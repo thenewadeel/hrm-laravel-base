@@ -1,62 +1,66 @@
 # Accounts Department
 
-1. Voucher Management
+---
 
-    - [ ] Creation, updating, and posting of vouchers for:
-        - [ ] Sales & Sales Return
-        - [ ] Purchase & Purchase Return
-        - [ ] Salary
-        - [ ] Fixed Assets/Depreciation
-        - [ ] Accounts receivable/payables and adjustments
+### Voucher Management:
 
-2. Ledger Management
+[ ] Creation, updating, and posting of vouchers for:
+[ ] Sales & Sales Return
+[ ] Purchase & Purchase Return
+[ ] Salary
+[ ] Fixed Assets/Depreciation
+[ ] Accounts receivable/payables and adjustments
 
-    - [ ] Customer/Vendor ledger handling.
+### Ledger Management:
 
-3. Expense Management
+[ ] Customer/Vendor ledger handling.
 
-    - [ ] Tracking and managing expenses.
+### Expense Management:
 
-4. Bank/Cash Management
+[ ] Tracking and managing expenses.
 
-    - [ ] Handling transactions and reconciliations.
+### Bank/Cash Management:
 
-5. Reports
+[ ] Handling transactions and reconciliations.
 
-    - [ ] Advance Reports
-    - [ ] Financial Statements: Trial Balance, Balance Sheet, Profit and Loss, Income Statement
-    - [ ] Outstanding Statements
-    - [ ] Bank Statements
+### Reports:
 
-6. Financial System
+[ ] Advance Reports
+[ ] Financial Statements: Trial Balance, Balance Sheet, Profit and Loss, Income Statement
+[ ] Outstanding Statements
+[ ] Bank Statements
 
-    - [ ] Chart of Accounts Management
-    - [ ] Assets Depreciation and Registration
-    - [ ] Financial Year Opening/Closing
+### Financial System:
 
-7. Other Functions
+[ ] Chart of Accounts Management
+[ ] Assets Depreciation and Registration
+[ ] Financial Year Opening/Closing
 
-    - [ ] Inventory Cost Management
-    - [ ] Tax Management
+### Other Functions:
+
+[ ] Inventory Cost Management
+[ ] Tax Management
 
 # Human Resource Department
 
-1. Admin Systems
+---
 
-    - [ ] Employee database management.
+### Admin Systems:
 
-2. Payroll & Compensation
+[ ] Employee database management.
 
-    - [ ] Payroll processing, Leave system, Time tracking
-    - [ ] Increments, Allowances, Deductions
-    - [ ] Pay Slip generation
+### Payroll & Compensation:
 
-3. Employee Records
+[ ] Payroll processing, Leave system, Time tracking
+[ ] Increments, Allowances, Deductions
+[ ] Pay Slip generation
 
-    - [ ] Employees List
-    - [ ] Withholding Tax management
+### Employee Records:
 
-4. Loans & Advances
+[ ] Employees List
+[ ] Withholding Tax management
 
-    - [ ] Loan processing
-    - [ ] Advance Salary system
+### Loans & Advances:
+
+[ ] Loan processing
+[ ] Advance Salary system
