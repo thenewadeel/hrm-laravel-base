@@ -2,6 +2,17 @@
 
 Base project for HR Management
 
+## Dev Setup
+
+1. Clone the repo : `git clone https://github.com/gcdev/hrm-laravel-base.git`
+2. Install dependencies via composer(php package manager) : `composer update`
+3. Setup environment variables : `cp .env.example .env`
+4. Generate application key : `php artisan key:generate`
+5. Install Node dependencies : `npm i`
+6. Make sqlite database file : `touch database/database.sqlite`
+7. Run migrations and seeders : `php artisan migrate:fresh --seed`
+8. Run dev server : `composer run dev`
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
