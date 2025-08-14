@@ -8,18 +8,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Organization extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'description',
-    ];
-    use SoftDeletes;
+    protected $fillable = ['name', 'description'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -27,4 +23,14 @@ class Organization extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    /**
+     * Get the users that belong to the organization.
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'organization_user')
+            ->withPivot(['roles', 'permissions'])
+            ->withTimestamps();
+    }
 }

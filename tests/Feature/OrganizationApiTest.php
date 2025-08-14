@@ -4,7 +4,11 @@ namespace Tests\Feature;
 
 use App\Models\Organization;
 use App\Models\User;
+use Illuminate\Container\Attributes\Log;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Log\Logger;
+use Illuminate\Support\Facades\App;
+use OrganizationUnit;
 use Tests\TestCase;
 
 class OrganizationApiTest extends TestCase
@@ -172,5 +176,53 @@ class OrganizationApiTest extends TestCase
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['name']);
+    }
+    protected function createOrganizationWithUser($user = null, array $roles = ['admin'])
+    {
+        $organization = Organization::factory()->create();
+        $user = $user ?: User::factory()->create();
+
+        $organization->users()->attach($user, [
+            'roles' => json_encode($roles)
+        ]);
+
+        return [$organization, $user];
+    }
+
+    /** @test */
+    public function user_can_view_their_organizations()
+    {
+        [$org, $user] = $this->createOrganizationWithUser();
+
+        $response = $this->actingAs($user)
+            ->getJson('/api/users/me/organizations');
+
+        // Get the pivot data through the user's relationship
+        $pivotData = $user->organizations()->first()->pivot;
+        // dd($response);
+        $response->assertStatus(200)
+            ->assertJsonCount(1, 'data')
+            ->assertJsonPath('data.0.id', $org->id)
+        ;
+    }
+    /** @test */
+    public function organization_admin_can_list_members()
+    {
+        [$org, $admin] = $this->createOrganizationWithUser();
+        $member = User::factory()->create();
+
+
+        // Attach with properly formatted JSON
+        $org->users()->attach($member, [
+            'roles' => json_encode(['member'])
+        ]);
+
+        $response = $this->actingAs($admin)
+            ->getJson("/api/organizations/{$org->id}/members");
+
+        $response->assertStatus(200)
+            ->assertJsonCount(2, 'data')
+            ->assertJsonFragment(['email' => $admin->email])
+            ->assertJsonFragment(['email' => $member->email]);
     }
 }

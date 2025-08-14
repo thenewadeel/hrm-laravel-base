@@ -35,4 +35,14 @@ Route::middleware('auth:sanctum')->group(function () {
      * )
      */
     Route::apiResource('organizations', OrganizationController::class);
+    Route::get('/users/me/organizations', function (Request $request) {
+        return response()->json([
+            'data' => $request->user()->organizations
+        ]);
+    });
+
+    Route::get(
+        '/organizations/{organization}/members',
+        [OrganizationController::class, 'members']
+    );
 });
