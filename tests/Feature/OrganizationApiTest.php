@@ -225,4 +225,34 @@ class OrganizationApiTest extends TestCase
             ->assertJsonFragment(['email' => $admin->email])
             ->assertJsonFragment(['email' => $member->email]);
     }
+
+    /** @test */
+    public function admin_can_invite_new_members()
+    {
+        [$org, $admin] = $this->createOrganizationWithUser();
+        $newUser = User::factory()->create();
+
+        $response = $this->actingAs($admin)
+            ->postJson("/api/organizations/{$org->id}/invitations", [
+                'email' => $newUser->email,
+                // 'role' => 'manager' // Send as plain string
+                'roles' => 'manager'
+
+            ]);
+
+        $response->assertStatus(201);
+
+        // Verify database record exists
+        $this->assertDatabaseHas('organization_user', [
+            'organization_id' => $org->id,
+            'user_id' => $newUser->id,
+        ]);
+
+        // Verify roles were stored correctly (raw JSON check)
+        $this->assertDatabaseHas('organization_user', [
+            'organization_id' => $org->id,
+            'user_id' => $newUser->id,
+            'roles' => json_encode(['manager']) // Check for exact JSON string
+        ]);
+    }
 }

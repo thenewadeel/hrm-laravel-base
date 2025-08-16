@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\OrganizationController;
+use App\Http\Controllers\Api\OrganizationInvitationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -44,5 +45,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get(
         '/organizations/{organization}/members',
         [OrganizationController::class, 'members']
+    );
+
+    Route::post(
+        '/organizations/{organization}/invitations',
+        [OrganizationInvitationController::class, 'store']
     );
 });

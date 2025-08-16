@@ -43,7 +43,7 @@ class OrganizationPolicy
         // Only organization owners/admins can update
         return $organization->users()
             ->where('user_id', $user->id)
-            ->whereJsonContains('pivot->roles', 'admin')
+            ->whereJsonContains('roles', 'admin')
             ->exists();
     }
 
@@ -76,8 +76,15 @@ class OrganizationPolicy
     /**
      * Determine whether the user can invite new members
      */
-    public function inviteMembers(User $user, Organization $organization): bool
+    public function inviteMembers(User $user, Organization $organization)
     {
-        return $this->update($user, $organization);
+        // Only organization admins can invite members
+        return   $organization->users()
+            ->where('user_id', $user->id)
+            // ->where('roles', 'like', '%"admin"%')
+            ->where(function ($query) {
+                $query->whereJsonContains('roles', 'admin');
+                // ->orWhereJsonContains('roles', 'moderator');
+            })->exists();
     }
 }
