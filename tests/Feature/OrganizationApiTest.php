@@ -261,8 +261,8 @@ class OrganizationApiTest extends TestCase
     {
         [$org, $admin] = $this->createOrganizationWithUser();
         $existingMember = User::factory()->create();
-        $org->users()->attach($existingMember, ['roles' => ['member']]);
-        dd();
+        $org->users()->attach($existingMember, ['roles' => json_encode(['member'])]);
+        // dd();
         $response = $this->actingAs($admin)
             ->postJson("/api/organizations/{$org->id}/invitations", [
                 'email' => $existingMember->email,
