@@ -255,4 +255,22 @@ class OrganizationApiTest extends TestCase
             'roles' => json_encode(['manager']) // Check for exact JSON string
         ]);
     }
+
+    /** @test */
+    public function cannot_invite_existing_member()
+    {
+        [$org, $admin] = $this->createOrganizationWithUser();
+        $existingMember = User::factory()->create();
+        $org->users()->attach($existingMember, ['roles' => ['member']]);
+        dd();
+        $response = $this->actingAs($admin)
+            ->postJson("/api/organizations/{$org->id}/invitations", [
+                'email' => $existingMember->email,
+                'roles' => json_encode(['manager'])
+            ]);
+
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors(['email']);
+    }
+
 }

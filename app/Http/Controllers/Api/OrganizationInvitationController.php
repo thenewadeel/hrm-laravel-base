@@ -17,7 +17,7 @@ class OrganizationInvitationController extends Controller
         if (Gate::denies('inviteMembers', $organization)) {
             abort(403, 'You are not authorized to invite members');
         }
-        // dd($request);
+
         // Validation
         $validated = $request->validate([
             'email' => [
@@ -25,26 +25,34 @@ class OrganizationInvitationController extends Controller
                 'email',
                 Rule::exists('users', 'email'),
                 function ($attribute, $value, $fail) use ($organization) {
-                    if ($organization->users()->where('email', $value)->exists()) {
-                        $fail('This user is already a member');
+                    $user = User::where('email', $value)->first();
+                    if ($user && $organization->users()->where('user_id', $user->id)->exists()) {
+                        $fail('This user is already a member of the organization');
                     }
                 }
             ],
             'roles' => ['required', Rule::in(['admin', 'manager', 'member'])]
         ]);
-        // dd($validated);
+
         // Find user
         $user = User::where('email', $validated['email'])->firstOrFail();
 
-        // Add to organization
-        // $organization->users()->attach($user->id, [
-        //     'roles' => [$validated['role']] // Store as array
-        // ]);
-        // Add to organization with manually encoded JSON
-        $organization->users()->attach($user->id, [
-            'roles' => json_encode([$validated['roles']]) // Explicit JSON encoding
-        ]);
+        // Add to organization with proper JSON encoding
+        $organization->users()->attach(
+            $user->id,
+            [
+                'roles' => json_encode([$validated['roles']])
+            ]
+            // 'roles' => [$validated['roles']] // Array wrapped in json_encode
+        );
 
-        return response()->json(null, 201);
+
+        return response()->json([
+            'message' => 'User invited successfully',
+            'data' => [
+                'user_id' => $user->id,
+                'roles' => $validated['roles']
+            ]
+        ], 201);
     }
 }
