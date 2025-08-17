@@ -273,4 +273,17 @@ class OrganizationApiTest extends TestCase
             ->assertJsonValidationErrors(['email']);
     }
 
+    /** @test */
+    public function non_admin_cannot_invite_members()
+    {
+        [$org, $member] = $this->createOrganizationWithUser(null, $roles = ['member']);
+        $newUser = User::factory()->create();
+
+        $response = $this->actingAs($member)
+            ->postJson("/api/organizations/{$org->id}/invitations", [
+                'email' => $newUser->email
+            ]);
+
+        $response->assertStatus(403);
+    }
 }
