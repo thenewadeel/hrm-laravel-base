@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\OrganizationController;
 use App\Http\Controllers\Api\OrganizationInvitationController;
+use App\Http\Controllers\Api\OrganizationUnitController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -50,5 +51,23 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post(
         '/organizations/{organization}/invitations',
         [OrganizationInvitationController::class, 'store']
+    );
+
+
+
+
+
+
+    Route::apiResource('organizations.units', OrganizationUnitController::class)
+        ->except(['update', 'destroy']); // Add these later
+
+    Route::put(
+        'organizations/{organization}/units/{unit}/assign',
+        [OrganizationUnitController::class, 'assignUser']
+    );
+
+    Route::get(
+        'organizations/{organization}/units/{unit}/hierarchy',
+        [OrganizationUnitController::class, 'hierarchy']
     );
 });

@@ -8,7 +8,6 @@ use Illuminate\Container\Attributes\Log;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Log\Logger;
 use Illuminate\Support\Facades\App;
-use OrganizationUnit;
 use Tests\TestCase;
 
 class OrganizationApiTest extends TestCase
