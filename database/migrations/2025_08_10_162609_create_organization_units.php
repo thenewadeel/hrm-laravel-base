@@ -13,13 +13,23 @@ return new class extends Migration
     {
         Schema::create('organization_units', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('organization_id')->constrained();
+            $table->foreignId('organization_id')
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
             $table->string('name');
-            $table->string('type'); // department, team, etc.
-            $table->foreignId('parent_id')->nullable()->constrained('organization_units');
-            $table->integer('depth')->default(0);
+            $table->string('type')->nullable(); // department, team, etc.
+            $table->foreignId('parent_id')
+                ->nullable()
+                ->constrained('organization_units')
+                ->nullOnDelete();
+
+            // $table->integer('depth')->default(0);
             $table->json('custom_fields')->nullable();
+            $table->softDeletes();
             $table->timestamps();
+            // Add index for better performance on hierarchical queries
+            // $table->index(['parent_id']);
         });
     }
 

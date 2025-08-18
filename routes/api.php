@@ -70,4 +70,10 @@ Route::middleware('auth:sanctum')->group(function () {
         'organizations/{organization}/units/{unit}/hierarchy',
         [OrganizationUnitController::class, 'hierarchy']
     );
+
+    Route::get(
+        'organizations/{organization}/units/{unit}/members',
+        [OrganizationUnitController::class, 'members']
+    );
 });
+            // ->putJson("/api/organizations/{$org->id}/units/{$unit->id}/assign", [

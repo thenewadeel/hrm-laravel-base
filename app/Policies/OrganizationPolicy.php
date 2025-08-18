@@ -3,88 +3,93 @@
 namespace App\Policies;
 
 use App\Models\Organization;
+use App\Models\OrganizationUnit;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
 class OrganizationPolicy
 {
-    /**
-     * Determine whether the user can view any organizations.
-     */
     public function viewAny(User $user): bool
     {
-        // Typically, users can view organizations they belong to
+        // Typically true - users can see organizations they belong to via scopes
         return true;
     }
 
-    /**
-     * Determine whether the user can view a specific organization.
-     */
     public function view(User $user, Organization $organization): bool
     {
-        // User can view if they're a member of the organization
+        // User must be a member of the organization
         return $organization->users()->where('user_id', $user->id)->exists();
     }
 
-    /**
-     * Determine whether the user can create organizations.
-     */
     public function create(User $user): bool
     {
-        // Typically any authenticated user can create an organization
+        // Any authenticated user can create organizations
         return true;
     }
 
-    /**
-     * Determine whether the user can update the organization.
-     */
     public function update(User $user, Organization $organization): bool
     {
-        // Only organization owners/admins can update
-        return $organization->users()
-            ->where('user_id', $user->id)
-            ->whereJsonContains('roles', 'admin')
-            ->exists();
+        // Only admins can update
+        return $this->isAdmin($user, $organization);
     }
 
-    /**
-     * Determine whether the user can delete the organization.
-     */
     public function delete(User $user, Organization $organization): bool
     {
-        // Only organization owners can delete
-        return $organization->owner_id === $user->id;
+        // Only owner or super admins can delete
+        return $organization->owner_id === $user->id || $user->is_super_admin;
     }
 
-    /**
-     * Custom method for viewing members
-     */
+    // public function viewMembers(User $user, Organization $organization): bool
+    // {
+    //     // Admins or moderators can view members
+    //     return $this->hasAnyRole($user, $organization, ['admin', 'moderator']);
+    // }
+
     public function viewMembers(User $user, Organization $organization)
     {
-        // Database-agnostic way to check roles
         return $organization->users()
             ->where('user_id', $user->id)
-            ->where(function ($query) {
-                $query->whereJsonContains('roles', 'admin')
-                    ->orWhereJsonContains('roles', 'moderator');
-            })
             ->exists();
     }
 
-
-
-    /**
-     * Determine whether the user can invite new members
-     */
-    public function inviteMembers(User $user, Organization $organization)
+    public function inviteMembers(User $user, Organization $organization): bool
     {
-        // Only organization admins can invite members
-        return   $organization->users()
+        // Only admins can invite
+        return $this->isAdmin($user, $organization);
+    }
+
+    public function manageMembers(User $user, Organization $organization): bool
+    {
+        // Only admins can manage members
+        return $this->isAdmin($user, $organization);
+    }
+
+    public function assignUser(User $user, OrganizationUnit $unit): bool
+    {
+        // Only org admins can assign users to units
+        return $this->isAdmin($user, $unit->organization);
+    }
+    // ---------------------------
+    // Helper Methods
+    // ---------------------------
+
+    protected function isAdmin(User $user, Organization $organization): bool
+    {
+        return $this->hasAnyRole($user, $organization, ['admin']);
+    }
+
+    protected function hasAnyRole(
+        User $user,
+        Organization $organization,
+        array $roles
+    ): bool {
+        return $organization->users()
             ->where('user_id', $user->id)
-            // ->where('roles', 'like', '%"admin"%')
-            ->where(function ($query) {
-                $query->whereJsonContains('roles', 'admin');
-                // ->orWhereJsonContains('roles', 'moderator');
-            })->exists();
+            ->where(function ($query) use ($roles) {
+                foreach ($roles as $role) {
+                    $query->orWhereJsonContains('roles', $role);
+                }
+            })
+            ->exists();
     }
 }

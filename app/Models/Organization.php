@@ -33,4 +33,8 @@ class Organization extends Model
             ->withPivot(['roles', 'permissions'])
             ->withTimestamps();
     }
+    public function units()
+    {
+        return $this->hasMany(OrganizationUnit::class);
+    }
 }

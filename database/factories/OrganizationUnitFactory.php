@@ -17,7 +17,10 @@ class OrganizationUnitFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->company(),
+            'type' => $this->faker->randomElement(['department', 'division', 'team']),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

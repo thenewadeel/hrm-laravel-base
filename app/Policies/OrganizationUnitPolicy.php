@@ -68,13 +68,4 @@ class OrganizationUnitPolicy
     {
         return false;
     }
-
-
-    public function assignUser(User $user, OrganizationUnit $unit, Organization $organization)
-    {
-        return $organization->users()
-            ->where('user_id', $user->id)
-            ->whereJsonContains('roles', 'admin')
-            ->exists();
-    }
 }

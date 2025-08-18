@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('organization_unit_id')->nullable()->constrained('organization_units');
             $table->json('roles')->nullable();
             $table->json('permissions')->nullable();
+            $table->string('position')->nullable();
             $table->timestamps();
         });
     }
