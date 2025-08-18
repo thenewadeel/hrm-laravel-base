@@ -64,7 +64,7 @@ class OrganizationPolicy
         return $this->isAdmin($user, $organization);
     }
 
-    public function assignUser(User $user, OrganizationUnit $unit): bool
+    public function assign(User $user, OrganizationUnit $unit): bool
     {
         // Only org admins can assign users to units
         return $this->isAdmin($user, $unit->organization);

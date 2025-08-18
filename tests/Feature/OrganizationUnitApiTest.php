@@ -118,36 +118,6 @@ class OrganizationUnitApiTest extends TestCase
         ]);
     }
 
-    // /** @test */
-    // public function can_assign_user_to_organization_unit()
-    // {
-    //     [$org, $admin] = $this->createOrganizationWithUser();
-    //     $user = User::factory()->create();
-    //     $unit = OrganizationUnit::factory()->for($org)->create();
-
-    //     $org->users()->attach($user);
-
-    //     $response = $this->actingAs($admin)
-    //         ->putJson("/api/organizations/{$org->id}/members/{$user->id}/assign", [
-    //             'organization_unit_id' => $unit->id
-    //         ]);
-    //     dd($response);
-    //     $response->assertStatus(200)
-    //         ->assertJson([
-    //             'message' => 'User assigned to unit successfully',
-    //             'data' => [
-    //                 'user_id' => $user->id,
-    //                 'unit_id' => $unit->id
-    //             ]
-    //         ]);
-
-    //     $this->assertDatabaseHas('organization_user', [
-    //         'user_id' => $user->id,
-    //         'organization_id' => $org->id,
-    //         'organization_unit_id' => $unit->id
-    //     ]);
-    // }
-
     /** @test */
     public function can_list_users_by_organization_unit()
     {
@@ -179,5 +149,103 @@ class OrganizationUnitApiTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJsonCount(2, 'data'); // Should return both direct and nested members
+    }
+
+    /** @test */
+    public function cannot_create_organization_unit_as_non_admin()
+    {
+        [$organization, $regularUser] = $this->createOrganizationWithUser(roles: ['user']);
+
+        $response = $this->actingAs($regularUser)
+            ->postJson("/api/organizations/{$organization->id}/units", [
+                'name' => 'Support Team',
+                'type' => 'team'
+            ]);
+
+        $response->assertStatus(403);
+    }
+
+    /** @test */
+    public function cannot_assign_user_as_non_admin()
+    {
+        [$org, $regularUser] = $this->createOrganizationWithUser(roles: ['user']);
+        $unit = OrganizationUnit::factory()->for($org)->create();
+        $user = User::factory()->create();
+        $org->users()->attach($user);
+
+        $response = $this->actingAs($regularUser)
+            ->putJson("/api/organizations/{$org->id}/units/{$unit->id}/assign", [
+                'user_id' => $user->id
+            ]);
+
+        $response->assertStatus(403);
+    }
+
+    /** @test */
+    public function cannot_create_unit_with_invalid_data()
+    {
+        [$organization, $admin] = $this->createOrganizationWithUser();
+
+        $response = $this->actingAs($admin)
+            ->postJson("/api/organizations/{$organization->id}/units", [
+                'type' => 'team' // Missing 'name' field
+            ]);
+
+        $response->assertStatus(422);
+    }
+
+    /** @test */
+    public function cannot_assign_non_existent_user_to_unit()
+    {
+        [$org, $admin] = $this->createOrganizationWithUser();
+        $unit = OrganizationUnit::factory()->for($org)->create();
+
+        $response = $this->actingAs($admin)
+            ->putJson("/api/organizations/{$org->id}/units/{$unit->id}/assign", [
+                'user_id' => 9999, // A non-existent user ID
+                'position' => 'Developer'
+            ]);
+
+        $response->assertStatus(422);
+    }
+
+    /** @test */
+    public function cannot_assign_user_not_in_organization()
+    {
+        [$org, $admin] = $this->createOrganizationWithUser();
+        $unit = OrganizationUnit::factory()->for($org)->create();
+        $userFromOtherOrg = User::factory()->create();
+
+        $response = $this->actingAs($admin)
+            ->putJson("/api/organizations/{$org->id}/units/{$unit->id}/assign", [
+                'user_id' => $userFromOtherOrg->id,
+                'position' => 'Developer'
+            ]);
+
+        $response->assertStatus(422);
+    }
+
+    /** @test */
+    public function cannot_get_hierarchy_for_non_existent_unit()
+    {
+        [$org, $admin] = $this->createOrganizationWithUser();
+
+        $response = $this->actingAs($admin)
+            ->getJson("/api/organizations/{$org->id}/units/9999/hierarchy"); // Non-existent unit ID
+
+        $response->assertStatus(404);
+    }
+
+    /** @test */
+    public function can_get_hierarchy_for_unit_with_no_children()
+    {
+        [$organization, $admin] = $this->createOrganizationWithUser();
+        $unit = OrganizationUnit::factory()->for($organization)->create();
+
+        $response = $this->actingAs($admin)
+            ->getJson("/api/organizations/{$organization->id}/units/{$unit->id}/hierarchy");
+
+        $response->assertStatus(200)
+            ->assertJsonPath('data.children', []);
     }
 }

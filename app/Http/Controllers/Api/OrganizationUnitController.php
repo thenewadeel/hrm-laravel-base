@@ -25,25 +25,18 @@ class OrganizationUnitController extends Controller
     public function store(Request $request, Organization $organization)
     {
         // $this->authorize('create', [OrganizationUnit::class, $organization]);
-
+        Gate::authorize('create', [OrganizationUnit::class, $organization]);
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'type' => 'required|string|max:255',
-            'parent_id' => 'nullable|exists:organization_units,id',
+            'parent_id' => 'nullable|exists:organization_units,id,organization_id,' . $organization->id,
             // 'custom_fields' => 'nullable|array'
         ]);
 
-        // Calculate depth
-        // $depth = 0;
-        // if ($validated['parent_id']) {
-        //     $parent = OrganizationUnit::find($validated['parent_id']);
-        //     $depth = $parent->depth + 1;
-        // }
-        // $unit = $organization->units()->create($validated);
         $orgData = [
             'name' => $validated['name'],
             'type' => $validated['type'],
-            'parent_id' => $validated['parent_id'],
+            'parent_id' => $validated['parent_id'] ?? null,
             'organization_id' => $organization->id,
             // 'custom_fields' => $validated['custom_fields'] ?? null,
         ];
@@ -109,9 +102,9 @@ class OrganizationUnitController extends Controller
         }
 
         // // Authorization
-        // if (Gate::denies('assignUser', $unit)) {
-        //     abort(403, 'You are not authorized to assign users to this unit');
-        // }
+        if (Gate::denies('assign', $unit)) {
+            abort(403, 'You are not authorized to assign users to this unit');
+        }
 
         // dd('ok');
         $validated = $request->validate([
