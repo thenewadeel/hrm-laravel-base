@@ -3,6 +3,7 @@
 namespace Tests\Unit\Accounting;
 
 use App\Models\Accounting\ChartOfAccount;
+use App\Models\Accounting\LedgerEntry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -56,10 +57,33 @@ class ChartOfAccountTest extends TestCase
     }
 
     /** @test */
+    /** @test */
     public function it_can_calculate_its_current_balance()
     {
-        // This test will be implemented AFTER we have LedgerEntries.
-        // It will sum all debits and credits posted to this account.
-        $this->markTestIncomplete('Pending ledger entry implementation.');
+        $account = ChartOfAccount::factory()->create(['type' => 'asset']);
+
+        // Create ledger entries for this account
+        LedgerEntry::factory()->create([
+            'chart_of_account_id' => $account->id,
+            'type' => 'debit',
+            'amount' => 1000.00
+        ]);
+
+        LedgerEntry::factory()->create([
+            'chart_of_account_id' => $account->id,
+            'type' => 'credit',
+            'amount' => 300.00
+        ]);
+
+        LedgerEntry::factory()->create([
+            'chart_of_account_id' => $account->id,
+            'type' => 'debit',
+            'amount' => 200.00
+        ]);
+
+        // For asset accounts: balance = debits - credits
+        $expectedBalance = (1000.00 + 200.00) - 300.00; // = 900.00
+
+        $this->assertEquals($expectedBalance, $account->balance);
     }
 }

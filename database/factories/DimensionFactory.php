@@ -1,23 +1,19 @@
 <?php
+// database/factories/DimensionFactory.php
 
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Dimension>
- */
 class DimensionFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->word(),
+            'code' => $this->faker->unique()->bothify('DIM-#####'),
+            'type' => $this->faker->randomElement(['cost_center', 'project', 'branch', 'department', 'team']),
+            'description' => $this->faker->sentence(),
         ];
     }
 }
