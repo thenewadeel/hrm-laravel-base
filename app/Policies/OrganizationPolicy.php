@@ -38,6 +38,23 @@ class OrganizationPolicy
         // Only owner or super admins can delete
         return $organization->owner_id === $user->id || $user->is_super_admin;
     }
+    // In OrganizationUnitPolicy.php
+
+    // public function update(User $user, OrganizationUnit $unit, Organization $organization)
+    // {
+    //     return $organization->users()
+    //         ->where('user_id', $user->id)
+    //         ->whereJsonContains('roles', 'admin')
+    //         ->exists();
+    // }
+
+    // public function delete(User $user, OrganizationUnit $unit, Organization $organization)
+    // {
+    //     return $organization->users()
+    //         ->where('user_id', $user->id)
+    //         ->whereJsonContains('roles', 'admin')
+    //         ->exists();
+    // }
 
     // public function viewMembers(User $user, Organization $organization): bool
     // {

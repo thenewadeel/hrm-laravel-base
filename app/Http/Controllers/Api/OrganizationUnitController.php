@@ -64,17 +64,44 @@ class OrganizationUnitController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    // In OrganizationUnitController.php
+
+    public function update(Request $request, Organization $organization, OrganizationUnit $unit)
     {
-        //
+        // Authorization
+        if (Gate::denies('update', $organization)) {
+            abort(403, 'You are not authorized to update members');
+        }
+        $validated = $request->validate([
+            'name' => 'sometimes|required|string|max:255',
+            'type' => 'sometimes|required|string|max:255',
+            'parent_id' => 'nullable|exists:organization_units,id,organization_id,' . $organization->id,
+            'custom_fields' => 'nullable|array'
+        ]);
+
+        $unit->update($validated);
+
+        return response()->json(['data' => $unit->fresh()]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Organization $organization, OrganizationUnit $unit)
     {
-        //
+        // Authorization
+        if (Gate::denies('delete', $organization)) {
+            abort(403, 'You are not authorized to delete members');
+        }
+        // Prevent deletion if has children or members
+        if ($unit->children()->exists()) {
+            abort(422, 'Cannot delete unit with child units');
+        }
+
+        if ($organization->users()->where('organization_unit_id', $unit->id)->exists()) {
+            abort(422, 'Cannot delete unit with assigned members');
+        }
+
+        $unit->delete();
+
+        return response()->json(null, 204);
     }
 
 

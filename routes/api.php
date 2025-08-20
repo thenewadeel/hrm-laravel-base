@@ -27,7 +27,6 @@ Route::middleware('auth:sanctum')->group(function () {
     /**
      * @OA\Tag(name="Organizations")
      */
-
     /**
      * @OA\Get(
      *     path="/api/organizations",
@@ -36,44 +35,41 @@ Route::middleware('auth:sanctum')->group(function () {
      *     @OA\Response(response="200", description="List organizations")
      * )
      */
-    Route::apiResource('organizations', OrganizationController::class);
+    // User organizations
     Route::get('/users/me/organizations', function (Request $request) {
         return response()->json([
             'data' => $request->user()->organizations
         ]);
     });
 
-    Route::get(
-        '/organizations/{organization}/members',
-        [OrganizationController::class, 'members']
-    );
+    // Organization CRUD
+    Route::apiResource('organizations', OrganizationController::class);
 
-    Route::post(
-        '/organizations/{organization}/invitations',
-        [OrganizationInvitationController::class, 'store']
-    );
+    // Organization-specific routes
+    Route::prefix('organizations/{organization}')->group(function () {
+        // Members
+        Route::get('members', [OrganizationController::class, 'members']);
 
+        // Invitations
+        Route::post('invitations', [OrganizationInvitationController::class, 'store']);
 
+        // Units - using singular 'unit' for consistency
+        Route::prefix('units')->group(function () {
+            Route::get('/', [OrganizationUnitController::class, 'index']);
+            Route::post('/', [OrganizationUnitController::class, 'store']);
 
+            // Specific unit operations
+            Route::prefix('{unit}')->group(function () {
+                Route::get('/', [OrganizationUnitController::class, 'show']);
+                Route::put('/', [OrganizationUnitController::class, 'update']);
+                Route::delete('/', [OrganizationUnitController::class, 'destroy']);
 
-
-
-    Route::apiResource('organizations.units', OrganizationUnitController::class)
-        ->except(['update', 'destroy']); // Add these later
-
-    Route::put(
-        'organizations/{organization}/units/{unit}/assign',
-        [OrganizationUnitController::class, 'assignUser']
-    );
-
-    Route::get(
-        'organizations/{organization}/units/{unit}/hierarchy',
-        [OrganizationUnitController::class, 'hierarchy']
-    );
-
-    Route::get(
-        'organizations/{organization}/units/{unit}/members',
-        [OrganizationUnitController::class, 'members']
-    );
+                // Unit-specific features
+                Route::get('hierarchy', [OrganizationUnitController::class, 'hierarchy']);
+                Route::get('members', [OrganizationUnitController::class, 'members']);
+                Route::put('assign', [OrganizationUnitController::class, 'assignUser']);
+                Route::post('bulk-assign', [OrganizationUnitController::class, 'bulkAssign']);
+            });
+        });
+    });
 });
-            // ->putJson("/api/organizations/{$org->id}/units/{$unit->id}/assign", [
