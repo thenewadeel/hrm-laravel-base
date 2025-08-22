@@ -83,3 +83,23 @@ Add comprehensive logging for financial transparency and compliance.
 Your accounting foundation is **rock solid** and ready for any business complexity. The TDD approach ensured everything works correctly and will be maintainable long-term.
 
 What would you like to tackle next? The sales module, procurement, HR integration, or the web interfaces?
+
+```C
+printf("There's no api endpoint defind in the accounting system\n");
+printf("The tests are passing by directly interacting with the AccountingService!\n");
+```
+
+💡 General Chart of Accounts Conventions
+
+Most financial institutions use block ranges by category:
+
+| **Account Type**     | **Typical Code Range**           | **Examples**                                           |
+| -------------------- | -------------------------------- | ------------------------------------------------------ |
+| **Assets**           | 1000–1999                        | 1000: Cash, 1100: Accounts Receivable, 1200: Inventory |
+| **Liabilities**      | 2000–2999                        | 2000: Accounts Payable, 2100: Loans Payable            |
+| **Equity**           | 3000–3999                        | 3100: Retained Earnings, 3200: Common Stock            |
+| **Revenue / Income** | 4000–4999                        | 4100: Sales Revenue, 4200: Interest Income             |
+| **Expenses**         | 5000–5999 (sometimes up to 7999) | 5100: Salaries, 5200: Rent, 5300: Marketing            |
+| **Other / Special**  | 8000–9999                        | 9000: Suspense, 9999: Year-End Adjustments             |
+
+> **Note:** Some institutions use a more complex system, but this is a good starting point.
