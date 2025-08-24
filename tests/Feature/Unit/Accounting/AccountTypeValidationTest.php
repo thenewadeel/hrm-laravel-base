@@ -75,7 +75,7 @@ class AccountTypeValidationTest extends TestCase
         $assetAccount = ChartOfAccount::factory()->create(['type' => 'asset']);
 
         $this->expectException(InvalidAccountTypeException::class);
-        $this->expectExceptionMessage('Cannot credit an asset account');
+        $this->expectExceptionMessage('Cannot credit a asset account');
 
         $this->callPrivateMethod($this->accountingService, 'validateAccountType', [$assetAccount, 'credit']);
     }

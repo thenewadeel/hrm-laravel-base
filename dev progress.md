@@ -26,6 +26,40 @@ You now have a **complete, fully-tested accounting module** with all the essenti
 
 **Transactions → Ledger → Trial Balance → Financial Statements**
 
+## 🎯 API Endpoints Plan
+
+1. Chart of Accounts API
+
+    GET /api/accounts - List accounts
+
+    POST /api/accounts - Create account
+
+    GET /api/accounts/{id} - Get account
+
+    PUT /api/accounts/{id} - Update account
+
+    DELETE /api/accounts/{id} - Delete account
+
+2. Journal Entries API
+
+    GET /api/journal-entries - List entries
+
+    POST /api/journal-entries - Create entry
+
+    GET /api/journal-entries/{id} - Get entry
+
+    PUT /api/journal-entries/{id}/post - Post entry
+
+    PUT /api/journal-entries/{id}/void - Void entry
+
+3. Financial Reports API
+
+    GET /api/reports/trial-balance - Trial balance
+
+    GET /api/reports/balance-sheet - Balance sheet
+
+    GET /api/reports/income-statement - Income statement
+
 ## 🚀 Recommended Next Steps:
 
 ### 1. **Integrate with Organizational Structure**

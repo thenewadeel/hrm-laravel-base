@@ -28,7 +28,7 @@ A comprehensive Laravel-based Human Resource Management and Accounting system de
 -   Role-based access control
 -   Multi-dimensional organizational structure
 
-### ✅ Accounting Module
+### ✅ Accounting Module (Complete)
 
 -   Chart of Accounts management
 -   Double-entry ledger system
@@ -39,6 +39,7 @@ A comprehensive Laravel-based Human Resource Management and Accounting system de
     -   Income Statement
 -   Organizational dimension tracking
 -   Sequence-based numbering system
+-   API for Accounting Service
 
 ### 🚧 Upcoming Modules
 

@@ -27,6 +27,9 @@ class JournalEntry extends Model
         'posted_at'
     ];
 
+    protected $attributes = [
+        'status' => 'draft', // ← Default value
+    ];
     protected $casts = [
         'entry_date' => 'date',
         'posted_at' => 'datetime',
