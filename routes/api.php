@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\Accounting\ChartOfAccountsController;
+use App\Http\Controllers\Api\Accounting\JournalEntriesController;
+use App\Http\Controllers\Api\Accounting\FinancialReportsController;
 use App\Http\Controllers\Api\OrganizationController;
 use App\Http\Controllers\Api\OrganizationInvitationController;
 use App\Http\Controllers\Api\OrganizationUnitController;
@@ -71,5 +74,23 @@ Route::middleware('auth:sanctum')->group(function () {
                 Route::post('bulk-assign', [OrganizationUnitController::class, 'bulkAssign']);
             });
         });
+    });
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+
+    // Chart of Accounts routes
+    Route::apiResource('accounts', ChartOfAccountsController::class);
+
+    // Journal Entries routes
+    Route::apiResource('journal-entries', JournalEntriesController::class);
+    Route::put('journal-entries/{journal_entry}/post', [JournalEntriesController::class, 'post']);
+    Route::put('journal-entries/{journal_entry}/void', [JournalEntriesController::class, 'void']);
+
+    // Financial Reports routes
+    Route::prefix('reports')->group(function () {
+        Route::get('trial-balance', [FinancialReportsController::class, 'trialBalance']);
+        Route::get('balance-sheet', [FinancialReportsController::class, 'balanceSheet']);
+        Route::get('income-statement', [FinancialReportsController::class, 'incomeStatement']);
     });
 });
