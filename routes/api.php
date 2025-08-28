@@ -75,9 +75,6 @@ Route::middleware('auth:sanctum')->group(function () {
             });
         });
     });
-});
-
-Route::middleware('auth:sanctum')->group(function () {
 
     // Chart of Accounts routes
     Route::apiResource('accounts', ChartOfAccountsController::class);

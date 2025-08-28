@@ -68,4 +68,33 @@ class OrganizationUnitPolicy
     {
         return false;
     }
+
+    public function assign(User $user, OrganizationUnit $unit): bool
+    {
+        // Only org admins can assign users to units
+        return $this->isAdmin($user, $unit->organization);
+    }
+    // ---------------------------
+    // Helper Methods
+    // ---------------------------
+
+    protected function isAdmin(User $user, Organization $organization): bool
+    {
+        return $this->hasAnyRole($user, $organization, ['admin']);
+    }
+
+    protected function hasAnyRole(
+        User $user,
+        Organization $organization,
+        array $roles
+    ): bool {
+        return $organization->users()
+            ->where('user_id', $user->id)
+            ->where(function ($query) use ($roles) {
+                foreach ($roles as $role) {
+                    $query->orWhereJsonContains('roles', $role);
+                }
+            })
+            ->exists();
+    }
 }
