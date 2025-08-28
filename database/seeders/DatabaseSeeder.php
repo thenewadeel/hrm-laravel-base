@@ -23,10 +23,20 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call([
-            ChartOfAccountsSeeder::class,
-            DimensionsSeeder::class,
-            SampleTransactionsSeeder::class,
-            // Add other seeders here as you create them
+            // Organizational structure
+            CsvOrganizationsSeeder::class,
+            CsvOrganizationUnitsSeeder::class,
+            CsvUsersSeeder::class,
+
+            // CSV-based seeders
+            CsvChartOfAccountsSeeder::class,
+            CsvDimensionsSeeder::class,
+            CsvSampleTransactionsSeeder::class,
+
+            // Factory-based seeders (for testing)
+            // ChartOfAccountsSeeder::class, // Keep your existing factory seeder
+            // DimensionsSeeder::class,
+            // SampleTransactionsSeeder::class,
         ]);
     }
 }

@@ -1,0 +1,9 @@
+date,description,account_code,type,amount,dimension_code
+2024-01-15,Initial capital investment,1020,debit,1000000,
+2024-01-15,Initial capital investment,3010,credit,1000000,
+2024-02-01,Bulk medicine sale to hospital,1100,debit,250000,DEPT-SALES
+2024-02-01,Bulk medicine sale to hospital,4010,credit,250000,DEPT-SALES
+2024-02-15,Monthly payroll,1020,credit,150000,
+2024-02-15,Monthly payroll,5020,debit,150000,DEPT-PROD
+2024-03-01,Raw material purchase,1200,debit,80000,DEPT-PROD
+2024-03-01,Raw material purchase,2010,credit,80000,DEPT-PROD

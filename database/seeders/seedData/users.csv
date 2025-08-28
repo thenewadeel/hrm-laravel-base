@@ -1,0 +1,8 @@
+name,email,password,organization_name,unit_name,position,roles,permissions,status
+Admin User,admin@pharma.com,password,Pharma Solutions Inc.,Head Office,System Administrator,["admin"],["all"],active
+Finance Manager,finance@pharma.com,password,Pharma Solutions Inc.,Finance & Accounts,Finance Manager,["accountant"],["financial_view","financial_edit"],active
+Accountant,accountant@pharma.com,password,Pharma Solutions Inc.,Finance & Accounts,Senior Accountant,["accountant"],["financial_view"],active
+Production Manager,production@pharma.com,password,Pharma Solutions Inc.,Production Department,Production Manager,["manager"],["production_view","production_edit"],active
+QC Manager,qc@pharma.com,password,Pharma Solutions Inc.,Quality Control,Quality Manager,["manager"],["quality_view","quality_edit"],active
+Sales Manager,sales@pharma.com,password,Pharma Solutions Inc.,Sales & Marketing,Sales Manager,["manager"],["sales_view","sales_edit"],active
+HR Manager,hr@pharma.com,password,Pharma Solutions Inc.,HR & Admin,HR Manager,["manager"],["hr_view","hr_edit"],active

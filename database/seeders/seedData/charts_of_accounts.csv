@@ -1,0 +1,28 @@
+code,name,type,description
+1000,Current Assets,asset,Short-term assets
+1010,Cash on Hand,asset,Physical cash available
+1020,Bank Accounts,asset,Company bank accounts  
+1100,Accounts Receivable,asset,Money owed by customers
+1200,Inventory,asset,Pharma product inventory
+1300,Prepaid Expenses,asset,Prepaid costs
+2000,Current Liabilities,liability,Short-term debts
+2010,Accounts Payable,liability,Money owed to suppliers
+2020,Short-term Loans,liability,Short-term borrowings
+2100,Accrued Expenses,liability,Accrued costs
+3000,Equity,equity,Owner's equity
+3010,Common Stock,equity,Issued capital
+3020,Retained Earnings,equity,Accumulated profits
+4000,Operating Revenue,revenue,Primary business revenue
+4010,Pharma Product Sales,revenue,Medicine sales
+4020,Consultation Fees,revenue,Medical consulting
+4100,Other Revenue,revenue,Miscellaneous income
+5000,Operating Expenses,expense,Business operation costs
+5010,Cost of Goods Sold,expense,Direct production costs
+5020,Salaries & Wages,expense,Employee compensation
+5030,Raw Materials,expense,Pharma ingredients
+5040,Manufacturing Costs,expense,Production expenses
+5050,Research & Development,expense,R&D expenses
+5060,Marketing & Advertising,expense,Promotion costs
+5070,Utilities,expense,Electricity, water, etc.
+5080,Rent,expense,Facility rental
+5090,Depreciation,expense,Asset depreciation

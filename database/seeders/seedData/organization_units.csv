@@ -1,0 +1,13 @@
+organization_name,unit_name,type,parent_unit_name,custom_fields
+Pharma Solutions Inc.,Head Office,branch,,{"location": "Dhaka"}
+Pharma Solutions Inc.,Dhaka Factory,branch,Head Office,{"location": "Dhaka", "facility_type": "manufacturing"}
+Pharma Solutions Inc.,Chittagong Branch,branch,Head Office,{"location": "Chittagong"}
+Pharma Solutions Inc.,Production Department,department,,{"function": "manufacturing"}
+Pharma Solutions Inc.,Quality Control,department,,{"function": "quality assurance"}
+Pharma Solutions Inc.,R&D Center,department,,{"function": "research"}
+Pharma Solutions Inc.,Sales & Marketing,department,,{"function": "sales"}
+Pharma Solutions Inc.,Finance & Accounts,department,,{"function": "finance"}
+Pharma Solutions Inc.,HR & Admin,department,,{"function": "human resources"}
+Pharma Solutions Inc.,Production Team A,team,Production Department,{"shift": "A"}
+Pharma Solutions Inc.,Production Team B,team,Production Department,{"shift": "B"}
+Pharma Solutions Inc.,QC Lab Team,team,Quality Control,{"lab_type": "main"}

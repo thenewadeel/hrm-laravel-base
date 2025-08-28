@@ -1,0 +1,11 @@
+name,code,type,description
+Production Department,DEPT-PROD,department,Pharma manufacturing
+Quality Control,DEPT-QC,department,Quality assurance team
+Research & Development,DEPT-RND,department,Product research
+Sales & Marketing,DEPT-SALES,department,Sales team
+Administration,DEPT-ADMIN,department,Administrative staff
+COVID Vaccine Project,PROJ-COVax,project,Vaccine development
+Diabetes Medication,PROJ-DIAB,project,Diabetes treatment R&D
+Factory Expansion,PROJ-EXP,project,Manufacturing capacity increase
+Dhaka Main Factory,LOC-DHA,branch,Primary manufacturing facility
+Chittagong Branch,LOC-CHT,branch,Secondary operation center
