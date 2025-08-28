@@ -43,7 +43,7 @@ class OrganizationUnit extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'organization_user')
-            ->withPivot(['position', 'permissions', 'is_active']);
+            ->withPivot(['position', 'roles', 'permissions', 'is_active']);
     }
 
     // Recursive relationship for all descendants
