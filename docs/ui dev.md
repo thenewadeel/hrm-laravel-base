@@ -9,7 +9,7 @@
 
 ### Phase 2: Organizational Structure
 
-5. **Company/Unit** management
+5. **Organization/Unit** management
 6. **Employee** master data
 7. **User/Role** management
 
@@ -62,22 +62,22 @@
 
 ## 📋 **Component-Based Architecture Plan**
 
-### 1. **Company Management Module**
+### 1. **Organization Management Module**
 
 ```bash
 # Blade Components
-resources/views/components/company/
-├── card.blade.php          # Company profile card
+resources/views/components/organization/
+├── card.blade.php          # Organization profile card
 ├── form.blade.php          # Create/edit form
 ├── list.blade.php          # Companies listing
-└── show.blade.php          # Company details view
+└── show.blade.php          # Organization details view
 
 # Livewire Components
-app/Http/Livewire/Company/
-├── CompanyList.php         # List with search/sort
-├── CompanyForm.php         # Create/update form
-├── CompanyShow.php         # Detail view with stats
-└── CompanyDelete.php       # Delete confirmation
+app/Http/Livewire/Organization/
+├── OrganizationList.php         # List with search/sort
+├── OrganizationForm.php         # Create/update form
+├── OrganizationShow.php         # Detail view with stats
+└── OrganizationDelete.php       # Delete confirmation
 ```
 
 ### 2. **Organization Unit Management Module**
@@ -140,27 +140,27 @@ app/Http/Livewire/User/
 
 ## 🚀 **Development Sequence**
 
-### Week 1: Company Management
+### Week 1: Organization Management
 
-**Day 1-2: Company CRUD Operations**
+**Day 1-2: Organization CRUD Operations**
 
 ```bash
 # Create Livewire components
-php artisan make:livewire Company/CompanyList
-php artisan make:livewire Company/CompanyForm
-php artisan make:livewire Company/CompanyShow
+php artisan make:livewire Organization/OrganizationList
+php artisan make:livewire Organization/OrganizationForm
+php artisan make:livewire Organization/OrganizationShow
 
 # Create blade components
-php artisan make:component Company/Card
-php artisan make:component Company/Form
-php artisan make:component Company/List
+php artisan make:component Organization/Card
+php artisan make:component Organization/Form
+php artisan make:component Organization/List
 ```
 
-**Day 3-4: Company Dashboard & Analytics**
+**Day 3-4: Organization Dashboard & Analytics**
 
 ```bash
-php artisan make:livewire Company/CompanyStats
-php artisan make:component Company/DashboardCard
+php artisan make:livewire Organization/OrganizationStats
+php artisan make:component Organization/DashboardCard
 ```
 
 ### Week 2: Organization Unit Management
@@ -227,11 +227,11 @@ php artisan make:component User/PermissionGrid
 ```php
 // routes/web.php
 Route::middleware(['auth', 'verified'])->group(function () {
-    // Company routes
-    Route::get('/companies', CompanyList::class)->name('companies.index');
-    Route::get('/companies/create', CompanyForm::class)->name('companies.create');
-    Route::get('/companies/{company}/edit', CompanyForm::class)->name('companies.edit');
-    Route::get('/companies/{company}', CompanyShow::class)->name('companies.show');
+    // Organization routes
+    Route::get('/organizations', OrganizationList::class)->name('organizations.index');
+    Route::get('/organizations/create', OrganizationForm::class)->name('organizations.create');
+    Route::get('/organizations/{organization}/edit', OrganizationForm::class)->name('organizations.edit');
+    Route::get('/organizations/{organization}', OrganizationShow::class)->name('organizations.show');
 
     // Organization unit routes
     Route::get('/units', UnitTree::class)->name('units.index');
@@ -271,18 +271,18 @@ php artisan make:component Form/Textarea
 ### Example Component Structure
 
 ```php
-// resources/views/components/company/card.blade.php
+// resources/views/components/organization/card.blade.php
 <div class="bg-white rounded-lg shadow-md p-6">
     <div class="flex items-center justify-between">
-        <h3 class="text-lg font-semibold text-gray-900">{{ $company->name }}</h3>
-        <x-badge :color="$company->is_active ? 'green' : 'gray'">
-            {{ $company->is_active ? 'Active' : 'Inactive' }}
+        <h3 class="text-lg font-semibold text-gray-900">{{ $organization->name }}</h3>
+        <x-badge :color="$organization->is_active ? 'green' : 'gray'">
+            {{ $organization->is_active ? 'Active' : 'Inactive' }}
         </x-badge>
     </div>
-    <p class="mt-2 text-gray-600">{{ $company->description }}</p>
+    <p class="mt-2 text-gray-600">{{ $organization->description }}</p>
     <div class="mt-4 flex space-x-2">
-        <x-button.link :href="route('companies.show', $company)">View</x-button.link>
-        <x-button.link :href="route('companies.edit', $company)" variant="outline">Edit</x-button.link>
+        <x-button.link :href="route('organizations.show', $organization)">View</x-button.link>
+        <x-button.link :href="route('organizations.edit', $organization)" variant="outline">Edit</x-button.link>
     </div>
 </div>
 ```
@@ -291,10 +291,10 @@ php artisan make:component Form/Textarea
 
 ### 1. **Naming Conventions**
 
--   Livewire components: `PascalCase` (CompanyList)
--   Blade components: `kebab-case` (company-card)
+-   Livewire components: `PascalCase` (OrganizationList)
+-   Blade components: `kebab-case` (organization-card)
 -   Methods: `camelCase` (handleSubmit)
--   Variables: `camelCase` ($companyName)
+-   Variables: `camelCase` ($organizationName)
 
 ### 2. **File Structure**
 
@@ -302,12 +302,12 @@ php artisan make:component Form/Textarea
 resources/views/
 ├── components/              # Reusable components
 │   ├── ui/                 # Base UI components
-│   ├── company/            # Company-specific components
+│   ├── organization/            # Organization-specific components
 │   ├── unit/               # Org unit components
 │   ├── employee/           # Employee components
 │   └── user/               # User management components
 ├── livewire/               # Livewire component views
-│   ├── company/
+│   ├── organization/
 │   ├── unit/
 │   ├── employee/
 │   └── user/
@@ -323,12 +323,12 @@ resources/views/
 
 ## 📊 **Progress Tracking**
 
-### Milestone 1: Company Management (Days 1-4)
+### Milestone 1: Organization Management (Days 1-4)
 
--   [ ] Company list with search/sort
--   [ ] Company create/edit forms
--   [ ] Company detail view
--   [ ] Basic company analytics
+-   [ ] Organization list with search/sort
+-   [ ] Organization create/edit forms
+-   [ ] Organization detail view
+-   [ ] Basic organization analytics
 
 ### Milestone 2: Org Units (Days 5-8)
 
