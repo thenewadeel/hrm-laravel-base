@@ -50,7 +50,7 @@ class OrganizationApiTest extends TestCase
         $organizations = Organization::factory()->count(3)->create();
 
         // Dump the created organizations
-        dump($organizations->toArray());
+        // dump($organizations->toArray());
 
         $this->assertTrue(true); // Dummy assertion
     }

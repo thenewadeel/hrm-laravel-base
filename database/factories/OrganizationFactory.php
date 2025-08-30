@@ -11,9 +11,25 @@ class OrganizationFactory extends Factory
         return [
             'name' => $this->faker->company(),
             'description' => $this->faker->paragraph(),
-            'is_active' => true,
+            'is_active' => $this->faker->boolean(90),
             'created_at' => now(),
             'updated_at' => now(),
         ];
+    }
+
+
+
+    public function active(): static
+    {
+        return $this->state(fn(array $attributes) => [
+            'is_active' => true,
+        ]);
+    }
+
+    public function inactive(): static
+    {
+        return $this->state(fn(array $attributes) => [
+            'is_active' => false,
+        ]);
     }
 }

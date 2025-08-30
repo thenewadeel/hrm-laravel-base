@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\OrganizationController;
+use App\Http\Livewire\Organization\OrganizationList;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,4 +16,32 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+
+// routes/web.php
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Company routes
+    // Route::livewire(['/organizations', OrganizationList::class])->name('organizations.index');
+    Route::get('/organizations', [OrganizationController::class, 'index'])->name('organizations.index');
+    // Route::get('/companies/create', CompanyForm::class)->name('companies.create');
+    // Route::get('/companies/{company}/edit', CompanyForm::class)->name('companies.edit');
+    // Route::get('/companies/{company}', CompanyShow::class)->name('companies.show');
+
+    // // Organization unit routes
+    // Route::get('/units', UnitTree::class)->name('units.index');
+    // Route::get('/units/create', UnitForm::class)->name('units.create');
+    // Route::get('/units/{unit}/edit', UnitForm::class)->name('units.edit');
+
+    // // Employee routes
+    // Route::get('/employees', EmployeeList::class)->name('employees.index');
+    // Route::get('/employees/create', EmployeeForm::class)->name('employees.create');
+    // Route::get('/employees/{employee}/edit', EmployeeForm::class)->name('employees.edit');
+    // Route::get('/employees/{employee}', EmployeeShow::class)->name('employees.show');
+
+    // // User management routes
+    // Route::get('/users', UserList::class)->name('users.index');
+    // Route::get('/users/create', UserForm::class)->name('users.create');
+    // Route::get('/users/{user}/edit', UserForm::class)->name('users.edit');
+    // Route::get('/roles', RoleManager::class)->name('roles.index');
 });
