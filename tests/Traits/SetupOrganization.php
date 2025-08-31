@@ -19,14 +19,6 @@ trait SetupOrganization
 
         return [$organization, $user];
     }
-    // protected function createOrganizationWithUser($userAttributes = [], $organizationAttributes = [])
-    // {
-    //     $user = User::factory()->create(array_merge(['role' => 'admin'], $userAttributes));
-    //     $organization = Organization::factory()->create($organizationAttributes);
-
-    //     return [$organization, $user];
-    // }
-
     protected function createOrganizationsForSorting()
     {
         $user = User::factory()->create();

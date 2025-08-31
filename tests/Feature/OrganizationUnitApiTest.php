@@ -7,29 +7,20 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\OrganizationUnit;
 use Tests\TestCase;
+use tests\Traits\SetupOrganization;
 
 class OrganizationUnitApiTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, SetupOrganization;
 
     protected $user;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->user = User::factory()->create();
+        // $this->user = User::factory()->create();
     }
-    protected function createOrganizationWithUser($user = null, array $roles = ['admin'])
-    {
-        $organization = Organization::factory()->create();
-        $user = $user ?: User::factory()->create();
 
-        $organization->users()->attach($user, [
-            'roles' => json_encode($roles)
-        ]);
-
-        return [$organization, $user];
-    }
 
 
 

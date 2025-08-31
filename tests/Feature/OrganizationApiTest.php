@@ -9,10 +9,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Log\Logger;
 use Illuminate\Support\Facades\App;
 use Tests\TestCase;
+use Tests\Traits\SetupOrganization;
 
 class OrganizationApiTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, SetupOrganization;
 
     protected $user;
 
@@ -175,17 +176,6 @@ class OrganizationApiTest extends TestCase
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['name']);
-    }
-    protected function createOrganizationWithUser($user = null, array $roles = ['admin'])
-    {
-        $organization = Organization::factory()->create();
-        $user = $user ?: User::factory()->create();
-
-        $organization->users()->attach($user, [
-            'roles' => json_encode($roles)
-        ]);
-
-        return [$organization, $user];
     }
 
     /** @test */
