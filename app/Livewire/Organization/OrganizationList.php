@@ -6,11 +6,12 @@ namespace App\Livewire\Organization;
 use App\Models\Organization;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\On; // Add this import
 
 class OrganizationList extends Component
 {
     use WithPagination;
-    public static $route = '/organizations';
+
     public $search = '';
     public $sortField = 'name';
     public $sortDirection = 'asc';
@@ -22,6 +23,14 @@ class OrganizationList extends Component
         'sortDirection' => ['except' => 'asc'],
         'perPage' => ['except' => 10]
     ];
+
+    // Add listener for refresh
+    #[On('organizationSaved')]
+    public function refreshList()
+    {
+        // This will refresh the component when organization is saved
+        $this->resetPage();
+    }
 
     public function sortBy($field)
     {
@@ -42,6 +51,7 @@ class OrganizationList extends Component
     {
         $this->resetPage(); // Reset to first page when perPage changes
     }
+
 
     public function render()
     {

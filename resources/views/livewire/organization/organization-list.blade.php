@@ -17,7 +17,7 @@
             </div>
 
             <!-- Create Button -->
-            <x-button wire:click="$emit('openOrganizationModal')">
+            <x-button wire:click="$dispatch('openOrganizationModal')">
                 <x-heroicon-o-plus class="h-5 w-5 mr-2" />
                 New Organization
             </x-button>
@@ -68,10 +68,10 @@
                             </x-badge>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <x-button wire:click="$emit('editOrganization', {{ $organization->id }})">
+                            <x-button wire:click="$dispatch('editOrganization', {{ $organization }})">
                                 Edit
                             </x-button>
-                            <x-button wire:click="$emit('deleteOrganization', {{ $organization->id }})"
+                            <x-button wire:click="$dispatch('deleteOrganization', {{ $organization->id }})"
                                 variant="danger">
                                 Delete
                             </x-button>
@@ -85,7 +85,7 @@
                             {{-- ← Check this line --}}
                             <p class="text-sm text-gray-500">Get started by creating a new organization.</p>
                             <div class="mt-4">
-                                <x-button wire:click="$emit('openOrganizationModal')">
+                                <x-button wire:click="$dispatch('openOrganizationModal')">
                                     Create Organization
                                 </x-button>
                             </div>
