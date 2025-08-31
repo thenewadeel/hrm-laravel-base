@@ -38,7 +38,7 @@ class OrganizationForm extends Component
         $this->organization = Organization::findOrFail($id);
         $this->name = $this->organization->name;
         $this->description = $this->organization->description;
-        $this->is_active = $this->organization->is_active;
+        $this->is_active = (bool) $this->organization->is_active;
         $this->isEditing = true;
         $this->showModal = true;
     }
