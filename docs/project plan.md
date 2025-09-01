@@ -36,13 +36,13 @@ Develop and install a customized software solution for a pharmaceutical producti
 **Core Infrastructure**
 
 -   [ ] Server/Cloud Setup
--   [ ] Database Design (MySQL)
--   [ ] Basic Auth System (Laravel Sanctum)
+-   [/] Database Design (MySQL)
+-   [x] Basic Auth System (Laravel Sanctum)
 
 **HR Core (Minimal)**
 
--   [ ] Employee DB Schema
--   [ ] Role Definitions (Admin, Accountant, Auditor)
+-   [/] Employee DB Schema
+-   [/] Role Definitions (Admin, Accountant, Auditor)
 -   [ ] Draft Approval Workflows
 
 ---
@@ -52,8 +52,8 @@ Develop and install a customized software solution for a pharmaceutical producti
 ### Accounts Module
 
 -   [ ] Voucher System (Sales/Purchase)
--   [ ] Ledger Management
--   [ ] Trial Balance Report
+-   [/] Ledger Management
+-   [/] Trial Balance Report
 
 ### HR Lite
 

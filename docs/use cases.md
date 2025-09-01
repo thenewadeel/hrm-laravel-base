@@ -4,7 +4,7 @@
 
 ### 1. **Company & Structure Management**
 
--   [ ] Create/Edit/Delete organizations and subsidiaries
+-   [/] Create/Edit/Delete organizations and subsidiaries
 -   [ ] Define organizational hierarchy (Branches → Departments → Teams)
 -   [ ] Manage organizational units and reporting lines
 -   [ ] Assign managers and supervisors to units
@@ -21,14 +21,14 @@
 
 ### 3. **Chart of Accounts Management**
 
--   [ ] Create/maintain account hierarchy
--   [ ] Define account types (Asset, Liability, Equity, Revenue, Expense)
--   [ ] Set up department/project-specific accounts
+-   [/] Create/maintain account hierarchy
+-   [/] Define account types (Asset, Liability, Equity, Revenue, Expense)
+-   [/] Set up department/project-specific accounts
 -   [ ] Account activation/deactivation
 
 ### 4. **Journal Entry Management**
 
--   [ ] Create manual journal entries with debit/credit validation
+-   [/] Create manual journal entries with debit/credit validation
 -   [ ] Draft, review, and post entries
 -   [ ] Void/reverse incorrect entries
 -   [ ] Attach supporting documents
@@ -36,9 +36,9 @@
 
 ### 5. **Financial Reporting**
 
--   [ ] Generate real-time Trial Balance
--   [ ] Produce Balance Sheets (Assets = Liabilities + Equity)
--   [ ] Create Income Statements (Revenue - Expenses)
+-   [/] Generate real-time Trial Balance
+-   [/] Produce Balance Sheets (Assets = Liabilities + Equity)
+-   [/] Create Income Statements (Revenue - Expenses)
 -   [ ] Departmental P&L reports
 -   [ ] Budget vs Actual comparisons
 -   [ ] Export reports to PDF/Excel

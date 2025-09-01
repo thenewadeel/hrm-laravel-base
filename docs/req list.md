@@ -26,13 +26,13 @@
 ### Reports:
 
 [ ] Advance Reports
-[ ] Financial Statements: Trial Balance, Balance Sheet, Profit and Loss, Income Statement
+[/] Financial Statements: Trial Balance, Balance Sheet, Profit and Loss, Income Statement
 [ ] Outstanding Statements
 [ ] Bank Statements
 
 ### Financial System:
 
-[ ] Chart of Accounts Management
+[/] Chart of Accounts Management
 [ ] Assets Depreciation and Registration
 [ ] Financial Year Opening/Closing
 
@@ -47,7 +47,7 @@
 
 ### Admin Systems:
 
-[ ] Employee database management.
+[/] Employee database management.
 
 ### Payroll & Compensation:
 
@@ -57,7 +57,7 @@
 
 ### Employee Records:
 
-[ ] Employees List
+[/] Employees List
 [ ] Withholding Tax management
 
 ### Loans & Advances:
