@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Livewire;
+namespace Tests\Feature\Livewire\Organization;
 
 use App\Livewire\OrganizationTree;
 use App\Models\OrganizationUnit;

@@ -28,7 +28,7 @@ class CsvUsersSeeder extends Seeder
         while (($row = fgetcsv($handle)) !== false) {
             [$name, $email, $password, $orgName, $unitName, $position, $rolesJson, $permissionsJson, $status] = $row;
 
-            $organization = Organization::where('name', $orgName)->first();
+            $organization = Organization::firstOrCreate(['name' => $orgName]);
 
             if (!$organization) {
                 $this->command->warn("Organization {$orgName} not found for user {$email}");
