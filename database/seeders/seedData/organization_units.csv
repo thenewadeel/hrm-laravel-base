@@ -11,3 +11,19 @@ Pharma Solutions Inc.,HR & Admin,department,,{"function": "human resources"}
 Pharma Solutions Inc.,Production Team A,team,Production Department,{"shift": "A"}
 Pharma Solutions Inc.,Production Team B,team,Production Department,{"shift": "B"}
 Pharma Solutions Inc.,QC Lab Team,team,Quality Control,{"lab_type": "main"}
+MediCare Bangladesh Ltd.,Corporate HQ,branch,,{"location": "Dhaka"}
+MediCare Bangladesh Ltd.,Dhaka Clinic,branch,Corporate HQ,{"location": "Dhaka", "facility_type": "clinic"}
+MediCare Bangladesh Ltd.,Sylhet Clinic,branch,Corporate HQ,{"location": "Sylhet", "facility_type": "clinic"}
+MediCare Bangladesh Ltd.,Emergency Services,department,,{"function": "emergency care"}
+MediCare Bangladesh Ltd.,Internal Medicine,department,,{"function": "patient care"}
+MediCare Bangladesh Ltd.,Patient Records,department,,{"function": "records management"}
+MediCare Bangladesh Ltd.,Billing & Insurance,department,Finance,{"function": "billing"}
+MediCare Bangladesh Ltd.,Dhaka Clinic Staff,team,Dhaka Clinic,{"team_lead": "Dr. Rahman"}
+MediCare Bangladesh Ltd.,Emergency Response Team 1,team,Emergency Services,{"shift": "Day"}
+BioResearch Labs,HQ & Main Lab,branch,,{"location": "Dhaka"}
+BioResearch Labs,Sample Collection Point,branch,HQ & Main Lab,{"location": "Mirpur"}
+BioResearch Labs,Genomics Division,department,,{"function": "genetic research"}
+BioResearch Labs,Clinical Trials,department,,{"function": "trial management"}
+BioResearch Labs,Data Analytics,department,Genomics Division,{"function": "data analysis"}
+BioResearch Labs,Lab Technicians,team,Genomics Division,{"specialty": "molecular biology"}
+BioResearch Labs,Trial Coordinators,team,Clinical Trials,{"focus": "oncology"}

@@ -17,7 +17,9 @@
             <div class="p-4 bg-white shadow-lg rounded-xl overflow-hidden mb-8">
                 @livewire('organization.organization-list')
             </div>
-
+            <div class="container mx-auto p-4">
+                @livewire('organization-tree')
+            </div>
             {{-- The Modal Component (no wrapper div needed) --}}
             @livewire('organization.organization-form')
         </div>
