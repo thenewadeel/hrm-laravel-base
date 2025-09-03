@@ -3,11 +3,11 @@
 
     <div class="mb-4">
         <label for="organization-filter" class="block text-gray-700 font-bold mb-2">Select Organization:</label>
-        <select id="organization-filter" wire:change="filterByOrganization($event.target.value)"
+        <select id="organization-filter" wire:model.live="organizationId"
             class="block w-full border border-gray-300 rounded-md p-2">
             <option value="">Select an Organization</option>
             @foreach ($organizations as $org)
-                <option value="{{ $org->id }}" {{ $org->id == $organizationId ? 'selected' : '' }}>
+                <option value="{{ $org->id }}">
                     {{ $org->name }}
                 </option>
             @endforeach
