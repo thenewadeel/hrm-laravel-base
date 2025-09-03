@@ -74,8 +74,12 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    // app/Models/User.php
+
     public function units()
     {
+        // This relationship correctly maps to the organization_user pivot table
+        // by specifying the foreign keys. This seems okay.
         return $this->belongsToMany(OrganizationUnit::class, 'organization_user', 'user_id', 'organization_unit_id')
             ->withPivot('organization_id', 'position', 'roles', 'permissions')
             ->withTimestamps();
@@ -83,7 +87,6 @@ class User extends Authenticatable
 
     public function organizationUnits()
     {
-        return $this->belongsToMany(OrganizationUnit::class, 'organization_user')
-            ->withPivot(['roles', 'position']);
+        return $this->units();
     }
 }

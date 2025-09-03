@@ -39,13 +39,12 @@ class OrganizationUnit extends Model
             // ->withDepth()
             ->withTrashed();
     }
-
     public function users()
     {
+        // The 'is_active' pivot column does not exist in your schema.
         return $this->belongsToMany(User::class, 'organization_user')
-            ->withPivot(['position', 'roles', 'permissions', 'is_active']);
+            ->withPivot(['position', 'roles', 'permissions']);
     }
-
     // Recursive relationship for all descendants
     public function allDescendants()
     {
