@@ -137,3 +137,25 @@ Most financial institutions use block ranges by category:
 | **Other / Special**  | 8000–9999                        | 9000: Suspense, 9999: Year-End Adjustments             |
 
 > **Note:** Some institutions use a more complex system, but this is a good starting point.
+
+Based on the most up-to-date file, here is a summary of the progress for the `JournalEntries` Livewire component.
+
+---
+
+### **Component Progress Summary: JournalEntries Livewire**
+
+**Objective:**
+Optimize a Livewire component to display a list of journal entries from a backend API without performance bottlenecks.
+
+**Problem Addressed:**
+The initial component suffered from a significant performance issue. The root cause was the Livewire **hydration cycle**, where the entire collection of journal entries was being stored in a public property. This led to massive data payloads being sent between the browser and the server on every user interaction, causing the page to slow down and become unresponsive.
+
+**Implemented Solution:**
+The component was refactored to use Livewire 3's **`#[Computed]`** property.
+
+1.  **Data Fetching:** The `journalEntries()` method, now a computed property, fetches data directly from the API (`/journal-entries`).
+2.  **Performance Improvement:** By using `#[Computed]`, the API-fetched data is no longer stored in a public property. This prevents it from being included in Livewire's hydration payload, drastically reducing the data transfer size on subsequent requests and eliminating the performance bottleneck.
+3.  **State Management:** The `render()` method returns the associated Blade view, which can directly access the cached `journalEntries` data without needing a separate `mount()` or `boot()` method to populate a public property.
+4.  **User Actions:** The component includes methods for `postEntry()` and `voidEntry()`. After a successful action, the component dispatches a `refreshJournalEntries` event to signal the front end to update the displayed data.
+
+The component is now efficient and ready for further development, such as building the UI for creating new journal entries.
