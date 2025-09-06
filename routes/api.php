@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Accounting\FinancialReportsController;
 use App\Http\Controllers\Api\OrganizationController;
 use App\Http\Controllers\Api\OrganizationInvitationController;
 use App\Http\Controllers\Api\OrganizationUnitController;
+use App\Models\Accounting\JournalEntry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -90,4 +91,14 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('balance-sheet', [FinancialReportsController::class, 'balanceSheet']);
         Route::get('income-statement', [FinancialReportsController::class, 'incomeStatement']);
     });
+});
+
+
+// Temporary test route
+Route::get('/debug/test-connection', function () {
+    return response()->json([
+        'message' => 'API is working!',
+        'timestamp' => now(),
+        'data' => JournalEntry::count() // if you have this model
+    ]);
 });

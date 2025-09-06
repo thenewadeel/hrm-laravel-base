@@ -45,3 +45,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Route::get('/users/{user}/edit', UserForm::class)->name('users.edit');
     // Route::get('/roles', RoleManager::class)->name('roles.index');
 });
+
+// Temporary debug route
+Route::get('/debug/api-config', function () {
+    return response()->json([
+        'app_url' => config('app.url'),
+        'api_url' => config('app.api_url'),
+        'env_api_url' => env('API_URL'),
+        'full_api_endpoint' => config('app.api_url') . '/journal-entries',
+        'is_local' => app()->isLocal(),
+        'environment' => app()->environment(),
+        'cors_config' => config('cors'),
+        'timezone' => config('app.timezone')
+    ]);
+});
