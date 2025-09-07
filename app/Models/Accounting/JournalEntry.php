@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth; // Added for assigning created_by
+use Illuminate\Support\Facades\Log;
 
 class JournalEntry extends Model
 {
@@ -34,32 +36,31 @@ class JournalEntry extends Model
         'entry_date' => 'date',
         'posted_at' => 'datetime',
     ];
+
+    /**
+     * Create a new journal entry within a database transaction.
+     * This method relies on the `creating` model event to generate the reference number.
+     */
     public static function createWithTransaction(array $attributes = [])
     {
+        Log::debug(json_encode($attributes) . " attributes");
         return DB::transaction(function () use ($attributes) {
-            $sequenceService = app(SequenceService::class);
+            // Assign the current user as the creator
+            $attributes['created_by'] = Auth::id();
 
-            // Reserve a sequence number first
-            $reservation = $sequenceService->reserve('journal_entry_ref');
-
-            try {
-                $journalEntry = self::create(array_merge($attributes, [
-                    'reference_number' => $reservation['formatted']
-                ]));
-
-                // Commit the sequence reservation
-                $sequenceService->commitReservation('journal_entry_ref', $reservation['value']);
-
-                return $journalEntry;
-            } catch (\Exception $e) {
-                // The sequence reservation will automatically roll back with the transaction
-                // No need to manually revert since we never committed it
-                throw $e;
-            }
+            // The booted method already handles the reference_number generation.
+            Log::debug(" journalEntry");
+            $journalEntry = self::create($attributes);
+            Log::debug(" journalEntry created");
+            return $journalEntry;
         });
     }
 
-    // Keep the old behavior for non-critical cases
+    /**
+     * The "booted" method of the model.
+     *
+     * This is a good place for model-level events.
+     */
     protected static function booted(): void
     {
         static::creating(function (JournalEntry $journalEntry) {
@@ -69,6 +70,7 @@ class JournalEntry extends Model
             }
         });
     }
+
     protected static function newFactory(): JournalEntryFactory
     {
         return JournalEntryFactory::new();
