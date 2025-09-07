@@ -1,7 +1,7 @@
 <?php
 
-// Laravel 12 Project Crawler - LLM Ingestible Format Generator
-// Modular approach with functions for each component type
+// Laravel 12 Project Crawler - Method Signatures for LLM Ingestion
+// Extracts method signatures instead of full content
 
 // Configuration
 $projectRoot = $argv[1] ?? '.';
@@ -14,8 +14,28 @@ $ignoredPaths = [
     'vendor',
     'storage',
     'bootstrap/cache',
-    'public/build', // Common Vite build output
-    'public/dist' // Common Webpack output
+    'public/build',
+    'public/dist'
+];
+
+// Component-specific settings
+$componentSettings = [
+    'Model' => ['extract_methods' => true, 'max_methods' => 20],
+    'Controller' => ['extract_methods' => true, 'max_methods' => 15],
+    'Migration' => ['extract_methods' => false],
+    'Route' => ['extract_methods' => false],
+    'View' => ['extract_methods' => false],
+    'Config' => ['extract_methods' => false],
+    'Environment' => ['extract_methods' => false]
+];
+
+// Essential files to include fully
+$essentialFiles = [
+    'routes/web.php',
+    'routes/api.php',
+    'app/Http/Controllers/Controller.php',
+    'app/Models/User.php',
+    '.env.example'
 ];
 
 // Logging functions
@@ -42,11 +62,53 @@ function log_error(string $message): void
     echo "[ERROR] $message\n";
 }
 
-// Utility function to clean content
-function clean_content(string $content): string
+// Simple but reliable method extraction using regex
+function extract_method_signatures(string $content, int $maxMethods = 20): array
 {
-    // Remove null bytes and other non-printable characters
-    return preg_replace('/[\\x00-\\x1F]/', '', $content);
+    $methods = [];
+
+    // Pattern to match method signatures
+    $pattern = '/(?:(public|protected|private|static|final)\s+)*function\s+(\w+)\s*\(([^)]*)\)/';
+
+    preg_match_all($pattern, $content, $matches, PREG_SET_ORDER);
+
+    foreach ($matches as $match) {
+        $modifiers = [];
+        if (!empty($match[1])) {
+            // Split multiple modifiers
+            $modifiers = preg_split('/\s+/', trim($match[1]));
+        }
+
+        $methodName = $match[2];
+        $parameters = trim($match[3]);
+
+        // Clean up parameters
+        $parameters = preg_replace('/\s+/', ' ', $parameters);
+
+        // Get line number (approximate)
+        $linesBefore = substr_count(substr($content, 0, strpos($content, $match[0])), "\n") + 1;
+
+        $methods[] = [
+            'name' => $methodName,
+            'modifiers' => $modifiers,
+            'parameters' => $parameters,
+            'line' => $linesBefore
+        ];
+
+        if (count($methods) >= $maxMethods) {
+            break;
+        }
+    }
+
+    return $methods;
+}
+
+// Check if file is essential
+function is_essential_file(string $filePath): bool
+{
+    global $essentialFiles, $projectRoot;
+    $relativePath = str_replace('\\', '/', substr($filePath, strlen($projectRoot) + 1));
+    return in_array($relativePath, $essentialFiles);
 }
 
 // Validation function
@@ -65,10 +127,28 @@ function validate_project_root(string $projectRoot): void
     log_info("Validated Laravel project at: $projectRoot");
 }
 
-// Component extraction function
-function extract_components(string $projectRoot, string $type, string $subDir, int $maxBytes, array $extensions = ['php']): array
+// Extract class name from PHP file using simple regex
+function extract_class_name(string $content): string
 {
-    global $ignoredPaths;
+    if (preg_match('/class\s+(\w+)/', $content, $matches)) {
+        return $matches[1];
+    }
+    return '';
+}
+
+// Extract namespace from PHP file using simple regex
+function extract_namespace(string $content): string
+{
+    if (preg_match('/namespace\s+([^;]+);/', $content, $matches)) {
+        return trim($matches[1]);
+    }
+    return '';
+}
+
+// Component extraction function
+function extract_components(string $projectRoot, string $type, string $subDir, array $extensions = ['php']): array
+{
+    global $ignoredPaths, $componentSettings;
 
     $dirPath = "$projectRoot/$subDir";
     $components = [];
@@ -85,12 +165,12 @@ function extract_components(string $projectRoot, string $type, string $subDir, i
 
     foreach ($files as $file) {
         $relativePath = substr($file->getPathname(), strlen($projectRoot) + 1);
+
+        // Skip ignored paths
         $skip = false;
         foreach ($ignoredPaths as $ignoredPath) {
-            // Use strpos to check if the file path contains an ignored directory
             if (str_starts_with($relativePath, $ignoredPath)) {
                 log_info("Skipping ignored path: " . $file->getPathname());
-                // Skip the entire directory if a match is found
                 if ($file->isDir()) {
                     $files->next();
                 }
@@ -105,21 +185,27 @@ function extract_components(string $projectRoot, string $type, string $subDir, i
         if ($file->isFile()) {
             $fileExtension = $file->getExtension();
             $isAllowed = in_array($fileExtension, $extensions);
+
+            // Special handling for blade templates
             if (!$isAllowed && $type === 'View' && str_ends_with($file->getBasename(), '.blade.php')) {
                 $isAllowed = true;
             }
 
-            // Additional check for minified or compiled files
+            // Skip minified/compiled files
             $fileName = $file->getBasename();
-            if (str_ends_with($fileName, '.min.css') || str_ends_with($fileName, '.min.js') || str_ends_with($fileName, '.css.map') || str_ends_with($fileName, '.js.map')) {
+            if (
+                str_ends_with($fileName, '.min.css') || str_ends_with($fileName, '.min.js') ||
+                str_ends_with($fileName, '.css.map') || str_ends_with($fileName, '.js.map')
+            ) {
                 log_info("Skipping minified/compiled file: " . $file->getPathname());
                 continue;
             }
 
             if ($isAllowed) {
-                $content = file_get_contents($file->getPathname(), false, null, 0, $maxBytes);
+                $isEssential = is_essential_file($file->getPathname());
+                $content = file_get_contents($file->getPathname());
 
-                // Use a different name for routes and env files
+                // Use appropriate naming
                 $name = $file->getBasename('.' . $fileExtension);
                 if ($type === 'Route') {
                     $name = $file->getBasename('.php');
@@ -129,12 +215,58 @@ function extract_components(string $projectRoot, string $type, string $subDir, i
                     $name = $file->getBasename();
                 }
 
-                $components[] = [
+                $componentData = [
                     'type' => $type,
                     'name' => $name,
-                    'file' => str_replace('\\', '/', $file->getPathname()), // Normalize file path
-                    'content' => clean_content($content)
+                    'file' => str_replace('\\', '/', $relativePath),
+                    'essential' => $isEssential
                 ];
+
+                // Extract method signatures for appropriate components
+                if ($componentSettings[$type]['extract_methods'] && $fileExtension === 'php') {
+                    $className = extract_class_name($content);
+                    $namespace = extract_namespace($content);
+
+                    if (!empty($className)) {
+                        $componentData['class'] = $className;
+                        if (!empty($namespace)) {
+                            $componentData['namespace'] = $namespace;
+                        }
+
+                        $maxMethods = $componentSettings[$type]['max_methods'] ?? 20;
+                        $methods = extract_method_signatures($content, $maxMethods);
+                        $componentData['methods'] = $methods;
+                        $componentData['method_count'] = count($methods);
+
+                        log_info("Found " . count($methods) . " methods in " . $className);
+                    }
+                }
+
+                // For essential files, include a small snippet of content
+                if ($isEssential && strlen($content) > 500) {
+                    $componentData['content_preview'] = substr($content, 0, 500) . '...';
+                } elseif ($isEssential) {
+                    $componentData['content'] = $content;
+                }
+
+                // For routes, include a summary of route definitions
+                if ($type === 'Route') {
+                    preg_match_all('/Route::\w+\([^;]*\);/', $content, $matches);
+                    if (!empty($matches[0])) {
+                        $routeSummary = [];
+                        foreach ($matches[0] as $routeDef) {
+                            // Simplify route definition for summary
+                            $simplified = preg_replace('/\s+/', ' ', $routeDef);
+                            if (strlen($simplified) > 100) {
+                                $simplified = substr($simplified, 0, 100) . '...';
+                            }
+                            $routeSummary[] = $simplified;
+                        }
+                        $componentData['route_summary'] = $routeSummary;
+                    }
+                }
+
+                $components[] = $componentData;
             }
         }
     }
@@ -142,23 +274,47 @@ function extract_components(string $projectRoot, string $type, string $subDir, i
     return $components;
 }
 
+// Extract only key information from composer.json
+function extract_composer_info(string $projectRoot): array
+{
+    $composerFile = "$projectRoot/composer.json";
+    if (!file_exists($composerFile)) {
+        return [];
+    }
+
+    $composerData = json_decode(file_get_contents($composerFile), true);
+    if (!$composerData) {
+        return [];
+    }
+
+    return [
+        'name' => $composerData['name'] ?? 'Unknown',
+        'description' => $composerData['description'] ?? '',
+        'require' => array_keys($composerData['require'] ?? []),
+        'require-dev' => array_keys($composerData['require-dev'] ?? [])
+    ];
+}
+
 // Main execution function
 function main(string $projectRoot, string $outputFile, bool $verbose): void
 {
-    log_info("Laravel 12 Project Crawler started");
+    log_info("Laravel 12 Project Crawler started (Method Signatures for LLM)");
 
     // Validate project structure
     validate_project_root($projectRoot);
 
     // Extract all components using the generalized function
     $components = [];
-    $components = array_merge($components, extract_components($projectRoot, 'Model', 'app/Models', 5000));
-    $components = array_merge($components, extract_components($projectRoot, 'Controller', 'app/Http/Controllers', 5000));
-    $components = array_merge($components, extract_components($projectRoot, 'Migration', 'database/migrations', 3000));
-    $components = array_merge($components, extract_components($projectRoot, 'Route', 'routes', 10000));
-    $components = array_merge($components, extract_components($projectRoot, 'View', 'resources/views', 5000, ['blade.php', 'php', 'js', 'vue']));
-    $components = array_merge($components, extract_components($projectRoot, 'Config', 'config', 3000));
-    $components = array_merge($components, extract_components($projectRoot, 'Environment', '.', 5000, ['.env', '.env.example']));
+    $components = array_merge($components, extract_components($projectRoot, 'Model', 'app/Models'));
+    $components = array_merge($components, extract_components($projectRoot, 'Controller', 'app/Http/Controllers'));
+    $components = array_merge($components, extract_components($projectRoot, 'Migration', 'database/migrations'));
+    $components = array_merge($components, extract_components($projectRoot, 'Route', 'routes'));
+    $components = array_merge($components, extract_components($projectRoot, 'View', 'resources/views', ['blade.php', 'php']));
+    $components = array_merge($components, extract_components($projectRoot, 'Config', 'config'));
+    $components = array_merge($components, extract_components($projectRoot, 'Environment', '.', ['.env', '.env.example']));
+
+    // Extract composer information
+    $composerInfo = extract_composer_info($projectRoot);
 
     // Create final JSON structure
     $projectName = basename(realpath($projectRoot));
@@ -166,7 +322,9 @@ function main(string $projectRoot, string $outputFile, bool $verbose): void
 
     $jsonData = [
         'project' => $projectName,
+        'composer' => $composerInfo,
         'timestamp' => $timestamp,
+        'component_count' => count($components),
         'components' => $components
     ];
 
@@ -188,10 +346,12 @@ function main(string $projectRoot, string $outputFile, bool $verbose): void
 
 function show_summary(string $projectName, int $componentCount, string $outputFile): void
 {
+    $fileSize = filesize($outputFile);
     echo "\n=== EXTRACTION SUMMARY ===\n";
     echo "Project: $projectName\n";
     echo "Total components: $componentCount\n";
     echo "Output file: $outputFile\n";
+    echo "File size: " . round($fileSize / 1024, 2) . " KB\n";
     echo "==========================\n";
 }
 
