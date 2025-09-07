@@ -2,33 +2,93 @@
 
 namespace App\Livewire\Accounting;
 
-use App\Models\Accounting\ChartOfAccount;
 use Livewire\Component;
+use App\Models\Accounting\ChartOfAccount;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Validation\Rule;
 
 class ChartOfAccounts extends Component
 {
-    /**
-     * @var \Illuminate\Database\Eloquent\Collection
-     */
-    public $accounts;
+    public Collection $accounts;
 
-    /**
-     * Mount the component and fetch the chart of accounts.
-     *
-     * @return void
-     */
+    // Public properties for the create form
+    public $code;
+    public $name;
+    public $type;
+    public $description;
+
+    // Public properties for the update form
+    public $editingAccount;
+
+    protected $rules = [
+        'code' => 'required|string|max:255',
+        'name' => 'required|string|max:255',
+        'type' => 'required|string|in:asset,liability,equity,revenue,expense',
+        'description' => 'nullable|string',
+    ];
+
     public function mount()
     {
-        $this->accounts = ChartOfAccount::all();
+        $this->loadAccounts();
     }
 
-    /**
-     * Render the Livewire component.
-     *
-     * @return \Illuminate\Contracts\View\View
-     */
+    public function loadAccounts()
+    {
+        $this->accounts = ChartOfAccount::orderBy('code')->get();
+    }
+
     public function render()
     {
         return view('livewire.accounting.chart-of-accounts');
+    }
+
+    public function create()
+    {
+        $this->validate([
+            'code' => ['required', 'string', 'max:255', Rule::unique('chart_of_accounts')],
+        ]);
+
+        ChartOfAccount::create([
+            'code' => $this->code,
+            'name' => $this->name,
+            'type' => $this->type,
+            'description' => $this->description,
+        ]);
+
+        $this->loadAccounts();
+        $this->reset(['code', 'name', 'type', 'description']);
+        session()->flash('message', 'Chart of Account created successfully.');
+    }
+
+    public function edit(ChartOfAccount $account)
+    {
+        $this->editingAccount = $account;
+        $this->code = $account->code;
+        $this->name = $account->name;
+        $this->type = $account->type;
+        $this->description = $account->description;
+    }
+
+    public function update()
+    {
+        $this->validate([
+            'code' => ['required', 'string', 'max:255', Rule::unique('chart_of_accounts')->ignore($this->editingAccount)],
+        ]);
+
+        $this->editingAccount->update([
+            'code' => $this->code,
+            'name' => $this->name,
+            'type' => $this->type,
+            'description' => $this->description,
+        ]);
+
+        $this->loadAccounts();
+        $this->reset(['code', 'name', 'type', 'description', 'editingAccount']);
+        session()->flash('message', 'Chart of Account updated successfully.');
+    }
+
+    public function cancelEdit()
+    {
+        $this->reset(['code', 'name', 'type', 'description', 'editingAccount']);
     }
 }
