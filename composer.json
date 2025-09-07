@@ -64,6 +64,9 @@
         "test": [
             "@php artisan config:clear --ansi",
             "@php artisan test"
+        ],
+        "llm-summarize": [
+            "php scripts/laraCrawler.php"
         ]
     },
     "extra": {
