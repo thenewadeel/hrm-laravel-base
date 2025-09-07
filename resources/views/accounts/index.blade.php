@@ -26,7 +26,7 @@
                         <button type="button" @click="activeTab = 'accounts'"
                             :class="{ 'border-indigo-500 text-indigo-600': activeTab === 'accounts', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'accounts' }"
                             class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
-                            Chart of Accounts
+                            Accounts
                         </button>
                         <button type="button" @click="activeTab = 'journal-entries'"
                             :class="{ 'border-indigo-500 text-indigo-600': activeTab === 'journal-entries', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'journal-entries' }"
@@ -52,7 +52,7 @@
                         @livewire('accounting.dashboard')
                     </div>
                     <div x-show="activeTab === 'accounts'">
-                        @livewire('accounting.accounts')
+                        tbd
                     </div>
                     <div x-show="activeTab === 'journal-entries'">
                         @livewire('accounting.journal-entries')
