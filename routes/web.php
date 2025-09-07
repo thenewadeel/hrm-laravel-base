@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Livewire\Organization\OrganizationList;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Route::get('/users/create', UserForm::class)->name('users.create');
     // Route::get('/users/{user}/edit', UserForm::class)->name('users.edit');
     // Route::get('/roles', RoleManager::class)->name('roles.index');
+    // });
+
+    Route::get('/accounts', [AccountsController::class, 'index'])->name('accounting.index');
+
 });
 
 // Temporary debug route
