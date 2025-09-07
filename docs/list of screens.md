@@ -1,11 +1,11 @@
 System Screen Checklist
 
 [ ] Core Authentication Screens Gp
-[ ] Login Screen
-[ ] Registration Screen
+[x] Login Screen
+[/] Registration Screen
 
 [ ] Accounts Department Screens Gp
-[ ] Accounts Dashboard
+[/] Accounts Dashboard
 [ ] Voucher Management
 [ ] Voucher List
 [ ] Voucher Creation/Edit Form
@@ -32,7 +32,7 @@ System Screen Checklist
 [ ] Leave Management
 
 [ ] System Administration & Settings Gp
-[ ] User Profile Management
+[/] User Profile Management
 [ ] Organization Settings
 [ ] User Management
 [ ] Role Management
