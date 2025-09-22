@@ -13,12 +13,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth; // Added for assigning created_by
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class JournalEntry extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'reference_number',
         'entry_date',
@@ -30,8 +31,9 @@ class JournalEntry extends Model
     ];
 
     protected $attributes = [
-        'status' => 'draft', // ← Default value
+        'status' => 'draft',
     ];
+
     protected $casts = [
         'entry_date' => 'date',
         'posted_at' => 'datetime',
@@ -39,17 +41,12 @@ class JournalEntry extends Model
 
     /**
      * Create a new journal entry within a database transaction.
-     * This method relies on the `creating` model event to generate the reference number.
      */
     public static function createWithTransaction(array $attributes = [])
     {
         Log::debug(json_encode($attributes) . " attributes");
         return DB::transaction(function () use ($attributes) {
-            // Assign the current user as the creator
             $attributes['created_by'] = Auth::id();
-
-            // The booted method already handles the reference_number generation.
-            Log::debug(" journalEntry");
             $journalEntry = self::create($attributes);
             Log::debug(" journalEntry created");
             return $journalEntry;
@@ -58,15 +55,23 @@ class JournalEntry extends Model
 
     /**
      * The "booted" method of the model.
-     *
-     * This is a good place for model-level events.
      */
     protected static function booted(): void
     {
         static::creating(function (JournalEntry $journalEntry) {
             if (empty($journalEntry->reference_number)) {
-                $sequenceService = app(SequenceService::class);
-                $journalEntry->reference_number = $sequenceService->generate('journal_entry_ref');
+                try {
+                    $sequenceService = app(SequenceService::class);
+                    $journalEntry->reference_number = $sequenceService->generate('journal_entry_ref');
+                } catch (\Exception $e) {
+                    // Fallback if sequence service fails
+                    $latest = self::where('reference_number', 'like', 'JE-%')
+                        ->orderBy('reference_number', 'desc')
+                        ->first();
+
+                    $nextNumber = $latest ? (int) str_replace('JE-', '', $latest->reference_number) + 1 : 1;
+                    $journalEntry->reference_number = 'JE-' . str_pad($nextNumber, 6, '0', STR_PAD_LEFT);
+                }
             }
         });
     }
@@ -75,6 +80,7 @@ class JournalEntry extends Model
     {
         return JournalEntryFactory::new();
     }
+
     public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
@@ -85,6 +91,21 @@ class JournalEntry extends Model
         return $this->belongsTo(User::class, 'approved_by');
     }
 
+    /**
+     * Fix the ledger entries relationship
+     * Assuming LedgerEntry has a journal_entry_id foreign key
+     */
+    // public function ledgerEntries(): HasMany
+    // {
+    //     return $this->hasMany(LedgerEntry::class, 'journal_entry_id');
+    //     }
+
+    /**
+     * Alternative if you're using polymorphic relationships:
+     * Make sure the transactionable_type is stored correctly
+     */
+    /*
+    */
     public function ledgerEntries(): HasMany
     {
         return $this->hasMany(LedgerEntry::class, 'transactionable_id')
@@ -97,7 +118,6 @@ class JournalEntry extends Model
     public function post(array $entries): void
     {
         $accountingService = app(AccountingService::class);
-
         $accountingService->postTransaction($entries, $this->description, $this);
 
         $this->update([

@@ -48,7 +48,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // });
 
     Route::get('/accounts', [AccountsController::class, 'index'])->name('accounting.index');
-
 });
 
 // Temporary debug route
@@ -63,4 +62,41 @@ Route::get('/debug/api-config', function () {
         'cors_config' => config('cors'),
         'timezone' => config('app.timezone')
     ]);
+});
+
+
+
+// In routes/web.php
+Route::get('/debug/journal-entries', function () {
+    try {
+        $entries = \App\Models\Accounting\JournalEntry::with('ledgerEntries.account')->get();
+        return response()->json($entries);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+});
+
+// In routes/web.php
+Route::get('/debug/test-sequence', function () {
+    try {
+        $sequenceService = app(App\Services\SequenceService::class);
+
+        // Test 1: Check current value
+        $current = $sequenceService->peek('journal_entry_ref');
+        echo "Current value: " . $current . "<br>";
+
+        // Test 2: Generate a new value
+        // $ref1 = $sequenceService->generate('journal_entry_ref');
+        // echo "Generated 1: " . $ref1 . "<br>";
+
+        // Test 3: Reserve a value
+        $ref2 = $sequenceService->reserve('journal_entry_ref');
+        echo "Reserved: " . json_encode($ref2) . "<br>";
+
+        // Test 4: Check value after generation
+        $currentAfter = $sequenceService->peek('journal_entry_ref');
+        echo "Value after generation: " . $currentAfter . "<br>";
+    } catch (\Exception $e) {
+        return "Error: " . $e->getMessage();
+    }
 });

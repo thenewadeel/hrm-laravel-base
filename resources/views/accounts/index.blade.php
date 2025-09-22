@@ -58,7 +58,7 @@
                         @livewire('accounting.journal-entries')
                     </div>
                     <div x-show="activeTab === 'reports'">
-                        {{-- @livewire('accounting.reports') --}}
+                        @livewire('accounting.reports')
                     </div>
                     <div x-show="activeTab === 'chart-of-accounts'">
                         @livewire('accounting.chart-of-accounts')
