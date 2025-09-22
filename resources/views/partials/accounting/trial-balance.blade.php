@@ -1,7 +1,38 @@
-<div class="space-y-6">
-    <h2 class="text-2xl font-bold text-gray-800">Trial Balance</h2>
-    <p class="text-gray-600">This report shows the ending balance of each general ledger account.</p>
-    <div class="shadow-sm border border-gray-200 rounded-lg overflow-hidden">
+<div class="bg-white shadow overflow-hidden sm:rounded-lg mb-8">
+    <div class="px-4 py-5 sm:px-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Trial Balance
+        </h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+            A list of all the accounts and their balances.
+        </p>
+    </div>
+    <div class="border-t border-gray-200">
+        <dl>
+            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">Total Debits</dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    ${{ number_format($report['total_debits'] ?? 0, 2) }}
+                </dd>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">Total Credits</dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    ${{ number_format($report['total_credits'] ?? 0, 2) }}
+                </dd>
+            </div>
+            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">Is Balanced?</dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{-- <span
+                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $report['is_balanced'] ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                        {{ $report['is_balanced'] ? 'Yes' : 'No' }}
+                    </span> --}}
+                </dd>
+            </div>
+        </dl>
+    </div>
+    <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
@@ -9,30 +40,33 @@
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Account
                     </th>
                     <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Debit</th>
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
                     <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Credit
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Debits
+                    </th>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Credits
+                    </th>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Balance
                     </th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-                @foreach ($trialBalanceData as $row)
+                @foreach ($report['accounts'] as $account)
                     <tr>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $row['account'] }}
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $account['code'] }}
+                            - {{ $account['name'] }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ ucfirst($account['type']) }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            ${{ number_format($row['debit'], 2) }}</td>
+                            ${{ number_format($account['debits'], 2) }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            ${{ number_format($row['credit'], 2) }}</td>
+                            ${{ number_format($account['credits'], 2) }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            ${{ number_format($account['balance'], 2) }}</td>
                     </tr>
                 @endforeach
-                <tr class="bg-gray-100 font-bold">
-                    <td class="px-6 py-4 whitespace-nowrap text-sm">Total</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm">
-                        ${{ number_format(collect($trialBalanceData)->sum('debit'), 2) }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm">
-                        ${{ number_format(collect($trialBalanceData)->sum('credit'), 2) }}</td>
-                </tr>
             </tbody>
         </table>
     </div>

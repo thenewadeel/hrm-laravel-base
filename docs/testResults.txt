@@ -1,4 +1,8 @@
 
+   WARN  Metadata found in doc-comment for method Tests\Unit\AccountingReportServiceTest::it_generates_a_correct_trial_balance(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\AccountingReportServiceTest::it_generates_a_correct_balance_sheet(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
    WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\ChartOfAccountsApiTest::it_can_list_chart_of_accounts(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
 
    WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\ChartOfAccountsApiTest::it_can_create_a_chart_of_account(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
@@ -220,54 +224,58 @@
    WARN  Metadata found in doc-comment for method Tests\Unit\Services\SequenceServiceTest::it_handles_concurrent_requests_safely(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
 
    PASS  Tests\Unit\ExampleTest
-  ✓ that true is true                                                    0.01s  
+  ✓ that true is true
+
+   PASS  Tests\Unit\AccountingReportServiceTest
+  ✓ it generates a correct trial balance                                 0.20s  
+  ✓ it generates a correct balance sheet                                 0.02s  
 
    PASS  Tests\Feature\Api\Accounting\ChartOfAccountsApiTest
-  ✓ it can list chart of accounts                                        0.36s  
-  ✓ it can create a chart of account                                     0.05s  
-  ✓ it validates account creation                                        0.05s  
-  ✓ it can show a specific account                                       0.04s  
-  ✓ it returns 404 for nonexistent account                               0.02s  
+  ✓ it can list chart of accounts                                        0.05s  
+  ✓ it can create a chart of account                                     0.04s  
+  ✓ it validates account creation                                        0.03s  
+  ✓ it can show a specific account                                       0.03s  
+  ✓ it returns 404 for nonexistent account                               0.01s  
 
    PASS  Tests\Feature\Api\Accounting\FinancialReportsApiTest
-  ✓ it can generate trial balance                                        0.05s  
-  ✓ it can generate balance sheet                                        0.06s  
-  ✓ it can generate income statement                                     0.05s  
-  ✓ it validates income statement date range                             0.04s  
-  ✓ it rejects end date before start date                                0.04s  
+  ✓ it can generate trial balance                                        0.04s  
+  ✓ it can generate balance sheet                                        0.04s  
+  ✓ it can generate income statement                                     0.04s  
+  ✓ it validates income statement date range                             0.03s  
+  ✓ it rejects end date before start date                                0.03s  
 
    PASS  Tests\Feature\Api\Accounting\JournalEntriesApiTest
-  ✓ it can create a journal entry                                        0.05s  
-  ✓ it validates journal entry balances                                  0.04s  
-  ✓ it can post a journal entry                                          0.05s  
+  ✓ it can create a journal entry                                        0.04s  
+  ✓ it validates journal entry balances                                  0.03s  
+  ✓ it can post a journal entry                                          0.03s  
 
    PASS  Tests\Feature\ApiTokenPermissionsTest
-  ✓ api token permissions can be updated                                 0.09s  
+  ✓ api token permissions can be updated                                 0.07s  
 
    PASS  Tests\Feature\AuthenticationTest
-  ✓ login screen can be rendered                                         0.05s  
-  ✓ users can authenticate using the login screen                        0.05s  
-  ✓ users cannot authenticate with invalid password                      0.05s  
+  ✓ login screen can be rendered                                         0.04s  
+  ✓ users can authenticate using the login screen                        0.04s  
+  ✓ users cannot authenticate with invalid password                      0.03s  
 
    PASS  Tests\Feature\BrowserSessionsTest
-  ✓ other browser sessions can be logged out                             0.06s  
+  ✓ other browser sessions can be logged out                             0.05s  
 
    PASS  Tests\Feature\CreateApiTokenTest
-  ✓ api tokens can be created                                            0.07s  
+  ✓ api tokens can be created                                            0.05s  
 
    PASS  Tests\Feature\CreateTeamTest
-  ✓ teams can be created                                                 0.06s  
+  ✓ teams can be created                                                 0.04s  
 
    PASS  Tests\Feature\DeleteAccountTest
-  ✓ user accounts can be deleted                                         0.06s  
-  ✓ correct password must be provided before account can be deleted      0.05s  
+  ✓ user accounts can be deleted                                         0.04s  
+  ✓ correct password must be provided before account can be deleted      0.04s  
 
    PASS  Tests\Feature\DeleteApiTokenTest
-  ✓ api tokens can be deleted                                            0.07s  
+  ✓ api tokens can be deleted                                            0.05s  
 
    PASS  Tests\Feature\DeleteTeamTest
-  ✓ teams can be deleted                                                 0.06s  
-  ✓ personal teams cant be deleted                                       0.05s  
+  ✓ teams can be deleted                                                 0.04s  
+  ✓ personal teams cant be deleted                                       0.04s  
 
    WARN  Tests\Feature\EmailVerificationTest
   - email verification screen can be rendered → Email verification not…  0.02s  
@@ -275,113 +283,113 @@
   - email can not verified with invalid hash → Email verification not e… 0.01s  
 
    PASS  Tests\Feature\ExampleTest
-  ✓ it returns a successful response                                     0.04s  
+  ✓ it returns a successful response                                     0.03s  
 
    PASS  Tests\Feature\Feature\Accounting\FinancialReportsTest
-  ✓ example                                                              0.04s  
+  ✓ example                                                              0.03s  
 
    PASS  Tests\Feature\InviteTeamMemberTest
-  ✓ team members can be invited to team                                  0.08s  
-  ✓ team member invitations can be cancelled                             0.09s  
+  ✓ team members can be invited to team                                  0.06s  
+  ✓ team member invitations can be cancelled                             0.06s  
 
    PASS  Tests\Feature\LeaveTeamTest
-  ✓ users can leave teams                                                0.06s  
-  ✓ team owners cant leave their own team                                0.06s  
+  ✓ users can leave teams                                                0.04s  
+  ✓ team owners cant leave their own team                                0.05s  
 
    PASS  Tests\Feature\Livewire\Accounting\ChartOfAccountsTest
-  ✓ chart of accounts page renders                                       0.05s  
+  ✓ chart of accounts page renders                                       0.04s  
   ✓ it displays a list of accounts                                       0.04s  
-  ✓ it displays a list of chart of accounts                              0.04s  
-  ✓ it can create a new chart of account record                          0.05s  
-  ✓ it can update an existing chart of account record                    0.05s  
+  ✓ it displays a list of chart of accounts                              0.03s  
+  ✓ it can create a new chart of account record                          0.04s  
+  ✓ it can update an existing chart of account record                    0.04s  
 
    FAIL  Tests\Feature\Livewire\Accounting\JournalEntriesTest
-  ✓ it renders successfully                                              0.05s  
-  ⨯ it creates a journal entry                                           0.08s  
-  ✓ a journal entry requires balanced debits and credits                 0.08s  
+  ✓ it renders successfully                                              0.04s  
+  ⨯ it creates a journal entry                                           0.07s  
+  ✓ a journal entry requires balanced debits and credits                 0.06s  
 
    PASS  Tests\Feature\Livewire\Organization\MemberManagerTest
-  ✓ it can display a list of organization members                        0.05s  
-  ✓ it can search for members by name or email                           0.05s  
+  ✓ it can display a list of organization members                        0.04s  
+  ✓ it can search for members by name or email                           0.04s  
 
    PASS  Tests\Feature\Livewire\Organization\OrganizationFormTest
-  ✓ it shows create form                                                 0.05s  
+  ✓ it shows create form                                                 0.04s  
   ✓ it shows edit form                                                   0.04s  
-  ✓ it creates new organization                                          0.05s  
-  ✓ it updates existing organization                                     0.06s  
-  ✓ it validates required fields                                         0.05s  
-  ✓ it validates unique name                                             0.05s  
-  ✓ it closes modal                                                      0.05s  
+  ✓ it creates new organization                                          0.04s  
+  ✓ it updates existing organization                                     0.05s  
+  ✓ it validates required fields                                         0.04s  
+  ✓ it validates unique name                                             0.04s  
+  ✓ it closes modal                                                      0.04s  
 
    PASS  Tests\Feature\Livewire\Organization\OrganizationListTest
-  ✓ it shows organizations list                                          0.06s  
-  ✓ it searches organizations by name                                    0.05s  
-  ✓ it sorts organizations by name ascending                             0.06s  
-  ✓ it sorts organizations by name descending                            0.06s  
-  ✓ it sorts organizations by status                                     0.05s  
-  ✓ it paginates organizations                                           0.07s  
-  ✓ it shows empty state when no organizations                           0.04s  
+  ✓ it shows organizations list                                          0.04s  
+  ✓ it searches organizations by name                                    0.04s  
+  ✓ it sorts organizations by name ascending                             0.04s  
+  ✓ it sorts organizations by name descending                            0.05s  
+  ✓ it sorts organizations by status                                     0.04s  
+  ✓ it paginates organizations                                           0.05s  
+  ✓ it shows empty state when no organizations                           0.03s  
 
    PASS  Tests\Feature\Livewire\Organization\OrganizationTreeTest
-  ✓ it can display the organization tree                                 0.05s  
-  ✓ an organization unit can be dragged and dropped to another parent    0.05s  
-  ✓ an organizational unit cannot be dropped onto itself                 0.05s  
-  ✓ an organizational unit can be dropped as a root node                 0.05s  
-  ✓ a parent cannot be dropped onto one of its descendants               0.05s  
-  ✓ a sibling can be dropped under another sibling                       0.05s  
-  ✓ an empty tree renders correctly                                      0.04s  
-  ✓ it can handle a large number of units without crashing               0.07s  
-  ✓ a dropped unit that does not exist does not cause an error           0.05s  
+  ✓ it can display the organization tree                                 0.04s  
+  ✓ an organization unit can be dragged and dropped to another parent    0.04s  
+  ✓ an organizational unit cannot be dropped onto itself                 0.04s  
+  ✓ an organizational unit can be dropped as a root node                 0.04s  
+  ✓ a parent cannot be dropped onto one of its descendants               0.04s  
+  ✓ a sibling can be dropped under another sibling                       0.04s  
+  ✓ an empty tree renders correctly                                      0.03s  
+  ✓ it can handle a large number of units without crashing               0.06s  
+  ✓ a dropped unit that does not exist does not cause an error           0.04s  
 
    PASS  UserPlacementTest
-  ✓ it can assign a user to a unit                                       0.06s  
-  ✓ it can unassign a user by dropping them onto the root                0.05s  
+  ✓ it can assign a user to a unit                                       0.05s  
+  ✓ it can unassign a user by dropping them onto the root                0.04s  
 
    PASS  Tests\Feature\OrganizationApiTest
-  ✓ can create organization                                              0.04s  
-  ✓ debug factory output                                                 0.02s  
-  ✓ verify organization factory works                                    0.02s  
-  ✓ can list organizations                                               0.04s  
-  ✓ can show organization                                                0.05s  
-  ✓ can update organization                                              0.04s  
-  ✓ can delete organization                                              0.04s  
+  ✓ can create organization                                              0.03s  
+  ✓ debug factory output                                                 0.01s  
+  ✓ verify organization factory works                                    0.01s  
+  ✓ can list organizations                                               0.03s  
+  ✓ can show organization                                                0.03s  
+  ✓ can update organization                                              0.03s  
+  ✓ can delete organization                                              0.03s  
   ✓ guests cannot access organizations                                   0.04s  
-  ✓ name is required for creation                                        0.04s  
-  ✓ name must be unique                                                  0.04s  
-  ✓ user can view their organizations                                    0.04s  
-  ✓ organization admin can list members                                  0.04s  
+  ✓ name is required for creation                                        0.03s  
+  ✓ name must be unique                                                  0.03s  
+  ✓ user can view their organizations                                    0.03s  
+  ✓ organization admin can list members                                  0.03s  
   ✓ admin can invite new members                                         0.04s  
-  ✓ cannot invite existing member                                        0.04s  
+  ✓ cannot invite existing member                                        0.03s  
   ✓ non admin cannot invite members                                      0.02s  
 
    PASS  Tests\Feature\OrganizationUnitApiTest
-  ✓ can create organization unit                                         0.06s  
+  ✓ can create organization unit                                         0.04s  
   ✓ can create nested unit                                               0.04s  
-  ✓ can get unit hierarchy                                               0.04s  
+  ✓ can get unit hierarchy                                               0.03s  
   ✓ can assign user to unit                                              0.04s  
-  ✓ can list users by organization unit                                  0.06s  
-  ✓ cannot create organization unit as non admin                         0.02s  
+  ✓ can list users by organization unit                                  0.04s  
+  ✓ cannot create organization unit as non admin                         0.03s  
   ✓ cannot assign user as non admin                                      0.02s  
-  ✓ cannot create unit with invalid data                                 0.04s  
-  ✓ cannot assign non existent user to unit                              0.04s  
+  ✓ cannot create unit with invalid data                                 0.03s  
+  ✓ cannot assign non existent user to unit                              0.03s  
   ✓ cannot assign user not in organization                               0.04s  
-  ✓ cannot get hierarchy for non existent unit                           0.02s  
-  ✓ can get hierarchy for unit with no children                          0.05s  
+  ✓ cannot get hierarchy for non existent unit                           0.01s  
+  ✓ can get hierarchy for unit with no children                          0.03s  
 
    PASS  Tests\Feature\PasswordConfirmationTest
   ✓ confirm password screen can be rendered                              0.05s  
-  ✓ password can be confirmed                                            0.04s  
-  ✓ password is not confirmed with invalid password                      0.24s  
+  ✓ password can be confirmed                                            0.03s  
+  ✓ password is not confirmed with invalid password                      0.23s  
 
    PASS  Tests\Feature\PasswordResetTest
-  ✓ reset password link screen can be rendered                           0.04s  
+  ✓ reset password link screen can be rendered                           0.05s  
   ✓ reset password link can be requested                                 0.23s  
   ✓ reset password screen can be rendered                                0.25s  
   ✓ password can be reset with valid token                               0.25s  
 
    PASS  Tests\Feature\ProfileInformationTest
   ✓ current profile information is available                             0.04s  
-  ✓ profile information can be updated                                   0.04s  
+  ✓ profile information can be updated                                   0.03s  
 
    WARN  Tests\Feature\RegistrationTest
   ✓ registration screen can be rendered                                  0.03s  
@@ -389,35 +397,35 @@
   ✓ new users can register                                               0.03s  
 
    PASS  Tests\Feature\RemoveTeamMemberTest
-  ✓ team members can be removed from teams                               0.07s  
-  ✓ only team owner can remove team members                              0.07s  
+  ✓ team members can be removed from teams                               0.05s  
+  ✓ only team owner can remove team members                              0.04s  
 
    PASS  Tests\Feature\TwoFactorAuthenticationSettingsTest
   ✓ two factor authentication can be enabled                             0.07s  
-  ✓ recovery codes can be regenerated                                    0.15s  
-  ✓ two factor authentication can be disabled                            0.08s  
+  ✓ recovery codes can be regenerated                                    0.12s  
+  ✓ two factor authentication can be disabled                            0.07s  
 
    PASS  Tests\Unit\Accounting\AccountTypeValidationTest
   ✓ it allows debit to asset accounts                                    0.01s  
   ✓ it allows debit to expense accounts                                  0.01s  
-  ✓ it throws exception when debiting liability account                  0.01s  
+  ✓ it throws exception when debiting liability account                  0.02s  
   ✓ it allows credit to liability accounts                               0.01s  
   ✓ it allows credit to revenue accounts                                 0.01s  
   ✓ it throws exception when crediting asset account                     0.01s  
   ✓ it validates account types during transaction posting                0.01s  
 
    PASS  Tests\Unit\Accounting\AccountingServiceTest
-  ✓ it throws an exception for unbalanced transactions                   0.02s  
-  ✓ it successfully posts a balanced transaction and creates ledger ent… 0.02s  
-  ✓ it can handle complex but balanced transactions                      0.02s  
+  ✓ it throws an exception for unbalanced transactions                   0.01s  
+  ✓ it successfully posts a balanced transaction and creates ledger ent… 0.01s  
+  ✓ it can handle complex but balanced transactions                      0.01s  
 
    PASS  Tests\Unit\Accounting\BalanceSheetTest
-  ✓ it generates balance sheet with no transactions                      0.02s  
+  ✓ it generates balance sheet with no transactions                      0.01s  
   ✓ it generates balanced balance sheet                                  0.02s  
   ✓ it includes retained earnings from income statement                  0.02s  
 
    PASS  Tests\Unit\Accounting\ChartOfAccountTest
-  ✓ it has a code name and type                                          0.02s  
+  ✓ it has a code name and type                                          0.01s  
   ✓ it can scope accounts by type                                        0.01s  
   ✓ account code must be unique                                          0.01s  
   ✓ it can calculate its current balance                                 0.01s  
@@ -426,53 +434,53 @@
   ✓ example                                                              0.04s  
 
    PASS  Tests\Unit\Accounting\IncomeStatementTest
-  ✓ it generates income statement with no transactions                   0.02s  
+  ✓ it generates income statement with no transactions                   0.01s  
   ✓ it generates income statement with revenue and expenses              0.02s  
-  ✓ it excludes transactions outside date range                          0.02s  
+  ✓ it excludes transactions outside date range                          0.01s  
 
    PASS  Tests\Unit\Accounting\InvalidAccountTypeExceptionTest
-  ✓ it provides detailed error message                                   0.02s  
+  ✓ it provides detailed error message                                   0.01s  
   ✓ it provides contextual information                                   0.01s  
   ✓ it allows custom message                                             0.01s  
 
    PASS  Tests\Unit\Accounting\JournalEntryFactoryTest
-  ✓ it can create a journal entry                                        0.02s  
+  ✓ it can create a journal entry                                        0.01s  
   ✓ it can create a draft journal entry                                  0.01s  
   ✓ it can create a posted journal entry                                 0.01s  
   ✓ it can create journal entry with specific approver                   0.01s  
 
    PASS  Tests\Unit\Accounting\JournalEntryTest
-  ✓ it can create a journal entry                                        0.02s  
-  ✓ it can post a balanced journal entry                                 0.02s  
+  ✓ it can create a journal entry                                        0.01s  
+  ✓ it can post a balanced journal entry                                 0.01s  
   ✓ it prevents posting unbalanced journal entries                       0.01s  
 
    PASS  Tests\Unit\Accounting\LedgerEntryTest
-  ✓ it belongs to a chart of account                                     0.02s  
-  ✓ it has a debit or credit type                                        0.01s  
-  ✓ it can be linked to a transaction via polymorphic relation           0.02s  
-  ✓ it can be tagged with dimensions                                     0.02s  
+  ✓ it belongs to a chart of account                                     0.01s  
+  ✓ it has a debit or credit type                                        0.02s  
+  ✓ it can be linked to a transaction via polymorphic relation           0.01s  
+  ✓ it can be tagged with dimensions                                     0.01s  
   ✓ it must have a positive amount                                       0.01s  
 
    PASS  Tests\Unit\Accounting\TrialBalanceTest
-  ✓ it generates trial balance with zero entries                         0.02s  
-  ✓ it generates trial balance with balanced entries                     0.02s  
-  ✓ it shows account balances in trial balance                           0.02s  
+  ✓ it generates trial balance with zero entries                         0.01s  
+  ✓ it generates trial balance with balanced entries                     0.01s  
+  ✓ it shows account balances in trial balance                           0.01s  
 
    PASS  Tests\Unit\Services\SequenceServiceTest
-  ✓ it generates sequential codes                                        0.02s  
+  ✓ it generates sequential codes                                        0.01s  
   ✓ it handles concurrent requests safely                                0.01s  
 
    PASS  Tests\Feature\UpdatePasswordTest
-  ✓ password can be updated                                              0.06s  
-  ✓ current password must be correct                                     0.06s  
+  ✓ password can be updated                                              0.05s  
+  ✓ current password must be correct                                     0.04s  
   ✓ new passwords must match                                             0.05s  
 
    PASS  Tests\Feature\UpdateTeamMemberRoleTest
-  ✓ team member roles can be updated                                     0.08s  
-  ✓ only team owner can update team member roles                         0.06s  
+  ✓ team member roles can be updated                                     0.07s  
+  ✓ only team owner can update team member roles                         0.05s  
 
    PASS  Tests\Feature\UpdateTeamNameTest
-  ✓ team names can be updated                                            0.06s  
+  ✓ team names can be updated                                            0.05s  
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\Livewire\Accounting\JournalEntriesTest > it creates…   
   Failed asserting that a row in the table [journal_entries] matches the attributes {
@@ -495,6 +503,6 @@ The table is empty.
      45▕         ]);
 
 
-  Tests:    1 failed, 4 skipped, 156 passed (390 assertions)
-  Duration: 7.99s
+  Tests:    1 failed, 4 skipped, 158 passed (397 assertions)
+  Duration: 6.50s
 
