@@ -1,0 +1,500 @@
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\ChartOfAccountsApiTest::it_can_list_chart_of_accounts(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\ChartOfAccountsApiTest::it_can_create_a_chart_of_account(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\ChartOfAccountsApiTest::it_validates_account_creation(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\ChartOfAccountsApiTest::it_can_show_a_specific_account(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\ChartOfAccountsApiTest::it_returns_404_for_nonexistent_account(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\FinancialReportsApiTest::it_can_generate_trial_balance(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\FinancialReportsApiTest::it_can_generate_balance_sheet(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\FinancialReportsApiTest::it_can_generate_income_statement(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\FinancialReportsApiTest::it_validates_income_statement_date_range(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\FinancialReportsApiTest::it_rejects_end_date_before_start_date(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\JournalEntriesApiTest::it_can_create_a_journal_entry(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\JournalEntriesApiTest::it_validates_journal_entry_balances(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\JournalEntriesApiTest::it_can_post_a_journal_entry(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Accounting\ChartOfAccountsTest::it_displays_a_list_of_chart_of_accounts(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Accounting\ChartOfAccountsTest::it_can_create_a_new_chart_of_account_record(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Accounting\ChartOfAccountsTest::it_can_update_an_existing_chart_of_account_record(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\MemberManagerTest::it_can_display_a_list_of_organization_members(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\MemberManagerTest::it_can_search_for_members_by_name_or_email(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationFormTest::it_shows_create_form(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationFormTest::it_shows_edit_form(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationFormTest::it_creates_new_organization(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationFormTest::it_updates_existing_organization(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationFormTest::it_validates_required_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationFormTest::it_validates_unique_name(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationFormTest::it_closes_modal(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationListTest::it_shows_organizations_list(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationListTest::it_searches_organizations_by_name(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationListTest::it_sorts_organizations_by_name_ascending(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationListTest::it_sorts_organizations_by_name_descending(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationListTest::it_sorts_organizations_by_status(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationListTest::it_paginates_organizations(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationListTest::it_shows_empty_state_when_no_organizations(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationTreeTest::it_can_display_the_organization_tree(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationTreeTest::an_organization_unit_can_be_dragged_and_dropped_to_another_parent(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationTreeTest::an_organizational_unit_cannot_be_dropped_onto_itself(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationTreeTest::an_organizational_unit_can_be_dropped_as_a_root_node(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationTreeTest::a_parent_cannot_be_dropped_onto_one_of_its_descendants(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationTreeTest::a_sibling_can_be_dropped_under_another_sibling(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationTreeTest::an_empty_tree_renders_correctly(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationTreeTest::it_can_handle_a_large_number_of_units_without_crashing(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationTreeTest::a_dropped_unit_that_does_not_exist_does_not_cause_an_error(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method UserPlacementTest::it_can_assign_a_user_to_a_unit(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method UserPlacementTest::it_can_unassign_a_user_by_dropping_them_onto_the_root(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::can_create_organization(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::debug_factory_output(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::verify_organization_factory_works(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::can_list_organizations(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::can_show_organization(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::can_update_organization(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::can_delete_organization(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::guests_cannot_access_organizations(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::name_is_required_for_creation(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::name_must_be_unique(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::user_can_view_their_organizations(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::organization_admin_can_list_members(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::admin_can_invite_new_members(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::cannot_invite_existing_member(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::non_admin_cannot_invite_members(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::can_create_organization_unit(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::can_create_nested_unit(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::can_get_unit_hierarchy(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::can_assign_user_to_unit(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::can_list_users_by_organization_unit(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::cannot_create_organization_unit_as_non_admin(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::cannot_assign_user_as_non_admin(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::cannot_create_unit_with_invalid_data(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::cannot_assign_non_existent_user_to_unit(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::cannot_assign_user_not_in_organization(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::cannot_get_hierarchy_for_non_existent_unit(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::can_get_hierarchy_for_unit_with_no_children(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\AccountTypeValidationTest::it_allows_debit_to_asset_accounts(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\AccountTypeValidationTest::it_allows_debit_to_expense_accounts(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\AccountTypeValidationTest::it_throws_exception_when_debiting_liability_account(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\AccountTypeValidationTest::it_allows_credit_to_liability_accounts(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\AccountTypeValidationTest::it_allows_credit_to_revenue_accounts(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\AccountTypeValidationTest::it_throws_exception_when_crediting_asset_account(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\AccountTypeValidationTest::it_validates_account_types_during_transaction_posting(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\AccountingServiceTest::it_throws_an_exception_for_unbalanced_transactions(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\AccountingServiceTest::it_successfully_posts_a_balanced_transaction_and_creates_ledger_entries(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\AccountingServiceTest::it_can_handle_complex_but_balanced_transactions(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\BalanceSheetTest::it_generates_balance_sheet_with_no_transactions(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\BalanceSheetTest::it_generates_balanced_balance_sheet(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\BalanceSheetTest::it_includes_retained_earnings_from_income_statement(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\ChartOfAccountTest::it_has_a_code_name_and_type(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\ChartOfAccountTest::it_can_scope_accounts_by_type(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\ChartOfAccountTest::account_code_must_be_unique(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\ChartOfAccountTest::it_can_calculate_its_current_balance(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\IncomeStatementTest::it_generates_income_statement_with_no_transactions(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\IncomeStatementTest::it_generates_income_statement_with_revenue_and_expenses(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\IncomeStatementTest::it_excludes_transactions_outside_date_range(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\InvalidAccountTypeExceptionTest::it_provides_detailed_error_message(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\InvalidAccountTypeExceptionTest::it_provides_contextual_information(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\InvalidAccountTypeExceptionTest::it_allows_custom_message(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\JournalEntryFactoryTest::it_can_create_a_journal_entry(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\JournalEntryFactoryTest::it_can_create_a_draft_journal_entry(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\JournalEntryFactoryTest::it_can_create_a_posted_journal_entry(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\JournalEntryFactoryTest::it_can_create_journal_entry_with_specific_approver(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\JournalEntryTest::it_can_create_a_journal_entry(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\JournalEntryTest::it_can_post_a_balanced_journal_entry(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\JournalEntryTest::it_prevents_posting_unbalanced_journal_entries(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\LedgerEntryTest::it_belongs_to_a_chart_of_account(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\LedgerEntryTest::it_has_a_debit_or_credit_type(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\LedgerEntryTest::it_can_be_linked_to_a_transaction_via_polymorphic_relation(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\LedgerEntryTest::it_can_be_tagged_with_dimensions(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\LedgerEntryTest::it_must_have_a_positive_amount(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\TrialBalanceTest::it_generates_trial_balance_with_zero_entries(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\TrialBalanceTest::it_generates_trial_balance_with_balanced_entries(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\TrialBalanceTest::it_shows_account_balances_in_trial_balance(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Services\SequenceServiceTest::it_generates_sequential_codes(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Services\SequenceServiceTest::it_handles_concurrent_requests_safely(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true                                                    0.01s  
+
+   PASS  Tests\Feature\Api\Accounting\ChartOfAccountsApiTest
+  ✓ it can list chart of accounts                                        0.36s  
+  ✓ it can create a chart of account                                     0.05s  
+  ✓ it validates account creation                                        0.05s  
+  ✓ it can show a specific account                                       0.04s  
+  ✓ it returns 404 for nonexistent account                               0.02s  
+
+   PASS  Tests\Feature\Api\Accounting\FinancialReportsApiTest
+  ✓ it can generate trial balance                                        0.05s  
+  ✓ it can generate balance sheet                                        0.06s  
+  ✓ it can generate income statement                                     0.05s  
+  ✓ it validates income statement date range                             0.04s  
+  ✓ it rejects end date before start date                                0.04s  
+
+   PASS  Tests\Feature\Api\Accounting\JournalEntriesApiTest
+  ✓ it can create a journal entry                                        0.05s  
+  ✓ it validates journal entry balances                                  0.04s  
+  ✓ it can post a journal entry                                          0.05s  
+
+   PASS  Tests\Feature\ApiTokenPermissionsTest
+  ✓ api token permissions can be updated                                 0.09s  
+
+   PASS  Tests\Feature\AuthenticationTest
+  ✓ login screen can be rendered                                         0.05s  
+  ✓ users can authenticate using the login screen                        0.05s  
+  ✓ users cannot authenticate with invalid password                      0.05s  
+
+   PASS  Tests\Feature\BrowserSessionsTest
+  ✓ other browser sessions can be logged out                             0.06s  
+
+   PASS  Tests\Feature\CreateApiTokenTest
+  ✓ api tokens can be created                                            0.07s  
+
+   PASS  Tests\Feature\CreateTeamTest
+  ✓ teams can be created                                                 0.06s  
+
+   PASS  Tests\Feature\DeleteAccountTest
+  ✓ user accounts can be deleted                                         0.06s  
+  ✓ correct password must be provided before account can be deleted      0.05s  
+
+   PASS  Tests\Feature\DeleteApiTokenTest
+  ✓ api tokens can be deleted                                            0.07s  
+
+   PASS  Tests\Feature\DeleteTeamTest
+  ✓ teams can be deleted                                                 0.06s  
+  ✓ personal teams cant be deleted                                       0.05s  
+
+   WARN  Tests\Feature\EmailVerificationTest
+  - email verification screen can be rendered → Email verification not…  0.02s  
+  - email can be verified → Email verification not enabled.              0.01s  
+  - email can not verified with invalid hash → Email verification not e… 0.01s  
+
+   PASS  Tests\Feature\ExampleTest
+  ✓ it returns a successful response                                     0.04s  
+
+   PASS  Tests\Feature\Feature\Accounting\FinancialReportsTest
+  ✓ example                                                              0.04s  
+
+   PASS  Tests\Feature\InviteTeamMemberTest
+  ✓ team members can be invited to team                                  0.08s  
+  ✓ team member invitations can be cancelled                             0.09s  
+
+   PASS  Tests\Feature\LeaveTeamTest
+  ✓ users can leave teams                                                0.06s  
+  ✓ team owners cant leave their own team                                0.06s  
+
+   PASS  Tests\Feature\Livewire\Accounting\ChartOfAccountsTest
+  ✓ chart of accounts page renders                                       0.05s  
+  ✓ it displays a list of accounts                                       0.04s  
+  ✓ it displays a list of chart of accounts                              0.04s  
+  ✓ it can create a new chart of account record                          0.05s  
+  ✓ it can update an existing chart of account record                    0.05s  
+
+   FAIL  Tests\Feature\Livewire\Accounting\JournalEntriesTest
+  ✓ it renders successfully                                              0.05s  
+  ⨯ it creates a journal entry                                           0.08s  
+  ✓ a journal entry requires balanced debits and credits                 0.08s  
+
+   PASS  Tests\Feature\Livewire\Organization\MemberManagerTest
+  ✓ it can display a list of organization members                        0.05s  
+  ✓ it can search for members by name or email                           0.05s  
+
+   PASS  Tests\Feature\Livewire\Organization\OrganizationFormTest
+  ✓ it shows create form                                                 0.05s  
+  ✓ it shows edit form                                                   0.04s  
+  ✓ it creates new organization                                          0.05s  
+  ✓ it updates existing organization                                     0.06s  
+  ✓ it validates required fields                                         0.05s  
+  ✓ it validates unique name                                             0.05s  
+  ✓ it closes modal                                                      0.05s  
+
+   PASS  Tests\Feature\Livewire\Organization\OrganizationListTest
+  ✓ it shows organizations list                                          0.06s  
+  ✓ it searches organizations by name                                    0.05s  
+  ✓ it sorts organizations by name ascending                             0.06s  
+  ✓ it sorts organizations by name descending                            0.06s  
+  ✓ it sorts organizations by status                                     0.05s  
+  ✓ it paginates organizations                                           0.07s  
+  ✓ it shows empty state when no organizations                           0.04s  
+
+   PASS  Tests\Feature\Livewire\Organization\OrganizationTreeTest
+  ✓ it can display the organization tree                                 0.05s  
+  ✓ an organization unit can be dragged and dropped to another parent    0.05s  
+  ✓ an organizational unit cannot be dropped onto itself                 0.05s  
+  ✓ an organizational unit can be dropped as a root node                 0.05s  
+  ✓ a parent cannot be dropped onto one of its descendants               0.05s  
+  ✓ a sibling can be dropped under another sibling                       0.05s  
+  ✓ an empty tree renders correctly                                      0.04s  
+  ✓ it can handle a large number of units without crashing               0.07s  
+  ✓ a dropped unit that does not exist does not cause an error           0.05s  
+
+   PASS  UserPlacementTest
+  ✓ it can assign a user to a unit                                       0.06s  
+  ✓ it can unassign a user by dropping them onto the root                0.05s  
+
+   PASS  Tests\Feature\OrganizationApiTest
+  ✓ can create organization                                              0.04s  
+  ✓ debug factory output                                                 0.02s  
+  ✓ verify organization factory works                                    0.02s  
+  ✓ can list organizations                                               0.04s  
+  ✓ can show organization                                                0.05s  
+  ✓ can update organization                                              0.04s  
+  ✓ can delete organization                                              0.04s  
+  ✓ guests cannot access organizations                                   0.04s  
+  ✓ name is required for creation                                        0.04s  
+  ✓ name must be unique                                                  0.04s  
+  ✓ user can view their organizations                                    0.04s  
+  ✓ organization admin can list members                                  0.04s  
+  ✓ admin can invite new members                                         0.04s  
+  ✓ cannot invite existing member                                        0.04s  
+  ✓ non admin cannot invite members                                      0.02s  
+
+   PASS  Tests\Feature\OrganizationUnitApiTest
+  ✓ can create organization unit                                         0.06s  
+  ✓ can create nested unit                                               0.04s  
+  ✓ can get unit hierarchy                                               0.04s  
+  ✓ can assign user to unit                                              0.04s  
+  ✓ can list users by organization unit                                  0.06s  
+  ✓ cannot create organization unit as non admin                         0.02s  
+  ✓ cannot assign user as non admin                                      0.02s  
+  ✓ cannot create unit with invalid data                                 0.04s  
+  ✓ cannot assign non existent user to unit                              0.04s  
+  ✓ cannot assign user not in organization                               0.04s  
+  ✓ cannot get hierarchy for non existent unit                           0.02s  
+  ✓ can get hierarchy for unit with no children                          0.05s  
+
+   PASS  Tests\Feature\PasswordConfirmationTest
+  ✓ confirm password screen can be rendered                              0.05s  
+  ✓ password can be confirmed                                            0.04s  
+  ✓ password is not confirmed with invalid password                      0.24s  
+
+   PASS  Tests\Feature\PasswordResetTest
+  ✓ reset password link screen can be rendered                           0.04s  
+  ✓ reset password link can be requested                                 0.23s  
+  ✓ reset password screen can be rendered                                0.25s  
+  ✓ password can be reset with valid token                               0.25s  
+
+   PASS  Tests\Feature\ProfileInformationTest
+  ✓ current profile information is available                             0.04s  
+  ✓ profile information can be updated                                   0.04s  
+
+   WARN  Tests\Feature\RegistrationTest
+  ✓ registration screen can be rendered                                  0.03s  
+  - registration screen cannot be rendered if support is disabled → Reg… 0.01s  
+  ✓ new users can register                                               0.03s  
+
+   PASS  Tests\Feature\RemoveTeamMemberTest
+  ✓ team members can be removed from teams                               0.07s  
+  ✓ only team owner can remove team members                              0.07s  
+
+   PASS  Tests\Feature\TwoFactorAuthenticationSettingsTest
+  ✓ two factor authentication can be enabled                             0.07s  
+  ✓ recovery codes can be regenerated                                    0.15s  
+  ✓ two factor authentication can be disabled                            0.08s  
+
+   PASS  Tests\Unit\Accounting\AccountTypeValidationTest
+  ✓ it allows debit to asset accounts                                    0.01s  
+  ✓ it allows debit to expense accounts                                  0.01s  
+  ✓ it throws exception when debiting liability account                  0.01s  
+  ✓ it allows credit to liability accounts                               0.01s  
+  ✓ it allows credit to revenue accounts                                 0.01s  
+  ✓ it throws exception when crediting asset account                     0.01s  
+  ✓ it validates account types during transaction posting                0.01s  
+
+   PASS  Tests\Unit\Accounting\AccountingServiceTest
+  ✓ it throws an exception for unbalanced transactions                   0.02s  
+  ✓ it successfully posts a balanced transaction and creates ledger ent… 0.02s  
+  ✓ it can handle complex but balanced transactions                      0.02s  
+
+   PASS  Tests\Unit\Accounting\BalanceSheetTest
+  ✓ it generates balance sheet with no transactions                      0.02s  
+  ✓ it generates balanced balance sheet                                  0.02s  
+  ✓ it includes retained earnings from income statement                  0.02s  
+
+   PASS  Tests\Unit\Accounting\ChartOfAccountTest
+  ✓ it has a code name and type                                          0.02s  
+  ✓ it can scope accounts by type                                        0.01s  
+  ✓ account code must be unique                                          0.01s  
+  ✓ it can calculate its current balance                                 0.01s  
+
+   PASS  Tests\Feature\Unit\Accounting\DimensionReportTest
+  ✓ example                                                              0.04s  
+
+   PASS  Tests\Unit\Accounting\IncomeStatementTest
+  ✓ it generates income statement with no transactions                   0.02s  
+  ✓ it generates income statement with revenue and expenses              0.02s  
+  ✓ it excludes transactions outside date range                          0.02s  
+
+   PASS  Tests\Unit\Accounting\InvalidAccountTypeExceptionTest
+  ✓ it provides detailed error message                                   0.02s  
+  ✓ it provides contextual information                                   0.01s  
+  ✓ it allows custom message                                             0.01s  
+
+   PASS  Tests\Unit\Accounting\JournalEntryFactoryTest
+  ✓ it can create a journal entry                                        0.02s  
+  ✓ it can create a draft journal entry                                  0.01s  
+  ✓ it can create a posted journal entry                                 0.01s  
+  ✓ it can create journal entry with specific approver                   0.01s  
+
+   PASS  Tests\Unit\Accounting\JournalEntryTest
+  ✓ it can create a journal entry                                        0.02s  
+  ✓ it can post a balanced journal entry                                 0.02s  
+  ✓ it prevents posting unbalanced journal entries                       0.01s  
+
+   PASS  Tests\Unit\Accounting\LedgerEntryTest
+  ✓ it belongs to a chart of account                                     0.02s  
+  ✓ it has a debit or credit type                                        0.01s  
+  ✓ it can be linked to a transaction via polymorphic relation           0.02s  
+  ✓ it can be tagged with dimensions                                     0.02s  
+  ✓ it must have a positive amount                                       0.01s  
+
+   PASS  Tests\Unit\Accounting\TrialBalanceTest
+  ✓ it generates trial balance with zero entries                         0.02s  
+  ✓ it generates trial balance with balanced entries                     0.02s  
+  ✓ it shows account balances in trial balance                           0.02s  
+
+   PASS  Tests\Unit\Services\SequenceServiceTest
+  ✓ it generates sequential codes                                        0.02s  
+  ✓ it handles concurrent requests safely                                0.01s  
+
+   PASS  Tests\Feature\UpdatePasswordTest
+  ✓ password can be updated                                              0.06s  
+  ✓ current password must be correct                                     0.06s  
+  ✓ new passwords must match                                             0.05s  
+
+   PASS  Tests\Feature\UpdateTeamMemberRoleTest
+  ✓ team member roles can be updated                                     0.08s  
+  ✓ only team owner can update team member roles                         0.06s  
+
+   PASS  Tests\Feature\UpdateTeamNameTest
+  ✓ team names can be updated                                            0.06s  
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Livewire\Accounting\JournalEntriesTest > it creates…   
+  Failed asserting that a row in the table [journal_entries] matches the attributes {
+    "entry_date": "2025-01-01",
+    "description": "Test entry",
+    "status": "posted"
+}.
+
+The table is empty.
+
+  at tests/Feature/Livewire/Accounting/JournalEntriesTest.php:41
+     37▕             ->set('transactions.1.credit', 500);
+     38▕ 
+     39▕         $component->call('createEntry');
+     40▕ 
+  ➜  41▕         $this->assertDatabaseHas('journal_entries', [
+     42▕             'entry_date' => '2025-01-01',
+     43▕             'description' => 'Test entry',
+     44▕             'status' => 'posted',
+     45▕         ]);
+
+
+  Tests:    1 failed, 4 skipped, 156 passed (390 assertions)
+  Duration: 7.99s
+

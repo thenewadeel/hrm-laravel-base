@@ -25,8 +25,8 @@
             "yunyami/clockwork"
         ]
     },
-    "timestamp": "2025-09-07T22:11:51+00:00",
-    "component_count": 150,
+    "timestamp": "2025-09-22T09:14:44+00:00",
+    "component_count": 151,
     "components": [
         {
             "type": "Model",
@@ -165,7 +165,7 @@
                         "static"
                     ],
                     "parameters": "array $attributes = []",
-                    "line": 44
+                    "line": 45
                 },
                 {
                     "name": "booted",
@@ -173,7 +173,7 @@
                         "static"
                     ],
                     "parameters": "",
-                    "line": 64
+                    "line": 59
                 },
                 {
                     "name": "newFactory",
@@ -181,7 +181,7 @@
                         "static"
                     ],
                     "parameters": "",
-                    "line": 74
+                    "line": 79
                 },
                 {
                     "name": "createdBy",
@@ -189,7 +189,7 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 78
+                    "line": 84
                 },
                 {
                     "name": "approvedBy",
@@ -197,7 +197,7 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 83
+                    "line": 89
                 },
                 {
                     "name": "ledgerEntries",
@@ -205,7 +205,15 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 88
+                    "line": 98
+                },
+                {
+                    "name": "ledgerEntries",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 98
                 },
                 {
                     "name": "post",
@@ -213,7 +221,7 @@
                         "public"
                     ],
                     "parameters": "array $entries",
-                    "line": 97
+                    "line": 118
                 },
                 {
                     "name": "void",
@@ -221,10 +229,10 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 112
+                    "line": 132
                 }
             ],
-            "method_count": 8
+            "method_count": 9
         },
         {
             "type": "Model",
@@ -1034,7 +1042,9 @@
                 "Route::get('/users/{user}/edit', UserForm::class)->name('users.edit');",
                 "Route::get('/roles', RoleManager::class)->name('roles.index');",
                 "Route::get('/accounts', [AccountsController::class, 'index'])->name('accounting.index');",
-                "Route::get('/debug/api-config', function () { return response()->json([ 'app_url' => config('app.url..."
+                "Route::get('/debug/api-config', function () { return response()->json([ 'app_url' => config('app.url...",
+                "Route::get('/debug/journal-entries', function () { try { $entries = \\App\\Models\\Accounting\\JournalEn...",
+                "Route::get('/debug/test-sequence', function () { try { $sequenceService = app(App\\Services\\SequenceS..."
             ]
         },
         {
@@ -1537,26 +1547,20 @@
         },
         {
             "type": "View",
-            "name": "accounts.blade.php",
-            "file": "resources/views/livewire/accounting/accounts.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
             "name": "reports.blade.php",
             "file": "resources/views/livewire/accounting/reports.blade.php",
             "essential": false
         },
         {
             "type": "View",
-            "name": "chart-of-accounts.blade.php",
-            "file": "resources/views/livewire/accounting/chart-of-accounts.blade.php",
+            "name": "journal-entries.blade.php",
+            "file": "resources/views/livewire/accounting/journal-entries.blade.php",
             "essential": false
         },
         {
             "type": "View",
-            "name": "journal-entries.blade.php",
-            "file": "resources/views/livewire/accounting/journal-entries.blade.php",
+            "name": "chart-of-accounts.blade.php",
+            "file": "resources/views/livewire/accounting/chart-of-accounts.blade.php",
             "essential": false
         },
         {
@@ -1585,8 +1589,20 @@
         },
         {
             "type": "View",
-            "name": "trial-bakance.blade.php",
-            "file": "resources/views/partials/trial-bakance.blade.php",
+            "name": "income-statement.blade.php",
+            "file": "resources/views/partials/accounting/income-statement.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "balance-sheet.blade.php",
+            "file": "resources/views/partials/accounting/balance-sheet.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "trial-balance.blade.php",
+            "file": "resources/views/partials/accounting/trial-balance.blade.php",
             "essential": false
         },
         {
