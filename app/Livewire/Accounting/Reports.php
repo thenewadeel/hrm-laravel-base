@@ -1,57 +1,97 @@
-<div class="p-4">
-    <h3 class="text-xl font-semibold text-gray-900 mb-4">Trial Balance Report</h3>
-    <p class="text-gray-600 mb-6">This report lists the ending balances in all of the company's general ledger accounts. Debits and credits must be equal.</p>
-    <div class="overflow-x-auto shadow-md rounded-xl">
-        <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-                <tr>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Account Name
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Debit
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Credit
-                    </th>
-                </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-                @forelse($data as $row)
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {{ $row['account_name'] }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        @if($row['debit'] > 0)
-                        ${{ number_format($row['debit'], 2) }}
-                        @endif
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        @if($row['credit'] > 0)
-                        ${{ number_format($row['credit'], 2) }}
-                        @endif
-                    </td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="3" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-                        No trial balance data available.
-                    </td>
-                </tr>
-                @endforelse
-                <tr class="bg-gray-50 font-bold">
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        Total
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        ${{ number_format($debitTotal, 2) }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        ${{ number_format($creditTotal, 2) }}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+<?php
+
+namespace App\Livewire\Accounting;
+
+use Livewire\Component;
+
+class Reports extends Component
+{
+    /**
+     * The data for the Trial Balance report.
+     * @var array
+     */
+    public $trialBalanceData;
+
+    /**
+     * The data for the Balance Sheet report.
+     * @var array
+     */
+    public $balanceSheetData;
+
+    /**
+     * The data for the Income Statement report.
+     * @var array
+     */
+    public $incomeStatementData;
+
+    /**
+     * Mount the component and populate with initial data.
+     * In a real application, you would fetch this data from a service or the database.
+     *
+     * @return void
+     */
+    public function mount()
+    {
+        // Dummy data for the Trial Balance
+        $this->trialBalanceData = [
+            ['account' => 'Cash', 'debit' => 10000, 'credit' => 0],
+            ['account' => 'Accounts Receivable', 'debit' => 5000, 'credit' => 0],
+            ['account' => 'Prepaid Insurance', 'debit' => 2000, 'credit' => 0],
+            ['account' => 'Equipment', 'debit' => 15000, 'credit' => 0],
+            ['account' => 'Accounts Payable', 'debit' => 0, 'credit' => 6000],
+            ['account' => 'Unearned Revenue', 'debit' => 0, 'credit' => 3000],
+            ['account' => 'Common Stock', 'debit' => 0, 'credit' => 18000],
+            ['account' => 'Retained Earnings', 'debit' => 0, 'credit' => 5000],
+            ['account' => 'Service Revenue', 'debit' => 0, 'credit' => 10000],
+            ['account' => 'Rent Expense', 'debit' => 5000, 'credit' => 0],
+            ['account' => 'Salaries Expense', 'debit' => 4000, 'credit' => 0],
+        ];
+
+        // Dummy data for the Balance Sheet
+        $this->balanceSheetData = [
+            'assets' => [
+                ['name' => 'Current Assets', 'amount' => 17000],
+                ['name' => 'Fixed Assets', 'amount' => 15000],
+                ['name' => 'Total Assets', 'amount' => 32000],
+            ],
+            'liabilities' => [
+                ['name' => 'Current Liabilities', 'amount' => 9000],
+                ['name' => 'Total Liabilities', 'amount' => 9000],
+            ],
+            'equity' => [
+                ['name' => 'Retained Earnings', 'amount' => 5000],
+                ['name' => 'Common Stock', 'amount' => 18000],
+                ['name' => 'Total Equity', 'amount' => 23000],
+            ],
+            'total_liabilities_equity' => 32000,
+        ];
+
+        // Dummy data for the Income Statement
+        $this->incomeStatementData = [
+            'revenue' => [
+                ['name' => 'Service Revenue', 'amount' => 10000],
+                ['name' => 'Total Revenue', 'amount' => 10000],
+            ],
+            'expenses' => [
+                ['name' => 'Rent Expense', 'amount' => 5000],
+                ['name' => 'Salaries Expense', 'amount' => 4000],
+                ['name' => 'Total Expenses', 'amount' => 9000],
+            ],
+            'net_income' => 1000,
+        ];
+    }
+
+    /**
+     * Render the component's view.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function render()
+    {
+        return view('livewire.accounting.reports', [
+            'trialBalanceData' => $this->trialBalanceData,
+            'balanceSheetData' => $this->balanceSheetData,
+            'incomeStatementData' => $this->incomeStatementData,
+        ]);
+    }
+}

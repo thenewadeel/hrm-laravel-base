@@ -11,7 +11,7 @@
     </div>{{-- Tab Content --}}
     <div class="mt-8 p-4 bg-white shadow-lg rounded-xl overflow-hidden">
         <div x-show="activeTab === 'trial-balance'" class="p-4">
-            @include('partials.trial-bakance')
+            @include('partials.accounting.trial-balance')
         </div>
         <div x-show="activeTab === 'balance-sheet'" class="p-4">
             {{-- @include('livewire.accounting.reports._balance-sheet') --}}
