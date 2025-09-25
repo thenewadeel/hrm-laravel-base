@@ -1,20 +1,20 @@
 System Screen Checklist
 
-[ ] Core Authentication Screens Gp
+[/] Core Authentication Screens Gp
 [x] Login Screen
 [/] Registration Screen
 
-[ ] Accounts Department Screens Gp
+[/] Accounts Department Screens Gp
 [/] Accounts Dashboard
 [ ] Voucher Management
 [ ] Voucher List
 [ ] Voucher Creation/Edit Form
-[ ] Financial Reporting
-[ ] Trial Balance Report
-[ ] Balance Sheet Report
-[ ] Profit and Loss Statement
+[/] Financial Reporting
+[/] Trial Balance Report
+[/] Balance Sheet Report
+[/] Profit and Loss Statement
 [ ] Bank Statement
-[ ] Chart of Accounts Management
+[/] Chart of Accounts Management
 
 [ ] Human Resources Department Screens Gp
 [ ] HR Dashboard

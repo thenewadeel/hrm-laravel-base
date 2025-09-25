@@ -159,3 +159,26 @@ The component was refactored to use Livewire 3's **`#[Computed]`** property.
 4.  **User Actions:** The component includes methods for `postEntry()` and `voidEntry()`. After a successful action, the component dispatches a `refreshJournalEntries` event to signal the front end to update the displayed data.
 
 The component is now efficient and ready for further development, such as building the UI for creating new journal entries.
+
+---
+
+### Progress - 19 Aug 2025
+
+-   TDD for api --started
+-   Solution box design
+-   Modelling
+-   Helper Abstractions / Scaffolds
+-   Workflows => Sys Actions !
+-   Interfaces
+-   Features
+-   Achieved features marked
+
+#### Wishlist
+
+-   Seeds/ excel based ?
+-   livewire raw CRUD GUI
+-   change logging
+-   change playback
+-   extra attributes everywhere
+-   Module List
+-   Proj Timeline
