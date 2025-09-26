@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Form;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -21,6 +21,6 @@ class Label extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.label');
+        return view('components.form.label');
     }
 }

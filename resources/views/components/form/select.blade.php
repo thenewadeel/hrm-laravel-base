@@ -1,3 +1,4 @@
 <div>
-    <!-- If you do not have a consistent goal in life, you can not live it in a consistent way. - Marcus Aurelius -->
+    Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may
+    fear less. - Marie Curie
 </div>

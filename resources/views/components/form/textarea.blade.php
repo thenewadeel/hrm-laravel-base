@@ -1,3 +1,3 @@
 <div>
-    <!-- An unexamined life is not worth living. - Socrates -->
+    Order your soul. Reduce your wants. - Augustine
 </div>
