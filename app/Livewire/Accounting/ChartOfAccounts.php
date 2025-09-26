@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Accounting\ChartOfAccount;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Validation\Rule;
+use Livewire\Attributes\On; // Import the On attribute
 
 class ChartOfAccounts extends Component
 {
@@ -60,6 +61,7 @@ class ChartOfAccounts extends Component
         session()->flash('message', 'Chart of Account created successfully.');
     }
 
+    #[On('edit-account')]
     public function edit(ChartOfAccount $account)
     {
         $this->editingAccount = $account;

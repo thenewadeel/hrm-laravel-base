@@ -118,43 +118,30 @@
     </div>
 
     <div class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-                <tr>
-                    <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Code</th>
-                    <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Name</th>
-                    <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Type</th>
-                    <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Description</th>
-                    <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions
-                    </th>
-                </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-                @foreach ($accounts as $account)
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $account->code }}
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $account->name }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize">{{ $account->type }}
-                        </td>
-                        <td class="px-6 py-4 text-sm text-gray-500 max-w-xs overflow-hidden truncate">
-                            {{ $account->description }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <button wire:click="edit({{ $account->id }})"
-                                class="text-indigo-600 hover:text-indigo-900">Edit</button>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <x-data-table :headers="[
+            'code' => 'Code',
+            'name' => 'Account',
+            'type' => 'Type',
+            'description' => 'Description',
+        ]" :data="$accounts" sort-by="name" sort-direction="asc">
+            {{-- Custom header for the actions column --}}
+            <x-slot:customHeader>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Actions
+                </th>
+            </x-slot>
+
+            {{-- Custom columns for the actions (edit/delete buttons) --}}
+            <x-slot:customColumns>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <button
+                        @click="Livewire.dispatchTo('accounting.chart-of-accounts', 'edit-account', { account: item.id })"
+                        class="text-indigo-600 hover:text-indigo-900">
+                        Edit
+                    </button>
+                </td>
+            </x-slot>
+        </x-data-table>
+
     </div>
 </div>
