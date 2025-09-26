@@ -10,10 +10,11 @@
     <x-slot name="form">
         <!-- Team Owner Information -->
         <div class="col-span-6">
-            <x-label value="{{ __('Team Owner') }}" />
+            <x-form.label value="{{ __('Team Owner') }}" />
 
             <div class="flex items-center mt-2">
-                <img class="size-12 rounded-full object-cover" src="{{ $team->owner->profile_photo_url }}" alt="{{ $team->owner->name }}">
+                <img class="size-12 rounded-full object-cover" src="{{ $team->owner->profile_photo_url }}"
+                    alt="{{ $team->owner->name }}">
 
                 <div class="ms-4 leading-tight">
                     <div class="text-gray-900 dark:text-white">{{ $team->owner->name }}</div>
@@ -24,15 +25,12 @@
 
         <!-- Team Name -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="name" value="{{ __('Team Name') }}" />
+            <x-form.label for="name" value="{{ __('Team Name') }}" />
 
-            <x-input id="name"
-                        type="text"
-                        class="mt-1 block w-full"
-                        wire:model="state.name"
-                        :disabled="! Gate::check('update', $team)" />
+            <x-form.input id="name" type="text" class="mt-1 block w-full" wire:model="state.name"
+                :disabled="!Gate::check('update', $team)" />
 
-            <x-input-error for="name" class="mt-2" />
+            <x-form.input-error for="name" class="mt-2" />
         </div>
     </x-slot>
 

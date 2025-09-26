@@ -9,10 +9,11 @@
 
     <x-slot name="form">
         <div class="col-span-6">
-            <x-label value="{{ __('Team Owner') }}" />
+            <x-form.label value="{{ __('Team Owner') }}" />
 
             <div class="flex items-center mt-2">
-                <img class="size-12 rounded-full object-cover" src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}">
+                <img class="size-12 rounded-full object-cover" src="{{ $this->user->profile_photo_url }}"
+                    alt="{{ $this->user->name }}">
 
                 <div class="ms-4 leading-tight">
                     <div class="text-gray-900 dark:text-white">{{ $this->user->name }}</div>
@@ -22,9 +23,9 @@
         </div>
 
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="name" value="{{ __('Team Name') }}" />
-            <x-input id="name" type="text" class="mt-1 block w-full" wire:model="state.name" autofocus />
-            <x-input-error for="name" class="mt-2" />
+            <x-form.label for="name" value="{{ __('Team Name') }}" />
+            <x-form.input id="name" type="text" class="mt-1 block w-full" wire:model="state.name" autofocus />
+            <x-form.input-error for="name" class="mt-2" />
         </div>
     </x-slot>
 
