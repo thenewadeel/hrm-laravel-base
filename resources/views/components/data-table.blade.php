@@ -5,12 +5,16 @@
     'loading' => false,
     'sortBy' => null,
     'sortDirection' => 'asc',
+    'columnTypes' => [],
+    'currencySymbol' => 'Rs. ', // Default value
 ])
 
 <div x-data="{
     data: {{ json_encode($data) }},
     sortBy: '{{ $sortBy }}',
     sortDirection: '{{ $sortDirection }}',
+    columnTypes: {{ json_encode($columnTypes) }},
+    currencySymbol: '{{ $currencySymbol }}',
 
     sort(column) {
         if (this.sortBy === column) {
@@ -30,6 +34,46 @@
                 return this.sortDirection === 'asc' ? aVal - bVal : bVal - aVal;
             }
         });
+    },
+    format(value, key) {
+        const type = this.columnTypes[key] || 'string';
+
+        if (value === null || typeof value === 'undefined') {
+            return '';
+        }
+
+        switch (type) {
+            case 'currency':
+                return this.currencySymbol + new Intl.NumberFormat('id-ID', {
+                    style: 'decimal',
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }).format(value);
+            case 'number':
+                // Check if the value is a valid number before formatting
+                if (typeof value === 'number' || (typeof value === 'string' && !isNaN(value))) {
+                    return new Intl.NumberFormat('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }).format(value);
+                }
+                return value; // Return as is if not a number
+            case 'date':
+                // Attempt to parse the date and format it
+                const date = new Date(value);
+                if (!isNaN(date)) {
+                    return date.toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric'
+                    });
+                }
+                return value;
+            case 'string':
+            default:
+                // Default to string, no special formatting needed
+                return value;
+        }
     }
 }" class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
     @if ($loading)
@@ -80,7 +124,7 @@
                         <tr>
                             @foreach (array_keys($headers) as $key)
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
-                                    x-text="item['{{ $key }}']"></td>
+                                    x-text="format(item['{{ $key }}'], '{{ $key }}')"></td>
                             @endforeach
                             {{ $customColumns ?? '' }}
                         </tr>
