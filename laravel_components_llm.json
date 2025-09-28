@@ -25,8 +25,8 @@
             "yunyami/clockwork"
         ]
     },
-    "timestamp": "2025-09-22T09:14:44+00:00",
-    "component_count": 151,
+    "timestamp": "2025-09-28T09:30:31+00:00",
+    "component_count": 144,
     "components": [
         {
             "type": "Model",
@@ -1021,7 +1021,7 @@
             "name": "web",
             "file": "routes/web.php",
             "essential": true,
-            "content_preview": "<?php\n\nuse App\\Http\\Controllers\\AccountsController;\nuse App\\Http\\Controllers\\OrganizationController;\nuse App\\Http\\Livewire\\Organization\\OrganizationList;\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::get('/', function () {\n    return view('welcome');\n});\n\nRoute::middleware([\n    'auth:sanctum',\n    config('jetstream.auth_session'),\n    'verified',\n])->group(function () {\n    Route::get('/dashboard', function () {\n        return view('dashboard');\n    })->name('dashboard');\n});\n\n\n// routes/web.ph...",
+            "content_preview": "<?php\n\nuse App\\Http\\Controllers\\AccountsController;\nuse App\\Http\\Controllers\\OrganizationController;\nuse App\\Http\\Livewire\\Organization\\OrganizationList;\nuse App\\Services\\AccountingReportService;\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::get('/', function () {\n    return view('welcome');\n});\n\nRoute::middleware([\n    'auth:sanctum',\n    config('jetstream.auth_session'),\n    'verified',\n])->group(function () {\n    Route::get('/dashboard', function () {\n        return view('dashboard');\n    })-...",
             "route_summary": [
                 "Route::get('/', function () { return view('welcome');",
                 "Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified', ])->group(function...",
@@ -1042,9 +1042,10 @@
                 "Route::get('/users/{user}/edit', UserForm::class)->name('users.edit');",
                 "Route::get('/roles', RoleManager::class)->name('roles.index');",
                 "Route::get('/accounts', [AccountsController::class, 'index'])->name('accounting.index');",
-                "Route::get('/debug/api-config', function () { return response()->json([ 'app_url' => config('app.url...",
-                "Route::get('/debug/journal-entries', function () { try { $entries = \\App\\Models\\Accounting\\JournalEn...",
-                "Route::get('/debug/test-sequence', function () { try { $sequenceService = app(App\\Services\\SequenceS..."
+                "Route::group(['prefix' => 'debug'], function () { Route::get('api-config', function () { return resp...",
+                "Route::get('journal-entries', function () { try { $entries = \\App\\Models\\Accounting\\JournalEntry::wi...",
+                "Route::get('test-sequence', function () { try { $sequenceService = app(App\\Services\\SequenceService:...",
+                "Route::get('reports/all', function (AccountingReportService $service) { $trialBalance = $service->ge..."
             ]
         },
         {
@@ -1145,12 +1146,6 @@
         },
         {
             "type": "View",
-            "name": "checkbox.blade.php",
-            "file": "resources/views/components/checkbox.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
             "name": "confirmation-modal.blade.php",
             "file": "resources/views/components/confirmation-modal.blade.php",
             "essential": false
@@ -1159,12 +1154,6 @@
             "type": "View",
             "name": "confirms-password.blade.php",
             "file": "resources/views/components/confirms-password.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "danger-button.blade.php",
-            "file": "resources/views/components/danger-button.blade.php",
             "essential": false
         },
         {
@@ -1187,30 +1176,6 @@
         },
         {
             "type": "View",
-            "name": "form-section.blade.php",
-            "file": "resources/views/components/form-section.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "input-error.blade.php",
-            "file": "resources/views/components/input-error.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "input.blade.php",
-            "file": "resources/views/components/input.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "label.blade.php",
-            "file": "resources/views/components/label.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
             "name": "modal.blade.php",
             "file": "resources/views/components/modal.blade.php",
             "essential": false
@@ -1225,12 +1190,6 @@
             "type": "View",
             "name": "responsive-nav-link.blade.php",
             "file": "resources/views/components/responsive-nav-link.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "secondary-button.blade.php",
-            "file": "resources/views/components/secondary-button.blade.php",
             "essential": false
         },
         {
@@ -1295,20 +1254,20 @@
         },
         {
             "type": "View",
+            "name": "input-error.blade.php",
+            "file": "resources/views/components/form/input-error.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "label.blade.php",
+            "file": "resources/views/components/form/label.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
             "name": "sort-indicator.blade.php",
             "file": "resources/views/components/sort-indicator.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "table.blade.php",
-            "file": "resources/views/components/table.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "button.blade.php",
-            "file": "resources/views/components/button.blade.php",
             "essential": false
         },
         {
@@ -1349,24 +1308,6 @@
         },
         {
             "type": "View",
-            "name": "textarea.blade.php",
-            "file": "resources/views/components/textarea.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "select.blade.php",
-            "file": "resources/views/components/select.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "card.blade.php",
-            "file": "resources/views/components/card.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
             "name": "notification-system.blade.php",
             "file": "resources/views/components/notification-system.blade.php",
             "essential": false
@@ -1399,6 +1340,24 @@
             "type": "View",
             "name": "welcome.blade.php",
             "file": "resources/views/components/welcome.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "card.blade.php",
+            "file": "resources/views/components/organization/card.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "button.blade.php",
+            "file": "resources/views/components/button.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "form-section.blade.php",
+            "file": "resources/views/components/form-section.blade.php",
             "essential": false
         },
         {
@@ -1439,14 +1398,14 @@
         },
         {
             "type": "View",
-            "name": "update-password-form.blade.php",
-            "file": "resources/views/profile/update-password-form.blade.php",
+            "name": "update-profile-information-form.blade.php",
+            "file": "resources/views/profile/update-profile-information-form.blade.php",
             "essential": false
         },
         {
             "type": "View",
-            "name": "update-profile-information-form.blade.php",
-            "file": "resources/views/profile/update-profile-information-form.blade.php",
+            "name": "update-password-form.blade.php",
+            "file": "resources/views/profile/update-password-form.blade.php",
             "essential": false
         },
         {
@@ -1469,14 +1428,14 @@
         },
         {
             "type": "View",
-            "name": "delete-team-form.blade.php",
-            "file": "resources/views/teams/delete-team-form.blade.php",
+            "name": "show.blade.php",
+            "file": "resources/views/teams/show.blade.php",
             "essential": false
         },
         {
             "type": "View",
-            "name": "show.blade.php",
-            "file": "resources/views/teams/show.blade.php",
+            "name": "update-team-name-form.blade.php",
+            "file": "resources/views/teams/update-team-name-form.blade.php",
             "essential": false
         },
         {
@@ -1487,8 +1446,8 @@
         },
         {
             "type": "View",
-            "name": "update-team-name-form.blade.php",
-            "file": "resources/views/teams/update-team-name-form.blade.php",
+            "name": "delete-team-form.blade.php",
+            "file": "resources/views/teams/delete-team-form.blade.php",
             "essential": false
         },
         {
@@ -1553,14 +1512,14 @@
         },
         {
             "type": "View",
-            "name": "journal-entries.blade.php",
-            "file": "resources/views/livewire/accounting/journal-entries.blade.php",
+            "name": "chart-of-accounts.blade.php",
+            "file": "resources/views/livewire/accounting/chart-of-accounts.blade.php",
             "essential": false
         },
         {
             "type": "View",
-            "name": "chart-of-accounts.blade.php",
-            "file": "resources/views/livewire/accounting/chart-of-accounts.blade.php",
+            "name": "journal-entries.blade.php",
+            "file": "resources/views/livewire/accounting/journal-entries.blade.php",
             "essential": false
         },
         {
@@ -1679,12 +1638,6 @@
         },
         {
             "type": "Config",
-            "name": "jetstream",
-            "file": "config/jetstream.php",
-            "essential": false
-        },
-        {
-            "type": "Config",
             "name": "fortify",
             "file": "config/fortify.php",
             "essential": false
@@ -1705,6 +1658,12 @@
             "type": "Config",
             "name": "app",
             "file": "config/app.php",
+            "essential": false
+        },
+        {
+            "type": "Config",
+            "name": "jetstream",
+            "file": "config/jetstream.php",
             "essential": false
         }
     ]
