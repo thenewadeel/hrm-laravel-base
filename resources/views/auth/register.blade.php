@@ -37,7 +37,7 @@
                 <div class="mt-4">
                     <x-form.label for="terms">
                         <div class="flex items-center">
-                            <x-checkbox name="terms" id="terms" required />
+                            <x-form.checkbox name="terms" id="terms" required />
 
                             <div class="ms-2">
                                 {!! __('I agree to the :terms_of_service and :privacy_policy', [

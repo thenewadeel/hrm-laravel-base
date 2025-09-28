@@ -39,7 +39,20 @@
 
     <div class="overflow-x-auto">
         <h4 class="text-md font-semibold text-gray-900 px-6 py-4">Assets</h4>
-        <table class="min-w-full divide-y divide-gray-200">
+        <x-data-table :headers="[
+            'code' => 'Code',
+            'name' => 'Name',
+            'balance' => 'Balance',
+        ]" :data="$report['assets']" :columnTypes="[
+            'balance' => 'currency',
+        ]" />
+
+        {{-- <x-data-table :headers="[
+            'code' => 'Code',
+            'name' => 'Name',
+            'balance' => 'Balance',
+        ]" :data="$report['assets']" /> --}}
+        {{-- <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Account
@@ -58,10 +71,17 @@
                     </tr>
                 @endforeach
             </tbody>
-        </table>
+        </table> --}}
 
         <h4 class="text-md font-semibold text-gray-900 px-6 py-4 mt-4">Liabilities</h4>
-        <table class="min-w-full divide-y divide-gray-200">
+        <x-data-table :headers="[
+            'code' => 'Code',
+            'name' => 'Name',
+            'balance' => 'Balance',
+        ]" :data="$report['liabilities']" :columnTypes="[
+            'balance' => 'currency',
+        ]" />
+        {{-- <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Account
@@ -80,10 +100,17 @@
                     </tr>
                 @endforeach
             </tbody>
-        </table>
+        </table> --}}
 
         <h4 class="text-md font-semibold text-gray-900 px-6 py-4 mt-4">Equity</h4>
-        <table class="min-w-full divide-y divide-gray-200">
+        <x-data-table :headers="[
+            'code' => 'Code',
+            'name' => 'Name',
+            'balance' => 'Balance',
+        ]" :data="$report['equity']" :columnTypes="[
+            'balance' => 'currency',
+        ]" />
+        {{-- <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Account
@@ -107,6 +134,6 @@
                         ${{ number_format($report['retained_earnings'], 2) }}</td>
                 </tr>
             </tbody>
-        </table>
+        </table> --}}
     </div>
 </div>
