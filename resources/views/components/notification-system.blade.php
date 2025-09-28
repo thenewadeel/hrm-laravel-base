@@ -24,7 +24,9 @@
         message: 'Welcome to our application!',
         show: true
     }],
-    addNotification(type, message) {
+    addNotification(type, message, event) {
+        {{-- console.log('Type:' + type + ' Message:' + message + ' Event:'); --}}
+        {{-- console.log({ event }); --}}
         const id = Date.now() + Math.random();
         this.notifications.unshift({ id, type, message, show: false });
         this.$nextTick(() => { const addedNotification = this.notifications.find(n => n.id === id); if (addedNotification) { addedNotification.show = true; } });
@@ -41,7 +43,7 @@
         this.notifications = this.notifications.filter(n => n.id !== id);
     }
 }"
-    @notify.window="addNotification($event.detail.type, $event.detail.message)"class="fixed z-50 {{ $position === 'top-right' ? 'top-4 right-4' : ($position === 'top-left' ? 'top-4 left-4' : ($position === 'bottom-right' ? 'bottom-4 right-4' : 'bottom-4 left-4')) }} space-y-3">
+    @notify.window="addNotification($event.detail[0].type, $event.detail[0].message,$event)"class="fixed z-50 {{ $position === 'top-right' ? 'top-4 right-4' : ($position === 'top-left' ? 'top-4 left-4' : ($position === 'bottom-right' ? 'bottom-4 right-4' : 'bottom-4 left-4')) }} space-y-3">
     <template x-for="notification in notifications" :key="notification.id">
         <div x-show="notification.show" x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0 translate-x-full" x-transition:enter-end="opacity-100 translate-x-0"

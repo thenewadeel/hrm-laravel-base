@@ -4,7 +4,8 @@ namespace App\Livewire\Accounting;
 
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\JournalEntry;
-use App\Exceptions\Accounting\UnbalancedTransactionException;
+use App\Exceptions\UnbalancedTransactionException;
+use App\Exceptions\InvalidAccountTypeException;
 use Illuminate\Validation\Validator;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -204,7 +205,7 @@ class JournalEntries extends Component
                 $journalEntry = JournalEntry::createWithTransaction([
                     'entry_date' => $this->entry_date,
                     'description' => $this->description,
-                    'created_by' => auth()->id(), // Make sure you're tracking who created the entry
+                    'created_by' => auth()->id(),
                 ]);
 
                 $journalEntry->post($ledgerEntries);
@@ -213,16 +214,39 @@ class JournalEntries extends Component
             // Reload data and reset form
             $this->resetForm();
 
-            // Flash success message
-            session()->flash('message', 'Journal Entry created and posted successfully.');
+            // Dispatch a success notification
+            Log::info('CP1:InvalidAccountTypeException passed: ');
+            $this->dispatch('notify', [
+                'type' => 'success',
+                // 'show' => true,
+                'message' => 'Journal Entry created and posted successfully.'
+            ]);
+        } catch (InvalidAccountTypeException $e) {
+            // Catch the specific exception and dispatch an error message
+            Log::error('CP2:InvalidAccountTypeException caught: ' . $e->getMessage());
+            $this->dispatch('notify', [
+                // 'show' => true,
+                'type' => 'error',
+                'message' => 'Invalid account type: ' . $e->getMessage()
+            ]);
         } catch (UnbalancedTransactionException $e) {
-            session()->flash('error', $e->getMessage());
+            // Dispatch an error notification for unbalanced transactions
+            Log::error('CP3:UnbalancedTransactionException caught: ' . $e->getMessage());
+            $this->dispatch('notify', [
+                // 'show' => true,
+                'type' => 'error',
+                'message' => 'ERR:' .  $e->getMessage()
+            ]);
         } catch (\Exception $e) {
             Log::error('Journal entry creation failed: ' . $e->getMessage());
-            session()->flash('error', 'An error occurred while creating the journal entry: ' . $e->getMessage());
+            // Dispatch a general error notification
+            $this->dispatch('notify', [
+                // 'show' => true,
+                'type' => 'error',
+                'message' => 'An error occurred while creating the journal entry: ' . $e->getMessage()
+            ]);
         }
     }
-
     protected function resetForm()
     {
         $this->reset(['description', 'transactions']);
