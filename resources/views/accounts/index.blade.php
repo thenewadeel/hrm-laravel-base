@@ -52,7 +52,13 @@
                         @livewire('accounting.dashboard')
                     </div>
                     <div x-show="activeTab === 'accounts'">
-                        tbd
+                        @foreach ($accounts as $account)
+                            @if ($account->ledgerEntries->count() != 0)
+                                {{-- <h1 title="{{ $account->ledgerEntries }}">{{ $account->name }}</h1> --}}
+                                @livewire('accounting.ledger-entries', ['entries' => $account->ledgerEntries, 'title' => $account->name])
+                            @endif
+                        @endforeach
+
                     </div>
                     <div x-show="activeTab === 'journal-entries'">
                         @livewire('accounting.journal-entries')

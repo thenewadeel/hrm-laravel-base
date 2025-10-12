@@ -121,7 +121,7 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     <template x-for="item in data" :key="item.id">
-                        <tr>
+                        <tr x-bind:title="JSON.stringify(item, null, 2)" class="cursor-pointer">
                             @foreach (array_keys($headers) as $key)
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
                                     x-text="format(item['{{ $key }}'], '{{ $key }}')"></td>
