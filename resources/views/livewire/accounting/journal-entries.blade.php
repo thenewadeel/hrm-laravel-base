@@ -69,7 +69,10 @@
                                     class="block w-full rounded-md border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                                     <option value="">Select Account</option>
                                     @foreach ($accounts as $account)
-                                        <option value="{{ $account->id }}">{{ $account->name }}</option>
+                                        <option value="{{ $account->id }}">
+                                            {{ $account->name }} -
+                                            ({{ $account->type }})
+                                        </option>
                                     @endforeach
                                 </select>
                                 @error("transactions.{$index}.account_id")

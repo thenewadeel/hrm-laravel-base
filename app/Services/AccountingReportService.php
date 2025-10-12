@@ -9,13 +9,25 @@ use Illuminate\Support\Collection;
 
 class AccountingReportService
 {
-    public function generateTrialBalance(): array
+    public function generateTrialBalance(\DateTimeInterface $asOfDate = null): array
     {
-        $accounts = ChartOfAccount::with(['ledgerEntries'])->get();
+        $asOfDate = $asOfDate ?? now(); // Default to 'now' if no date is provided
 
-        $accountBalances = $accounts->map(function (ChartOfAccount $account) {
-            $debits = $account->ledgerEntries->where('type', 'debit')->sum('amount');
-            $credits = $account->ledgerEntries->where('type', 'credit')->sum('amount');
+        $accounts = ChartOfAccount::select(['id', 'code', 'name', 'type'])
+            ->get();
+
+        $accountBalances = $accounts->map(function (ChartOfAccount $account) use ($asOfDate) {
+            // Calculate total debits up to the specified date
+            $debits = LedgerEntry::where('chart_of_account_id', $account->id)
+                ->where('type', 'debit')
+                ->where('entry_date', '<=', $asOfDate)
+                ->sum('amount');
+
+            // Calculate total credits up to the specified date
+            $credits = LedgerEntry::where('chart_of_account_id', $account->id)
+                ->where('type', 'credit')
+                ->where('entry_date', '<=', $asOfDate)
+                ->sum('amount');
 
             // Calculate balance based on account type normal balance
             $balance = in_array($account->type, ['asset', 'expense'])
@@ -27,8 +39,8 @@ class AccountingReportService
                 'code' => $account->code,
                 'name' => $account->name,
                 'type' => $account->type,
-                'debits' => $debits,
-                'credits' => $credits,
+                'debits' => $debits, // These now represent the total historical debits
+                'credits' => $credits, // These now represent the total historical credits
                 'balance' => $balance
             ];
         });
@@ -187,6 +199,47 @@ class AccountingReportService
                 'end_date' => $endDate->format('Y-m-d')
             ],
             'generated_at' => now()
+        ];
+    }
+
+    /**
+     * Generates a summary of key financial metrics for the dashboard.
+     *
+     * @return array
+     */
+    public function getDashboardSummary(): array
+    {
+        // Define the period for income statement metrics (e.g., current month)
+        $endDate = now();
+        $startDate = (clone $endDate)->startOfMonth();
+
+        // 1. Get Income Statement figures for the period (e.g., current month)
+        $incomeStatement = $this->generateIncomeStatement($startDate, $endDate);
+
+        $totalRevenue = $incomeStatement['total_revenue'];
+        $totalExpenses = $incomeStatement['total_expenses'];
+        $netIncome = $incomeStatement['net_income'];
+
+        // 2. Get current account balances from the Trial Balance up to today
+        // Note: If you implement the change in generateTrialBalance, this will be more efficient.
+        $trialBalance = $this->generateTrialBalance($endDate);
+        $accountBalances = collect($trialBalance['accounts']);
+
+        // Directly calculate balances by filtering the collection
+        $cashOnHand = $accountBalances->where('code', '1010')->sum('balance');
+        $accountsReceivable = $accountBalances->where('code', '1100')->sum('balance');
+        $accountsPayable = $accountBalances->where('code', '2010')->sum('balance');
+
+        return [
+            'total_revenue' => $totalRevenue,
+            'total_expenses' => $totalExpenses,
+            'net_income' => $netIncome,
+            'cash_on_hand' => $cashOnHand,
+            'accounts_receivable' => $accountsReceivable,
+            'accounts_payable' => $accountsPayable,
+            // 'period_start' => $startDate->format('Y-m-d'),
+            // 'period_end' => $endDate->format('Y-m-d'),
+            // 'generated_at' => now(),
         ];
     }
 }
