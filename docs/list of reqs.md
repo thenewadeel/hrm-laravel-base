@@ -13,11 +13,11 @@
 
 ### Ledger Management:
 
-[ ] Customer/Vendor ledger handling.
+[/] Customer/Vendor ledger handling.
 
 ### Expense Management:
 
-[ ] Tracking and managing expenses.
+[/] Tracking and managing expenses.
 
 ### Bank/Cash Management:
 
