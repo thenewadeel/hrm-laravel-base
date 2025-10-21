@@ -70,7 +70,7 @@ trait SetupInventory
         return $user->hasPermission($permission, $organization);
     }
 
-    protected function createInventorySetup($user = null, array $roles = ['admin'])
+    protected function createInventorySetup($user = null, array $roles = [InventoryRoles::INVENTORY_ADMIN])
     {
         $organization = Organization::factory()->create();
         $organization_unit = OrganizationUnit::factory()->create([
@@ -78,10 +78,18 @@ trait SetupInventory
         ]);
         $user = $user ?: User::factory()->create();
 
-        $organization_unit->users()->attach($user, [
+        $organization->users()->attach($user, [
             'roles' => json_encode($roles),
-            'organization_id' => $organization->id
+            'organization_id' => $organization->id,
+            'organization_unit_id' => $organization_unit->id
+
         ]);
+
+
+        // $organization_unit->users()->attach($user, [
+        //     'roles' => json_encode($roles),
+        //     'organization_id' => $organization->id
+        // ]);
         $store = Store::factory()->create([
             'name' => 'test store',
             'organization_unit_id' => $organization_unit->id

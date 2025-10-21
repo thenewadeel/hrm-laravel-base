@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Roles\InventoryRoles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -93,6 +95,7 @@ class User extends Authenticatable
 
     /**
      * Check if user has permission for a specific organization
+     * Checks both direct permissions and role-based permissions
      */
     public function hasPermission(string $permission, $organization = null): bool
     {
@@ -101,19 +104,49 @@ class User extends Authenticatable
             $orgId = $organization instanceof Organization ? $organization->id : $organization;
             $membership = $this->organizations()->where('organizations.id', $orgId)->first();
 
-            if ($membership && $membership->pivot->permissions) {
-                $permissions = json_decode($membership->pivot->permissions, true) ?? [];
-                return in_array($permission, $permissions);
+            if ($membership) {
+                // Check direct permissions
+                if ($membership->pivot->permissions) {
+                    $directPermissions = json_decode($membership->pivot->permissions, true) ?? [];
+                    if (in_array($permission, $directPermissions)) {
+                        return true;
+                    }
+                }
+
+                // Check role-based permissions
+                if ($membership->pivot->roles) {
+                    $userRoles = json_decode($membership->pivot->roles, true) ?? [];
+                    $rolePermissions = $this->getPermissionsForRoles($userRoles);
+                    if (in_array($permission, $rolePermissions)) {
+                        return true;
+                    }
+                }
             }
         }
 
         // Check if user has permission in any organization
         foreach ($this->organizations as $org) {
+            $hasPermission = false;
+
+            // Check direct permissions
             if ($org->pivot->permissions) {
-                $permissions = json_decode($org->pivot->permissions, true) ?? [];
-                if (in_array($permission, $permissions)) {
-                    return true;
+                $directPermissions = json_decode($org->pivot->permissions, true) ?? [];
+                if (in_array($permission, $directPermissions)) {
+                    $hasPermission = true;
                 }
+            }
+
+            // Check role-based permissions
+            if (!$hasPermission && $org->pivot->roles) {
+                $userRoles = json_decode($org->pivot->roles, true) ?? [];
+                $rolePermissions = $this->getPermissionsForRoles($userRoles);
+                if (in_array($permission, $rolePermissions)) {
+                    $hasPermission = true;
+                }
+            }
+
+            if ($hasPermission) {
+                return true;
             }
         }
 
@@ -199,19 +232,60 @@ class User extends Authenticatable
     }
 
     /**
+     * Get permissions for given roles
+     */
+    protected function getPermissionsForRoles(array $roles): array
+    {
+        $allPermissions = [];
+
+        foreach ($roles as $role) {
+            $rolePermissions = InventoryRoles::getPermissionsForRole($role);
+            $allPermissions = array_merge($allPermissions, $rolePermissions);
+        }
+
+        return array_unique($allPermissions);
+    }
+
+    /**
      * Get all permissions for user across all organizations
+     * Includes both direct permissions and role-based permissions
      */
     public function getAllPermissions(): array
     {
         $allPermissions = [];
 
         foreach ($this->organizations as $org) {
+            // Get direct permissions
             if ($org->pivot->permissions) {
-                $permissions = json_decode($org->pivot->permissions, true) ?? [];
-                $allPermissions = array_merge($allPermissions, $permissions);
+                $directPermissions = json_decode($org->pivot->permissions, true) ?? [];
+                $allPermissions = array_merge($allPermissions, $directPermissions);
+            }
+
+            // Get role-based permissions
+            if ($org->pivot->roles) {
+                $userRoles = json_decode($org->pivot->roles, true) ?? [];
+                $rolePermissions = $this->getPermissionsForRoles($userRoles);
+                $allPermissions = array_merge($allPermissions, $rolePermissions);
             }
         }
 
         return array_unique($allPermissions);
+    }
+
+    /**
+     * Get all roles for user across all organizations
+     */
+    public function getAllRoles(): array
+    {
+        $allRoles = [];
+
+        foreach ($this->organizations as $org) {
+            if ($org->pivot->roles) {
+                $roles = json_decode($org->pivot->roles, true) ?? [];
+                $allRoles = array_merge($allRoles, $roles);
+            }
+        }
+
+        return array_unique($allRoles);
     }
 }

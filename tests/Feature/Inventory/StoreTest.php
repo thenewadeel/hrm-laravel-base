@@ -20,9 +20,8 @@ class StoreTest extends TestCase
             'code' => 'WH001',
             'location' => 'Building A',
             'description' => 'Primary storage facility',
-            'organization_id' => $setup['organization']->id
+            'organization_unit_id' => $setup['organization_unit']->id
         ];
-
         $response = $this->actingAs($setup['user'])
             ->postJson('/api/inventory/stores', $storeData);
 
@@ -32,10 +31,11 @@ class StoreTest extends TestCase
                 'code' => 'WH001'
             ]);
 
+        // dd('asd');
         $this->assertDatabaseHas('inventory_stores', [
             'name' => 'Main Warehouse',
             'code' => 'WH001',
-            'organization_id' => $setup['organization']->id
+            'organization_unit_id' => $setup['organization_unit']->id
         ]);
     }
 
