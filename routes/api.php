@@ -9,6 +9,11 @@ use App\Http\Controllers\Api\OrganizationUnitController;
 use App\Models\Accounting\JournalEntry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Inventory\StoreController;
+use App\Http\Controllers\Api\Inventory\ItemController;
+use App\Http\Controllers\Api\Inventory\TransactionController;
+use App\Http\Middleware\CheckInventoryPermission;
+use App\Permissions\InventoryPermissions;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -101,4 +106,40 @@ Route::get('/debug/test-connection', function () {
         'timestamp' => now(),
         'data' => JournalEntry::count() // if you have this model
     ]);
+});
+
+
+Route::prefix('inventory')->middleware(['auth:sanctum'])->group(function () {
+
+    // Stores - using policy authorization
+    Route::apiResource('stores', StoreController::class);
+
+    // Items - using policy authorization
+    Route::apiResource('items', ItemController::class);
+
+    // Transactions - using policy authorization
+    Route::apiResource('transactions', TransactionController::class);
+
+    // Transaction actions with explicit permission checks
+    Route::put('transactions/{transaction}/finalize', [TransactionController::class, 'finalize'])
+        ->middleware('can:finalize,transaction')
+        ->name('transactions.finalize');
+
+    Route::put('transactions/{transaction}/cancel', [TransactionController::class, 'cancel'])
+        ->middleware('can:cancel,transaction')
+        ->name('transactions.cancel');
+
+    // Store inventory management
+    Route::put('stores/{store}/inventory', [StoreController::class, 'updateInventory'])
+        ->middleware('can:manageInventory,store')
+        ->name('stores.inventory.update');
+
+    // Reports
+    Route::get('reports/stock-levels', [\App\Http\Controllers\Api\Inventory\ReportController::class, 'stockLevels'])
+        ->middleware('can:' . InventoryPermissions::VIEW_INVENTORY_REPORTS)
+        ->name('inventory.reports.stock-levels');
+
+    Route::get('reports/movement', [\App\Http\Controllers\Api\Inventory\ReportController::class, 'movement'])
+        ->middleware('can:' . InventoryPermissions::VIEW_INVENTORY_REPORTS)
+        ->name('inventory.reports.movement');
 });
