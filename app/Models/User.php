@@ -89,4 +89,129 @@ class User extends Authenticatable
     {
         return $this->units();
     }
+
+
+    /**
+     * Check if user has permission for a specific organization
+     */
+    public function hasPermission(string $permission, $organization = null): bool
+    {
+        // If organization is provided, check permission in that context
+        if ($organization) {
+            $orgId = $organization instanceof Organization ? $organization->id : $organization;
+            $membership = $this->organizations()->where('organizations.id', $orgId)->first();
+
+            if ($membership && $membership->pivot->permissions) {
+                $permissions = json_decode($membership->pivot->permissions, true) ?? [];
+                return in_array($permission, $permissions);
+            }
+        }
+
+        // Check if user has permission in any organization
+        foreach ($this->organizations as $org) {
+            if ($org->pivot->permissions) {
+                $permissions = json_decode($org->pivot->permissions, true) ?? [];
+                if (in_array($permission, $permissions)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Give permission to user for a specific organization
+     */
+    public function givePermissionTo(string|array $permissions, $organization = null): self
+    {
+        $permissions = is_array($permissions) ? $permissions : [$permissions];
+
+        if ($organization) {
+            $orgId = $organization instanceof Organization ? $organization->id : $organization;
+            $membership = $this->organizations()->where('organizations.id', $orgId)->first();
+
+            if ($membership) {
+                $currentPermissions = json_decode($membership->pivot->permissions, true) ?? [];
+                $newPermissions = array_unique(array_merge($currentPermissions, $permissions));
+
+                $this->organizations()->updateExistingPivot($orgId, [
+                    'permissions' => json_encode($newPermissions)
+                ]);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Check if user has role in specific organization
+     */
+    public function hasRole(string|array $roles, $organization = null): bool
+    {
+        $roles = is_array($roles) ? $roles : [$roles];
+
+        if ($organization) {
+            $orgId = $organization instanceof Organization ? $organization->id : $organization;
+            $membership = $this->organizations()->where('organizations.id', $orgId)->first();
+
+            if ($membership && $membership->pivot->roles) {
+                $userRoles = json_decode($membership->pivot->roles, true) ?? [];
+                return !empty(array_intersect($roles, $userRoles));
+            }
+        }
+
+        // Check if user has role in any organization
+        foreach ($this->organizations as $org) {
+            if ($org->pivot->roles) {
+                $userRoles = json_decode($org->pivot->roles, true) ?? [];
+                if (!empty(array_intersect($roles, $userRoles))) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Assign role to user for specific organization
+     */
+    public function assignRole(string|array $roles, $organization = null): self
+    {
+        $roles = is_array($roles) ? $roles : [$roles];
+
+        if ($organization) {
+            $orgId = $organization instanceof Organization ? $organization->id : $organization;
+            $membership = $this->organizations()->where('organizations.id', $orgId)->first();
+
+            if ($membership) {
+                $currentRoles = json_decode($membership->pivot->roles, true) ?? [];
+                $newRoles = array_unique(array_merge($currentRoles, $roles));
+
+                $this->organizations()->updateExistingPivot($orgId, [
+                    'roles' => json_encode($newRoles)
+                ]);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get all permissions for user across all organizations
+     */
+    public function getAllPermissions(): array
+    {
+        $allPermissions = [];
+
+        foreach ($this->organizations as $org) {
+            if ($org->pivot->permissions) {
+                $permissions = json_decode($org->pivot->permissions, true) ?? [];
+                $allPermissions = array_merge($allPermissions, $permissions);
+            }
+        }
+
+        return array_unique($allPermissions);
+    }
 }
