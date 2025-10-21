@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Inventory\Store;
 use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -85,4 +86,9 @@ class OrganizationUnit extends Model
     // {
     //     $query->orderBy('depth')->orderBy('parent_id')->orderBy('name');
     // }
+
+    public function stores()
+    {
+        return $this->hasMany(Store::class);
+    }
 }
