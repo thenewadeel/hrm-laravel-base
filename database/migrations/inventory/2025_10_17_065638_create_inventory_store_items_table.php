@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('store_id')->constrained('inventory_stores')->nullOnDelete();
             $table->foreignId('item_id')->constrained('inventory_items')->nullOnDelete();
-            $table->foreignId('head_id')->constrained('inventory_heads')->nullOnDelete();
+            $table->foreignId('head_id')->nullable()->constrained('inventory_heads')->nullOnDelete();
             $table->integer('quantity')->default(0);
             $table->integer('min_stock')->default(0);
             $table->integer('max_stock')->nullable();
