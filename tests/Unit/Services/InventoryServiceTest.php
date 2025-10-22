@@ -44,14 +44,10 @@ class InventoryServiceTest extends TestCase
         $this->user = $setup['user']; // User::factory()->create();
         $this->store = $setup['store']; // Store::factory()->create(['organization_id' => $this->organization->id]);
         $this->item = Item::factory()->create();
-        // dd($this->user);
-        // dd($this->user->id, $this->organization->id, $this->organizationUnit->id, $this->store->id, $this->item->id, $this->user->organizationUnits()->first()->id);
-        // dd($this->organizationUnit);
-        // Attach user to organization with admin role
-        // $this->organization->users()->attach($this->user, [
-        //     'roles' => json_encode(['inventory_admin']),
-        //     'permissions' => json_encode([])
-        // ]);
+
+
+        // ✅ CRITICAL: Set the authenticated user for Gate system
+        $this->actingAs($this->user);
     }
 
     /** @test */
@@ -65,7 +61,7 @@ class InventoryServiceTest extends TestCase
         ];
         $store = $this->inventoryService->createStore($storeData, $this->user);
 
-        // dd($store->organization_unit);
+        // dd($this->user);
         $this->assertInstanceOf(Store::class, $store);
         $this->assertEquals('New Warehouse', $store->name);
         $this->assertEquals('WH002', $store->code);

@@ -21,10 +21,14 @@ class InventoryRoles
             self::STORE_MANAGER => [
                 // Store and item management
                 InventoryPermissions::VIEW_STORES,
+                InventoryPermissions::CREATE_STORES,
+                InventoryPermissions::EDIT_STORES,
+                InventoryPermissions::DELETE_STORES,
+                InventoryPermissions::MANAGE_STORE_INVENTORY,
                 InventoryPermissions::VIEW_ITEMS,
                 InventoryPermissions::CREATE_ITEMS,
                 InventoryPermissions::EDIT_ITEMS,
-                InventoryPermissions::MANAGE_STORE_INVENTORY,
+                InventoryPermissions::DELETE_ITEMS,
 
                 // Transaction management
                 InventoryPermissions::VIEW_TRANSACTIONS,
