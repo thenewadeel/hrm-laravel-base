@@ -137,4 +137,50 @@ class StoreTest extends TestCase
                 ]
             ]);
     }
+    /** @test */
+    public function it_can_use_organization_scope()
+    {
+        $setup = $this->createMultipleStoresWithInventory();
+
+        // Test the scope directly
+        $stores = Store::forOrganization($setup['organization']->id)->get();
+        $this->assertCount(3, $stores);
+    }
+
+    /** @test */
+    public function it_can_use_search_scope()
+    {
+        $setup = $this->createInventorySetup();
+
+        $store = Store::factory()->create([
+            'organization_unit_id' => $setup['organization_unit']->id,
+            'name' => 'Main Warehouse',
+            'code' => 'WH-MAIN'
+        ]);
+
+        $results = Store::search('Main')->get();
+        $this->assertCount(1, $results);
+        $this->assertEquals('Main Warehouse', $results->first()->name);
+
+        $results = Store::search('WH-')->get();
+        $this->assertCount(1, $results);
+        $this->assertEquals('WH-MAIN', $results->first()->code);
+    }
+
+    /** @test */
+    public function it_can_use_active_scope()
+    {
+        $setup = $this->createInventorySetup();
+
+        $inactiveStore = Store::factory()->create([
+            'organization_unit_id' => $setup['organization_unit']->id,
+            'is_active' => false
+        ]);
+
+        $activeStores = Store::active()->get();
+        $inactiveStores = Store::active(false)->get();
+
+        $this->assertTrue($activeStores->every->is_active);
+        $this->assertFalse($inactiveStores->every->is_active);
+    }
 }

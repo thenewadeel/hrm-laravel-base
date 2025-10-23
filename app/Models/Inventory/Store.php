@@ -114,9 +114,9 @@ class Store extends Model
     }
 
     // Scopes
-    public function scopeActive($query)
+    public function scopeActive($query, bool $active = true)
     {
-        return $query->where('is_active', true);
+        return $query->where('is_active', $active);
     }
 
     /**
@@ -126,6 +126,41 @@ class Store extends Model
     {
         return $query->whereHas('organization_unit', function ($q) use ($organizationId) {
             $q->where('organization_id', $organizationId);
+        });
+    }
+    /**
+     * Scope to filter stores by organization unit ID
+     */
+    public function scopeForOrganizationUnit($query, $organizationUnitId)
+    {
+        return $query->where('organization_unit_id', $organizationUnitId);
+    }
+
+    /**
+     * Scope to filter stores by user's organizations
+     */
+    public function scopeForUser($query,  $user)
+    {
+        $organizationIds = $user->organizations->pluck('id');
+
+        return $query->whereHas('organization_unit', function ($q) use ($organizationIds) {
+            $q->whereIn('organization_id', $organizationIds);
+        });
+    }
+
+    /**
+     * Scope to search stores by name, code, or location
+     */
+    public function scopeSearch($query, ?string $search)
+    {
+        if (empty($search)) {
+            return $query;
+        }
+
+        return $query->where(function ($q) use ($search) {
+            $q->where('name', 'like', "%{$search}%")
+                ->orWhere('code', 'like', "%{$search}%")
+                ->orWhere('location', 'like', "%{$search}%");
         });
     }
 

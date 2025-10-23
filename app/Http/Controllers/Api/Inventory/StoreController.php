@@ -20,45 +20,24 @@ class StoreController extends Controller
     {
         Gate::authorize('viewAny', Store::class);
 
-        $query = Store::with(['organization_unit.organization'])
-            ->withCount('items');
+        $organizationId = $request->has('organization_id') && !empty($request->organization_id)
+            ? $request->organization_id
+            : $request->user()->organizations()->first()->id;
 
-        // Filter by organization_id if provided - through organization_unit relationship
-        if ($request->has('organization_id') && !empty($request->organization_id)) {
-            $query->whereHas('organization_unit', function ($q) use ($request) {
-                $q->where('organization_id', $request->organization_id);
-            });
-        } else {
-            // Default to user's current organization
-            $query->whereHas('organization_unit', function ($q) use ($request) {
-                $q->where('organization_id', $request->user()->organizations()->first()->id);
-            });
-        }
+        $stores = Store::with(['organization_unit.organization'])
+            ->withCount('items')
+            ->forOrganization($organizationId)
+            ->search($request->search)
+            ->active($request->boolean('is_active', true))
+            ->when($request->has('sort_field'), function ($query) use ($request) {
+                $sortField = $request->get('sort_field', 'name');
+                $sortDirection = $request->get('sort_direction', 'asc');
 
-        // Search functionality
-        if ($request->has('search') && !empty($request->search)) {
-            $search = $request->search;
-            $query->where(function ($q) use ($search) {
-                $q->where('name', 'like', "%{$search}%")
-                    ->orWhere('code', 'like', "%{$search}%")
-                    ->orWhere('location', 'like', "%{$search}%");
-            });
-        }
-
-        // Filter by active status
-        if ($request->has('is_active')) {
-            $query->where('is_active', $request->boolean('is_active'));
-        }
-
-        // Sort functionality
-        $sortField = $request->get('sort_field', 'name');
-        $sortDirection = $request->get('sort_direction', 'asc');
-
-        if (in_array($sortField, ['name', 'code', 'location', 'created_at'])) {
-            $query->orderBy($sortField, $sortDirection);
-        }
-
-        $stores = $query->paginate($request->get('per_page', 15));
+                if (in_array($sortField, ['name', 'code', 'location', 'created_at'])) {
+                    $query->orderBy($sortField, $sortDirection);
+                }
+            })
+            ->paginate($request->get('per_page', 15));
 
         return StoreResource::collection($stores);
     }
