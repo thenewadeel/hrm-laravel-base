@@ -35,21 +35,43 @@ class InventoryService
     }
 
     /**
-     * Update store inventory - add/update items
+     * Update store inventory - add/update items with min/max stock
      */
-    public function updateStoreInventory(Store $store, Item $item, int $quantity, User $user): void
-    {
-        // Gate::authorize('manageInventory', $store);
+    public function updateStoreInventory(
+        Store $store,
+        Item $item,
+        int $quantity,
+        User $user,
+        ?int $minStock = null,
+        ?int $maxStock = null
+    ): void {
+        // dd($user->getAllPermissions());
+        Gate::authorize('manageInventory', $store);
 
-        DB::transaction(function () use ($store, $item, $quantity) {
-            $store->items()->syncWithoutDetaching([
-                $item->id => ['quantity' => max(0, $quantity)]
-            ]);
+        // Check if item belongs to same organization
+        if ($item->organization_id !== $store->organization->id) {
+            throw new \Exception('Item does not belong to the same organization');
+        }
 
-            // Update store totals or trigger events
-            $store->touch(); // Update timestamp
+        DB::transaction(function () use ($store, $item, $quantity, $minStock, $maxStock) {
+            $pivotData = ['quantity' => max(0, $quantity)];
+
+            if (!is_null($minStock)) {
+                $pivotData['min_stock'] = $minStock;
+            }
+
+            if (!is_null($maxStock)) {
+                $pivotData['max_stock'] = $maxStock;
+            }
+
+            $store->items()->syncWithoutDetaching([$item->id => $pivotData]);
+
+            // Update store timestamp
+            $store->touch();
         });
     }
+
+
 
     /**
      * Adjust store inventory (increment/decrement)
@@ -171,32 +193,68 @@ class InventoryService
     }
 
     /**
-     * Get stock levels for a store
+     * Get store stock levels with detailed information
      */
     public function getStoreStockLevels(Store $store, User $user): array
     {
-        // Gate::authorize('view', $store);
+        Gate::authorize('view', $store);
 
         $items = $store->items()
-            ->withPivot('quantity')
+            ->withPivot('quantity', 'min_stock', 'max_stock')
             ->get()
             ->map(function ($item) {
+                $quantity = $item->pivot->quantity;
+                $minStock = $item->pivot->min_stock;
+                $maxStock = $item->pivot->max_stock;
+                $reorderLevel = $item->reorder_level;
+                // dd([
+                //     'quantity' => $quantity,
+                //     'min_stock' => $minStock,
+                //     'max_stock' => $maxStock,
+                //     'reorder_level' => $reorderLevel,
+                //     'is_low_stock' => $quantity <= ($minStock ?? $reorderLevel),
+                //     'is_out_of_stock' => $quantity <= 0,
+                //     'is_overstock' => $maxStock && $quantity > $maxStock
+                // ]);
+
+                // Determine stock status
+                $isLowStock = $quantity <= ($minStock ?? $reorderLevel);
+                $isOutOfStock = $quantity <= 0;
+                $isOverstock = $maxStock && $quantity > $maxStock;
+
                 return [
                     'item_id' => $item->id,
                     'item_name' => $item->name,
                     'sku' => $item->sku,
-                    'current_stock' => $item->pivot->quantity,
-                    'reorder_level' => $item->reorder_level,
-                    'is_low_stock' => $item->pivot->quantity <= $item->reorder_level,
-                    'is_out_of_stock' => $item->pivot->quantity <= 0,
+                    'category' => $item->category,
+                    'current_stock' => $quantity,
+                    'min_stock' => $minStock,
+                    'max_stock' => $maxStock,
+                    'reorder_level' => $reorderLevel,
+                    'is_low_stock' => $isLowStock,
+                    'is_out_of_stock' => $isOutOfStock,
+                    'is_overstock' => $isOverstock,
+                    'status' => $isOutOfStock ? 'out_of_stock' : ($isLowStock ? 'low_stock' : ($isOverstock ? 'overstock' : 'normal')),
                 ];
             });
 
-        return [
-            'store' => $store->only(['id', 'name', 'code']),
+        $summary = [
             'total_items' => $items->count(),
+            'total_quantity' => $items->sum('current_stock'),
             'low_stock_items' => $items->where('is_low_stock', true)->count(),
             'out_of_stock_items' => $items->where('is_out_of_stock', true)->count(),
+            'overstock_items' => $items->where('is_overstock', true)->count(),
+            'normal_stock_items' => $items->where('status', 'normal')->count(),
+        ];
+
+        return [
+            'store' => [
+                'id' => $store->id,
+                'name' => $store->name,
+                'code' => $store->code,
+                'location' => $store->location,
+            ],
+            'summary' => $summary,
             'items' => $items,
         ];
     }

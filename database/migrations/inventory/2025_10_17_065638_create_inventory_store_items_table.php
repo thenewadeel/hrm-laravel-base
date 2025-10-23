@@ -14,7 +14,7 @@ return new class extends Migration
             $table->foreignId('item_id')->constrained('inventory_items')->nullOnDelete();
             $table->foreignId('head_id')->nullable()->constrained('inventory_heads')->nullOnDelete();
             $table->integer('quantity')->default(0);
-            $table->integer('min_stock')->default(0);
+            $table->integer('min_stock')->nullable();
             $table->integer('max_stock')->nullable();
             $table->softDeletes();
             $table->timestamps();
