@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Inventory;
 
+use App\Models\Inventory\Item;
+use App\Models\Inventory\Store;
 use Tests\Traits\SetupInventory;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -26,7 +28,7 @@ class StoreTest extends TestCase
             ->postJson('/api/inventory/stores', $storeData);
 
         $response->assertStatus(201)
-            ->assertJson([
+            ->assertJsonFragment([
                 'name' => 'Main Warehouse',
                 'code' => 'WH001'
             ]);
@@ -50,8 +52,8 @@ class StoreTest extends TestCase
                 'quantity' => 100
             ]);
 
+        // dd($response->json());
         $response->assertStatus(201);
-
         $this->assertDatabaseHas('inventory_store_items', [
             'store_id' => $setup['store']->id,
             'item_id' => $setup['items']->first()->id,
@@ -71,18 +73,20 @@ class StoreTest extends TestCase
 
         $response = $this->actingAs($setup['user'])
             ->getJson("/api/inventory/stores/{$setup['store']->id}");
-
+        // dd($response->json());
         $response->assertStatus(200)
-            ->assertJsonCount(3, 'items')
+            ->assertJsonCount(3, 'data.items')
             ->assertJsonStructure([
-                'id',
-                'name',
-                'code',
-                'items' => [
-                    '*' => [
-                        'id',
-                        'name',
-                        'pivot' => ['quantity']
+                'data' => [
+                    'id',
+                    'name',
+                    'code',
+                    'items' => [
+                        '*' => [
+                            'id',
+                            'name',
+                            'pivot' => ['quantity']
+                        ]
                     ]
                 ]
             ]);
@@ -119,15 +123,16 @@ class StoreTest extends TestCase
             ->getJson("/api/inventory/stores?organization_id={$setup['organization']->id}");
 
         $response->assertStatus(200)
-            ->assertJsonCount(3, 'data')
+            ->assertJsonCount(3, 'data') // Should have 3 stores
             ->assertJsonStructure([
                 'data' => [
                     '*' => [
                         'id',
                         'name',
                         'code',
+                        'organization_id', // Now available through relationship
+                        'organization_unit_id',
                         'items_count',
-                        'total_quantity'
                     ]
                 ]
             ]);

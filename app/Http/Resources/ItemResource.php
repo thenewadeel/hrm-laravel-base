@@ -24,6 +24,7 @@ class ItemResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'stores' => $this->whenLoaded('stores'),
+            'pivot' => $this->whenLoaded('pivot'),
         ];
     }
 }

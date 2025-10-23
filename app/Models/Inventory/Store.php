@@ -119,9 +119,14 @@ class Store extends Model
         return $query->where('is_active', true);
     }
 
+    /**
+     * Scope to filter stores by organization ID
+     */
     public function scopeForOrganization($query, $organizationId)
     {
-        return $query->where('organization_id', $organizationId);
+        return $query->whereHas('organization_unit', function ($q) use ($organizationId) {
+            $q->where('organization_id', $organizationId);
+        });
     }
 
     protected static function newFactory()

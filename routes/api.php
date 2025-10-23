@@ -113,6 +113,12 @@ Route::prefix('inventory')->middleware(['auth:sanctum'])->group(function () {
 
     // Stores - using policy authorization
     Route::apiResource('stores', StoreController::class);
+    Route::post('stores/{store}/items', [StoreController::class, 'addItem'])
+        ->name('stores.items.add');
+    Route::put('stores/{store}/items/{item}', [StoreController::class, 'updateItemQuantity'])
+        ->name('stores.items.update');
+    Route::delete('stores/{store}/items/{item}', [StoreController::class, 'removeItem'])
+        ->name('stores.items.remove');
 
     // Items - using policy authorization
     Route::apiResource('items', ItemController::class);

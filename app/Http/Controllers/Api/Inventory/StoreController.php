@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Api\Inventory;
 
 use App\Http\Controllers\Controller;
 use App\Models\Inventory\Store;
+use App\Models\Inventory\Item;
+use App\Http\Resources\StoreResource;
 use App\Services\InventoryService;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
 
 class StoreController extends Controller
@@ -18,35 +19,72 @@ class StoreController extends Controller
     public function index(Request $request)
     {
         Gate::authorize('viewAny', Store::class);
-        $stores = Store::where('organization_id', $request->user()->organizations()->first()->id)
-            ->withCount('items')
-            ->get();
 
-        return response()->json($stores);
+        $query = Store::with(['organization_unit.organization'])
+            ->withCount('items');
+
+        // Filter by organization_id if provided - through organization_unit relationship
+        if ($request->has('organization_id') && !empty($request->organization_id)) {
+            $query->whereHas('organization_unit', function ($q) use ($request) {
+                $q->where('organization_id', $request->organization_id);
+            });
+        } else {
+            // Default to user's current organization
+            $query->whereHas('organization_unit', function ($q) use ($request) {
+                $q->where('organization_id', $request->user()->organizations()->first()->id);
+            });
+        }
+
+        // Search functionality
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('code', 'like', "%{$search}%")
+                    ->orWhere('location', 'like', "%{$search}%");
+            });
+        }
+
+        // Filter by active status
+        if ($request->has('is_active')) {
+            $query->where('is_active', $request->boolean('is_active'));
+        }
+
+        // Sort functionality
+        $sortField = $request->get('sort_field', 'name');
+        $sortDirection = $request->get('sort_direction', 'asc');
+
+        if (in_array($sortField, ['name', 'code', 'location', 'created_at'])) {
+            $query->orderBy($sortField, $sortDirection);
+        }
+
+        $stores = $query->paginate($request->get('per_page', 15));
+
+        return StoreResource::collection($stores);
     }
-
     public function store(Request $request)
     {
         Gate::authorize('create', Store::class);
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'code' => 'required|string|unique:inventory_stores,code',
             'location' => 'nullable|string|max:255',
             'description' => 'nullable|string',
+            // 'organization_id' => 'required|exists:organizations,id',
             'organization_unit_id' => 'required|exists:organization_units,id'
         ]);
 
-        $store = $this->inventoryService->createStore($validated, $request->user());
+        $store = Store::create($validated);
 
-        return response()->json($store, 201);
+        return new StoreResource($store);
     }
 
     public function show(Store $store)
     {
         Gate::authorize('view', $store);
-        $store->load('items', 'organization');
 
-        return response()->json($store);
+        return new StoreResource($store->load('items', 'organization'));
     }
 
     public function update(Request $request, Store $store)
@@ -62,8 +100,10 @@ class StoreController extends Controller
         ]);
 
         $store->update($validated);
-        return response()->json($store);
+
+        return new StoreResource($store);
     }
+
     public function destroy(Store $store)
     {
         Gate::authorize('delete', $store);
@@ -72,24 +112,136 @@ class StoreController extends Controller
 
         return response()->json(null, 204);
     }
-    public function updateInventory(Request $request, Store $store)
+
+    /**
+     * Add item to store or update quantity
+     */
+    public function addItem(Store $store, Request $request)
     {
         Gate::authorize('manageInventory', $store);
+
         $validated = $request->validate([
             'item_id' => 'required|exists:inventory_items,id',
-            'quantity' => 'required|integer|min:0'
+            'quantity' => 'required|integer|min:0',
+            'min_stock' => 'nullable|integer|min:0',
+            'max_stock' => 'nullable|integer|min:0'
         ]);
 
-        $item = \App\Models\Inventory\Item::find($validated['item_id']);
-        $this->inventoryService->updateStoreInventory($store, $item, $validated['quantity'], $request->user());
+        $item = Item::findOrFail($validated['item_id']);
 
-        return response()->json(['message' => 'Inventory updated successfully']);
+        // Check if item belongs to same organization
+        if ($item->organization_id !== $store->organization->id) {
+            return response()->json([
+                'message' => 'Item does not belong to the same organization'
+            ], 422);
+        }
+
+        $this->inventoryService->updateStoreInventory(
+            $store,
+            $item,
+            $validated['quantity'],
+            $request->user(),
+            $validated['min_stock'] ?? null,
+            $validated['max_stock'] ?? null
+        );
+
+        return response()->json([
+            'message' => 'Item added to store successfully',
+            'data' => [
+                'store_id' => $store->id,
+                'item_id' => $item->id,
+                'quantity' => $validated['quantity']
+            ]
+        ], 201);
     }
 
+    /**
+     * Update item quantity in store
+     */
+    public function updateItemQuantity(Store $store, Item $item, Request $request)
+    {
+        Gate::authorize('manageInventory', $store);
+
+        $validated = $request->validate([
+            'quantity' => 'required|integer|min:0',
+            'min_stock' => 'nullable|integer|min:0',
+            'max_stock' => 'nullable|integer|min:0'
+        ]);
+
+        // Check if item belongs to same organization
+        if ($item->organization_id !== $store->organization->id) {
+            return response()->json([
+                'message' => 'Item does not belong to the same organization'
+            ], 422);
+        }
+
+        $this->inventoryService->updateStoreInventory(
+            $store,
+            $item,
+            $validated['quantity'],
+            $request->user(),
+            $validated['min_stock'] ?? null,
+            $validated['max_stock'] ?? null
+        );
+
+        return response()->json([
+            'message' => 'Item quantity updated successfully',
+            'data' => [
+                'store_id' => $store->id,
+                'item_id' => $item->id,
+                'quantity' => $validated['quantity']
+            ]
+        ]);
+    }
+
+    /**
+     * Remove item from store
+     */
+    public function removeItem(Store $store, Item $item)
+    {
+        Gate::authorize('manageInventory', $store);
+
+        // Check if item belongs to same organization
+        if ($item->organization_id !== $store->organization->id) {
+            return response()->json([
+                'message' => 'Item does not belong to the same organization'
+            ], 422);
+        }
+
+        $store->items()->detach($item->id);
+
+        return response()->json([
+            'message' => 'Item removed from store successfully'
+        ]);
+    }
+
+    /**
+     * Get store items with quantities
+     */
+    public function getStoreItems(Store $store)
+    {
+        Gate::authorize('view', $store);
+
+        $items = $store->items()
+            ->withPivot('quantity', 'min_stock', 'max_stock')
+            ->paginate(request()->get('per_page', 15));
+
+        return response()->json([
+            'data' => $items
+        ]);
+    }
+
+    /**
+     * Get store stock levels
+     */
     public function stockLevels(Store $store)
     {
         Gate::authorize('view', $store);
+
         $stockLevels = $this->inventoryService->getStoreStockLevels($store, request()->user());
-        return response()->json($stockLevels);
+
+        return response()->json([
+            'data' => $stockLevels
+        ]);
     }
 }

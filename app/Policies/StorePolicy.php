@@ -19,7 +19,7 @@ class StorePolicy
     public function view(User $user, Store $store): bool
     {
         return $user->hasPermission(InventoryPermissions::VIEW_STORES, $store->organization) &&
-            $user->organizations->contains($store->organization_id);
+            $user->organizations->contains($store->organization->id);
     }
 
     public function create(User $user): bool
@@ -30,30 +30,30 @@ class StorePolicy
     public function update(User $user, Store $store): bool
     {
         return $user->hasPermission(InventoryPermissions::EDIT_STORES, $store->organization) &&
-            $user->organizations->contains($store->organization_id);
+            $user->organizations->contains($store->organization->id);
     }
 
     public function delete(User $user, Store $store): bool
     {
         return $user->hasPermission(InventoryPermissions::DELETE_STORES, $store->organization) &&
-            $user->organizations->contains($store->organization_id);
+            $user->organizations->contains($store->organization->id);
     }
 
     public function manageInventory(User $user, Store $store): bool
     {
         return $user->hasPermission(InventoryPermissions::MANAGE_STORE_INVENTORY, $store->organization) &&
-            $user->organizations->contains($store->organization_id);
+            $user->organizations->contains($store->organization->id);
     }
 
     public function restore(User $user, Store $store): bool
     {
         return $user->hasPermission(InventoryPermissions::EDIT_STORES) &&
-            $user->organizations->contains($store->organization_id);
+            $user->organizations->contains($store->organization->id);
     }
 
     public function forceDelete(User $user, Store $store): bool
     {
         return $user->hasPermission(InventoryPermissions::DELETE_STORES) &&
-            $user->organizations->contains($store->organization_id);
+            $user->organizations->contains($store->organization->id);
     }
 }
