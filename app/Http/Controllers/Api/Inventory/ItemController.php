@@ -136,7 +136,7 @@ class ItemController extends Controller
     {
         Gate::authorize('viewAny', Item::class);
 
-        $query = Item::where('organization_id', $request->user()->currentOrganization->id)
+        $query = Item::where('organization_id', $request->user()->organizations()->first()->id)
             ->whereHas('stores', function ($q) {
                 $q->where('inventory_store_items.quantity', '<=', \DB::raw('items.reorder_level'))
                     ->where('inventory_store_items.quantity', '>', 0);
@@ -157,7 +157,7 @@ class ItemController extends Controller
     {
         Gate::authorize('viewAny', Item::class);
 
-        $query = Item::where('organization_id', $request->user()->currentOrganization->id)
+        $query = Item::where('organization_id', $request->user()->organizations()->first()->id)
             ->where(function ($q) {
                 $q->whereHas('stores', function ($subQuery) {
                     $subQuery->where('inventory_store_items.quantity', '<=', 0);
