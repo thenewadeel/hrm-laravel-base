@@ -23,7 +23,7 @@ class InventoryRoles
                 InventoryPermissions::VIEW_STORES,
                 InventoryPermissions::CREATE_STORES,
                 InventoryPermissions::EDIT_STORES,
-                InventoryPermissions::DELETE_STORES,
+                // InventoryPermissions::DELETE_STORES,
                 InventoryPermissions::MANAGE_STORE_INVENTORY,
                 InventoryPermissions::VIEW_ITEMS,
                 InventoryPermissions::CREATE_ITEMS,
