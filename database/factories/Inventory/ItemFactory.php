@@ -12,7 +12,7 @@ class ItemFactory extends Factory
     public function definition()
     {
         return [
-            // 'organization_id' => Organization::factory(),
+            'organization_id' => Organization::first()?->id ?? Organization::factory(),
             'name' => $this->faker->word,
             'sku' => 'SKU' . $this->faker->unique()->numberBetween(10000, 99999),
             'description' => $this->faker->sentence,

@@ -206,26 +206,58 @@ class InventoryService
      */
     public function getItemAvailability(Item $item, User $user): array
     {
-        // Gate::authorize('view', $item);
+        Gate::authorize('view', $item);
 
-        $availability = $item->stores()
-            ->where('inventory_store_items.quantity', '>', 0)
+        $stores = $item->stores()
             ->get()
-            ->map(function ($store) {
+            ->map(function ($store) use ($item) {
+                $quantity = $store->pivot->quantity ?? 0;
+                $reorderLevel = $item->reorder_level ?? 0;
+
                 return [
                     'store_id' => $store->id,
                     'store_name' => $store->name,
                     'store_code' => $store->code,
-                    'quantity' => $store->pivot->quantity,
                     'location' => $store->location,
+                    'quantity' => $quantity,
+                    'min_stock' => $store->pivot->min_stock ?? null,
+                    'max_stock' => $store->pivot->max_stock ?? null,
+                    'is_low_stock' => $quantity <= $reorderLevel,
+                    'is_out_of_stock' => $quantity <= 0,
                 ];
             });
 
+        $totalQuantity = $stores->sum('quantity');
+        $reorderLevel = $item->reorder_level ?? 0;
+
+        $totalQuantity = $stores->sum('quantity');
+        $storesWithStock = $stores->where('quantity', '>', 0);
+        $lowStockStores = $stores->where('is_low_stock', true);
+
+        // dd($stores);
+
         return [
-            'item' => $item->only(['id', 'name', 'sku', 'total_quantity']),
-            'availability' => $availability,
-            'total_available' => $availability->sum('quantity'),
-            'stores_count' => $availability->count(),
+            'item' => [
+                'id' => $item->id,
+                'name' => $item->name,
+                'sku' => $item->sku,
+                'description' => $item->description,
+                'category' => $item->category,
+                'reorder_level' => $reorderLevel,
+                'total_quantity' => $totalQuantity,
+                'is_low_stock_overall' => $totalQuantity <= $reorderLevel,
+                'is_out_of_stock_overall' => $totalQuantity <= 0,
+            ],
+            'availability' => $stores,
+            'summary' => [
+                'total_quantity' => $totalQuantity,
+                'stores_count' => $stores->count(),
+                'stores_with_stock' => $storesWithStock->count(),
+                'low_stock_stores' => $lowStockStores->count(),
+                'out_of_stock_stores' => $stores->where('quantity', '<=', 0)->count(),
+            ],
+            'stores_with_stock' => $storesWithStock->values(),
+            'low_stock_locations' => $lowStockStores->values(),
         ];
     }
 

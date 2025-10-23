@@ -3,6 +3,7 @@
 namespace App\Models\Inventory;
 
 use App\Models\Organization;
+use App\Models\OrganizationUnit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -27,7 +28,9 @@ class Item extends Model
         'cost_price',
         'selling_price',
         'reorder_level',
-        'is_active'
+        'is_active',
+        'head_id',
+        'organization_id'
     ];
 
     protected $casts = [
@@ -40,7 +43,6 @@ class Item extends Model
     {
         return $this->belongsTo(Organization::class);
     }
-
     public function stores(): BelongsToMany
     {
         return $this->belongsToMany(Store::class, 'inventory_store_items')

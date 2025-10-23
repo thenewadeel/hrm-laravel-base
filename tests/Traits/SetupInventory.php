@@ -33,7 +33,7 @@ trait SetupInventory
     }
     protected function createUserWithInventoryPermissions($user = null, $role = InventoryRoles::INVENTORY_ADMIN, $organization = null)
     {
-        $setup = $this->createInventorySetup($user);
+        $setup = $this->createInventorySetup($user, [$role], true);
         $user = $setup['user'];
         $organization = $organization ?: $setup['organization'];
         // Get permissions for the role
@@ -70,7 +70,7 @@ trait SetupInventory
         return $user->hasPermission($permission, $organization);
     }
 
-    protected function createInventorySetup($user = null, array $roles = [InventoryRoles::INVENTORY_ADMIN])
+    protected function createInventorySetup($user = null, array $roles = [InventoryRoles::INVENTORY_ADMIN], $noItems = false)
     {
         $organization = Organization::factory()->create();
         $organization_unit = OrganizationUnit::factory()->create([
@@ -95,16 +95,21 @@ trait SetupInventory
             'organization_unit_id' => $organization_unit->id
         ]);
 
-        $items = Item::factory()->count(5)->create();
-        // dd('cp');
-
-        return [
+        $result = [
             'organization' => $organization,
             'organization_unit' => $organization_unit,
             'user' => $user,
             'store' => $store,
-            'items' => $items
+            // 'items' => $items
         ];
+        if ($noItems == true) {
+        } else {
+            $items = Item::factory()->count(5)->create([
+                'organization_id' => $organization->id
+            ]);
+            $result['items'] = $items;
+        }
+        return $result;
     }
 
     protected function createDraftTransactionWithItems($store = null, $user = null, $itemCount = 3)
@@ -115,7 +120,7 @@ trait SetupInventory
             $items = $setup['items']->take($itemCount);
         } else {
             $items = Item::factory()->count($itemCount)->create([
-                // 'organization_id' => $store->organization_id
+                'organization_id' => $store->organization_id
             ]);
         }
 
@@ -170,7 +175,7 @@ trait SetupInventory
         $setup = $this->createInventorySetup($user);
 
         $additionalStores = Store::factory()->count(2)->create([
-            'organization_id' => $setup['organization']->id
+            'organization_unit_id' => $setup['organization_unit']->id
         ]);
 
         // Add inventory to all stores

@@ -116,6 +116,12 @@ Route::prefix('inventory')->middleware(['auth:sanctum'])->group(function () {
 
     // Items - using policy authorization
     Route::apiResource('items', ItemController::class);
+    Route::get('items/{item}/availability', [ItemController::class, 'availability'])
+        ->name('items.availability');
+    Route::get('items/low-stock', [ItemController::class, 'lowStock'])
+        ->name('items.low-stock');
+    Route::get('items/out-of-stock', [ItemController::class, 'outOfStock'])
+        ->name('items.out-of-stock');
 
     // Transactions - using policy authorization
     Route::apiResource('transactions', TransactionController::class);

@@ -16,18 +16,17 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('category')->nullable();
             $table->string('unit')->default('pcs'); // pcs, kg, meter, etc.
-            // $table->string('qty_type')->nullable()->default('nos'); //["nos","kg","box","pack"]
-            // $table->decimal('last_rate', 8, 2)->default(1.00);
             $table->decimal('cost_price', 10, 2)->nullable()->comment('in cents');
             $table->decimal('selling_price', 10, 2)->nullable()->comment('in cents');
             $table->integer('reorder_level')->default(0);
             $table->boolean('is_active')->default(true);
 
+            $table->foreignId('head_id')->nullable()->constrained('inventory_heads')->nullOnDelete();
+            $table->foreignId('organization_id')->constrained('organizations')->onDelete('cascade');
             // $table->string('code')->nullable();
             //    $table->decimal('balance', 8, 2);
             // $table->foreignId('item_id');
             // $table->foreignId('inventory_id');
-            $table->foreignId('head_id')->nullable()->constrained('inventory_heads')->nullOnDelete();
 
             $table->softDeletes();
             $table->timestamps();
