@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Store extends Model
@@ -40,6 +41,10 @@ class Store extends Model
     public function organization_unit(): BelongsTo
     {
         return $this->belongsTo(OrganizationUnit::class);
+    }
+    public function organization(): HasOneThrough
+    {
+        return $this->hasOneThrough(Organization::class, OrganizationUnit::class, 'id', 'id', 'organization_unit_id', 'organization_id');
     }
 
     public function items(): BelongsToMany

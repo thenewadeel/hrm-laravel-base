@@ -34,7 +34,7 @@ trait SetupInventory
     protected function createUserWithInventoryPermissions($user = null, $role = InventoryRoles::INVENTORY_ADMIN, $organization = null)
     {
         $setup = $this->createInventorySetup($user, [$role], true);
-        $user = $setup['user'];
+        $user = $user ?: $setup['user'];
         $organization = $organization ?: $setup['organization'];
         // Get permissions for the role
         $permissions = \App\Roles\InventoryRoles::getPermissionsForRole($role);
@@ -120,7 +120,7 @@ trait SetupInventory
             $items = $setup['items']->take($itemCount);
         } else {
             $items = Item::factory()->count($itemCount)->create([
-                'organization_id' => $store->organization_id
+                'organization_id' => $store->organization->id
             ]);
         }
 
