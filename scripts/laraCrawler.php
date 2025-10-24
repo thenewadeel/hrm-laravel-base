@@ -1,7 +1,7 @@
 <?php
 
-// Laravel 12 Project Crawler - Method Signatures for LLM Ingestion
-// Extracts method signatures instead of full content
+// Laravel 12 Project Crawler - Method Signatures & Database Schema for LLM Ingestion
+// Extracts method signatures and database schema information
 
 // Configuration
 $projectRoot = $argv[1] ?? '.';
@@ -22,7 +22,7 @@ $ignoredPaths = [
 $componentSettings = [
     'Model' => ['extract_methods' => true, 'max_methods' => 20],
     'Controller' => ['extract_methods' => true, 'max_methods' => 15],
-    'Migration' => ['extract_methods' => false],
+    'Migration' => ['extract_methods' => false, 'extract_schema' => true],
     'Route' => ['extract_methods' => false],
     'View' => ['extract_methods' => false],
     'Config' => ['extract_methods' => false],
@@ -60,6 +60,155 @@ function log_warning(string $message): void
 function log_error(string $message): void
 {
     echo "[ERROR] $message\n";
+}
+
+// Extract database schema from migration files
+function extract_migration_schema(string $content): array
+{
+    $schema = [
+        'tables' => [],
+        'operations' => []
+    ];
+
+    // Pattern to detect table creation
+    if (preg_match('/Schema::create\(\s*[\'"]([^\'"]+)[\'"]\s*,\s*function\s*\([^)]+\)\s*{([^}]+)}\s*\);/s', $content, $matches)) {
+        $tableName = $matches[1];
+        $tableDefinition = $matches[2];
+
+        $schema['tables'][$tableName] = extract_table_columns($tableDefinition);
+        $schema['operations'][] = [
+            'type' => 'create_table',
+            'table' => $tableName
+        ];
+    }
+
+    // Pattern to detect table updates
+    if (preg_match('/Schema::table\(\s*[\'"]([^\'"]+)[\'"]\s*,\s*function\s*\([^)]+\)\s*{([^}]+)}\s*\);/s', $content, $matches)) {
+        $tableName = $matches[1];
+        $tableChanges = $matches[2];
+
+        $schema['operations'][] = [
+            'type' => 'update_table',
+            'table' => $tableName,
+            'changes' => extract_table_changes($tableChanges)
+        ];
+    }
+
+    // Pattern to detect table drops/renames
+    if (preg_match('/Schema::drop\(\s*[\'"]([^\'"]+)[\'"]\s*\);/', $content, $matches)) {
+        $schema['operations'][] = [
+            'type' => 'drop_table',
+            'table' => $matches[1]
+        ];
+    }
+
+    if (preg_match('/Schema::rename\(\s*[\'"]([^\'"]+)[\'"]\s*,\s*[\'"]([^\'"]+)[\'"]\s*\);/', $content, $matches)) {
+        $schema['operations'][] = [
+            'type' => 'rename_table',
+            'from' => $matches[1],
+            'to' => $matches[2]
+        ];
+    }
+
+    return $schema;
+}
+
+// Extract column definitions from table schema
+function extract_table_columns(string $tableDefinition): array
+{
+    $columns = [];
+
+    // Pattern to match column definitions: $table->type('name', ...)
+    preg_match_all('/\$table->(\w+)\(\s*[\'"]([^\'"]+)[\'"]([^;]*)\);/', $tableDefinition, $matches, PREG_SET_ORDER);
+
+    foreach ($matches as $match) {
+        $columnType = $match[1];
+        $columnName = $match[2];
+        $columnOptions = $match[3];
+
+        $columnInfo = [
+            'name' => $columnName,
+            'type' => $columnType,
+            'options' => trim($columnOptions)
+        ];
+
+        // Extract common modifiers
+        if (strpos($tableDefinition, "->nullable()") !== false) {
+            $columnInfo['nullable'] = true;
+        }
+
+        if (strpos($tableDefinition, "->unique()") !== false) {
+            $columnInfo['unique'] = true;
+        }
+
+        if (preg_match("/->default\(([^)]+)\)/", $tableDefinition, $defaultMatch)) {
+            $columnInfo['default'] = trim($defaultMatch[1]);
+        }
+
+        // Detect primary key
+        if ($columnType === 'id' || strpos($columnName, '_id') !== false) {
+            $columnInfo['primary_key'] = true;
+        }
+
+        // Detect foreign keys
+        if (preg_match("/->references\(['\"]([^'\"]+)['\"]\)->on\(['\"]([^'\"]+)['\"]\)/", $columnOptions, $foreignKeyMatch)) {
+            $columnInfo['foreign_key'] = [
+                'references' => $foreignKeyMatch[1],
+                'on_table' => $foreignKeyMatch[2]
+            ];
+        }
+
+        $columns[] = $columnInfo;
+    }
+
+    return $columns;
+}
+
+// Extract table changes from update operations
+function extract_table_changes(string $tableChanges): array
+{
+    $changes = [];
+
+    // Pattern to match column additions
+    preg_match_all('/\$table->(\w+)\(\s*[\'"]([^\'"]+)[\'"]([^;]*)\);/', $tableChanges, $matches, PREG_SET_ORDER);
+
+    foreach ($matches as $match) {
+        $changeType = $match[1];
+        $columnName = $match[2];
+        $options = $match[3];
+
+        $changes[] = [
+            'operation' => $changeType,
+            'column' => $columnName,
+            'options' => trim($options)
+        ];
+    }
+
+    // Pattern to match column modifications
+    if (preg_match_all('/\$table->(\w+)\(\s*[\'"]([^\'"]+)[\'"]([^;]*)\)->change\(\);/', $tableChanges, $matches, PREG_SET_ORDER)) {
+        foreach ($matches as $match) {
+            $changes[] = [
+                'operation' => 'modify_' . $match[1],
+                'column' => $match[2],
+                'options' => trim($match[3])
+            ];
+        }
+    }
+
+    // Pattern to match column drops
+    if (preg_match_all('/\$table->dropColumn\(\s*\[([^]]+)\]\s*\);/', $tableChanges, $matches)) {
+        foreach ($matches[1] as $columnsList) {
+            $droppedColumns = array_map('trim', explode(',', str_replace("'", "", $columnsList)));
+            foreach ($droppedColumns as $column) {
+                $changes[] = [
+                    'operation' => 'drop_column',
+                    'column' => $column
+                ];
+            }
+        }
+    }
+
+    return $changes;
 }
 
 // Simple but reliable method extraction using regex
@@ -242,6 +391,20 @@ function extract_components(string $projectRoot, string $type, string $subDir, a
                     }
                 }
 
+                // Extract database schema from migrations
+                if ($type === 'Migration' && $componentSettings[$type]['extract_schema'] && $fileExtension === 'php') {
+                    $schema = extract_migration_schema($content);
+                    if (!empty($schema['tables']) || !empty($schema['operations'])) {
+                        $componentData['database_schema'] = $schema;
+                        log_info("Extracted schema from migration: " . $name);
+
+                        // Log table information
+                        foreach ($schema['tables'] as $tableName => $columns) {
+                            log_info("  - Table: $tableName with " . count($columns) . " columns");
+                        }
+                    }
+                }
+
                 // For essential files, include a small snippet of content
                 if ($isEssential && strlen($content) > 500) {
                     $componentData['content_preview'] = substr($content, 0, 500) . '...';
@@ -298,7 +461,7 @@ function extract_composer_info(string $projectRoot): array
 // Main execution function
 function main(string $projectRoot, string $outputFile, bool $verbose): void
 {
-    log_info("Laravel 12 Project Crawler started (Method Signatures for LLM)");
+    log_info("Laravel 12 Project Crawler started (Method Signatures & Database Schema for LLM)");
 
     // Validate project structure
     validate_project_root($projectRoot);
