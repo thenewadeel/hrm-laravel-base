@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\SetupController;
 use App\Http\Livewire\Organization\OrganizationList;
+use App\Models\Inventory\Store;
 use App\Services\AccountingReportService;
 use Illuminate\Support\Facades\Route;
 
@@ -25,18 +26,59 @@ Route::middleware([
 // routes/web.php
 Route::middleware(['auth', 'verified'])->group(function () {
     // Setup Wizard Routes
-    Route::get('/setup', function () {
-        // Check if user already has organization using the relationship
-        $user = auth()->user();
+    Route::prefix('setup')->group(function () {
+        // Step 1: Organization
+        Route::get('/', function () {
+            $user = auth()->user();
 
-        if ($user->organizations()->count() > 0) {
-            return redirect('/dashboard');
-        }
+            if ($user->organizations()->count() > 0) {
+                return redirect('/setup/stores');
+            }
 
-        return view('setup.welcome');
-    })->name('setup.welcome');
+            return view('setup.organization');
+        })->name('setup.organization');
 
+        Route::post('/organization', [SetupController::class, 'storeOrganization'])
+            ->name('setup.organization.store');
 
+        // Step 2: Store
+        Route::get('/stores', function () {
+            $user = auth()->user();
+            $organization = $user->organizations()->first();
+
+            if (!$organization) {
+                return redirect('/setup');
+            }
+
+            if (Store::forOrganization($organization->id)->count() > 0) {
+                return redirect('/setup/accounts');
+            }
+
+            return view('setup.stores');
+        })->name('setup.stores');
+
+        Route::post('/stores', [SetupController::class, 'storeStore'])
+            ->name('setup.stores.store');
+
+        // Step 3: Chart of Accounts
+        Route::get('/accounts', function () {
+            $user = auth()->user();
+            $organization = $user->organizations()->first();
+
+            if (!$organization) {
+                return redirect('/setup');
+            }
+
+            if (Store::forOrganization($organization->id)->count() === 0) {
+                return redirect('/setup/stores');
+            }
+
+            return view('setup.accounts');
+        })->name('setup.accounts');
+
+        Route::post('/accounts', [SetupController::class, 'storeAccounts'])
+            ->name('setup.accounts.store');
+    });
     Route::post('/setup/organization', [SetupController::class, 'storeOrganization'])
         ->name('setup.organization.store');
 

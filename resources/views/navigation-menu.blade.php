@@ -3,7 +3,7 @@
     @auth
         @if (auth()->user()->organizations()->count() === 0 && !request()->is('setup*'))
             <script>
-                window.location.href = '{{ route('setup.welcome') }}';
+                window.location.href = '{{ route('setup.stores') }}';
             </script>
         @endif
     @endauth
