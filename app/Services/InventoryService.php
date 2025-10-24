@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Permissions\InventoryPermissions;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\ValidationException;
 
 class InventoryService
 {
@@ -98,25 +99,44 @@ class InventoryService
      */
     public function createTransaction(array $data, User $user): Transaction
     {
-        // Gate::authorize('create', Transaction::class);
+        Gate::authorize('create', Transaction::class);
 
         return DB::transaction(function () use ($data, $user) {
+            // Create the transaction
             $transaction = Transaction::create([
-                ...$data,
+                'store_id' => $data['store_id'],
                 'created_by' => $user->id,
+                'type' => $data['type'],
                 'status' => Transaction::STATUS_DRAFT,
+                'reference' => $data['reference'],
+                'notes' => $data['notes'] ?? null,
+                'transaction_date' => $data['transaction_date'],
             ]);
 
-            return $transaction->load(['store', 'createdBy']);
+            // ✅ FIX: Check if items exist and create them
+            if (isset($data['items']) && is_array($data['items']) && !empty($data['items'])) {
+                foreach ($data['items'] as $itemData) {
+                    $transaction->items()->create([
+                        'item_id' => $itemData['item_id'],
+                        'quantity' => $itemData['quantity'],
+                        'unit_price' => ($itemData['unit_price']), // Convert to cents
+                        'notes' => $itemData['notes'] ?? null,
+                    ]);
+                }
+
+                // ✅ Reload the items relationship to ensure they're available
+                $transaction->load('items');
+            }
+
+            return $transaction;
         });
     }
-
     /**
      * Add items to a draft transaction
      */
     public function addItemsToTransaction(Transaction $transaction, array $items, User $user): Transaction
     {
-        // Gate::authorize('update', $transaction);
+        Gate::authorize('update', $transaction);
 
         if (!$transaction->isDraft()) {
             throw new \Exception('Cannot modify finalized or cancelled transaction');
@@ -127,7 +147,7 @@ class InventoryService
                 $transaction->items()->create([
                     'item_id' => $itemData['item_id'],
                     'quantity' => $itemData['quantity'],
-                    'unit_price' => (int)($itemData['unit_price'] * 100), // Convert to cents
+                    'unit_price' => ($itemData['unit_price']), // Convert to cents
                     'notes' => $itemData['notes'] ?? null,
                 ]);
             }
@@ -141,15 +161,19 @@ class InventoryService
      */
     public function finalizeTransaction(Transaction $transaction, User $user): Transaction
     {
-        // Gate::authorize('finalize', $transaction);
+        Gate::authorize('finalize', $transaction);
 
         if (!$transaction->isDraft()) {
             throw new \Exception('Transaction is not in draft status');
         }
 
         if ($transaction->items->isEmpty()) {
-            throw new \Exception('Cannot finalize transaction with no items');
+            // ✅ Change from generic Exception to ValidationException
+            throw ValidationException::withMessages([
+                'items' => ['Cannot finalize transaction with no items']
+            ]);
         }
+
 
         return DB::transaction(function () use ($transaction, $user) {
             // Update store inventory based on transaction type

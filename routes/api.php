@@ -132,13 +132,12 @@ Route::prefix('inventory')->middleware(['auth:sanctum'])->group(function () {
     // Transactions - using policy authorization
     Route::apiResource('transactions', TransactionController::class);
 
-    // Transaction actions with explicit permission checks
+    // Transaction actions
+    Route::post('transactions/{transaction}/items', [TransactionController::class, 'addItems'])
+        ->name('transactions.items.add');
     Route::put('transactions/{transaction}/finalize', [TransactionController::class, 'finalize'])
-        ->middleware('can:finalize,transaction')
         ->name('transactions.finalize');
-
     Route::put('transactions/{transaction}/cancel', [TransactionController::class, 'cancel'])
-        ->middleware('can:cancel,transaction')
         ->name('transactions.cancel');
 
     // Store inventory management

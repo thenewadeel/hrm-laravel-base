@@ -50,12 +50,12 @@ class TransactionItem extends Model
     // Business logic methods
     public function getFormattedUnitPrice(): string
     {
-        return number_format($this->unit_price / 100, 2);
+        return number_format($this->unit_price, 2);
     }
 
     public function getFormattedTotalPrice(): string
     {
-        return number_format($this->total_price / 100, 2);
+        return number_format($this->total_price, 2);
     }
 
     protected static function newFactory()

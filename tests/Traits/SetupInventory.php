@@ -124,12 +124,16 @@ trait SetupInventory
             ]);
         }
 
+        $user = $user ?: auth()->user();
+
         $transaction = Transaction::factory()->create([
             'store_id' => $store->id,
             'status' => Transaction::STATUS_DRAFT,
             'type' => Transaction::TYPE_INCOMING,
-            'created_by' => $user?->id
+            'created_by' => $user->id, // ✅ Make sure created_by is set
+            'transaction_date' => now(),
         ]);
+
 
         $transactionItems = [];
         foreach ($items as $item) {

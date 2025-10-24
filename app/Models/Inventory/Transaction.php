@@ -45,7 +45,7 @@ class Transaction extends Model
         'transaction_date' => 'datetime',
         'finalized_at' => 'datetime'
     ];
-
+    protected $appends = ['total_quantity', 'total_value'];
     // Get available types
     public static function getTypes(): array
     {
@@ -76,36 +76,53 @@ class Transaction extends Model
     }
 
     // Scopes
+    /**
+     * Scope for draft transactions
+     */
     public function scopeDraft($query)
     {
         return $query->where('status', self::STATUS_DRAFT);
     }
 
+    /**
+     * Scope for finalized transactions
+     */
     public function scopeFinalized($query)
     {
         return $query->where('status', self::STATUS_FINALIZED);
     }
 
+    /**
+     * Scope for cancelled transactions
+     */
     public function scopeCancelled($query)
     {
         return $query->where('status', self::STATUS_CANCELLED);
     }
 
-    public function scopeType($query, $type)
-    {
-        return $query->where('type', $type);
-    }
-
+    /**
+     * Scope for incoming transactions
+     */
     public function scopeIncoming($query)
     {
         return $query->where('type', self::TYPE_INCOMING);
     }
 
+    /**
+     * Scope for outgoing transactions
+     */
     public function scopeOutgoing($query)
     {
         return $query->where('type', self::TYPE_OUTGOING);
     }
 
+    /**
+     * Scope for adjustment transactions
+     */
+    public function scopeAdjustment($query)
+    {
+        return $query->where('type', self::TYPE_ADJUSTMENT);
+    }
     // Business logic methods
     public function isDraft(): bool
     {
@@ -168,19 +185,57 @@ class Transaction extends Model
     {
         return $this->hasMany(TransactionItem::class);
     }
-
+    /**
+     * Accessor for total quantity
+     */
     public function getTotalQuantityAttribute()
     {
-        return $this->items->sum('quantity');
+        if ($this->relationLoaded('items')) {
+            return $this->items->sum('quantity');
+        }
+
+        return $this->items()->sum('quantity');
     }
 
+    /**
+     * Accessor for total value
+     */
     public function getTotalValueAttribute()
     {
-        return $this->items->sum(function ($item) {
+        if ($this->relationLoaded('items')) {
+            return $this->items->sum(function ($item) {
+                return $item->quantity * $item->unit_price;
+            });
+        }
+
+        return $this->items()->get()->sum(function ($item) {
             return $item->quantity * $item->unit_price;
         });
     }
 
+    /**
+     * Accessor for total price
+     */
+    public function getTotalPriceAttribute(): float
+    {
+        return ($this->attributes['quantity'] * $this->attributes['unit_price']);
+    }
+    /**
+     * Accessor for unit_price - convert from cents to dollars
+     */
+    public function getUnitPriceAttribute($value): float
+    {
+        return $value;
+    }
+
+
+    /**
+     * Mutator for unit_price - convert dollars to cents for storage
+     */
+    public function setUnitPriceAttribute($value): void
+    {
+        $this->attributes['unit_price'] = (int)($value);
+    }
 
     protected static function newFactory()
     {

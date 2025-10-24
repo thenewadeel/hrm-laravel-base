@@ -19,7 +19,7 @@ class TransactionPolicy
     public function view(User $user, Transaction $transaction): bool
     {
         return $user->hasPermission(InventoryPermissions::VIEW_TRANSACTIONS) &&
-            $user->organizations->contains($transaction->store->organization_id);
+            $user->organizations->contains($transaction->store->organization->id);
     }
 
     public function create(User $user): bool
@@ -30,42 +30,42 @@ class TransactionPolicy
     public function update(User $user, Transaction $transaction): bool
     {
         // Can only update draft transactions
-        return $user->hasPermission(InventoryPermissions::EDIT_TRANSACTIONS) &&
-            $user->organizations->contains($transaction->store->organization_id) &&
-            $transaction->isDraft();
+        return $user->hasPermission(InventoryPermissions::EDIT_TRANSACTIONS, $transaction->store->organization) &&
+            $user->organizations->contains($transaction->store->organization->id) &&
+            $transaction->isDraft(); // ✅ Add this check
     }
 
     public function delete(User $user, Transaction $transaction): bool
     {
         // Can only delete draft transactions
         return $user->hasPermission(InventoryPermissions::DELETE_TRANSACTIONS) &&
-            $user->organizations->contains($transaction->store->organization_id) &&
+            $user->organizations->contains($transaction->store->organization->id) &&
             $transaction->isDraft();
     }
 
     public function finalize(User $user, Transaction $transaction): bool
     {
         return $user->hasPermission(InventoryPermissions::FINALIZE_TRANSACTIONS) &&
-            $user->organizations->contains($transaction->store->organization_id) &&
+            $user->organizations->contains($transaction->store->organization->id) &&
             $transaction->isDraft();
     }
 
     public function cancel(User $user, Transaction $transaction): bool
     {
         return $user->hasPermission(InventoryPermissions::CANCEL_TRANSACTIONS) &&
-            $user->organizations->contains($transaction->store->organization_id) &&
+            $user->organizations->contains($transaction->store->organization->id) &&
             !$transaction->isCancelled();
     }
 
     public function restore(User $user, Transaction $transaction): bool
     {
         return $user->hasPermission(InventoryPermissions::EDIT_TRANSACTIONS) &&
-            $user->organizations->contains($transaction->store->organization_id);
+            $user->organizations->contains($transaction->store->organization->id);
     }
 
     public function forceDelete(User $user, Transaction $transaction): bool
     {
         return $user->hasPermission(InventoryPermissions::DELETE_TRANSACTIONS) &&
-            $user->organizations->contains($transaction->store->organization_id);
+            $user->organizations->contains($transaction->store->organization->id);
     }
 }

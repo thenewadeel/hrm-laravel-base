@@ -9,6 +9,7 @@ use App\Models\Organization;
 use App\Models\OrganizationUnit;
 use App\Models\User;
 use App\Services\InventoryService;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Traits\SetupInventory;
 use Illuminate\Support\Facades\Artisan;
@@ -244,8 +245,9 @@ class InventoryServiceTest extends TestCase
             'notes' => 'Test'
         ]];
 
-        $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('Cannot modify finalized or cancelled transaction');
+        // ✅ Change to expect AuthorizationException instead of generic Exception
+        $this->expectException(AuthorizationException::class);
+        $this->expectExceptionMessage('This action is unauthorized.');
 
         $this->inventoryService->addItemsToTransaction($transaction, $items, $this->user);
     }
