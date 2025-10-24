@@ -1,0 +1,9 @@
+name,sku,description,category,unit,cost_price,selling_price,reorder_level
+Laptop - Dell XPS 13,ELEC-LTP-DLLXPS13,13-inch business laptop, 16GB RAM, 512GB SSD,Electronics,pcs,129900,159900,5
+Wireless Mouse,ELEC-MS-LGWT400,Logitech wireless mouse, 2.4GHz,Electronics,pcs,2500,4500,20
+USB-C Hub,ELEC-ACC-USBC7IN1,7-in-1 USB-C Hub with HDMI, USB 3.0, Ethernet,Electronics,pcs,3500,6500,15
+A4 Copy Paper,OFF-PAP-A4-500,A4 size copy paper, 500 sheets,Office Supplies,ream,1800,2800,10
+Ballpoint Pens - Blue,OFF-PEN-BP-BLUE-12,Pack of 12 blue ballpoint pens,Office Supplies,pack,600,1200,25
+Stapler Heavy Duty,OFF-STP-HD-01,Heavy duty office stapler,Office Supplies,pcs,1500,2800,8
+Office Chair - Executive,FURN-CHR-EXEC-BLK,Executive office chair, black,Furniture,pcs,25000,45000,3
+Meeting Table,FURN-TBL-MTG-6P,6-person meeting table, oak finish,Furniture,pcs,75000,120000,2

@@ -1,0 +1,15 @@
+code,name,type,description
+1001,Cash,asset,Cash on hand and in bank
+1002,Accounts Receivable,asset,Amounts owed by customers
+1003,Inventory,asset,Goods available for sale
+1004,Equipment,asset,Office and operational equipment
+2001,Accounts Payable,liability,Amounts owed to suppliers
+2002,Loans Payable,liability,Outstanding loans
+3001,Owner's Equity,equity,Owner investment in the business
+3002,Retained Earnings,equity,Accumulated profits
+4001,Sales Revenue,revenue,Revenue from product sales
+4002,Service Revenue,revenue,Revenue from services
+5001,Cost of Goods Sold,expense,Cost of inventory sold
+5002,Rent Expense,expense,Office and store rent
+5003,Salary Expense,expense,Employee salaries and wages
+5004,Utilities Expense,expense,Electricity, water, internet
