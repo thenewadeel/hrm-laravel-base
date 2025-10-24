@@ -13,6 +13,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Traits\SetupInventory;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class InventoryServiceTest extends TestCase
 {
@@ -48,7 +49,7 @@ class InventoryServiceTest extends TestCase
         $this->actingAs($this->user);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_create_a_store()
     {
         $storeData = [
@@ -68,7 +69,7 @@ class InventoryServiceTest extends TestCase
         $this->assertEquals($this->organizationUnit->id, $store->organization_unit_id);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_update_store_inventory()
     {
         $this->inventoryService->updateStoreInventory($this->store, $this->item, 100, $this->user);
@@ -80,7 +81,7 @@ class InventoryServiceTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_update_store_inventory_with_min_max_stock()
     {
         $this->inventoryService->updateStoreInventory(
@@ -101,7 +102,7 @@ class InventoryServiceTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_adjust_store_inventory()
     {
         // First set initial quantity
@@ -126,7 +127,7 @@ class InventoryServiceTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_create_and_finalize_transaction()
     {
         $transactionData = [
@@ -164,7 +165,7 @@ class InventoryServiceTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_cancel_transaction()
     {
         $transactionData = [
@@ -182,7 +183,7 @@ class InventoryServiceTest extends TestCase
         $this->assertEquals('cancelled', $transaction->status);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_store_stock_levels()
     {
         // Set up some inventory
@@ -203,7 +204,7 @@ class InventoryServiceTest extends TestCase
         $this->assertCount(2, $stockLevels['items']);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_item_availability()
     {
         // Create multiple stores and add items
@@ -226,7 +227,7 @@ class InventoryServiceTest extends TestCase
         $this->assertCount(2, $availability['availability']);
     }
 
-    /** @test */
+    #[Test]
     public function it_prevents_modifying_finalized_transaction()
     {
         $transaction = Transaction::factory()->create([
@@ -249,7 +250,7 @@ class InventoryServiceTest extends TestCase
         $this->inventoryService->addItemsToTransaction($transaction, $items, $this->user);
     }
 
-    /** @test */
+    #[Test]
     public function it_prevents_finalizing_transaction_with_no_items()
     {
         $transactionData = [
@@ -267,7 +268,7 @@ class InventoryServiceTest extends TestCase
         $this->inventoryService->finalizeTransaction($transaction, $this->user);
     }
 
-    /** @test */
+    #[Test]
     public function it_prevents_cancelling_finalized_transaction()
     {
         $transaction = Transaction::factory()->create([
@@ -283,7 +284,7 @@ class InventoryServiceTest extends TestCase
         $this->inventoryService->cancelTransaction($transaction, $this->user);
     }
 
-    /** @test */
+    #[Test]
     public function it_calculates_low_stock_correctly()
     {
         $lowStockItem = Item::factory()->create([
@@ -302,7 +303,7 @@ class InventoryServiceTest extends TestCase
         $this->assertEquals('low_stock', $lowStockItemData['status']);
     }
 
-    /** @test */
+    #[Test]
     public function it_calculates_overstock_correctly()
     {
         $itemWithMaxStock = Item::factory()->create([

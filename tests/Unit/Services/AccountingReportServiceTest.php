@@ -8,6 +8,7 @@ use App\Services\AccountingReportService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Carbon\Carbon;
+use PHPUnit\Framework\Attributes\Test;
 
 class AccountingReportServiceTest extends TestCase
 {
@@ -22,7 +23,7 @@ class AccountingReportServiceTest extends TestCase
         $this->service = new AccountingReportService();
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_a_correct_trial_balance()
     {
         // Arrange
@@ -43,7 +44,7 @@ class AccountingReportServiceTest extends TestCase
         $this->assertTrue($report['is_balanced']);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_a_correct_balance_sheet()
     {
         // Arrange

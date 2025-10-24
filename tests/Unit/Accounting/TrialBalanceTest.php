@@ -8,6 +8,7 @@ use App\Models\Accounting\LedgerEntry;
 use App\Services\AccountingReportService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class TrialBalanceTest extends TestCase
 {
@@ -21,7 +22,7 @@ class TrialBalanceTest extends TestCase
         $this->reportService = app(AccountingReportService::class);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_trial_balance_with_zero_entries()
     {
         $trialBalance = $this->reportService->generateTrialBalance();
@@ -31,7 +32,7 @@ class TrialBalanceTest extends TestCase
         $this->assertTrue($trialBalance['is_balanced']);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_trial_balance_with_balanced_entries()
     {
         $cashAccount = ChartOfAccount::factory()->create(['type' => 'asset', 'code' => '1010']);
@@ -57,10 +58,7 @@ class TrialBalanceTest extends TestCase
         $this->assertTrue($trialBalance['is_balanced']);
     }
 
-    /** @test */
-    /** @test */
-    /** @test */
-    /** @test */
+    #[Test]
     public function it_shows_account_balances_in_trial_balance()
     {
         $cashAccount = ChartOfAccount::factory()->create(['type' => 'asset', 'code' => '1010']);

@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Accounting\ChartOfAccount;
+use PHPUnit\Framework\Attributes\Test;
 
 class ChartOfAccountsApiTest extends TestCase
 {
@@ -22,7 +23,7 @@ class ChartOfAccountsApiTest extends TestCase
     }
 
 
-    /** @test */
+    #[Test]
     public function it_can_list_chart_of_accounts()
     {
         $accounts = ChartOfAccount::factory()->count(3)->create();
@@ -39,7 +40,7 @@ class ChartOfAccountsApiTest extends TestCase
             ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_create_a_chart_of_account()
     {
         $accountData = [
@@ -60,7 +61,7 @@ class ChartOfAccountsApiTest extends TestCase
         $this->assertDatabaseHas('chart_of_accounts', $accountData);
     }
 
-    /** @test */
+    #[Test]
     public function it_validates_account_creation()
     {
         $this->actingAs($this->user);
@@ -70,7 +71,7 @@ class ChartOfAccountsApiTest extends TestCase
             ->assertJsonValidationErrors(['code', 'name', 'type']);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_show_a_specific_account()
     {
         $account = ChartOfAccount::factory()->create();
@@ -88,7 +89,7 @@ class ChartOfAccountsApiTest extends TestCase
             ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_404_for_nonexistent_account()
     {
         $this->actingAs($this->user);

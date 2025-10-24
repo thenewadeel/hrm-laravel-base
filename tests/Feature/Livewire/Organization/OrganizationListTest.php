@@ -9,12 +9,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
 use Tests\Traits\SetupOrganization; // Updated namespace
+use PHPUnit\Framework\Attributes\Test;
 
 class OrganizationListTest extends TestCase
 {
     use RefreshDatabase, SetupOrganization;
 
-    /** @test */
+    #[Test]
     public function it_shows_organizations_list()
     {
         [$organization, $user] = $this->createOrganizationWithUser();
@@ -26,7 +27,7 @@ class OrganizationListTest extends TestCase
         // ->assertSee($organizations[2]->name);
     }
 
-    /** @test */
+    #[Test]
     public function it_searches_organizations_by_name()
     {
         [$organization, $user] = $this->createOrganizationWithUser();
@@ -40,7 +41,7 @@ class OrganizationListTest extends TestCase
             ->assertDontSee($org2->name);
     }
 
-    /** @test */
+    #[Test]
     public function it_sorts_organizations_by_name_ascending()
     {
         [$organization, $user] = $this->createOrganizationWithUser();
@@ -75,7 +76,7 @@ class OrganizationListTest extends TestCase
         $test->assertSeeInOrder([$orgC->name, $orgB->name, $orgA->name]);
     }
 
-    /** @test */
+    #[Test]
     public function it_sorts_organizations_by_name_descending()
     {
         [$organization, $user] = $this->createOrganizationWithUser();
@@ -91,7 +92,7 @@ class OrganizationListTest extends TestCase
             ->assertSeeInOrder([$orgA->name, $orgB->name, $orgC->name]);
     }
 
-    /** @test */
+    #[Test]
     public function it_sorts_organizations_by_status()
     {
         [$organization, $user] = $this->createOrganizationWithUser();
@@ -105,7 +106,7 @@ class OrganizationListTest extends TestCase
             ->assertSeeInOrder([$inactiveOrg->name, $activeOrg->name]); // Inactive first (false < true)
     }
 
-    /** @test */
+    #[Test]
     public function it_paginates_organizations()
     {
         [$organization, $user] = $this->createOrganizationWithUser();
@@ -132,7 +133,7 @@ class OrganizationListTest extends TestCase
         $this->assertEquals(5, $organizationsData->lastPage());
     }
 
-    /** @test */
+    #[Test]
     public function it_shows_empty_state_when_no_organizations()
     {
         // [$organization, $user] = $this->createOrganizationWithUser();

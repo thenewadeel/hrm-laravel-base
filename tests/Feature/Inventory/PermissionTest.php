@@ -6,12 +6,13 @@ use Tests\Traits\SetupInventory;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Roles\InventoryRoles;
+use PHPUnit\Framework\Attributes\Test;
 
 class PermissionTest extends TestCase
 {
     use RefreshDatabase, SetupInventory;
 
-    /** @test */
+    #[Test]
     public function inventory_admin_has_all_permissions()
     {
         $setup = $this->createUserWithInventoryPermissions();
@@ -30,7 +31,7 @@ class PermissionTest extends TestCase
             ->assertStatus(201);
     }
 
-    /** @test */
+    #[Test]
     public function store_manager_cannot_delete_stores()
     {
         $setup = $this->createStoreManager();
@@ -41,7 +42,7 @@ class PermissionTest extends TestCase
             ->assertStatus(403);
     }
 
-    /** @test */
+    #[Test]
     public function inventory_clerk_cannot_finalize_transactions()
     {
         $setup = $this->createInventoryClerk();
@@ -52,7 +53,7 @@ class PermissionTest extends TestCase
             ->assertStatus(403);
     }
 
-    /** @test */
+    #[Test]
     public function auditor_can_only_view_inventory()
     {
         $setup = $this->createAuditor();
@@ -66,7 +67,7 @@ class PermissionTest extends TestCase
             ->assertStatus(403);
     }
 
-    /** @test */
+    #[Test]
     public function user_cannot_access_other_organization_inventory()
     {
         // Create user with permissions in Organization A

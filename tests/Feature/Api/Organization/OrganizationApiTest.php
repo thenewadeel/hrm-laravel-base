@@ -10,6 +10,7 @@ use Illuminate\Log\Logger;
 use Illuminate\Support\Facades\App;
 use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
+use PHPUnit\Framework\Attributes\Test;
 
 class OrganizationApiTest extends TestCase
 {
@@ -23,7 +24,7 @@ class OrganizationApiTest extends TestCase
         $this->user = User::factory()->create();
     }
 
-    /** @test */
+    #[Test]
     public function can_create_organization()
     {
         $response = $this->actingAs($this->user)
@@ -45,7 +46,7 @@ class OrganizationApiTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function debug_factory_output()
     {
         $organizations = Organization::factory()->count(3)->create();
@@ -56,7 +57,7 @@ class OrganizationApiTest extends TestCase
         $this->assertTrue(true); // Dummy assertion
     }
 
-    /** @test */
+    #[Test]
     public function verify_organization_factory_works()
     {
         $organization = Organization::factory()->create();
@@ -71,7 +72,7 @@ class OrganizationApiTest extends TestCase
         $this->assertCount(3, $organizations);
     }
 
-    /** @test */
+    #[Test]
     public function can_list_organizations()
     {
         Organization::factory()->count(3)->create();
@@ -83,7 +84,7 @@ class OrganizationApiTest extends TestCase
             ->assertJsonCount(3, 'data');
     }
 
-    /** @test */
+    #[Test]
     public function can_show_organization()
     {
         $org = Organization::factory()->create();
@@ -100,7 +101,7 @@ class OrganizationApiTest extends TestCase
             ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_update_organization()
     {
         $org = Organization::factory()->create();
@@ -120,7 +121,7 @@ class OrganizationApiTest extends TestCase
             ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_delete_organization()
     {
         $org = Organization::factory()->create();
@@ -131,7 +132,7 @@ class OrganizationApiTest extends TestCase
         $response->assertStatus(204);
         $this->assertSoftDeleted($org);
     }
-    /** @test */
+    #[Test]
     public function guests_cannot_access_organizations()
     {
         $org = Organization::factory()->create();
@@ -152,7 +153,7 @@ class OrganizationApiTest extends TestCase
         $this->deleteJson("/api/organizations/{$org->id}")->assertUnauthorized();
     }
 
-    /** @test */
+    #[Test]
     public function name_is_required_for_creation()
     {
         $response = $this->actingAs($this->user)
@@ -164,7 +165,7 @@ class OrganizationApiTest extends TestCase
             ->assertJsonValidationErrors(['name']);
     }
 
-    /** @test */
+    #[Test]
     public function name_must_be_unique()
     {
         Organization::factory()->create(['name' => 'Existing Org']);
@@ -178,7 +179,7 @@ class OrganizationApiTest extends TestCase
             ->assertJsonValidationErrors(['name']);
     }
 
-    /** @test */
+    #[Test]
     public function user_can_view_their_organizations()
     {
         [$org, $user] = $this->createOrganizationWithUser();
@@ -194,7 +195,7 @@ class OrganizationApiTest extends TestCase
             ->assertJsonPath('data.0.id', $org->id)
         ;
     }
-    /** @test */
+    #[Test]
     public function organization_admin_can_list_members()
     {
         [$org, $admin] = $this->createOrganizationWithUser();
@@ -215,7 +216,7 @@ class OrganizationApiTest extends TestCase
             ->assertJsonFragment(['email' => $member->email]);
     }
 
-    /** @test */
+    #[Test]
     public function admin_can_invite_new_members()
     {
         [$org, $admin] = $this->createOrganizationWithUser();
@@ -245,7 +246,7 @@ class OrganizationApiTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function cannot_invite_existing_member()
     {
         [$org, $admin] = $this->createOrganizationWithUser();
@@ -262,7 +263,7 @@ class OrganizationApiTest extends TestCase
             ->assertJsonValidationErrors(['email']);
     }
 
-    /** @test */
+    #[Test]
     public function non_admin_cannot_invite_members()
     {
         [$org, $member] = $this->createOrganizationWithUser(null, $roles = ['member']);

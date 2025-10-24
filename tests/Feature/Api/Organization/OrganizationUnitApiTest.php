@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\OrganizationUnit;
 use Tests\TestCase;
 use tests\Traits\SetupOrganization;
+use PHPUnit\Framework\Attributes\Test;
 
 class OrganizationUnitApiTest extends TestCase
 {
@@ -24,7 +25,7 @@ class OrganizationUnitApiTest extends TestCase
 
 
 
-    /** @test */
+    #[Test]
     public function can_create_organization_unit()
     {
         [$organization, $admin] = $this->createOrganizationWithUser();
@@ -50,7 +51,7 @@ class OrganizationUnitApiTest extends TestCase
             ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_create_nested_unit()
     {
         [$organization, $admin] = $this->createOrganizationWithUser();
@@ -69,7 +70,7 @@ class OrganizationUnitApiTest extends TestCase
             ->assertJsonPath('data.parent_id', $parentUnit->id);
     }
 
-    /** @test */
+    #[Test]
     public function can_get_unit_hierarchy()
     {
         [$organization, $admin] = $this->createOrganizationWithUser();
@@ -86,7 +87,7 @@ class OrganizationUnitApiTest extends TestCase
     }
 
 
-    /** @test */
+    #[Test]
     public function can_assign_user_to_unit()
     {
         [$org, $admin] = $this->createOrganizationWithUser();
@@ -109,7 +110,7 @@ class OrganizationUnitApiTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_list_users_by_organization_unit()
     {
         [$org, $admin] = $this->createOrganizationWithUser();
@@ -142,7 +143,7 @@ class OrganizationUnitApiTest extends TestCase
             ->assertJsonCount(2, 'data'); // Should return both direct and nested members
     }
 
-    /** @test */
+    #[Test]
     public function cannot_create_organization_unit_as_non_admin()
     {
         [$organization, $regularUser] = $this->createOrganizationWithUser(roles: ['user']);
@@ -156,7 +157,7 @@ class OrganizationUnitApiTest extends TestCase
         $response->assertStatus(403);
     }
 
-    /** @test */
+    #[Test]
     public function cannot_assign_user_as_non_admin()
     {
         [$org, $regularUser] = $this->createOrganizationWithUser(roles: ['user']);
@@ -172,7 +173,7 @@ class OrganizationUnitApiTest extends TestCase
         $response->assertStatus(403);
     }
 
-    /** @test */
+    #[Test]
     public function cannot_create_unit_with_invalid_data()
     {
         [$organization, $admin] = $this->createOrganizationWithUser();
@@ -185,7 +186,7 @@ class OrganizationUnitApiTest extends TestCase
         $response->assertStatus(422);
     }
 
-    /** @test */
+    #[Test]
     public function cannot_assign_non_existent_user_to_unit()
     {
         [$org, $admin] = $this->createOrganizationWithUser();
@@ -200,7 +201,7 @@ class OrganizationUnitApiTest extends TestCase
         $response->assertStatus(422);
     }
 
-    /** @test */
+    #[Test]
     public function cannot_assign_user_not_in_organization()
     {
         [$org, $admin] = $this->createOrganizationWithUser();
@@ -216,7 +217,7 @@ class OrganizationUnitApiTest extends TestCase
         $response->assertStatus(422);
     }
 
-    /** @test */
+    #[Test]
     public function cannot_get_hierarchy_for_non_existent_unit()
     {
         [$org, $admin] = $this->createOrganizationWithUser();
@@ -227,7 +228,7 @@ class OrganizationUnitApiTest extends TestCase
         $response->assertStatus(404);
     }
 
-    /** @test */
+    #[Test]
     public function can_get_hierarchy_for_unit_with_no_children()
     {
         [$organization, $admin] = $this->createOrganizationWithUser();

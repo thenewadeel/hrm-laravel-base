@@ -9,12 +9,13 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class MemberManagerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_can_display_a_list_of_organization_members()
     {
         // Arrange
@@ -30,7 +31,7 @@ class MemberManagerTest extends TestCase
             ->assertSee($user2->name);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_search_for_members_by_name_or_email()
     {
         // Arrange

@@ -7,12 +7,13 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class UserPlacementTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_can_assign_a_user_to_a_unit()
     {
         // Arrange
@@ -33,7 +34,7 @@ class UserPlacementTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_unassign_a_user_by_dropping_them_onto_the_root()
     {
         // Arrange

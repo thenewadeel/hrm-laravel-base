@@ -8,6 +8,7 @@ use App\Models\Accounting\LedgerEntry;
 use App\Services\AccountingReportService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class IncomeStatementTest extends TestCase
 {
@@ -21,7 +22,7 @@ class IncomeStatementTest extends TestCase
         $this->reportService = app(AccountingReportService::class);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_income_statement_with_no_transactions()
     {
         $startDate = now()->subMonth();
@@ -34,8 +35,7 @@ class IncomeStatementTest extends TestCase
         $this->assertEquals(0, $incomeStatement['net_income']);
     }
 
-    /** @test */
-    /** @test */
+    #[Test]
     public function it_generates_income_statement_with_revenue_and_expenses()
     {
         $revenueAccount = ChartOfAccount::factory()->create(['type' => 'revenue', 'code' => '4010', 'name' => 'Sales Revenue']);
@@ -82,8 +82,7 @@ class IncomeStatementTest extends TestCase
         $this->assertEquals(2000.00, $incomeStatement['net_income']); // 10000 - 8000
     }
 
-    /** @test */
-    /** @test */
+    #[Test]
     public function it_excludes_transactions_outside_date_range()
     {
         $revenueAccount = ChartOfAccount::factory()->create(['type' => 'revenue']);

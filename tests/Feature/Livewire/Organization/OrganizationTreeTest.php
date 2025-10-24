@@ -7,12 +7,13 @@ use App\Models\OrganizationUnit;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class OrganizationTreeTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_can_display_the_organization_tree()
     {
         // 1. Arrange: Create a sample organization tree structure.
@@ -30,7 +31,7 @@ class OrganizationTreeTest extends TestCase
             ->assertSee($child2->name);
     }
 
-    /** @test */
+    #[Test]
     public function an_organization_unit_can_be_dragged_and_dropped_to_another_parent()
     {
         // 1. Arrange: Create a sample organization tree.
@@ -51,7 +52,7 @@ class OrganizationTreeTest extends TestCase
     }
 
 
-    /** @test */
+    #[Test]
     public function an_organizational_unit_cannot_be_dropped_onto_itself()
     {
         // Arrange
@@ -65,7 +66,7 @@ class OrganizationTreeTest extends TestCase
         $this->assertEquals(null, $unit->fresh()->parent_id);
     }
 
-    /** @test */
+    #[Test]
     public function an_organizational_unit_can_be_dropped_as_a_root_node()
     {
         // Arrange
@@ -80,7 +81,7 @@ class OrganizationTreeTest extends TestCase
         $this->assertEquals(null, $child->fresh()->parent_id);
     }
 
-    /** @test */
+    #[Test]
     public function a_parent_cannot_be_dropped_onto_one_of_its_descendants()
     {
         // Arrange
@@ -96,7 +97,7 @@ class OrganizationTreeTest extends TestCase
         $this->assertEquals(null, $grandparent->fresh()->parent_id);
     }
 
-    /** @test */
+    #[Test]
     public function a_sibling_can_be_dropped_under_another_sibling()
     {
         // Arrange
@@ -112,7 +113,7 @@ class OrganizationTreeTest extends TestCase
         $this->assertEquals($siblingA->id, $siblingB->fresh()->parent_id);
     }
 
-    /** @test */
+    #[Test]
     public function an_empty_tree_renders_correctly()
     {
         // Arrange: No units in the database
@@ -123,7 +124,7 @@ class OrganizationTreeTest extends TestCase
             ->assertSee('No organizational units found.');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_handle_a_large_number_of_units_without_crashing()
     {
         // Arrange
@@ -134,7 +135,7 @@ class OrganizationTreeTest extends TestCase
             ->assertOk();
     }
 
-    /** @test */
+    #[Test]
     public function a_dropped_unit_that_does_not_exist_does_not_cause_an_error()
     {
         // Arrange

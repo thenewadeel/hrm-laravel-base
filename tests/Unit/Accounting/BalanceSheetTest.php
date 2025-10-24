@@ -8,6 +8,7 @@ use App\Models\Accounting\LedgerEntry;
 use App\Services\AccountingReportService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class BalanceSheetTest extends TestCase
 {
@@ -21,7 +22,7 @@ class BalanceSheetTest extends TestCase
         $this->reportService = app(AccountingReportService::class);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_balance_sheet_with_no_transactions()
     {
         $balanceSheet = $this->reportService->generateBalanceSheet(now());
@@ -32,7 +33,7 @@ class BalanceSheetTest extends TestCase
         $this->assertTrue($balanceSheet['is_balanced']);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_balanced_balance_sheet()
     {
         // Create accounts
@@ -63,8 +64,7 @@ class BalanceSheetTest extends TestCase
         $this->assertTrue($balanceSheet['is_balanced']);
     }
 
-    /** @test */
-    /** @test */
+    #[Test]
     public function it_includes_retained_earnings_from_income_statement()
     {
         // Create equity account for retained earnings

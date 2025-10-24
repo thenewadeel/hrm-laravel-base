@@ -6,12 +6,13 @@ use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\LedgerEntry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class ChartOfAccountTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_has_a_code_name_and_type()
     {
         // Arrange & Act
@@ -27,7 +28,7 @@ class ChartOfAccountTest extends TestCase
         $this->assertEquals('asset', $account->type);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_scope_accounts_by_type()
     {
         // Arrange
@@ -45,7 +46,7 @@ class ChartOfAccountTest extends TestCase
         $this->assertTrue($assetAccounts->every(fn($account) => $account->type === 'asset'));
     }
 
-    /** @test */
+    #[Test]
     public function account_code_must_be_unique()
     {
         // Arrange
@@ -56,8 +57,7 @@ class ChartOfAccountTest extends TestCase
         ChartOfAccount::factory()->create(['code' => '1010']);
     }
 
-    /** @test */
-    /** @test */
+    #[Test]
     public function it_can_calculate_its_current_balance()
     {
         $account = ChartOfAccount::factory()->create(['type' => 'asset']);

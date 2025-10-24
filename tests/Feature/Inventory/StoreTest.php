@@ -7,12 +7,13 @@ use App\Models\Inventory\Store;
 use Tests\Traits\SetupInventory;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 
 class StoreTest extends TestCase
 {
     use RefreshDatabase, SetupInventory;
 
-    /** @test */
+    #[Test]
     public function it_can_create_a_store()
     {
         $setup = $this->createInventorySetup();
@@ -41,7 +42,7 @@ class StoreTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_items_to_store()
     {
         $setup = $this->createInventorySetup();
@@ -61,7 +62,7 @@ class StoreTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_retrieve_store_with_items()
     {
         $setup = $this->createInventorySetup();
@@ -92,7 +93,7 @@ class StoreTest extends TestCase
             ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_update_item_quantity_in_store()
     {
         $setup = $this->createInventorySetup();
@@ -114,7 +115,7 @@ class StoreTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_list_all_stores_for_organization()
     {
         $setup = $this->createMultipleStoresWithInventory();
@@ -137,7 +138,7 @@ class StoreTest extends TestCase
                 ]
             ]);
     }
-    /** @test */
+    #[Test]
     public function it_can_use_organization_scope()
     {
         $setup = $this->createMultipleStoresWithInventory();
@@ -147,7 +148,7 @@ class StoreTest extends TestCase
         $this->assertCount(3, $stores);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_use_search_scope()
     {
         $setup = $this->createInventorySetup();
@@ -167,7 +168,7 @@ class StoreTest extends TestCase
         $this->assertEquals('WH-MAIN', $results->first()->code);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_use_active_scope()
     {
         $setup = $this->createInventorySetup();

@@ -6,13 +6,13 @@ use App\Models\Inventory\Item;
 use Tests\Traits\SetupInventory;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 
 class ItemTest extends TestCase
 {
     use RefreshDatabase, SetupInventory;
 
-    /** @test */
-    /** @test */
+    #[Test]
     public function it_can_create_an_item()
     {
         $setup = $this->createUserWithInventoryPermissions();
@@ -46,7 +46,7 @@ class ItemTest extends TestCase
     }
 
 
-    /** @test */
+    #[Test]
     public function it_can_search_items_by_name_or_sku()
     {
         $setup = $this->createUserWithInventoryPermissions();
@@ -83,7 +83,7 @@ class ItemTest extends TestCase
             ->assertJsonFragment(['sku' => 'WM-004']);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_filter_items_by_category()
     {
         $setup = $this->createUserWithInventoryPermissions();
@@ -109,7 +109,7 @@ class ItemTest extends TestCase
             ->assertJsonMissing(['name' => 'Office Chair']);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_sort_items()
     {
         $setup = $this->createUserWithInventoryPermissions();
@@ -146,7 +146,7 @@ class ItemTest extends TestCase
         $this->assertEquals('Alpha Item', $data[2]['name']);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_only_items_from_users_organization()
     {
         $setupA = $this->createUserWithInventoryPermissions();
@@ -173,7 +173,7 @@ class ItemTest extends TestCase
             ->assertJsonMissing(['name' => 'Org B Item']);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_item_availability_across_stores()
     {
         $setup = $this->createUserWithInventoryPermissions();
@@ -242,7 +242,7 @@ class ItemTest extends TestCase
             ->assertJsonPath('data.summary.out_of_stock_stores', 1);
     }
 
-    /** @test */
+    #[Test]
     public function it_shows_low_stock_status_correctly()
     {
         $setup = $this->createUserWithInventoryPermissions();
@@ -265,7 +265,7 @@ class ItemTest extends TestCase
             ->assertJsonPath('data.availability.0.quantity', 15);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_403_for_unauthorized_access()
     {
         $setupA = $this->createUserWithInventoryPermissions();
@@ -283,7 +283,7 @@ class ItemTest extends TestCase
         $response->assertStatus(403);
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_item_with_no_stores()
     {
         $setup = $this->createUserWithInventoryPermissions();
