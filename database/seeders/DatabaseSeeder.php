@@ -21,22 +21,23 @@ class DatabaseSeeder extends Seeder
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ]);
 
+        if (app()->environment('debug')) {
+            $this->call([
+                // Organizational structure
+                CsvOrganizationsSeeder::class,
+                CsvOrganizationUnitsSeeder::class,
+                CsvUsersSeeder::class,
 
-        $this->call([
-            // Organizational structure
-            CsvOrganizationsSeeder::class,
-            CsvOrganizationUnitsSeeder::class,
-            CsvUsersSeeder::class,
+                // CSV-based seeders
+                CsvChartOfAccountsSeeder::class,
+                CsvDimensionsSeeder::class,
+                CsvSampleTransactionsSeeder::class,
 
-            // CSV-based seeders
-            CsvChartOfAccountsSeeder::class,
-            CsvDimensionsSeeder::class,
-            CsvSampleTransactionsSeeder::class,
-
-            // Factory-based seeders (for testing)
-            // ChartOfAccountsSeeder::class, // Keep your existing factory seeder
-            // DimensionsSeeder::class,
-            // SampleTransactionsSeeder::class,
-        ]);
+                // Factory-based seeders (for testing)
+                // ChartOfAccountsSeeder::class, // Keep your existing factory seeder
+                // DimensionsSeeder::class,
+                // SampleTransactionsSeeder::class,
+            ]);
+        }
     }
 }
