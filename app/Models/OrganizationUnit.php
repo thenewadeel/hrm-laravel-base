@@ -20,7 +20,7 @@ class OrganizationUnit extends Model
         'name',
         'type',
         'parent_id',
-        'depth',
+        'organization_id',
         'custom_fields',
     ];
 

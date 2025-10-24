@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Organization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +20,10 @@ class OrganizationUnitFactory extends Factory
         return [
             'name' => $this->faker->company(),
             'type' => $this->faker->randomElement(['department', 'division', 'team']),
+            'organization_id' => Organization::first()?->id ?? Organization::factory(),
+            'parent_id' => null,
+            'custom_fields' => null,
+
             'created_at' => now(),
             'updated_at' => now(),
         ];
