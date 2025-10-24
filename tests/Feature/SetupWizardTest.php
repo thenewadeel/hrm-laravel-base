@@ -1,0 +1,103 @@
+<?php
+// tests/Feature/SetupWizardTest.php
+
+namespace Tests\Feature;
+
+use App\Models\User;
+use App\Models\Organization;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
+
+class SetupWizardTest extends TestCase
+{
+    use RefreshDatabase;
+
+    #[Test]
+    public function it_shows_setup_wizard_for_new_users()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)
+            ->get('/setup');
+
+        $response->assertStatus(200)
+            ->assertSee('Welcome');
+    }
+
+    #[Test]
+    public function it_redirects_to_dashboard_if_organization_exists()
+    {
+        $user = User::factory()->create();
+        $organization = Organization::factory()->create();
+
+        $user->organizations()->attach($organization->id, [
+            'roles' => json_encode(['admin']),
+            'organization_unit_id' => null
+        ]);
+
+        $response = $this->actingAs($user)
+            ->get('/setup');
+
+        $response->assertRedirect('/dashboard');
+    }
+
+    #[Test]
+    public function it_can_create_organization_through_wizard()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)
+            ->post('/setup/organization', [
+                'name' => 'Test Organization',
+                // Remove 'type' since organizations table doesn't have it
+            ]);
+
+        $response->assertRedirect('/dashboard');
+        $this->assertDatabaseHas('organizations', [
+            'name' => 'Test Organization',
+            'is_active' => true,
+        ]);
+    }
+
+    #[Test]
+    public function it_validates_organization_creation()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)
+            ->post('/setup/organization', []);
+
+        $response->assertSessionHasErrors(['name']); // Only name is required now
+    }
+
+    #[Test]
+    public function it_assigns_admin_role_to_creator()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user)
+            ->post('/setup/organization', [
+                'name' => 'Test Org',
+            ]);
+
+        $organization = $user->organizations()->first();
+        $this->assertNotNull($organization);
+        $this->assertEquals('Test Org', $organization->name);
+
+        // Debug: Check what organization units exist
+        // $allUnits = \App\Models\OrganizationUnit::all();
+        // dump($allUnits->toArray());
+
+        // Check the pivot data
+        $pivot = $user->organizations()->first()->pivot;
+        $this->assertEquals(['admin'], json_decode($pivot->roles, true));
+
+        // Check that organization unit was created with correct organization_id
+        $this->assertDatabaseHas('organization_units', [
+            'name' => 'Head Office',
+            'organization_id' => $organization->id,
+            'type' => 'head_office',
+        ]);
+    }
+}

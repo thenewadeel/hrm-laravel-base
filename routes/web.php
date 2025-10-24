@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\SetupController;
 use App\Http\Livewire\Organization\OrganizationList;
 use App\Services\AccountingReportService;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,24 @@ Route::middleware([
 
 // routes/web.php
 Route::middleware(['auth', 'verified'])->group(function () {
+    // Setup Wizard Routes
+    Route::get('/setup', function () {
+        // Check if user already has organization using the relationship
+        $user = auth()->user();
+
+        if ($user->organizations()->count() > 0) {
+            return redirect('/dashboard');
+        }
+
+        return view('setup.welcome');
+    })->name('setup.welcome');
+
+
+    Route::post('/setup/organization', [SetupController::class, 'storeOrganization'])
+        ->name('setup.organization.store');
+
+
+
     // Company routes
     // Route::livewire(['/organizations', OrganizationList::class])->name('organizations.index');
     Route::get('/organizations', [OrganizationController::class, 'index'])->name('organizations.index');
@@ -53,6 +72,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 // Temporary debug routes
 Route::group(['prefix' => 'debug'], function () {
+    Route::get('/orgs', function () {
+        $user = auth()->user();
+        return [
+            'user_id' => $user->id,
+            'org_count' => $user->organizations()->count(),
+            'orgs' => $user->organizations->pluck('id')
+        ];
+    });
     Route::get('api-config', function () {
         return response()->json([
             'app_url' => config('app.url'),
