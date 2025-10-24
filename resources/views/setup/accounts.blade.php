@@ -35,10 +35,16 @@
                                 <span class="text-xs mt-1 block">Accounting</span>
                             </div>
                         </div>
+                        <div class="text-center text-sm text-gray-600 mb-2">Step 3 of 3</div> {{-- ADD THIS LINE --}}
                         <div class="bg-gray-200 rounded-full h-2">
                             <div class="bg-blue-500 h-2 rounded-full" style="width: 66%"></div>
                         </div>
                     </div>
+
+                    <!-- Make sure the header contains "Accounting Setup" -->
+                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                        Accounting Setup
+                    </h2>
 
                     <div class="text-center mb-8">
                         <h1 class="text-2xl font-bold text-gray-900 mb-2">

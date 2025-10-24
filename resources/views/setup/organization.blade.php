@@ -35,6 +35,7 @@
                                 <span class="text-xs mt-1 block">Accounting</span>
                             </div>
                         </div>
+                        <div class="text-center text-sm text-gray-600 mb-2">Step 1 of 3</div> {{-- ADD THIS LINE --}}
                         <div class="bg-gray-200 rounded-full h-2">
                             <div class="bg-blue-500 h-2 rounded-full" style="width: 0%"></div>
                         </div>

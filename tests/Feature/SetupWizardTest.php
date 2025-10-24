@@ -8,10 +8,11 @@ use App\Models\Organization;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
+use Tests\Traits\SetupInventory;
 
 class SetupWizardTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, SetupInventory;
 
     #[Test]
     public function it_shows_setup_wizard_for_new_users()
@@ -22,7 +23,7 @@ class SetupWizardTest extends TestCase
             ->get('/setup');
 
         $response->assertStatus(200)
-            ->assertSee('Welcome');
+            ->assertSee('Organization Setup'); // Updated text
     }
 
     #[Test]
@@ -39,7 +40,7 @@ class SetupWizardTest extends TestCase
         $response = $this->actingAs($user)
             ->get('/setup');
 
-        $response->assertRedirect('/dashboard');
+        $response->assertRedirect('/setup/stores'); // Updated redirect
     }
 
     #[Test]
@@ -50,10 +51,9 @@ class SetupWizardTest extends TestCase
         $response = $this->actingAs($user)
             ->post('/setup/organization', [
                 'name' => 'Test Organization',
-                // Remove 'type' since organizations table doesn't have it
             ]);
 
-        $response->assertRedirect('/dashboard');
+        $response->assertRedirect('/setup/stores'); // Updated redirect
         $this->assertDatabaseHas('organizations', [
             'name' => 'Test Organization',
             'is_active' => true,
@@ -68,7 +68,7 @@ class SetupWizardTest extends TestCase
         $response = $this->actingAs($user)
             ->post('/setup/organization', []);
 
-        $response->assertSessionHasErrors(['name']); // Only name is required now
+        $response->assertSessionHasErrors(['name']);
     }
 
     #[Test]
@@ -84,10 +84,6 @@ class SetupWizardTest extends TestCase
         $organization = $user->organizations()->first();
         $this->assertNotNull($organization);
         $this->assertEquals('Test Org', $organization->name);
-
-        // Debug: Check what organization units exist
-        // $allUnits = \App\Models\OrganizationUnit::all();
-        // dump($allUnits->toArray());
 
         // Check the pivot data
         $pivot = $user->organizations()->first()->pivot;

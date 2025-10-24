@@ -7,12 +7,15 @@ use App\Models\User;
 use App\Models\Organization;
 use App\Models\Inventory\Store;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupInventory;
 
 class SetupStoreTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, SetupInventory;
+
 
     #[Test]
     public function it_creates_first_store_for_organization()
@@ -32,11 +35,12 @@ class SetupStoreTest extends TestCase
             ]);
 
         $response->assertRedirect();
-        $this->assertDatabaseHas('inventory_stores', [
-            'name' => 'Main Store',
-            'organization_id' => $organization->id,
-            'code' => 'STORE001',
-        ]);
+
+        // Use where() instead of assertDatabaseHas
+        $store = Store::where('name', 'Main Store')->first();
+        $this->assertNotNull($store);
+        $this->assertEquals($organization->id, $store->organization->id);
+        $this->assertEquals('STORE001', $store->code);
     }
 
     #[Test]
@@ -72,12 +76,10 @@ class SetupStoreTest extends TestCase
                 // No code provided
             ]);
 
-        $this->assertDatabaseHas('inventory_stores', [
-            'name' => 'Main Store',
-            'organization_id' => $organization->id,
-        ]);
-
-        $store = Store::first();
+        // Use where() instead of assertDatabaseHas
+        $store = Store::where('name', 'Main Store')->first();
+        $this->assertNotNull($store);
+        $this->assertEquals($organization->id, $store->organization->id);
         $this->assertNotNull($store->code);
     }
 }

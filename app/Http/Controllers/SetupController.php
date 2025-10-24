@@ -86,6 +86,8 @@ class SetupController extends Controller
         return redirect('/setup/accounts');
     }
 
+    // app/Http/Controllers/SetupController.php - Fix the storeAccounts method
+
     public function storeAccounts(Request $request)
     {
         $user = auth()->user();
@@ -101,12 +103,16 @@ class SetupController extends Controller
             }
 
             // Create accounting department organization unit
+            $headOffice = $organization->units()->where('name', 'Head Office')->first();
+
+            // if ($headOffice) {
             OrganizationUnit::create([
                 'name' => 'Accounting Department',
                 'type' => 'department',
                 'organization_id' => $organization->id,
-                'parent_id' => $organization->units()->where('name', 'Head Office')->first()->id,
+                'parent_id' => $headOffice ? $headOffice->id : null,
             ]);
+            // }
         });
 
         return redirect('/dashboard')->with('success', 'Setup completed successfully!');
