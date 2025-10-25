@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Builder;
+use App\Models\Inventory\Store; // Assuming Store model location
+use App\Models\Inventory\Head;   // Assuming Head model location
+use App\Models\Inventory\TransactionItem; // Assuming TransactionItem model location
 use App\Models\Traits\BelongsToOrganization;
 
 class Item extends Model
@@ -40,6 +44,17 @@ class Item extends Model
         'is_active' => 'boolean'
     ];
 
+    // ------------------------------------------------------------------------------------------------
+    // APPENDED ATTRIBUTES
+    // ------------------------------------------------------------------------------------------------
+
+    // Add 'total_quantity' to be automatically included in array/JSON form
+    protected $appends = ['total_quantity', 'formatted_selling_price'];
+
+    // ------------------------------------------------------------------------------------------------
+    // RELATIONS
+    // ------------------------------------------------------------------------------------------------
+
     // public function organization(): BelongsTo
     // {
     //     return $this->belongsTo(Organization::class);
@@ -59,10 +74,111 @@ class Item extends Model
         return $this->hasMany(TransactionItem::class);
     }
 
-    public function getTotalQuantityAttribute()
+    // ------------------------------------------------------------------------------------------------
+    // ACCESSORS (Getters)
+    // ------------------------------------------------------------------------------------------------
+
+    /**
+     * Accessor for the total quantity across all stores.
+     * (Existing one, kept for context, note the modern naming convention: get{Attribute}Attribute)
+     *
+     * @return int
+     */
+    public function getTotalQuantityAttribute(): int
     {
-        return $this->stores->sum('pivot.quantity');
+        // Ensure you load the stores relation before calling this or use $item->load('stores')->total_quantity
+        // It's safer to use a sum query if 'stores' isn't always loaded:
+        // return $this->stores()->sum('inventory_store_items.quantity');
+        return (int) $this->stores->sum('pivot.quantity');
     }
+
+    /**
+     * Accessor to get the selling price formatted as currency.
+     *
+     * @return string
+     */
+    public function getFormattedSellingPriceAttribute(): string
+    {
+        // Assuming US dollar formatting, adjust as needed (e.g., using a localization package)
+        return number_format($this->selling_price, 2) . ' PKR';
+    }
+
+    // ------------------------------------------------------------------------------------------------
+    // MUTATORS (Setters)
+    // ------------------------------------------------------------------------------------------------
+
+    /**
+     * Mutator to ensure the SKU is always stored in uppercase.
+     *
+     * @param string $value
+     * @return void
+     */
+    public function setSkuAttribute(string $value): void
+    {
+        $this->attributes['sku'] = strtoupper($value);
+    }
+
+    // ------------------------------------------------------------------------------------------------
+    // LOCAL SCOPES
+    // ------------------------------------------------------------------------------------------------
+
+    /**
+     * Scope a query to only include active items.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->where('is_active', true);
+    }
+
+    /**
+     * Scope a query to include items that need reordering (quantity is below reorder_level).
+     * This requires a JOIN to the pivot table and aggregation, making it a bit complex for a simple scope.
+     * A simpler version scopes based on the item's `reorder_level` column.
+     *
+     * For a simple check based on the model's reorder_level being set:
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeNeedsAttention(Builder $query): Builder
+    {
+        // This targets items where the 'reorder_level' field is set to a positive number.
+        return $query->where('reorder_level', '>', 0);
+
+        /*
+        // A more complex, accurate scope requires checking total stock against the reorder_level:
+        return $query->select('inventory_items.*')
+            ->leftJoin('inventory_store_items', 'inventory_items.id', '=', 'inventory_store_items.item_id')
+            ->groupBy('inventory_items.id')
+            ->havingRaw('COALESCE(SUM(inventory_store_items.quantity), 0) < inventory_items.reorder_level');
+        */
+    }
+
+    /**
+     * Scope a query to filter by a specific category.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $category
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfCategory(Builder $query, string $category): Builder
+    {
+        return $query->where('category', $category);
+    }
+
+    public function scopeOfHead(Builder $query, string $head): Builder
+    {
+        return $query->where('head_id', $head);
+    }
+    public function scopeOfOrganization(Builder $query, string $organization): Builder
+    {
+        return $query->where('organization_id', $organization);
+    }
+    // ------------------------------------------------------------------------------------------------
+    // FACTORY
+    // ------------------------------------------------------------------------------------------------
 
     protected static function newFactory()
     {
