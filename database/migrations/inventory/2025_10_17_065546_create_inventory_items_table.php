@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('inventory_items', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('organization_id')->constrained()->onDelete('cascade');
+            $table->foreignId('organization_id')->constrained('organizations')->onDelete('cascade');
             $table->string('name');
             $table->string('sku')->unique();
             $table->text('description')->nullable();
@@ -22,7 +22,6 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
 
             $table->foreignId('head_id')->nullable()->constrained('inventory_heads')->nullOnDelete();
-            $table->foreignId('organization_id')->constrained('organizations')->onDelete('cascade');
             // $table->string('code')->nullable();
             //    $table->decimal('balance', 8, 2);
             // $table->foreignId('item_id');

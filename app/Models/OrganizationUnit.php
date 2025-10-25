@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Inventory\Store;
 use App\Models\Organization;
+use App\Models\Traits\BelongsToOrganization;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OrganizationUnit extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, BelongsToOrganization;
     protected $casts = [
         'custom_fields' => 'array',
     ];
@@ -24,10 +25,10 @@ class OrganizationUnit extends Model
         'custom_fields',
     ];
 
-    public function organization()
-    {
-        return $this->belongsTo(Organization::class);
-    }
+    // public function organization()
+    // {
+    //     return $this->belongsTo(Organization::class);
+    // }
 
     public function parent()
     {

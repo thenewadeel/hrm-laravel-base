@@ -14,11 +14,15 @@ return new class extends Migration
         // In the migration file
         Schema::create('chart_of_accounts', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
+            $table->foreignId('organization_id')->constrained('organizations');
+            $table->string('code');
             $table->string('name');
             $table->enum('type', ['asset', 'liability', 'equity', 'revenue', 'expense']);
             $table->text('description')->nullable();
             $table->timestamps();
+
+            // Ensures that the 'code' is unique only within a specific 'organization_id'.
+            $table->unique(['organization_id', 'code']);
         });
     }
 

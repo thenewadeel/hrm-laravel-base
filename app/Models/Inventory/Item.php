@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Models\Traits\BelongsToOrganization;
 
 class Item extends Model
 {
-    use HasFactory;
+    use HasFactory, BelongsToOrganization;
     /**
      * The table associated with the model.
      *
@@ -39,10 +40,10 @@ class Item extends Model
         'is_active' => 'boolean'
     ];
 
-    public function organization(): BelongsTo
-    {
-        return $this->belongsTo(Organization::class);
-    }
+    // public function organization(): BelongsTo
+    // {
+    //     return $this->belongsTo(Organization::class);
+    // }
     public function stores(): BelongsToMany
     {
         return $this->belongsToMany(Store::class, 'inventory_store_items')

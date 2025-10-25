@@ -198,7 +198,7 @@ class DemoOrganizationSeeder extends Seeder
                 'name' => $accountData['name'],
                 'type' => $accountData['type'],
                 'description' => $accountData['description'],
-                // 'organization_id' => $organization->id,
+                'organization_id' => $organization->id,
             ]);
         }
 
