@@ -1,241 +1,188 @@
 
-   WARN  Metadata found in doc-comment for method Tests\Unit\AccountingReportServiceTest::it_generates_a_correct_trial_balance(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\AccountingReportServiceTest::it_generates_a_correct_balance_sheet(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\ChartOfAccountsApiTest::it_can_list_chart_of_accounts(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\ChartOfAccountsApiTest::it_can_create_a_chart_of_account(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\ChartOfAccountsApiTest::it_validates_account_creation(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\ChartOfAccountsApiTest::it_can_show_a_specific_account(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\ChartOfAccountsApiTest::it_returns_404_for_nonexistent_account(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\FinancialReportsApiTest::it_can_generate_trial_balance(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\FinancialReportsApiTest::it_can_generate_balance_sheet(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\FinancialReportsApiTest::it_can_generate_income_statement(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\FinancialReportsApiTest::it_validates_income_statement_date_range(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\FinancialReportsApiTest::it_rejects_end_date_before_start_date(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\JournalEntriesApiTest::it_can_create_a_journal_entry(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\JournalEntriesApiTest::it_validates_journal_entry_balances(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Api\Accounting\JournalEntriesApiTest::it_can_post_a_journal_entry(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Accounting\ChartOfAccountsTest::it_displays_a_list_of_chart_of_accounts(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Accounting\ChartOfAccountsTest::it_can_create_a_new_chart_of_account_record(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Accounting\ChartOfAccountsTest::it_can_update_an_existing_chart_of_account_record(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\MemberManagerTest::it_can_display_a_list_of_organization_members(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\MemberManagerTest::it_can_search_for_members_by_name_or_email(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationFormTest::it_shows_create_form(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationFormTest::it_shows_edit_form(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationFormTest::it_creates_new_organization(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationFormTest::it_updates_existing_organization(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationFormTest::it_validates_required_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationFormTest::it_validates_unique_name(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationFormTest::it_closes_modal(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationListTest::it_shows_organizations_list(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationListTest::it_searches_organizations_by_name(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationListTest::it_sorts_organizations_by_name_ascending(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationListTest::it_sorts_organizations_by_name_descending(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationListTest::it_sorts_organizations_by_status(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationListTest::it_paginates_organizations(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationListTest::it_shows_empty_state_when_no_organizations(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationTreeTest::it_can_display_the_organization_tree(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationTreeTest::an_organization_unit_can_be_dragged_and_dropped_to_another_parent(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationTreeTest::an_organizational_unit_cannot_be_dropped_onto_itself(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationTreeTest::an_organizational_unit_can_be_dropped_as_a_root_node(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationTreeTest::a_parent_cannot_be_dropped_onto_one_of_its_descendants(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationTreeTest::a_sibling_can_be_dropped_under_another_sibling(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationTreeTest::an_empty_tree_renders_correctly(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationTreeTest::it_can_handle_a_large_number_of_units_without_crashing(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\Livewire\Organization\OrganizationTreeTest::a_dropped_unit_that_does_not_exist_does_not_cause_an_error(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method UserPlacementTest::it_can_assign_a_user_to_a_unit(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method UserPlacementTest::it_can_unassign_a_user_by_dropping_them_onto_the_root(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::can_create_organization(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::debug_factory_output(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::verify_organization_factory_works(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::can_list_organizations(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::can_show_organization(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::can_update_organization(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::can_delete_organization(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::guests_cannot_access_organizations(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::name_is_required_for_creation(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::name_must_be_unique(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::user_can_view_their_organizations(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::organization_admin_can_list_members(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::admin_can_invite_new_members(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::cannot_invite_existing_member(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationApiTest::non_admin_cannot_invite_members(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::can_create_organization_unit(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::can_create_nested_unit(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::can_get_unit_hierarchy(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::can_assign_user_to_unit(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::can_list_users_by_organization_unit(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::cannot_create_organization_unit_as_non_admin(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::cannot_assign_user_as_non_admin(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::cannot_create_unit_with_invalid_data(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::cannot_assign_non_existent_user_to_unit(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::cannot_assign_user_not_in_organization(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::cannot_get_hierarchy_for_non_existent_unit(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Feature\OrganizationUnitApiTest::can_get_hierarchy_for_unit_with_no_children(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\AccountTypeValidationTest::it_allows_debit_to_asset_accounts(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\AccountTypeValidationTest::it_allows_debit_to_expense_accounts(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\AccountTypeValidationTest::it_throws_exception_when_debiting_liability_account(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\AccountTypeValidationTest::it_allows_credit_to_liability_accounts(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\AccountTypeValidationTest::it_allows_credit_to_revenue_accounts(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\AccountTypeValidationTest::it_throws_exception_when_crediting_asset_account(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\AccountTypeValidationTest::it_validates_account_types_during_transaction_posting(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\AccountingServiceTest::it_throws_an_exception_for_unbalanced_transactions(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\AccountingServiceTest::it_successfully_posts_a_balanced_transaction_and_creates_ledger_entries(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\AccountingServiceTest::it_can_handle_complex_but_balanced_transactions(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\BalanceSheetTest::it_generates_balance_sheet_with_no_transactions(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\BalanceSheetTest::it_generates_balanced_balance_sheet(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\BalanceSheetTest::it_includes_retained_earnings_from_income_statement(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\ChartOfAccountTest::it_has_a_code_name_and_type(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\ChartOfAccountTest::it_can_scope_accounts_by_type(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\ChartOfAccountTest::account_code_must_be_unique(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\ChartOfAccountTest::it_can_calculate_its_current_balance(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\IncomeStatementTest::it_generates_income_statement_with_no_transactions(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\IncomeStatementTest::it_generates_income_statement_with_revenue_and_expenses(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\IncomeStatementTest::it_excludes_transactions_outside_date_range(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\InvalidAccountTypeExceptionTest::it_provides_detailed_error_message(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\InvalidAccountTypeExceptionTest::it_provides_contextual_information(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\InvalidAccountTypeExceptionTest::it_allows_custom_message(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\JournalEntryFactoryTest::it_can_create_a_journal_entry(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\JournalEntryFactoryTest::it_can_create_a_draft_journal_entry(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\JournalEntryFactoryTest::it_can_create_a_posted_journal_entry(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\JournalEntryFactoryTest::it_can_create_journal_entry_with_specific_approver(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\JournalEntryTest::it_can_create_a_journal_entry(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\JournalEntryTest::it_can_post_a_balanced_journal_entry(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\JournalEntryTest::it_prevents_posting_unbalanced_journal_entries(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\LedgerEntryTest::it_belongs_to_a_chart_of_account(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\LedgerEntryTest::it_has_a_debit_or_credit_type(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\LedgerEntryTest::it_can_be_linked_to_a_transaction_via_polymorphic_relation(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\LedgerEntryTest::it_can_be_tagged_with_dimensions(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\LedgerEntryTest::it_must_have_a_positive_amount(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\TrialBalanceTest::it_generates_trial_balance_with_zero_entries(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\TrialBalanceTest::it_generates_trial_balance_with_balanced_entries(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Accounting\TrialBalanceTest::it_shows_account_balances_in_trial_balance(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Services\SequenceServiceTest::it_generates_sequential_codes(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   WARN  Metadata found in doc-comment for method Tests\Unit\Services\SequenceServiceTest::it_handles_concurrent_requests_safely(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
-
-   PASS  Tests\Unit\ExampleTest
-  ✓ that true is true                                                    0.01s  
+   PASS  Tests\Unit\Accounting\AccountTypeValidationTest
+  ✓ it allows debit to asset accounts                                    0.27s  
+  ✓ it allows debit to expense accounts                                  0.02s  
+  ✓ it throws exception when debiting liability account                  0.02s  
+  ✓ it allows credit to liability accounts                               0.02s  
+  ✓ it allows credit to revenue accounts                                 0.02s  
+  ✓ it throws exception when crediting asset account                     0.02s  
+  ✓ it validates account types during transaction posting                0.02s  
+
+   PASS  Tests\Unit\Accounting\BalanceSheetTest
+  ✓ it generates balance sheet with no transactions                      0.05s  
+  ✓ it generates balanced balance sheet                                  0.05s  
+  ✓ it includes retained earnings from income statement                  0.05s  
+
+   PASS  Tests\Unit\Accounting\ChartOfAccountTest
+  ✓ it has a code name and type                                          0.03s  
+  ✓ it can scope accounts by type                                        0.03s  
+  ✓ account code must be unique                                          0.03s  
+  ✓ it can calculate its current balance                                 0.03s  
+
+   PASS  Tests\Unit\Accounting\DimensionReportTest
+  ✓ example                                                              0.12s  
+
+   PASS  Tests\Unit\Accounting\FinancialReportsTest
+  ✓ example                                                              0.09s  
+
+   PASS  Tests\Unit\Accounting\IncomeStatementTest
+  ✓ it generates income statement with no transactions                   0.02s  
+  ✓ it generates income statement with revenue and expenses              0.03s  
+  ✓ it excludes transactions outside date range                          0.02s  
+
+   PASS  Tests\Unit\Accounting\InvalidAccountTypeExceptionTest
+  ✓ it provides detailed error message                                   0.02s  
+  ✓ it provides contextual information                                   0.01s  
+  ✓ it allows custom message                                             0.01s  
+
+   PASS  Tests\Unit\Accounting\JournalEntryFactoryTest
+  ✓ it can create a journal entry                                        0.02s  
+  ✓ it can create a draft journal entry                                  0.02s  
+  ✓ it can create a posted journal entry                                 0.02s  
+  ✓ it can create journal entry with specific approver                   0.02s  
+
+   PASS  Tests\Unit\Accounting\JournalEntryTest
+  ✓ it can create a journal entry                                        0.03s  
+  ✓ it can post a balanced journal entry                                 0.02s  
+  ✓ it prevents posting unbalanced journal entries                       0.02s  
+
+   PASS  Tests\Unit\Accounting\LedgerEntryTest
+  ✓ it belongs to a chart of account                                     0.02s  
+  ✓ it has a debit or credit type                                        0.02s  
+  ✓ it can be linked to a transaction via polymorphic relation           0.02s  
+  ✓ it can be tagged with dimensions                                     0.02s  
+  ✓ it must have a positive amount                                       0.02s  
+
+   PASS  Tests\Unit\Accounting\TrialBalanceTest
+  ✓ it generates trial balance with zero entries                         0.02s  
+  ✓ it generates trial balance with balanced entries                     0.02s  
+  ✓ it shows account balances in trial balance                           0.02s  
+
+   PASS  Tests\Unit\Models\Inventory\InventoryTransactionTest
+  ✓ example                                                              0.02s  
+
+   PASS  Tests\Unit\Models\Inventory\ItemTest
+  ✓ example                                                              0.01s  
+
+   PASS  Tests\Unit\Models\Inventory\StoreTest
+  ✓ example                                                              0.02s  
 
    PASS  Tests\Unit\AccountingReportServiceTest
-  ✓ it generates a correct trial balance                                 0.29s  
-  ✓ it generates a correct balance sheet                                 0.03s  
+  ✓ it generates a correct trial balance                                 0.02s  
+  ✓ it generates a correct balance sheet                                 0.02s  
+
+   PASS  Tests\Unit\Accounting\AccountingServiceTest
+  ✓ it throws an exception for unbalanced transactions                   0.02s  
+  ✓ it successfully posts a balanced transaction and creates ledger ent… 0.02s  
+  ✓ it can handle complex but balanced transactions                      0.02s  
+
+   PASS  Tests\Unit\Services\InventoryServiceTest
+  ✓ it can create a store                                                0.05s  
+  ✓ it can update store inventory                                        0.03s  
+  ✓ it can update store inventory with min max stock                     0.03s  
+  ✓ it can adjust store inventory                                        0.04s  
+  ✓ it can create and finalize transaction                               0.04s  
+  ✓ it can cancel transaction                                            0.03s  
+  ✓ it can get store stock levels                                        0.03s  
+  ✓ it can get item availability                                         0.03s  
+  ✓ it prevents modifying finalized transaction                          0.04s  
+  ✓ it prevents finalizing transaction with no items                     0.03s  
+  ✓ it prevents cancelling finalized transaction                         0.03s  
+  ✓ it calculates low stock correctly                                    0.04s  
+  ✓ it calculates overstock correctly                                    0.03s  
+
+   PASS  Tests\Unit\Services\SequenceServiceTest
+  ✓ it generates sequential codes                                        0.02s  
+  ✓ it handles concurrent requests safely                                0.02s  
+
+   PASS  Tests\Unit\Teams\CreateTeamTest
+  ✓ teams can be created                                                 0.06s  
+
+   PASS  Tests\Unit\Teams\DeleteTeamTest
+  ✓ teams can be deleted                                                 0.04s  
+  ✓ personal teams cant be deleted                                       0.04s  
+
+   PASS  Tests\Unit\Teams\InviteTeamMemberTest
+  ✓ team members can be invited to team                                  0.07s  
+  ✓ team member invitations can be cancelled                             0.07s  
+
+   PASS  Tests\Unit\Teams\LeaveTeamTest
+  ✓ users can leave teams                                                0.05s  
+  ✓ team owners cant leave their own team                                0.05s  
+
+   PASS  Tests\Unit\Teams\RemoveTeamMemberTest
+  ✓ team members can be removed from teams                               0.07s  
+  ✓ only team owner can remove team members                              0.05s  
+
+   PASS  Tests\Unit\Teams\UpdateTeamMemberRoleTest
+  ✓ team member roles can be updated                                     0.09s  
+  ✓ only team owner can update team member roles                         0.06s  
+
+   PASS  Tests\Unit\Teams\UpdateTeamNameTest
+  ✓ team names can be updated                                            0.05s  
+
+   PASS  Tests\Unit\base\ApiTokenPermissionsTest
+  ✓ api token permissions can be updated                                 0.07s  
+
+   PASS  Tests\Unit\base\AuthenticationTest
+  ✓ login screen can be rendered                                         0.04s  
+  ✓ users can authenticate using the login screen                        0.04s  
+  ✓ users cannot authenticate with invalid password                      0.04s  
+
+   PASS  Tests\Unit\base\BrowserSessionsTest
+  ✓ other browser sessions can be logged out                             0.05s  
+
+   PASS  Tests\Unit\base\CreateApiTokenTest
+  ✓ api tokens can be created                                            0.06s  
+
+   PASS  Tests\Unit\base\DeleteAccountTest
+  ✓ user accounts can be deleted                                         0.05s  
+  ✓ correct password must be provided before account can be deleted      0.05s  
+
+   PASS  Tests\Unit\base\DeleteApiTokenTest
+  ✓ api tokens can be deleted                                            0.07s  
+
+   WARN  Tests\Unit\base\EmailVerificationTest
+  - email verification screen can be rendered → Email verification not…  0.02s  
+  - email can be verified → Email verification not enabled.              0.01s  
+  - email can not verified with invalid hash → Email verification not e… 0.01s  
+
+   PASS  Tests\Unit\base\PasswordConfirmationTest
+  ✓ confirm password screen can be rendered                              0.05s  
+  ✓ password can be confirmed                                            0.04s  
+  ✓ password is not confirmed with invalid password                      0.24s  
+
+   PASS  Tests\Unit\base\PasswordResetTest
+  ✓ reset password link screen can be rendered                           0.05s  
+  ✓ reset password link can be requested                                 0.26s  
+  ✓ reset password screen can be rendered                                0.26s  
+  ✓ password can be reset with valid token                               0.26s  
+
+   PASS  Tests\Unit\base\ProfileInformationTest
+  ✓ current profile information is available                             0.05s  
+  ✓ profile information can be updated                                   0.04s  
+
+   WARN  Tests\Unit\base\RegistrationTest
+  ✓ registration screen can be rendered                                  0.03s  
+  - registration screen cannot be rendered if support is disabled → Reg… 0.01s  
+  ✓ new users can register                                               0.03s  
+
+   PASS  Tests\Unit\base\TwoFactorAuthenticationSettingsTest
+  ✓ two factor authentication can be enabled                             0.15s  
+  ✓ recovery codes can be regenerated                                    0.14s  
+  ✓ two factor authentication can be disabled                            0.10s  
+
+   PASS  Tests\Unit\base\UpdatePasswordTest
+  ✓ password can be updated                                              0.07s  
+  ✓ current password must be correct                                     0.05s  
+  ✓ new passwords must match                                             0.06s  
 
    PASS  Tests\Feature\Api\Accounting\ChartOfAccountsApiTest
-  ✓ it can list chart of accounts                                        0.08s  
-  ✓ it can create a chart of account                                     0.05s  
+  ✓ it can list chart of accounts                                        0.05s  
+  ✓ it can create a chart of account                                     0.04s  
   ✓ it validates account creation                                        0.05s  
   ✓ it can show a specific account                                       0.04s  
-  ✓ it returns 404 for nonexistent account                               0.02s  
+  ✓ it returns 404 for nonexistent account                               0.05s  
 
    PASS  Tests\Feature\Api\Accounting\FinancialReportsApiTest
   ✓ it can generate trial balance                                        0.05s  
@@ -246,60 +193,102 @@
 
    PASS  Tests\Feature\Api\Accounting\JournalEntriesApiTest
   ✓ it can create a journal entry                                        0.05s  
-  ✓ it validates journal entry balances                                  0.04s  
+  ✓ it validates journal entry balances                                  0.05s  
   ✓ it can post a journal entry                                          0.04s  
 
-   PASS  Tests\Feature\ApiTokenPermissionsTest
-  ✓ api token permissions can be updated                                 0.11s  
+   FAIL  Tests\Feature\OrganizationApiTest
+  ✓ can create organization                                              0.04s  
+  ✓ debug factory output                                                 0.02s  
+  ✓ verify organization factory works                                    0.02s  
+  ✓ can list organizations                                               0.04s  
+  ✓ can show organization                                                0.04s  
+  ✓ can update organization                                              0.04s  
+  ⨯ can delete organization                                              0.04s  
+  ⨯ guests cannot access organizations                                   0.05s  
+  ✓ name is required for creation                                        0.04s  
+  ✓ name must be unique                                                  0.04s  
+  ✓ user can view their organizations                                    0.04s  
+  ✓ organization admin can list members                                  0.04s  
+  ✓ admin can invite new members                                         0.04s  
+  ✓ cannot invite existing member                                        0.04s  
+  ✓ non admin cannot invite members                                      0.04s  
 
-   PASS  Tests\Feature\AuthenticationTest
-  ✓ login screen can be rendered                                         0.04s  
-  ✓ users can authenticate using the login screen                        0.05s  
-  ✓ users cannot authenticate with invalid password                      0.04s  
+   FAIL  Tests\Feature\OrganizationUnitApiTest
+  ✓ can create organization unit                                         0.07s  
+  ✓ can create nested unit                                               0.04s  
+  ✓ can get unit hierarchy                                               0.05s  
+  ✓ can assign user to unit                                              0.04s  
+  ⨯ can list users by organization unit                                  0.05s  
+  ⨯ cannot create organization unit as non admin                         0.02s  
+  ✓ cannot assign user as non admin                                      0.04s  
+  ✓ cannot create unit with invalid data                                 0.04s  
+  ✓ cannot assign non existent user to unit                              0.04s  
+  ✓ cannot assign user not in organization                               0.04s  
+  ✓ cannot get hierarchy for non existent unit                           0.05s  
+  ✓ can get hierarchy for unit with no children                          0.04s  
 
-   PASS  Tests\Feature\BrowserSessionsTest
-  ✓ other browser sessions can be logged out                             0.06s  
-
-   PASS  Tests\Feature\CreateApiTokenTest
-  ✓ api tokens can be created                                            0.07s  
-
-   PASS  Tests\Feature\CreateTeamTest
-  ✓ teams can be created                                                 0.05s  
-
-   PASS  Tests\Feature\DeleteAccountTest
-  ✓ user accounts can be deleted                                         0.06s  
-  ✓ correct password must be provided before account can be deleted      0.06s  
-
-   PASS  Tests\Feature\DeleteApiTokenTest
-  ✓ api tokens can be deleted                                            0.07s  
-
-   PASS  Tests\Feature\DeleteTeamTest
-  ✓ teams can be deleted                                                 0.05s  
-  ✓ personal teams cant be deleted                                       0.05s  
-
-   WARN  Tests\Feature\EmailVerificationTest
-  - email verification screen can be rendered → Email verification not…  0.03s  
-  - email can be verified → Email verification not enabled.              0.01s  
-  - email can not verified with invalid hash → Email verification not e… 0.01s  
+   FAIL  Tests\Feature\DashboardTest
+  ✓ it redirects to setup for users without organization                 0.05s  
+  ⨯ it shows dashboard for users with organization                       0.02s  
+  ⨯ it shows dashboard sections                                          0.02s  
+  ⨯ it shows store inventory summary                                     0.02s  
+  ⨯ it shows low stock alerts                                            0.02s  
+  ⨯ it shows recent transactions                                         0.02s  
+  ⨯ it shows quick action buttons                                        0.02s  
+  ⨯ it shows stats cards                                                 0.02s  
+  ⨯ it shows empty state for no stores                                   0.02s  
+  ⨯ it shows all stocked message when no low stock                       0.02s  
+  ⨯ it shows store with item counts                                      0.02s  
 
    PASS  Tests\Feature\ExampleTest
-  ✓ it returns a successful response                                     0.05s  
+  ✓ it returns a successful response                                     0.06s  
 
-   PASS  Tests\Feature\Feature\Accounting\FinancialReportsTest
-  ✓ example                                                              0.05s  
+   FAIL  Tests\Feature\Inventory\ItemTest
+  ✓ it can create an item                                                0.06s  
+  ✓ it can search items by name or sku                                   0.08s  
+  ✓ it can filter items by category                                      0.08s  
+  ✓ it can sort items                                                    0.08s  
+  ✓ it returns only items from users organization                        0.07s  
+  ✓ it can get item availability across stores                           0.07s  
+  ✓ it shows low stock status correctly                                  0.07s  
+  ⨯ it returns 403 for unauthorized access                               0.07s  
+  ✓ it handles item with no stores                                       0.08s  
 
-   PASS  Tests\Feature\InviteTeamMemberTest
-  ✓ team members can be invited to team                                  0.09s  
-  ✓ team member invitations can be cancelled                             0.08s  
+   FAIL  Tests\Feature\Inventory\PermissionTest
+  ✓ inventory admin has all permissions                                  0.08s  
+  ✓ store manager cannot delete stores                                   0.07s  
+  ✓ inventory clerk cannot finalize transactions                         0.08s  
+  ✓ auditor can only view inventory                                      0.07s  
+  ⨯ user cannot access other organization inventory                      0.08s  
 
-   PASS  Tests\Feature\LeaveTeamTest
-  ✓ users can leave teams                                                0.06s  
-  ✓ team owners cant leave their own team                                0.06s  
+   PASS  Tests\Feature\Inventory\StoreTest
+  ✓ it can create a store                                                0.07s  
+  ✓ it can add items to store                                            0.07s  
+  ✓ it can retrieve store with items                                     0.07s  
+  ✓ it can update item quantity in store                                 0.07s  
+  ✓ it can list all stores for organization                              0.10s  
+  ✓ it can use organization scope                                        0.05s  
+  ✓ it can use search scope                                              0.05s  
+  ✓ it can use active scope                                              0.05s  
+
+   PASS  Tests\Feature\Inventory\TransactionTest
+  ✓ it can create draft transaction without items                        0.08s  
+  ✓ it can create draft transaction with items                           0.08s  
+  ✓ it can add items to empty draft transaction                          0.09s  
+  ✓ it can add items to transaction with existing items                  0.08s  
+  ✓ it can finalize transaction created without items after adding item… 0.09s  
+  ✓ it can finalize transaction created with items                       0.08s  
+  ✓ it cannot finalize empty transaction                                 0.07s  
+  ✓ it cannot add items to finalized transaction                         0.08s  
+  ✓ it can list transactions by status                                   0.11s  
+  ✓ it can calculate transaction totals                                  0.08s  
+  ✓ it cannot modify finalized transaction                               0.09s  
+  ✓ it can calculate totals for empty transaction                        0.07s  
 
    PASS  Tests\Feature\Livewire\Accounting\ChartOfAccountsTest
-  ✓ chart of accounts page renders                                       0.04s  
-  ✓ it displays a list of accounts                                       0.04s  
-  ✓ it displays a list of chart of accounts                              0.04s  
+  ✓ chart of accounts page renders                                       0.06s  
+  ✓ it displays a list of accounts                                       0.05s  
+  ✓ it displays a list of chart of accounts                              0.05s  
   ✓ it can create a new chart of account record                          0.06s  
   ✓ it can update an existing chart of account record                    0.06s  
 
@@ -321,166 +310,514 @@
   ✓ it validates unique name                                             0.05s  
   ✓ it closes modal                                                      0.05s  
 
-   PASS  Tests\Feature\Livewire\Organization\OrganizationListTest
-  ✓ it shows organizations list                                          0.05s  
+   FAIL  Tests\Feature\Livewire\Organization\OrganizationListTest
+  ✓ it shows organizations list                                          0.06s  
   ✓ it searches organizations by name                                    0.05s  
   ✓ it sorts organizations by name ascending                             0.05s  
   ✓ it sorts organizations by name descending                            0.06s  
   ✓ it sorts organizations by status                                     0.05s  
   ✓ it paginates organizations                                           0.07s  
-  ✓ it shows empty state when no organizations                           0.04s  
+  ⨯ it shows empty state when no organizations                           0.04s  
 
    PASS  Tests\Feature\Livewire\Organization\OrganizationTreeTest
-  ✓ it can display the organization tree                                 0.05s  
-  ✓ an organization unit can be dragged and dropped to another parent    0.05s  
+  ✓ it can display the organization tree                                 0.06s  
+  ✓ an organization unit can be dragged and dropped to another parent    0.07s  
   ✓ an organizational unit cannot be dropped onto itself                 0.05s  
   ✓ an organizational unit can be dropped as a root node                 0.05s  
-  ✓ a parent cannot be dropped onto one of its descendants               0.05s  
-  ✓ a sibling can be dropped under another sibling                       0.05s  
+  ✓ a parent cannot be dropped onto one of its descendants               0.06s  
+  ✓ a sibling can be dropped under another sibling                       0.06s  
   ✓ an empty tree renders correctly                                      0.04s  
-  ✓ it can handle a large number of units without crashing               0.07s  
-  ✓ a dropped unit that does not exist does not cause an error           0.04s  
+  ✓ it can handle a large number of units without crashing               0.15s  
+  ✓ a dropped unit that does not exist does not cause an error           0.05s  
 
-   PASS  UserPlacementTest
-  ✓ it can assign a user to a unit                                       0.06s  
-  ✓ it can unassign a user by dropping them onto the root                0.05s  
+   FAIL  UserPlacementTest
+  ✓ it can assign a user to a unit                                       0.07s  
+  ⨯ it can unassign a user by dropping them onto the root                0.05s  
 
-   PASS  Tests\Feature\OrganizationApiTest
-  ✓ can create organization                                              0.05s  
-  ✓ debug factory output                                                 0.02s  
-  ✓ verify organization factory works                                    0.02s  
-  ✓ can list organizations                                               0.04s  
-  ✓ can show organization                                                0.04s  
-  ✓ can update organization                                              0.04s  
-  ✓ can delete organization                                              0.05s  
-  ✓ guests cannot access organizations                                   0.04s  
-  ✓ name is required for creation                                        0.04s  
-  ✓ name must be unique                                                  0.04s  
-  ✓ user can view their organizations                                    0.04s  
-  ✓ organization admin can list members                                  0.04s  
-  ✓ admin can invite new members                                         0.05s  
-  ✓ cannot invite existing member                                        0.05s  
-  ✓ non admin cannot invite members                                      0.02s  
+   FAIL  Tests\Feature\MultiStepSetupWizardTest
+  ✓ it shows organization step for new users                             0.07s  
+  ✓ it can store organization and proceed to store step                  0.06s  
+  ✓ it shows store setup step after organization                         0.07s  
+  ✓ it can create first store and proceed to accounting                  0.07s  
+  ⨯ it shows accounting setup step after store                           0.08s  
+  ✓ it can setup chart of accounts and complete wizard                   0.08s  
+  ✓ it redirects to correct step based on progress                       0.06s  
 
-   PASS  Tests\Feature\OrganizationUnitApiTest
-  ✓ can create organization unit                                         0.06s  
-  ✓ can create nested unit                                               0.04s  
-  ✓ can get unit hierarchy                                               0.05s  
-  ✓ can assign user to unit                                              0.04s  
-  ✓ can list users by organization unit                                  0.05s  
-  ✓ cannot create organization unit as non admin                         0.02s  
-  ✓ cannot assign user as non admin                                      0.02s  
-  ✓ cannot create unit with invalid data                                 0.05s  
-  ✓ cannot assign non existent user to unit                              0.04s  
-  ✓ cannot assign user not in organization                               0.04s  
-  ✓ cannot get hierarchy for non existent unit                           0.02s  
-  ✓ can get hierarchy for unit with no children                          0.04s  
+   PASS  Tests\Feature\SetupChartOfAccountsTest
+  ✓ it creates default chart of accounts                                 0.07s  
+  ✓ it skips account creation if not requested                           0.06s  
+  ✓ it creates organization unit for accounting department               0.07s  
 
-   PASS  Tests\Feature\PasswordConfirmationTest
-  ✓ confirm password screen can be rendered                              0.05s  
-  ✓ password can be confirmed                                            0.04s  
-  ✓ password is not confirmed with invalid password                      0.25s  
+   PASS  Tests\Feature\SetupStoreTest
+  ✓ it creates first store for organization                              0.07s  
+  ✓ it validates store creation                                          0.06s  
+  ✓ it auto generates store code if not provided                         0.06s  
 
-   PASS  Tests\Feature\PasswordResetTest
-  ✓ reset password link screen can be rendered                           0.06s  
-  ✓ reset password link can be requested                                 0.24s  
-  ✓ reset password screen can be rendered                                0.24s  
-  ✓ password can be reset with valid token                               0.26s  
+   FAIL  Tests\Feature\SetupWizardTest
+  ✓ it shows setup wizard for new users                                  0.05s  
+  ✓ it redirects to dashboard if organization exists                     0.04s  
+  ✓ it can create organization through wizard                            0.04s  
+  ✓ it validates organization creation                                   0.05s  
+  ⨯ it assigns admin role to creator                                     0.01s  
 
-   PASS  Tests\Feature\ProfileInformationTest
-  ✓ current profile information is available                             0.05s  
-  ✓ profile information can be updated                                   0.04s  
+   PASS  Tests\Feature\TenancyFeatureTest
+  ✓ queries are automatically scoped to the authenticated users organiz… 0.05s  
+  ✓ organization id is automatically set on creation                     0.05s  
+  ✓ global scope can be bypassed for admin queries                       0.05s  
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OrganizationApiTest > can delete or…  QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: 1 (Connection: sqlite, SQL: select exists(select * from "1" where "deleted_at" is not null) as "exists")
 
-   WARN  Tests\Feature\RegistrationTest
-  ✓ registration screen can be rendered                                  0.03s  
-  - registration screen cannot be rendered if support is disabled → Reg… 0.01s  
-  ✓ new users can register                                               0.03s  
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:406
+    402▕             // For select statements, we'll simply execute the query and return an array
+    403▕             // of the database result set. Each element in the array will be a single
+    404▕             // row from the database table, and will either be an array or objects.
+    405▕             $statement = $this->prepared(
+  ➜ 406▕                 $this->getPdoForSelect($useReadPdo)->prepare($query)
+    407▕             );
+    408▕ 
+    409▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    410▕
 
-   PASS  Tests\Feature\RemoveTeamMemberTest
-  ✓ team members can be removed from teams                               0.06s  
-  ✓ only team owner can remove team members                              0.05s  
+      [2m+5 vendor frames [22m
+  6   tests/Feature/Api/Organization/OrganizationApiTest.php:137
 
-   PASS  Tests\Feature\TwoFactorAuthenticationSettingsTest
-  ✓ two factor authentication can be enabled                             0.07s  
-  ✓ recovery codes can be regenerated                                    0.13s  
-  ✓ two factor authentication can be disabled                            0.08s  
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OrganizationApiTest > guests cannot access organiza…   
+  Expected response status code [401] but received 200.
+Failed asserting that 200 is identical to 401.
 
-   PASS  Tests\Unit\Accounting\AccountTypeValidationTest
-  ✓ it allows debit to asset accounts                                    0.02s  
-  ✓ it allows debit to expense accounts                                  0.01s  
-  ✓ it throws exception when debiting liability account                  0.01s  
-  ✓ it allows credit to liability accounts                               0.01s  
-  ✓ it allows credit to revenue accounts                                 0.01s  
-  ✓ it throws exception when crediting asset account                     0.01s  
-  ✓ it validates account types during transaction posting                0.01s  
+  at tests/Feature/Api/Organization/OrganizationApiTest.php:145
+    141▕     {
+    142▕         $org = Organization::factory()->create();
+    143▕ 
+    144▕         // Index
+  ➜ 145▕         $this->getJson('/api/organizations')->assertUnauthorized();
+    146▕ 
+    147▕         // Show
+    148▕         $this->getJson("/api/organizations/{$this->organization->id}")->assertUnauthorized();
+    149▕
 
-   PASS  Tests\Unit\Accounting\AccountingServiceTest
-  ✓ it throws an exception for unbalanced transactions                   0.02s  
-  ✓ it successfully posts a balanced transaction and creates ledger ent… 0.02s  
-  ✓ it can handle complex but balanced transactions                      0.02s  
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OrganizationUnitApiTest > can list users by organiz…   
+  Expected response status code [200] but received 500.
+Failed asserting that 500 is identical to 200.
 
-   PASS  Tests\Unit\Accounting\BalanceSheetTest
-  ✓ it generates balance sheet with no transactions                      0.02s  
-  ✓ it generates balanced balance sheet                                  0.02s  
-  ✓ it includes retained earnings from income statement                  0.02s  
+The following exception occurred during the last request:
 
-   PASS  Tests\Unit\Accounting\ChartOfAccountTest
-  ✓ it has a code name and type                                          0.02s  
-  ✓ it can scope accounts by type                                        0.02s  
-  ✓ account code must be unique                                          0.02s  
-  ✓ it can calculate its current balance                                 0.01s  
+PDOException: SQLSTATE[HY000]: General error: 1 ambiguous column name: organization_id in /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Connection.php:406
+Stack trace:
+#0 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Connection.php(406): PDO->prepare()
+#1 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Connection.php(811): Illuminate\Database\Connection->{closure:Illuminate\Database\Connection::select():397}()
+#2 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Connection.php(778): Illuminate\Database\Connection->runQueryCallback()
+#3 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Connection.php(397): Illuminate\Database\Connection->run()
+#4 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3188): Illuminate\Database\Connection->select()
+#5 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3173): Illuminate\Database\Query\Builder->runSelect()
+#6 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3763): Illuminate\Database\Query\Builder->{closure:Illuminate\Database\Query\Builder::get():3172}()
+#7 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3172): Illuminate\Database\Query\Builder->onceWithColumns()
+#8 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(902): Illuminate\Database\Query\Builder->get()
+#9 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Relations/BelongsToMany.php(910): Illuminate\Database\Eloquent\Builder->getModels()
+#10 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Relations/BelongsToMany.php(894): Illuminate\Database\Eloquent\Relations\BelongsToMany->get()
+#11 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/HasAttributes.php(635): Illuminate\Database\Eloquent\Relations\BelongsToMany->getResults()
+#12 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/HasAttributes.php(573): Illuminate\Database\Eloquent\Model->getRelationshipFromMethod()
+#13 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/HasAttributes.php(494): Illuminate\Database\Eloquent\Model->getRelationValue()
+#14 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(2423): Illuminate\Database\Eloquent\Model->getAttribute()
+#15 /home/gg/dev/hrm-laravel-base/app/Http/Controllers/Api/OrganizationUnitController.php(187): Illuminate\Database\Eloquent\Model->__get()
+#16 [internal function]: App\Http\Controllers\Api\OrganizationUnitController->{closure:App\Http\Controllers\Api\OrganizationUnitController::members():186}()
+#17 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Collections/Arr.php(786): array_map()
+#18 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(814): Illuminate\Support\Arr::map()
+#19 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Collection.php(418): Illuminate\Support\Collection->map()
+#20 /home/gg/dev/hrm-laravel-base/app/Http/Controllers/Api/OrganizationUnitController.php(186): Illuminate\Database\Eloquent\Collection->map()
+#21 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(46): App\Http\Controllers\Api\OrganizationUnitController->members()
+#22 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Route.php(265): Illuminate\Routing\ControllerDispatcher->dispatch()
+#23 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Route.php(211): Illuminate\Routing\Route->runController()
+#24 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(822): Illuminate\Routing\Route->run()
+#25 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}()
+#26 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
+#27 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings->handle()
+#28 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#29 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle()
+#30 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#31 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then()
+#32 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack()
+#33 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute()
+#34 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute()
+#35 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch()
+#36 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}()
+#37 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Features/SupportDisablingBackButtonCache/DisableBackButtonCacheMiddleware.php(19): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
+#38 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware->handle()
+#39 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#40 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
+#41 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#42 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
+#43 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
+#44 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#45 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
+#46 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
+#47 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#48 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle()
+#49 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#50 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
+#51 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(61): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#52 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle()
+#53 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#54 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle()
+#55 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#56 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle()
+#57 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#58 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle()
+#59 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#60 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then()
+#61 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
+#62 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle()
+#63 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(573): Illuminate\Foundation\Testing\TestCase->call()
+#64 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(381): Illuminate\Foundation\Testing\TestCase->json()
+#65 /home/gg/dev/hrm-laravel-base/tests/Feature/Api/Organization/OrganizationUnitApiTest.php(140): Illuminate\Foundation\Testing\TestCase->getJson()
+#66 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(1656): Tests\Feature\OrganizationUnitApiTest->can_list_users_by_organization_unit()
+#67 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(514): PHPUnit\Framework\TestCase->runTest()
+#68 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(87): PHPUnit\Framework\TestCase->runBare()
+#69 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(361): PHPUnit\Framework\TestRunner->run()
+#70 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestCase->run()
+#71 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
+#72 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
+#73 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
+#74 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/Application.php(211): PHPUnit\TextUI\TestRunner->run()
+#75 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run()
+#76 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle()
+#77 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(192): {closure:/home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest:18}()
+#78 {main}
 
-   PASS  Tests\Feature\Unit\Accounting\DimensionReportTest
-  ✓ example                                                              0.05s  
+Next Illuminate\Database\QueryException: SQLSTATE[HY000]: General error: 1 ambiguous column name: organization_id (Connection: sqlite, SQL: select "organization_units".*, "organization_user"."user_id" as "pivot_user_id", "organization_user"."organization_unit_id" as "pivot_organization_unit_id", "organization_user"."organization_id" as "pivot_organization_id", "organization_user"."position" as "pivot_position", "organization_user"."roles" as "pivot_roles", "organization_user"."permissions" as "pivot_permissions", "organization_user"."created_at" as "pivot_created_at", "organization_user"."updated_at" as "pivot_updated_at" from "organization_units" inner join "organization_user" on "organization_units"."id" = "organization_user"."organization_unit_id" where "organization_user"."user_id" = 1 and "organization_units"."deleted_at" is null and "organization_id" = 1) in /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Connection.php:824
+Stack trace:
+#0 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Connection.php(778): Illuminate\Database\Connection->runQueryCallback()
+#1 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Connection.php(397): Illuminate\Database\Connection->run()
+#2 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3188): Illuminate\Database\Connection->select()
+#3 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3173): Illuminate\Database\Query\Builder->runSelect()
+#4 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3763): Illuminate\Database\Query\Builder->{closure:Illuminate\Database\Query\Builder::get():3172}()
+#5 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3172): Illuminate\Database\Query\Builder->onceWithColumns()
+#6 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(902): Illuminate\Database\Query\Builder->get()
+#7 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Relations/BelongsToMany.php(910): Illuminate\Database\Eloquent\Builder->getModels()
+#8 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Relations/BelongsToMany.php(894): Illuminate\Database\Eloquent\Relations\BelongsToMany->get()
+#9 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/HasAttributes.php(635): Illuminate\Database\Eloquent\Relations\BelongsToMany->getResults()
+#10 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/HasAttributes.php(573): Illuminate\Database\Eloquent\Model->getRelationshipFromMethod()
+#11 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/HasAttributes.php(494): Illuminate\Database\Eloquent\Model->getRelationValue()
+#12 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(2423): Illuminate\Database\Eloquent\Model->getAttribute()
+#13 /home/gg/dev/hrm-laravel-base/app/Http/Controllers/Api/OrganizationUnitController.php(187): Illuminate\Database\Eloquent\Model->__get()
+#14 [internal function]: App\Http\Controllers\Api\OrganizationUnitController->{closure:App\Http\Controllers\Api\OrganizationUnitController::members():186}()
+#15 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Collections/Arr.php(786): array_map()
+#16 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(814): Illuminate\Support\Arr::map()
+#17 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Collection.php(418): Illuminate\Support\Collection->map()
+#18 /home/gg/dev/hrm-laravel-base/app/Http/Controllers/Api/OrganizationUnitController.php(186): Illuminate\Database\Eloquent\Collection->map()
+#19 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(46): App\Http\Controllers\Api\OrganizationUnitController->members()
+#20 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Route.php(265): Illuminate\Routing\ControllerDispatcher->dispatch()
+#21 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Route.php(211): Illuminate\Routing\Route->runController()
+#22 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(822): Illuminate\Routing\Route->run()
+#23 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}()
+#24 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
+#25 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings->handle()
+#26 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#27 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle()
+#28 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#29 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then()
+#30 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack()
+#31 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute()
+#32 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute()
+#33 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch()
+#34 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}()
+#35 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Features/SupportDisablingBackButtonCache/DisableBackButtonCacheMiddleware.php(19): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
+#36 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware->handle()
+#37 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#38 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
+#39 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#40 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
+#41 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
+#42 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#43 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
+#44 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
+#45 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#46 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle()
+#47 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#48 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
+#49 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(61): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#50 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle()
+#51 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#52 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle()
+#53 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#54 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle()
+#55 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#56 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle()
+#57 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
+#58 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then()
+#59 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
+#60 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle()
+#61 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(573): Illuminate\Foundation\Testing\TestCase->call()
+#62 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(381): Illuminate\Foundation\Testing\TestCase->json()
+#63 /home/gg/dev/hrm-laravel-base/tests/Feature/Api/Organization/OrganizationUnitApiTest.php(140): Illuminate\Foundation\Testing\TestCase->getJson()
+#64 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(1656): Tests\Feature\OrganizationUnitApiTest->can_list_users_by_organization_unit()
+#65 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(514): PHPUnit\Framework\TestCase->runTest()
+#66 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(87): PHPUnit\Framework\TestCase->runBare()
+#67 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(361): PHPUnit\Framework\TestRunner->run()
+#68 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestCase->run()
+#69 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
+#70 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
+#71 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
+#72 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/Application.php(211): PHPUnit\TextUI\TestRunner->run()
+#73 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run()
+#74 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle()
+#75 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(192): {closure:/home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest:18}()
+#76 {main}
 
-   PASS  Tests\Unit\Accounting\IncomeStatementTest
-  ✓ it generates income statement with no transactions                   0.02s  
-  ✓ it generates income statement with revenue and expenses              0.02s  
-  ✓ it excludes transactions outside date range                          0.02s  
+----------------------------------------------------------------------------------
 
-   PASS  Tests\Unit\Accounting\InvalidAccountTypeExceptionTest
-  ✓ it provides detailed error message                                   0.02s  
-  ✓ it provides contextual information                                   0.01s  
-  ✓ it allows custom message                                             0.02s  
+SQLSTATE[HY000]: General error: 1 ambiguous column name: organization_id (Connection: sqlite, SQL: select "organization_units".*, "organization_user"."user_id" as "pivot_user_id", "organization_user"."organization_unit_id" as "pivot_organization_unit_id", "organization_user"."organization_id" as "pivot_organization_id", "organization_user"."position" as "pivot_position", "organization_user"."roles" as "pivot_roles", "organization_user"."permissions" as "pivot_permissions", "organization_user"."created_at" as "pivot_created_at", "organization_user"."updated_at" as "pivot_updated_at" from "organization_units" inner join "organization_user" on "organization_units"."id" = "organization_user"."organization_unit_id" where "organization_user"."user_id" = 1 and "organization_units"."deleted_at" is null and "organization_id" = 1)
 
-   PASS  Tests\Unit\Accounting\JournalEntryFactoryTest
-  ✓ it can create a journal entry                                        0.02s  
-  ✓ it can create a draft journal entry                                  0.02s  
-  ✓ it can create a posted journal entry                                 0.02s  
-  ✓ it can create journal entry with specific approver                   0.02s  
+  at tests/Feature/Api/Organization/OrganizationUnitApiTest.php:143
+    139▕         $response = $this->actingAs($admin)
+    140▕             ->getJson("/api/organizations/{$org->id}/units/{$dept->id}/members");
+    141▕         // dd($response);
+    142▕ 
+  ➜ 143▕         $response->assertStatus(200)
+    144▕             ->assertJsonCount(2, 'data'); // Should return both direct and nested members
+    145▕     }
+    146▕ 
+    147▕     #[Test]
 
-   PASS  Tests\Unit\Accounting\JournalEntryTest
-  ✓ it can create a journal entry                                        0.03s  
-  ✓ it can post a balanced journal entry                                 0.02s  
-  ✓ it prevents posting unbalanced journal entries                       0.02s  
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OrganizationUnitApiTest > cannot create…   TypeError   
+  Illuminate\Foundation\Testing\TestCase::actingAs(): Argument #1 ($user) must be of type Illuminate\Contracts\Auth\Authenticatable, null given, called in /home/gg/dev/hrm-laravel-base/tests/Feature/Api/Organization/OrganizationUnitApiTest.php on line 152
 
-   PASS  Tests\Unit\Accounting\LedgerEntryTest
-  ✓ it belongs to a chart of account                                     0.02s  
-  ✓ it has a debit or credit type                                        0.02s  
-  ✓ it can be linked to a transaction via polymorphic relation           0.02s  
-  ✓ it can be tagged with dimensions                                     0.02s  
-  ✓ it must have a positive amount                                       0.01s  
+  at tests/Feature/Api/Organization/OrganizationUnitApiTest.php:152
+    148▕     public function cannot_create_organization_unit_as_non_admin()
+    149▕     {
+    150▕         [$organization, $regularUser] = $this->createOrganizationWithUser(roles: ['user']);
+    151▕ 
+  ➜ 152▕         $response = $this->actingAs($regularUser)
+    153▕             ->postJson("/api/organizations/{$organization->id}/units", [
+    154▕                 'name' => 'Support Team',
+    155▕                 'type' => 'team'
+    156▕             ]);
 
-   PASS  Tests\Unit\Accounting\TrialBalanceTest
-  ✓ it generates trial balance with zero entries                         0.02s  
-  ✓ it generates trial balance with balanced entries                     0.02s  
-  ✓ it shows account balances in trial balance                           0.02s  
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\DashboardTest > it shows dashboard for users…  Error   
+  Call to a member function organizations() on null
 
-   PASS  Tests\Unit\Services\SequenceServiceTest
-  ✓ it generates sequential codes                                        0.02s  
-  ✓ it handles concurrent requests safely                                0.01s  
+  at app/Models/Traits/BelongsToOrganization.php:27
+     23▕         // Optional: Ensure the organization_id is automatically filled on creation
+     24▕         // This is a common practice to prevent tenancy leaks.
+     25▕         static::creating(function ($model) {
+     26▕             $user = auth()->user();
+  ➜  27▕             $user_organization = $user->organizations()->first();
+     28▕             if ($user && $user_organization) {
+     29▕                 $model->organization_id = $user_organization->id;
+     30▕             }
+     31▕         });
 
-   PASS  Tests\Feature\UpdatePasswordTest
-  ✓ password can be updated                                              0.06s  
-  ✓ current password must be correct                                     0.05s  
-  ✓ new passwords must match                                             0.06s  
+  1   app/Models/Traits/BelongsToOrganization.php:27
+      [2m+12 vendor frames [22m
+  14  tests/Feature/DashboardTest.php:39
 
-   PASS  Tests\Feature\UpdateTeamMemberRoleTest
-  ✓ team member roles can be updated                                     0.09s  
-  ✓ only team owner can update team member roles                         0.07s  
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\DashboardTest > it shows dashboard sections    Error   
+  Call to a member function organizations() on null
 
-   PASS  Tests\Feature\UpdateTeamNameTest
-  ✓ team names can be updated                                            0.06s  
+  at app/Models/Traits/BelongsToOrganization.php:27
+     23▕         // Optional: Ensure the organization_id is automatically filled on creation
+     24▕         // This is a common practice to prevent tenancy leaks.
+     25▕         static::creating(function ($model) {
+     26▕             $user = auth()->user();
+  ➜  27▕             $user_organization = $user->organizations()->first();
+     28▕             if ($user && $user_organization) {
+     29▕                 $model->organization_id = $user_organization->id;
+     30▕             }
+     31▕         });
+
+  1   app/Models/Traits/BelongsToOrganization.php:27
+      [2m+12 vendor frames [22m
+  14  tests/Feature/DashboardTest.php:59
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\DashboardTest > it shows store inventory sum…  Error   
+  Call to a member function organizations() on null
+
+  at app/Models/Traits/BelongsToOrganization.php:27
+     23▕         // Optional: Ensure the organization_id is automatically filled on creation
+     24▕         // This is a common practice to prevent tenancy leaks.
+     25▕         static::creating(function ($model) {
+     26▕             $user = auth()->user();
+  ➜  27▕             $user_organization = $user->organizations()->first();
+     28▕             if ($user && $user_organization) {
+     29▕                 $model->organization_id = $user_organization->id;
+     30▕             }
+     31▕         });
+
+  1   app/Models/Traits/BelongsToOrganization.php:27
+      [2m+12 vendor frames [22m
+  14  tests/Feature/DashboardTest.php:81
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\DashboardTest > it shows low stock alerts      Error   
+  Call to a member function organizations() on null
+
+  at app/Models/Traits/BelongsToOrganization.php:27
+     23▕         // Optional: Ensure the organization_id is automatically filled on creation
+     24▕         // This is a common practice to prevent tenancy leaks.
+     25▕         static::creating(function ($model) {
+     26▕             $user = auth()->user();
+  ➜  27▕             $user_organization = $user->organizations()->first();
+     28▕             if ($user && $user_organization) {
+     29▕                 $model->organization_id = $user_organization->id;
+     30▕             }
+     31▕         });
+
+  1   app/Models/Traits/BelongsToOrganization.php:27
+      [2m+12 vendor frames [22m
+  14  tests/Feature/DashboardTest.php:109
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\DashboardTest > it shows recent transactions   Error   
+  Call to a member function organizations() on null
+
+  at app/Models/Traits/BelongsToOrganization.php:27
+     23▕         // Optional: Ensure the organization_id is automatically filled on creation
+     24▕         // This is a common practice to prevent tenancy leaks.
+     25▕         static::creating(function ($model) {
+     26▕             $user = auth()->user();
+  ➜  27▕             $user_organization = $user->organizations()->first();
+     28▕             if ($user && $user_organization) {
+     29▕                 $model->organization_id = $user_organization->id;
+     30▕             }
+     31▕         });
+
+  1   app/Models/Traits/BelongsToOrganization.php:27
+      [2m+12 vendor frames [22m
+  14  tests/Feature/DashboardTest.php:146
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\DashboardTest > it shows quick action button…  Error   
+  Call to a member function organizations() on null
+
+  at app/Models/Traits/BelongsToOrganization.php:27
+     23▕         // Optional: Ensure the organization_id is automatically filled on creation
+     24▕         // This is a common practice to prevent tenancy leaks.
+     25▕         static::creating(function ($model) {
+     26▕             $user = auth()->user();
+  ➜  27▕             $user_organization = $user->organizations()->first();
+     28▕             if ($user && $user_organization) {
+     29▕                 $model->organization_id = $user_organization->id;
+     30▕             }
+     31▕         });
+
+  1   app/Models/Traits/BelongsToOrganization.php:27
+      [2m+12 vendor frames [22m
+  14  tests/Feature/DashboardTest.php:173
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\DashboardTest > it shows stats cards           Error   
+  Call to a member function organizations() on null
+
+  at app/Models/Traits/BelongsToOrganization.php:27
+     23▕         // Optional: Ensure the organization_id is automatically filled on creation
+     24▕         // This is a common practice to prevent tenancy leaks.
+     25▕         static::creating(function ($model) {
+     26▕             $user = auth()->user();
+  ➜  27▕             $user_organization = $user->organizations()->first();
+     28▕             if ($user && $user_organization) {
+     29▕                 $model->organization_id = $user_organization->id;
+     30▕             }
+     31▕         });
+
+  1   app/Models/Traits/BelongsToOrganization.php:27
+      [2m+12 vendor frames [22m
+  14  tests/Feature/DashboardTest.php:197
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\DashboardTest > it shows empty state for no…   Error   
+  Call to a member function organizations() on null
+
+  at app/Models/Traits/BelongsToOrganization.php:27
+     23▕         // Optional: Ensure the organization_id is automatically filled on creation
+     24▕         // This is a common practice to prevent tenancy leaks.
+     25▕         static::creating(function ($model) {
+     26▕             $user = auth()->user();
+  ➜  27▕             $user_organization = $user->organizations()->first();
+     28▕             if ($user && $user_organization) {
+     29▕                 $model->organization_id = $user_organization->id;
+     30▕             }
+     31▕         });
+
+  1   app/Models/Traits/BelongsToOrganization.php:27
+      [2m+12 vendor frames [22m
+  14  tests/Feature/DashboardTest.php:223
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\DashboardTest > it shows all stocked message…  Error   
+  Call to a member function organizations() on null
+
+  at app/Models/Traits/BelongsToOrganization.php:27
+     23▕         // Optional: Ensure the organization_id is automatically filled on creation
+     24▕         // This is a common practice to prevent tenancy leaks.
+     25▕         static::creating(function ($model) {
+     26▕             $user = auth()->user();
+  ➜  27▕             $user_organization = $user->organizations()->first();
+     28▕             if ($user && $user_organization) {
+     29▕                 $model->organization_id = $user_organization->id;
+     30▕             }
+     31▕         });
+
+  1   app/Models/Traits/BelongsToOrganization.php:27
+      [2m+12 vendor frames [22m
+  14  tests/Feature/DashboardTest.php:249
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\DashboardTest > it shows store with item cou…  Error   
+  Call to a member function organizations() on null
+
+  at app/Models/Traits/BelongsToOrganization.php:27
+     23▕         // Optional: Ensure the organization_id is automatically filled on creation
+     24▕         // This is a common practice to prevent tenancy leaks.
+     25▕         static::creating(function ($model) {
+     26▕             $user = auth()->user();
+  ➜  27▕             $user_organization = $user->organizations()->first();
+     28▕             if ($user && $user_organization) {
+     29▕                 $model->organization_id = $user_organization->id;
+     30▕             }
+     31▕         });
+
+  1   app/Models/Traits/BelongsToOrganization.php:27
+      [2m+12 vendor frames [22m
+  14  tests/Feature/DashboardTest.php:284
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Inventory\ItemTest > it returns 403 for unauthorize…   
+  Expected response status code [403] but received 404.
+Failed asserting that 404 is identical to 403.
+
+  at tests/Feature/Inventory/ItemTest.php:299
+    295▕         // User from Org A tries to access Org B's item availability
+    296▕         $response = $this->actingAs($setupA['user'])
+    297▕             ->getJson("/api/inventory/items/{$itemB->id}/availability");
+    298▕ 
+  ➜ 299▕         $response->assertStatus(403);
+    300▕     }
+    301▕ 
+    302▕     #[Test]
+    303▕     public function it_handles_item_with_no_stores()
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Inventory\PermissionTest > user cannot access other…   
+  Expected response status code [403] but received 200.
+Failed asserting that 200 is identical to 403.
+
+  at tests/Feature/Inventory/PermissionTest.php:90
+     86▕ 
+     87▕         // User from Org A tries to access Org B's store
+     88▕         $this->actingAs($setupA['user'])
+     89▕             ->getJson("/api/inventory/stores/{$storeB->id}")
+  ➜  90▕             ->assertStatus(403);
+     91▕     }
+     92▕ }
+     93▕
+
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\Livewire\Accounting\JournalEntriesTest > it creates…   
   Failed asserting that a row in the table [journal_entries] matches the attributes {
@@ -489,26 +826,110 @@
     "status": "posted"
 }.
 
-Found: [
+The table is empty.
+
+  at tests/Feature/Livewire/Accounting/JournalEntriesTest.php:50
+     46▕             ->set('transactions.1.credit', 500);
+     47▕ 
+     48▕         $component->call('createEntry');
+     49▕ 
+  ➜  50▕         $this->assertDatabaseHas('journal_entries', [
+     51▕             'entry_date' => '2025-01-01',
+     52▕             'description' => 'Test entry',
+     53▕             'status' => 'posted',
+     54▕         ]);
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Livewire\Organization\OrganizationListTest > it sho…   
+  Expected: <div wire:snapshot="" wire:effects="" wire:id="eSQURcc7zxOPq0etRY4O">\n
+      <!-- Header with Search and Actions -->\n
+      <div class="flex flex-col sm:flex-row justify-between items-center mb-6 space-y-4 sm:space-y-0">\n
+  ... (103 more lines)
+
+  To contain: No organizations found
+
+  at vendor/livewire/livewire/src/Features/SupportTesting/MakesAssertions.php:14
+     10▕ {
+     11▕     function assertSee($values, $escape = true, $stripInitialData = true)
+     12▕     {
+     13▕         foreach (Arr::wrap($values) as $value) {
+  ➜  14▕             PHPUnit::assertStringContainsString(
+     15▕                 $escape ? e($value): $value,
+     16▕                 $this->html($stripInitialData)
+     17▕             );
+     18▕         }
+
+      [2m+1 vendor frames [22m
+  2   tests/Feature/Livewire/Organization/OrganizationListTest.php:148
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  UserPlacementTest > it can unassign a user by dropping them onto…    
+  Failed asserting that a row in the table [organization_user] matches the attributes {
+    "user_id": 2,
+    "organization_id": 2,
+    "organization_unit_id": null
+}.
+
+Found similar results: [
     {
-        "entry_date": "2025-01-01 00:00:00",
-        "description": "Test entry",
-        "status": "posted"
+        "user_id": 2,
+        "organization_id": 2,
+        "organization_unit_id": 1
+    },
+    {
+        "user_id": 2,
+        "organization_id": 1,
+        "organization_unit_id": null
     }
 ].
 
-  at tests/Feature/Livewire/Accounting/JournalEntriesTest.php:41
-     37▕             ->set('transactions.1.credit', 500);
-     38▕ 
-     39▕         $component->call('createEntry');
-     40▕ 
-  ➜  41▕         $this->assertDatabaseHas('journal_entries', [
-     42▕             'entry_date' => '2025-01-01',
-     43▕             'description' => 'Test entry',
-     44▕             'status' => 'posted',
-     45▕         ]);
+  at tests/Feature/Livewire/Organization/UserPlacementTest.php:64
+     60▕         Livewire::test(UserPlacement::class, ['organizationId' => $organization->id])
+     61▕             ->call('assignUserToUnit', $user->id, null);
+     62▕ 
+     63▕         // Assert
+  ➜  64▕         $this->assertDatabaseHas('organization_user', [
+     65▕             'user_id' => $user->id,
+     66▕             'organization_id' => $organization->id,
+     67▕             'organization_unit_id' => null
+     68▕         ]);
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\MultiStepSetupWizardTest > it shows accounting setu…   
+  Expected: <!DOCTYPE html>\n
+  <html lang="en">\n
+  \n
+  ... (389 more lines)
+
+  To contain: Accounting Setup
+
+  at tests/Feature/MultiStepSetupWizardTest.php:133
+    129▕             $response = $this->followRedirects($response);
+    130▕         }
+    131▕ 
+    132▕         $response->assertStatus(200)
+  ➜ 133▕             ->assertSee('Accounting Setup')
+    134▕             ->assertSee('Step 3 of 3');
+    135▕     }
+    136▕     #[Test]
+    137▕     public function it_can_setup_chart_of_accounts_and_complete_wizard()
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SetupWizardTest > it assigns admin role…   TypeError   
+  Illuminate\Foundation\Testing\TestCase::actingAs(): Argument #1 ($user) must be of type Illuminate\Contracts\Auth\Authenticatable, null given, called in /home/gg/dev/hrm-laravel-base/tests/Feature/SetupWizardTest.php on line 80
+
+  at tests/Feature/SetupWizardTest.php:80
+     76▕     public function it_assigns_admin_role_to_creator()
+     77▕     {
+     78▕         // dd('$user');
+     79▕         $user = $this->user; //User::factory()->create();
+  ➜  80▕         $this->actingAs($user)
+     81▕             ->post('/setup/organization', [
+     82▕                 'name' => 'Test Org',
+     83▕             ]);
+     84▕
 
 
-  Tests:    1 failed, 4 skipped, 158 passed (397 assertions)
-  Duration: 8.13s
+  Tests:    21 failed, 4 skipped, 219 passed (743 assertions)
+  Duration: 13.10s
 
