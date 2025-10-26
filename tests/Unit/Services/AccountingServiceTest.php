@@ -8,16 +8,18 @@ use App\Services\AccountingService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class AccountingServiceTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, SetupOrganization;
 
     protected AccountingService $accountingService;
 
     protected function setUp(): void
     {
         parent::setUp();
+        $this->setupOrganization();
         $this->accountingService = app(AccountingService::class);
     }
 

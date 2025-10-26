@@ -8,16 +8,31 @@ use App\Models\User;
 
 trait SetupOrganization
 {
+    public $user;
+    public $organization;
+    protected function setupOrganization()
+    {
+        // dd('o');
+        // parent::setUp();
+        // $this->createOrganizationWithUser();
+        $this->user = $this->createOrganizationWithUser();
+        $this->actingAs($this->user);
+        return $this->user;
+    }
     protected function createOrganizationWithUser($user = null, array $roles = ['admin'])
     {
         $organization = Organization::factory()->create();
-        $user = $user ?: User::factory()->create();
+        $user = User::factory()->create();
 
+        // dd($user);
         $organization->users()->attach($user, [
-            'roles' => json_encode($roles)
+            'roles' => json_encode($roles),
+            'organization_id' => $organization->id
         ]);
-
-        return [$organization, $user];
+        $this->$user = $user;
+        $this->organization = $organization;
+        // return [$organization, $user];
+        return $user;
     }
     protected function createOrganizationsForSorting()
     {
@@ -31,9 +46,11 @@ trait SetupOrganization
 
         foreach ($organizations as $organization) {
             $organization->users()->attach($user, [
-                'roles' => json_encode(['admin'])
+                'roles' => json_encode(['admin']),
+                'organization_id' => $organization->id
             ]);
         }
+        $this->actingAs($user);
         return [$organizations, $user];
     }
 }

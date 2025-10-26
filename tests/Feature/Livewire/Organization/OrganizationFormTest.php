@@ -14,11 +14,15 @@ use PHPUnit\Framework\Attributes\Test;
 class OrganizationFormTest extends TestCase
 {
     use RefreshDatabase, SetupOrganization;
-
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setupOrganization();
+    }
     #[Test]
     public function it_shows_create_form()
     {
-        [$organization, $user] = $this->createOrganizationWithUser();
+        [$organization, $user] = [$this->organization, $this->user];
 
         Livewire::actingAs($user)
             ->test('organization.organization-form')
@@ -31,7 +35,7 @@ class OrganizationFormTest extends TestCase
     #[Test]
     public function it_shows_edit_form()
     {
-        [$organization, $user] = $this->createOrganizationWithUser();
+        [$organization, $user] = [$this->organization, $this->user];
 
         Livewire::actingAs($user)
             ->test('organization.organization-form')
@@ -47,7 +51,7 @@ class OrganizationFormTest extends TestCase
     #[Test]
     public function it_creates_new_organization()
     {
-        [$organization, $user] = $this->createOrganizationWithUser();
+        [$organization, $user] = [$this->organization, $this->user];
 
 
         Livewire::actingAs($user)
@@ -69,7 +73,7 @@ class OrganizationFormTest extends TestCase
     #[Test]
     public function it_updates_existing_organization()
     {
-        [$organization, $user] = $this->createOrganizationWithUser();
+        [$organization, $user] = [$this->organization, $this->user];
 
         Livewire::actingAs($user)
             ->test('organization.organization-form')
@@ -92,7 +96,7 @@ class OrganizationFormTest extends TestCase
     #[Test]
     public function it_validates_required_fields()
     {
-        [$organization, $user] = $this->createOrganizationWithUser();
+        [$organization, $user] = [$this->organization, $this->user];
 
         Livewire::actingAs($user)
             ->test('organization.organization-form')
@@ -104,7 +108,7 @@ class OrganizationFormTest extends TestCase
     #[Test]
     public function it_validates_unique_name()
     {
-        [$organization, $user] = $this->createOrganizationWithUser();
+        [$organization, $user] = [$this->organization, $this->user];
         $existing = Organization::factory()->create(['name' => 'Existing Org']);
 
         Livewire::actingAs($user)
@@ -117,7 +121,7 @@ class OrganizationFormTest extends TestCase
     #[Test]
     public function it_closes_modal()
     {
-        [$organization, $user] = $this->createOrganizationWithUser();
+        [$organization, $user] = [$this->organization, $this->user];
 
         Livewire::actingAs($user)
             ->test('organization.organization-form')

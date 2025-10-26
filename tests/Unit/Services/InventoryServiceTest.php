@@ -15,39 +15,24 @@ use Tests\Traits\SetupInventory;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class InventoryServiceTest extends TestCase
 {
-    use RefreshDatabase, SetupInventory;
+    use RefreshDatabase, SetupOrganization, SetupInventory;
 
     private InventoryService $inventoryService;
-    private User $user;
-    private Organization $organization;
-    private OrganizationUnit $organizationUnit;
-    private Store $store;
-    private Item $item;
+    // private User $user;
+    // private Organization $organization;
+    // private OrganizationUnit $organizationUnit;
+    // private Store $store;
+    // private Item $item;
 
     protected function setUp(): void
     {
         parent::setUp();
-        Artisan::call('migrate', [
-            // '--database' => 'sqlite', // Or your desired test database connection
-            '--path' => 'database/migrations/inventory',
-            // '--force' => true, // Essential for production environments, though not strictly needed for in-memory SQLite
-        ]);
-
-        $setup = $this->createInventorySetup();
-
-        $this->inventoryService = app(InventoryService::class);
-
-        $this->organization = $setup['organization'];
-        $this->organizationUnit = $setup['organization_unit'];
-        $this->user = $setup['user'];
-        $this->store = $setup['store'];
-        $this->item = $setup['items']->first();
-
-        // Set authenticated user for Gate system
-        $this->actingAs($this->user);
+        $this->setupOrganization();
+        $this->setupInventory();
     }
 
     #[Test]

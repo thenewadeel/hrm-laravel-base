@@ -14,11 +14,12 @@ class OrganizationUnitApiTest extends TestCase
 {
     use RefreshDatabase, SetupOrganization;
 
-    protected $user;
+    // protected $user;
 
     protected function setUp(): void
     {
         parent::setUp();
+        $this->setupOrganization();
         // $this->user = User::factory()->create();
     }
 
@@ -28,11 +29,11 @@ class OrganizationUnitApiTest extends TestCase
     #[Test]
     public function can_create_organization_unit()
     {
-        [$organization, $admin] = $this->createOrganizationWithUser();
+        [$organization, $admin] = [$this->organization, $this->user]; //$this->createOrganizationWithUser();
 
         // $organization = Organization::factory()->create();
         // $admin = User::factory()->create();
-        $organization->users()->attach($admin, ['roles' => json_encode(['admin'])]);
+        // $organization->users()->attach($admin, ['roles' => json_encode(['admin'])]);
 
         $response = $this->actingAs($admin)
             ->postJson("/api/organizations/{$organization->id}/units", [
@@ -54,7 +55,7 @@ class OrganizationUnitApiTest extends TestCase
     #[Test]
     public function can_create_nested_unit()
     {
-        [$organization, $admin] = $this->createOrganizationWithUser();
+        [$organization, $admin] = [$this->organization, $this->user]; //$this->createOrganizationWithUser();
 
         // $organization = Organization::factory()->create();
         $parentUnit = OrganizationUnit::factory()->create(['organization_id' => $organization->id]);
@@ -73,7 +74,7 @@ class OrganizationUnitApiTest extends TestCase
     #[Test]
     public function can_get_unit_hierarchy()
     {
-        [$organization, $admin] = $this->createOrganizationWithUser();
+        [$organization, $admin] = [$this->organization, $this->user]; //$this->createOrganizationWithUser();
         $unit = OrganizationUnit::factory()
             ->for($organization)
             ->has(OrganizationUnit::factory()->count(2), 'children')
@@ -90,7 +91,7 @@ class OrganizationUnitApiTest extends TestCase
     #[Test]
     public function can_assign_user_to_unit()
     {
-        [$org, $admin] = $this->createOrganizationWithUser();
+        [$org, $admin] = [$this->organization, $this->user]; //$this->createOrganizationWithUser();
         $unit = OrganizationUnit::factory()->for($org)->create();
         $user = User::factory()->create();
         $org->users()->attach($user);
@@ -113,7 +114,7 @@ class OrganizationUnitApiTest extends TestCase
     #[Test]
     public function can_list_users_by_organization_unit()
     {
-        [$org, $admin] = $this->createOrganizationWithUser();
+        [$org, $admin] = [$this->organization, $this->user]; //$this->createOrganizationWithUser();
 
         // Create hierarchy: Department → Team
         $dept = OrganizationUnit::factory()->create([
@@ -160,8 +161,10 @@ class OrganizationUnitApiTest extends TestCase
     #[Test]
     public function cannot_assign_user_as_non_admin()
     {
-        [$org, $regularUser] = $this->createOrganizationWithUser(roles: ['user']);
-        $unit = OrganizationUnit::factory()->for($org)->create();
+        $this->createOrganizationWithUser(roles: ['user']);
+        [$org, $regularUser] = [$this->organization, $this->user];
+        // dd([$org, $regularUser]);
+        $unit = OrganizationUnit::factory()->create(['organization_id' => $org->id]);
         $user = User::factory()->create();
         $org->users()->attach($user);
 
@@ -176,7 +179,7 @@ class OrganizationUnitApiTest extends TestCase
     #[Test]
     public function cannot_create_unit_with_invalid_data()
     {
-        [$organization, $admin] = $this->createOrganizationWithUser();
+        [$organization, $admin] = [$this->organization, $this->user]; //$this->createOrganizationWithUser();
 
         $response = $this->actingAs($admin)
             ->postJson("/api/organizations/{$organization->id}/units", [
@@ -189,7 +192,7 @@ class OrganizationUnitApiTest extends TestCase
     #[Test]
     public function cannot_assign_non_existent_user_to_unit()
     {
-        [$org, $admin] = $this->createOrganizationWithUser();
+        [$org, $admin] =  [$this->organization, $this->user]; //$this->createOrganizationWithUser();
         $unit = OrganizationUnit::factory()->for($org)->create();
 
         $response = $this->actingAs($admin)
@@ -204,7 +207,7 @@ class OrganizationUnitApiTest extends TestCase
     #[Test]
     public function cannot_assign_user_not_in_organization()
     {
-        [$org, $admin] = $this->createOrganizationWithUser();
+        [$org, $admin] = [$this->organization, $this->user]; // $this->createOrganizationWithUser();
         $unit = OrganizationUnit::factory()->for($org)->create();
         $userFromOtherOrg = User::factory()->create();
 
@@ -220,7 +223,7 @@ class OrganizationUnitApiTest extends TestCase
     #[Test]
     public function cannot_get_hierarchy_for_non_existent_unit()
     {
-        [$org, $admin] = $this->createOrganizationWithUser();
+        [$org, $admin] =  [$this->organization, $this->user]; //$this->createOrganizationWithUser();
 
         $response = $this->actingAs($admin)
             ->getJson("/api/organizations/{$org->id}/units/9999/hierarchy"); // Non-existent unit ID
@@ -231,7 +234,7 @@ class OrganizationUnitApiTest extends TestCase
     #[Test]
     public function can_get_hierarchy_for_unit_with_no_children()
     {
-        [$organization, $admin] = $this->createOrganizationWithUser();
+        [$organization, $admin] = [$this->organization, $this->user]; //$this->createOrganizationWithUser();
         $unit = OrganizationUnit::factory()->for($organization)->create();
 
         $response = $this->actingAs($admin)

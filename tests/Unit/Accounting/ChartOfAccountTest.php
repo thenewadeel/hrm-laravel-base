@@ -7,11 +7,17 @@ use App\Models\Accounting\LedgerEntry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class ChartOfAccountTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, SetupOrganization;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setupOrganization();
+    }
     #[Test]
     public function it_has_a_code_name_and_type()
     {

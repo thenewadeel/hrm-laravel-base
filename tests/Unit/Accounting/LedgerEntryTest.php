@@ -9,10 +9,16 @@ use App\Models\TestTransaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class LedgerEntryTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, SetupOrganization;
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setupOrganization();
+    }
 
     #[Test]
     public function it_belongs_to_a_chart_of_account()

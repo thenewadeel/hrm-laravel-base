@@ -12,10 +12,21 @@ class ItemTest extends TestCase
 {
     use RefreshDatabase, SetupInventory;
 
+    // protected $user;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->setupOrganization();
+        $this->setupInventory();
+        // $this->user = User::factory()->create();
+    }
+
     #[Test]
     public function it_can_create_an_item()
     {
-        $setup = $this->createUserWithInventoryPermissions();
+        // $setup = $this->createUserWithInventoryPermissions();
 
         $itemData = [
             'name' => 'Laptop Dell XPS 13',
@@ -23,11 +34,11 @@ class ItemTest extends TestCase
             'description' => 'High-performance business laptop',
             'category' => 'electronics',
             'unit' => 'pcs',
-            'organization_id' => $setup['organization']->id,
+            'organization_id' => $this->organization->id,
             // 'organization_unit_id' => $setup['orgUnit']->id
         ];
 
-        $response = $this->actingAs($setup['user'])
+        $response = $this->actingAs($this->user)
             ->postJson('/api/inventory/items', $itemData);
 
         $response->assertStatus(201)
@@ -41,7 +52,7 @@ class ItemTest extends TestCase
 
         $this->assertDatabaseHas('inventory_items', [
             'sku' => 'DLXPS13-2024',
-            'organization_id' => $setup['organization']->id
+            'organization_id' => $this->organization->id
         ]);
     }
 
@@ -53,10 +64,10 @@ class ItemTest extends TestCase
 
         // Create specific items for searching
         $searchableItems = [
-            ['name' => 'Wireless Mouse', 'sku' => 'WM-001', 'organization_id' => $setup['organization']->id],
-            ['name' => 'Gaming Keyboard', 'sku' => 'GK-002', 'organization_id' => $setup['organization']->id],
-            ['name' => 'Wireless Headphones', 'sku' => 'WH-003', 'organization_id' => $setup['organization']->id],
-            ['name' => 'Wired Mouse', 'sku' => 'WM-004', 'organization_id' => $setup['organization']->id],
+            ['name' => 'Wireless Mouse', 'sku' => 'WM-001', 'organization_id' => $this->organization->id],
+            ['name' => 'Gaming Keyboard', 'sku' => 'GK-002', 'organization_id' => $this->organization->id],
+            ['name' => 'Wireless Headphones', 'sku' => 'WH-003', 'organization_id' => $this->organization->id],
+            ['name' => 'Wired Mouse', 'sku' => 'WM-004', 'organization_id' => $this->organization->id],
         ];
 
         foreach ($searchableItems as $itemData) {
@@ -64,7 +75,7 @@ class ItemTest extends TestCase
         }
 
         // Test search by name
-        $response = $this->actingAs($setup['user'])
+        $response = $this->actingAs($this->user)
             ->getJson('/api/inventory/items?search=Wireless');
 
         $response->assertStatus(200)
@@ -74,7 +85,7 @@ class ItemTest extends TestCase
             ->assertJsonMissing(['name' => 'Gaming Keyboard']);
 
         // Test search by SKU
-        $response = $this->actingAs($setup['user'])
+        $response = $this->actingAs($this->user)
             ->getJson('/api/inventory/items?search=WM-');
 
         $response->assertStatus(200)
@@ -89,18 +100,18 @@ class ItemTest extends TestCase
         $setup = $this->createUserWithInventoryPermissions();
 
         $items = [
-            ['name' => 'Laptop', 'category' => 'electronics', 'organization_id' => $setup['organization']->id],
-            ['name' => 'Office Chair', 'category' => 'furniture', 'organization_id' => $setup['organization']->id],
-            ['name' => 'Monitor', 'category' => 'electronics', 'organization_id' => $setup['organization']->id],
-            ['name' => 'Notebook', 'category' => 'stationery', 'organization_id' => $setup['organization']->id],
+            ['name' => 'Laptop', 'category' => 'electronicsX', 'organization_id' => $this->organization->id],
+            ['name' => 'Office Chair', 'category' => 'furnitureX', 'organization_id' => $this->organization->id],
+            ['name' => 'Monitor', 'category' => 'electronicsX', 'organization_id' => $this->organization->id],
+            ['name' => 'Notebook', 'category' => 'stationeryX', 'organization_id' => $this->organization->id],
         ];
 
         foreach ($items as $itemData) {
             \App\Models\Inventory\Item::factory()->create($itemData);
         }
 
-        $response = $this->actingAs($setup['user'])
-            ->getJson('/api/inventory/items?category=electronics');
+        $response = $this->actingAs($this->user)
+            ->getJson('/api/inventory/items?category=electronicsX');
         // dd($response->json());
         $response->assertStatus(200)
             ->assertJsonCount(2, 'data')
@@ -112,12 +123,14 @@ class ItemTest extends TestCase
     #[Test]
     public function it_can_sort_items()
     {
-        $setup = $this->createUserWithInventoryPermissions();
-
+        // $setup = $this->createUserWithInventoryPermissions();
+        $setup = $this->createTempInventorySetup();
+        $user = $setup['user'];
+        $organization = $setup['organization'];
         $items = [
-            ['name' => 'Zebra Item', 'sku' => 'Z-001', 'organization_id' => $setup['organization']->id],
-            ['name' => 'Alpha Item', 'sku' => 'A-001', 'organization_id' => $setup['organization']->id],
-            ['name' => 'Beta Item', 'sku' => 'B-001', 'organization_id' => $setup['organization']->id],
+            ['name' => 'Zebra Item', 'sku' => 'Z-001', 'organization_id' => $organization->id],
+            ['name' => 'Alpha Item', 'sku' => 'A-001', 'organization_id' => $organization->id],
+            ['name' => 'Beta Item', 'sku' => 'B-001', 'organization_id' => $organization->id],
         ];
 
         foreach ($items as $itemData) {
@@ -125,18 +138,19 @@ class ItemTest extends TestCase
         }
 
         // Test ascending sort by name
-        $response = $this->actingAs($setup['user'])
+        $response = $this->actingAs($user)
             ->getJson('/api/inventory/items?sort_field=name&sort_direction=asc');
 
         $response->assertStatus(200);
         $data = $response->json('data');
+        // dd($data);
         // dd($data);
         $this->assertEquals('Alpha Item', $data[0]['name']);
         $this->assertEquals('Beta Item', $data[1]['name']);
         $this->assertEquals('Zebra Item', $data[2]['name']);
 
         // Test descending sort by name
-        $response = $this->actingAs($setup['user'])
+        $response = $this->actingAs($user)
             ->getJson('/api/inventory/items?sort_field=name&sort_direction=desc');
 
         $response->assertStatus(200);
@@ -149,16 +163,18 @@ class ItemTest extends TestCase
     #[Test]
     public function it_returns_only_items_from_users_organization()
     {
-        $setupA = $this->createUserWithInventoryPermissions();
-        $setupB = $this->createInventorySetup(); // Different organization
-
+        $setupA = $this->createTempInventorySetup();
+        $setupB = $this->createTempInventorySetup(); // Different organization
+        // dd($setupB);
         // Create items in both organizations
-        $itemA = \App\Models\Inventory\Item::factory()->create([
+        $this->actingAs($setupA['user']);
+        $itemA = Item::factory()->create([
             'name' => 'Org A Item',
             'organization_id' => $setupA['organization']->id
         ]);
 
-        $itemB = \App\Models\Inventory\Item::factory()->create([
+        $this->actingAs($setupB['user']);
+        $itemB = Item::factory()->create([
             'name' => 'Org B Item',
             'organization_id' => $setupB['organization']->id
         ]);
@@ -166,7 +182,7 @@ class ItemTest extends TestCase
         // User from Org A should only see Org A items
         $response = $this->actingAs($setupA['user'])
             ->getJson('/api/inventory/items');
-
+        // dd($response->json());
         $response->assertStatus(200)
             ->assertJsonCount(1, 'data') // Only the item from their organization
             ->assertJsonFragment(['name' => 'Org A Item'])
@@ -180,29 +196,29 @@ class ItemTest extends TestCase
 
         // Create multiple stores
         $stores = [
-            $setup['store'],
+            $this->store,
             \App\Models\Inventory\Store::factory()->create([
-                // 'organization_id' => $setup['organization']->id,
-                'organization_unit_id' => $setup['organization_unit']->id,
+                // 'organization_id' => $this->organization->id,
+                'organization_unit_id' => $this->organizationUnit->id,
                 'name' => 'Warehouse A',
                 'code' => 'WH-A'
             ]),
             \App\Models\Inventory\Store::factory()->create([
-                // 'organization_id' => $setup['organization']->id,
-                'organization_unit_id' => $setup['organization_unit']->id,
+                // 'organization_id' => $this->organization->id,
+                'organization_unit_id' => $this->organizationUnit->id,
                 'name' => 'Warehouse B',
                 'code' => 'WH-B'
             ]),
         ];
 
-        $item = Item::factory()->create(['organization_id' => $setup['organization']->id]); //$setup['items']->first();
+        $item = Item::factory()->create(['organization_id' => $this->organization->id]); //$setup['items']->first();
 
         // Add item to stores with different quantities
         $stores[0]->items()->attach($item->id, ['quantity' => 50]);
         $stores[1]->items()->attach($item->id, ['quantity' => 25]);
         $stores[2]->items()->attach($item->id, ['quantity' => 0]); // Out of stock
 
-        $response = $this->actingAs($setup['user'])
+        $response = $this->actingAs($this->user)
             ->getJson("/api/inventory/items/{$item->id}/availability");
         // dd($response->json());
         $response->assertStatus(200)
@@ -248,15 +264,15 @@ class ItemTest extends TestCase
         $setup = $this->createUserWithInventoryPermissions();
 
         $item = \App\Models\Inventory\Item::factory()->create([
-            'organization_id' => $setup['organization']->id,
+            'organization_id' => $this->organization->id,
             // 'organization_unit_id' => $setup['orgUnit']->id,
             'reorder_level' => 20
         ]);
 
         // Add item with low stock
-        $setup['store']->items()->attach($item->id, ['quantity' => 15]); // Below reorder level
+        $this->store->items()->attach($item->id, ['quantity' => 15]); // Below reorder level
 
-        $response = $this->actingAs($setup['user'])
+        $response = $this->actingAs($this->user)
             ->getJson("/api/inventory/items/{$item->id}/availability");
 
         $response->assertStatus(200)
@@ -268,8 +284,8 @@ class ItemTest extends TestCase
     #[Test]
     public function it_returns_403_for_unauthorized_access()
     {
-        $setupA = $this->createUserWithInventoryPermissions();
-        $setupB = $this->createInventorySetup(); // Different organization
+        $setupA = $this->createTempInventorySetup();
+        $setupB = $this->createTempInventorySetup(); // Different organization
 
         $itemB = Item::factory()->create([
             'organization_id' => $setupB['organization']->id,
@@ -289,12 +305,12 @@ class ItemTest extends TestCase
         $setup = $this->createUserWithInventoryPermissions();
 
         $item = Item::factory()->create([
-            'organization_id' => $setup['organization']->id,
+            'organization_id' => $this->organization->id,
             // 'organization_unit_id' => $setupB['orgUnit']->id,
         ]);;
         // Don't attach to any stores
 
-        $response = $this->actingAs($setup['user'])
+        $response = $this->actingAs($this->user)
             ->getJson("/api/inventory/items/{$item->id}/availability");
 
         $response->assertStatus(200)

@@ -7,10 +7,17 @@ use Tests\Traits\SetupInventory;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class TransactionTest extends TestCase
 {
-    use RefreshDatabase, SetupInventory;
+    use RefreshDatabase, SetupOrganization, SetupInventory;
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setupOrganization();
+        $this->setupInventory();
+    }
 
     #[Test]
     public function it_can_create_draft_transaction_without_items()

@@ -9,17 +9,19 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class JournalEntriesApiTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, SetupOrganization;
 
-    protected $user;
+    // protected $user;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->user = User::factory()->create();
+        $this->setupOrganization();
+        // $this->user = User::factory()->create();
     }
 
     #[Test]

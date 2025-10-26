@@ -12,27 +12,34 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\Traits\SetupInventory;
+use Tests\Traits\SetupOrganization;
 
 class SetupChartOfAccountsTest extends TestCase
 {
-    use RefreshDatabase, SetupInventory;
+    use RefreshDatabase, SetupOrganization, SetupInventory;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->migrateInventory();
+        $this->setupOrganization();
+    }
     #[Test]
     public function it_creates_default_chart_of_accounts()
     {
-        $user = User::factory()->create();
-        $organization = Organization::factory()->create();
-        $user->organizations()->attach($organization->id, [
-            'roles' => json_encode(['admin']),
-            'organization_unit_id' => null
-        ]);
+        // $user = User::factory()->create();
+        // $organization = Organization::factory()->create();
+        // $user->organizations()->attach($organization->id, [
+        //     'roles' => json_encode(['admin']),
+        //     'organization_unit_id' => null
+        // ]);
+        // $this->actingAs($user);
+        // // Create a store to pass the store check
+        // Store::factory()->create([
+        //     'organization_unit_id' => $organization->units()->first()->id ?? null,
+        // ]);
 
-        // Create a store to pass the store check
-        Store::factory()->create([
-            'organization_unit_id' => $organization->units()->first()->id ?? null,
-        ]);
-
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->user)
             ->post('/setup/accounts', [
                 'setup_default_accounts' => true,
             ]);
@@ -40,8 +47,7 @@ class SetupChartOfAccountsTest extends TestCase
         $response->assertRedirect('/dashboard');
 
         // Check that default accounts were created
-        $accounts = ChartOfAccount:: //where('organization_id', $organization->id)->
-            get();
+        $accounts = ChartOfAccount::where('organization_id', $this->organization->id)->get();
         $this->assertTrue($accounts->count() > 0, 'No chart of accounts were created');
 
         // Check for specific default accounts using where()

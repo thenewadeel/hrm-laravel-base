@@ -8,11 +8,18 @@ use Tests\Traits\SetupInventory;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class StoreTest extends TestCase
 {
-    use RefreshDatabase, SetupInventory;
+    use RefreshDatabase, SetupOrganization, SetupInventory;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setupOrganization();
+        $this->setupInventory();
+    }
     #[Test]
     public function it_can_create_a_store()
     {
@@ -124,7 +131,7 @@ class StoreTest extends TestCase
             ->getJson("/api/inventory/stores?organization_id={$setup['organization']->id}");
 
         $response->assertStatus(200)
-            ->assertJsonCount(3, 'data') // Should have 3 stores
+            ->assertJsonCount(4, 'data') // Should have 3 stores
             ->assertJsonStructure([
                 'data' => [
                     '*' => [
@@ -145,7 +152,7 @@ class StoreTest extends TestCase
 
         // Test the scope directly
         $stores = Store::forOrganization($setup['organization']->id)->get();
-        $this->assertCount(3, $stores);
+        $this->assertCount(4, $stores);
     }
 
     #[Test]

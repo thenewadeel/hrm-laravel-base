@@ -9,20 +9,31 @@ use App\Services\AccountingService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class AccountTypeValidationTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, SetupOrganization;
 
     protected AccountingService $accountingService;
 
     protected function setUp(): void
     {
         parent::setUp();
+        $this->setupOrganization();
         $this->accountingService = app(AccountingService::class);
     }
 
-    #[Test]
+    /*************  ✨ Windsurf Command ⭐  *************/
+    /**
+     * Tests that the AccountingService allows debiting asset accounts.
+     *
+     * This test ensures that the AccountingService does not throw an
+     * exception when debiting an asset account.
+     *
+     * @return void
+     */
+    /*******  035c4e9d-be51-4bf5-a46e-a38c524a3910  *******/    #[Test]
     public function it_allows_debit_to_asset_accounts()
     {
         $assetAccount = ChartOfAccount::factory()->create(['type' => 'asset']);

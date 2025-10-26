@@ -7,10 +7,17 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Roles\InventoryRoles;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class PermissionTest extends TestCase
 {
-    use RefreshDatabase, SetupInventory;
+    use RefreshDatabase, SetupOrganization, SetupInventory;
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setupOrganization();
+        $this->setupInventory();
+    }
 
     #[Test]
     public function inventory_admin_has_all_permissions()
@@ -71,10 +78,10 @@ class PermissionTest extends TestCase
     public function user_cannot_access_other_organization_inventory()
     {
         // Create user with permissions in Organization A
-        $setupA = $this->createUserWithInventoryPermissions();
+        $setupA = $this->createTempInventorySetup();
 
         // Create Organization B with its own store
-        $setupB = $this->createInventorySetup();
+        $setupB = $this->createTempInventorySetup();
         $storeB = $setupB['store'];
 
         // User from Org A tries to access Org B's store

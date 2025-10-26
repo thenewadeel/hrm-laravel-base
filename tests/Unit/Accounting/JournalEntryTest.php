@@ -9,11 +9,16 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class JournalEntryTest extends TestCase
 {
-    use RefreshDatabase;
-
+    use RefreshDatabase, SetupOrganization;
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setupOrganization();
+    }
     #[Test]
     public function it_can_create_a_journal_entry()
     {

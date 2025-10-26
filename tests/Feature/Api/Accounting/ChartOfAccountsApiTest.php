@@ -9,17 +9,19 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Accounting\ChartOfAccount;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class ChartOfAccountsApiTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, SetupOrganization;
 
-    protected $user;
+    // protected $user;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->user = User::factory()->create();
+        $this->setupOrganization();
+        // $this->user = User::factory()->create();
     }
 
 
@@ -28,7 +30,7 @@ class ChartOfAccountsApiTest extends TestCase
     {
         $accounts = ChartOfAccount::factory()->count(3)->create();
 
-        $this->actingAs($this->user);
+        // $this->actingAs($this->user);
         $response = $this->getJson('/api/accounts');
         // dd($response->json());
         $response->assertStatus(200)
@@ -50,7 +52,7 @@ class ChartOfAccountsApiTest extends TestCase
             'description' => 'Test account description'
         ];
 
-        $this->actingAs($this->user);
+        // $this->actingAs($this->user);
         $response = $this->postJson('/api/accounts', $accountData);
 
         $response->assertStatus(201)
@@ -64,7 +66,7 @@ class ChartOfAccountsApiTest extends TestCase
     #[Test]
     public function it_validates_account_creation()
     {
-        $this->actingAs($this->user);
+        // $this->actingAs($this->user);
         $response = $this->postJson('/api/accounts', []);
 
         $response->assertStatus(422)
@@ -76,7 +78,7 @@ class ChartOfAccountsApiTest extends TestCase
     {
         $account = ChartOfAccount::factory()->create();
 
-        $this->actingAs($this->user);
+        // $this->actingAs($this->user);
         $response = $this->getJson("/api/accounts/{$account->id}");
 
         $response->assertStatus(200)
@@ -92,7 +94,7 @@ class ChartOfAccountsApiTest extends TestCase
     #[Test]
     public function it_returns_404_for_nonexistent_account()
     {
-        $this->actingAs($this->user);
+        // $this->actingAs($this->user);
         $response = $this->getJson('/api/accounts/9999');
 
         $response->assertStatus(404);

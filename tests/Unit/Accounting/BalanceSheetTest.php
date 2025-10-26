@@ -9,10 +9,11 @@ use App\Services\AccountingReportService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class BalanceSheetTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, SetupOrganization;
 
     protected AccountingReportService $reportService;
 
@@ -20,6 +21,7 @@ class BalanceSheetTest extends TestCase
     {
         parent::setUp();
         $this->reportService = app(AccountingReportService::class);
+        $this->setupOrganization();
     }
 
     #[Test]

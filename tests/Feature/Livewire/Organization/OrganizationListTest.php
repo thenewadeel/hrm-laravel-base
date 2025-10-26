@@ -14,11 +14,15 @@ use PHPUnit\Framework\Attributes\Test;
 class OrganizationListTest extends TestCase
 {
     use RefreshDatabase, SetupOrganization;
-
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setupOrganization();
+    }
     #[Test]
     public function it_shows_organizations_list()
     {
-        [$organization, $user] = $this->createOrganizationWithUser();
+        [$organization, $user] = [$this->organization, $this->user];
 
         Livewire::actingAs($user)
             ->test('organization.organization-list')
@@ -30,7 +34,7 @@ class OrganizationListTest extends TestCase
     #[Test]
     public function it_searches_organizations_by_name()
     {
-        [$organization, $user] = $this->createOrganizationWithUser();
+        [$organization, $user] = [$this->organization, $this->user];
         $org1 = Organization::factory()->create(['name' => 'Pharma Solutions']);
         $org2 = Organization::factory()->create(['name' => 'MediCare Ltd']);
 
@@ -44,7 +48,7 @@ class OrganizationListTest extends TestCase
     #[Test]
     public function it_sorts_organizations_by_name_ascending()
     {
-        [$organization, $user] = $this->createOrganizationWithUser();
+        [$organization, $user] = [$this->organization, $this->user];
 
         // Create organizations in specific order
         $orgC = Organization::factory()->create(['name' => 'Gamma Organization']);
@@ -79,7 +83,7 @@ class OrganizationListTest extends TestCase
     #[Test]
     public function it_sorts_organizations_by_name_descending()
     {
-        [$organization, $user] = $this->createOrganizationWithUser();
+        [$organization, $user] = [$this->organization, $this->user];
 
         $orgA = Organization::factory()->create(['name' => 'Alpha Organization']);
         $orgB = Organization::factory()->create(['name' => 'Beta Organization']);
@@ -95,7 +99,7 @@ class OrganizationListTest extends TestCase
     #[Test]
     public function it_sorts_organizations_by_status()
     {
-        [$organization, $user] = $this->createOrganizationWithUser();
+        [$organization, $user] = [$this->organization, $this->user];
 
         $activeOrg = Organization::factory()->active()->create(['name' => 'Active Company']);
         $inactiveOrg = Organization::factory()->inactive()->create(['name' => 'Inactive Company']);
@@ -109,7 +113,7 @@ class OrganizationListTest extends TestCase
     #[Test]
     public function it_paginates_organizations()
     {
-        [$organization, $user] = $this->createOrganizationWithUser();
+        [$organization, $user] = [$this->organization, $this->user];
         Organization::factory()->count(20)->create();
 
 

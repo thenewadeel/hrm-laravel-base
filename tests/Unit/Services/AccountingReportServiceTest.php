@@ -9,16 +9,18 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Carbon\Carbon;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class AccountingReportServiceTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, SetupOrganization;
 
     protected AccountingReportService $service;
 
     protected function setUp(): void
     {
         parent::setUp();
+        $this->setupOrganization();
         // Since the service does not use constructor injection, we can simply instantiate it
         $this->service = new AccountingReportService();
     }

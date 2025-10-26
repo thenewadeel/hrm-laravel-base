@@ -8,11 +8,16 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class OrganizationTreeTest extends TestCase
 {
-    use RefreshDatabase;
-
+    use RefreshDatabase, SetupOrganization;
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setupOrganization();
+    }
     #[Test]
     public function it_can_display_the_organization_tree()
     {

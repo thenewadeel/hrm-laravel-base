@@ -10,30 +10,48 @@ use App\Models\Organization;
 use App\Models\OrganizationUnit;
 use App\Models\User;
 use App\Roles\InventoryRoles;
+use App\Services\InventoryService;
 use Illuminate\Support\Facades\Artisan;
 
 trait SetupInventory
 {
-    protected function setUp(): void
+    use SetupOrganization;
+    // public $user;
+    // public User $user;
+    // public Organization $organization;
+    public OrganizationUnit $organizationUnit;
+    public Store $store;
+    public Item $item;
+    protected function migrateInventory()
     {
-        parent::setUp();
-
         // Run migrations from the custom path for testing
         Artisan::call('migrate', [
             // '--database' => 'sqlite', // Or your desired test database connection
             '--path' => 'database/migrations/inventory',
             // '--force' => true, // Essential for production environments, though not strictly needed for in-memory SQLite
         ]);
+    }
+    protected function setupInventory(): void
+    {
+        // parent::setUp();
+        // dd('ppp');
+        $this->migrateInventory();
+        $setup = $this->createInventorySetup();
 
-        // Optional: Seed your test database if needed
-        // Artisan::call('db:seed', [
-        //     '--class' => 'TestDatabaseSeeder',
-        //     '--force' => true,
-        // ]);
+        $this->inventoryService = app(InventoryService::class);
+
+        $this->organization = $setup['organization'];
+        $this->organizationUnit = $setup['organization_unit'];
+        $this->user = $setup['user'];
+        $this->store = $setup['store'];
+        $this->item = $setup['items']->first();
+
+        // Set authenticated user for Gate system
+        // $this->actingAs($this->user);
     }
     protected function createUserWithInventoryPermissions($user = null, $role = InventoryRoles::INVENTORY_ADMIN, $organization = null)
     {
-        $setup = $this->createInventorySetup($user, [$role], true);
+        $setup = $this->createInventorySetup();
         $user = $user ?: $setup['user'];
         $organization = $organization ?: $setup['organization'];
         // Get permissions for the role
@@ -70,13 +88,13 @@ trait SetupInventory
         return $user->hasPermission($permission, $organization);
     }
 
-    protected function createInventorySetup($user = null, array $roles = [InventoryRoles::INVENTORY_ADMIN], $noItems = false)
+    protected function createInventorySetup(array $roles = [InventoryRoles::INVENTORY_ADMIN])
     {
-        $organization = Organization::factory()->create();
+        $organization = $this->organization ?? Organization::factory()->create();
         $organization_unit = OrganizationUnit::factory()->create([
             'organization_id' => $organization->id
         ]);
-        $user = $user ?: User::factory()->create();
+        $user = $this->user ?? User::factory()->create();
 
         $organization->users()->attach($user, [
             'roles' => json_encode($roles),
@@ -102,20 +120,66 @@ trait SetupInventory
             'store' => $store,
             // 'items' => $items
         ];
-        if ($noItems == true) {
-        } else {
-            $items = Item::factory()->count(5)->create([
-                'organization_id' => $organization->id
-            ]);
-            $result['items'] = $items;
-        }
+        // if ($noItems == true) {
+        // } else {
+        $items = Item::factory()->count(5)->create([
+            'organization_id' => $organization->id
+        ]);
+        $result['items'] = $items;
+        // }
+        // $this->user = $user;
+        // dd($user);
+        $this->actingAs($user);
+
         return $result;
     }
 
+    protected function createTempInventorySetup(array $roles = [InventoryRoles::INVENTORY_ADMIN])
+    {
+        $organization = Organization::factory()->create();
+        $organization_unit = OrganizationUnit::factory()->create([
+            'organization_id' => $organization->id
+        ]);
+        $user =  User::factory()->create();
+
+        $organization->users()->attach($user, [
+            'roles' => json_encode($roles),
+            'organization_id' => $organization->id,
+            'organization_unit_id' => $organization_unit->id
+
+        ]);
+
+
+        // $organization_unit->users()->attach($user, [
+        //     'roles' => json_encode($roles),
+        //     'organization_id' => $organization->id
+        // ]);
+        $store = Store::factory()->create([
+            'name' => 'test store',
+            'organization_unit_id' => $organization_unit->id
+        ]);
+        $permissions = \App\Roles\InventoryRoles::getPermissionsForRole($roles[0]);
+
+        // Assign permissions to user for the specific organization
+        $user->givePermissionTo($permissions, $organization);
+        $user->assignRole($roles[0], $organization);
+
+        $result = [
+            'organization' => $organization,
+            'organization_unit' => $organization_unit,
+            'user' => $user,
+            'store' => $store,
+            // 'items' => $items
+        ];
+
+        $this->actingAs($user);
+
+        return $result;
+    }
     protected function createDraftTransactionWithItems($store = null, $user = null, $itemCount = 3)
     {
         if (!$store) {
-            $setup = $this->createInventorySetup($user);
+            $setup = $this->createInventorySetup();
             $store = $setup['store'];
             $items = $setup['items']->take($itemCount);
         } else {
@@ -176,7 +240,7 @@ trait SetupInventory
 
     protected function createMultipleStoresWithInventory($user = null)
     {
-        $setup = $this->createInventorySetup($user);
+        $setup = $this->createInventorySetup();
 
         $additionalStores = Store::factory()->count(2)->create([
             'organization_unit_id' => $setup['organization_unit']->id

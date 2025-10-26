@@ -11,11 +11,18 @@ use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\Traits\SetupInventory;
+use Tests\Traits\SetupOrganization;
 
 class SetupStoreTest extends TestCase
 {
-    use RefreshDatabase, SetupInventory;
+    use RefreshDatabase, SetupOrganization, SetupInventory;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setupOrganization();
+        $this->setupInventory();
+    }
 
     #[Test]
     public function it_creates_first_store_for_organization()

@@ -12,11 +12,18 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\Traits\SetupInventory;
+use Tests\Traits\SetupOrganization;
 
 class MultiStepSetupWizardTest extends TestCase
 {
-    use RefreshDatabase, SetupInventory;
+    use RefreshDatabase, SetupOrganization, SetupInventory;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setupOrganization();
+        $this->setupInventory();
+    }
     #[Test]
     public function it_shows_organization_step_for_new_users()
     {
