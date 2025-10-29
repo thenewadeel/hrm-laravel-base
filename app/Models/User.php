@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
 use App\Roles\InventoryRoles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -16,30 +14,19 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens;
-
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
     use HasProfilePhoto;
     use HasTeams;
     use Notifiable;
     use TwoFactorAuthenticatable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'email',
         'password',
+        'current_organization_id', // <-- ADDED for fixed tenancy
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
@@ -47,20 +34,11 @@ class User extends Authenticatable
         'two_factor_secret',
     ];
 
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array<int, string>
-     */
     protected $appends = [
         'profile_photo_url',
+        'organization', // <-- ADDED for fixed tenancy
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -69,21 +47,23 @@ class User extends Authenticatable
         ];
     }
 
+    // --- RELATIONSHIPS (CRITICAL FIXES HERE) ---
+
     public function organizations()
     {
+        // CRITICAL FIX: Link to the custom pivot model
         return $this->belongsToMany(Organization::class, 'organization_user')
-            ->withPivot('organization_unit_id', 'position', 'roles', 'permissions')
+            ->using(OrganizationUser::class)
+            ->withPivot(['organization_unit_id', 'position', 'roles', 'permissions'])
             ->withTimestamps();
     }
 
-    // app/Models/User.php
-
     public function units()
     {
-        // This relationship correctly maps to the organization_user pivot table
-        // by specifying the foreign keys. This seems okay.
+        // CRITICAL FIX: Link to the custom pivot model
         return $this->belongsToMany(OrganizationUnit::class, 'organization_user', 'user_id', 'organization_unit_id')
-            ->withPivot('organization_id', 'position', 'roles', 'permissions')
+            ->using(OrganizationUser::class)
+            ->withPivot(['organization_id', 'position', 'roles', 'permissions'])
             ->withTimestamps();
     }
 
@@ -92,12 +72,21 @@ class User extends Authenticatable
         return $this->units();
     }
 
+    // Fixed Tenancy Relationships
+    public function currentOrganization()
+    {
+        return $this->belongsTo(Organization::class, 'current_organization_id');
+    }
 
-    /**
-     * Check if user has permission for a specific organization
-     * Checks both direct permissions and role-based permissions
-     */
-    public function hasPermission(string $permission, $organization = null): bool
+    public function getOrganizationAttribute()
+    {
+        return $this->currentOrganization;
+    }
+
+    // --- PERMISSION/ROLE METHODS (json_decode REMOVED) ---
+
+    // Around line 101 and 116 - fix the hasPermission methods
+    public function hasPermission($permission, $organization = null): bool
     {
         // If organization is provided, check permission in that context
         if ($organization) {
@@ -173,43 +162,29 @@ class User extends Authenticatable
                 ]);
             }
         }
-
         return $this;
     }
 
-    /**
-     * Check if user has role in specific organization
-     */
     public function hasRole(string|array $roles, $organization = null): bool
     {
         $roles = is_array($roles) ? $roles : [$roles];
-
         if ($organization) {
             $orgId = $organization instanceof Organization ? $organization->id : $organization;
             $membership = $this->organizations()->where('organizations.id', $orgId)->first();
-
-            if ($membership && $membership->pivot->roles) {
-                $userRoles = json_decode($membership->pivot->roles, true) ?? [];
+            if ($membership) {
+                $userRoles = $membership->pivot->roles ?? [];
                 return !empty(array_intersect($roles, $userRoles));
             }
         }
-
-        // Check if user has role in any organization
         foreach ($this->organizations as $org) {
-            if ($org->pivot->roles) {
-                $userRoles = json_decode($org->pivot->roles, true) ?? [];
-                if (!empty(array_intersect($roles, $userRoles))) {
-                    return true;
-                }
+            $userRoles = $org->pivot->roles ?? [];
+            if (!empty(array_intersect($roles, $userRoles))) {
+                return true;
             }
         }
-
         return false;
     }
 
-    /**
-     * Assign role to user for specific organization
-     */
     public function assignRole(string|array $roles, $organization = null): self
     {
         $roles = is_array($roles) ? $roles : [$roles];

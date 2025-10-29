@@ -25,11 +25,6 @@ class OrganizationUnit extends Model
         'custom_fields',
     ];
 
-    // public function organization()
-    // {
-    //     return $this->belongsTo(Organization::class);
-    // }
-
     public function parent()
     {
         return $this->belongsTo(OrganizationUnit::class, 'parent_id');
@@ -38,16 +33,16 @@ class OrganizationUnit extends Model
     public function children()
     {
         return $this->hasMany(OrganizationUnit::class, 'parent_id')
-            // ->withDepth()
             ->withTrashed();
     }
     public function users()
     {
-        // The 'is_active' pivot column does not exist in your schema.
+        // CRITICAL FIX: Link to the custom pivot model
         return $this->belongsToMany(User::class, 'organization_user')
+            ->using(OrganizationUser::class)
             ->withPivot(['position', 'roles', 'permissions']);
     }
-    // Recursive relationship for all descendants
+    // ... (rest of the file is omitted for brevity)  // Recursive relationship for all descendants
     public function allDescendants()
     {
         return $this->hasMany(OrganizationUnit::class, 'parent_id')
