@@ -3,8 +3,9 @@
 namespace App\Policies;
 
 use App\Models\Organization;
-use App\Models\OrganizationUnit;
 use App\Models\User;
+use App\Permissions\OrganizationPermissions;
+use App\Roles\InventoryRoles;
 use Illuminate\Auth\Access\Response;
 
 class OrganizationPolicy
@@ -17,96 +18,77 @@ class OrganizationPolicy
 
     public function view(User $user, Organization $organization): bool
     {
-        // User must be a member of the organization
-        return $organization->users()->where('user_id', $user->id)->exists();
+        return
+            $user->organizations->contains($organization->organization_id);
     }
 
-    public function create(User $user): bool
+    /**
+     * Determine whether the user can create models.
+     */
+    public function create(User $user, Organization $organization)
     {
-        // Any authenticated user can create organizations
-        return true;
+        return $user->hasPermission(OrganizationPermissions::CREATE_ORGANIZATION);
     }
 
+
+    /**
+     * Determine whether the user can update the model.
+     */
     public function update(User $user, Organization $organization): bool
     {
-        // Only admins can update
-        return $this->isAdmin($user, $organization);
+        return $user->hasPermission(OrganizationPermissions::EDIT_ORGANIZATION) &&
+            $user->organizations->contains($organization->id);
     }
 
+    /**
+     * Determine whether the user can delete the model.
+     */
     public function delete(User $user, Organization $organization): bool
     {
-        // Only owner or super admins can delete
-        return $organization->owner_id === $user->id || $user->is_super_admin;
+        return $user->hasPermission(OrganizationPermissions::DELETE_ORGANIZATION) &&
+            $user->organizations->contains($organization->id);
     }
-    // In OrganizationUnitPolicy.php
 
-    // public function update(User $user, OrganizationUnit $unit, Organization $organization)
-    // {
-    //     return $organization->users()
-    //         ->where('user_id', $user->id)
-    //         ->whereJsonContains('roles', 'admin')
-    //         ->exists();
-    // }
+    /**
+     * Determine whether the user can restore the model.
+     */
+    public function restore(User $user, Organization $organization): bool
+    {
+        return $user->hasPermission(OrganizationPermissions::EDIT_ORGANIZATION) &&
+            $user->organizations->contains($organization->id);
+    }
 
-    // public function delete(User $user, OrganizationUnit $unit, Organization $organization)
-    // {
-    //     return $organization->users()
-    //         ->where('user_id', $user->id)
-    //         ->whereJsonContains('roles', 'admin')
-    //         ->exists();
-    // }
-
-    // public function viewMembers(User $user, Organization $organization): bool
-    // {
-    //     // Admins or moderators can view members
-    //     return $this->hasAnyRole($user, $organization, ['admin', 'moderator']);
-    // }
+    /**
+     * Determine whether the user can permanently delete the model.
+     */
+    public function forceDelete(User $user, Organization $organization): bool
+    {
+        return false; // Short circuit
+        return $user->hasPermission(OrganizationPermissions::DELETE_ORGANIZATION) &&
+            $user->organizations->contains($organization->id);
+    }
 
     public function viewMembers(User $user, Organization $organization)
     {
-        return $organization->users()
-            ->where('user_id', $user->id)
-            ->exists();
+        return $user->hasPermission(OrganizationPermissions::VIEW_ORGANIZATION_USERS || OrganizationPermissions::VIEW_USERS) &&
+            $user->organizations->contains($organization->id);
     }
 
     public function inviteMembers(User $user, Organization $organization): bool
     {
-        // Only admins can invite
-        return $this->isAdmin($user, $organization);
+        return $user->hasPermission(OrganizationPermissions::CREATE_ORGANIZATION_USERS || OrganizationPermissions::CREATE_USERS) &&
+            $user->organizations->contains($organization->id);
     }
 
     public function manageMembers(User $user, Organization $organization): bool
     {
-        // Only admins can manage members
-        return $this->isAdmin($user, $organization);
+        return $user->hasPermission(OrganizationPermissions::EDIT_ORGANIZATION_USERS || OrganizationPermissions::EDIT_USERS) &&
+            $user->organizations->contains($organization->id);
     }
 
-    public function assign(User $user, OrganizationUnit $unit): bool
-    {
-        // Only org admins can assign users to units
-        return $this->isAdmin($user, $unit->organization);
-    }
-    // ---------------------------
-    // Helper Methods
-    // ---------------------------
-
-    protected function isAdmin(User $user, Organization $organization): bool
-    {
-        return $this->hasAnyRole($user, $organization, ['admin']);
-    }
-
-    protected function hasAnyRole(
-        User $user,
-        Organization $organization,
-        array $roles
-    ): bool {
-        return $organization->users()
-            ->where('user_id', $user->id)
-            ->where(function ($query) use ($roles) {
-                foreach ($roles as $role) {
-                    $query->orWhereJsonContains('roles', $role);
-                }
-            })
-            ->exists();
-    }
+    // public function assign(User $user, Organization $organization): bool
+    // {
+    //     return $user->hasPermission(OrganizationPermissions::ASSIGN_ORGANIZATION_USERS) &&
+    //         $user->organizations->contains($organization->id);
+    // }
 }

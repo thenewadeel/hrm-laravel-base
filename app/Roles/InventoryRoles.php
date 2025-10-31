@@ -6,6 +6,7 @@ use App\Permissions\InventoryPermissions;
 
 class InventoryRoles
 {
+    const SUPER_ADMIN = 'admin';
     const INVENTORY_ADMIN = 'inventory_admin';
     const STORE_MANAGER = 'store_manager';
     const INVENTORY_CLERK = 'inventory_clerk';
@@ -14,6 +15,10 @@ class InventoryRoles
     public static function permissions(): array
     {
         return [
+            self::SUPER_ADMIN => [
+                // All inventory permissions
+                ...InventoryPermissions::all(),
+            ],
             self::INVENTORY_ADMIN => [
                 // All inventory permissions
                 ...InventoryPermissions::all(),
