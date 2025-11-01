@@ -4,8 +4,9 @@ namespace Tests\Traits;
 
 use App\Models\Organization;
 use App\Models\User;
+use App\Roles\OrganizationRoles;
 
-trait TenancyTestSetup
+trait SetupTenancy
 {
     /**
      * Define the array of models that should be tested for tenancy scope.
@@ -41,19 +42,19 @@ trait TenancyTestSetup
         // $userA = User::factory()->create();
 
         $this->orgA->users()->attach($this->userA, [
-            'roles' => json_encode(["admin"]),
+            'roles' => json_encode([OrganizationRoles::ORGANIZATION_ADMIN]),
             'organization_id' => $this->orgA->id,
             // 'organization_unit_id' => $organization_unit->id
 
         ]);
         $this->orgB->users()->attach($this->userB, [
-            'roles' => json_encode(["admin"]),
+            'roles' => json_encode([OrganizationRoles::ORGANIZATION_ADMIN]),
             'organization_id' => $this->orgB->id,
             // 'organization_unit_id' => $organization_unit->id
 
         ]);
 
-
+        // dd($this->orgB->users);
 
         // 3. Populate test data for each registered model
         $this->populateTenantData();
