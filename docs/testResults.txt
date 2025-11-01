@@ -1,39 +1,39 @@
 
    PASS  Tests\Unit\Accounting\AccountTypeValidationTest
-  ✓ it allows debit to asset accounts                                    0.27s  
-  ✓ it allows debit to expense accounts                                  0.02s  
-  ✓ it throws exception when debiting liability account                  0.02s  
-  ✓ it allows credit to liability accounts                               0.02s  
-  ✓ it allows credit to revenue accounts                                 0.02s  
-  ✓ it throws exception when crediting asset account                     0.02s  
-  ✓ it validates account types during transaction posting                0.02s  
+  ✓ it allows debit to asset accounts                                    0.26s  
+  ✓ it allows debit to expense accounts                                  0.03s  
+  ✓ it throws exception when debiting liability account                  0.04s  
+  ✓ it allows credit to liability accounts                               0.03s  
+  ✓ it allows credit to revenue accounts                                 0.03s  
+  ✓ it throws exception when crediting asset account                     0.03s  
+  ✓ it validates account types during transaction posting                0.03s  
 
    PASS  Tests\Unit\Accounting\BalanceSheetTest
-  ✓ it generates balance sheet with no transactions                      0.05s  
-  ✓ it generates balanced balance sheet                                  0.05s  
+  ✓ it generates balance sheet with no transactions                      0.04s  
+  ✓ it generates balanced balance sheet                                  0.04s  
   ✓ it includes retained earnings from income statement                  0.05s  
 
    PASS  Tests\Unit\Accounting\ChartOfAccountTest
   ✓ it has a code name and type                                          0.03s  
   ✓ it can scope accounts by type                                        0.03s  
   ✓ account code must be unique                                          0.03s  
-  ✓ it can calculate its current balance                                 0.03s  
+  ✓ it can calculate its current balance                                 0.04s  
 
    PASS  Tests\Unit\Accounting\DimensionReportTest
   ✓ example                                                              0.12s  
 
    PASS  Tests\Unit\Accounting\FinancialReportsTest
-  ✓ example                                                              0.09s  
+  ✓ example                                                              0.07s  
 
    PASS  Tests\Unit\Accounting\IncomeStatementTest
-  ✓ it generates income statement with no transactions                   0.02s  
-  ✓ it generates income statement with revenue and expenses              0.03s  
+  ✓ it generates income statement with no transactions                   0.03s  
+  ✓ it generates income statement with revenue and expenses              0.04s  
   ✓ it excludes transactions outside date range                          0.02s  
 
    PASS  Tests\Unit\Accounting\InvalidAccountTypeExceptionTest
   ✓ it provides detailed error message                                   0.02s  
-  ✓ it provides contextual information                                   0.01s  
-  ✓ it allows custom message                                             0.01s  
+  ✓ it provides contextual information                                   0.02s  
+  ✓ it allows custom message                                             0.02s  
 
    PASS  Tests\Unit\Accounting\JournalEntryFactoryTest
   ✓ it can create a journal entry                                        0.02s  
@@ -42,7 +42,7 @@
   ✓ it can create journal entry with specific approver                   0.02s  
 
    PASS  Tests\Unit\Accounting\JournalEntryTest
-  ✓ it can create a journal entry                                        0.03s  
+  ✓ it can create a journal entry                                        0.02s  
   ✓ it can post a balanced journal entry                                 0.02s  
   ✓ it prevents posting unbalanced journal entries                       0.02s  
 
@@ -62,10 +62,10 @@
   ✓ example                                                              0.02s  
 
    PASS  Tests\Unit\Models\Inventory\ItemTest
-  ✓ example                                                              0.01s  
+  ✓ example                                                              0.02s  
 
    PASS  Tests\Unit\Models\Inventory\StoreTest
-  ✓ example                                                              0.02s  
+  ✓ example                                                              0.01s  
 
    PASS  Tests\Unit\AccountingReportServiceTest
   ✓ it generates a correct trial balance                                 0.02s  
@@ -77,45 +77,45 @@
   ✓ it can handle complex but balanced transactions                      0.02s  
 
    PASS  Tests\Unit\Services\InventoryServiceTest
-  ✓ it can create a store                                                0.05s  
-  ✓ it can update store inventory                                        0.03s  
+  ✓ it can create a store                                                0.04s  
+  ✓ it can update store inventory                                        0.04s  
   ✓ it can update store inventory with min max stock                     0.03s  
-  ✓ it can adjust store inventory                                        0.04s  
+  ✓ it can adjust store inventory                                        0.03s  
   ✓ it can create and finalize transaction                               0.04s  
   ✓ it can cancel transaction                                            0.03s  
   ✓ it can get store stock levels                                        0.03s  
   ✓ it can get item availability                                         0.03s  
   ✓ it prevents modifying finalized transaction                          0.04s  
-  ✓ it prevents finalizing transaction with no items                     0.03s  
+  ✓ it prevents finalizing transaction with no items                     0.04s  
   ✓ it prevents cancelling finalized transaction                         0.03s  
-  ✓ it calculates low stock correctly                                    0.04s  
+  ✓ it calculates low stock correctly                                    0.03s  
   ✓ it calculates overstock correctly                                    0.03s  
 
    PASS  Tests\Unit\Services\SequenceServiceTest
   ✓ it generates sequential codes                                        0.02s  
-  ✓ it handles concurrent requests safely                                0.02s  
+  ✓ it handles concurrent requests safely                                0.01s  
 
    PASS  Tests\Unit\Teams\CreateTeamTest
-  ✓ teams can be created                                                 0.06s  
+  ✓ teams can be created                                                 0.05s  
 
    PASS  Tests\Unit\Teams\DeleteTeamTest
   ✓ teams can be deleted                                                 0.04s  
   ✓ personal teams cant be deleted                                       0.04s  
 
    PASS  Tests\Unit\Teams\InviteTeamMemberTest
-  ✓ team members can be invited to team                                  0.07s  
-  ✓ team member invitations can be cancelled                             0.07s  
+  ✓ team members can be invited to team                                  0.06s  
+  ✓ team member invitations can be cancelled                             0.06s  
 
    PASS  Tests\Unit\Teams\LeaveTeamTest
   ✓ users can leave teams                                                0.05s  
   ✓ team owners cant leave their own team                                0.05s  
 
    PASS  Tests\Unit\Teams\RemoveTeamMemberTest
-  ✓ team members can be removed from teams                               0.07s  
+  ✓ team members can be removed from teams                               0.06s  
   ✓ only team owner can remove team members                              0.05s  
 
    PASS  Tests\Unit\Teams\UpdateTeamMemberRoleTest
-  ✓ team member roles can be updated                                     0.09s  
+  ✓ team member roles can be updated                                     0.07s  
   ✓ only team owner can update team member roles                         0.06s  
 
    PASS  Tests\Unit\Teams\UpdateTeamNameTest
@@ -125,22 +125,22 @@
   ✓ api token permissions can be updated                                 0.07s  
 
    PASS  Tests\Unit\base\AuthenticationTest
-  ✓ login screen can be rendered                                         0.04s  
+  ✓ login screen can be rendered                                         0.03s  
   ✓ users can authenticate using the login screen                        0.04s  
-  ✓ users cannot authenticate with invalid password                      0.04s  
+  ✓ users cannot authenticate with invalid password                      0.03s  
 
    PASS  Tests\Unit\base\BrowserSessionsTest
-  ✓ other browser sessions can be logged out                             0.05s  
+  ✓ other browser sessions can be logged out                             0.04s  
 
    PASS  Tests\Unit\base\CreateApiTokenTest
-  ✓ api tokens can be created                                            0.06s  
+  ✓ api tokens can be created                                            0.05s  
 
    PASS  Tests\Unit\base\DeleteAccountTest
-  ✓ user accounts can be deleted                                         0.05s  
+  ✓ user accounts can be deleted                                         0.04s  
   ✓ correct password must be provided before account can be deleted      0.05s  
 
    PASS  Tests\Unit\base\DeleteApiTokenTest
-  ✓ api tokens can be deleted                                            0.07s  
+  ✓ api tokens can be deleted                                            0.05s  
 
    WARN  Tests\Unit\base\EmailVerificationTest
   - email verification screen can be rendered → Email verification not…  0.02s  
@@ -148,19 +148,19 @@
   - email can not verified with invalid hash → Email verification not e… 0.01s  
 
    PASS  Tests\Unit\base\PasswordConfirmationTest
-  ✓ confirm password screen can be rendered                              0.05s  
+  ✓ confirm password screen can be rendered                              0.04s  
   ✓ password can be confirmed                                            0.04s  
-  ✓ password is not confirmed with invalid password                      0.24s  
+  ✓ password is not confirmed with invalid password                      0.23s  
 
    PASS  Tests\Unit\base\PasswordResetTest
   ✓ reset password link screen can be rendered                           0.05s  
-  ✓ reset password link can be requested                                 0.26s  
+  ✓ reset password link can be requested                                 0.23s  
   ✓ reset password screen can be rendered                                0.26s  
   ✓ password can be reset with valid token                               0.26s  
 
    PASS  Tests\Unit\base\ProfileInformationTest
   ✓ current profile information is available                             0.05s  
-  ✓ profile information can be updated                                   0.04s  
+  ✓ profile information can be updated                                   0.06s  
 
    WARN  Tests\Unit\base\RegistrationTest
   ✓ registration screen can be rendered                                  0.03s  
@@ -168,43 +168,43 @@
   ✓ new users can register                                               0.03s  
 
    PASS  Tests\Unit\base\TwoFactorAuthenticationSettingsTest
-  ✓ two factor authentication can be enabled                             0.15s  
-  ✓ recovery codes can be regenerated                                    0.14s  
-  ✓ two factor authentication can be disabled                            0.10s  
+  ✓ two factor authentication can be enabled                             0.07s  
+  ✓ recovery codes can be regenerated                                    0.11s  
+  ✓ two factor authentication can be disabled                            0.06s  
 
    PASS  Tests\Unit\base\UpdatePasswordTest
-  ✓ password can be updated                                              0.07s  
-  ✓ current password must be correct                                     0.05s  
-  ✓ new passwords must match                                             0.06s  
+  ✓ password can be updated                                              0.05s  
+  ✓ current password must be correct                                     0.04s  
+  ✓ new passwords must match                                             0.05s  
 
    PASS  Tests\Feature\Api\Accounting\ChartOfAccountsApiTest
-  ✓ it can list chart of accounts                                        0.05s  
+  ✓ it can list chart of accounts                                        0.04s  
   ✓ it can create a chart of account                                     0.04s  
-  ✓ it validates account creation                                        0.05s  
+  ✓ it validates account creation                                        0.03s  
   ✓ it can show a specific account                                       0.04s  
-  ✓ it returns 404 for nonexistent account                               0.05s  
+  ✓ it returns 404 for nonexistent account                               0.03s  
 
    PASS  Tests\Feature\Api\Accounting\FinancialReportsApiTest
-  ✓ it can generate trial balance                                        0.05s  
-  ✓ it can generate balance sheet                                        0.05s  
-  ✓ it can generate income statement                                     0.05s  
+  ✓ it can generate trial balance                                        0.04s  
+  ✓ it can generate balance sheet                                        0.04s  
+  ✓ it can generate income statement                                     0.04s  
   ✓ it validates income statement date range                             0.04s  
   ✓ it rejects end date before start date                                0.04s  
 
    PASS  Tests\Feature\Api\Accounting\JournalEntriesApiTest
-  ✓ it can create a journal entry                                        0.05s  
-  ✓ it validates journal entry balances                                  0.05s  
+  ✓ it can create a journal entry                                        0.04s  
+  ✓ it validates journal entry balances                                  0.04s  
   ✓ it can post a journal entry                                          0.04s  
 
-   FAIL  Tests\Feature\OrganizationApiTest
+   PASS  Tests\Feature\OrganizationApiTest
   ✓ can create organization                                              0.04s  
   ✓ debug factory output                                                 0.02s  
   ✓ verify organization factory works                                    0.02s  
   ✓ can list organizations                                               0.04s  
   ✓ can show organization                                                0.04s  
   ✓ can update organization                                              0.04s  
-  ⨯ can delete organization                                              0.04s  
-  ⨯ guests cannot access organizations                                   0.05s  
+  ✓ can delete organization                                              0.04s  
+  ✓ guests cannot access organizations                                   0.04s  
   ✓ name is required for creation                                        0.04s  
   ✓ name must be unique                                                  0.04s  
   ✓ user can view their organizations                                    0.04s  
@@ -213,610 +213,211 @@
   ✓ cannot invite existing member                                        0.04s  
   ✓ non admin cannot invite members                                      0.04s  
 
-   FAIL  Tests\Feature\OrganizationUnitApiTest
-  ✓ can create organization unit                                         0.07s  
+   PASS  Tests\Feature\OrganizationUnitApiTest
+  ✓ can create organization unit                                         0.05s  
   ✓ can create nested unit                                               0.04s  
-  ✓ can get unit hierarchy                                               0.05s  
+  ✓ can get unit hierarchy                                               0.04s  
   ✓ can assign user to unit                                              0.04s  
-  ⨯ can list users by organization unit                                  0.05s  
-  ⨯ cannot create organization unit as non admin                         0.02s  
+  ✓ can list users by organization unit                                  0.04s  
+  ✓ cannot create organization unit as non admin                         0.04s  
   ✓ cannot assign user as non admin                                      0.04s  
   ✓ cannot create unit with invalid data                                 0.04s  
   ✓ cannot assign non existent user to unit                              0.04s  
   ✓ cannot assign user not in organization                               0.04s  
-  ✓ cannot get hierarchy for non existent unit                           0.05s  
+  ✓ cannot get hierarchy for non existent unit                           0.04s  
   ✓ can get hierarchy for unit with no children                          0.04s  
 
    FAIL  Tests\Feature\DashboardTest
-  ✓ it redirects to setup for users without organization                 0.05s  
-  ⨯ it shows dashboard for users with organization                       0.02s  
-  ⨯ it shows dashboard sections                                          0.02s  
-  ⨯ it shows store inventory summary                                     0.02s  
-  ⨯ it shows low stock alerts                                            0.02s  
-  ⨯ it shows recent transactions                                         0.02s  
-  ⨯ it shows quick action buttons                                        0.02s  
-  ⨯ it shows stats cards                                                 0.02s  
-  ⨯ it shows empty state for no stores                                   0.02s  
-  ⨯ it shows all stocked message when no low stock                       0.02s  
-  ⨯ it shows store with item counts                                      0.02s  
+  ✓ it redirects to setup for users without organization                 0.06s  
+  ✓ it shows dashboard for users with organization                       0.06s  
+  ✓ it shows dashboard sections                                          0.06s  
+  ✓ it shows store inventory summary                                     0.06s  
+  ⨯ it shows low stock alerts                                            0.03s  
+  ✓ it shows recent transactions                                         0.09s  
+  ✓ it shows quick action buttons                                        0.06s  
+  ✓ it shows stats cards                                                 0.06s  
+  ⨯ it shows empty state for no stores                                   0.06s  
+  ✓ it shows all stocked message when no low stock                       0.06s  
+  ✓ it shows store with item counts                                      0.06s  
 
    PASS  Tests\Feature\ExampleTest
-  ✓ it returns a successful response                                     0.06s  
+  ✓ it returns a successful response                                     0.04s  
 
    FAIL  Tests\Feature\Inventory\ItemTest
-  ✓ it can create an item                                                0.06s  
-  ✓ it can search items by name or sku                                   0.08s  
-  ✓ it can filter items by category                                      0.08s  
-  ✓ it can sort items                                                    0.08s  
-  ✓ it returns only items from users organization                        0.07s  
-  ✓ it can get item availability across stores                           0.07s  
-  ✓ it shows low stock status correctly                                  0.07s  
-  ⨯ it returns 403 for unauthorized access                               0.07s  
-  ✓ it handles item with no stores                                       0.08s  
+  ✓ it can create an item                                                0.05s  
+  ✓ it can search items by name or sku                                   0.07s  
+  ✓ it can filter items by category                                      0.06s  
+  ✓ it can sort items                                                    0.06s  
+  ✓ it returns only items from users organization                        0.06s  
+  ✓ it can get item availability across stores                           0.06s  
+  ✓ it shows low stock status correctly                                  0.06s  
+  ⨯ it returns 403 for unauthorized access                               0.06s  
+  ✓ it handles item with no stores                                       0.06s  
 
-   FAIL  Tests\Feature\Inventory\PermissionTest
-  ✓ inventory admin has all permissions                                  0.08s  
-  ✓ store manager cannot delete stores                                   0.07s  
-  ✓ inventory clerk cannot finalize transactions                         0.08s  
-  ✓ auditor can only view inventory                                      0.07s  
-  ⨯ user cannot access other organization inventory                      0.08s  
+   PASS  Tests\Feature\Inventory\PermissionTest
+  ✓ inventory admin has all permissions                                  0.06s  
+  ✓ store manager cannot delete stores                                   0.05s  
+  ✓ inventory clerk cannot finalize transactions                         0.06s  
+  ✓ auditor can only view inventory                                      0.06s  
+  ✓ user cannot access other organization inventory                      0.05s  
 
    PASS  Tests\Feature\Inventory\StoreTest
-  ✓ it can create a store                                                0.07s  
-  ✓ it can add items to store                                            0.07s  
-  ✓ it can retrieve store with items                                     0.07s  
-  ✓ it can update item quantity in store                                 0.07s  
-  ✓ it can list all stores for organization                              0.10s  
-  ✓ it can use organization scope                                        0.05s  
-  ✓ it can use search scope                                              0.05s  
-  ✓ it can use active scope                                              0.05s  
+  ✓ it can create a store                                                0.06s  
+  ✓ it can add items to store                                            0.05s  
+  ✓ it can retrieve store with items                                     0.06s  
+  ✓ it can update item quantity in store                                 0.05s  
+  ✓ it can list all stores for organization                              0.06s  
+  ✓ it can use organization scope                                        0.04s  
+  ✓ it can use search scope                                              0.03s  
+  ✓ it can use active scope                                              0.03s  
 
    PASS  Tests\Feature\Inventory\TransactionTest
-  ✓ it can create draft transaction without items                        0.08s  
-  ✓ it can create draft transaction with items                           0.08s  
-  ✓ it can add items to empty draft transaction                          0.09s  
-  ✓ it can add items to transaction with existing items                  0.08s  
-  ✓ it can finalize transaction created without items after adding item… 0.09s  
-  ✓ it can finalize transaction created with items                       0.08s  
-  ✓ it cannot finalize empty transaction                                 0.07s  
-  ✓ it cannot add items to finalized transaction                         0.08s  
-  ✓ it can list transactions by status                                   0.11s  
-  ✓ it can calculate transaction totals                                  0.08s  
-  ✓ it cannot modify finalized transaction                               0.09s  
-  ✓ it can calculate totals for empty transaction                        0.07s  
+  ✓ it can create draft transaction without items                        0.07s  
+  ✓ it can create draft transaction with items                           0.06s  
+  ✓ it can add items to empty draft transaction                          0.06s  
+  ✓ it can add items to transaction with existing items                  0.06s  
+  ✓ it can finalize transaction created without items after adding item… 0.07s  
+  ✓ it can finalize transaction created with items                       0.07s  
+  ✓ it cannot finalize empty transaction                                 0.06s  
+  ✓ it cannot add items to finalized transaction                         0.06s  
+  ✓ it can list transactions by status                                   0.08s  
+  ✓ it can calculate transaction totals                                  0.06s  
+  ✓ it cannot modify finalized transaction                               0.07s  
+  ✓ it can calculate totals for empty transaction                        0.06s  
 
    PASS  Tests\Feature\Livewire\Accounting\ChartOfAccountsTest
-  ✓ chart of accounts page renders                                       0.06s  
-  ✓ it displays a list of accounts                                       0.05s  
-  ✓ it displays a list of chart of accounts                              0.05s  
-  ✓ it can create a new chart of account record                          0.06s  
-  ✓ it can update an existing chart of account record                    0.06s  
+  ✓ chart of accounts page renders                                       0.04s  
+  ✓ it displays a list of accounts                                       0.04s  
+  ✓ it displays a list of chart of accounts                              0.04s  
+  ✓ it can create a new chart of account record                          0.05s  
+  ✓ it can update an existing chart of account record                    0.05s  
 
    FAIL  Tests\Feature\Livewire\Accounting\JournalEntriesTest
-  ✓ it renders successfully                                              0.05s  
-  ⨯ it creates a journal entry                                           0.09s  
-  ✓ a journal entry requires balanced debits and credits                 0.08s  
+  ✓ it renders successfully                                              0.04s  
+  ⨯ it creates a journal entry                                           0.07s  
+  ✓ a journal entry requires balanced debits and credits                 0.07s  
 
    PASS  Tests\Feature\Livewire\Organization\MemberManagerTest
-  ✓ it can display a list of organization members                        0.05s  
+  ✓ it can display a list of organization members                        0.04s  
   ✓ it can search for members by name or email                           0.05s  
 
    PASS  Tests\Feature\Livewire\Organization\OrganizationFormTest
   ✓ it shows create form                                                 0.05s  
   ✓ it shows edit form                                                   0.04s  
-  ✓ it creates new organization                                          0.05s  
-  ✓ it updates existing organization                                     0.06s  
-  ✓ it validates required fields                                         0.05s  
-  ✓ it validates unique name                                             0.05s  
-  ✓ it closes modal                                                      0.05s  
+  ✓ it creates new organization                                          0.04s  
+  ✓ it updates existing organization                                     0.05s  
+  ✓ it validates required fields                                         0.04s  
+  ✓ it validates unique name                                             0.04s  
+  ✓ it closes modal                                                      0.04s  
 
    FAIL  Tests\Feature\Livewire\Organization\OrganizationListTest
-  ✓ it shows organizations list                                          0.06s  
-  ✓ it searches organizations by name                                    0.05s  
+  ✓ it shows organizations list                                          0.05s  
+  ✓ it searches organizations by name                                    0.04s  
   ✓ it sorts organizations by name ascending                             0.05s  
-  ✓ it sorts organizations by name descending                            0.06s  
-  ✓ it sorts organizations by status                                     0.05s  
-  ✓ it paginates organizations                                           0.07s  
+  ✓ it sorts organizations by name descending                            0.05s  
+  ✓ it sorts organizations by status                                     0.04s  
+  ✓ it paginates organizations                                           0.05s  
   ⨯ it shows empty state when no organizations                           0.04s  
 
-   PASS  Tests\Feature\Livewire\Organization\OrganizationTreeTest
-  ✓ it can display the organization tree                                 0.06s  
-  ✓ an organization unit can be dragged and dropped to another parent    0.07s  
-  ✓ an organizational unit cannot be dropped onto itself                 0.05s  
-  ✓ an organizational unit can be dropped as a root node                 0.05s  
-  ✓ a parent cannot be dropped onto one of its descendants               0.06s  
-  ✓ a sibling can be dropped under another sibling                       0.06s  
-  ✓ an empty tree renders correctly                                      0.04s  
-  ✓ it can handle a large number of units without crashing               0.15s  
-  ✓ a dropped unit that does not exist does not cause an error           0.05s  
+   FAIL  Tests\Feature\Livewire\Organization\OrganizationTreeTest
+  ✓ it can display the organization tree                                 0.05s  
+  ✓ an organization unit can be dragged and dropped to another parent    0.04s  
+  ✓ an organizational unit cannot be dropped onto itself                 0.04s  
+  ✓ an organizational unit can be dropped as a root node                 0.04s  
+  ✓ a parent cannot be dropped onto one of its descendants               0.04s  
+  ✓ a sibling can be dropped under another sibling                       0.04s  
+  ⨯ an empty tree renders correctly                                      0.02s  
+  ✓ it can handle a large number of units without crashing               0.08s  
+  ⨯ a dropped unit that does not exist does not cause an error           0.04s  
 
    FAIL  UserPlacementTest
-  ✓ it can assign a user to a unit                                       0.07s  
-  ⨯ it can unassign a user by dropping them onto the root                0.05s  
+  ✓ it can assign a user to a unit                                       0.05s  
+  ⨯ it can unassign a user by dropping them onto the root                0.04s  
 
-   FAIL  Tests\Feature\MultiStepSetupWizardTest
-  ✓ it shows organization step for new users                             0.07s  
-  ✓ it can store organization and proceed to store step                  0.06s  
-  ✓ it shows store setup step after organization                         0.07s  
-  ✓ it can create first store and proceed to accounting                  0.07s  
-  ⨯ it shows accounting setup step after store                           0.08s  
-  ✓ it can setup chart of accounts and complete wizard                   0.08s  
-  ✓ it redirects to correct step based on progress                       0.06s  
+   PASS  Tests\Feature\MultiStepSetupWizardTest
+  ✓ it shows organization step for new users                             0.06s  
+  ✓ it can store organization and proceed to store step                  0.05s  
+  ✓ it shows store setup step after organization                         0.06s  
+  ✓ it can create first store and proceed to accounting                  0.06s  
+  ✓ it shows accounting setup step after store                           0.06s  
+
+   PASS  OrganizationUserPivotTest
+  ✓ it can get all roles with the new pivot model                        0.02s  
 
    PASS  Tests\Feature\SetupChartOfAccountsTest
-  ✓ it creates default chart of accounts                                 0.07s  
-  ✓ it skips account creation if not requested                           0.06s  
-  ✓ it creates organization unit for accounting department               0.07s  
+  ✓ it creates default chart of accounts                                 0.05s  
+  ✓ it skips account creation if not requested                           0.05s  
+  ✓ it creates organization unit for accounting department               0.06s  
 
    PASS  Tests\Feature\SetupStoreTest
-  ✓ it creates first store for organization                              0.07s  
-  ✓ it validates store creation                                          0.06s  
-  ✓ it auto generates store code if not provided                         0.06s  
+  ✓ it creates first store for organization                              0.05s  
+  ✓ it validates store creation                                          0.05s  
+  ✓ it auto generates store code if not provided                         0.05s  
 
-   FAIL  Tests\Feature\SetupWizardTest
-  ✓ it shows setup wizard for new users                                  0.05s  
-  ✓ it redirects to dashboard if organization exists                     0.04s  
-  ✓ it can create organization through wizard                            0.04s  
+   PASS  Tests\Feature\SetupWizardTest
+  ✓ it shows setup wizard for new users                                  0.06s  
+  ✓ it redirects to dashboard if organization exists                     0.05s  
+  ✓ it can create organization through wizard                            0.05s  
   ✓ it validates organization creation                                   0.05s  
-  ⨯ it assigns admin role to creator                                     0.01s  
+  ✓ it assigns admin role to creator                                     0.05s  
 
    PASS  Tests\Feature\TenancyFeatureTest
-  ✓ queries are automatically scoped to the authenticated users organiz… 0.05s  
-  ✓ organization id is automatically set on creation                     0.05s  
-  ✓ global scope can be bypassed for admin queries                       0.05s  
+  ✓ queries are automatically scoped to the authenticated users organiz… 0.04s  
+  ✓ organization id is automatically set on creation                     0.03s  
+  ✓ global scope can be bypassed for admin queries                       0.03s  
   ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\OrganizationApiTest > can delete or…  QueryException   
-  SQLSTATE[HY000]: General error: 1 no such table: 1 (Connection: sqlite, SQL: select exists(select * from "1" where "deleted_at" is not null) as "exists")
+   FAILED  Tests\Feature\DashboardTest > it shows low stock…   QueryException   
+  SQLSTATE[HY000]: General error: 1 table inventory_stores has no column named organization_id (Connection: sqlite, SQL: insert into "inventory_stores" ("organization_unit_id", "name", "code", "location", "description", "is_active", "organization_id", "updated_at", "created_at") values (2, repellat Store, ST8075, 4370 Mante Forks, Quis laudantium facilis sed eos., 1, 2, 2025-11-01 07:19:14, 2025-11-01 07:19:14))
 
-  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:406
-    402▕             // For select statements, we'll simply execute the query and return an array
-    403▕             // of the database result set. Each element in the array will be a single
-    404▕             // row from the database table, and will either be an array or objects.
-    405▕             $statement = $this->prepared(
-  ➜ 406▕                 $this->getPdoForSelect($useReadPdo)->prepare($query)
-    407▕             );
-    408▕ 
-    409▕             $this->bindValues($statement, $this->prepareBindings($bindings));
-    410▕
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
 
-      [2m+5 vendor frames [22m
-  6   tests/Feature/Api/Organization/OrganizationApiTest.php:137
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\OrganizationApiTest > guests cannot access organiza…   
-  Expected response status code [401] but received 200.
-Failed asserting that 200 is identical to 401.
-
-  at tests/Feature/Api/Organization/OrganizationApiTest.php:145
-    141▕     {
-    142▕         $org = Organization::factory()->create();
-    143▕ 
-    144▕         // Index
-  ➜ 145▕         $this->getJson('/api/organizations')->assertUnauthorized();
-    146▕ 
-    147▕         // Show
-    148▕         $this->getJson("/api/organizations/{$this->organization->id}")->assertUnauthorized();
-    149▕
+      [2m+16 vendor frames [22m
+  17  tests/Feature/DashboardTest.php:116
 
   ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\OrganizationUnitApiTest > can list users by organiz…   
-  Expected response status code [200] but received 500.
-Failed asserting that 500 is identical to 200.
+   FAILED  Tests\Feature\DashboardTest > it shows empty state for no stores     
+  Expected: <!DOCTYPE html>\n
+  <html lang="en">\n
+  \n
+  ... (470 more lines)
 
-The following exception occurred during the last request:
+  To contain: No stores yet
 
-PDOException: SQLSTATE[HY000]: General error: 1 ambiguous column name: organization_id in /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Connection.php:406
-Stack trace:
-#0 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Connection.php(406): PDO->prepare()
-#1 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Connection.php(811): Illuminate\Database\Connection->{closure:Illuminate\Database\Connection::select():397}()
-#2 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Connection.php(778): Illuminate\Database\Connection->runQueryCallback()
-#3 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Connection.php(397): Illuminate\Database\Connection->run()
-#4 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3188): Illuminate\Database\Connection->select()
-#5 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3173): Illuminate\Database\Query\Builder->runSelect()
-#6 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3763): Illuminate\Database\Query\Builder->{closure:Illuminate\Database\Query\Builder::get():3172}()
-#7 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3172): Illuminate\Database\Query\Builder->onceWithColumns()
-#8 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(902): Illuminate\Database\Query\Builder->get()
-#9 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Relations/BelongsToMany.php(910): Illuminate\Database\Eloquent\Builder->getModels()
-#10 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Relations/BelongsToMany.php(894): Illuminate\Database\Eloquent\Relations\BelongsToMany->get()
-#11 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/HasAttributes.php(635): Illuminate\Database\Eloquent\Relations\BelongsToMany->getResults()
-#12 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/HasAttributes.php(573): Illuminate\Database\Eloquent\Model->getRelationshipFromMethod()
-#13 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/HasAttributes.php(494): Illuminate\Database\Eloquent\Model->getRelationValue()
-#14 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(2423): Illuminate\Database\Eloquent\Model->getAttribute()
-#15 /home/gg/dev/hrm-laravel-base/app/Http/Controllers/Api/OrganizationUnitController.php(187): Illuminate\Database\Eloquent\Model->__get()
-#16 [internal function]: App\Http\Controllers\Api\OrganizationUnitController->{closure:App\Http\Controllers\Api\OrganizationUnitController::members():186}()
-#17 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Collections/Arr.php(786): array_map()
-#18 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(814): Illuminate\Support\Arr::map()
-#19 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Collection.php(418): Illuminate\Support\Collection->map()
-#20 /home/gg/dev/hrm-laravel-base/app/Http/Controllers/Api/OrganizationUnitController.php(186): Illuminate\Database\Eloquent\Collection->map()
-#21 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(46): App\Http\Controllers\Api\OrganizationUnitController->members()
-#22 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Route.php(265): Illuminate\Routing\ControllerDispatcher->dispatch()
-#23 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Route.php(211): Illuminate\Routing\Route->runController()
-#24 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(822): Illuminate\Routing\Route->run()
-#25 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}()
-#26 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#27 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings->handle()
-#28 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#29 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle()
-#30 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#31 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then()
-#32 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack()
-#33 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute()
-#34 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute()
-#35 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch()
-#36 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}()
-#37 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Features/SupportDisablingBackButtonCache/DisableBackButtonCacheMiddleware.php(19): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#38 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware->handle()
-#39 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#40 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#41 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#42 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#43 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
-#44 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#45 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#46 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
-#47 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#48 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle()
-#49 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#50 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
-#51 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(61): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#52 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle()
-#53 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#54 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle()
-#55 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#56 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle()
-#57 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#58 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle()
-#59 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#60 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then()
-#61 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
-#62 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle()
-#63 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(573): Illuminate\Foundation\Testing\TestCase->call()
-#64 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(381): Illuminate\Foundation\Testing\TestCase->json()
-#65 /home/gg/dev/hrm-laravel-base/tests/Feature/Api/Organization/OrganizationUnitApiTest.php(140): Illuminate\Foundation\Testing\TestCase->getJson()
-#66 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(1656): Tests\Feature\OrganizationUnitApiTest->can_list_users_by_organization_unit()
-#67 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(514): PHPUnit\Framework\TestCase->runTest()
-#68 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(87): PHPUnit\Framework\TestCase->runBare()
-#69 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(361): PHPUnit\Framework\TestRunner->run()
-#70 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestCase->run()
-#71 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#72 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#73 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
-#74 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/Application.php(211): PHPUnit\TextUI\TestRunner->run()
-#75 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run()
-#76 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle()
-#77 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(192): {closure:/home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest:18}()
-#78 {main}
-
-Next Illuminate\Database\QueryException: SQLSTATE[HY000]: General error: 1 ambiguous column name: organization_id (Connection: sqlite, SQL: select "organization_units".*, "organization_user"."user_id" as "pivot_user_id", "organization_user"."organization_unit_id" as "pivot_organization_unit_id", "organization_user"."organization_id" as "pivot_organization_id", "organization_user"."position" as "pivot_position", "organization_user"."roles" as "pivot_roles", "organization_user"."permissions" as "pivot_permissions", "organization_user"."created_at" as "pivot_created_at", "organization_user"."updated_at" as "pivot_updated_at" from "organization_units" inner join "organization_user" on "organization_units"."id" = "organization_user"."organization_unit_id" where "organization_user"."user_id" = 1 and "organization_units"."deleted_at" is null and "organization_id" = 1) in /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Connection.php:824
-Stack trace:
-#0 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Connection.php(778): Illuminate\Database\Connection->runQueryCallback()
-#1 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Connection.php(397): Illuminate\Database\Connection->run()
-#2 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3188): Illuminate\Database\Connection->select()
-#3 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3173): Illuminate\Database\Query\Builder->runSelect()
-#4 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3763): Illuminate\Database\Query\Builder->{closure:Illuminate\Database\Query\Builder::get():3172}()
-#5 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3172): Illuminate\Database\Query\Builder->onceWithColumns()
-#6 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(902): Illuminate\Database\Query\Builder->get()
-#7 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Relations/BelongsToMany.php(910): Illuminate\Database\Eloquent\Builder->getModels()
-#8 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Relations/BelongsToMany.php(894): Illuminate\Database\Eloquent\Relations\BelongsToMany->get()
-#9 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/HasAttributes.php(635): Illuminate\Database\Eloquent\Relations\BelongsToMany->getResults()
-#10 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/HasAttributes.php(573): Illuminate\Database\Eloquent\Model->getRelationshipFromMethod()
-#11 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/HasAttributes.php(494): Illuminate\Database\Eloquent\Model->getRelationValue()
-#12 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(2423): Illuminate\Database\Eloquent\Model->getAttribute()
-#13 /home/gg/dev/hrm-laravel-base/app/Http/Controllers/Api/OrganizationUnitController.php(187): Illuminate\Database\Eloquent\Model->__get()
-#14 [internal function]: App\Http\Controllers\Api\OrganizationUnitController->{closure:App\Http\Controllers\Api\OrganizationUnitController::members():186}()
-#15 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Collections/Arr.php(786): array_map()
-#16 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(814): Illuminate\Support\Arr::map()
-#17 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Collection.php(418): Illuminate\Support\Collection->map()
-#18 /home/gg/dev/hrm-laravel-base/app/Http/Controllers/Api/OrganizationUnitController.php(186): Illuminate\Database\Eloquent\Collection->map()
-#19 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(46): App\Http\Controllers\Api\OrganizationUnitController->members()
-#20 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Route.php(265): Illuminate\Routing\ControllerDispatcher->dispatch()
-#21 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Route.php(211): Illuminate\Routing\Route->runController()
-#22 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(822): Illuminate\Routing\Route->run()
-#23 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}()
-#24 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#25 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings->handle()
-#26 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#27 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle()
-#28 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#29 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then()
-#30 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack()
-#31 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute()
-#32 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute()
-#33 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch()
-#34 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}()
-#35 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Features/SupportDisablingBackButtonCache/DisableBackButtonCacheMiddleware.php(19): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#36 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware->handle()
-#37 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#38 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#39 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#40 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#41 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
-#42 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#43 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#44 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
-#45 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#46 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle()
-#47 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#48 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
-#49 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(61): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#50 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle()
-#51 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#52 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle()
-#53 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#54 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle()
-#55 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#56 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle()
-#57 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#58 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then()
-#59 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
-#60 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle()
-#61 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(573): Illuminate\Foundation\Testing\TestCase->call()
-#62 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(381): Illuminate\Foundation\Testing\TestCase->json()
-#63 /home/gg/dev/hrm-laravel-base/tests/Feature/Api/Organization/OrganizationUnitApiTest.php(140): Illuminate\Foundation\Testing\TestCase->getJson()
-#64 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(1656): Tests\Feature\OrganizationUnitApiTest->can_list_users_by_organization_unit()
-#65 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(514): PHPUnit\Framework\TestCase->runTest()
-#66 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(87): PHPUnit\Framework\TestCase->runBare()
-#67 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(361): PHPUnit\Framework\TestRunner->run()
-#68 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestCase->run()
-#69 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#70 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#71 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
-#72 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/Application.php(211): PHPUnit\TextUI\TestRunner->run()
-#73 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run()
-#74 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle()
-#75 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(192): {closure:/home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest:18}()
-#76 {main}
-
-----------------------------------------------------------------------------------
-
-SQLSTATE[HY000]: General error: 1 ambiguous column name: organization_id (Connection: sqlite, SQL: select "organization_units".*, "organization_user"."user_id" as "pivot_user_id", "organization_user"."organization_unit_id" as "pivot_organization_unit_id", "organization_user"."organization_id" as "pivot_organization_id", "organization_user"."position" as "pivot_position", "organization_user"."roles" as "pivot_roles", "organization_user"."permissions" as "pivot_permissions", "organization_user"."created_at" as "pivot_created_at", "organization_user"."updated_at" as "pivot_updated_at" from "organization_units" inner join "organization_user" on "organization_units"."id" = "organization_user"."organization_unit_id" where "organization_user"."user_id" = 1 and "organization_units"."deleted_at" is null and "organization_id" = 1)
-
-  at tests/Feature/Api/Organization/OrganizationUnitApiTest.php:143
-    139▕         $response = $this->actingAs($admin)
-    140▕             ->getJson("/api/organizations/{$org->id}/units/{$dept->id}/members");
-    141▕         // dd($response);
-    142▕ 
-  ➜ 143▕         $response->assertStatus(200)
-    144▕             ->assertJsonCount(2, 'data'); // Should return both direct and nested members
-    145▕     }
-    146▕ 
-    147▕     #[Test]
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\OrganizationUnitApiTest > cannot create…   TypeError   
-  Illuminate\Foundation\Testing\TestCase::actingAs(): Argument #1 ($user) must be of type Illuminate\Contracts\Auth\Authenticatable, null given, called in /home/gg/dev/hrm-laravel-base/tests/Feature/Api/Organization/OrganizationUnitApiTest.php on line 152
-
-  at tests/Feature/Api/Organization/OrganizationUnitApiTest.php:152
-    148▕     public function cannot_create_organization_unit_as_non_admin()
-    149▕     {
-    150▕         [$organization, $regularUser] = $this->createOrganizationWithUser(roles: ['user']);
-    151▕ 
-  ➜ 152▕         $response = $this->actingAs($regularUser)
-    153▕             ->postJson("/api/organizations/{$organization->id}/units", [
-    154▕                 'name' => 'Support Team',
-    155▕                 'type' => 'team'
-    156▕             ]);
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\DashboardTest > it shows dashboard for users…  Error   
-  Call to a member function organizations() on null
-
-  at app/Models/Traits/BelongsToOrganization.php:27
-     23▕         // Optional: Ensure the organization_id is automatically filled on creation
-     24▕         // This is a common practice to prevent tenancy leaks.
-     25▕         static::creating(function ($model) {
-     26▕             $user = auth()->user();
-  ➜  27▕             $user_organization = $user->organizations()->first();
-     28▕             if ($user && $user_organization) {
-     29▕                 $model->organization_id = $user_organization->id;
-     30▕             }
-     31▕         });
-
-  1   app/Models/Traits/BelongsToOrganization.php:27
-      [2m+12 vendor frames [22m
-  14  tests/Feature/DashboardTest.php:39
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\DashboardTest > it shows dashboard sections    Error   
-  Call to a member function organizations() on null
-
-  at app/Models/Traits/BelongsToOrganization.php:27
-     23▕         // Optional: Ensure the organization_id is automatically filled on creation
-     24▕         // This is a common practice to prevent tenancy leaks.
-     25▕         static::creating(function ($model) {
-     26▕             $user = auth()->user();
-  ➜  27▕             $user_organization = $user->organizations()->first();
-     28▕             if ($user && $user_organization) {
-     29▕                 $model->organization_id = $user_organization->id;
-     30▕             }
-     31▕         });
-
-  1   app/Models/Traits/BelongsToOrganization.php:27
-      [2m+12 vendor frames [22m
-  14  tests/Feature/DashboardTest.php:59
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\DashboardTest > it shows store inventory sum…  Error   
-  Call to a member function organizations() on null
-
-  at app/Models/Traits/BelongsToOrganization.php:27
-     23▕         // Optional: Ensure the organization_id is automatically filled on creation
-     24▕         // This is a common practice to prevent tenancy leaks.
-     25▕         static::creating(function ($model) {
-     26▕             $user = auth()->user();
-  ➜  27▕             $user_organization = $user->organizations()->first();
-     28▕             if ($user && $user_organization) {
-     29▕                 $model->organization_id = $user_organization->id;
-     30▕             }
-     31▕         });
-
-  1   app/Models/Traits/BelongsToOrganization.php:27
-      [2m+12 vendor frames [22m
-  14  tests/Feature/DashboardTest.php:81
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\DashboardTest > it shows low stock alerts      Error   
-  Call to a member function organizations() on null
-
-  at app/Models/Traits/BelongsToOrganization.php:27
-     23▕         // Optional: Ensure the organization_id is automatically filled on creation
-     24▕         // This is a common practice to prevent tenancy leaks.
-     25▕         static::creating(function ($model) {
-     26▕             $user = auth()->user();
-  ➜  27▕             $user_organization = $user->organizations()->first();
-     28▕             if ($user && $user_organization) {
-     29▕                 $model->organization_id = $user_organization->id;
-     30▕             }
-     31▕         });
-
-  1   app/Models/Traits/BelongsToOrganization.php:27
-      [2m+12 vendor frames [22m
-  14  tests/Feature/DashboardTest.php:109
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\DashboardTest > it shows recent transactions   Error   
-  Call to a member function organizations() on null
-
-  at app/Models/Traits/BelongsToOrganization.php:27
-     23▕         // Optional: Ensure the organization_id is automatically filled on creation
-     24▕         // This is a common practice to prevent tenancy leaks.
-     25▕         static::creating(function ($model) {
-     26▕             $user = auth()->user();
-  ➜  27▕             $user_organization = $user->organizations()->first();
-     28▕             if ($user && $user_organization) {
-     29▕                 $model->organization_id = $user_organization->id;
-     30▕             }
-     31▕         });
-
-  1   app/Models/Traits/BelongsToOrganization.php:27
-      [2m+12 vendor frames [22m
-  14  tests/Feature/DashboardTest.php:146
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\DashboardTest > it shows quick action button…  Error   
-  Call to a member function organizations() on null
-
-  at app/Models/Traits/BelongsToOrganization.php:27
-     23▕         // Optional: Ensure the organization_id is automatically filled on creation
-     24▕         // This is a common practice to prevent tenancy leaks.
-     25▕         static::creating(function ($model) {
-     26▕             $user = auth()->user();
-  ➜  27▕             $user_organization = $user->organizations()->first();
-     28▕             if ($user && $user_organization) {
-     29▕                 $model->organization_id = $user_organization->id;
-     30▕             }
-     31▕         });
-
-  1   app/Models/Traits/BelongsToOrganization.php:27
-      [2m+12 vendor frames [22m
-  14  tests/Feature/DashboardTest.php:173
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\DashboardTest > it shows stats cards           Error   
-  Call to a member function organizations() on null
-
-  at app/Models/Traits/BelongsToOrganization.php:27
-     23▕         // Optional: Ensure the organization_id is automatically filled on creation
-     24▕         // This is a common practice to prevent tenancy leaks.
-     25▕         static::creating(function ($model) {
-     26▕             $user = auth()->user();
-  ➜  27▕             $user_organization = $user->organizations()->first();
-     28▕             if ($user && $user_organization) {
-     29▕                 $model->organization_id = $user_organization->id;
-     30▕             }
-     31▕         });
-
-  1   app/Models/Traits/BelongsToOrganization.php:27
-      [2m+12 vendor frames [22m
-  14  tests/Feature/DashboardTest.php:197
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\DashboardTest > it shows empty state for no…   Error   
-  Call to a member function organizations() on null
-
-  at app/Models/Traits/BelongsToOrganization.php:27
-     23▕         // Optional: Ensure the organization_id is automatically filled on creation
-     24▕         // This is a common practice to prevent tenancy leaks.
-     25▕         static::creating(function ($model) {
-     26▕             $user = auth()->user();
-  ➜  27▕             $user_organization = $user->organizations()->first();
-     28▕             if ($user && $user_organization) {
-     29▕                 $model->organization_id = $user_organization->id;
-     30▕             }
-     31▕         });
-
-  1   app/Models/Traits/BelongsToOrganization.php:27
-      [2m+12 vendor frames [22m
-  14  tests/Feature/DashboardTest.php:223
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\DashboardTest > it shows all stocked message…  Error   
-  Call to a member function organizations() on null
-
-  at app/Models/Traits/BelongsToOrganization.php:27
-     23▕         // Optional: Ensure the organization_id is automatically filled on creation
-     24▕         // This is a common practice to prevent tenancy leaks.
-     25▕         static::creating(function ($model) {
-     26▕             $user = auth()->user();
-  ➜  27▕             $user_organization = $user->organizations()->first();
-     28▕             if ($user && $user_organization) {
-     29▕                 $model->organization_id = $user_organization->id;
-     30▕             }
-     31▕         });
-
-  1   app/Models/Traits/BelongsToOrganization.php:27
-      [2m+12 vendor frames [22m
-  14  tests/Feature/DashboardTest.php:249
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\DashboardTest > it shows store with item cou…  Error   
-  Call to a member function organizations() on null
-
-  at app/Models/Traits/BelongsToOrganization.php:27
-     23▕         // Optional: Ensure the organization_id is automatically filled on creation
-     24▕         // This is a common practice to prevent tenancy leaks.
-     25▕         static::creating(function ($model) {
-     26▕             $user = auth()->user();
-  ➜  27▕             $user_organization = $user->organizations()->first();
-     28▕             if ($user && $user_organization) {
-     29▕                 $model->organization_id = $user_organization->id;
-     30▕             }
-     31▕         });
-
-  1   app/Models/Traits/BelongsToOrganization.php:27
-      [2m+12 vendor frames [22m
-  14  tests/Feature/DashboardTest.php:284
+  at tests/Feature/DashboardTest.php:215
+    211▕         $response = $this->actingAs($user)
+    212▕             ->get('/dashboard');
+    213▕ 
+    214▕         $response->assertStatus(200)
+  ➜ 215▕             ->assertSee('No stores yet')
+    216▕             ->assertSee('Add your first store'); // Fixed: removed extra space
+    217▕     }
+    218▕ 
+    219▕
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\Inventory\ItemTest > it returns 403 for unauthorize…   
   Expected response status code [403] but received 404.
 Failed asserting that 404 is identical to 403.
 
-  at tests/Feature/Inventory/ItemTest.php:299
-    295▕         // User from Org A tries to access Org B's item availability
-    296▕         $response = $this->actingAs($setupA['user'])
-    297▕             ->getJson("/api/inventory/items/{$itemB->id}/availability");
-    298▕ 
-  ➜ 299▕         $response->assertStatus(403);
-    300▕     }
-    301▕ 
-    302▕     #[Test]
-    303▕     public function it_handles_item_with_no_stores()
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\Inventory\PermissionTest > user cannot access other…   
-  Expected response status code [403] but received 200.
-Failed asserting that 200 is identical to 403.
-
-  at tests/Feature/Inventory/PermissionTest.php:90
-     86▕ 
-     87▕         // User from Org A tries to access Org B's store
-     88▕         $this->actingAs($setupA['user'])
-     89▕             ->getJson("/api/inventory/stores/{$storeB->id}")
-  ➜  90▕             ->assertStatus(403);
-     91▕     }
-     92▕ }
-     93▕
+  at tests/Feature/Inventory/ItemTest.php:326
+    322▕         $response = $this->actingAs($setupA['user'])
+    323▕             ->getJson("/api/inventory/items/{$itemB->id}/availability");
+    324▕         // dd($response->json());
+    325▕ 
+  ➜ 326▕         $response->assertStatus(403);
+    327▕     }
+    328▕ 
+    329▕     #[Test]
+    330▕     public function it_handles_item_with_no_stores()
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\Livewire\Accounting\JournalEntriesTest > it creates…   
@@ -841,7 +442,7 @@ The table is empty.
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\Livewire\Organization\OrganizationListTest > it sho…   
-  Expected: <div wire:snapshot="" wire:effects="" wire:id="eSQURcc7zxOPq0etRY4O">\n
+  Expected: <div wire:snapshot="" wire:effects="" wire:id="1wE9AzUi3OH0sWUekKdq">\n
       <!-- Header with Search and Actions -->\n
       <div class="flex flex-col sm:flex-row justify-between items-center mb-6 space-y-4 sm:space-y-0">\n
   ... (103 more lines)
@@ -863,6 +464,39 @@ The table is empty.
   2   tests/Feature/Livewire/Organization/OrganizationListTest.php:148
 
   ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Livewire\Organization\OrganizationTreeTest > an emp…   
+  Failed asserting that 1 matches expected 0.
+
+  at tests/Feature/Livewire/Organization/OrganizationTreeTest.php:125
+    121▕     #[Test]
+    122▕     public function an_empty_tree_renders_correctly()
+    123▕     {
+    124▕         // Arrange: No units in the database
+  ➜ 125▕         $this->assertEquals(0, OrganizationUnit::count());
+    126▕ 
+    127▕         // Act & Assert
+    128▕         Livewire::test(OrganizationTree::class)
+    129▕             ->assertSee('No organizational units found.');
+
+  1   tests/Feature/Livewire/Organization/OrganizationTreeTest.php:125
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Livewire\Organization\OrganizationTreeTest > a drop…   
+  Failed asserting that 2 matches expected 1.
+
+  at tests/Feature/Livewire/Organization/OrganizationTreeTest.php:155
+    151▕         Livewire::test(OrganizationTree::class)
+    152▕             ->call('updateParent', $nonExistentId, $targetId);
+    153▕ 
+    154▕         // Assert: The database state should be unchanged
+  ➜ 155▕         $this->assertEquals(1, OrganizationUnit::count());
+    156▕     }
+    157▕ }
+    158▕
+
+  1   tests/Feature/Livewire/Organization/OrganizationTreeTest.php:155
+
+  ────────────────────────────────────────────────────────────────────────────  
    FAILED  UserPlacementTest > it can unassign a user by dropping them onto…    
   Failed asserting that a row in the table [organization_user] matches the attributes {
     "user_id": 2,
@@ -874,7 +508,7 @@ Found similar results: [
     {
         "user_id": 2,
         "organization_id": 2,
-        "organization_unit_id": 1
+        "organization_unit_id": 2
     },
     {
         "user_id": 2,
@@ -883,53 +517,18 @@ Found similar results: [
     }
 ].
 
-  at tests/Feature/Livewire/Organization/UserPlacementTest.php:64
-     60▕         Livewire::test(UserPlacement::class, ['organizationId' => $organization->id])
-     61▕             ->call('assignUserToUnit', $user->id, null);
-     62▕ 
-     63▕         // Assert
-  ➜  64▕         $this->assertDatabaseHas('organization_user', [
-     65▕             'user_id' => $user->id,
-     66▕             'organization_id' => $organization->id,
-     67▕             'organization_unit_id' => null
-     68▕         ]);
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\MultiStepSetupWizardTest > it shows accounting setu…   
-  Expected: <!DOCTYPE html>\n
-  <html lang="en">\n
-  \n
-  ... (389 more lines)
-
-  To contain: Accounting Setup
-
-  at tests/Feature/MultiStepSetupWizardTest.php:133
-    129▕             $response = $this->followRedirects($response);
-    130▕         }
-    131▕ 
-    132▕         $response->assertStatus(200)
-  ➜ 133▕             ->assertSee('Accounting Setup')
-    134▕             ->assertSee('Step 3 of 3');
-    135▕     }
-    136▕     #[Test]
-    137▕     public function it_can_setup_chart_of_accounts_and_complete_wizard()
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\SetupWizardTest > it assigns admin role…   TypeError   
-  Illuminate\Foundation\Testing\TestCase::actingAs(): Argument #1 ($user) must be of type Illuminate\Contracts\Auth\Authenticatable, null given, called in /home/gg/dev/hrm-laravel-base/tests/Feature/SetupWizardTest.php on line 80
-
-  at tests/Feature/SetupWizardTest.php:80
-     76▕     public function it_assigns_admin_role_to_creator()
-     77▕     {
-     78▕         // dd('$user');
-     79▕         $user = $this->user; //User::factory()->create();
-  ➜  80▕         $this->actingAs($user)
-     81▕             ->post('/setup/organization', [
-     82▕                 'name' => 'Test Org',
-     83▕             ]);
-     84▕
+  at tests/Feature/Livewire/Organization/UserPlacementTest.php:65
+     61▕         Livewire::test(UserPlacement::class, ['organizationId' => $organization->id])
+     62▕             ->call('assignUserToUnit', $user->id, null);
+     63▕ 
+     64▕         // Assert
+  ➜  65▕         $this->assertDatabaseHas('organization_user', [
+     66▕             'user_id' => $user->id,
+     67▕             'organization_id' => $organization->id,
+     68▕             'organization_unit_id' => null
+     69▕         ]);
 
 
-  Tests:    21 failed, 4 skipped, 219 passed (743 assertions)
-  Duration: 13.10s
+  Tests:    8 failed, 4 skipped, 231 passed (779 assertions)
+  Duration: 11.61s
 

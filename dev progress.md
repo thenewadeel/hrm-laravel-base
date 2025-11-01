@@ -182,3 +182,7 @@ The component is now efficient and ready for further development, such as buildi
 -   extra attributes everywhere
 -   Module List
 -   Proj Timeline
+
+## Debt
+
+[x] ChartOfAccounts needs **organization as a tenancy mechanism**

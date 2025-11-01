@@ -25,8 +25,8 @@
             "yunyami/clockwork"
         ]
     },
-    "timestamp": "2025-09-28T09:30:31+00:00",
-    "component_count": 144,
+    "timestamp": "2025-11-01T07:19:06+00:00",
+    "component_count": 169,
     "components": [
         {
             "type": "Model",
@@ -90,7 +90,15 @@
                         "static"
                     ],
                     "parameters": "",
-                    "line": 20
+                    "line": 23
+                },
+                {
+                    "name": "organization",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 28
                 },
                 {
                     "name": "ledgerEntries",
@@ -98,7 +106,7 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 25
+                    "line": 32
                 },
                 {
                     "name": "scopeAssets",
@@ -106,7 +114,7 @@
                         "public"
                     ],
                     "parameters": "$query",
-                    "line": 30
+                    "line": 37
                 },
                 {
                     "name": "scopeLiabilities",
@@ -114,7 +122,7 @@
                         "public"
                     ],
                     "parameters": "$query",
-                    "line": 34
+                    "line": 41
                 },
                 {
                     "name": "scopeEquity",
@@ -122,7 +130,7 @@
                         "public"
                     ],
                     "parameters": "$query",
-                    "line": 38
+                    "line": 45
                 },
                 {
                     "name": "scopeRevenues",
@@ -130,7 +138,7 @@
                         "public"
                     ],
                     "parameters": "$query",
-                    "line": 42
+                    "line": 49
                 },
                 {
                     "name": "scopeExpenses",
@@ -138,7 +146,7 @@
                         "public"
                     ],
                     "parameters": "$query",
-                    "line": 46
+                    "line": 53
                 },
                 {
                     "name": "getBalanceAttribute",
@@ -146,10 +154,10 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 51
+                    "line": 58
                 }
             ],
-            "method_count": 8
+            "method_count": 9
         },
         {
             "type": "Model",
@@ -165,7 +173,7 @@
                         "static"
                     ],
                     "parameters": "array $attributes = []",
-                    "line": 45
+                    "line": 48
                 },
                 {
                     "name": "booted",
@@ -173,7 +181,7 @@
                         "static"
                     ],
                     "parameters": "",
-                    "line": 59
+                    "line": 62
                 },
                 {
                     "name": "newFactory",
@@ -181,7 +189,7 @@
                         "static"
                     ],
                     "parameters": "",
-                    "line": 79
+                    "line": 82
                 },
                 {
                     "name": "createdBy",
@@ -189,7 +197,7 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 84
+                    "line": 87
                 },
                 {
                     "name": "approvedBy",
@@ -197,7 +205,15 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 89
+                    "line": 92
+                },
+                {
+                    "name": "organization",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 97
                 },
                 {
                     "name": "ledgerEntries",
@@ -205,7 +221,7 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 98
+                    "line": 106
                 },
                 {
                     "name": "ledgerEntries",
@@ -213,7 +229,7 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 98
+                    "line": 106
                 },
                 {
                     "name": "post",
@@ -221,7 +237,7 @@
                         "public"
                     ],
                     "parameters": "array $entries",
-                    "line": 118
+                    "line": 126
                 },
                 {
                     "name": "void",
@@ -229,10 +245,10 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 132
+                    "line": 140
                 }
             ],
-            "method_count": 9
+            "method_count": 10
         },
         {
             "type": "Model",
@@ -320,7 +336,7 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 30
+                    "line": 17
                 },
                 {
                     "name": "units",
@@ -328,7 +344,7 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 36
+                    "line": 25
                 }
             ],
             "method_count": 2
@@ -342,20 +358,12 @@
             "namespace": "App\\Models",
             "methods": [
                 {
-                    "name": "organization",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 26
-                },
-                {
                     "name": "parent",
                     "modifiers": [
                         "public"
                     ],
                     "parameters": "",
-                    "line": 31
+                    "line": 28
                 },
                 {
                     "name": "children",
@@ -363,7 +371,7 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 36
+                    "line": 33
                 },
                 {
                     "name": "users",
@@ -371,7 +379,7 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 42
+                    "line": 38
                 },
                 {
                     "name": "allDescendants",
@@ -379,7 +387,7 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 49
+                    "line": 46
                 },
                 {
                     "name": "allDescendantsWithSelf",
@@ -387,7 +395,7 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 55
+                    "line": 52
                 },
                 {
                     "name": "allAncestors",
@@ -395,7 +403,7 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 64
+                    "line": 61
                 },
                 {
                     "name": "scopeWithDepth",
@@ -403,7 +411,7 @@
                         "public"
                     ],
                     "parameters": "$query",
-                    "line": 69
+                    "line": 66
                 },
                 {
                     "name": "scopeWithDepthBelow",
@@ -411,7 +419,7 @@
                         "public"
                     ],
                     "parameters": "$query, $depth",
-                    "line": 74
+                    "line": 71
                 },
                 {
                     "name": "scopeDefaultOrder",
@@ -419,10 +427,621 @@
                         "public"
                     ],
                     "parameters": "$query",
-                    "line": 84
+                    "line": 81
+                },
+                {
+                    "name": "stores",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 86
                 }
             ],
             "method_count": 10
+        },
+        {
+            "type": "Model",
+            "name": "Item",
+            "file": "app/Models/Inventory/Item.php",
+            "essential": false,
+            "class": "Item",
+            "namespace": "App\\Models\\Inventory",
+            "methods": [
+                {
+                    "name": "organization",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 58
+                },
+                {
+                    "name": "stores",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 62
+                },
+                {
+                    "name": "head",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 68
+                },
+                {
+                    "name": "transactionItems",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 72
+                },
+                {
+                    "name": "getTotalQuantityAttribute",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 87
+                },
+                {
+                    "name": "getFormattedSellingPriceAttribute",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 100
+                },
+                {
+                    "name": "setSkuAttribute",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "string $value",
+                    "line": 116
+                },
+                {
+                    "name": "scopeActive",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Builder $query",
+                    "line": 131
+                },
+                {
+                    "name": "scopeNeedsAttention",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Builder $query",
+                    "line": 145
+                },
+                {
+                    "name": "scopeOfCategory",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Builder $query, string $category",
+                    "line": 166
+                },
+                {
+                    "name": "scopeOfHead",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Builder $query, string $head",
+                    "line": 171
+                },
+                {
+                    "name": "scopeOfOrganization",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Builder $query, string $organization",
+                    "line": 175
+                },
+                {
+                    "name": "newFactory",
+                    "modifiers": [
+                        "static"
+                    ],
+                    "parameters": "",
+                    "line": 183
+                }
+            ],
+            "method_count": 13
+        },
+        {
+            "type": "Model",
+            "name": "Transaction",
+            "file": "app/Models/Inventory/Transaction.php",
+            "essential": false,
+            "class": "Transaction",
+            "namespace": "App\\Models\\Inventory",
+            "methods": [
+                {
+                    "name": "getTypes",
+                    "modifiers": [
+                        "static"
+                    ],
+                    "parameters": "",
+                    "line": 50
+                },
+                {
+                    "name": "getStatuses",
+                    "modifiers": [
+                        "static"
+                    ],
+                    "parameters": "",
+                    "line": 60
+                },
+                {
+                    "name": "getValidationRules",
+                    "modifiers": [
+                        "static"
+                    ],
+                    "parameters": "",
+                    "line": 70
+                },
+                {
+                    "name": "scopeDraft",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "$query",
+                    "line": 82
+                },
+                {
+                    "name": "scopeFinalized",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "$query",
+                    "line": 90
+                },
+                {
+                    "name": "scopeCancelled",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "$query",
+                    "line": 98
+                },
+                {
+                    "name": "scopeIncoming",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "$query",
+                    "line": 106
+                },
+                {
+                    "name": "scopeOutgoing",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "$query",
+                    "line": 114
+                },
+                {
+                    "name": "scopeAdjustment",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "$query",
+                    "line": 122
+                },
+                {
+                    "name": "isDraft",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 127
+                },
+                {
+                    "name": "isFinalized",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 132
+                },
+                {
+                    "name": "isCancelled",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 137
+                },
+                {
+                    "name": "canBeModified",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 142
+                },
+                {
+                    "name": "finalize",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 147
+                },
+                {
+                    "name": "cancel",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 159
+                },
+                {
+                    "name": "store",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 169
+                },
+                {
+                    "name": "createdBy",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 174
+                },
+                {
+                    "name": "approvedBy",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 179
+                },
+                {
+                    "name": "items",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 184
+                },
+                {
+                    "name": "getTotalQuantityAttribute",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 191
+                }
+            ],
+            "method_count": 20
+        },
+        {
+            "type": "Model",
+            "name": "TransactionItem",
+            "file": "app/Models/Inventory/TransactionItem.php",
+            "essential": false,
+            "class": "TransactionItem",
+            "namespace": "App\\Models\\Inventory",
+            "methods": [
+                {
+                    "name": "transaction",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 34
+                },
+                {
+                    "name": "item",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 39
+                },
+                {
+                    "name": "getTotalPriceAttribute",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 45
+                },
+                {
+                    "name": "getFormattedUnitPrice",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 51
+                },
+                {
+                    "name": "getFormattedTotalPrice",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 56
+                },
+                {
+                    "name": "newFactory",
+                    "modifiers": [
+                        "static"
+                    ],
+                    "parameters": "",
+                    "line": 61
+                }
+            ],
+            "method_count": 6
+        },
+        {
+            "type": "Model",
+            "name": "Head",
+            "file": "app/Models/Inventory/Head.php",
+            "essential": false,
+            "class": "Head",
+            "namespace": "App\\Models\\Inventory",
+            "methods": [
+                {
+                    "name": "store",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 30
+                },
+                {
+                    "name": "items",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 34
+                },
+                {
+                    "name": "store_items",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 38
+                }
+            ],
+            "method_count": 3
+        },
+        {
+            "type": "Model",
+            "name": "Store",
+            "file": "app/Models/Inventory/Store.php",
+            "essential": false,
+            "class": "Store",
+            "namespace": "App\\Models\\Inventory",
+            "methods": [
+                {
+                    "name": "organization_unit",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 41
+                },
+                {
+                    "name": "organization",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 45
+                },
+                {
+                    "name": "items",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 50
+                },
+                {
+                    "name": "transactions",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 57
+                },
+                {
+                    "name": "getTotalQuantityAttribute",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 63
+                },
+                {
+                    "name": "getTotalValueAttribute",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 68
+                },
+                {
+                    "name": "getItemQuantity",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Item $item",
+                    "line": 76
+                },
+                {
+                    "name": "updateItemQuantity",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Item $item, int $quantity",
+                    "line": 82
+                },
+                {
+                    "name": "adjustItemQuantity",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Item $item, int $adjustment",
+                    "line": 89
+                },
+                {
+                    "name": "hasSufficientStock",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Item $item, int $quantity",
+                    "line": 97
+                },
+                {
+                    "name": "getLowStockItems",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 102
+                },
+                {
+                    "name": "getOutOfStockItems",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 109
+                },
+                {
+                    "name": "scopeActive",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "$query, bool $active = true",
+                    "line": 117
+                },
+                {
+                    "name": "scopeForOrganization",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "$query, $organizationId",
+                    "line": 125
+                },
+                {
+                    "name": "scopeForOrganizationUnit",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "$query, $organizationUnitId",
+                    "line": 134
+                },
+                {
+                    "name": "scopeForUser",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "$query, $user",
+                    "line": 142
+                },
+                {
+                    "name": "scopeSearch",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "$query, ?string $search",
+                    "line": 154
+                },
+                {
+                    "name": "newFactory",
+                    "modifiers": [
+                        "static"
+                    ],
+                    "parameters": "",
+                    "line": 167
+                }
+            ],
+            "method_count": 18
+        },
+        {
+            "type": "Model",
+            "name": "OrganizationScope",
+            "file": "app/Models/Scopes/OrganizationScope.php",
+            "essential": false,
+            "class": "OrganizationScope",
+            "namespace": "App\\Models\\Scopes",
+            "methods": [
+                {
+                    "name": "apply",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Builder $builder, Model $model",
+                    "line": 24
+                }
+            ],
+            "method_count": 1
+        },
+        {
+            "type": "Model",
+            "name": "BelongsToOrganization",
+            "file": "app/Models/Traits/BelongsToOrganization.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "OrganizationUser",
+            "file": "app/Models/OrganizationUser.php",
+            "essential": false,
+            "class": "OrganizationUser",
+            "namespace": "App\\Models",
+            "methods": [
+                {
+                    "name": "hasRole",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "string $role",
+                    "line": 22
+                },
+                {
+                    "name": "hasAnyRole",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "array $roles",
+                    "line": 37
+                },
+                {
+                    "name": "getRolesAttribute",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "$value",
+                    "line": 52
+                },
+                {
+                    "name": "setRolesAttribute",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "$value",
+                    "line": 68
+                }
+            ],
+            "method_count": 4
         },
         {
             "type": "Model",
@@ -438,7 +1057,7 @@
                         "protected"
                     ],
                     "parameters": "",
-                    "line": 62
+                    "line": 43
                 },
                 {
                     "name": "organizations",
@@ -446,7 +1065,7 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 70
+                    "line": 53
                 },
                 {
                     "name": "units",
@@ -454,7 +1073,7 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 79
+                    "line": 62
                 },
                 {
                     "name": "organizationUnits",
@@ -462,11 +1081,99 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 88
+                    "line": 71
+                },
+                {
+                    "name": "getOperatingOrganizationIdAttribute",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 78
+                },
+                {
+                    "name": "currentOrganization",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 95
+                },
+                {
+                    "name": "getOrganizationAttribute",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 100
+                },
+                {
+                    "name": "hasPermission",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "$permission, $organization = null",
+                    "line": 108
+                },
+                {
+                    "name": "addRole",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "$role, $organization = null",
+                    "line": 140
+                },
+                {
+                    "name": "givePermissionTo",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "string|array $permissions, $organization = null",
+                    "line": 146
+                },
+                {
+                    "name": "hasRole",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "string|array $roles, $organization = null",
+                    "line": 178
+                },
+                {
+                    "name": "assignRole",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "string|array $roles, $organization = null",
+                    "line": 198
+                },
+                {
+                    "name": "getPermissionsForRoles",
+                    "modifiers": [
+                        "protected"
+                    ],
+                    "parameters": "array $roles",
+                    "line": 231
+                },
+                {
+                    "name": "getAllPermissions",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 242
+                },
+                {
+                    "name": "getAllRoles",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 257
                 }
             ],
-            "method_count": 4,
-            "content_preview": "<?php\n\nnamespace App\\Models;\n\n// use Illuminate\\Contracts\\Auth\\MustVerifyEmail;\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Foundation\\Auth\\User as Authenticatable;\nuse Illuminate\\Notifications\\Notifiable;\nuse Laravel\\Fortify\\TwoFactorAuthenticatable;\nuse Laravel\\Jetstream\\HasProfilePhoto;\nuse Laravel\\Jetstream\\HasTeams;\nuse Laravel\\Sanctum\\HasApiTokens;\n\nclass User extends Authenticatable\n{\n    use HasApiTokens;\n\n    /** @use HasFactory<\\Database\\Factories\\UserFactory>..."
+            "method_count": 15,
+            "content_preview": "<?php\n\nnamespace App\\Models;\n\nuse App\\Roles\\InventoryRoles;\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Foundation\\Auth\\User as Authenticatable;\nuse Illuminate\\Notifications\\Notifiable;\nuse Laravel\\Fortify\\TwoFactorAuthenticatable;\nuse Laravel\\Jetstream\\HasProfilePhoto;\nuse Laravel\\Jetstream\\HasTeams;\nuse Laravel\\Sanctum\\HasApiTokens;\n\nclass User extends Authenticatable\n{\n    use HasApiTokens;\n    use HasFactory;\n    use HasProfilePhoto;\n    use HasTeams;\n    use Notifi..."
         },
         {
             "type": "Controller",
@@ -493,7 +1200,7 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 12
+                    "line": 14
                 },
                 {
                     "name": "store",
@@ -501,7 +1208,7 @@
                         "public"
                     ],
                     "parameters": "Request $request",
-                    "line": 19
+                    "line": 23
                 },
                 {
                     "name": "show",
@@ -509,7 +1216,7 @@
                         "public"
                     ],
                     "parameters": "Organization $organization",
-                    "line": 33
+                    "line": 47
                 },
                 {
                     "name": "update",
@@ -517,7 +1224,7 @@
                         "public"
                     ],
                     "parameters": "Request $request, Organization $organization",
-                    "line": 40
+                    "line": 56
                 },
                 {
                     "name": "destroy",
@@ -525,7 +1232,7 @@
                         "public"
                     ],
                     "parameters": "Organization $organization",
-                    "line": 54
+                    "line": 80
                 },
                 {
                     "name": "members",
@@ -533,7 +1240,7 @@
                         "public"
                     ],
                     "parameters": "Organization $organization",
-                    "line": 62
+                    "line": 90
                 }
             ],
             "method_count": 6
@@ -556,81 +1263,6 @@
                 }
             ],
             "method_count": 1
-        },
-        {
-            "type": "Controller",
-            "name": "OrganizationUnitController",
-            "file": "app/Http/Controllers/Api/OrganizationUnitController.php",
-            "essential": false,
-            "class": "OrganizationUnitController",
-            "namespace": "App\\Http\\Controllers\\Api",
-            "methods": [
-                {
-                    "name": "index",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 16
-                },
-                {
-                    "name": "store",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request, Organization $organization",
-                    "line": 25
-                },
-                {
-                    "name": "show",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Organization $organization, OrganizationUnit $unit",
-                    "line": 55
-                },
-                {
-                    "name": "update",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request, Organization $organization, OrganizationUnit $unit",
-                    "line": 69
-                },
-                {
-                    "name": "destroy",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Organization $organization, OrganizationUnit $unit",
-                    "line": 87
-                },
-                {
-                    "name": "hierarchy",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Organization $organization, OrganizationUnit $unit",
-                    "line": 108
-                },
-                {
-                    "name": "assignUser",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request, Organization $organization, OrganizationUnit $unit",
-                    "line": 121
-                },
-                {
-                    "name": "members",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Organization $organization, OrganizationUnit $unit",
-                    "line": 166
-                }
-            ],
-            "method_count": 8
         },
         {
             "type": "Controller",
@@ -835,6 +1467,346 @@
         },
         {
             "type": "Controller",
+            "name": "ItemController",
+            "file": "app/Http/Controllers/Api/Inventory/ItemController.php",
+            "essential": false,
+            "class": "ItemController",
+            "namespace": "App\\Http\\Controllers\\Api\\Inventory",
+            "methods": [
+                {
+                    "name": "__construct",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "private InventoryService $inventoryService",
+                    "line": 14
+                },
+                {
+                    "name": "index",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Request $request",
+                    "line": 18
+                },
+                {
+                    "name": "store",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Request $request",
+                    "line": 69
+                },
+                {
+                    "name": "show",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Item $item",
+                    "line": 91
+                },
+                {
+                    "name": "update",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Request $request, Item $item",
+                    "line": 98
+                },
+                {
+                    "name": "destroy",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Item $item",
+                    "line": 119
+                },
+                {
+                    "name": "availability",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Item $item, Request $request",
+                    "line": 131
+                },
+                {
+                    "name": "lowStock",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Request $request",
+                    "line": 146
+                },
+                {
+                    "name": "outOfStock",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Request $request",
+                    "line": 167
+                }
+            ],
+            "method_count": 9
+        },
+        {
+            "type": "Controller",
+            "name": "StoreController",
+            "file": "app/Http/Controllers/Api/Inventory/StoreController.php",
+            "essential": false,
+            "class": "StoreController",
+            "namespace": "App\\Http\\Controllers\\Api\\Inventory",
+            "methods": [
+                {
+                    "name": "__construct",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "private InventoryService $inventoryService",
+                    "line": 16
+                },
+                {
+                    "name": "index",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Request $request",
+                    "line": 20
+                },
+                {
+                    "name": "store",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Request $request",
+                    "line": 55
+                },
+                {
+                    "name": "show",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Store $store",
+                    "line": 73
+                },
+                {
+                    "name": "update",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Request $request, Store $store",
+                    "line": 90
+                },
+                {
+                    "name": "destroy",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Store $store",
+                    "line": 107
+                },
+                {
+                    "name": "addItem",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Store $store, Request $request",
+                    "line": 119
+                },
+                {
+                    "name": "updateItemQuantity",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Store $store, Item $item, Request $request",
+                    "line": 161
+                },
+                {
+                    "name": "removeItem",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Store $store, Item $item",
+                    "line": 200
+                },
+                {
+                    "name": "getStoreItems",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Store $store",
+                    "line": 221
+                },
+                {
+                    "name": "stockLevels",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Store $store",
+                    "line": 237
+                }
+            ],
+            "method_count": 11
+        },
+        {
+            "type": "Controller",
+            "name": "TransactionController",
+            "file": "app/Http/Controllers/Api/Inventory/TransactionController.php",
+            "essential": false,
+            "class": "TransactionController",
+            "namespace": "App\\Http\\Controllers\\Api\\Inventory",
+            "methods": [
+                {
+                    "name": "__construct",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "private InventoryService $inventoryService",
+                    "line": 14
+                },
+                {
+                    "name": "index",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Request $request",
+                    "line": 18
+                },
+                {
+                    "name": "store",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Request $request",
+                    "line": 64
+                },
+                {
+                    "name": "show",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Transaction $transaction",
+                    "line": 88
+                },
+                {
+                    "name": "update",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Request $request, Transaction $transaction",
+                    "line": 97
+                },
+                {
+                    "name": "destroy",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Transaction $transaction",
+                    "line": 125
+                },
+                {
+                    "name": "addItems",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Transaction $transaction, Request $request",
+                    "line": 137
+                },
+                {
+                    "name": "finalize",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Transaction $transaction",
+                    "line": 158
+                },
+                {
+                    "name": "cancel",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Transaction $transaction",
+                    "line": 170
+                }
+            ],
+            "method_count": 9
+        },
+        {
+            "type": "Controller",
+            "name": "OrganizationUnitController",
+            "file": "app/Http/Controllers/Api/OrganizationUnitController.php",
+            "essential": false,
+            "class": "OrganizationUnitController",
+            "namespace": "App\\Http\\Controllers\\Api",
+            "methods": [
+                {
+                    "name": "index",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 17
+                },
+                {
+                    "name": "store",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Request $request, Organization $organization",
+                    "line": 26
+                },
+                {
+                    "name": "show",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Organization $organization, OrganizationUnit $unit",
+                    "line": 57
+                },
+                {
+                    "name": "update",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Request $request, Organization $organization, OrganizationUnit $unit",
+                    "line": 71
+                },
+                {
+                    "name": "destroy",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Organization $organization, OrganizationUnit $unit",
+                    "line": 89
+                },
+                {
+                    "name": "hierarchy",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Organization $organization, OrganizationUnit $unit",
+                    "line": 110
+                },
+                {
+                    "name": "assignUser",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Request $request, Organization $organization, OrganizationUnit $unit",
+                    "line": 123
+                },
+                {
+                    "name": "members",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Organization $organization, OrganizationUnit $unit",
+                    "line": 168
+                }
+            ],
+            "method_count": 8
+        },
+        {
+            "type": "Controller",
             "name": "OrganizationController",
             "file": "app/Http/Controllers/OrganizationController.php",
             "essential": false,
@@ -866,118 +1838,1508 @@
                         "public"
                     ],
                     "parameters": "",
-                    "line": 9
+                    "line": 10
                 }
             ],
             "method_count": 1
         },
         {
+            "type": "Controller",
+            "name": "DashboardController",
+            "file": "app/Http/Controllers/DashboardController.php",
+            "essential": false,
+            "class": "DashboardController",
+            "namespace": "App\\Http\\Controllers",
+            "methods": [
+                {
+                    "name": "index",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 14
+                },
+                {
+                    "name": "getLowStockItems",
+                    "modifiers": [
+                        "protected"
+                    ],
+                    "parameters": "Organization $organization",
+                    "line": 46
+                }
+            ],
+            "method_count": 2
+        },
+        {
+            "type": "Controller",
+            "name": "SetupController",
+            "file": "app/Http/Controllers/SetupController.php",
+            "essential": false,
+            "class": "SetupController",
+            "namespace": "App\\Http\\Controllers",
+            "methods": [
+                {
+                    "name": "storeOrganization",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Request $request",
+                    "line": 16
+                },
+                {
+                    "name": "storeStore",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Request $request",
+                    "line": 49
+                },
+                {
+                    "name": "storeAccounts",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "Request $request",
+                    "line": 92
+                },
+                {
+                    "name": "createDefaultChartOfAccounts",
+                    "modifiers": [
+                        "protected"
+                    ],
+                    "parameters": "$organization",
+                    "line": 122
+                }
+            ],
+            "method_count": 4
+        },
+        {
             "type": "Migration",
             "name": "0001_01_01_000000_create_users_table",
             "file": "database/migrations/0001_01_01_000000_create_users_table.php",
-            "essential": false
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "users": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "email",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "email_verified_at",
+                            "type": "timestamp",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "password",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "current_team_id",
+                            "type": "foreignId",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "profile_photo_path",
+                            "type": "string",
+                            "options": ", 2048)->nullable(",
+                            "nullable": true,
+                            "unique": true
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "users"
+                    }
+                ]
+            }
         },
         {
             "type": "Migration",
             "name": "0001_01_01_000001_create_cache_table",
             "file": "database/migrations/0001_01_01_000001_create_cache_table.php",
-            "essential": false
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "cache": [
+                        {
+                            "name": "key",
+                            "type": "string",
+                            "options": ")->primary("
+                        },
+                        {
+                            "name": "value",
+                            "type": "mediumText",
+                            "options": ""
+                        },
+                        {
+                            "name": "expiration",
+                            "type": "integer",
+                            "options": ""
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "cache"
+                    }
+                ]
+            }
         },
         {
             "type": "Migration",
             "name": "0001_01_01_000002_create_jobs_table",
             "file": "database/migrations/0001_01_01_000002_create_jobs_table.php",
-            "essential": false
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "jobs": [
+                        {
+                            "name": "queue",
+                            "type": "string",
+                            "options": ")->index(",
+                            "nullable": true
+                        },
+                        {
+                            "name": "payload",
+                            "type": "longText",
+                            "options": "",
+                            "nullable": true
+                        },
+                        {
+                            "name": "attempts",
+                            "type": "unsignedTinyInteger",
+                            "options": "",
+                            "nullable": true
+                        },
+                        {
+                            "name": "reserved_at",
+                            "type": "unsignedInteger",
+                            "options": ")->nullable(",
+                            "nullable": true
+                        },
+                        {
+                            "name": "available_at",
+                            "type": "unsignedInteger",
+                            "options": "",
+                            "nullable": true
+                        },
+                        {
+                            "name": "created_at",
+                            "type": "unsignedInteger",
+                            "options": "",
+                            "nullable": true
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "jobs"
+                    }
+                ]
+            }
         },
         {
             "type": "Migration",
             "name": "2025_06_22_091725_add_two_factor_columns_to_users_table",
             "file": "database/migrations/2025_06_22_091725_add_two_factor_columns_to_users_table.php",
-            "essential": false
+            "essential": false,
+            "database_schema": {
+                "tables": [],
+                "operations": [
+                    {
+                        "type": "update_table",
+                        "table": "users",
+                        "changes": [
+                            {
+                                "operation": "text",
+                                "column": "two_factor_secret",
+                                "options": ")\n                ->after('password')\n                ->nullable("
+                            },
+                            {
+                                "operation": "text",
+                                "column": "two_factor_recovery_codes",
+                                "options": ")\n                ->after('two_factor_secret')\n                ->nullable("
+                            },
+                            {
+                                "operation": "timestamp",
+                                "column": "two_factor_confirmed_at",
+                                "options": ")\n                ->after('two_factor_recovery_codes')\n                ->nullable("
+                            }
+                        ]
+                    }
+                ]
+            }
         },
         {
             "type": "Migration",
             "name": "2025_06_22_091750_create_personal_access_tokens_table",
             "file": "database/migrations/2025_06_22_091750_create_personal_access_tokens_table.php",
-            "essential": false
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "personal_access_tokens": [
+                        {
+                            "name": "tokenable",
+                            "type": "morphs",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "token",
+                            "type": "string",
+                            "options": ", 64)->unique(",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "abilities",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "last_used_at",
+                            "type": "timestamp",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "expires_at",
+                            "type": "timestamp",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "personal_access_tokens"
+                    }
+                ]
+            }
         },
         {
             "type": "Migration",
             "name": "2025_06_22_091750_create_teams_table",
             "file": "database/migrations/2025_06_22_091750_create_teams_table.php",
-            "essential": false
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "teams": [
+                        {
+                            "name": "user_id",
+                            "type": "foreignId",
+                            "options": ")->index(",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": ""
+                        },
+                        {
+                            "name": "personal_team",
+                            "type": "boolean",
+                            "options": ""
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "teams"
+                    }
+                ]
+            }
         },
         {
             "type": "Migration",
             "name": "2025_06_22_091751_create_team_user_table",
             "file": "database/migrations/2025_06_22_091751_create_team_user_table.php",
-            "essential": false
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "team_user": [
+                        {
+                            "name": "team_id",
+                            "type": "foreignId",
+                            "options": "",
+                            "nullable": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "user_id",
+                            "type": "foreignId",
+                            "options": "",
+                            "nullable": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "role",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "team_user"
+                    }
+                ]
+            }
         },
         {
             "type": "Migration",
             "name": "2025_06_22_091752_create_team_invitations_table",
             "file": "database/migrations/2025_06_22_091752_create_team_invitations_table.php",
-            "essential": false
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "team_invitations": [
+                        {
+                            "name": "team_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->cascadeOnDelete(",
+                            "nullable": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "email",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true
+                        },
+                        {
+                            "name": "role",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "team_invitations"
+                    }
+                ]
+            }
         },
         {
             "type": "Migration",
             "name": "2025_08_06_220325_create_organizations_table",
             "file": "database/migrations/2025_08_06_220325_create_organizations_table.php",
-            "essential": false
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "organizations": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "is_active",
+                            "type": "boolean",
+                            "options": ")->default(true",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "organizations"
+                    }
+                ]
+            }
         },
         {
             "type": "Migration",
             "name": "2025_08_10_161714_create_organization_user_table",
             "file": "database/migrations/2025_08_10_161714_create_organization_user_table.php",
-            "essential": false
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "organization_user": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained(",
+                            "nullable": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "user_id",
+                            "type": "foreignId",
+                            "options": ")->constrained(",
+                            "nullable": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "organization_unit_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('organization_units'",
+                            "nullable": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "roles",
+                            "type": "json",
+                            "options": ")->nullable(",
+                            "nullable": true
+                        },
+                        {
+                            "name": "permissions",
+                            "type": "json",
+                            "options": ")->nullable(",
+                            "nullable": true
+                        },
+                        {
+                            "name": "position",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "organization_user"
+                    }
+                ]
+            }
         },
         {
             "type": "Migration",
             "name": "2025_08_10_162609_create_organization_units",
             "file": "database/migrations/2025_08_10_162609_create_organization_units.php",
-            "essential": false
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "organization_units": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")\n                ->nullable()\n                ->constrained()\n                ->nullOnDelete(",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "type",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "parent_id",
+                            "type": "foreignId",
+                            "options": ")\n                ->nullable()\n                ->constrained('organization_units')\n                ->nullOnDelete(",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "depth",
+                            "type": "integer",
+                            "options": ")->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "custom_fields",
+                            "type": "json",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "organization_units"
+                    }
+                ]
+            }
         },
         {
             "type": "Migration",
             "name": "2025_08_20_152855_create_chart_of_accounts_table",
             "file": "database/migrations/2025_08_20_152855_create_chart_of_accounts_table.php",
-            "essential": false
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "chart_of_accounts": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('organizations'",
+                            "nullable": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "code",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true
+                        },
+                        {
+                            "name": "type",
+                            "type": "enum",
+                            "options": ", ['asset', 'liability', 'equity', 'revenue', 'expense']",
+                            "nullable": true
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "chart_of_accounts"
+                    }
+                ]
+            }
         },
         {
             "type": "Migration",
             "name": "2025_08_20_160558_create_ledger_entries_table",
             "file": "database/migrations/2025_08_20_160558_create_ledger_entries_table.php",
-            "essential": false
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "ledger_entries": [
+                        {
+                            "name": "entry_date",
+                            "type": "date",
+                            "options": ""
+                        },
+                        {
+                            "name": "chart_of_account_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "type",
+                            "type": "enum",
+                            "options": ", ['debit', 'credit']"
+                        },
+                        {
+                            "name": "amount",
+                            "type": "decimal",
+                            "options": ", 15, 2)->unsigned("
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": ""
+                        },
+                        {
+                            "name": "transactionable",
+                            "type": "nullableMorphs",
+                            "options": ""
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "ledger_entries"
+                    }
+                ]
+            }
         },
         {
             "type": "Migration",
             "name": "2025_08_20_160925_create_test_transactions_table",
             "file": "database/migrations/2025_08_20_160925_create_test_transactions_table.php",
-            "essential": false
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "test_transactions": [
+                        {
+                            "name": "amount",
+                            "type": "decimal",
+                            "options": ", 15, 2"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "test_transactions"
+                    }
+                ]
+            }
         },
         {
             "type": "Migration",
             "name": "2025_08_20_170904_create_dimensions_table",
             "file": "database/migrations/2025_08_20_170904_create_dimensions_table.php",
-            "essential": false
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "dimensions": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "code",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "type",
+                            "type": "enum",
+                            "options": ", ['cost_center', 'project', 'branch', 'department', 'team']",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "type",
+                            "type": "index",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "dimensions"
+                    }
+                ]
+            }
         },
         {
             "type": "Migration",
             "name": "2025_08_20_175351_create_dimensionables_table",
             "file": "database/migrations/2025_08_20_175351_create_dimensionables_table.php",
-            "essential": false
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "dimensionables": [
+                        {
+                            "name": "dimension_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "dimensionable",
+                            "type": "morphs",
+                            "options": ""
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "dimensionables"
+                    }
+                ]
+            }
         },
         {
             "type": "Migration",
             "name": "2025_08_20_185027_create_journal_entries_table",
             "file": "database/migrations/2025_08_20_185027_create_journal_entries_table.php",
-            "essential": false
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "journal_entries": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('organizations'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "reference_number",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "entry_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "status",
+                            "type": "enum",
+                            "options": ", ['draft', 'posted', 'void'])->default('draft'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "created_by",
+                            "type": "foreignId",
+                            "options": ")->constrained('users'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "approved_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "posted_at",
+                            "type": "timestamp",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "journal_entries"
+                    }
+                ]
+            }
         },
         {
             "type": "Migration",
             "name": "2025_08_22_150819_create_sequences_table",
             "file": "database/migrations/2025_08_22_150819_create_sequences_table.php",
-            "essential": false
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "sequences": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": ")->primary(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "last_value",
+                            "type": "unsignedBigInteger",
+                            "options": ")->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "increment_by",
+                            "type": "unsignedBigInteger",
+                            "options": ")->default(1",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "prefix",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "suffix",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "pad_length",
+                            "type": "integer",
+                            "options": ")->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "sequences"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_10_17_065345_create_inventory_stores_table",
+            "file": "database/migrations/inventory/2025_10_17_065345_create_inventory_stores_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "inventory_stores": [
+                        {
+                            "name": "organization_unit_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('organization_units'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "code",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "location",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "is_active",
+                            "type": "boolean",
+                            "options": ")->default(true",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "inventory_stores"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_10_17_065546_create_inventory_items_table",
+            "file": "database/migrations/inventory/2025_10_17_065546_create_inventory_items_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "inventory_items": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('organizations')->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "sku",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "category",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "unit",
+                            "type": "string",
+                            "options": ")->default('pcs'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "cost_price",
+                            "type": "decimal",
+                            "options": ", 10, 2)->nullable()->comment('in cents'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "selling_price",
+                            "type": "decimal",
+                            "options": ", 10, 2)->nullable()->comment('in cents'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "reorder_level",
+                            "type": "integer",
+                            "options": ")->default(0",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "is_active",
+                            "type": "boolean",
+                            "options": ")->default(true",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "head_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('inventory_heads')->nullOnDelete(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "code",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "balance",
+                            "type": "decimal",
+                            "options": ", 8, 2",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "item_id",
+                            "type": "foreignId",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "inventory_id",
+                            "type": "foreignId",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'",
+                            "primary_key": true
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "inventory_items"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_10_17_065638_create_inventory_store_items_table",
+            "file": "database/migrations/inventory/2025_10_17_065638_create_inventory_store_items_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "inventory_store_items": [
+                        {
+                            "name": "store_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('inventory_stores')->nullOnDelete(",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "item_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('inventory_items')->nullOnDelete(",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "head_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('inventory_heads')->nullOnDelete(",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "quantity",
+                            "type": "integer",
+                            "options": ")->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "min_stock",
+                            "type": "integer",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "max_stock",
+                            "type": "integer",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "inventory_store_items"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_10_17_065704_create_inventory_transactions_table",
+            "file": "database/migrations/inventory/2025_10_17_065704_create_inventory_transactions_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "inventory_transactions": [
+                        {
+                            "name": "store_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('inventory_stores')->nullOnDelete(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "inventory_id",
+                            "type": "foreignId",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "created_by",
+                            "type": "foreignId",
+                            "options": ")->constrained('users')->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'"
+                        },
+                        {
+                            "name": "staff_id",
+                            "type": "foreignId",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "approved_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users')->nullOnDelete(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'"
+                        },
+                        {
+                            "name": "type",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'"
+                        },
+                        {
+                            "name": "type",
+                            "type": "enum",
+                            "options": ", [\"UP\", \"DOWN\"])->default('UP'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'"
+                        },
+                        {
+                            "name": "status",
+                            "type": "string",
+                            "options": ")->default('draft'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'"
+                        },
+                        {
+                            "name": "reference",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'"
+                        },
+                        {
+                            "name": "vendor_id",
+                            "type": "foreignId",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'"
+                        },
+                        {
+                            "name": "transaction_date",
+                            "type": "timestamp",
+                            "options": ")->useCurrent(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'"
+                        },
+                        {
+                            "name": "finalized_at",
+                            "type": "timestamp",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'"
+                        },
+                        {
+                            "name": "applied_on",
+                            "type": "timestamp",
+                            "options": ")->nullable()->default(null",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "inventory_transactions"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_10_17_065723_create_inventory_transactions_items_table",
+            "file": "database/migrations/inventory/2025_10_17_065723_create_inventory_transactions_items_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "inventory_transaction_items": [
+                        {
+                            "name": "transaction_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('inventory_transactions')->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "'NULL'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "inventory_transaction_id",
+                            "type": "foreignId",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'NULL'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "item_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('inventory_items')->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "'NULL'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "item_id",
+                            "type": "foreignId",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'NULL'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "quantity",
+                            "type": "integer",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'NULL'"
+                        },
+                        {
+                            "name": "qty",
+                            "type": "integer",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'NULL'"
+                        },
+                        {
+                            "name": "unit_price",
+                            "type": "integer",
+                            "options": ")->comment('in cents'",
+                            "nullable": true,
+                            "default": "'NULL'"
+                        },
+                        {
+                            "name": "rate",
+                            "type": "decimal",
+                            "options": ", 8, 2",
+                            "nullable": true,
+                            "default": "'NULL'"
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "'NULL'"
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable()->default('NULL'",
+                            "nullable": true,
+                            "default": "'NULL'"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "inventory_transaction_items"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_10_18_075344_create_inventory_heads_table",
+            "file": "database/migrations/inventory/2025_10_18_075344_create_inventory_heads_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "inventory_heads": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'NULL'"
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": ")->nullable()->default('NULL'",
+                            "nullable": true,
+                            "default": "'NULL'"
+                        },
+                        {
+                            "name": "image",
+                            "type": "string",
+                            "options": ")->nullable()->default('NULL'",
+                            "nullable": true,
+                            "default": "'NULL'"
+                        },
+                        {
+                            "name": "store_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('inventory_stores')->nullOnDelete(",
+                            "nullable": true,
+                            "default": "'NULL'",
+                            "primary_key": true
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "inventory_heads"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_10_29_204937_add_current_organization_id_to_users_table",
+            "file": "database/migrations/2025_10_29_204937_add_current_organization_id_to_users_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": [],
+                "operations": [
+                    {
+                        "type": "update_table",
+                        "table": "users",
+                        "changes": [
+                            {
+                                "operation": "foreignId",
+                                "column": "current_organization_id",
+                                "options": ")\n                ->nullable()\n                ->constrained('organizations') // Constrain to the organizations table\n                ->after('password'"
+                            },
+                            {
+                                "operation": "index",
+                                "column": "current_organization_id",
+                                "options": ""
+                            }
+                        ]
+                    }
+                ]
+            }
         },
         {
             "type": "Route",
@@ -987,10 +3349,51 @@
         },
         {
             "type": "Route",
+            "name": "web",
+            "file": "routes/web.php",
+            "essential": true,
+            "content_preview": "<?php\n\nuse App\\Http\\Controllers\\AccountsController;\nuse App\\Http\\Controllers\\OrganizationController;\nuse App\\Http\\Controllers\\SetupController;\nuse App\\Http\\Livewire\\Organization\\OrganizationList;\nuse App\\Models\\Inventory\\Store;\nuse App\\Models\\OrganizationUser;\nuse App\\Services\\AccountingReportService;\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::get('/', function () {\n    return view('welcome');\n});\n\n// Route::middleware([\n//     'auth:sanctum',\n//     config('jetstream.auth_session'),\n//     '...",
+            "route_summary": [
+                "Route::get('/', function () { return view('welcome');",
+                "Route::middleware([ // 'auth:sanctum', // config('jetstream.auth_session'), // 'verified', // ])->gr...",
+                "Route::middleware(['auth', 'verified'])->group(function () { Route::get('/dashboard', [App\\Http\\Cont...",
+                "Route::prefix('setup')->group(function () { // Step 1: Organization Route::get('/', function () { $u...",
+                "Route::post('/organization', [SetupController::class, 'storeOrganization']) ->name('setup.organizati...",
+                "Route::get('/stores', function () { $user = auth()->user();",
+                "Route::post('/stores', [SetupController::class, 'storeStore']) ->name('setup.stores.store');",
+                "Route::get('/accounts', function () { $user = auth()->user();",
+                "Route::post('/accounts', [SetupController::class, 'storeAccounts']) ->name('setup.accounts.store');",
+                "Route::post('/setup/organization', [SetupController::class, 'storeOrganization']) ->name('setup.orga...",
+                "Route::livewire(['/organizations', OrganizationList::class])->name('organizations.index');",
+                "Route::get('/organizations', [OrganizationController::class, 'index'])->name('organizations.index');",
+                "Route::get('/companies/create', CompanyForm::class)->name('companies.create');",
+                "Route::get('/companies/{company}/edit', CompanyForm::class)->name('companies.edit');",
+                "Route::get('/companies/{company}', CompanyShow::class)->name('companies.show');",
+                "Route::get('/units', UnitTree::class)->name('units.index');",
+                "Route::get('/units/create', UnitForm::class)->name('units.create');",
+                "Route::get('/units/{unit}/edit', UnitForm::class)->name('units.edit');",
+                "Route::get('/employees', EmployeeList::class)->name('employees.index');",
+                "Route::get('/employees/create', EmployeeForm::class)->name('employees.create');",
+                "Route::get('/employees/{employee}/edit', EmployeeForm::class)->name('employees.edit');",
+                "Route::get('/employees/{employee}', EmployeeShow::class)->name('employees.show');",
+                "Route::get('/users', UserList::class)->name('users.index');",
+                "Route::get('/users/create', UserForm::class)->name('users.create');",
+                "Route::get('/users/{user}/edit', UserForm::class)->name('users.edit');",
+                "Route::get('/roles', RoleManager::class)->name('roles.index');",
+                "Route::get('/accounts', [AccountsController::class, 'index'])->name('accounting.index');",
+                "Route::group(['prefix' => 'debug'], function () { Route::get('/orgs', function () { $user = auth()->...",
+                "Route::get('api-config', function () { return response()->json([ 'app_url' => config('app.url'), 'ap...",
+                "Route::get('journal-entries', function () { try { $entries = \\App\\Models\\Accounting\\JournalEntry::wi...",
+                "Route::get('test-sequence', function () { try { $sequenceService = app(App\\Services\\SequenceService:...",
+                "Route::get('reports/all', function (AccountingReportService $service) { $trialBalance = $service->ge..."
+            ]
+        },
+        {
+            "type": "Route",
             "name": "api",
             "file": "routes/api.php",
             "essential": true,
-            "content_preview": "<?php\n\nuse App\\Http\\Controllers\\Api\\Accounting\\ChartOfAccountsController;\nuse App\\Http\\Controllers\\Api\\Accounting\\JournalEntriesController;\nuse App\\Http\\Controllers\\Api\\Accounting\\FinancialReportsController;\nuse App\\Http\\Controllers\\Api\\OrganizationController;\nuse App\\Http\\Controllers\\Api\\OrganizationInvitationController;\nuse App\\Http\\Controllers\\Api\\OrganizationUnitController;\nuse App\\Models\\Accounting\\JournalEntry;\nuse Illuminate\\Http\\Request;\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::get(...",
+            "content_preview": "<?php\n\nuse App\\Http\\Controllers\\Api\\Accounting\\ChartOfAccountsController;\nuse App\\Http\\Controllers\\Api\\Accounting\\JournalEntriesController;\nuse App\\Http\\Controllers\\Api\\Accounting\\FinancialReportsController;\nuse App\\Http\\Controllers\\Api\\OrganizationController;\nuse App\\Http\\Controllers\\Api\\OrganizationInvitationController;\nuse App\\Http\\Controllers\\Api\\OrganizationUnitController;\nuse App\\Models\\Accounting\\JournalEntry;\nuse Illuminate\\Http\\Request;\nuse Illuminate\\Support\\Facades\\Route;\nuse App\\Http...",
             "route_summary": [
                 "Route::get('/user', function (Request $request) { return $request->user();",
                 "Route::middleware('auth:sanctum')->group(function () { /** * @OA\\Tag(name=\"Organizations\") */ /** * ...",
@@ -1013,39 +3416,22 @@
                 "Route::prefix('reports')->group(function () { Route::get('trial-balance', [FinancialReportsControlle...",
                 "Route::get('balance-sheet', [FinancialReportsController::class, 'balanceSheet']);",
                 "Route::get('income-statement', [FinancialReportsController::class, 'incomeStatement']);",
-                "Route::get('/debug/test-connection', function () { return response()->json([ 'message' => 'API is wo..."
-            ]
-        },
-        {
-            "type": "Route",
-            "name": "web",
-            "file": "routes/web.php",
-            "essential": true,
-            "content_preview": "<?php\n\nuse App\\Http\\Controllers\\AccountsController;\nuse App\\Http\\Controllers\\OrganizationController;\nuse App\\Http\\Livewire\\Organization\\OrganizationList;\nuse App\\Services\\AccountingReportService;\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::get('/', function () {\n    return view('welcome');\n});\n\nRoute::middleware([\n    'auth:sanctum',\n    config('jetstream.auth_session'),\n    'verified',\n])->group(function () {\n    Route::get('/dashboard', function () {\n        return view('dashboard');\n    })-...",
-            "route_summary": [
-                "Route::get('/', function () { return view('welcome');",
-                "Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified', ])->group(function...",
-                "Route::middleware(['auth', 'verified'])->group(function () { // Company routes // Route::livewire(['...",
-                "Route::get('/organizations', [OrganizationController::class, 'index'])->name('organizations.index');",
-                "Route::get('/companies/create', CompanyForm::class)->name('companies.create');",
-                "Route::get('/companies/{company}/edit', CompanyForm::class)->name('companies.edit');",
-                "Route::get('/companies/{company}', CompanyShow::class)->name('companies.show');",
-                "Route::get('/units', UnitTree::class)->name('units.index');",
-                "Route::get('/units/create', UnitForm::class)->name('units.create');",
-                "Route::get('/units/{unit}/edit', UnitForm::class)->name('units.edit');",
-                "Route::get('/employees', EmployeeList::class)->name('employees.index');",
-                "Route::get('/employees/create', EmployeeForm::class)->name('employees.create');",
-                "Route::get('/employees/{employee}/edit', EmployeeForm::class)->name('employees.edit');",
-                "Route::get('/employees/{employee}', EmployeeShow::class)->name('employees.show');",
-                "Route::get('/users', UserList::class)->name('users.index');",
-                "Route::get('/users/create', UserForm::class)->name('users.create');",
-                "Route::get('/users/{user}/edit', UserForm::class)->name('users.edit');",
-                "Route::get('/roles', RoleManager::class)->name('roles.index');",
-                "Route::get('/accounts', [AccountsController::class, 'index'])->name('accounting.index');",
-                "Route::group(['prefix' => 'debug'], function () { Route::get('api-config', function () { return resp...",
-                "Route::get('journal-entries', function () { try { $entries = \\App\\Models\\Accounting\\JournalEntry::wi...",
-                "Route::get('test-sequence', function () { try { $sequenceService = app(App\\Services\\SequenceService:...",
-                "Route::get('reports/all', function (AccountingReportService $service) { $trialBalance = $service->ge..."
+                "Route::get('/debug/test-connection', function () { return response()->json([ 'message' => 'API is wo...",
+                "Route::prefix('inventory')->middleware(['auth:sanctum'])->group(function () { // Stores - using poli...",
+                "Route::post('stores/{store}/items', [StoreController::class, 'addItem']) ->name('stores.items.add');",
+                "Route::put('stores/{store}/items/{item}', [StoreController::class, 'updateItemQuantity']) ->name('st...",
+                "Route::delete('stores/{store}/items/{item}', [StoreController::class, 'removeItem']) ->name('stores....",
+                "Route::apiResource('items', ItemController::class);",
+                "Route::get('items/{item}/availability', [ItemController::class, 'availability']) ->name('items.avail...",
+                "Route::get('items/low-stock', [ItemController::class, 'lowStock']) ->name('items.low-stock');",
+                "Route::get('items/out-of-stock', [ItemController::class, 'outOfStock']) ->name('items.out-of-stock')...",
+                "Route::apiResource('transactions', TransactionController::class);",
+                "Route::post('transactions/{transaction}/items', [TransactionController::class, 'addItems']) ->name('...",
+                "Route::put('transactions/{transaction}/finalize', [TransactionController::class, 'finalize']) ->name...",
+                "Route::put('transactions/{transaction}/cancel', [TransactionController::class, 'cancel']) ->name('tr...",
+                "Route::put('stores/{store}/inventory', [StoreController::class, 'updateInventory']) ->middleware('ca...",
+                "Route::get('reports/stock-levels', [\\App\\Http\\Controllers\\Api\\Inventory\\ReportController::class, 'st...",
+                "Route::get('reports/movement', [\\App\\Http\\Controllers\\Api\\Inventory\\ReportController::class, 'moveme..."
             ]
         },
         {
@@ -1332,12 +3718,6 @@
         },
         {
             "type": "View",
-            "name": "data-table.blade.php",
-            "file": "resources/views/components/data-table.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
             "name": "welcome.blade.php",
             "file": "resources/views/components/welcome.blade.php",
             "essential": false
@@ -1358,6 +3738,12 @@
             "type": "View",
             "name": "form-section.blade.php",
             "file": "resources/views/components/form-section.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "data-table.blade.php",
+            "file": "resources/views/components/data-table.blade.php",
             "essential": false
         },
         {
@@ -1464,12 +3850,6 @@
         },
         {
             "type": "View",
-            "name": "dashboard.blade.php",
-            "file": "resources/views/dashboard.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
             "name": "organization-form.blade.php",
             "file": "resources/views/livewire/organization/organization-form.blade.php",
             "essential": false
@@ -1524,6 +3904,12 @@
         },
         {
             "type": "View",
+            "name": "ledger-entries.blade.php",
+            "file": "resources/views/livewire/accounting/ledger-entries.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
             "name": "index.blade.php",
             "file": "resources/views/organizations/index.blade.php",
             "essential": false
@@ -1573,13 +3959,43 @@
         {
             "type": "View",
             "name": "welcome.blade.php",
-            "file": "resources/views/welcome.blade.php",
+            "file": "resources/views/setup/welcome.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "stores.blade.php",
+            "file": "resources/views/setup/stores.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "accounts.blade.php",
+            "file": "resources/views/setup/accounts.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "organization.blade.php",
+            "file": "resources/views/setup/organization.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "dashboard.blade.php",
+            "file": "resources/views/dashboard.blade.php",
             "essential": false
         },
         {
             "type": "View",
             "name": "navigation-menu.blade.php",
             "file": "resources/views/navigation-menu.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "welcome.blade.php",
+            "file": "resources/views/welcome.blade.php",
             "essential": false
         },
         {
