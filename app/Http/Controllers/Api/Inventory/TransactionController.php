@@ -21,7 +21,7 @@ class TransactionController extends Controller
 
         $query = Transaction::with(['store', 'createdBy', 'items.item'])
             ->whereHas('store', function ($query) use ($request) {
-                $query->forOrganization($request->user()->organizations()->first()->id);
+                $query->forOrganization($request->user()->current_organization_id);
             });
 
         // Filter by status

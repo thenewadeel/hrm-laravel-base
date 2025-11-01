@@ -5,6 +5,7 @@ use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\SetupController;
 use App\Http\Livewire\Organization\OrganizationList;
 use App\Models\Inventory\Store;
+use App\Models\OrganizationUser;
 use App\Services\AccountingReportService;
 use Illuminate\Support\Facades\Route;
 
@@ -12,19 +13,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified',
+// ])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// });
 
 
 // routes/web.php
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
+        ->name('dashboard');
     // Setup Wizard Routes
     Route::prefix('setup')->group(function () {
         // Step 1: Organization
@@ -63,13 +66,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Step 3: Chart of Accounts
         Route::get('/accounts', function () {
             $user = auth()->user();
-            $organization = $user->organizations()->first();
+            // $org_user = OrganizationUser::where('user_id', $user->id)->first(); //TODO : refactor
+            $organization_id = $user->operating_organization_id; //$org_user->organization_id;
+            // dd([
+            //     // 'accounts',
+            //     "organization_id" => $organization_id,
+            //     // "org_user" => (OrganizationUser::where('user_id', $user->id)->first()),
+            //     // "stores" => Store::get(),
+            //     "org_stores" => Store::forOrganization($organization_id)->get(),
 
-            if (!$organization) {
+
+            // ]);
+
+            if (!$organization_id) {
                 return redirect('/setup');
             }
 
-            if (Store::forOrganization($organization->id)->count() === 0) {
+            if (Store::forOrganization($organization_id)->count() === 0) {
                 return redirect('/setup/stores');
             }
 

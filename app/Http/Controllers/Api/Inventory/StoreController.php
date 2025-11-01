@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Inventory\Store;
 use App\Models\Inventory\Item;
 use App\Http\Resources\StoreResource;
+use App\Permissions\InventoryPermissions;
 use App\Services\InventoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -18,11 +19,21 @@ class StoreController extends Controller
 
     public function index(Request $request)
     {
+        $user = auth()->user();
+        // dd([
+        //     $request->all(),
+        //     $request->user()->id,
+        //     $user->id,
+        //     $user->getAllRoles(),
+        //     $user->getAllPermissions(),
+        //     // $user->hasPermission(OrganizationPermissions::CREATE_ORGANIZATION),
+        //     // $user->hasRole(OrganizationRoles::SUPER_ADMIN)
+        // ]);
         Gate::authorize('viewAny', Store::class);
 
         $organizationId = $request->has('organization_id') && !empty($request->organization_id)
             ? $request->organization_id
-            : $request->user()->organizations()->first()->id;
+            : $request->user()->current_organization_id;
 
         $stores = Store::with(['organization_unit.organization'])
             ->withCount('items')
@@ -61,6 +72,16 @@ class StoreController extends Controller
 
     public function show(Store $store)
     {
+        $user = auth()->user();
+        // dd([
+        //     $store,
+        //     $user->id,
+        //     $user->organizations[0]->id,
+        //     $user->getAllRoles(),
+        //     $user->getAllPermissions(),
+        //     $user->hasPermission(InventoryPermissions::VIEW_STORES, $store->organization) &&
+        //         $user->organizations->contains($store->organization->id)
+        // ]);
         Gate::authorize('view', $store);
 
         return new StoreResource($store->load('items', 'organization'));

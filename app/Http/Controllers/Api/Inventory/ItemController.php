@@ -17,10 +17,21 @@ class ItemController extends Controller
 
     public function index(Request $request)
     {
+        $user = auth()->user();
+        // dd([
+        //     $request->all(),
+        //     $request->user()->id,
+        //     $user->id,
+        //     $user->organizations->pluck('pivot.organization_id'),
+        //     $user->getAllRoles(),
+        //     $user->getAllPermissions(),
+        //     // $user->hasPermission(OrganizationPermissions::CREATE_ORGANIZATION),
+        //     // $user->hasRole(OrganizationRoles::SUPER_ADMIN)
+        // ]);
         Gate::authorize('viewAny', Item::class);
 
-        $query = Item::where('organization_id', $request->user()->organizations()->first()->id)
-            ->with('stores');
+        $query = Item:: //where('organization_id', $request->user()->current_organization_id)
+            with('stores');
 
         // Search functionality
         if ($request->has('search') && !empty($request->search)) {
@@ -136,7 +147,7 @@ class ItemController extends Controller
     {
         Gate::authorize('viewAny', Item::class);
 
-        $query = Item::where('organization_id', $request->user()->organizations()->first()->id)
+        $query = Item::where('organization_id', $request->user()->current_organization_id)
             ->whereHas('stores', function ($q) {
                 $q->where('inventory_store_items.quantity', '<=', \DB::raw('items.reorder_level'))
                     ->where('inventory_store_items.quantity', '>', 0);
@@ -157,7 +168,7 @@ class ItemController extends Controller
     {
         Gate::authorize('viewAny', Item::class);
 
-        $query = Item::where('organization_id', $request->user()->organizations()->first()->id)
+        $query = Item::where('organization_id', $request->user()->current_organization_id)
             ->where(function ($q) {
                 $q->whereHas('stores', function ($subQuery) {
                     $subQuery->where('inventory_store_items.quantity', '<=', 0);

@@ -7,6 +7,7 @@ use App\Models\Organization;
 use App\Models\OrganizationUnit;
 use App\Models\Inventory\Store;
 use App\Models\Accounting\ChartOfAccount;
+use App\Roles\InventoryRoles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -36,7 +37,7 @@ class SetupController extends Controller
 
             // Attach user to organization with admin role
             auth()->user()->organizations()->attach($organization->id, [
-                'roles' => json_encode(['admin']),
+                'roles' => json_encode([InventoryRoles::INVENTORY_ADMIN]),
                 'organization_unit_id' => $rootUnit->id,
                 'position' => 'Administrator'
             ]);
