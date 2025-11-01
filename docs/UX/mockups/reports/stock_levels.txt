@@ -1,0 +1,15 @@
+┌─────────────────────────────────────────────────────────────┐
+│  📦 Stock Levels Report • Jan 1-15, 2024  [📥 Export]      │
+├─────────────────────────────────────────────────────────────┤
+│  Store: [All Stores ▾] Category: [All Categories ▾]        │
+├─────────────────────────────────────────────────────────────┤
+│  ITEM              STORE        CURRENT  REORDER  STATUS   │
+├─────────────────────────────────────────────────────────────┤
+│  🔩 Steel Bolts    Main Store     25       20      ✅      │
+│  🔩 Steel Bolts    Workshop       15       10      ✅      │
+│  🔩 Steel Bolts    Warehouse       5        5      ⚠️      │
+│  ⚡ LED Bulbs      Main Store     12       20      ⚠️      │
+│  ⚡ LED Bulbs      Workshop        8       15      ⚠️      │
+│  🛢️ Motor Oil      Main Store      0        5      ❌      │
+│  ...                                                        │
+└─────────────────────────────────────────────────────────────┘
