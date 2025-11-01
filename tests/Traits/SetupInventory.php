@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Roles\InventoryRoles;
 use App\Services\InventoryService;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 
 trait SetupInventory
 {
@@ -48,6 +49,7 @@ trait SetupInventory
         $this->store = $setup['store'];
         $this->item = $setup['items']->first();
         // Set authenticated user for Gate system
+        Auth::logout();
         $this->actingAs($this->inventoryAdminUser);
     }
     protected function createUserWithInventoryPermissions($user = null, $role = InventoryRoles::INVENTORY_ADMIN, $organization = null)

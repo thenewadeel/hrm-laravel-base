@@ -21,7 +21,7 @@ trait SetupOrganization
         // parent::setUp();
         // $this->createOrganizationWithUser();
         $this->user = $this->createOrganizationWithUser()['user'];
-        // $this->actingAs($this->user);
+        $this->actingAs($this->user);
         // dd('o');
         // dd($this->organizationUnit);
 

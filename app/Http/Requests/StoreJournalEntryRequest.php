@@ -16,6 +16,7 @@ class StoreJournalEntryRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'organization_id' => ['required', 'exists:organizations,id'],
             'entry_date' => ['required', 'date', 'before_or_equal:today'],
             'description' => ['required', 'string', 'max:500'],
             'entries' => ['required', 'array', 'min:2'], // At least 2 entries (debit + credit)
