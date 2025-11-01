@@ -4,13 +4,14 @@
 use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class OrganizationUserPivotTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_can_get_all_roles_with_the_new_pivot_model()
     {
         // 1. Setup Data

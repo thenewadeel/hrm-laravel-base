@@ -11,7 +11,7 @@ use App\Models\Scopes\OrganizationScope;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
-use Tests\Traits\TenancyTestSetup;
+use Tests\Traits\SetupTenancy;
 use PHPUnit\Framework\Attributes\Test;
 
 /**
@@ -20,10 +20,10 @@ use PHPUnit\Framework\Attributes\Test;
  */
 class TenancyFeatureTest extends TestCase
 {
-    use RefreshDatabase, TenancyTestSetup;
+    use RefreshDatabase, SetupTenancy;
 
     /**
-     * Implement the abstract method required by the TenancyTestSetup trait.
+     * Implement the abstract method required by the SetupTenancy trait.
      * This method MUST return the array of models to be tested.
      *
      * @return array<class-string<\Illuminate\Database\Eloquent\Model>>
@@ -68,7 +68,7 @@ class TenancyFeatureTest extends TestCase
         foreach ($this->tenantModels() as $modelClass) {
             // Retrieve all records for the current model
             $records = $modelClass::all();
-
+            // dd($records);
             // Assertion 1: Must only see the 2 records belonging to Org A
             $this->assertCount(2, $records, "Model $modelClass failed Isolation (Wrong Count).");
 
@@ -87,7 +87,7 @@ class TenancyFeatureTest extends TestCase
     public function test_organization_id_is_automatically_set_on_creation(): void
     {
         $this->actingAs($this->userB); // Log in as User B (Org B)
-
+        // dd($this->userB);
         foreach ($this->tenantModels() as $modelClass) {
             // Create a new record *without* explicitly passing organization_id
             $newRecord = $modelClass::factory()->create([

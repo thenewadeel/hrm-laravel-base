@@ -10,10 +10,18 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use Tests\Traits\SetupInventory;
+use Tests\Traits\SetupOrganization;
 
 class SetupWizardTest extends TestCase
 {
-    use RefreshDatabase, SetupInventory;
+    use RefreshDatabase, SetupOrganization, SetupInventory;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setupOrganization();
+        $this->setupInventory();
+    }
 
     #[Test]
     public function it_shows_setup_wizard_for_new_users()
@@ -76,7 +84,7 @@ class SetupWizardTest extends TestCase
     public function it_assigns_admin_role_to_creator()
     {
         // dd('$user');
-        $user = $this->user; //User::factory()->create();
+        $user = User::factory()->create();
         $this->actingAs($user)
             ->post('/setup/organization', [
                 'name' => 'Test Org',
@@ -88,7 +96,7 @@ class SetupWizardTest extends TestCase
 
         // Check the pivot data
         $pivot = $user->organizations()->first()->pivot;
-        $this->assertEquals([InventoryRoles::INVENTORY_ADMIN], json_decode($pivot->roles, true));
+        $this->assertEquals([InventoryRoles::INVENTORY_ADMIN], $pivot->roles);
 
         // Check that organization unit was created with correct organization_id
         $this->assertDatabaseHas('organization_units', [

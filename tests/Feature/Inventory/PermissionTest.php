@@ -6,6 +6,7 @@ use Tests\Traits\SetupInventory;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Roles\InventoryRoles;
+use Illuminate\Support\Facades\Auth;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\Traits\SetupOrganization;
 
@@ -23,16 +24,16 @@ class PermissionTest extends TestCase
     public function inventory_admin_has_all_permissions()
     {
         $setup = $this->createUserWithInventoryPermissions();
+        // dd($setup['user']->getAllPermissions());
 
         $this->actingAs($setup['user'])
             ->getJson('/api/inventory/stores')
             ->assertStatus(200);
-        // dd('cp1');
         $this->actingAs($setup['user'])
             ->postJson('/api/inventory/stores', [
                 'name' => 'Test Store',
                 'code' => 'TEST001',
-                'organization_id' => $setup['organization']->id,
+                // 'organization_id' => $setup['organization']->id,
                 'organization_unit_id' => $setup['organization_unit']->id
             ])
             ->assertStatus(201);
@@ -43,7 +44,11 @@ class PermissionTest extends TestCase
     {
         $setup = $this->createStoreManager();
         $store = $setup['store'];
-
+        // dd([
+        //     $setup['user']->getAllPermissions(),
+        //     $store->organization->id,
+        //     $setup['user']->can('delete', $store)
+        // ]);
         $this->actingAs($setup['user'])
             ->deleteJson("/api/inventory/stores/{$store->id}")
             ->assertStatus(403);
@@ -83,8 +88,9 @@ class PermissionTest extends TestCase
         // Create Organization B with its own store
         $setupB = $this->createTempInventorySetup();
         $storeB = $setupB['store'];
-
+        // dd(['ppp', $setupA['user']->organizations->pluck('pivot.organization_id'), $setupB['user']->organizations->pluck('pivot.organization_id')]);
         // User from Org A tries to access Org B's store
+        Auth::logout();
         $this->actingAs($setupA['user'])
             ->getJson("/api/inventory/stores/{$storeB->id}")
             ->assertStatus(403);

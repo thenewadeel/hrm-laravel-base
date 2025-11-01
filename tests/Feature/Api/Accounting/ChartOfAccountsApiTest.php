@@ -21,6 +21,8 @@ class ChartOfAccountsApiTest extends TestCase
     {
         parent::setUp();
         $this->setupOrganization();
+        $this->actingAs($this->user);
+        // dd($this->user->organizations);
         // $this->user = User::factory()->create();
     }
 
@@ -28,9 +30,18 @@ class ChartOfAccountsApiTest extends TestCase
     #[Test]
     public function it_can_list_chart_of_accounts()
     {
+        $user = $this->user; //auth()->user();
+        // dd([
+        //     $user->id,
+        //     $user->current_organization_id,
+        //     $user->organizations,
+        //     $user->getAllRoles(),
+        //     $user->getAllPermissions(),
+        //     // $user->hasPermission(OrganizationPermissions::CREATE_ORGANIZATION),
+        //     // $user->hasRole(OrganizationRoles::SUPER_ADMIN)
+        // ]);
         $accounts = ChartOfAccount::factory()->count(3)->create();
 
-        // $this->actingAs($this->user);
         $response = $this->getJson('/api/accounts');
         // dd($response->json());
         $response->assertStatus(200)
@@ -49,7 +60,8 @@ class ChartOfAccountsApiTest extends TestCase
             'code' => '9999',
             'name' => 'Test Account',
             'type' => 'expense',
-            'description' => 'Test account description'
+            'description' => 'Test account description',
+            'organization_id' => $this->organization->id
         ];
 
         // $this->actingAs($this->user);

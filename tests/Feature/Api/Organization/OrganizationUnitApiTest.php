@@ -6,6 +6,8 @@ use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\OrganizationUnit;
+use App\Roles\InventoryRoles;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 use tests\Traits\SetupOrganization;
 use PHPUnit\Framework\Attributes\Test;
@@ -34,7 +36,7 @@ class OrganizationUnitApiTest extends TestCase
         // $organization = Organization::factory()->create();
         // $admin = User::factory()->create();
         // $organization->users()->attach($admin, ['roles' => json_encode(['admin'])]);
-
+        // dd([$admin->organizations]);
         $response = $this->actingAs($admin)
             ->postJson("/api/organizations/{$organization->id}/units", [
                 'name' => 'Development Department',
@@ -92,10 +94,15 @@ class OrganizationUnitApiTest extends TestCase
     public function can_assign_user_to_unit()
     {
         [$org, $admin] = [$this->organization, $this->user]; //$this->createOrganizationWithUser();
-        $unit = OrganizationUnit::factory()->for($org)->create();
         $user = User::factory()->create();
-        $org->users()->attach($user);
-
+        $unit = OrganizationUnit::factory()->create(['organization_id' => $org->id]);
+        $unit->save();
+        // $org->users()->attach($user);
+        $org->users()->attach($user, [
+            'roles' => json_encode([InventoryRoles::INVENTORY_ADMIN]),
+            'organization_id' => $org->id,
+            // 'organization_unit_id' => $this->organizationUnit->id
+        ]);
         // dd(json_encode($unit));
         $response = $this->actingAs($admin)
             ->putJson("/api/organizations/{$org->id}/units/{$unit->id}/assign", [
@@ -147,8 +154,15 @@ class OrganizationUnitApiTest extends TestCase
     #[Test]
     public function cannot_create_organization_unit_as_non_admin()
     {
-        [$organization, $regularUser] = $this->createOrganizationWithUser(roles: ['user']);
-
+        // [$organization, $regularUser] = $this->createOrganizationWithUser(user: null, roles: ['user']);
+        $organization = Organization::factory()->create();
+        $regularUser = User::factory()->create();
+        $organization->users()->attach($regularUser, [
+            'roles' => ['user'],
+            'organization_id' => $organization->id,
+            // 'organization_unit_id' => $unit->id
+        ]);
+        // dd($regularUser->getAllRoles());
         $response = $this->actingAs($regularUser)
             ->postJson("/api/organizations/{$organization->id}/units", [
                 'name' => 'Support Team',
@@ -161,16 +175,23 @@ class OrganizationUnitApiTest extends TestCase
     #[Test]
     public function cannot_assign_user_as_non_admin()
     {
-        $this->createOrganizationWithUser(roles: ['user']);
-        [$org, $regularUser] = [$this->organization, $this->user];
-        // dd([$org, $regularUser]);
-        $unit = OrganizationUnit::factory()->create(['organization_id' => $org->id]);
-        $user = User::factory()->create();
-        $org->users()->attach($user);
+        // failing, because controller gets a different auth()user and user_id [actingAs is not working]
+        $organization = Organization::factory()->create();
+        $regularUser = User::factory()->create();
+        $regularUser->organizations()->attach($organization, [
+            'roles' => json_encode(['user']),
+            'organization_id' => $organization->id,
+            // 'organization_unit_id' => $unit->id
+        ]);
+        $unit = OrganizationUnit::factory()->create(['organization_id' => $organization->id]);
+        // dd($regularUser->id);
+        // Auth::logout();
+        $this->actingAs($regularUser);
 
         $response = $this->actingAs($regularUser)
-            ->putJson("/api/organizations/{$org->id}/units/{$unit->id}/assign", [
-                'user_id' => $user->id
+            ->putJson("/api/organizations/{$organization->id}/units/{$unit->id}/assign", [
+                'user_id' => $regularUser->id,
+                'position' => 'Mermaid Trainer'
             ]);
 
         $response->assertStatus(403);

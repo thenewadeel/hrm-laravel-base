@@ -6,6 +6,7 @@ use App\Livewire\MemberManager;
 use App\Models\Organization;
 use App\Models\OrganizationUnit;
 use App\Models\User;
+use App\Roles\InventoryRoles;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -29,7 +30,7 @@ class MemberManagerTest extends TestCase
         $user2 = User::factory()->create();
         // $organization->users()->attach($user1);
         $organization->users()->attach($user2, [
-            'roles' => json_encode(["admin"]),
+            'roles' => json_encode([InventoryRoles::INVENTORY_ADMIN]),
             'organization_id' => $organization->id
         ]);
         // Act & Assert
@@ -47,7 +48,7 @@ class MemberManagerTest extends TestCase
         $user2 = User::factory()->create();
         // $organization->users()->attach($user1);
         $organization->users()->attach($user2, [
-            'roles' => json_encode(["admin"]),
+            'roles' => json_encode([InventoryRoles::INVENTORY_ADMIN]),
             'organization_id' => $organization->id
         ]);
 

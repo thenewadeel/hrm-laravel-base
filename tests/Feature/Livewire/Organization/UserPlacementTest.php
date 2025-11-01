@@ -4,6 +4,7 @@ use App\Livewire\UserPlacement;
 use App\Models\Organization;
 use App\Models\OrganizationUnit;
 use App\Models\User;
+use App\Roles\InventoryRoles;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -27,7 +28,7 @@ class UserPlacementTest extends TestCase
         $user = User::factory()->create();
         $unit = OrganizationUnit::factory()->create(['organization_id' => $organization->id]);
         $organization->users()->attach($user, [
-            'roles' => json_encode(["admin"]),
+            'roles' => json_encode([InventoryRoles::INVENTORY_ADMIN]),
             'organization_id' => $organization->id,
             'organization_unit_id' => $unit->id
         ]);
@@ -52,7 +53,7 @@ class UserPlacementTest extends TestCase
         $user = User::factory()->create();
         $unit = OrganizationUnit::factory()->create(['organization_id' => $organization->id]);
         $organization->users()->attach($user, [
-            'roles' => json_encode(["admin"]),
+            'roles' => json_encode([InventoryRoles::INVENTORY_ADMIN]),
             'organization_id' => $organization->id,
             'organization_unit_id' => $unit->id
         ]);
