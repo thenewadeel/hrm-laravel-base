@@ -1,33 +1,33 @@
 
    PASS  Tests\Unit\Accounting\AccountTypeValidationTest
-  ✓ it allows debit to asset accounts                                    0.26s  
+  ✓ it allows debit to asset accounts                                    0.31s  
   ✓ it allows debit to expense accounts                                  0.03s  
-  ✓ it throws exception when debiting liability account                  0.04s  
+  ✓ it throws exception when debiting liability account                  0.03s  
   ✓ it allows credit to liability accounts                               0.03s  
   ✓ it allows credit to revenue accounts                                 0.03s  
   ✓ it throws exception when crediting asset account                     0.03s  
   ✓ it validates account types during transaction posting                0.03s  
 
    PASS  Tests\Unit\Accounting\BalanceSheetTest
-  ✓ it generates balance sheet with no transactions                      0.04s  
+  ✓ it generates balance sheet with no transactions                      0.05s  
   ✓ it generates balanced balance sheet                                  0.04s  
   ✓ it includes retained earnings from income statement                  0.05s  
 
    PASS  Tests\Unit\Accounting\ChartOfAccountTest
-  ✓ it has a code name and type                                          0.03s  
+  ✓ it has a code name and type                                          0.04s  
   ✓ it can scope accounts by type                                        0.03s  
   ✓ account code must be unique                                          0.03s  
-  ✓ it can calculate its current balance                                 0.04s  
+  ✓ it can calculate its current balance                                 0.05s  
 
    PASS  Tests\Unit\Accounting\DimensionReportTest
-  ✓ example                                                              0.12s  
+  ✓ example                                                              0.11s  
 
    PASS  Tests\Unit\Accounting\FinancialReportsTest
-  ✓ example                                                              0.07s  
+  ✓ example                                                              0.04s  
 
    PASS  Tests\Unit\Accounting\IncomeStatementTest
-  ✓ it generates income statement with no transactions                   0.03s  
-  ✓ it generates income statement with revenue and expenses              0.04s  
+  ✓ it generates income statement with no transactions                   0.02s  
+  ✓ it generates income statement with revenue and expenses              0.03s  
   ✓ it excludes transactions outside date range                          0.02s  
 
    PASS  Tests\Unit\Accounting\InvalidAccountTypeExceptionTest
@@ -42,7 +42,7 @@
   ✓ it can create journal entry with specific approver                   0.02s  
 
    PASS  Tests\Unit\Accounting\JournalEntryTest
-  ✓ it can create a journal entry                                        0.02s  
+  ✓ it can create a journal entry                                        0.03s  
   ✓ it can post a balanced journal entry                                 0.02s  
   ✓ it prevents posting unbalanced journal entries                       0.02s  
 
@@ -55,17 +55,17 @@
 
    PASS  Tests\Unit\Accounting\TrialBalanceTest
   ✓ it generates trial balance with zero entries                         0.02s  
-  ✓ it generates trial balance with balanced entries                     0.02s  
+  ✓ it generates trial balance with balanced entries                     0.03s  
   ✓ it shows account balances in trial balance                           0.02s  
 
    PASS  Tests\Unit\Models\Inventory\InventoryTransactionTest
   ✓ example                                                              0.02s  
 
    PASS  Tests\Unit\Models\Inventory\ItemTest
-  ✓ example                                                              0.02s  
+  ✓ example                                                              0.01s  
 
    PASS  Tests\Unit\Models\Inventory\StoreTest
-  ✓ example                                                              0.01s  
+  ✓ example                                                              0.02s  
 
    PASS  Tests\Unit\AccountingReportServiceTest
   ✓ it generates a correct trial balance                                 0.02s  
@@ -74,25 +74,25 @@
    PASS  Tests\Unit\Accounting\AccountingServiceTest
   ✓ it throws an exception for unbalanced transactions                   0.02s  
   ✓ it successfully posts a balanced transaction and creates ledger ent… 0.02s  
-  ✓ it can handle complex but balanced transactions                      0.02s  
+  ✓ it can handle complex but balanced transactions                      0.03s  
 
    PASS  Tests\Unit\Services\InventoryServiceTest
   ✓ it can create a store                                                0.04s  
-  ✓ it can update store inventory                                        0.04s  
+  ✓ it can update store inventory                                        0.03s  
   ✓ it can update store inventory with min max stock                     0.03s  
   ✓ it can adjust store inventory                                        0.03s  
   ✓ it can create and finalize transaction                               0.04s  
-  ✓ it can cancel transaction                                            0.03s  
+  ✓ it can cancel transaction                                            0.04s  
   ✓ it can get store stock levels                                        0.03s  
-  ✓ it can get item availability                                         0.03s  
+  ✓ it can get item availability                                         0.04s  
   ✓ it prevents modifying finalized transaction                          0.04s  
-  ✓ it prevents finalizing transaction with no items                     0.04s  
+  ✓ it prevents finalizing transaction with no items                     0.03s  
   ✓ it prevents cancelling finalized transaction                         0.03s  
   ✓ it calculates low stock correctly                                    0.03s  
   ✓ it calculates overstock correctly                                    0.03s  
 
    PASS  Tests\Unit\Services\SequenceServiceTest
-  ✓ it generates sequential codes                                        0.02s  
+  ✓ it generates sequential codes                                        0.03s  
   ✓ it handles concurrent requests safely                                0.01s  
 
    PASS  Tests\Unit\Teams\CreateTeamTest
@@ -103,8 +103,8 @@
   ✓ personal teams cant be deleted                                       0.04s  
 
    PASS  Tests\Unit\Teams\InviteTeamMemberTest
-  ✓ team members can be invited to team                                  0.06s  
-  ✓ team member invitations can be cancelled                             0.06s  
+  ✓ team members can be invited to team                                  0.07s  
+  ✓ team member invitations can be cancelled                             0.07s  
 
    PASS  Tests\Unit\Teams\LeaveTeamTest
   ✓ users can leave teams                                                0.05s  
@@ -116,7 +116,7 @@
 
    PASS  Tests\Unit\Teams\UpdateTeamMemberRoleTest
   ✓ team member roles can be updated                                     0.07s  
-  ✓ only team owner can update team member roles                         0.06s  
+  ✓ only team owner can update team member roles                         0.07s  
 
    PASS  Tests\Unit\Teams\UpdateTeamNameTest
   ✓ team names can be updated                                            0.05s  
@@ -125,22 +125,22 @@
   ✓ api token permissions can be updated                                 0.07s  
 
    PASS  Tests\Unit\base\AuthenticationTest
-  ✓ login screen can be rendered                                         0.03s  
+  ✓ login screen can be rendered                                         0.04s  
   ✓ users can authenticate using the login screen                        0.04s  
-  ✓ users cannot authenticate with invalid password                      0.03s  
+  ✓ users cannot authenticate with invalid password                      0.04s  
 
    PASS  Tests\Unit\base\BrowserSessionsTest
-  ✓ other browser sessions can be logged out                             0.04s  
+  ✓ other browser sessions can be logged out                             0.05s  
 
    PASS  Tests\Unit\base\CreateApiTokenTest
-  ✓ api tokens can be created                                            0.05s  
+  ✓ api tokens can be created                                            0.06s  
 
    PASS  Tests\Unit\base\DeleteAccountTest
   ✓ user accounts can be deleted                                         0.04s  
   ✓ correct password must be provided before account can be deleted      0.05s  
 
    PASS  Tests\Unit\base\DeleteApiTokenTest
-  ✓ api tokens can be deleted                                            0.05s  
+  ✓ api tokens can be deleted                                            0.06s  
 
    WARN  Tests\Unit\base\EmailVerificationTest
   - email verification screen can be rendered → Email verification not…  0.02s  
@@ -149,55 +149,55 @@
 
    PASS  Tests\Unit\base\PasswordConfirmationTest
   ✓ confirm password screen can be rendered                              0.04s  
-  ✓ password can be confirmed                                            0.04s  
+  ✓ password can be confirmed                                            0.03s  
   ✓ password is not confirmed with invalid password                      0.23s  
 
    PASS  Tests\Unit\base\PasswordResetTest
-  ✓ reset password link screen can be rendered                           0.05s  
+  ✓ reset password link screen can be rendered                           0.03s  
   ✓ reset password link can be requested                                 0.23s  
   ✓ reset password screen can be rendered                                0.26s  
   ✓ password can be reset with valid token                               0.26s  
 
    PASS  Tests\Unit\base\ProfileInformationTest
   ✓ current profile information is available                             0.05s  
-  ✓ profile information can be updated                                   0.06s  
+  ✓ profile information can be updated                                   0.05s  
 
    WARN  Tests\Unit\base\RegistrationTest
   ✓ registration screen can be rendered                                  0.03s  
   - registration screen cannot be rendered if support is disabled → Reg… 0.01s  
-  ✓ new users can register                                               0.03s  
+  ✓ new users can register                                               0.04s  
 
    PASS  Tests\Unit\base\TwoFactorAuthenticationSettingsTest
   ✓ two factor authentication can be enabled                             0.07s  
-  ✓ recovery codes can be regenerated                                    0.11s  
-  ✓ two factor authentication can be disabled                            0.06s  
+  ✓ recovery codes can be regenerated                                    0.13s  
+  ✓ two factor authentication can be disabled                            0.07s  
 
    PASS  Tests\Unit\base\UpdatePasswordTest
   ✓ password can be updated                                              0.05s  
-  ✓ current password must be correct                                     0.04s  
+  ✓ current password must be correct                                     0.05s  
   ✓ new passwords must match                                             0.05s  
 
    PASS  Tests\Feature\Api\Accounting\ChartOfAccountsApiTest
   ✓ it can list chart of accounts                                        0.04s  
-  ✓ it can create a chart of account                                     0.04s  
-  ✓ it validates account creation                                        0.03s  
+  ✓ it can create a chart of account                                     0.05s  
+  ✓ it validates account creation                                        0.04s  
   ✓ it can show a specific account                                       0.04s  
-  ✓ it returns 404 for nonexistent account                               0.03s  
+  ✓ it returns 404 for nonexistent account                               0.04s  
 
    PASS  Tests\Feature\Api\Accounting\FinancialReportsApiTest
   ✓ it can generate trial balance                                        0.04s  
   ✓ it can generate balance sheet                                        0.04s  
-  ✓ it can generate income statement                                     0.04s  
+  ✓ it can generate income statement                                     0.05s  
   ✓ it validates income statement date range                             0.04s  
   ✓ it rejects end date before start date                                0.04s  
 
-   PASS  Tests\Feature\Api\Accounting\JournalEntriesApiTest
-  ✓ it can create a journal entry                                        0.04s  
+   FAIL  Tests\Feature\Api\Accounting\JournalEntriesApiTest
+  ⨯ it can create a journal entry                                        0.04s  
   ✓ it validates journal entry balances                                  0.04s  
   ✓ it can post a journal entry                                          0.04s  
 
    PASS  Tests\Feature\OrganizationApiTest
-  ✓ can create organization                                              0.04s  
+  ✓ can create organization                                              0.05s  
   ✓ debug factory output                                                 0.02s  
   ✓ verify organization factory works                                    0.02s  
   ✓ can list organizations                                               0.04s  
@@ -213,195 +213,220 @@
   ✓ cannot invite existing member                                        0.04s  
   ✓ non admin cannot invite members                                      0.04s  
 
-   PASS  Tests\Feature\OrganizationUnitApiTest
+   FAIL  Tests\Feature\OrganizationUnitApiTest
   ✓ can create organization unit                                         0.05s  
-  ✓ can create nested unit                                               0.04s  
+  ✓ can create nested unit                                               0.05s  
   ✓ can get unit hierarchy                                               0.04s  
   ✓ can assign user to unit                                              0.04s  
   ✓ can list users by organization unit                                  0.04s  
   ✓ cannot create organization unit as non admin                         0.04s  
-  ✓ cannot assign user as non admin                                      0.04s  
+  ⨯ cannot assign user as non admin                                      0.04s  
   ✓ cannot create unit with invalid data                                 0.04s  
-  ✓ cannot assign non existent user to unit                              0.04s  
-  ✓ cannot assign user not in organization                               0.04s  
-  ✓ cannot get hierarchy for non existent unit                           0.04s  
-  ✓ can get hierarchy for unit with no children                          0.04s  
+  ✓ cannot assign non existent user to unit                              0.05s  
+  ✓ cannot assign user not in organization                               0.07s  
+  ✓ cannot get hierarchy for non existent unit                           0.06s  
+  ✓ can get hierarchy for unit with no children                          0.05s  
 
    FAIL  Tests\Feature\DashboardTest
-  ✓ it redirects to setup for users without organization                 0.06s  
-  ✓ it shows dashboard for users with organization                       0.06s  
-  ✓ it shows dashboard sections                                          0.06s  
+  ✓ it redirects to setup for users without organization                 0.07s  
+  ✓ it shows dashboard for users with organization                       0.07s  
+  ✓ it shows dashboard sections                                          0.07s  
   ✓ it shows store inventory summary                                     0.06s  
-  ⨯ it shows low stock alerts                                            0.03s  
-  ✓ it shows recent transactions                                         0.09s  
-  ✓ it shows quick action buttons                                        0.06s  
-  ✓ it shows stats cards                                                 0.06s  
-  ⨯ it shows empty state for no stores                                   0.06s  
-  ✓ it shows all stocked message when no low stock                       0.06s  
-  ✓ it shows store with item counts                                      0.06s  
+  ⨯ it shows low stock alerts                                            0.07s  
+  ✓ it shows recent transactions                                         0.10s  
+  ✓ it shows quick action buttons                                        0.07s  
+  ✓ it shows stats cards                                                 0.07s  
+  ✓ it shows empty state for no stores                                   0.07s  
+  ✓ it shows all stocked message when no low stock                       0.08s  
+  ✓ it shows store with item counts                                      0.08s  
 
    PASS  Tests\Feature\ExampleTest
-  ✓ it returns a successful response                                     0.04s  
+  ✓ it returns a successful response                                     0.06s  
 
    FAIL  Tests\Feature\Inventory\ItemTest
-  ✓ it can create an item                                                0.05s  
+  ✓ it can create an item                                                0.06s  
   ✓ it can search items by name or sku                                   0.07s  
-  ✓ it can filter items by category                                      0.06s  
-  ✓ it can sort items                                                    0.06s  
-  ✓ it returns only items from users organization                        0.06s  
-  ✓ it can get item availability across stores                           0.06s  
+  ✓ it can filter items by category                                      0.07s  
+  ✓ it can sort items                                                    0.07s  
+  ✓ it returns only items from users organization                        0.08s  
+  ✓ it can get item availability across stores                           0.07s  
   ✓ it shows low stock status correctly                                  0.06s  
   ⨯ it returns 403 for unauthorized access                               0.06s  
   ✓ it handles item with no stores                                       0.06s  
 
    PASS  Tests\Feature\Inventory\PermissionTest
-  ✓ inventory admin has all permissions                                  0.06s  
-  ✓ store manager cannot delete stores                                   0.05s  
+  ✓ inventory admin has all permissions                                  0.08s  
+  ✓ store manager cannot delete stores                                   0.06s  
   ✓ inventory clerk cannot finalize transactions                         0.06s  
   ✓ auditor can only view inventory                                      0.06s  
-  ✓ user cannot access other organization inventory                      0.05s  
+  ✓ user cannot access other organization inventory                      0.06s  
 
    PASS  Tests\Feature\Inventory\StoreTest
-  ✓ it can create a store                                                0.06s  
-  ✓ it can add items to store                                            0.05s  
+  ✓ it can create a store                                                0.07s  
+  ✓ it can add items to store                                            0.06s  
   ✓ it can retrieve store with items                                     0.06s  
-  ✓ it can update item quantity in store                                 0.05s  
-  ✓ it can list all stores for organization                              0.06s  
-  ✓ it can use organization scope                                        0.04s  
-  ✓ it can use search scope                                              0.03s  
-  ✓ it can use active scope                                              0.03s  
+  ✓ it can update item quantity in store                                 0.06s  
+  ✓ it can list all stores for organization                              0.08s  
+  ✓ it can use organization scope                                        0.05s  
+  ✓ it can use search scope                                              0.05s  
+  ✓ it can use active scope                                              0.05s  
 
    PASS  Tests\Feature\Inventory\TransactionTest
-  ✓ it can create draft transaction without items                        0.07s  
-  ✓ it can create draft transaction with items                           0.06s  
-  ✓ it can add items to empty draft transaction                          0.06s  
-  ✓ it can add items to transaction with existing items                  0.06s  
-  ✓ it can finalize transaction created without items after adding item… 0.07s  
+  ✓ it can create draft transaction without items                        0.08s  
+  ✓ it can create draft transaction with items                           0.08s  
+  ✓ it can add items to empty draft transaction                          0.08s  
+  ✓ it can add items to transaction with existing items                  0.09s  
+  ✓ it can finalize transaction created without items after adding item… 0.08s  
   ✓ it can finalize transaction created with items                       0.07s  
-  ✓ it cannot finalize empty transaction                                 0.06s  
-  ✓ it cannot add items to finalized transaction                         0.06s  
-  ✓ it can list transactions by status                                   0.08s  
-  ✓ it can calculate transaction totals                                  0.06s  
-  ✓ it cannot modify finalized transaction                               0.07s  
-  ✓ it can calculate totals for empty transaction                        0.06s  
+  ✓ it cannot finalize empty transaction                                 0.07s  
+  ✓ it cannot add items to finalized transaction                         0.07s  
+  ✓ it can list transactions by status                                   0.09s  
+  ✓ it can calculate transaction totals                                  0.07s  
+  ✓ it cannot modify finalized transaction                               0.08s  
+  ✓ it can calculate totals for empty transaction                        0.07s  
 
    PASS  Tests\Feature\Livewire\Accounting\ChartOfAccountsTest
-  ✓ chart of accounts page renders                                       0.04s  
-  ✓ it displays a list of accounts                                       0.04s  
-  ✓ it displays a list of chart of accounts                              0.04s  
-  ✓ it can create a new chart of account record                          0.05s  
-  ✓ it can update an existing chart of account record                    0.05s  
+  ✓ chart of accounts page renders                                       0.06s  
+  ✓ it displays a list of accounts                                       0.05s  
+  ✓ it displays a list of chart of accounts                              0.05s  
+  ✓ it can create a new chart of account record                          0.06s  
+  ✓ it can update an existing chart of account record                    0.06s  
 
    FAIL  Tests\Feature\Livewire\Accounting\JournalEntriesTest
-  ✓ it renders successfully                                              0.04s  
-  ⨯ it creates a journal entry                                           0.07s  
-  ✓ a journal entry requires balanced debits and credits                 0.07s  
+  ✓ it renders successfully                                              0.05s  
+  ⨯ it creates a journal entry                                           0.08s  
+  ✓ a journal entry requires balanced debits and credits                 0.09s  
 
    PASS  Tests\Feature\Livewire\Organization\MemberManagerTest
   ✓ it can display a list of organization members                        0.04s  
   ✓ it can search for members by name or email                           0.05s  
 
    PASS  Tests\Feature\Livewire\Organization\OrganizationFormTest
-  ✓ it shows create form                                                 0.05s  
+  ✓ it shows create form                                                 0.04s  
   ✓ it shows edit form                                                   0.04s  
-  ✓ it creates new organization                                          0.04s  
-  ✓ it updates existing organization                                     0.05s  
+  ✓ it creates new organization                                          0.05s  
+  ✓ it updates existing organization                                     0.06s  
   ✓ it validates required fields                                         0.04s  
   ✓ it validates unique name                                             0.04s  
   ✓ it closes modal                                                      0.04s  
 
    FAIL  Tests\Feature\Livewire\Organization\OrganizationListTest
   ✓ it shows organizations list                                          0.05s  
-  ✓ it searches organizations by name                                    0.04s  
+  ✓ it searches organizations by name                                    0.05s  
   ✓ it sorts organizations by name ascending                             0.05s  
-  ✓ it sorts organizations by name descending                            0.05s  
-  ✓ it sorts organizations by status                                     0.04s  
-  ✓ it paginates organizations                                           0.05s  
-  ⨯ it shows empty state when no organizations                           0.04s  
+  ✓ it sorts organizations by name descending                            0.07s  
+  ✓ it sorts organizations by status                                     0.05s  
+  ✓ it paginates organizations                                           0.07s  
+  ⨯ it shows empty state when no organizations                           0.05s  
 
    FAIL  Tests\Feature\Livewire\Organization\OrganizationTreeTest
-  ✓ it can display the organization tree                                 0.05s  
-  ✓ an organization unit can be dragged and dropped to another parent    0.04s  
-  ✓ an organizational unit cannot be dropped onto itself                 0.04s  
-  ✓ an organizational unit can be dropped as a root node                 0.04s  
-  ✓ a parent cannot be dropped onto one of its descendants               0.04s  
-  ✓ a sibling can be dropped under another sibling                       0.04s  
+  ✓ it can display the organization tree                                 0.06s  
+  ✓ an organization unit can be dragged and dropped to another parent    0.06s  
+  ✓ an organizational unit cannot be dropped onto itself                 0.05s  
+  ✓ an organizational unit can be dropped as a root node                 0.05s  
+  ✓ a parent cannot be dropped onto one of its descendants               0.05s  
+  ✓ a sibling can be dropped under another sibling                       0.05s  
   ⨯ an empty tree renders correctly                                      0.02s  
-  ✓ it can handle a large number of units without crashing               0.08s  
+  ✓ it can handle a large number of units without crashing               0.09s  
   ⨯ a dropped unit that does not exist does not cause an error           0.04s  
 
    FAIL  UserPlacementTest
-  ✓ it can assign a user to a unit                                       0.05s  
-  ⨯ it can unassign a user by dropping them onto the root                0.04s  
+  ✓ it can assign a user to a unit                                       0.06s  
+  ⨯ it can unassign a user by dropping them onto the root                0.06s  
 
    PASS  Tests\Feature\MultiStepSetupWizardTest
   ✓ it shows organization step for new users                             0.06s  
   ✓ it can store organization and proceed to store step                  0.05s  
-  ✓ it shows store setup step after organization                         0.06s  
-  ✓ it can create first store and proceed to accounting                  0.06s  
-  ✓ it shows accounting setup step after store                           0.06s  
+  ✓ it shows store setup step after organization                         0.14s  
+  ✓ it can create first store and proceed to accounting                  0.09s  
+  ✓ it shows accounting setup step after store                           0.12s  
 
    PASS  OrganizationUserPivotTest
-  ✓ it can get all roles with the new pivot model                        0.02s  
+  ✓ it can get all roles with the new pivot model                        0.04s  
 
    PASS  Tests\Feature\SetupChartOfAccountsTest
-  ✓ it creates default chart of accounts                                 0.05s  
-  ✓ it skips account creation if not requested                           0.05s  
-  ✓ it creates organization unit for accounting department               0.06s  
+  ✓ it creates default chart of accounts                                 0.09s  
+  ✓ it skips account creation if not requested                           0.08s  
+  ✓ it creates organization unit for accounting department               0.09s  
 
    PASS  Tests\Feature\SetupStoreTest
-  ✓ it creates first store for organization                              0.05s  
-  ✓ it validates store creation                                          0.05s  
-  ✓ it auto generates store code if not provided                         0.05s  
+  ✓ it creates first store for organization                              0.11s  
+  ✓ it validates store creation                                          0.09s  
+  ✓ it auto generates store code if not provided                         0.10s  
 
    PASS  Tests\Feature\SetupWizardTest
-  ✓ it shows setup wizard for new users                                  0.06s  
-  ✓ it redirects to dashboard if organization exists                     0.05s  
-  ✓ it can create organization through wizard                            0.05s  
-  ✓ it validates organization creation                                   0.05s  
-  ✓ it assigns admin role to creator                                     0.05s  
+  ✓ it shows setup wizard for new users                                  0.17s  
+  ✓ it redirects to dashboard if organization exists                     0.12s  
+  ✓ it can create organization through wizard                            0.14s  
+  ✓ it validates organization creation                                   0.09s  
+  ✓ it assigns admin role to creator                                     0.08s  
 
    PASS  Tests\Feature\TenancyFeatureTest
-  ✓ queries are automatically scoped to the authenticated users organiz… 0.04s  
-  ✓ organization id is automatically set on creation                     0.03s  
-  ✓ global scope can be bypassed for admin queries                       0.03s  
+  ✓ queries are automatically scoped to the authenticated users organiz… 0.05s  
+  ✓ organization id is automatically set on creation                     0.05s  
+  ✓ global scope can be bypassed for admin queries                       0.04s  
   ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\DashboardTest > it shows low stock…   QueryException   
-  SQLSTATE[HY000]: General error: 1 table inventory_stores has no column named organization_id (Connection: sqlite, SQL: insert into "inventory_stores" ("organization_unit_id", "name", "code", "location", "description", "is_active", "organization_id", "updated_at", "created_at") values (2, repellat Store, ST8075, 4370 Mante Forks, Quis laudantium facilis sed eos., 1, 2, 2025-11-01 07:19:14, 2025-11-01 07:19:14))
+   FAILED  Tests\Feature\Api\Accounting\JournalEntriesApiTest > it can creat…   
+  Expected response status code [201] but received 422.
+Failed asserting that 422 is identical to 201.
 
-  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
-    560▕             if ($this->pretending()) {
-    561▕                 return true;
-    562▕             }
-    563▕ 
-  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
-    565▕ 
-    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
-    567▕ 
-    568▕             $this->recordsHaveBeenModified();
+The following errors occurred during the last request:
 
-      [2m+16 vendor frames [22m
-  17  tests/Feature/DashboardTest.php:116
+{
+    "message": "The organization id field is required.",
+    "errors": {
+        "organization_id": [
+            "The organization id field is required."
+        ]
+    }
+}
+
+  at tests/Feature/Api/Accounting/JournalEntriesApiTest.php:44
+     40▕         ];
+     41▕         $this->actingAs($this->user);
+     42▕         $response = $this->postJson('/api/journal-entries', $entryData);
+     43▕         // dd($response->json());
+  ➜  44▕         $response->assertStatus(201)
+     45▕             ->assertJsonStructure([
+     46▕                 'data' => [
+     47▕                     'id',
+     48▕                     'reference_number',
 
   ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\DashboardTest > it shows empty state for no stores     
+   FAILED  Tests\Feature\OrganizationUnitApiTest > cannot assign user as non…   
+  Expected response status code [403] but received 404.
+Failed asserting that 404 is identical to 403.
+
+  at tests/Feature/Api/Organization/OrganizationUnitApiTest.php:197
+    193▕                 'user_id' => $regularUser->id,
+    194▕                 'position' => 'Mermaid Trainer'
+    195▕             ]);
+    196▕ 
+  ➜ 197▕         $response->assertStatus(403);
+    198▕     }
+    199▕ 
+    200▕     #[Test]
+    201▕     public function cannot_create_unit_with_invalid_data()
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\DashboardTest > it shows low stock alerts              
   Expected: <!DOCTYPE html>\n
   <html lang="en">\n
   \n
   ... (470 more lines)
 
-  To contain: No stores yet
+  To contain: voluptate
 
-  at tests/Feature/DashboardTest.php:215
-    211▕         $response = $this->actingAs($user)
-    212▕             ->get('/dashboard');
-    213▕ 
-    214▕         $response->assertStatus(200)
-  ➜ 215▕             ->assertSee('No stores yet')
-    216▕             ->assertSee('Add your first store'); // Fixed: removed extra space
-    217▕     }
-    218▕ 
-    219▕
+  at tests/Feature/DashboardTest.php:151
+    147▕             ->get('/dashboard');
+    148▕         // dd($response);
+    149▕         $response->assertStatus(200)
+    150▕             ->assertSee('Low Stock Alerts')
+  ➜ 151▕             ->assertSee($lowStockItem->name);
+    152▕     }
+    153▕ 
+    154▕     #[Test]
+    155▕     public function it_shows_recent_transactions()
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\Inventory\ItemTest > it returns 403 for unauthorize…   
@@ -427,7 +452,13 @@ Failed asserting that 404 is identical to 403.
     "status": "posted"
 }.
 
-The table is empty.
+Found: [
+    {
+        "entry_date": "2025-01-01 00:00:00",
+        "description": "Test entry",
+        "status": "posted"
+    }
+].
 
   at tests/Feature/Livewire/Accounting/JournalEntriesTest.php:50
      46▕             ->set('transactions.1.credit', 500);
@@ -442,7 +473,7 @@ The table is empty.
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\Livewire\Organization\OrganizationListTest > it sho…   
-  Expected: <div wire:snapshot="" wire:effects="" wire:id="1wE9AzUi3OH0sWUekKdq">\n
+  Expected: <div wire:snapshot="" wire:effects="" wire:id="lZpJwObkpxF9d5EsUydC">\n
       <!-- Header with Search and Actions -->\n
       <div class="flex flex-col sm:flex-row justify-between items-center mb-6 space-y-4 sm:space-y-0">\n
   ... (103 more lines)
@@ -529,6 +560,6 @@ Found similar results: [
      69▕         ]);
 
 
-  Tests:    8 failed, 4 skipped, 231 passed (779 assertions)
-  Duration: 11.61s
+  Tests:    9 failed, 4 skipped, 230 passed (770 assertions)
+  Duration: 13.66s
 

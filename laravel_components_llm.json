@@ -25,7 +25,7 @@
             "yunyami/clockwork"
         ]
     },
-    "timestamp": "2025-11-01T07:19:06+00:00",
+    "timestamp": "2025-11-01T15:54:44+00:00",
     "component_count": 169,
     "components": [
         {
@@ -1845,33 +1845,6 @@
         },
         {
             "type": "Controller",
-            "name": "DashboardController",
-            "file": "app/Http/Controllers/DashboardController.php",
-            "essential": false,
-            "class": "DashboardController",
-            "namespace": "App\\Http\\Controllers",
-            "methods": [
-                {
-                    "name": "index",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 14
-                },
-                {
-                    "name": "getLowStockItems",
-                    "modifiers": [
-                        "protected"
-                    ],
-                    "parameters": "Organization $organization",
-                    "line": 46
-                }
-            ],
-            "method_count": 2
-        },
-        {
-            "type": "Controller",
             "name": "SetupController",
             "file": "app/Http/Controllers/SetupController.php",
             "essential": false,
@@ -1912,6 +1885,33 @@
                 }
             ],
             "method_count": 4
+        },
+        {
+            "type": "Controller",
+            "name": "DashboardController",
+            "file": "app/Http/Controllers/DashboardController.php",
+            "essential": false,
+            "class": "DashboardController",
+            "namespace": "App\\Http\\Controllers",
+            "methods": [
+                {
+                    "name": "index",
+                    "modifiers": [
+                        "public"
+                    ],
+                    "parameters": "",
+                    "line": 14
+                },
+                {
+                    "name": "getLowStockItems",
+                    "modifiers": [
+                        "protected"
+                    ],
+                    "parameters": "Organization $organization",
+                    "line": 57
+                }
+            ],
+            "method_count": 2
         },
         {
             "type": "Migration",
@@ -3352,7 +3352,7 @@
             "name": "web",
             "file": "routes/web.php",
             "essential": true,
-            "content_preview": "<?php\n\nuse App\\Http\\Controllers\\AccountsController;\nuse App\\Http\\Controllers\\OrganizationController;\nuse App\\Http\\Controllers\\SetupController;\nuse App\\Http\\Livewire\\Organization\\OrganizationList;\nuse App\\Models\\Inventory\\Store;\nuse App\\Models\\OrganizationUser;\nuse App\\Services\\AccountingReportService;\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::get('/', function () {\n    return view('welcome');\n});\n\n// Route::middleware([\n//     'auth:sanctum',\n//     config('jetstream.auth_session'),\n//     '...",
+            "content_preview": "<?php\n\nuse App\\Http\\Controllers\\AccountsController;\nuse App\\Http\\Controllers\\Api\\Inventory\\ItemController;\nuse App\\Http\\Controllers\\Api\\Inventory\\StoreController;\nuse App\\Http\\Controllers\\Api\\Inventory\\TransactionController;\nuse App\\Http\\Controllers\\OrganizationController;\nuse App\\Http\\Controllers\\SetupController;\nuse App\\Http\\Livewire\\Organization\\OrganizationList;\nuse App\\Models\\Inventory\\Store;\nuse App\\Models\\OrganizationUser;\nuse App\\Services\\AccountingReportService;\nuse Illuminate\\Support\\F...",
             "route_summary": [
                 "Route::get('/', function () { return view('welcome');",
                 "Route::middleware([ // 'auth:sanctum', // config('jetstream.auth_session'), // 'verified', // ])->gr...",
@@ -3381,6 +3381,11 @@
                 "Route::get('/users/{user}/edit', UserForm::class)->name('users.edit');",
                 "Route::get('/roles', RoleManager::class)->name('roles.index');",
                 "Route::get('/accounts', [AccountsController::class, 'index'])->name('accounting.index');",
+                "Route::get('/items/low-stock', [ItemController::class, 'lowStock'])->name('items.low-stock');",
+                "Route::get('/items/out-of-stock', [ItemController::class, 'outOfStock'])->name('items.out-of-stock')...",
+                "Route::resource('items', ItemController::class);",
+                "Route::resource('stores', StoreController::class);",
+                "Route::resource('transactions', TransactionController::class);",
                 "Route::group(['prefix' => 'debug'], function () { Route::get('/orgs', function () { $user = auth()->...",
                 "Route::get('api-config', function () { return response()->json([ 'app_url' => config('app.url'), 'ap...",
                 "Route::get('journal-entries', function () { try { $entries = \\App\\Models\\Accounting\\JournalEntry::wi...",
@@ -3982,12 +3987,6 @@
         },
         {
             "type": "View",
-            "name": "dashboard.blade.php",
-            "file": "resources/views/dashboard.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
             "name": "navigation-menu.blade.php",
             "file": "resources/views/navigation-menu.blade.php",
             "essential": false
@@ -3996,6 +3995,12 @@
             "type": "View",
             "name": "welcome.blade.php",
             "file": "resources/views/welcome.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "dashboard.blade.php",
+            "file": "resources/views/dashboard.blade.php",
             "essential": false
         },
         {

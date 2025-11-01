@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AccountsController;
+use App\Http\Controllers\Api\Inventory\ItemController;
+use App\Http\Controllers\Api\Inventory\StoreController;
+use App\Http\Controllers\Api\Inventory\TransactionController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\SetupController;
 use App\Http\Livewire\Organization\OrganizationList;
@@ -123,6 +126,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // });
 
     Route::get('/accounts', [AccountsController::class, 'index'])->name('accounting.index');
+
+    // Inventory routes
+    Route::get('/items/low-stock', [ItemController::class, 'lowStock'])->name('items.low-stock');
+    Route::get('/items/out-of-stock', [ItemController::class, 'outOfStock'])->name('items.out-of-stock');
+    Route::resource('items', ItemController::class);
+    Route::resource('stores', StoreController::class);
+    Route::resource('transactions', TransactionController::class);
 });
 
 // Temporary debug routes

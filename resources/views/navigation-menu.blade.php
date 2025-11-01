@@ -20,16 +20,22 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <!-- Dashboard -->
+                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard*')">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m8-8V4a1 1 0 00-1-1h-2a1 1 0 00-1 1v1M9 7h6" />
+                        </svg>
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <!-- Inventory Management -->
                 </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
 
                 @auth
-
+                    {{-- In resources/views/navigation-menu.blade.php --}}
 
                     <!-- Teams Dropdown -->
                     @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
