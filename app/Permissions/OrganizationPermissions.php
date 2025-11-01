@@ -12,10 +12,10 @@ class OrganizationPermissions
     // const MANAGE_USER_INVENTORY = 'organization.users.manage-inventory';
 
     // organization Management
-    const VIEW_ORGANIZATION = 'organization.organization.view';
-    const CREATE_ORGANIZATION = 'organization.organization.create';
-    const EDIT_ORGANIZATION = 'organization.organization.edit';
-    const DELETE_ORGANIZATION = 'organization.organization.delete';
+    const VIEW_ORGANIZATION = 'organization.view';
+    const CREATE_ORGANIZATION = 'organization.create';
+    const EDIT_ORGANIZATION = 'organization.edit';
+    const DELETE_ORGANIZATION = 'organization.delete';
 
     // organization_unit Management
     const VIEW_ORGANIZATION_UNITS = 'organization.organization_units.view';
@@ -69,6 +69,12 @@ class OrganizationPermissions
     public static function groups(): array
     {
         return [
+            'organization_management' => [
+                self::VIEW_ORGANIZATION,
+                self::CREATE_ORGANIZATION,
+                self::EDIT_ORGANIZATION,
+                self::DELETE_ORGANIZATION,
+            ],
             'user_management' => [
                 self::VIEW_USERS,
                 self::CREATE_USERS,

@@ -12,8 +12,10 @@ class OrganizationUser extends Pivot
         'roles' => 'array',
         'permissions' => 'array',
         'custom_fields' => 'array',
+        'position' => 'string',
+        'organization_id' => 'integer',
+        'organization_unit_id' => 'integer',
     ];
-
     /**
      * Check if user has a specific role
      */

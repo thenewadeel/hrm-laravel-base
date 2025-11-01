@@ -19,22 +19,19 @@ class OrganizationScope implements Scope
      * @param  \Illuminate\Database\Eloquent\Model  $model
      * @return void
      */
+    // In App\Models\Scopes\OrganizationScope.php
+
     public function apply(Builder $builder, Model $model)
     {
-        // 1. Check if a user is authenticated.
         if (Auth::check()) {
             $user = Auth::user();
 
-            // 2. Check if the authenticated user has an organization_id property.
-            //    (Assumption: Your User model has an organization_id column)
-            $user_organization = $user->organizations()->first();
-            if ($user_organization) {
-                // Apply the tenancy filter
-                $builder->where('organization_id', $user_organization->id);
+            // ✨ Use the centralized method
+            $orgId = $user->operatingOrganizationId;
+
+            if ($orgId) {
+                $builder->where('organization_id', $orgId);
             }
         }
-        // Note: If no user is authenticated or the user has no ID, the scope does nothing,
-        // which might result in 0 results for models that require an organization_id.
-        // You may adjust this logic based on how you manage unauthenticated tenants.
     }
 }

@@ -18,6 +18,8 @@ class JournalEntryFactory extends Factory
             'created_by' => User::factory(),
             'approved_by' => $this->faker->optional()->passthrough(User::factory()),
             'posted_at' => $this->faker->optional(0.3)->dateTime(), // 30% chance of having posted_at
+            'organization_id' => auth()->user()->current_organization_id ?? 1,
+
         ];
     }
 

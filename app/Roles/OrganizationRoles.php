@@ -26,7 +26,7 @@ class OrganizationRoles
                 OrganizationPermissions::VIEW_ORGANIZATION,
                 OrganizationPermissions::CREATE_ORGANIZATION,
                 OrganizationPermissions::EDIT_ORGANIZATION,
-                OrganizationPermissions::DELETE_ORGANIZATION,
+                // OrganizationPermissions::DELETE_ORGANIZATION,
                 // Reporting
                 OrganizationPermissions::VIEW_ORGANIZATION_REPORTS,
                 OrganizationPermissions::EXPORT_ORGANIZATION_DATA,

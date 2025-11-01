@@ -6,6 +6,7 @@ use App\Models\Organization;
 use App\Models\User;
 use App\Permissions\OrganizationPermissions;
 use App\Roles\InventoryRoles;
+use App\Roles\OrganizationRoles;
 use Illuminate\Auth\Access\Response;
 
 class OrganizationPolicy
@@ -19,15 +20,15 @@ class OrganizationPolicy
     public function view(User $user, Organization $organization): bool
     {
         return
-            $user->organizations->contains($organization->organization_id);
+            $user->organizations->contains($organization->id);
     }
 
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user, Organization $organization)
+    public function create(User $user)
     {
-        return $user->hasPermission(OrganizationPermissions::CREATE_ORGANIZATION);
+        return true; //$user->hasPermission(OrganizationPermissions::CREATE_ORGANIZATION) || $user->hasRole(OrganizationRoles::SUPER_ADMIN);
     }
 
 

@@ -37,6 +37,7 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
         'organization', // <-- ADDED for fixed tenancy
+        'operating_organization_id',
     ];
 
     protected function casts(): array
@@ -71,7 +72,25 @@ class User extends Authenticatable
     {
         return $this->units();
     }
+    // You might also add 'operating_organization_id' to $appends for API serialization
+    // protected $appends = ['operating_organization_id'];
 
+    public function getOperatingOrganizationIdAttribute(): ?int
+    {
+        // 1. Check for the explicitly set current organization ID
+        if ($this->current_organization_id) {
+            return (int) $this->current_organization_id;
+        }
+
+        // 2. Fallback to the first organization if one exists
+        // (Ensure 'organizations' relationship is loaded before calling this if used outside the query)
+        if ($this->organizations->isNotEmpty()) {
+            return (int) $this->organizations->first()->id;
+        }
+
+        // 3. Return null if no organization ID can be determined
+        return null;
+    }
     // Fixed Tenancy Relationships
     public function currentOrganization()
     {
@@ -88,77 +107,68 @@ class User extends Authenticatable
     // Around line 101 and 116 - fix the hasPermission methods
     public function hasPermission($permission, $organization = null): bool
     {
-        // If organization is provided, check permission in that context
-        if ($organization) {
-            $orgId = $organization instanceof Organization ? $organization->id : $organization;
-            $membership = $this->organizations()->where('organizations.id', $orgId)->first();
-
-            if ($membership) {
-                // Check direct permissions
-                if ($membership->pivot->permissions) {
-                    $directPermissions = json_decode($membership->pivot->permissions, true) ?? [];
-                    if (in_array($permission, $directPermissions)) {
-                        return true;
-                    }
-                }
-
-                // Check role-based permissions
-                if ($membership->pivot->roles) {
-                    $userRoles = json_decode($membership->pivot->roles, true) ?? [];
-                    $rolePermissions = $this->getPermissionsForRoles($userRoles);
-                    if (in_array($permission, $rolePermissions)) {
-                        return true;
-                    }
-                }
-            }
+        $organization = $organization ?: $this->currentOrganization ?: $this->organizations()->first();
+        if (!$organization) {
+            return false;
         }
 
-        // Check if user has permission in any organization
-        foreach ($this->organizations as $org) {
-            $hasPermission = false;
+        $membership = $this->organizations()->where('organizations.id', $organization->id)->first();
 
-            // Check direct permissions
-            if ($org->pivot->permissions) {
-                $directPermissions = json_decode($org->pivot->permissions, true) ?? [];
-                if (in_array($permission, $directPermissions)) {
-                    $hasPermission = true;
-                }
-            }
-
-            // Check role-based permissions
-            if (!$hasPermission && $org->pivot->roles) {
-                $userRoles = json_decode($org->pivot->roles, true) ?? [];
-                $rolePermissions = $this->getPermissionsForRoles($userRoles);
-                if (in_array($permission, $rolePermissions)) {
-                    $hasPermission = true;
-                }
-            }
-
-            if ($hasPermission) {
-                return true;
-            }
+        if (!$membership) {
+            return false;
         }
 
-        return false;
+        // Fix: Ensure roles is always treated as array
+        $roles = $membership->pivot->roles ?? [];
+
+        // Handle case where roles might be stored as JSON string
+        if (is_string($roles)) {
+            $roles = json_decode($roles, true) ?? [];
+        }
+
+        if (!is_array($roles)) {
+            $roles = [$roles];
+        }
+
+        $permissions = $this->getAllPermissions();
+        // dd(['cp', $permission, $permissions]);
+
+        return in_array($permission, $permissions);
     }
 
-    /**
-     * Give permission to user for a specific organization
-     */
+    // Also fix the addRole method around line 173
+    public function addRole($role, $organization = null)
+    {
+
+        return $this->assignRole($role, $organization);
+    }
+
     public function givePermissionTo(string|array $permissions, $organization = null): self
     {
-        $permissions = is_array($permissions) ? $permissions : [$permissions];
+        // 1. Ensure $permissions is an array for merging
+        $permissionsToAdd = (array) $permissions;
 
         if ($organization) {
             $orgId = $organization instanceof Organization ? $organization->id : $organization;
-            $membership = $this->organizations()->where('organizations.id', $orgId)->first();
+
+            // Use withPivot(['permissions']) if necessary to ensure the column is loaded
+            $membership = $this->organizations()
+                ->where('organization_id', $orgId)
+                ->first();
 
             if ($membership) {
-                $currentPermissions = json_decode($membership->pivot->permissions, true) ?? [];
-                $newPermissions = array_unique(array_merge($currentPermissions, $permissions));
+                // dd($membership);
+                // 2. RETRIEVE CURRENT PERMISSIONS (Laravel casting ensures this is an array)
+                // If the column is null in the DB, the cast will return null, so use the null coalescing operator.
+                $currentPermissions = $membership->pivot->permissions ?? [];
 
+                // 3. APPEND (Merge the current array with the new permissions)
+                $newPermissions = array_unique(array_merge($currentPermissions, $permissionsToAdd));
+
+                // 4. SAVE (Laravel will automatically JSON-encode the array back to the DB)
                 $this->organizations()->updateExistingPivot($orgId, [
-                    'permissions' => json_encode($newPermissions)
+                    // The 'permissions' attribute is now an array
+                    'permissions' => $newPermissions
                 ]);
             }
         }
@@ -187,15 +197,27 @@ class User extends Authenticatable
 
     public function assignRole(string|array $roles, $organization = null): self
     {
-        $roles = is_array($roles) ? $roles : [$roles];
+        $organization = $organization ?: $this->currentOrganization;
 
         if ($organization) {
             $orgId = $organization instanceof Organization ? $organization->id : $organization;
             $membership = $this->organizations()->where('organizations.id', $orgId)->first();
 
             if ($membership) {
-                $currentRoles = json_decode($membership->pivot->roles, true) ?? [];
-                $newRoles = array_unique(array_merge($currentRoles, $roles));
+                $currentRoles = $membership->pivot->roles ?? [];
+
+                // Ensure currentRoles is always an array
+                if (is_string($currentRoles)) {
+                    $currentRoles = json_decode($currentRoles, true) ?? [];
+                }
+
+                if (!is_array($currentRoles)) {
+                    $currentRoles = [$currentRoles];
+                }
+
+                // Ensure $role is an array for array_merge
+                $rolesToAdd = is_array($roles) ? $roles : [$roles];
+                $newRoles = array_unique(array_merge($currentRoles, $rolesToAdd));
 
                 $this->organizations()->updateExistingPivot($orgId, [
                     'roles' => json_encode($newRoles)
@@ -206,59 +228,46 @@ class User extends Authenticatable
         return $this;
     }
 
-    /**
-     * Get permissions for given roles
-     */
     protected function getPermissionsForRoles(array $roles): array
     {
+        // dd($roles);
         $allPermissions = [];
-
         foreach ($roles as $role) {
             $rolePermissions = InventoryRoles::getPermissionsForRole($role);
             $allPermissions = array_merge($allPermissions, $rolePermissions);
         }
-
         return array_unique($allPermissions);
     }
 
-    /**
-     * Get all permissions for user across all organizations
-     * Includes both direct permissions and role-based permissions
-     */
     public function getAllPermissions(): array
     {
         $allPermissions = [];
-
         foreach ($this->organizations as $org) {
-            // Get direct permissions
-            if ($org->pivot->permissions) {
-                $directPermissions = json_decode($org->pivot->permissions, true) ?? [];
-                $allPermissions = array_merge($allPermissions, $directPermissions);
-            }
+            $directPermissions = $org->pivot->permissions ?? [];
+            $allPermissions = array_merge($allPermissions, $directPermissions);
 
-            // Get role-based permissions
-            if ($org->pivot->roles) {
-                $userRoles = json_decode($org->pivot->roles, true) ?? [];
-                $rolePermissions = $this->getPermissionsForRoles($userRoles);
-                $allPermissions = array_merge($allPermissions, $rolePermissions);
-            }
+            $userRoles = $org->pivot->roles ?? [];
+            $rolePermissions = $this->getPermissionsForRoles($userRoles);
+            $allPermissions = array_merge($allPermissions, $rolePermissions);
+            // dd([$org->pivot->permissions, $allPermissions, $userRoles, $rolePermissions]);
         }
-
         return array_unique($allPermissions);
     }
 
-    /**
-     * Get all roles for user across all organizations
-     */
     public function getAllRoles(): array
     {
         $allRoles = [];
 
         foreach ($this->organizations as $org) {
-            if ($org->pivot->roles) {
-                $roles = json_decode($org->pivot->roles, true) ?? [];
-                $allRoles = array_merge($allRoles, $roles);
+            $roles = $org->pivot->roles ?? [];
+
+            // Handle case where roles is a JSON string
+            if (is_string($roles)) {
+                $decodedRoles = json_decode($roles, true);
+                $roles = is_array($decodedRoles) ? $decodedRoles : [];
             }
+
+            $allRoles = array_merge($allRoles, $roles);
         }
 
         return array_unique($allRoles);

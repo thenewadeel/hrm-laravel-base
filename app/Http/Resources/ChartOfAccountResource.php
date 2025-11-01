@@ -19,6 +19,7 @@ class ChartOfAccountResource extends JsonResource
             'balance' => $this->balance,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'organization_id' => $this->organization_id
         ];
     }
 }

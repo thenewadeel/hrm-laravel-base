@@ -4,6 +4,7 @@ namespace App\Models\Traits;
 
 use App\Models\Organization;
 use App\Models\Scopes\OrganizationScope;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Trait to apply the OrganizationScope globally and define the relationship.
@@ -16,17 +17,37 @@ trait BelongsToOrganization
      *
      * @return void
      */
+    // In App\Models\Traits\BelongsToOrganization.php
+
     protected static function bootBelongsToOrganization()
     {
         static::addGlobalScope(new OrganizationScope);
 
-        // Optional: Ensure the organization_id is automatically filled on creation
-        // This is a common practice to prevent tenancy leaks.
         static::creating(function ($model) {
-            $user = auth()->user();
-            $user_organization = $user->organizations()->first();
-            if ($user && $user_organization) {
-                $model->organization_id = $user_organization->id;
+            $user = Auth::user();
+
+            if ($user) {
+                $orgId = null;
+
+                if ($user->current_organization_id) {
+                    $orgId = $user->current_organization_id;
+                } elseif ($user->organizations->isNotEmpty()) { // ✅ Safe access
+                    $orgId = $user->organizations->first()->id;
+                }
+
+                if ($orgId) {
+                    $model->organization_id = $orgId;
+                    return; // Stop here if organization_id is set
+                }
+            }
+
+            // Fallback for Tests/Console/No Auth
+            if (empty($model->organization_id)) {
+                $firstOrganization = Organization::query()->first(['id']);
+
+                if ($firstOrganization) {
+                    $model->organization_id = $firstOrganization->id;
+                }
             }
         });
     }
