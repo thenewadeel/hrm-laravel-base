@@ -1,64 +1,84 @@
 <?php
+// app/Http/Controllers/DashboardController.php
 
 namespace App\Http\Controllers;
 
-use App\Models\Inventory\Item;
+use App\Models\Organization;
 use App\Models\Inventory\Store;
+use App\Models\Inventory\Item;
 use App\Models\Inventory\Transaction;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $organization = auth()->user()->currentOrganization;
+        $user = auth()->user();
+        $organization = Organization::find($user->operating_organization_id);
 
+        // Redirect to setup if no organization
         if (!$organization) {
-            return redirect()->route('setup.welcome');
+            return redirect('/setup');
         }
 
-        $totalItems = Item::where('organization_id', $organization->id)->count();
-        $lowStockItems = Item::where('organization_id', $organization->id)
-            ->where('quantity', '<=', DB::raw('reorder_level'))
-            ->where('quantity', '>', 0)
-            ->count();
-        $outOfStockItems = Item::where('organization_id', $organization->id)
-            ->where('quantity', '<=', 0)
-            ->count();
-        $totalValue = Item::where('organization_id', $organization->id)
-            ->sum(DB::raw('quantity * cost_price'));
-
-        $recentTransactions = Transaction::with(['store', 'createdBy'])
-            ->whereHas('store', function ($query) use ($organization) {
-                $query->where('organization_id', $organization->id);
-            })
-            ->orderBy('created_at', 'desc')
-            ->limit(5)
+        // Get dashboard data
+        $stores = Store::withCount('items')->get();
+        $totalItems = Item::count();
+        $lowStockItems = Item::lowInStock()
             ->get();
 
-        $storeSummary = Store::withCount('items')
-            ->where('organization_id', $organization->id)
-            ->where('is_active', true)
+        $recentTransactions = Transaction::whereIn('store_id', Store::forOrganization($organization->id)->pluck('id'))
+            ->with('store')
+            ->latest()
+            ->take(5)
             ->get();
 
+        $items = Item::pluck('id', 'name');
+        // dd([
+        //     'user' => $user->operating_organization_id,
+        //     'role' => $user->getAllRoles(),
+        //     'permissions' => $user->getAllPermissions(),
+        //     'organization' => $organization->id,
+        //     'stores' => $stores->first()->organization->id,
+        //     'totalItems' => $totalItems,
+        //     'lowStockItems' => $lowStockItems,
+        //     'recentTransactions' => $recentTransactions
+        // ]);
         return view('dashboard', compact(
+            'organization',
+            'stores',
             'totalItems',
             'lowStockItems',
-            'outOfStockItems',
-            'totalValue',
-            'recentTransactions',
-            'storeSummary'
+            'recentTransactions'
         ));
     }
 
-    protected function getLowStockItems($organization)
+    protected function getLowStockItems(Organization $organization)
     {
+        // Get items that have store quantities below reorder level
         return Item::where('organization_id', $organization->id)
-            ->where('quantity', '<=', DB::raw('reorder_level'))
-            ->where('quantity', '>', 0)
-            ->with(['stores', 'head'])
-            ->orderBy('quantity', 'asc')
-            ->get();
+            ->whereHas('stores', function ($query) {
+                $query->whereColumn('inventory_store_items.quantity', '<=', 'inventory_items.reorder_level');
+            })
+            ->with(['stores' => function ($query) {
+                $query->whereColumn('inventory_store_items.quantity', '<=', 'inventory_items.reorder_level');
+            }])
+            ->get()
+            ->map(function ($item) {
+                // Get the low stock store quantities
+                $lowStockStores = $item->stores->map(function ($store) {
+                    return [
+                        'store_name' => $store->name,
+                        'quantity' => $store->pivot->quantity,
+                        'reorder_level' => $item->reorder_level
+                    ];
+                });
+
+                return [
+                    'item' => $item,
+                    'low_stock_stores' => $lowStockStores
+                ];
+            })
+            ->flatten(1);
     }
 }
