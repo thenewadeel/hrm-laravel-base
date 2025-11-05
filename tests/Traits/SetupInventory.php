@@ -118,7 +118,15 @@ trait SetupInventory
         // dd(['createInventorySetup', $organization, $organization_unit, $user->organizations->pluck('pivot.roles'),$permissions, $organization, $user->organizations]);
         // dd($this->user->organizations);
 
-
+        // dd([
+        //     'authUser' => json_encode($user),
+        //     'operatingOrganizationId' => $user->operatingOrganizationId, // Check this!
+        //     'userCurrentOrg' => $user->current_organization_id,
+        //     'userOrgs' => $user->organizations()->pluck('organizations.id'),
+        //     'itemsCount' => Item::count(),
+        //     'itemsWithoutScope' => Item::withoutGlobalScope(\App\Models\Scopes\OrganizationScope::class)->get()->pluck('organization_id'),
+        //     'itemsWithScope' => Item::get()->pluck('organization_id')
+        // ]);
         $store = Store::factory()->create([
             'name' => 'test store',
             'organization_unit_id' => $organization_unit->id
@@ -248,6 +256,7 @@ trait SetupInventory
         return $setup;
     }
 
+    // In SetupInventory trait, update the createMultipleStoresWithInventory method
     protected function createMultipleStoresWithInventory($user = null)
     {
         $setup = $this->createInventorySetup();
@@ -256,13 +265,20 @@ trait SetupInventory
             'organization_unit_id' => $setup['organization_unit']->id
         ]);
 
-        // Add inventory to all stores
+        // Add inventory to all stores with unique items
         $allStores = collect([$setup['store']])->merge($additionalStores);
 
-        foreach ($allStores as $store) {
-            foreach ($setup['items']->take(3) as $item) {
+        // Create separate items for each store to avoid unique constraint issues
+        foreach ($allStores as $index => $store) {
+            $storeItems = Item::factory()->count(3)->create([
+                'organization_id' => $setup['organization']->id
+            ]);
+
+            foreach ($storeItems as $item) {
                 $store->items()->attach($item->id, [
-                    'quantity' => rand(50, 200)
+                    'quantity' => rand(50, 200),
+                    'min_stock' => 10,
+                    'max_stock' => 500
                 ]);
             }
         }

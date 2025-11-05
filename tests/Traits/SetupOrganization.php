@@ -91,4 +91,17 @@ trait SetupOrganization
         $this->actingAs($user);
         return [$organizations, $user];
     }
+    protected function attachUserToOrganization(User $user, Organization $org, array $roles = []): void
+    {
+        $user->organizations()->attach($org, [
+            'roles' => json_encode($roles),
+            'organization_id' => $org->id,
+        ]);
+
+        // Automatically set current organization if not set
+        if (is_null($user->current_organization_id)) {
+            $user->current_organization_id = $org->id;
+            $user->save();
+        }
+    }
 }
