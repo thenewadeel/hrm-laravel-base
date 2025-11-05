@@ -59,4 +59,8 @@ trait BelongsToOrganization
     {
         return $this->belongsTo(Organization::class);
     }
+    public function scopeOfOrganization($query, string $organization)
+    {
+        return $query->where('organization_id', $organization);
+    }
 }

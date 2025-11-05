@@ -49,7 +49,7 @@ class Item extends Model
     // ------------------------------------------------------------------------------------------------
 
     // Add 'total_quantity' to be automatically included in array/JSON form
-    protected $appends = ['total_quantity', 'formatted_selling_price'];
+    // protected $appends = ['total_quantity', 'formatted_selling_price'];
 
     // ------------------------------------------------------------------------------------------------
     // RELATIONS
@@ -102,6 +102,17 @@ class Item extends Model
         // Assuming US dollar formatting, adjust as needed (e.g., using a localization package)
         return number_format($this->selling_price, 2) . ' PKR';
     }
+    public function getFormattedCostPriceAttribute(): string
+    {
+        // Assuming US dollar formatting, adjust as needed (e.g., using a localization package)
+        return number_format($this->cost_price, 2) . ' PKR';
+    }
+
+    public function getOverallCostAttribute(): string
+    {
+        // Assuming US dollar formatting, adjust as needed (e.g., using a localization package)
+        return number_format($this->cost_price * $this->total_quantity, 2) . ' PKR';
+    }
 
     // ------------------------------------------------------------------------------------------------
     // MUTATORS (Setters)
@@ -131,6 +142,10 @@ class Item extends Model
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('is_active', true);
+    }
+    public function scopeInActive(Builder $query): Builder
+    {
+        return $query->where('is_active', false);
     }
 
     /**
@@ -172,11 +187,66 @@ class Item extends Model
     {
         return $query->where('head_id', $head);
     }
-    public function scopeOfOrganization(Builder $query, string $organization): Builder
-    {
-        return $query->where('organization_id', $organization);
-    }
+
+    // public function scopeOfOrganization(Builder $query, string $organization): Builder
+    // {
+    //     return $query->where('organization_id', $organization);
+    // }
     // ------------------------------------------------------------------------------------------------
+    /**
+     * Scope for items that are low in stock across all stores (but not out of stock)
+     */
+    public function scopeLowInStock(Builder $query): Builder
+    {
+        return $query->whereHas('stores', function ($q) {
+            $q->whereRaw('inventory_store_items.quantity < inventory_store_items.min_stock')
+                ->where('inventory_store_items.quantity', '>', 0); // Exclude out of stock
+        });
+    }
+
+    /**
+     * Scope for items that are out of stock
+     */
+    public function scopeOutOfStock(Builder $query): Builder
+    {
+        return $query->whereHas('stores', function ($q) {
+            $q->where('inventory_store_items.quantity', '<=', 0);
+        });
+    }
+
+    /**
+     * Scope for items that are adequately stocked
+     */
+    public function scopeAdequatelyStocked(Builder $query): Builder
+    {
+        return $query->whereHas('stores', function ($q) {
+            $q->whereRaw('inventory_store_items.quantity >= inventory_store_items.min_stock')
+                ->where('inventory_store_items.quantity', '>', 0); // Also not out of stock
+        });
+    }
+
+    /**
+     * Scope for items that are low in stock in a specific store
+     */
+    public function scopeLowInStockInStore(Builder $query, $storeId): Builder
+    {
+        return $query->whereHas('stores', function ($q) use ($storeId) {
+            $q->where('inventory_stores.id', $storeId)
+                ->whereRaw('inventory_store_items.quantity < inventory_store_items.min_stock');
+        });
+    }
+
+
+    /**
+     * Alternative approach using join for low stock items
+     */
+    public function scopeLowStockJoin(Builder $query): Builder
+    {
+        return $query->join('inventory_store_items', 'inventory_items.id', '=', 'inventory_store_items.item_id')
+            ->whereRaw('inventory_store_items.quantity < inventory_store_items.min_stock')
+            ->select('inventory_items.*')
+            ->distinct();
+    }
     // FACTORY
     // ------------------------------------------------------------------------------------------------
 

@@ -4,6 +4,7 @@ namespace App\Models\Inventory;
 
 use App\Models\Organization;
 use App\Models\OrganizationUnit;
+use App\Models\Scopes\StoreOrganizationScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Query\Builder;
 
 class Store extends Model
 {
@@ -35,8 +37,12 @@ class Store extends Model
         'is_active' => 'boolean'
     ];
 
-    protected $appends = ['total_quantity', 'total_value'];
+    // protected $appends = ['total_quantity', 'total_value'];
 
+    protected static function booted()
+    {
+        static::addGlobalScope(new StoreOrganizationScope);
+    }
     // Relationships
     public function organization_unit(): BelongsTo
     {
@@ -113,12 +119,66 @@ class Store extends Model
             ->get();
     }
 
+    /**
+     * Get low stock items for this specific store (but not out of stock)
+     */
+    public function lowStockItems()
+    {
+        return $this->belongsToMany(Item::class, 'inventory_store_items')
+            ->whereRaw('inventory_store_items.quantity < inventory_store_items.min_stock')
+            ->where('inventory_store_items.quantity', '>', 0) // Exclude out of stock
+            ->withPivot(['quantity', 'min_stock', 'max_stock']);
+    }
+
+    /**
+     * Get out of stock items for this specific store
+     */
+    public function outOfStockItems()
+    {
+        return $this->belongsToMany(Item::class, 'inventory_store_items')
+            ->where('inventory_store_items.quantity', '<=', 0)
+            ->withPivot(['quantity', 'min_stock', 'max_stock']);
+    }
+
+    /**
+     * Get items that are adequately stocked
+     */
+    public function adequateStockItems()
+    {
+        return $this->belongsToMany(Item::class, 'inventory_store_items')
+            ->whereRaw('inventory_store_items.quantity >= inventory_store_items.min_stock')
+            ->where('inventory_store_items.quantity', '>', 0) // Also not out of stock
+            ->withPivot(['quantity', 'min_stock', 'max_stock']);
+    }
+
+
+
+    /**
+     * Get current stock level statistics - FIXED VERSION
+     */
+    public function getStockStatsAttribute()
+    {
+        $totalItems = $this->items()->count();
+        $lowStockItems = $this->lowStockItems()->count();
+        $outOfStockItems = $this->outOfStockItems()->count();
+        $adequateStockItems = $this->adequateStockItems()->count();
+
+        // Verify the math makes sense
+        $calculatedTotal = $lowStockItems + $outOfStockItems + $adequateStockItems;
+
+        return [
+            'total_items' => $totalItems,
+            'low_stock_items' => $lowStockItems,
+            'out_of_stock_items' => $outOfStockItems,
+            'adequate_stock_items' => $adequateStockItems,
+            'calculated_total' => $calculatedTotal, // For debugging
+        ];
+    }
     // Scopes
     public function scopeActive($query, bool $active = true)
     {
         return $query->where('is_active', $active);
     }
-
     /**
      * Scope to filter stores by organization ID
      */
@@ -163,9 +223,49 @@ class Store extends Model
                 ->orWhere('location', 'like', "%{$search}%");
         });
     }
+    /**
+     * Scope for stores that have low stock items
+     */
+    public function scopeHasLowStock(Builder $query): Builder
+    {
+        return $query->whereHas('items', function ($q) {
+            $q->whereRaw('inventory_store_items.quantity < inventory_store_items.min_stock')
+                ->where('inventory_store_items.quantity', '>', 0);
+        });
+    }
 
     protected static function newFactory()
     {
         return \Database\Factories\Inventory\StoreFactory::new();
+    }
+    /**
+     * Alternative: More reliable statistics using database queries
+     */
+    public function getStockStatsReliableAttribute()
+    {
+        $totalItems = $this->items()->count();
+
+        // Use raw queries to avoid relationship overlap issues
+        $lowStockCount = $this->items()
+            ->whereRaw('inventory_store_items.quantity < inventory_store_items.min_stock')
+            ->where('inventory_store_items.quantity', '>', 0)
+            ->count();
+
+        $outOfStockCount = $this->items()
+            ->where('inventory_store_items.quantity', '<=', 0)
+            ->count();
+
+        $adequateStockCount = $this->items()
+            ->whereRaw('inventory_store_items.quantity >= inventory_store_items.min_stock')
+            ->where('inventory_store_items.quantity', '>', 0)
+            ->count();
+
+        return [
+            'total_items' => $totalItems,
+            'low_stock_items' => $lowStockCount,
+            'out_of_stock_items' => $outOfStockCount,
+            'adequate_stock_items' => $adequateStockCount,
+            'verification_total' => $lowStockCount + $outOfStockCount + $adequateStockCount,
+        ];
     }
 }
