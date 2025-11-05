@@ -16,7 +16,7 @@ return new class extends Migration
             // $table->foreignId('item_id');
             $table->integer('quantity');
             // $table->integer('qty');
-            $table->integer('unit_price')->comment('in cents');
+            $table->integer('unit_price')->nullable();
             // $table->decimal('rate', 8, 2);
             $table->text('notes')->nullable();
             // $table->text('notes')->nullable()->default('NULL');
