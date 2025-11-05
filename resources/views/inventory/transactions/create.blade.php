@@ -92,7 +92,7 @@
                     <div class="mt-8 pt-8 border-t border-gray-200">
                         <h4 class="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h4>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            @foreach ($quickStores as $store)
+                            {{-- @foreach ($quickStores as $store)
                                 <div class="text-center">
                                     <p class="text-sm text-gray-600 mb-2">Quick receipt for</p>
                                     <x-button.outline
@@ -101,7 +101,7 @@
                                         🏪 {{ $store->name }}
                                     </x-button.outline>
                                 </div>
-                            @endforeach
+                            @endforeach --}}
                         </div>
                     </div>
 

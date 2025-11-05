@@ -124,7 +124,7 @@
                                 <x-button.outline
                                     href="{{ route('inventory.transactions.create') }}?type=transfer&from_store_id={{ $store->id }}"
                                     class="w-full justify-center">
-                                    <x-heroicon-s-arrow-right-left class="w-4 h-4 mr-2" />
+                                    {{-- <x-heroicon-s-arrow-right-left class="w-4 h-4 mr-2" /> --}}
                                     Transfer Items
                                 </x-button.outline>
 
@@ -180,18 +180,21 @@
                             </x-button.link>
                         </div>
                         <div class="space-y-4">
-                            @forelse($recentTransactions as $transaction)
-                                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                            {{-- @forelse($recentTransactions as $transaction)
+                                <div class="flex items-center justify-between py-3 border-b border-gray-100"
+                                    title="{{ json_encode($transaction) }}">
                                     <div>
-                                        <p class="font-medium text-gray-900">{{ $transaction->reference }}</p>
+                                        <p class="font-medium text-gray-900">{{ $transaction->reference ?? 'no ref' }}
+                                        </p>
                                         <p class="text-sm text-gray-500">
-                                            {{ $transaction->type }} • {{ $transaction->items_count }} items
+                                            {{ $transaction->type ?? 'no type' }} •
+                                            {{ $transaction->items_count ?? 'unknown' }} items
                                         </p>
                                     </div>
                                     <div class="text-right">
-                                        <x-status-badge :status="$transaction->status" />
+                                        <x-status-badge :status="$transaction->status ?? 'nil'" />
                                         <p class="text-sm text-gray-500">
-                                            {{ $transaction->created_at->diffForHumans() }}</p>
+                                            {{ $transaction->created_at->diffForHumans() ?? 'unknown time' }}</p>
                                     </div>
                                 </div>
                             @empty
@@ -201,7 +204,7 @@
                                     <p class="mt-1 text-sm text-gray-500">This store has no transaction history yet.
                                     </p>
                                 </div>
-                            @endforelse
+                            @endforelse --}}
                         </div>
                     </div>
                 </div>
@@ -217,18 +220,19 @@
                                 View All
                             </x-button.link>
                         </div>
-                        <div class="space-y-3">
+                        <div class="space-y-3" title="{{ json_encode($lowStockItems) }}">
                             @forelse($lowStockItems as $item)
                                 <div class="flex items-center justify-between py-2 border-b border-gray-100">
                                     <div class="flex items-center">
                                         <x-heroicon-s-cube class="h-4 w-4 text-gray-400 mr-2" />
                                         <div>
-                                            <p class="text-sm font-medium text-gray-900">{{ $item->name }}</p>
-                                            <p class="text-xs text-gray-500">{{ $item->sku }}</p>
+                                            <p class="text-sm font-medium text-gray-900">
+                                                {{ $item->name ?? 'no item name' }}</p>
+                                            <p class="text-xs text-gray-500">{{ $item->sku ?? 'no SKU' }}</p>
                                         </div>
                                     </div>
                                     <div class="text-right">
-                                        <x-inventory.quantity-indicator :quantity="$item->pivot->quantity ?? $item->quantity" :reorderLevel="$item->reorder_level" />
+                                        <x-inventory.quantity-indicator :quantity="$item->pivot->quantity ?? ($item->quantity ?? 0)" :reorderLevel="$item->reorder_level ?? 0" />
                                         <p class="text-xs text-gray-500 mt-1">
                                             {{ $item->pivot->quantity ?? $item->quantity }} /
                                             {{ $item->reorder_level }} {{ $item->unit }}

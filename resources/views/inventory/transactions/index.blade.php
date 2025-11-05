@@ -193,13 +193,14 @@
                                                     size="sm">
                                                     View
                                                 </x-button.link>
-                                                @if ($transaction->isDraft())
+                                                {{-- @if ($transaction->isDraft())
                                                     <x-button.link
                                                         href="{{ route('inventory.transactions.edit', $transaction) }}"
                                                         size="sm">
                                                         Edit
                                                     </x-button.link>
-                                                @endif
+                                                @endif --}}
+                                                {{-- TODO : Transaction Approval --}}
                                             </div>
                                         </td>
                                     </tr>

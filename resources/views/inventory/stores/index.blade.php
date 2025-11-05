@@ -25,28 +25,22 @@
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                         <x-heroicon-s-magnifying-glass class="h-4 w-4 text-gray-400" />
                                     </div>
-                                    <x-form.input 
-                                        id="search" 
-                                        name="search" 
-                                        type="text" 
-                                        class="pl-10 block w-full" 
-                                        :value="request('search')" 
-                                        placeholder="Search by store name, code, or location..." 
-                                    />
+                                    <x-form.input id="search" name="search" type="text"
+                                        class="pl-10 block w-full" :value="request('search')"
+                                        placeholder="Search by store name, code, or location..." />
                                 </div>
                             </div>
 
                             <!-- Status Filter -->
                             <div>
                                 <x-form.label for="filter_status" value="Status" />
-                                <x-form.select 
-                                    id="filter_status" 
-                                    name="filter_status" 
-                                    class="mt-1 block w-full md:w-40"
-                                >
+                                <x-form.select id="filter_status" name="filter_status"
+                                    class="mt-1 block w-full md:w-40">
                                     <option value="">All Status</option>
-                                    <option value="active" {{ request('filter_status') == 'active' ? 'selected' : '' }}>Active</option>
-                                    <option value="inactive" {{ request('filter_status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                    <option value="active" {{ request('filter_status') == 'active' ? 'selected' : '' }}>
+                                        Active</option>
+                                    <option value="inactive"
+                                        {{ request('filter_status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
                                 </x-form.select>
                             </div>
 
@@ -67,12 +61,14 @@
             <!-- Stores Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse($stores as $store)
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-200 hover:shadow-md transition-shadow duration-200">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-200 hover:shadow-md transition-shadow duration-200"
+                        title={{ $store }}>
                         <div class="p-6">
                             <!-- Store Header -->
                             <div class="flex items-center justify-between mb-4">
                                 <div class="flex items-center">
-                                    <div class="flex-shrink-0 h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <div
+                                        class="flex-shrink-0 h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center">
                                         <x-heroicon-s-building-storefront class="h-6 w-6 text-blue-600" />
                                     </div>
                                     <div class="ml-4">
@@ -82,29 +78,29 @@
                                 </div>
                                 <x-status-badge :status="$store->is_active ? 'active' : 'inactive'" />
                             </div>
-                            
+
                             <!-- Store Details -->
                             <div class="space-y-3 text-sm text-gray-600 mb-4">
-                                @if($store->location)
+                                @if ($store->location)
                                     <div class="flex items-center">
                                         <x-heroicon-s-map-pin class="h-4 w-4 mr-2 text-gray-400" />
                                         <span class="truncate">{{ $store->location }}</span>
                                     </div>
                                 @endif
-                                
-                                @if($store->organizationUnit)
+
+                                @if ($store->organizationUnit)
                                     <div class="flex items-center">
                                         <x-heroicon-s-building-office class="h-4 w-4 mr-2 text-gray-400" />
                                         <span>{{ $store->organizationUnit->name }}</span>
                                     </div>
                                 @endif
-                                
+
                                 <div class="flex items-center">
                                     <x-heroicon-s-cube class="h-4 w-4 mr-2 text-gray-400" />
                                     <span>{{ $store->items_count ?? 0 }} items</span>
                                 </div>
-                                
-                                @if($store->description)
+
+                                @if ($store->description)
                                     <div class="pt-2 border-t border-gray-100">
                                         <p class="text-gray-500 text-xs">{{ Str::limit($store->description, 100) }}</p>
                                     </div>
@@ -116,18 +112,21 @@
                                 <div class="grid grid-cols-2 gap-4 text-xs">
                                     <div class="text-center">
                                         <div class="font-semibold text-gray-900">Total Value</div>
-                                        <div class="text-green-600 font-medium">${{ number_format(($store->total_value ?? 0) / 100, 2) }}</div>
+                                        <div class="text-green-600 font-medium">
+                                            ${{ number_format(($store->total_value ?? 0) / 100, 2) }}</div>
                                     </div>
                                     <div class="text-center">
                                         <div class="font-semibold text-gray-900">Low Stock</div>
-                                        <div class="text-orange-600 font-medium">{{ $store->low_stock_count ?? 0 }} items</div>
+                                        <div class="text-orange-600 font-medium">{{ $store->low_stock_count ?? 0 }}
+                                            items</div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Action Buttons -->
                             <div class="flex justify-between items-center">
-                                <x-button.link href="{{ route('inventory.stores.show', $store) }}" class="text-blue-600 hover:text-blue-800">
+                                <x-button.link href="{{ route('inventory.stores.show', $store) }}"
+                                    class="text-blue-600 hover:text-blue-800">
                                     View Details
                                 </x-button.link>
                                 <div class="flex space-x-2">
@@ -156,7 +155,7 @@
             </div>
 
             <!-- Pagination -->
-            @if($stores->hasPages())
+            @if ($stores->hasPages())
                 <div class="mt-6">
                     {{ $stores->links() }}
                 </div>
