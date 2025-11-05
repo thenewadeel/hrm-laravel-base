@@ -25,974 +25,111 @@
             "yunyami/clockwork"
         ]
     },
-    "timestamp": "2025-11-01T15:54:44+00:00",
-    "component_count": 169,
+    "timestamp": "2025-11-05T18:29:32+00:00",
+    "component_count": 208,
     "components": [
         {
             "type": "Model",
             "name": "Membership",
             "file": "app/Models/Membership.php",
-            "essential": false,
-            "class": "Membership",
-            "namespace": "App\\Models",
-            "methods": [],
-            "method_count": 0
+            "essential": false
         },
         {
             "type": "Model",
             "name": "Team",
             "file": "app/Models/Team.php",
-            "essential": false,
-            "class": "Team",
-            "namespace": "App\\Models",
-            "methods": [
-                {
-                    "name": "casts",
-                    "modifiers": [
-                        "protected"
-                    ],
-                    "parameters": "",
-                    "line": 42
-                }
-            ],
-            "method_count": 1
+            "essential": false
         },
         {
             "type": "Model",
             "name": "TeamInvitation",
             "file": "app/Models/TeamInvitation.php",
-            "essential": false,
-            "class": "TeamInvitation",
-            "namespace": "App\\Models",
-            "methods": [
-                {
-                    "name": "team",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 24
-                }
-            ],
-            "method_count": 1
+            "essential": false
         },
         {
             "type": "Model",
             "name": "ChartOfAccount",
             "file": "app/Models/Accounting/ChartOfAccount.php",
-            "essential": false,
-            "class": "ChartOfAccount",
-            "namespace": "App\\Models\\Accounting",
-            "methods": [
-                {
-                    "name": "newFactory",
-                    "modifiers": [
-                        "static"
-                    ],
-                    "parameters": "",
-                    "line": 23
-                },
-                {
-                    "name": "organization",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 28
-                },
-                {
-                    "name": "ledgerEntries",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 32
-                },
-                {
-                    "name": "scopeAssets",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$query",
-                    "line": 37
-                },
-                {
-                    "name": "scopeLiabilities",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$query",
-                    "line": 41
-                },
-                {
-                    "name": "scopeEquity",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$query",
-                    "line": 45
-                },
-                {
-                    "name": "scopeRevenues",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$query",
-                    "line": 49
-                },
-                {
-                    "name": "scopeExpenses",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$query",
-                    "line": 53
-                },
-                {
-                    "name": "getBalanceAttribute",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 58
-                }
-            ],
-            "method_count": 9
+            "essential": false
         },
         {
             "type": "Model",
             "name": "JournalEntry",
             "file": "app/Models/Accounting/JournalEntry.php",
-            "essential": false,
-            "class": "JournalEntry",
-            "namespace": "App\\Models\\Accounting",
-            "methods": [
-                {
-                    "name": "createWithTransaction",
-                    "modifiers": [
-                        "static"
-                    ],
-                    "parameters": "array $attributes = []",
-                    "line": 48
-                },
-                {
-                    "name": "booted",
-                    "modifiers": [
-                        "static"
-                    ],
-                    "parameters": "",
-                    "line": 62
-                },
-                {
-                    "name": "newFactory",
-                    "modifiers": [
-                        "static"
-                    ],
-                    "parameters": "",
-                    "line": 82
-                },
-                {
-                    "name": "createdBy",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 87
-                },
-                {
-                    "name": "approvedBy",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 92
-                },
-                {
-                    "name": "organization",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 97
-                },
-                {
-                    "name": "ledgerEntries",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 106
-                },
-                {
-                    "name": "ledgerEntries",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 106
-                },
-                {
-                    "name": "post",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "array $entries",
-                    "line": 126
-                },
-                {
-                    "name": "void",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 140
-                }
-            ],
-            "method_count": 10
+            "essential": false
         },
         {
             "type": "Model",
             "name": "LedgerEntry",
             "file": "app/Models/Accounting/LedgerEntry.php",
-            "essential": false,
-            "class": "LedgerEntry",
-            "namespace": "App\\Models\\Accounting",
-            "methods": [
-                {
-                    "name": "newFactory",
-                    "modifiers": [
-                        "static"
-                    ],
-                    "parameters": "",
-                    "line": 32
-                },
-                {
-                    "name": "account",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 37
-                },
-                {
-                    "name": "transactionable",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 42
-                },
-                {
-                    "name": "dimensions",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 47
-                }
-            ],
-            "method_count": 4
+            "essential": false
         },
         {
             "type": "Model",
             "name": "Dimension",
             "file": "app/Models/Dimension.php",
-            "essential": false,
-            "class": "Dimension",
-            "namespace": "App\\Models",
-            "methods": [
-                {
-                    "name": "ledgerEntries",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 17
-                }
-            ],
-            "method_count": 1
+            "essential": false
         },
         {
             "type": "Model",
             "name": "TestTransaction",
             "file": "app/Models/TestTransaction.php",
-            "essential": false,
-            "class": "TestTransaction",
-            "namespace": "App\\Models",
-            "methods": [],
-            "method_count": 0
+            "essential": false
         },
         {
             "type": "Model",
             "name": "Organization",
             "file": "app/Models/Organization.php",
-            "essential": false,
-            "class": "Organization",
-            "namespace": "App\\Models",
-            "methods": [
-                {
-                    "name": "users",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 17
-                },
-                {
-                    "name": "units",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 25
-                }
-            ],
-            "method_count": 2
+            "essential": false
         },
         {
             "type": "Model",
             "name": "OrganizationUnit",
             "file": "app/Models/OrganizationUnit.php",
-            "essential": false,
-            "class": "OrganizationUnit",
-            "namespace": "App\\Models",
-            "methods": [
-                {
-                    "name": "parent",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 28
-                },
-                {
-                    "name": "children",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 33
-                },
-                {
-                    "name": "users",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 38
-                },
-                {
-                    "name": "allDescendants",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 46
-                },
-                {
-                    "name": "allDescendantsWithSelf",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 52
-                },
-                {
-                    "name": "allAncestors",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 61
-                },
-                {
-                    "name": "scopeWithDepth",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$query",
-                    "line": 66
-                },
-                {
-                    "name": "scopeWithDepthBelow",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$query, $depth",
-                    "line": 71
-                },
-                {
-                    "name": "scopeDefaultOrder",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$query",
-                    "line": 81
-                },
-                {
-                    "name": "stores",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 86
-                }
-            ],
-            "method_count": 10
+            "essential": false
         },
         {
             "type": "Model",
             "name": "Item",
             "file": "app/Models/Inventory/Item.php",
-            "essential": false,
-            "class": "Item",
-            "namespace": "App\\Models\\Inventory",
-            "methods": [
-                {
-                    "name": "organization",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 58
-                },
-                {
-                    "name": "stores",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 62
-                },
-                {
-                    "name": "head",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 68
-                },
-                {
-                    "name": "transactionItems",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 72
-                },
-                {
-                    "name": "getTotalQuantityAttribute",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 87
-                },
-                {
-                    "name": "getFormattedSellingPriceAttribute",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 100
-                },
-                {
-                    "name": "setSkuAttribute",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "string $value",
-                    "line": 116
-                },
-                {
-                    "name": "scopeActive",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Builder $query",
-                    "line": 131
-                },
-                {
-                    "name": "scopeNeedsAttention",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Builder $query",
-                    "line": 145
-                },
-                {
-                    "name": "scopeOfCategory",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Builder $query, string $category",
-                    "line": 166
-                },
-                {
-                    "name": "scopeOfHead",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Builder $query, string $head",
-                    "line": 171
-                },
-                {
-                    "name": "scopeOfOrganization",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Builder $query, string $organization",
-                    "line": 175
-                },
-                {
-                    "name": "newFactory",
-                    "modifiers": [
-                        "static"
-                    ],
-                    "parameters": "",
-                    "line": 183
-                }
-            ],
-            "method_count": 13
+            "essential": false
         },
         {
             "type": "Model",
             "name": "Transaction",
             "file": "app/Models/Inventory/Transaction.php",
-            "essential": false,
-            "class": "Transaction",
-            "namespace": "App\\Models\\Inventory",
-            "methods": [
-                {
-                    "name": "getTypes",
-                    "modifiers": [
-                        "static"
-                    ],
-                    "parameters": "",
-                    "line": 50
-                },
-                {
-                    "name": "getStatuses",
-                    "modifiers": [
-                        "static"
-                    ],
-                    "parameters": "",
-                    "line": 60
-                },
-                {
-                    "name": "getValidationRules",
-                    "modifiers": [
-                        "static"
-                    ],
-                    "parameters": "",
-                    "line": 70
-                },
-                {
-                    "name": "scopeDraft",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$query",
-                    "line": 82
-                },
-                {
-                    "name": "scopeFinalized",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$query",
-                    "line": 90
-                },
-                {
-                    "name": "scopeCancelled",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$query",
-                    "line": 98
-                },
-                {
-                    "name": "scopeIncoming",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$query",
-                    "line": 106
-                },
-                {
-                    "name": "scopeOutgoing",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$query",
-                    "line": 114
-                },
-                {
-                    "name": "scopeAdjustment",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$query",
-                    "line": 122
-                },
-                {
-                    "name": "isDraft",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 127
-                },
-                {
-                    "name": "isFinalized",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 132
-                },
-                {
-                    "name": "isCancelled",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 137
-                },
-                {
-                    "name": "canBeModified",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 142
-                },
-                {
-                    "name": "finalize",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 147
-                },
-                {
-                    "name": "cancel",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 159
-                },
-                {
-                    "name": "store",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 169
-                },
-                {
-                    "name": "createdBy",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 174
-                },
-                {
-                    "name": "approvedBy",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 179
-                },
-                {
-                    "name": "items",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 184
-                },
-                {
-                    "name": "getTotalQuantityAttribute",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 191
-                }
-            ],
-            "method_count": 20
+            "essential": false
         },
         {
             "type": "Model",
             "name": "TransactionItem",
             "file": "app/Models/Inventory/TransactionItem.php",
-            "essential": false,
-            "class": "TransactionItem",
-            "namespace": "App\\Models\\Inventory",
-            "methods": [
-                {
-                    "name": "transaction",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 34
-                },
-                {
-                    "name": "item",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 39
-                },
-                {
-                    "name": "getTotalPriceAttribute",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 45
-                },
-                {
-                    "name": "getFormattedUnitPrice",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 51
-                },
-                {
-                    "name": "getFormattedTotalPrice",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 56
-                },
-                {
-                    "name": "newFactory",
-                    "modifiers": [
-                        "static"
-                    ],
-                    "parameters": "",
-                    "line": 61
-                }
-            ],
-            "method_count": 6
+            "essential": false
         },
         {
             "type": "Model",
             "name": "Head",
             "file": "app/Models/Inventory/Head.php",
-            "essential": false,
-            "class": "Head",
-            "namespace": "App\\Models\\Inventory",
-            "methods": [
-                {
-                    "name": "store",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 30
-                },
-                {
-                    "name": "items",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 34
-                },
-                {
-                    "name": "store_items",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 38
-                }
-            ],
-            "method_count": 3
+            "essential": false
         },
         {
             "type": "Model",
             "name": "Store",
             "file": "app/Models/Inventory/Store.php",
-            "essential": false,
-            "class": "Store",
-            "namespace": "App\\Models\\Inventory",
-            "methods": [
-                {
-                    "name": "organization_unit",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 41
-                },
-                {
-                    "name": "organization",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 45
-                },
-                {
-                    "name": "items",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 50
-                },
-                {
-                    "name": "transactions",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 57
-                },
-                {
-                    "name": "getTotalQuantityAttribute",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 63
-                },
-                {
-                    "name": "getTotalValueAttribute",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 68
-                },
-                {
-                    "name": "getItemQuantity",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Item $item",
-                    "line": 76
-                },
-                {
-                    "name": "updateItemQuantity",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Item $item, int $quantity",
-                    "line": 82
-                },
-                {
-                    "name": "adjustItemQuantity",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Item $item, int $adjustment",
-                    "line": 89
-                },
-                {
-                    "name": "hasSufficientStock",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Item $item, int $quantity",
-                    "line": 97
-                },
-                {
-                    "name": "getLowStockItems",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 102
-                },
-                {
-                    "name": "getOutOfStockItems",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 109
-                },
-                {
-                    "name": "scopeActive",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$query, bool $active = true",
-                    "line": 117
-                },
-                {
-                    "name": "scopeForOrganization",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$query, $organizationId",
-                    "line": 125
-                },
-                {
-                    "name": "scopeForOrganizationUnit",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$query, $organizationUnitId",
-                    "line": 134
-                },
-                {
-                    "name": "scopeForUser",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$query, $user",
-                    "line": 142
-                },
-                {
-                    "name": "scopeSearch",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$query, ?string $search",
-                    "line": 154
-                },
-                {
-                    "name": "newFactory",
-                    "modifiers": [
-                        "static"
-                    ],
-                    "parameters": "",
-                    "line": 167
-                }
-            ],
-            "method_count": 18
+            "essential": true,
+            "content_preview": "<?php\n\nnamespace App\\Models\\Inventory;\n\nuse App\\Models\\Organization;\nuse App\\Models\\OrganizationUnit;\nuse App\\Models\\Scopes\\StoreOrganizationScope;\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Database\\Eloquent\\Relations\\BelongsTo;\nuse Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany;\nuse Illuminate\\Database\\Eloquent\\Relations\\HasMany;\nuse Illuminate\\Database\\Eloquent\\Relations\\HasOneThrough;\nuse Illuminate\\Database\\Eloquent\\So..."
         },
         {
             "type": "Model",
             "name": "OrganizationScope",
             "file": "app/Models/Scopes/OrganizationScope.php",
-            "essential": false,
-            "class": "OrganizationScope",
-            "namespace": "App\\Models\\Scopes",
-            "methods": [
-                {
-                    "name": "apply",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Builder $builder, Model $model",
-                    "line": 24
-                }
-            ],
-            "method_count": 1
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "StoreOrganizationScope",
+            "file": "app/Models/Scopes/StoreOrganizationScope.php",
+            "essential": false
         },
         {
             "type": "Model",
@@ -1004,914 +141,134 @@
             "type": "Model",
             "name": "OrganizationUser",
             "file": "app/Models/OrganizationUser.php",
-            "essential": false,
-            "class": "OrganizationUser",
-            "namespace": "App\\Models",
-            "methods": [
-                {
-                    "name": "hasRole",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "string $role",
-                    "line": 22
-                },
-                {
-                    "name": "hasAnyRole",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "array $roles",
-                    "line": 37
-                },
-                {
-                    "name": "getRolesAttribute",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$value",
-                    "line": 52
-                },
-                {
-                    "name": "setRolesAttribute",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$value",
-                    "line": 68
-                }
-            ],
-            "method_count": 4
+            "essential": false
         },
         {
             "type": "Model",
             "name": "User",
             "file": "app/Models/User.php",
             "essential": true,
-            "class": "User",
-            "namespace": "App\\Models",
-            "methods": [
-                {
-                    "name": "casts",
-                    "modifiers": [
-                        "protected"
-                    ],
-                    "parameters": "",
-                    "line": 43
-                },
-                {
-                    "name": "organizations",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 53
-                },
-                {
-                    "name": "units",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 62
-                },
-                {
-                    "name": "organizationUnits",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 71
-                },
-                {
-                    "name": "getOperatingOrganizationIdAttribute",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 78
-                },
-                {
-                    "name": "currentOrganization",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 95
-                },
-                {
-                    "name": "getOrganizationAttribute",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 100
-                },
-                {
-                    "name": "hasPermission",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$permission, $organization = null",
-                    "line": 108
-                },
-                {
-                    "name": "addRole",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "$role, $organization = null",
-                    "line": 140
-                },
-                {
-                    "name": "givePermissionTo",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "string|array $permissions, $organization = null",
-                    "line": 146
-                },
-                {
-                    "name": "hasRole",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "string|array $roles, $organization = null",
-                    "line": 178
-                },
-                {
-                    "name": "assignRole",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "string|array $roles, $organization = null",
-                    "line": 198
-                },
-                {
-                    "name": "getPermissionsForRoles",
-                    "modifiers": [
-                        "protected"
-                    ],
-                    "parameters": "array $roles",
-                    "line": 231
-                },
-                {
-                    "name": "getAllPermissions",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 242
-                },
-                {
-                    "name": "getAllRoles",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 257
-                }
-            ],
-            "method_count": 15,
             "content_preview": "<?php\n\nnamespace App\\Models;\n\nuse App\\Roles\\InventoryRoles;\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Foundation\\Auth\\User as Authenticatable;\nuse Illuminate\\Notifications\\Notifiable;\nuse Laravel\\Fortify\\TwoFactorAuthenticatable;\nuse Laravel\\Jetstream\\HasProfilePhoto;\nuse Laravel\\Jetstream\\HasTeams;\nuse Laravel\\Sanctum\\HasApiTokens;\n\nclass User extends Authenticatable\n{\n    use HasApiTokens;\n    use HasFactory;\n    use HasProfilePhoto;\n    use HasTeams;\n    use Notifi..."
         },
         {
             "type": "Controller",
             "name": "Controller",
             "file": "app/Http/Controllers/Controller.php",
-            "essential": true,
-            "class": "Controller",
-            "namespace": "App\\Http\\Controllers",
-            "methods": [],
-            "method_count": 0,
-            "content": "<?php\n\nnamespace App\\Http\\Controllers;\n\nabstract class Controller\n{\n    //\n}\n"
+            "essential": false
         },
         {
             "type": "Controller",
             "name": "OrganizationController",
             "file": "app/Http/Controllers/Api/OrganizationController.php",
-            "essential": false,
-            "class": "OrganizationController",
-            "namespace": "App\\Http\\Controllers\\Api",
-            "methods": [
-                {
-                    "name": "index",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 14
-                },
-                {
-                    "name": "store",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request",
-                    "line": 23
-                },
-                {
-                    "name": "show",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Organization $organization",
-                    "line": 47
-                },
-                {
-                    "name": "update",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request, Organization $organization",
-                    "line": 56
-                },
-                {
-                    "name": "destroy",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Organization $organization",
-                    "line": 80
-                },
-                {
-                    "name": "members",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Organization $organization",
-                    "line": 90
-                }
-            ],
-            "method_count": 6
+            "essential": false
         },
         {
             "type": "Controller",
             "name": "OrganizationInvitationController",
             "file": "app/Http/Controllers/Api/OrganizationInvitationController.php",
-            "essential": false,
-            "class": "OrganizationInvitationController",
-            "namespace": "App\\Http\\Controllers\\Api",
-            "methods": [
-                {
-                    "name": "store",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Organization $organization, Request $request",
-                    "line": 14
-                }
-            ],
-            "method_count": 1
+            "essential": false
         },
         {
             "type": "Controller",
             "name": "ChartOfAccountsController",
             "file": "app/Http/Controllers/Api/Accounting/ChartOfAccountsController.php",
-            "essential": false,
-            "class": "ChartOfAccountsController",
-            "namespace": "App\\Http\\Controllers\\Api\\Accounting",
-            "methods": [
-                {
-                    "name": "index",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 14
-                },
-                {
-                    "name": "store",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "StoreChartOfAccountRequest $request",
-                    "line": 21
-                },
-                {
-                    "name": "show",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "ChartOfAccount $account",
-                    "line": 28
-                },
-                {
-                    "name": "update",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "UpdateChartOfAccountRequest $request, ChartOfAccount $account",
-                    "line": 33
-                },
-                {
-                    "name": "destroy",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "ChartOfAccount $account",
-                    "line": 40
-                }
-            ],
-            "method_count": 5
+            "essential": false
         },
         {
             "type": "Controller",
             "name": "FinancialReportsController",
             "file": "app/Http/Controllers/Api/Accounting/FinancialReportsController.php",
-            "essential": false,
-            "class": "FinancialReportsController",
-            "namespace": "App\\Http\\Controllers\\Api\\Accounting",
-            "methods": [
-                {
-                    "name": "__construct",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "AccountingReportService $reportService",
-                    "line": 14
-                },
-                {
-                    "name": "trialBalance",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request",
-                    "line": 22
-                },
-                {
-                    "name": "balanceSheet",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request",
-                    "line": 47
-                },
-                {
-                    "name": "incomeStatement",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request",
-                    "line": 72
-                },
-                {
-                    "name": "index",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 97
-                },
-                {
-                    "name": "store",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request",
-                    "line": 98
-                },
-                {
-                    "name": "show",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "string $id",
-                    "line": 99
-                },
-                {
-                    "name": "update",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request, string $id",
-                    "line": 100
-                },
-                {
-                    "name": "destroy",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "string $id",
-                    "line": 101
-                }
-            ],
-            "method_count": 9
+            "essential": false
         },
         {
             "type": "Controller",
             "name": "JournalEntriesController",
             "file": "app/Http/Controllers/Api/Accounting/JournalEntriesController.php",
-            "essential": false,
-            "class": "JournalEntriesController",
-            "namespace": "App\\Http\\Controllers\\Api\\Accounting",
-            "methods": [
-                {
-                    "name": "__construct",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "AccountingService $accountingService",
-                    "line": 17
-                },
-                {
-                    "name": "index",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 22
-                },
-                {
-                    "name": "store",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "StoreJournalEntryRequest $request",
-                    "line": 31
-                },
-                {
-                    "name": "update",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "UpdateJournalEntryRequest $request, JournalEntry $journalEntry",
-                    "line": 44
-                },
-                {
-                    "name": "show",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "JournalEntry $journalEntry",
-                    "line": 60
-                },
-                {
-                    "name": "post",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "JournalEntry $journalEntry",
-                    "line": 65
-                },
-                {
-                    "name": "void",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "JournalEntry $journalEntry",
-                    "line": 78
-                }
-            ],
-            "method_count": 7
+            "essential": false
         },
         {
             "type": "Controller",
             "name": "ItemController",
             "file": "app/Http/Controllers/Api/Inventory/ItemController.php",
-            "essential": false,
-            "class": "ItemController",
-            "namespace": "App\\Http\\Controllers\\Api\\Inventory",
-            "methods": [
-                {
-                    "name": "__construct",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "private InventoryService $inventoryService",
-                    "line": 14
-                },
-                {
-                    "name": "index",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request",
-                    "line": 18
-                },
-                {
-                    "name": "store",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request",
-                    "line": 69
-                },
-                {
-                    "name": "show",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Item $item",
-                    "line": 91
-                },
-                {
-                    "name": "update",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request, Item $item",
-                    "line": 98
-                },
-                {
-                    "name": "destroy",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Item $item",
-                    "line": 119
-                },
-                {
-                    "name": "availability",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Item $item, Request $request",
-                    "line": 131
-                },
-                {
-                    "name": "lowStock",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request",
-                    "line": 146
-                },
-                {
-                    "name": "outOfStock",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request",
-                    "line": 167
-                }
-            ],
-            "method_count": 9
-        },
-        {
-            "type": "Controller",
-            "name": "StoreController",
-            "file": "app/Http/Controllers/Api/Inventory/StoreController.php",
-            "essential": false,
-            "class": "StoreController",
-            "namespace": "App\\Http\\Controllers\\Api\\Inventory",
-            "methods": [
-                {
-                    "name": "__construct",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "private InventoryService $inventoryService",
-                    "line": 16
-                },
-                {
-                    "name": "index",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request",
-                    "line": 20
-                },
-                {
-                    "name": "store",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request",
-                    "line": 55
-                },
-                {
-                    "name": "show",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Store $store",
-                    "line": 73
-                },
-                {
-                    "name": "update",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request, Store $store",
-                    "line": 90
-                },
-                {
-                    "name": "destroy",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Store $store",
-                    "line": 107
-                },
-                {
-                    "name": "addItem",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Store $store, Request $request",
-                    "line": 119
-                },
-                {
-                    "name": "updateItemQuantity",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Store $store, Item $item, Request $request",
-                    "line": 161
-                },
-                {
-                    "name": "removeItem",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Store $store, Item $item",
-                    "line": 200
-                },
-                {
-                    "name": "getStoreItems",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Store $store",
-                    "line": 221
-                },
-                {
-                    "name": "stockLevels",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Store $store",
-                    "line": 237
-                }
-            ],
-            "method_count": 11
+            "essential": false
         },
         {
             "type": "Controller",
             "name": "TransactionController",
             "file": "app/Http/Controllers/Api/Inventory/TransactionController.php",
-            "essential": false,
-            "class": "TransactionController",
-            "namespace": "App\\Http\\Controllers\\Api\\Inventory",
-            "methods": [
-                {
-                    "name": "__construct",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "private InventoryService $inventoryService",
-                    "line": 14
-                },
-                {
-                    "name": "index",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request",
-                    "line": 18
-                },
-                {
-                    "name": "store",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request",
-                    "line": 64
-                },
-                {
-                    "name": "show",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Transaction $transaction",
-                    "line": 88
-                },
-                {
-                    "name": "update",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request, Transaction $transaction",
-                    "line": 97
-                },
-                {
-                    "name": "destroy",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Transaction $transaction",
-                    "line": 125
-                },
-                {
-                    "name": "addItems",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Transaction $transaction, Request $request",
-                    "line": 137
-                },
-                {
-                    "name": "finalize",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Transaction $transaction",
-                    "line": 158
-                },
-                {
-                    "name": "cancel",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Transaction $transaction",
-                    "line": 170
-                }
-            ],
-            "method_count": 9
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "StoreController",
+            "file": "app/Http/Controllers/Api/Inventory/StoreController.php",
+            "essential": false
         },
         {
             "type": "Controller",
             "name": "OrganizationUnitController",
             "file": "app/Http/Controllers/Api/OrganizationUnitController.php",
-            "essential": false,
-            "class": "OrganizationUnitController",
-            "namespace": "App\\Http\\Controllers\\Api",
-            "methods": [
-                {
-                    "name": "index",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 17
-                },
-                {
-                    "name": "store",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request, Organization $organization",
-                    "line": 26
-                },
-                {
-                    "name": "show",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Organization $organization, OrganizationUnit $unit",
-                    "line": 57
-                },
-                {
-                    "name": "update",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request, Organization $organization, OrganizationUnit $unit",
-                    "line": 71
-                },
-                {
-                    "name": "destroy",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Organization $organization, OrganizationUnit $unit",
-                    "line": 89
-                },
-                {
-                    "name": "hierarchy",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Organization $organization, OrganizationUnit $unit",
-                    "line": 110
-                },
-                {
-                    "name": "assignUser",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request, Organization $organization, OrganizationUnit $unit",
-                    "line": 123
-                },
-                {
-                    "name": "members",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Organization $organization, OrganizationUnit $unit",
-                    "line": 168
-                }
-            ],
-            "method_count": 8
+            "essential": false
         },
         {
             "type": "Controller",
             "name": "OrganizationController",
             "file": "app/Http/Controllers/OrganizationController.php",
-            "essential": false,
-            "class": "OrganizationController",
-            "namespace": "App\\Http\\Controllers",
-            "methods": [
-                {
-                    "name": "index",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 10
-                }
-            ],
-            "method_count": 1
+            "essential": false
         },
         {
             "type": "Controller",
             "name": "AccountsController",
             "file": "app/Http/Controllers/AccountsController.php",
-            "essential": false,
-            "class": "AccountsController",
-            "namespace": "App\\Http\\Controllers",
-            "methods": [
-                {
-                    "name": "index",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 10
-                }
-            ],
-            "method_count": 1
+            "essential": false
         },
         {
             "type": "Controller",
             "name": "SetupController",
             "file": "app/Http/Controllers/SetupController.php",
-            "essential": false,
-            "class": "SetupController",
-            "namespace": "App\\Http\\Controllers",
-            "methods": [
-                {
-                    "name": "storeOrganization",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request",
-                    "line": 16
-                },
-                {
-                    "name": "storeStore",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request",
-                    "line": 49
-                },
-                {
-                    "name": "storeAccounts",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "Request $request",
-                    "line": 92
-                },
-                {
-                    "name": "createDefaultChartOfAccounts",
-                    "modifiers": [
-                        "protected"
-                    ],
-                    "parameters": "$organization",
-                    "line": 122
-                }
-            ],
-            "method_count": 4
+            "essential": false
         },
         {
             "type": "Controller",
             "name": "DashboardController",
             "file": "app/Http/Controllers/DashboardController.php",
-            "essential": false,
-            "class": "DashboardController",
-            "namespace": "App\\Http\\Controllers",
-            "methods": [
-                {
-                    "name": "index",
-                    "modifiers": [
-                        "public"
-                    ],
-                    "parameters": "",
-                    "line": 14
-                },
-                {
-                    "name": "getLowStockItems",
-                    "modifiers": [
-                        "protected"
-                    ],
-                    "parameters": "Organization $organization",
-                    "line": 57
-                }
-            ],
-            "method_count": 2
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "InventoryController",
+            "file": "app/Http/Controllers/Inventory/InventoryController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "InventoryItemController",
+            "file": "app/Http/Controllers/Inventory/InventoryItemController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "InventoryReportController",
+            "file": "app/Http/Controllers/Inventory/InventoryReportController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "InventoryStockController",
+            "file": "app/Http/Controllers/Inventory/InventoryStockController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "InventoryStoreController",
+            "file": "app/Http/Controllers/Inventory/InventoryStoreController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "InventoryTransactionController",
+            "file": "app/Http/Controllers/Inventory/InventoryTransactionController.php",
+            "essential": false
         },
         {
             "type": "Migration",
@@ -3232,7 +1589,7 @@
                         {
                             "name": "unit_price",
                             "type": "integer",
-                            "options": ")->comment('in cents'",
+                            "options": ")->nullable(",
                             "nullable": true,
                             "default": "'NULL'"
                         },
@@ -3349,59 +1706,13 @@
         },
         {
             "type": "Route",
-            "name": "web",
-            "file": "routes/web.php",
-            "essential": true,
-            "content_preview": "<?php\n\nuse App\\Http\\Controllers\\AccountsController;\nuse App\\Http\\Controllers\\Api\\Inventory\\ItemController;\nuse App\\Http\\Controllers\\Api\\Inventory\\StoreController;\nuse App\\Http\\Controllers\\Api\\Inventory\\TransactionController;\nuse App\\Http\\Controllers\\OrganizationController;\nuse App\\Http\\Controllers\\SetupController;\nuse App\\Http\\Livewire\\Organization\\OrganizationList;\nuse App\\Models\\Inventory\\Store;\nuse App\\Models\\OrganizationUser;\nuse App\\Services\\AccountingReportService;\nuse Illuminate\\Support\\F...",
-            "route_summary": [
-                "Route::get('/', function () { return view('welcome');",
-                "Route::middleware([ // 'auth:sanctum', // config('jetstream.auth_session'), // 'verified', // ])->gr...",
-                "Route::middleware(['auth', 'verified'])->group(function () { Route::get('/dashboard', [App\\Http\\Cont...",
-                "Route::prefix('setup')->group(function () { // Step 1: Organization Route::get('/', function () { $u...",
-                "Route::post('/organization', [SetupController::class, 'storeOrganization']) ->name('setup.organizati...",
-                "Route::get('/stores', function () { $user = auth()->user();",
-                "Route::post('/stores', [SetupController::class, 'storeStore']) ->name('setup.stores.store');",
-                "Route::get('/accounts', function () { $user = auth()->user();",
-                "Route::post('/accounts', [SetupController::class, 'storeAccounts']) ->name('setup.accounts.store');",
-                "Route::post('/setup/organization', [SetupController::class, 'storeOrganization']) ->name('setup.orga...",
-                "Route::livewire(['/organizations', OrganizationList::class])->name('organizations.index');",
-                "Route::get('/organizations', [OrganizationController::class, 'index'])->name('organizations.index');",
-                "Route::get('/companies/create', CompanyForm::class)->name('companies.create');",
-                "Route::get('/companies/{company}/edit', CompanyForm::class)->name('companies.edit');",
-                "Route::get('/companies/{company}', CompanyShow::class)->name('companies.show');",
-                "Route::get('/units', UnitTree::class)->name('units.index');",
-                "Route::get('/units/create', UnitForm::class)->name('units.create');",
-                "Route::get('/units/{unit}/edit', UnitForm::class)->name('units.edit');",
-                "Route::get('/employees', EmployeeList::class)->name('employees.index');",
-                "Route::get('/employees/create', EmployeeForm::class)->name('employees.create');",
-                "Route::get('/employees/{employee}/edit', EmployeeForm::class)->name('employees.edit');",
-                "Route::get('/employees/{employee}', EmployeeShow::class)->name('employees.show');",
-                "Route::get('/users', UserList::class)->name('users.index');",
-                "Route::get('/users/create', UserForm::class)->name('users.create');",
-                "Route::get('/users/{user}/edit', UserForm::class)->name('users.edit');",
-                "Route::get('/roles', RoleManager::class)->name('roles.index');",
-                "Route::get('/accounts', [AccountsController::class, 'index'])->name('accounting.index');",
-                "Route::get('/items/low-stock', [ItemController::class, 'lowStock'])->name('items.low-stock');",
-                "Route::get('/items/out-of-stock', [ItemController::class, 'outOfStock'])->name('items.out-of-stock')...",
-                "Route::resource('items', ItemController::class);",
-                "Route::resource('stores', StoreController::class);",
-                "Route::resource('transactions', TransactionController::class);",
-                "Route::group(['prefix' => 'debug'], function () { Route::get('/orgs', function () { $user = auth()->...",
-                "Route::get('api-config', function () { return response()->json([ 'app_url' => config('app.url'), 'ap...",
-                "Route::get('journal-entries', function () { try { $entries = \\App\\Models\\Accounting\\JournalEntry::wi...",
-                "Route::get('test-sequence', function () { try { $sequenceService = app(App\\Services\\SequenceService:...",
-                "Route::get('reports/all', function (AccountingReportService $service) { $trialBalance = $service->ge..."
-            ]
-        },
-        {
-            "type": "Route",
             "name": "api",
             "file": "routes/api.php",
             "essential": true,
             "content_preview": "<?php\n\nuse App\\Http\\Controllers\\Api\\Accounting\\ChartOfAccountsController;\nuse App\\Http\\Controllers\\Api\\Accounting\\JournalEntriesController;\nuse App\\Http\\Controllers\\Api\\Accounting\\FinancialReportsController;\nuse App\\Http\\Controllers\\Api\\OrganizationController;\nuse App\\Http\\Controllers\\Api\\OrganizationInvitationController;\nuse App\\Http\\Controllers\\Api\\OrganizationUnitController;\nuse App\\Models\\Accounting\\JournalEntry;\nuse Illuminate\\Http\\Request;\nuse Illuminate\\Support\\Facades\\Route;\nuse App\\Http...",
             "route_summary": [
                 "Route::get('/user', function (Request $request) { return $request->user();",
-                "Route::middleware('auth:sanctum')->group(function () { /** * @OA\\Tag(name=\"Organizations\") */ /** * ...",
+                "Route::middleware(['api', 'auth:sanctum'])->group(function () { /** * @OA\\Tag(name=\"Organizations\") ...",
                 "Route::apiResource('organizations', OrganizationController::class);",
                 "Route::prefix('organizations/{organization}')->group(function () { // Members Route::get('members', ...",
                 "Route::post('invitations', [OrganizationInvitationController::class, 'store']);",
@@ -3437,6 +1748,86 @@
                 "Route::put('stores/{store}/inventory', [StoreController::class, 'updateInventory']) ->middleware('ca...",
                 "Route::get('reports/stock-levels', [\\App\\Http\\Controllers\\Api\\Inventory\\ReportController::class, 'st...",
                 "Route::get('reports/movement', [\\App\\Http\\Controllers\\Api\\Inventory\\ReportController::class, 'moveme..."
+            ]
+        },
+        {
+            "type": "Route",
+            "name": "web",
+            "file": "routes/web.php",
+            "essential": true,
+            "content_preview": "<?php\n\nuse App\\Http\\Controllers\\AccountsController;\nuse App\\Http\\Controllers\\Api\\Inventory\\ItemController;\nuse App\\Http\\Controllers\\Api\\Inventory\\StoreController;\nuse App\\Http\\Controllers\\Api\\Inventory\\TransactionController;\nuse App\\Http\\Controllers\\Inventory\\InventoryController as InventoryInventoryController;\nuse App\\Http\\Controllers\\Inventory\\InventoryController;\nuse App\\Http\\Controllers\\Inventory\\InventoryItemController;\nuse App\\Http\\Controllers\\Inventory\\InventoryReportController;\nuse App\\H...",
+            "route_summary": [
+                "Route::get('/', function () { return view('welcome');",
+                "Route::middleware([ // 'auth:sanctum', // config('jetstream.auth_session'), // 'verified', // ])->gr...",
+                "Route::middleware(['auth', 'verified'])->group(function () { Route::get('/dashboard', [App\\Http\\Cont...",
+                "Route::prefix('setup')->group(function () { // Step 1: Organization Route::get('/', function () { $u...",
+                "Route::post('/organization', [SetupController::class, 'storeOrganization']) ->name('setup.organizati...",
+                "Route::get('/stores', function () { $user = auth()->user();",
+                "Route::post('/stores', [SetupController::class, 'storeStore']) ->name('setup.stores.store');",
+                "Route::get('/accounts', function () { $user = auth()->user();",
+                "Route::post('/accounts', [SetupController::class, 'storeAccounts']) ->name('setup.accounts.store');",
+                "Route::post('/setup/organization', [SetupController::class, 'storeOrganization']) ->name('setup.orga...",
+                "Route::livewire(['/organizations', OrganizationList::class])->name('organizations.index');",
+                "Route::get('/organizations', [OrganizationController::class, 'index'])->name('organizations.index');",
+                "Route::get('/companies/create', CompanyForm::class)->name('companies.create');",
+                "Route::get('/companies/{company}/edit', CompanyForm::class)->name('companies.edit');",
+                "Route::get('/companies/{company}', CompanyShow::class)->name('companies.show');",
+                "Route::get('/units', UnitTree::class)->name('units.index');",
+                "Route::get('/units/create', UnitForm::class)->name('units.create');",
+                "Route::get('/units/{unit}/edit', UnitForm::class)->name('units.edit');",
+                "Route::get('/employees', EmployeeList::class)->name('employees.index');",
+                "Route::get('/employees/create', EmployeeForm::class)->name('employees.create');",
+                "Route::get('/employees/{employee}/edit', EmployeeForm::class)->name('employees.edit');",
+                "Route::get('/employees/{employee}', EmployeeShow::class)->name('employees.show');",
+                "Route::get('/users', UserList::class)->name('users.index');",
+                "Route::get('/users/create', UserForm::class)->name('users.create');",
+                "Route::get('/users/{user}/edit', UserForm::class)->name('users.edit');",
+                "Route::get('/roles', RoleManager::class)->name('roles.index');",
+                "Route::get('/accounts', [AccountsController::class, 'index'])->name('accounting.index');",
+                "Route::get('/items/low-stock', [ItemController::class, 'lowStock'])->name('items.low-stock');",
+                "Route::get('/items/out-of-stock', [ItemController::class, 'outOfStock'])->name('items.out-of-stock')...",
+                "Route::resource('items', ItemController::class);",
+                "Route::resource('stores', StoreController::class);",
+                "Route::resource('transactions', TransactionController::class);",
+                "Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory.index');",
+                "Route::prefix('inventory/items')->name('inventory.items.')->group(function () { Route::get('/', [Inv...",
+                "Route::get('/create', [InventoryItemController::class, 'create'])->name('create');",
+                "Route::post('/', [InventoryItemController::class, 'store'])->name('store');",
+                "Route::get('/{item}', [InventoryItemController::class, 'show'])->name('show');",
+                "Route::get('/{item}/edit', [InventoryItemController::class, 'edit'])->name('edit');",
+                "Route::put('/{item}', [InventoryItemController::class, 'update'])->name('update');",
+                "Route::delete('/{item}', [InventoryItemController::class, 'destroy'])->name('destroy');",
+                "Route::prefix('inventory/stores')->name('inventory.stores.')->group(function () { Route::get('/', [I...",
+                "Route::get('/create', [InventoryStoreController::class, 'create'])->name('create');",
+                "Route::post('/', [InventoryStoreController::class, 'store'])->name('store');",
+                "Route::get('/{store}', [InventoryStoreController::class, 'show'])->name('show');",
+                "Route::get('/{store}/edit', [InventoryStoreController::class, 'edit'])->name('edit');",
+                "Route::put('/{store}', [InventoryStoreController::class, 'update'])->name('update');",
+                "Route::delete('/{store}', [InventoryStoreController::class, 'destroy'])->name('destroy');",
+                "Route::prefix('inventory/transactions')->name('inventory.transactions.')->group(function () { Route:...",
+                "Route::get('/create', [InventoryTransactionController::class, 'create'])->name('create');",
+                "Route::get('/wizard', [InventoryTransactionController::class, 'wizard'])->name('wizard');",
+                "Route::post('/', [InventoryTransactionController::class, 'store'])->name('store');",
+                "Route::get('/{transaction}', [InventoryTransactionController::class, 'show'])->name('show');",
+                "Route::prefix('inventory/reports')->name('inventory.reports.')->group(function () { Route::get('/', ...",
+                "Route::get('/low-stock', [InventoryReportController::class, 'lowStock'])->name('low-stock');",
+                "Route::get('/movement', [InventoryReportController::class, 'movement'])->name('movement');",
+                "Route::get('/stock-levels', [InventoryReportController::class, 'stockLevels'])->name('stock-levels')...",
+                "Route::prefix('inventory/stock')->name('inventory.stock.')->group(function () { Route::get('/adjustm...",
+                "Route::post('/adjustment', [InventoryStockController::class, 'processAdjustment'])->name('process-ad...",
+                "Route::get('/count', [InventoryStockController::class, 'count'])->name('count');",
+                "Route::post('/count', [InventoryStockController::class, 'processCount'])->name('process-count');",
+                "Route::get('/transfer', [InventoryStockController::class, 'transfer'])->name('transfer');",
+                "Route::post('/transfer', [InventoryStockController::class, 'processTransfer'])->name('process-transf...",
+                "Route::prefix('mobile/inventory')->name('mobile.inventory.')->group(function () { // Route::get('/da...",
+                "Route::get('/stock-count', [MobileInventoryController::class, 'stockCount'])->name('mobile.stock-cou...",
+                "Route::get('/organizations', [OrganizationController::class, 'index'])->name('organizations.index');",
+                "Route::get('/demo/inventory-components', function () { return view('demo.inventory-components');",
+                "Route::group(['prefix' => 'debug'], function () { Route::get('/orgs', function () { $user = auth()->...",
+                "Route::get('api-config', function () { return response()->json([ 'app_url' => config('app.url'), 'ap...",
+                "Route::get('journal-entries', function () { try { $entries = \\App\\Models\\Accounting\\JournalEntry::wi...",
+                "Route::get('test-sequence', function () { try { $sequenceService = app(App\\Services\\SequenceService:...",
+                "Route::get('reports/all', function (AccountingReportService $service) { $trialBalance = $service->ge..."
             ]
         },
         {
@@ -3711,12 +2102,6 @@
         },
         {
             "type": "View",
-            "name": "status-badge.blade.php",
-            "file": "resources/views/components/status-badge.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
             "name": "empty-state.blade.php",
             "file": "resources/views/components/empty-state.blade.php",
             "essential": false
@@ -3749,6 +2134,60 @@
             "type": "View",
             "name": "data-table.blade.php",
             "file": "resources/views/components/data-table.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "advanced-search.blade.php",
+            "file": "resources/views/components/advanced-search.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "barcode-scanner.blade.php",
+            "file": "resources/views/components/barcode-scanner.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "bulk-actions.blade.php",
+            "file": "resources/views/components/bulk-actions.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "low-stock-alert.blade.php",
+            "file": "resources/views/components/inventory/low-stock-alert.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "quantity-indicator.blade.php",
+            "file": "resources/views/components/inventory/quantity-indicator.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "stock-card.blade.php",
+            "file": "resources/views/components/inventory/stock-card.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "quick-adjustment.blade.php",
+            "file": "resources/views/components/quick-adjustment.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "status-badge.blade.php",
+            "file": "resources/views/components/status-badge.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "flash-message.blade.php",
+            "file": "resources/views/components/flash-message.blade.php",
             "essential": false
         },
         {
@@ -3987,6 +2426,156 @@
         },
         {
             "type": "View",
+            "name": "inventory.blade.php",
+            "file": "resources/views/setup/inventory.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/alerts/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/categories/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "dashboard.blade.php",
+            "file": "resources/views/dashboard.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "inventory-components.blade.php",
+            "file": "resources/views/demo/inventory-components.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "form.blade.php",
+            "file": "resources/views/inventory/items/form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/inventory/items/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "show.blade.php",
+            "file": "resources/views/inventory/items/show.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "dashboard.blade.php",
+            "file": "resources/views/inventory/mobile/dashboard.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "stock-count.blade.php",
+            "file": "resources/views/inventory/mobile/stock-count.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/inventory/reports/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "low-stock.blade.php",
+            "file": "resources/views/inventory/reports/low-stock.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "movement.blade.php",
+            "file": "resources/views/inventory/reports/movement.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "stock-levels.blade.php",
+            "file": "resources/views/inventory/reports/stock-levels.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "adjustment.blade.php",
+            "file": "resources/views/inventory/stock/adjustment.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "count.blade.php",
+            "file": "resources/views/inventory/stock/count.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "transfer.blade.php",
+            "file": "resources/views/inventory/stock/transfer.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "form.blade.php",
+            "file": "resources/views/inventory/stores/form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/inventory/stores/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "show.blade.php",
+            "file": "resources/views/inventory/stores/show.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "create.blade.php",
+            "file": "resources/views/inventory/transactions/create.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/inventory/transactions/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "show.blade.php",
+            "file": "resources/views/inventory/transactions/show.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "wizard.blade.php",
+            "file": "resources/views/inventory/transactions/wizard.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/inventory/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
             "name": "navigation-menu.blade.php",
             "file": "resources/views/navigation-menu.blade.php",
             "essential": false
@@ -3995,12 +2584,6 @@
             "type": "View",
             "name": "welcome.blade.php",
             "file": "resources/views/welcome.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "dashboard.blade.php",
-            "file": "resources/views/dashboard.blade.php",
             "essential": false
         },
         {
