@@ -5,14 +5,14 @@
                 📦 {{ __('Stock Levels Report') }}
             </h2>
             <div class="flex space-x-2">
-                <x-button.outline href="{{ route('inventory.reports.export', ['type' => 'stock_levels', 'format' => 'pdf']) }}?{{ http_build_query(request()->query()) }}">
-                    <x-heroicon-s-document-arrow-down class="w-4 h-4 mr-2" />
-                    Export PDF
-                </x-button.outline>
-                <x-button.primary href="{{ route('inventory.reports.export', ['type' => 'stock_levels', 'format' => 'csv']) }}?{{ http_build_query(request()->query()) }}">
-                    <x-heroicon-s-document-arrow-down class="w-4 h-4 mr-2" />
-                    Export CSV
-                </x-button.primary>
+                {{-- <x-button.outline href="{{ route('inventory.reports.export', ['type' => 'stock_levels', 'format' => 'pdf']) }}?{{ http_build_query(request()->query()) }}"> --}}
+                <x-heroicon-s-document-arrow-down class="w-4 h-4 mr-2" />
+                Export PDF
+                {{-- </x-button.outline> --}}
+                {{-- <x-button.primary href="{{ route('inventory.reports.export', ['type' => 'stock_levels', 'format' => 'csv']) }}?{{ http_build_query(request()->query()) }}"> --}}
+                <x-heroicon-s-document-arrow-down class="w-4 h-4 mr-2" />
+                Export CSV
+                {{-- </x-button.primary> --}}
             </div>
         </div>
     </x-slot>
@@ -28,8 +28,9 @@
                                 <x-form.label for="store_id" value="Store" />
                                 <x-form.select id="store_id" name="store_id" class="mt-1 block w-full">
                                     <option value="">All Stores</option>
-                                    @foreach($stores as $store)
-                                        <option value="{{ $store->id }}" {{ request('store_id') == $store->id ? 'selected' : '' }}>
+                                    @foreach ($stores as $store)
+                                        <option value="{{ $store->id }}"
+                                            {{ request('store_id') == $store->id ? 'selected' : '' }}>
                                             {{ $store->name }}
                                         </option>
                                     @endforeach
@@ -40,8 +41,9 @@
                                 <x-form.label for="category" value="Category" />
                                 <x-form.select id="category" name="category" class="mt-1 block w-full">
                                     <option value="">All Categories</option>
-                                    @foreach($categories as $category)
-                                        <option value="{{ $category }}" {{ request('category') == $category ? 'selected' : '' }}>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category }}"
+                                            {{ request('category') == $category ? 'selected' : '' }}>
                                             {{ $category }}
                                         </option>
                                     @endforeach
@@ -52,9 +54,13 @@
                                 <x-form.label for="status" value="Stock Status" />
                                 <x-form.select id="status" name="status" class="mt-1 block w-full">
                                     <option value="">All Status</option>
-                                    <option value="low_stock" {{ request('status') == 'low_stock' ? 'selected' : '' }}>Low Stock</option>
-                                    <option value="out_of_stock" {{ request('status') == 'out_of_stock' ? 'selected' : '' }}>Out of Stock</option>
-                                    <option value="in_stock" {{ request('status') == 'in_stock' ? 'selected' : '' }}>In Stock</option>
+                                    <option value="low_stock" {{ request('status') == 'low_stock' ? 'selected' : '' }}>
+                                        Low Stock</option>
+                                    <option value="out_of_stock"
+                                        {{ request('status') == 'out_of_stock' ? 'selected' : '' }}>Out of Stock
+                                    </option>
+                                    <option value="in_stock" {{ request('status') == 'in_stock' ? 'selected' : '' }}>In
+                                        Stock</option>
                                 </x-form.select>
                             </div>
 
@@ -101,36 +107,55 @@
                         </div>
                     </div>
 
-                    @if($items->count() > 0)
+                    @if ($items->count() > 0)
                         <div class="overflow-x-auto">
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-gray-50">
                                     <tr>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Item</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">SKU</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Store</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Current Stock</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reorder Level</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Value</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Item</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            SKU</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Category</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Store</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Current Stock</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Reorder Level</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Status</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Value</th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                    @foreach($items as $item)
+                                    @foreach ($items as $item)
                                         <tr class="hover:bg-gray-50">
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
-                                                    <div class="flex-shrink-0 h-10 w-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                                                    <div
+                                                        class="flex-shrink-0 h-10 w-10 bg-gray-100 rounded-lg flex items-center justify-center">
                                                         <x-heroicon-s-cube class="h-6 w-6 text-gray-400" />
                                                     </div>
                                                     <div class="ml-4">
                                                         <div class="text-sm font-medium text-gray-900">
-                                                            <a href="{{ route('inventory.items.show', $item) }}" class="hover:text-blue-600">
+                                                            <a href="{{ route('inventory.items.show', $item) }}"
+                                                                class="hover:text-blue-600">
                                                                 {{ $item->name }}
                                                             </a>
                                                         </div>
-                                                        <div class="text-sm text-gray-500">{{ Str::limit($item->description, 30) }}</div>
+                                                        <div class="text-sm text-gray-500">
+                                                            {{ Str::limit($item->description, 30) }}</div>
                                                     </div>
                                                 </div>
                                             </td>
@@ -150,13 +175,10 @@
                                                 {{ $item->reorder_level }} {{ $item->unit }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <x-inventory.quantity-indicator 
-                                                    :quantity="$item->total_quantity" 
-                                                    :reorderLevel="$item->reorder_level" 
-                                                />
+                                                <x-inventory.quantity-indicator :quantity="$item->total_quantity" :reorderLevel="$item->reorder_level" />
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                @if($item->cost_price)
+                                                @if ($item->cost_price)
                                                     ${{ number_format(($item->total_quantity * $item->cost_price) / 100, 2) }}
                                                 @else
                                                     <span class="text-gray-400">-</span>
@@ -169,7 +191,7 @@
                         </div>
 
                         <!-- Pagination -->
-                        @if($items->hasPages())
+                        @if ($items->hasPages())
                             <div class="mt-4">
                                 {{ $items->links() }}
                             </div>
@@ -185,14 +207,14 @@
             </div>
 
             <!-- Low Stock Alerts -->
-            @if($lowStockItems->count() > 0)
+            @if ($lowStockItems->count() > 0)
                 <div class="mt-6 bg-yellow-50 border border-yellow-200 rounded-lg p-6">
                     <div class="flex items-center mb-4">
                         <x-heroicon-s-exclamation-triangle class="h-5 w-5 text-yellow-400 mr-2" />
                         <h3 class="text-lg font-semibold text-yellow-800">Low Stock Alerts</h3>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        @foreach($lowStockItems->take(6) as $item)
+                        @foreach ($lowStockItems->take(6) as $item)
                             <div class="bg-white rounded-lg p-3 border border-yellow-200">
                                 <div class="flex justify-between items-start">
                                     <div>
@@ -205,13 +227,14 @@
                                     </div>
                                 </div>
                                 <div class="mt-2 w-full bg-gray-200 rounded-full h-2">
-                                    <div class="bg-yellow-500 h-2 rounded-full" 
-                                         style="width: {{ min(100, ($item->total_quantity / $item->reorder_level) * 100) }}%"></div>
+                                    <div class="bg-yellow-500 h-2 rounded-full"
+                                        style="width: {{ min(100, ($item->total_quantity / $item->reorder_level) * 100) }}%">
+                                    </div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
-                    @if($lowStockItems->count() > 6)
+                    @if ($lowStockItems->count() > 6)
                         <div class="mt-4 text-center">
                             <x-button.link href="{{ route('inventory.reports.low-stock') }}" class="text-yellow-700">
                                 View all {{ $lowStockItems->count() }} low stock items →

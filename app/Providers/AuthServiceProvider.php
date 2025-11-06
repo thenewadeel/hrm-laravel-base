@@ -30,6 +30,11 @@ class AuthServiceProvider extends ServiceProvider
 
         // Add similar gates for other permissions...
 
+        // Report permissions gate - ADD THIS
+        Gate::define('inventory.reports.view', function (User $user) {
+            return $user->hasPermission('inventory.reports.view');
+        });
+
         // Role-based gates with organization context
         Gate::define('inventory.admin', function (User $user, $organization = null) {
             return $user->hasRole(InventoryRoles::INVENTORY_ADMIN, $organization);

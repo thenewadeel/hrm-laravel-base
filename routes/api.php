@@ -32,7 +32,7 @@ Route::get('/user', function (Request $request) {
  * )
  */
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['api', 'auth:sanctum'])->group(function () {
     /**
      * @OA\Tag(name="Organizations")
      */
@@ -146,11 +146,11 @@ Route::prefix('inventory')->middleware(['auth:sanctum'])->group(function () {
         ->name('stores.inventory.update');
 
     // Reports
-    Route::get('reports/stock-levels', [\App\Http\Controllers\Api\Inventory\ReportController::class, 'stockLevels'])
-        ->middleware('can:' . InventoryPermissions::VIEW_INVENTORY_REPORTS)
-        ->name('inventory.reports.stock-levels');
+    // Route::get('reports/stock-levels', [\App\Http\Controllers\Api\Inventory\ReportController::class, 'stockLevels'])
+    // ->middleware('can:' . InventoryPermissions::VIEW_INVENTORY_REPORTS)
+    // ->name('inventory.reports.stock-levels');
 
-    Route::get('reports/movement', [\App\Http\Controllers\Api\Inventory\ReportController::class, 'movement'])
-        ->middleware('can:' . InventoryPermissions::VIEW_INVENTORY_REPORTS)
-        ->name('inventory.reports.movement');
+    // Route::get('reports/movement', [\App\Http\Controllers\Api\Inventory\ReportController::class, 'movement'])
+    // ->middleware('can:' . InventoryPermissions::VIEW_INVENTORY_REPORTS)
+    // ->name('inventory.reports.movement');
 });
