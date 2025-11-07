@@ -20,11 +20,11 @@ $ignoredPaths = [
 
 // Component-specific settings
 $componentSettings = [
-    'Model' => ['extract_methods' => true, 'max_methods' => 20],
-    'Controller' => ['extract_methods' => true, 'max_methods' => 15],
+    'Model' => ['extract_methods' => false, 'max_methods' => 20],
+    'Controller' => ['extract_methods' => false, 'max_methods' => 15],
     'Migration' => ['extract_methods' => false, 'extract_schema' => true],
     'Route' => ['extract_methods' => false],
-    'View' => ['extract_methods' => false],
+    'View' => ['extract_methods' => true],
     'Config' => ['extract_methods' => false],
     'Environment' => ['extract_methods' => false]
 ];
@@ -33,8 +33,9 @@ $componentSettings = [
 $essentialFiles = [
     'routes/web.php',
     'routes/api.php',
-    'app/Http/Controllers/Controller.php',
+    // 'app/Http/Controllers/Controller.php',
     'app/Models/User.php',
+    // 'app/Models/Inventory/Store.php',
     '.env.example'
 ];
 

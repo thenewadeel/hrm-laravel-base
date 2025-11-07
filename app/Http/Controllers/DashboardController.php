@@ -7,6 +7,8 @@ use App\Models\Organization;
 use App\Models\Inventory\Store;
 use App\Models\Inventory\Item;
 use App\Models\Inventory\Transaction;
+use App\Models\OrganizationUnit;
+use App\Models\Scopes\StoreOrganizationScope;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -22,7 +24,7 @@ class DashboardController extends Controller
         }
 
         // Get dashboard data
-        $stores = Store::withCount('items')->get();
+        $stores = Store::forOrganization($organization->id)->withCount('items')->get();
         $totalItems = Item::count();
         $lowStockItems = Item::lowInStock()
             ->get();
@@ -39,7 +41,9 @@ class DashboardController extends Controller
         //     'role' => $user->getAllRoles(),
         //     'permissions' => $user->getAllPermissions(),
         //     'organization' => $organization->id,
-        //     'stores' => $stores->first()->organization->id,
+        //     'organizationU' => OrganizationUnit::ofOrganization($organization->id),
+        //     'stores' => $stores,
+        //     'storesall' => Store::withoutGlobalScope(StoreOrganizationScope::class)->get()->toArray(),
         //     'totalItems' => $totalItems,
         //     'lowStockItems' => $lowStockItems,
         //     'recentTransactions' => $recentTransactions

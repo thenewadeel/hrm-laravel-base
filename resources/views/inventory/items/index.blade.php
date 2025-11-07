@@ -26,33 +26,38 @@
 
             <!-- Items Table -->
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    XXXXXXXXX
+                <div class="p-6 bg-white border-b border-gray-200" title="{{ json_encode($items) }} ">
+                    {{ json_encode($items) }}
                     @if ($items->count() > 0)
-                        <x-data-table :data="$items">
-                            <x-slot name="header">
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Item</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    SKU</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Category</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Stock</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Price</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Status</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Actions</th>
-                            </x-slot>
+                        <x-data-table :headers="[
+                            'name' => 'Item Name',
+                            // 'sku' => 'SKU',
+                            // 'category' => 'Category',
+                            // 'stock' => 'Stock',
+                            // 'cost_price' => 'CPrice',
+                            // 'sale_price' => 'SPrice',
+                            // 'is_active' => 'Status',
+                            // 'stock' => 'Stock',
+                        ]" :data="$items" sort-by="name" sort-direction="asc">
+                            {{-- Custom header for the actions column --}}
+                            {{-- <x-slot:customHeader>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Actions
+                            </th>
+                        </x-slot> --}}
+
+                            {{-- Custom columns for the actions (edit/delete buttons) --}}
+                            {{-- <x-slot:customColumns>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <button
+                                    @click="Livewire.dispatchTo('accounting.chart-of-accounts', 'edit-account', { account: item.id })"
+                                    class="text-indigo-600 hover:text-indigo-900">
+                                    Edit
+                                </button>
+                            </td>
+                        </x-slot> --}}
+                        </x-data-table>
+                        {{-- <x-data-table :data="$items">
 
                             <x-slot name="body">
                                 @foreach ($items as $item)
@@ -120,7 +125,7 @@
                                     </tr>
                                 @endforeach
                             </x-slot>
-                        </x-data-table>
+                        </x-data-table> --}}
 
                         <!-- Pagination -->
                         @if ($items->hasPages())

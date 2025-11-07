@@ -18,7 +18,10 @@ class InventoryItemController extends Controller
      */
     public function index(Request $request): View
     {
-        $query = Item::with(['organization', 'head']);
+        $query = Item::with([
+            // 'organization',
+            'head'
+        ]);
 
         // Search functionality
         if ($request->has('search') && $request->search) {
@@ -48,7 +51,7 @@ class InventoryItemController extends Controller
         $items = $query->latest()->paginate(20);
         $categories = Item::distinct()->pluck('category')->filter();
         $stores = Store::where('is_active', true)->get();
-
+        // dd($items);
         return view('inventory.items.index', compact('items', 'categories', 'stores'));
     }
 

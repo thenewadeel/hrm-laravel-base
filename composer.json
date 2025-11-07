@@ -66,7 +66,13 @@
             "@php artisan test > docs/testResults.txt"
         ],
         "llm-summarize": [
-            "php scripts/laraCrawler.php"
+            "@php scripts/laraCrawler.php"
+        ],
+        "dev-cp": [
+            "@php artisan config:clear --ansi",
+            "@php scripts/laraCrawler.php",
+            "tree resources/views/ > \"docs/list of views.txt\"",
+            "@php artisan test > docs/testResults.txt"
         ]
     },
     "extra": {

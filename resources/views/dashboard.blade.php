@@ -2,7 +2,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Dashboard - {{ $organization->name }}
+            Dashboard - {{ $organization?->name }}
         </h2>
     </x-slot>
 
@@ -75,7 +75,7 @@
                                     <dt class="text-sm font-medium text-gray-500 truncate">Low Stock Items</dt>
                                     <dd class="text-lg font-medium text-gray-900">{{ $lowStockItems->count() }}</dd>
                                     @foreach ($lowStockItems as $lowStockItem)
-                                        {{ $lowStockItem->name }}
+                                        {{ $lowStockItem?->name }}
                                     @endforeach
                                 </dl>
                             </div>
@@ -121,7 +121,7 @@
                                 @foreach ($stores as $store)
                                     <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                                         <div>
-                                            <h4 class="font-medium text-gray-900">{{ $store->name }}</h4>
+                                            <h4 class="font-medium text-gray-900">{{ $store?->name }}</h4>
                                             <p class="text-sm text-gray-500">{{ $store->location }}</p>
                                         </div>
                                         <div class="text-right">
@@ -152,7 +152,7 @@
                                     <div
                                         class="flex items-center justify-between p-3 bg-red-50 border border-red-200 rounded-lg">
                                         <div>
-                                            <h4 class="font-medium text-red-900">{{ $alert['item']->name }}</h4>
+                                            <h4 class="font-medium text-red-900">{{ $alert['item']?->name }}</h4>
                                             <p class="text-sm text-red-700">
                                                 @foreach ($alert['low_stock_stores'] as $storeAlert)
                                                     {{ $storeAlert['store_name'] }}: {{ $storeAlert['quantity'] }}
@@ -189,7 +189,7 @@
                                 <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                                     <div>
                                         <h4 class="font-medium text-gray-900">{{ $transaction->reference }}</h4>
-                                        <p class="text-sm text-gray-500">{{ $transaction->store->name }} •
+                                        <p class="text-sm text-gray-500">{{ $transaction->store?->name }} •
                                             {{ $transaction->created_at->diffForHumans() }}</p>
                                     </div>
                                     <span
