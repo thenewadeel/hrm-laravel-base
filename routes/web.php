@@ -4,6 +4,9 @@ use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\Api\Inventory\ItemController;
 use App\Http\Controllers\Api\Inventory\StoreController;
 use App\Http\Controllers\Api\Inventory\TransactionController;
+use App\Http\Controllers\Attendance\AttendanceController;
+use App\Http\Controllers\HR\EmployeeController;
+use App\Http\Controllers\HrmDashboardController;
 use App\Http\Controllers\Inventory\InventoryController as InventoryInventoryController;
 use App\Http\Controllers\Inventory\InventoryController;
 use App\Http\Controllers\Inventory\InventoryItemController;
@@ -12,6 +15,8 @@ use App\Http\Controllers\Inventory\InventoryStoreController;
 use App\Http\Controllers\Inventory\InventoryStockController;
 use App\Http\Controllers\Inventory\InventoryTransactionController;
 use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\OrganizationDashboardController;
+use App\Http\Controllers\Payroll\PayrollController;
 use App\Http\Controllers\SetupController;
 use App\Http\Livewire\Organization\OrganizationList;
 use App\Models\Accounting\ChartOfAccount;
@@ -115,11 +120,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     // -------------------
-    // Company routes
+    // Organization routes
     // -------------------
     // Route::livewire(['/organizations', OrganizationList::class])->name('organizations.index');
     Route::get('/organizations', [OrganizationController::class, 'index'])->name('organizations.index');
-    // Route::get('/companies/create', CompanyForm::class)->name('companies.create');
+    Route::get('/organization/dashboard', [OrganizationDashboardController::class, 'index'])
+        ->name('organization.dashboard')
+    ;    // Route::get('/companies/create', CompanyForm::class)->name('companies.create');
     // Route::get('/companies/{company}/edit', CompanyForm::class)->name('companies.edit');
     // Route::get('/companies/{company}', CompanyShow::class)->name('companies.show');
 
@@ -128,7 +135,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Route::get('/units/create', UnitForm::class)->name('units.create');
     // Route::get('/units/{unit}/edit', UnitForm::class)->name('units.edit');
 
+    // -------------------
+    // HRM routes
+    // -------------------
+    // In routes/web.php
+    Route::get('/hrm/dashboard', [HrmDashboardController::class, 'index'])
+        ->name('hrm.dashboard');
     // // Employee routes
+    Route::resource('hr/employees', EmployeeController::class);
+    Route::get('/attendance/dashboard', [AttendanceController::class, 'dashboard'])->name('attendance.dashboard');
+    Route::get('/payroll/processing', [PayrollController::class, 'processing'])->name('payroll.processing');
     // Route::get('/employees', EmployeeList::class)->name('employees.index');
     // Route::get('/employees/create', EmployeeForm::class)->name('employees.create');
     // Route::get('/employees/{employee}/edit', EmployeeForm::class)->name('employees.edit');
