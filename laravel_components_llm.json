@@ -25,7 +25,7 @@
             "yunyami/clockwork"
         ]
     },
-    "timestamp": "2025-11-05T18:29:32+00:00",
+    "timestamp": "2025-11-07T10:24:12+00:00",
     "component_count": 208,
     "components": [
         {
@@ -116,8 +116,7 @@
             "type": "Model",
             "name": "Store",
             "file": "app/Models/Inventory/Store.php",
-            "essential": true,
-            "content_preview": "<?php\n\nnamespace App\\Models\\Inventory;\n\nuse App\\Models\\Organization;\nuse App\\Models\\OrganizationUnit;\nuse App\\Models\\Scopes\\StoreOrganizationScope;\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Database\\Eloquent\\Relations\\BelongsTo;\nuse Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany;\nuse Illuminate\\Database\\Eloquent\\Relations\\HasMany;\nuse Illuminate\\Database\\Eloquent\\Relations\\HasOneThrough;\nuse Illuminate\\Database\\Eloquent\\So..."
+            "essential": false
         },
         {
             "type": "Model",

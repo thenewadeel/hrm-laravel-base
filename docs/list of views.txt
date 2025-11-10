@@ -1,0 +1,158 @@
+resources/views/
+├── accounts
+│   └── index.blade.php
+├── alerts
+│   └── index.blade.php
+├── api
+│   ├── api-token-manager.blade.php
+│   └── index.blade.php
+├── auth
+│   ├── confirm-password.blade.php
+│   ├── forgot-password.blade.php
+│   ├── login.blade.php
+│   ├── register.blade.php
+│   ├── reset-password.blade.php
+│   ├── two-factor-challenge.blade.php
+│   └── verify-email.blade.php
+├── categories
+│   └── index.blade.php
+├── components
+│   ├── action-message.blade.php
+│   ├── action-section.blade.php
+│   ├── advanced-search.blade.php
+│   ├── application-logo.blade.php
+│   ├── application-mark.blade.php
+│   ├── authentication-card.blade.php
+│   ├── authentication-card-logo.blade.php
+│   ├── badge.blade.php
+│   ├── banner.blade.php
+│   ├── barcode-scanner.blade.php
+│   ├── bulk-actions.blade.php
+│   ├── button
+│   │   ├── danger.blade.php
+│   │   ├── ghost.blade.php
+│   │   ├── link.blade.php
+│   │   ├── outline.blade.php
+│   │   ├── primary.blade.php
+│   │   └── secondary.blade.php
+│   ├── button.blade.php
+│   ├── confirmation-modal.blade.php
+│   ├── confirms-password.blade.php
+│   ├── data-table.blade.php
+│   ├── dialog-modal.blade.php
+│   ├── dropdown.blade.php
+│   ├── dropdown-link.blade.php
+│   ├── empty-state.blade.php
+│   ├── flash-message.blade.php
+│   ├── form
+│   │   ├── checkbox.blade.php
+│   │   ├── input.blade.php
+│   │   ├── input-error.blade.php
+│   │   ├── label.blade.php
+│   │   ├── select.blade.php
+│   │   └── textarea.blade.php
+│   ├── form-section.blade.php
+│   ├── inventory
+│   │   ├── low-stock-alert.blade.php
+│   │   ├── quantity-indicator.blade.php
+│   │   └── stock-card.blade.php
+│   ├── layout.blade.php
+│   ├── loading-spinner.blade.php
+│   ├── modal.blade.php
+│   ├── nav-link.blade.php
+│   ├── notification-system.blade.php
+│   ├── organization
+│   │   └── card.blade.php
+│   ├── quick-adjustment.blade.php
+│   ├── responsive-nav-link.blade.php
+│   ├── section-border.blade.php
+│   ├── section-title.blade.php
+│   ├── sort-indicator.blade.php
+│   ├── status-badge.blade.php
+│   ├── switchable-team.blade.php
+│   ├── validation-errors.blade.php
+│   └── welcome.blade.php
+├── dashboard.blade.php
+├── demo
+│   └── inventory-components.blade.php
+├── emails
+│   └── team-invitation.blade.php
+├── inventory
+│   ├── index.blade.php
+│   ├── items
+│   │   ├── form.blade.php
+│   │   ├── index.blade.php
+│   │   └── show.blade.php
+│   ├── mobile
+│   │   ├── dashboard.blade.php
+│   │   └── stock-count.blade.php
+│   ├── reports
+│   │   ├── index.blade.php
+│   │   ├── low-stock.blade.php
+│   │   ├── movement.blade.php
+│   │   └── stock-levels.blade.php
+│   ├── stock
+│   │   ├── adjustment.blade.php
+│   │   ├── count.blade.php
+│   │   └── transfer.blade.php
+│   ├── stores
+│   │   ├── form.blade.php
+│   │   ├── index.blade.php
+│   │   └── show.blade.php
+│   └── transactions
+│       ├── create.blade.php
+│       ├── index.blade.php
+│       ├── show.blade.php
+│       └── wizard.blade.php
+├── layouts
+│   ├── app.blade.php
+│   └── guest.blade.php
+├── livewire
+│   ├── accounting
+│   │   ├── chart-of-accounts.blade.php
+│   │   ├── dashboard.blade.php
+│   │   ├── journal-entries.blade.php
+│   │   ├── ledger-entries.blade.php
+│   │   └── reports.blade.php
+│   ├── member-manager.blade.php
+│   ├── organization
+│   │   ├── organization-form.blade.php
+│   │   └── organization-list.blade.php
+│   ├── organization-tree.blade.php
+│   └── user-placement.blade.php
+├── navigation-menu.blade.php
+├── organizations
+│   └── index.blade.php
+├── partials
+│   ├── accounting
+│   │   ├── balance-sheet.blade.php
+│   │   ├── income-statement.blade.php
+│   │   └── trial-balance.blade.php
+│   ├── accounts-table.blade.php
+│   ├── organization-unit-tree.blade.php
+│   └── user-unit-tree.blade.php
+├── policy.blade.php
+├── profile
+│   ├── delete-user-form.blade.php
+│   ├── logout-other-browser-sessions-form.blade.php
+│   ├── show.blade.php
+│   ├── two-factor-authentication-form.blade.php
+│   ├── update-password-form.blade.php
+│   └── update-profile-information-form.blade.php
+├── setup
+│   ├── accounts.blade.php
+│   ├── inventory.blade.php
+│   ├── organization.blade.php
+│   ├── stores.blade.php
+│   └── welcome.blade.php
+├── teams
+│   ├── create.blade.php
+│   ├── create-team-form.blade.php
+│   ├── delete-team-form.blade.php
+│   ├── show.blade.php
+│   ├── team-member-manager.blade.php
+│   └── update-team-name-form.blade.php
+├── terms.blade.php
+└── welcome.blade.php
+
+30 directories, 126 files

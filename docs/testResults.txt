@@ -1,6 +1,6 @@
 
    PASS  Tests\Unit\Accounting\AccountTypeValidationTest
-  ✓ it allows debit to asset accounts                                    0.19s  
+  ✓ it allows debit to asset accounts                                    0.23s  
   ✓ it allows debit to expense accounts                                  0.02s  
   ✓ it throws exception when debiting liability account                  0.02s  
   ✓ it allows credit to liability accounts                               0.02s  
@@ -11,7 +11,7 @@
    PASS  Tests\Unit\Accounting\BalanceSheetTest
   ✓ it generates balance sheet with no transactions                      0.03s  
   ✓ it generates balanced balance sheet                                  0.02s  
-  ✓ it includes retained earnings from income statement                  0.02s  
+  ✓ it includes retained earnings from income statement                  0.03s  
 
    PASS  Tests\Unit\Accounting\ChartOfAccountTest
   ✓ it has a code name and type                                          0.02s  
@@ -20,10 +20,10 @@
   ✓ it can calculate its current balance                                 0.02s  
 
    PASS  Tests\Unit\Accounting\DimensionReportTest
-  ✓ example                                                              0.05s  
+  ✓ example                                                              0.06s  
 
    PASS  Tests\Unit\Accounting\FinancialReportsTest
-  ✓ example                                                              0.04s  
+  ✓ example                                                              0.05s  
 
    PASS  Tests\Unit\Accounting\IncomeStatementTest
   ✓ it generates income statement with no transactions                   0.02s  
@@ -59,7 +59,7 @@
   ✓ it shows account balances in trial balance                           0.02s  
 
    PASS  Tests\Unit\Models\Inventory\InventoryTransactionTest
-  ✓ example                                                              0.01s  
+  ✓ example                                                              0.02s  
 
    PASS  Tests\Unit\Models\Inventory\ItemTest
   ✓ example                                                              0.01s  
@@ -68,7 +68,7 @@
   ✓ example                                                              0.01s  
 
    PASS  Tests\Unit\AccountingReportServiceTest
-  ✓ it generates a correct trial balance                                 0.02s  
+  ✓ it generates a correct trial balance                                 0.03s  
   ✓ it generates a correct balance sheet                                 0.02s  
 
    PASS  Tests\Unit\Accounting\AccountingServiceTest
@@ -77,11 +77,11 @@
   ✓ it can handle complex but balanced transactions                      0.02s  
 
    PASS  Tests\Unit\Services\InventoryServiceTest
-  ✓ it can create a store                                                0.03s  
-  ✓ it can update store inventory                                        0.05s  
-  ✓ it can update store inventory with min max stock                     0.05s  
-  ✓ it can adjust store inventory                                        0.04s  
-  ✓ it can create and finalize transaction                               0.03s  
+  ✓ it can create a store                                                0.04s  
+  ✓ it can update store inventory                                        0.03s  
+  ✓ it can update store inventory with min max stock                     0.04s  
+  ✓ it can adjust store inventory                                        0.03s  
+  ✓ it can create and finalize transaction                               0.04s  
   ✓ it can cancel transaction                                            0.03s  
   ✓ it can get store stock levels                                        0.03s  
   ✓ it can get item availability                                         0.03s  
@@ -103,44 +103,44 @@
   ✓ personal teams cant be deleted                                       0.04s  
 
    PASS  Tests\Unit\Teams\InviteTeamMemberTest
-  ✓ team members can be invited to team                                  0.06s  
-  ✓ team member invitations can be cancelled                             0.06s  
+  ✓ team members can be invited to team                                  0.07s  
+  ✓ team member invitations can be cancelled                             0.07s  
 
    PASS  Tests\Unit\Teams\LeaveTeamTest
-  ✓ users can leave teams                                                0.04s  
-  ✓ team owners cant leave their own team                                0.04s  
+  ✓ users can leave teams                                                0.05s  
+  ✓ team owners cant leave their own team                                0.05s  
 
    PASS  Tests\Unit\Teams\RemoveTeamMemberTest
-  ✓ team members can be removed from teams                               0.05s  
-  ✓ only team owner can remove team members                              0.04s  
+  ✓ team members can be removed from teams                               0.06s  
+  ✓ only team owner can remove team members                              0.05s  
 
    PASS  Tests\Unit\Teams\UpdateTeamMemberRoleTest
-  ✓ team member roles can be updated                                     0.06s  
-  ✓ only team owner can update team member roles                         0.05s  
+  ✓ team member roles can be updated                                     0.07s  
+  ✓ only team owner can update team member roles                         0.06s  
 
    PASS  Tests\Unit\Teams\UpdateTeamNameTest
   ✓ team names can be updated                                            0.05s  
 
    PASS  Tests\Unit\base\ApiTokenPermissionsTest
-  ✓ api token permissions can be updated                                 0.06s  
+  ✓ api token permissions can be updated                                 0.07s  
 
    PASS  Tests\Unit\base\AuthenticationTest
-  ✓ login screen can be rendered                                         0.03s  
+  ✓ login screen can be rendered                                         0.04s  
   ✓ users can authenticate using the login screen                        0.04s  
   ✓ users cannot authenticate with invalid password                      0.03s  
 
    PASS  Tests\Unit\base\BrowserSessionsTest
-  ✓ other browser sessions can be logged out                             0.04s  
+  ✓ other browser sessions can be logged out                             0.05s  
 
    PASS  Tests\Unit\base\CreateApiTokenTest
   ✓ api tokens can be created                                            0.06s  
 
    PASS  Tests\Unit\base\DeleteAccountTest
-  ✓ user accounts can be deleted                                         0.04s  
+  ✓ user accounts can be deleted                                         0.05s  
   ✓ correct password must be provided before account can be deleted      0.04s  
 
    PASS  Tests\Unit\base\DeleteApiTokenTest
-  ✓ api tokens can be deleted                                            0.05s  
+  ✓ api tokens can be deleted                                            0.06s  
 
    WARN  Tests\Unit\base\EmailVerificationTest
   - email verification screen can be rendered → Email verification not…  0.02s  
@@ -159,8 +159,8 @@
   ✓ password can be reset with valid token                               0.26s  
 
    PASS  Tests\Unit\base\ProfileInformationTest
-  ✓ current profile information is available                             0.04s  
-  ✓ profile information can be updated                                   0.05s  
+  ✓ current profile information is available                             0.05s  
+  ✓ profile information can be updated                                   0.04s  
 
    WARN  Tests\Unit\base\RegistrationTest
   ✓ registration screen can be rendered                                  0.03s  
@@ -170,26 +170,26 @@
    PASS  Tests\Unit\base\TwoFactorAuthenticationSettingsTest
   ✓ two factor authentication can be enabled                             0.07s  
   ✓ recovery codes can be regenerated                                    0.11s  
-  ✓ two factor authentication can be disabled                            0.06s  
+  ✓ two factor authentication can be disabled                            0.07s  
 
    PASS  Tests\Unit\base\UpdatePasswordTest
-  ✓ password can be updated                                              0.04s  
-  ✓ current password must be correct                                     0.05s  
-  ✓ new passwords must match                                             0.04s  
+  ✓ password can be updated                                              0.05s  
+  ✓ current password must be correct                                     0.04s  
+  ✓ new passwords must match                                             0.05s  
 
    PASS  Tests\Feature\Api\Accounting\ChartOfAccountsApiTest
-  ✓ it can list chart of accounts                                        0.04s  
-  ✓ it can create a chart of account                                     0.03s  
-  ✓ it validates account creation                                        0.03s  
+  ✓ it can list chart of accounts                                        0.05s  
+  ✓ it can create a chart of account                                     0.04s  
+  ✓ it validates account creation                                        0.04s  
   ✓ it can show a specific account                                       0.04s  
-  ✓ it returns 404 for nonexistent account                               0.03s  
+  ✓ it returns 404 for nonexistent account                               0.04s  
 
    PASS  Tests\Feature\Api\Accounting\FinancialReportsApiTest
   ✓ it can generate trial balance                                        0.04s  
-  ✓ it can generate balance sheet                                        0.04s  
+  ✓ it can generate balance sheet                                        0.05s  
   ✓ it can generate income statement                                     0.04s  
   ✓ it validates income statement date range                             0.04s  
-  ✓ it rejects end date before start date                                0.03s  
+  ✓ it rejects end date before start date                                0.04s  
 
    FAIL  Tests\Feature\Api\Accounting\JournalEntriesApiTest
   ⨯ it can create a journal entry                                        0.04s  
@@ -200,193 +200,191 @@
   ✓ can create organization                                              0.04s  
   ✓ debug factory output                                                 0.02s  
   ✓ verify organization factory works                                    0.02s  
-  ✓ can list organizations                                               0.03s  
-  ✓ can show organization                                                0.03s  
-  ✓ can update organization                                              0.03s  
+  ✓ can list organizations                                               0.04s  
+  ✓ can show organization                                                0.04s  
+  ✓ can update organization                                              0.04s  
   ✓ can delete organization                                              0.04s  
-  ✓ guests cannot access organizations                                   0.03s  
-  ✓ name is required for creation                                        0.03s  
-  ✓ name must be unique                                                  0.03s  
-  ✓ user can view their organizations                                    0.03s  
-  ✓ organization admin can list members                                  0.03s  
+  ✓ guests cannot access organizations                                   0.04s  
+  ✓ name is required for creation                                        0.04s  
+  ✓ name must be unique                                                  0.04s  
+  ✓ user can view their organizations                                    0.04s  
+  ✓ organization admin can list members                                  0.04s  
   ✓ admin can invite new members                                         0.04s  
-  ✓ cannot invite existing member                                        0.03s  
+  ✓ cannot invite existing member                                        0.04s  
   ✓ non admin cannot invite members                                      0.04s  
 
    FAIL  Tests\Feature\OrganizationUnitApiTest
-  ✓ can create organization unit                                         0.04s  
+  ✓ can create organization unit                                         0.05s  
   ✓ can create nested unit                                               0.04s  
-  ✓ can get unit hierarchy                                               0.04s  
-  ✓ can assign user to unit                                              0.04s  
+  ✓ can get unit hierarchy                                               0.05s  
+  ✓ can assign user to unit                                              0.05s  
   ✓ can list users by organization unit                                  0.04s  
-  ✓ cannot create organization unit as non admin                         0.04s  
+  ✓ cannot create organization unit as non admin                         0.05s  
   ⨯ cannot assign user as non admin                                      0.04s  
   ✓ cannot create unit with invalid data                                 0.04s  
-  ✓ cannot assign non existent user to unit                              0.03s  
+  ✓ cannot assign non existent user to unit                              0.04s  
   ✓ cannot assign user not in organization                               0.04s  
-  ✓ cannot get hierarchy for non existent unit                           0.03s  
+  ✓ cannot get hierarchy for non existent unit                           0.04s  
   ✓ can get hierarchy for unit with no children                          0.04s  
 
    FAIL  Tests\Feature\DashboardTest
   ✓ it redirects to setup for users without organization                 0.06s  
   ✓ it shows dashboard for users with organization                       0.06s  
   ✓ it shows dashboard sections                                          0.06s  
-  ✓ it shows store inventory summary                                     0.05s  
-  ⨯ it shows low stock alerts                                            0.31s  
-  ✓ it shows recent transactions                                         0.08s  
-  ⨯ it shows quick action buttons                                        0.06s  
-  ✓ it shows stats cards                                                 0.06s  
-  ✓ it shows empty state for no stores                                   0.05s  
+  ✓ it shows store inventory summary                                     0.06s  
+  ⨯ it shows low stock alerts                                            0.35s  
+  ✓ it shows recent transactions                                         0.09s  
+  ⨯ it shows quick action buttons                                        0.07s  
+  ✓ it shows stats cards                                                 0.07s  
+  ✓ it shows empty state for no stores                                   0.07s  
   ✓ it shows all stocked message when no low stock                       0.06s  
-  ✓ it shows store with item counts                                      0.06s  
+  ✓ it shows store with item counts                                      0.07s  
 
    PASS  Tests\Feature\ExampleTest
-  ✓ it returns a successful response                                     0.04s  
+  ✓ it returns a successful response                                     0.05s  
 
    PASS  Tests\Feature\Inventory\InventoryControllerTest
-  ✓ it displays inventory dashboard                                      0.06s  
-  ✓ it shows correct statistics on dashboard                             0.06s  
-  ✓ it requires authentication for inventory dashboard                   0.05s  
-  ✓ it includes todays transactions in stats                             0.06s  
-  ✓ it handles empty inventory gracefully                                0.06s  
+  ✓ it displays inventory dashboard                                      0.07s  
+  ✓ it shows correct statistics on dashboard                             0.11s  
+  ✓ it requires authentication for inventory dashboard                   0.10s  
+  ✓ it includes todays transactions in stats                             0.11s  
+  ✓ it handles empty inventory gracefully                                0.11s  
 
    PASS  Tests\Feature\Inventory\InventoryItemControllerTest
-  ✓ it displays items index                                              0.07s  
-  ✓ it filters items by search term                                      0.07s  
-  ✓ it shows item creation form                                          0.06s  
-  ✓ it stores new item with valid data                                   0.05s  
-  ✓ it validates required fields when storing item                       0.05s  
+  ✓ it displays items index                                              0.24s  
+  ✓ it filters items by search term                                      0.13s  
+  ✓ it shows item creation form                                          0.09s  
+  ✓ it stores new item with valid data                                   0.08s  
+  ✓ it validates required fields when storing item                       0.07s  
 
-   FAIL  Tests\Feature\Inventory\InventoryReportControllerTest
-  ✓ it displays reports dashboard                                        0.06s  
-  ✓ it displays low stock report                                         0.06s  
-  ⨯ it displays stock movement report                                    0.30s  
-  ⨯ it filters movement report by date range                             0.30s  
-  ⨯ it displays stock levels report                                      0.32s  
-  ⨯ it filters stock levels by category                                  0.31s  
-  ⨯ it handles empty reports gracefully                                  0.56s  
-  ✓ debug 403 errors                                                     0.10s  
-  ! debug 403 detailed → This test did not perform any assertions        0.04s  
-  ! debug transaction items schema → This test did not perform any asse… 0.05s  
+   PASS  Tests\Feature\Inventory\InventoryReportControllerTest
+  ✓ it displays reports dashboard                                        0.08s  
+  ✓ it displays low stock report                                         0.08s  
+  ✓ it filters low stock by store                                        0.09s  
+  ✓ it displays stock movement report                                    0.07s  
+  ✓ it filters movement report by date range                             0.08s  
+  ✓ it displays stock levels report                                      0.08s  
+  ✓ it filters stock levels by category                                  0.07s  
+  ✓ it handles empty reports gracefully                                  0.10s  
 
    PASS  Tests\Feature\InventoryScopeTest
-  ✓ it finds low stock items using scope                                 0.06s  
-  ✓ it finds low stock items in specific store                           0.05s  
-  ✓ it finds out of stock items using scope                              0.05s  
-  ✓ store can retrieve its low stock items                               0.05s  
+  ✓ it finds low stock items using scope                                 0.05s  
+  ✓ it finds low stock items in specific store                           0.04s  
+  ✓ it finds out of stock items using scope                              0.04s  
+  ✓ store can retrieve its low stock items                               0.04s  
   ✓ store can retrieve its out of stock items                            0.04s  
-  ✓ it calculates stock statistics for store                             0.05s  
-  ✓ it properly categorizes stock levels                                 0.05s  
+  ✓ it calculates stock statistics for store                             0.04s  
+  ✓ it properly categorizes stock levels                                 0.04s  
 
    PASS  Tests\Feature\Inventory\InventoryStockControllerTest
-  ✓ it shows stock adjustment form                                       0.08s  
-  ✓ it processes stock adjustment                                        0.09s  
-  ✓ it shows stock count form                                            0.08s  
-  ✓ it processes stock count                                             0.08s  
+  ✓ it shows stock adjustment form                                       0.06s  
+  ✓ it processes stock adjustment                                        0.06s  
+  ✓ it shows stock count form                                            0.05s  
+  ✓ it processes stock count                                             0.06s  
   ✓ it shows stock transfer form                                         0.06s  
-  ✓ it processes stock transfer                                          0.08s  
+  ✓ it processes stock transfer                                          0.07s  
 
    PASS  Tests\Feature\Inventory\InventoryStoreControllerTest
-  ✓ it displays stores index                                             0.09s  
+  ✓ it displays stores index                                             0.07s  
   ✓ it filters stores by search term                                     0.07s  
   ✓ it shows store creation form                                         0.07s  
-  ✓ it stores new store with valid data                                  0.06s  
-  ✓ it shows store detail page                                           0.08s  
-  ✓ it updates store with valid data                                     0.06s  
-  ✓ it deletes store without transactions or items                       0.06s  
+  ✓ it stores new store with valid data                                  0.05s  
+  ✓ it shows store detail page                                           0.07s  
+  ✓ it updates store with valid data                                     0.05s  
+  ✓ it deletes store without transactions or items                       0.05s  
   ✓ it prevents deletion of store with transactions                      0.06s  
 
    PASS  Tests\Feature\Inventory\InventoryTenancyTest
   ✓ it scopes items by organization                                      0.05s  
-  ✓ it scopes stores by organization                                     0.05s  
-  ✓ user cannot access other organizations inventory data                0.10s  
+  ✓ it scopes stores by organization                                     0.04s  
+  ✓ user cannot access other organizations inventory data                0.09s  
   ✓ it enforces organization isolation in controllers                    0.10s  
 
    PASS  Tests\Feature\Inventory\InventoryTransactionControllerTest
-  ✓ it displays transactions index                                       0.08s  
-  ✓ it shows transaction creation form                                   0.07s  
-  ✓ it stores new transaction with items                                 0.07s  
+  ✓ it displays transactions index                                       0.07s  
+  ✓ it shows transaction creation form                                   0.06s  
+  ✓ it stores new transaction with items                                 0.06s  
 
    FAIL  Tests\Feature\Inventory\ItemTest
   ✓ it can create an item                                                0.06s  
-  ✓ it can search items by name or sku                                   0.07s  
-  ✓ it can filter items by category                                      0.07s  
-  ✓ it can sort items                                                    0.07s  
+  ✓ it can search items by name or sku                                   0.06s  
+  ✓ it can filter items by category                                      0.06s  
+  ✓ it can sort items                                                    0.06s  
   ✓ it returns only items from users organization                        0.06s  
-  ✓ it can get item availability across stores                           0.06s  
-  ✓ it shows low stock status correctly                                  0.07s  
+  ✓ it can get item availability across stores                           0.07s  
+  ✓ it shows low stock status correctly                                  0.06s  
   ⨯ it returns 403 for unauthorized access                               0.06s  
-  ✓ it handles item with no stores                                       0.07s  
+  ✓ it handles item with no stores                                       0.06s  
 
    FAIL  Tests\Feature\Inventory\PermissionTest
   ✓ inventory admin has all permissions                                  0.07s  
   ✓ store manager cannot delete stores                                   0.06s  
   ✓ inventory clerk cannot finalize transactions                         0.06s  
-  ✓ auditor can only view inventory                                      0.07s  
+  ✓ auditor can only view inventory                                      0.06s  
   ⨯ user cannot access other organization inventory                      0.06s  
 
    PASS  Tests\Feature\Inventory\StoreTest
-  ✓ it can create a store                                                0.06s  
+  ✓ it can create a store                                                0.07s  
   ✓ it can add items to store                                            0.06s  
-  ✓ it can retrieve store with items                                     0.07s  
+  ✓ it can retrieve store with items                                     0.06s  
   ✓ it can update item quantity in store                                 0.06s  
-  ✓ it can list all stores for organization                              0.07s  
+  ✓ it can list all stores for organization                              0.06s  
   ✓ it can use organization scope                                        0.04s  
   ✓ it can use search scope                                              0.04s  
   ✓ it can use active scope                                              0.04s  
 
    PASS  Tests\Feature\Inventory\TransactionTest
-  ✓ it can create draft transaction without items                        0.07s  
-  ✓ it can create draft transaction with items                           0.07s  
+  ✓ it can create draft transaction without items                        0.06s  
+  ✓ it can create draft transaction with items                           0.06s  
   ✓ it can add items to empty draft transaction                          0.07s  
   ✓ it can add items to transaction with existing items                  0.07s  
   ✓ it can finalize transaction created without items after adding item… 0.07s  
-  ✓ it can finalize transaction created with items                       0.08s  
-  ✓ it cannot finalize empty transaction                                 0.07s  
+  ✓ it can finalize transaction created with items                       0.07s  
+  ✓ it cannot finalize empty transaction                                 0.06s  
   ✓ it cannot add items to finalized transaction                         0.08s  
-  ✓ it can list transactions by status                                   0.11s  
-  ✓ it can calculate transaction totals                                  0.08s  
-  ✓ it cannot modify finalized transaction                               0.09s  
+  ✓ it can list transactions by status                                   0.09s  
+  ✓ it can calculate transaction totals                                  0.07s  
+  ✓ it cannot modify finalized transaction                               0.07s  
   ✓ it can calculate totals for empty transaction                        0.07s  
 
    PASS  Tests\Feature\Livewire\Accounting\ChartOfAccountsTest
   ✓ chart of accounts page renders                                       0.05s  
-  ✓ it displays a list of accounts                                       0.05s  
-  ✓ it displays a list of chart of accounts                              0.05s  
-  ✓ it can create a new chart of account record                          0.06s  
-  ✓ it can update an existing chart of account record                    0.06s  
+  ✓ it displays a list of accounts                                       0.04s  
+  ✓ it displays a list of chart of accounts                              0.04s  
+  ✓ it can create a new chart of account record                          0.05s  
+  ✓ it can update an existing chart of account record                    0.05s  
 
    FAIL  Tests\Feature\Livewire\Accounting\JournalEntriesTest
   ✓ it renders successfully                                              0.05s  
-  ⨯ it creates a journal entry                                           0.08s  
-  ✓ a journal entry requires balanced debits and credits                 0.08s  
+  ⨯ it creates a journal entry                                           0.07s  
+  ✓ a journal entry requires balanced debits and credits                 0.07s  
 
    PASS  Tests\Feature\Livewire\Organization\MemberManagerTest
-  ✓ it can display a list of organization members                        0.05s  
+  ✓ it can display a list of organization members                        0.04s  
   ✓ it can search for members by name or email                           0.05s  
 
    PASS  Tests\Feature\Livewire\Organization\OrganizationFormTest
-  ✓ it shows create form                                                 0.05s  
+  ✓ it shows create form                                                 0.04s  
   ✓ it shows edit form                                                   0.05s  
   ✓ it creates new organization                                          0.05s  
-  ✓ it updates existing organization                                     0.07s  
-  ✓ it validates required fields                                         0.05s  
-  ✓ it validates unique name                                             0.05s  
-  ✓ it closes modal                                                      0.05s  
+  ✓ it updates existing organization                                     0.05s  
+  ✓ it validates required fields                                         0.04s  
+  ✓ it validates unique name                                             0.04s  
+  ✓ it closes modal                                                      0.04s  
 
    FAIL  Tests\Feature\Livewire\Organization\OrganizationListTest
   ✓ it shows organizations list                                          0.05s  
   ✓ it searches organizations by name                                    0.05s  
-  ✓ it sorts organizations by name ascending                             0.06s  
-  ✓ it sorts organizations by name descending                            0.06s  
+  ✓ it sorts organizations by name ascending                             0.05s  
+  ✓ it sorts organizations by name descending                            0.05s  
   ✓ it sorts organizations by status                                     0.05s  
   ✓ it paginates organizations                                           0.06s  
-  ⨯ it shows empty state when no organizations                           0.05s  
+  ⨯ it shows empty state when no organizations                           0.04s  
 
    FAIL  Tests\Feature\Livewire\Organization\OrganizationTreeTest
   ✓ it can display the organization tree                                 0.05s  
-  ✓ an organization unit can be dragged and dropped to another parent    0.06s  
-  ✓ an organizational unit cannot be dropped onto itself                 0.05s  
+  ✓ an organization unit can be dragged and dropped to another parent    0.05s  
+  ✓ an organizational unit cannot be dropped onto itself                 0.04s  
   ✓ an organizational unit can be dropped as a root node                 0.05s  
   ✓ a parent cannot be dropped onto one of its descendants               0.05s  
   ✓ a sibling can be dropped under another sibling                       0.05s  
@@ -395,38 +393,38 @@
   ⨯ a dropped unit that does not exist does not cause an error           0.05s  
 
    FAIL  UserPlacementTest
-  ✓ it can assign a user to a unit                                       0.07s  
+  ✓ it can assign a user to a unit                                       0.05s  
   ⨯ it can unassign a user by dropping them onto the root                0.05s  
 
    PASS  Tests\Feature\MultiStepSetupWizardTest
-  ✓ it shows organization step for new users                             0.07s  
+  ✓ it shows organization step for new users                             0.06s  
   ✓ it can store organization and proceed to store step                  0.06s  
-  ✓ it shows store setup step after organization                         0.07s  
-  ✓ it can create first store and proceed to accounting                  0.06s  
-  ✓ it shows accounting setup step after store                           0.07s  
+  ✓ it shows store setup step after organization                         0.06s  
+  ✓ it can create first store and proceed to accounting                  0.07s  
+  ✓ it shows accounting setup step after store                           0.06s  
 
    PASS  OrganizationUserPivotTest
   ✓ it can get all roles with the new pivot model                        0.02s  
 
    PASS  Tests\Feature\SetupChartOfAccountsTest
   ✓ it creates default chart of accounts                                 0.06s  
-  ✓ it skips account creation if not requested                           0.06s  
-  ✓ it creates organization unit for accounting department               0.06s  
+  ✓ it skips account creation if not requested                           0.05s  
+  ✓ it creates organization unit for accounting department               0.05s  
 
    PASS  Tests\Feature\SetupStoreTest
   ✓ it creates first store for organization                              0.06s  
-  ✓ it validates store creation                                          0.06s  
+  ✓ it validates store creation                                          0.05s  
   ✓ it auto generates store code if not provided                         0.06s  
 
    PASS  Tests\Feature\SetupWizardTest
-  ✓ it shows setup wizard for new users                                  0.07s  
-  ✓ it redirects to dashboard if organization exists                     0.06s  
-  ✓ it can create organization through wizard                            0.06s  
-  ✓ it validates organization creation                                   0.06s  
+  ✓ it shows setup wizard for new users                                  0.06s  
+  ✓ it redirects to dashboard if organization exists                     0.05s  
+  ✓ it can create organization through wizard                            0.05s  
+  ✓ it validates organization creation                                   0.05s  
   ✓ it assigns admin role to creator                                     0.06s  
 
    PASS  Tests\Feature\TenancyFeatureTest
-  ✓ queries are automatically scoped to the authenticated users organiz… 0.05s  
+  ✓ queries are automatically scoped to the authenticated users organiz… 0.04s  
   ✓ organization id is automatically set on creation                     0.04s  
   ✓ global scope can be bypassed for admin queries                       0.04s  
   ────────────────────────────────────────────────────────────────────────────  
@@ -479,10 +477,10 @@ Failed asserting that 500 is identical to 200.
 
 The following exception occurred during the last request:
 
-ErrorException: Attempt to read property "name" on null in /home/gg/dev/hrm-laravel-base/storage/framework/views/cbc6c49f60401dc694ac60624efc35fc.php:167
+ErrorException: foreach() argument must be of type array|object, null given in /home/gg/dev/hrm-laravel-base/storage/framework/views/cbc6c49f60401dc694ac60624efc35fc.php:169
 Stack trace:
 #0 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(258): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError()
-#1 /home/gg/dev/hrm-laravel-base/storage/framework/views/cbc6c49f60401dc694ac60624efc35fc.php(167): Illuminate\Foundation\Bootstrap\HandleExceptions->{closure:Illuminate\Foundation\Bootstrap\HandleExceptions::forwardsTo():257}()
+#1 /home/gg/dev/hrm-laravel-base/storage/framework/views/cbc6c49f60401dc694ac60624efc35fc.php(169): Illuminate\Foundation\Bootstrap\HandleExceptions->{closure:Illuminate\Foundation\Bootstrap\HandleExceptions::forwardsTo():257}()
 #2 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require('...')
 #3 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\Filesystem\Filesystem::{closure:Illuminate\Filesystem\Filesystem::getRequire():120}()
 #4 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(57): Illuminate\Filesystem\Filesystem->getRequire()
@@ -566,7 +564,7 @@ Stack trace:
 #82 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(192): {closure:/home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest:18}()
 #83 {main}
 
-Next Illuminate\View\ViewException: Attempt to read property "name" on null (View: /home/gg/dev/hrm-laravel-base/resources/views/dashboard.blade.php) in /home/gg/dev/hrm-laravel-base/storage/framework/views/cbc6c49f60401dc694ac60624efc35fc.php:167
+Next Illuminate\View\ViewException: foreach() argument must be of type array|object, null given (View: /home/gg/dev/hrm-laravel-base/resources/views/dashboard.blade.php) in /home/gg/dev/hrm-laravel-base/storage/framework/views/cbc6c49f60401dc694ac60624efc35fc.php:169
 Stack trace:
 #0 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(58): Illuminate\View\Engines\CompilerEngine->handleViewException()
 #1 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(59): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->handleViewException()
@@ -652,7 +650,7 @@ Stack trace:
 
 ----------------------------------------------------------------------------------
 
-Attempt to read property "name" on null (View: /home/gg/dev/hrm-laravel-base/resources/views/dashboard.blade.php)
+foreach() argument must be of type array|object, null given (View: /home/gg/dev/hrm-laravel-base/resources/views/dashboard.blade.php)
 
   at tests/Feature/DashboardTest.php:149
     145▕         // dd([$store->items]);
@@ -670,7 +668,7 @@ Attempt to read property "name" on null (View: /home/gg/dev/hrm-laravel-base/res
   Expected: <!DOCTYPE html>\n
   <html lang="en">\n
   \n
-  ... (558 more lines)
+  ... (557 more lines)
 
   To contain: Add Store
 
@@ -684,967 +682,6 @@ Attempt to read property "name" on null (View: /home/gg/dev/hrm-laravel-base/res
     192▕             ->assertSee('Add Item');
     193▕     }
     194▕
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\Inventory\InventoryReportControllerTest > it displa…   
-  Expected response status code [200] but received 500.
-Failed asserting that 500 is identical to 200.
-
-The following exception occurred during the last request:
-
-Error: Call to a member function format() on null in /home/gg/dev/hrm-laravel-base/storage/framework/views/6d48479948324cf370985853fa49f4b8.php:396
-Stack trace:
-#0 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require()
-#1 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\Filesystem\Filesystem::{closure:Illuminate\Filesystem\Filesystem::getRequire():120}()
-#2 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(57): Illuminate\Filesystem\Filesystem->getRequire()
-#3 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(22): Illuminate\View\Engines\PhpEngine->evaluatePath()
-#4 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(76): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->evaluatePath()
-#5 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(10): Illuminate\View\Engines\CompilerEngine->get()
-#6 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(208): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->get()
-#7 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(191): Illuminate\View\View->getContents()
-#8 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(160): Illuminate\View\View->renderContents()
-#9 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(78): Illuminate\View\View->render()
-#10 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(34): Illuminate\Http\Response->setContent()
-#11 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(939): Illuminate\Http\Response->__construct()
-#12 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(906): Illuminate\Routing\Router::toResponse()
-#13 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Routing\Router->prepareResponse()
-#14 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}()
-#15 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/EnsureEmailIsVerified.php(41): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#16 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\EnsureEmailIsVerified->handle()
-#17 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#18 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#19 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#20 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings->handle()
-#21 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#22 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle()
-#23 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(87): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#24 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle()
-#25 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#26 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\View\Middleware\ShareErrorsFromSession->handle()
-#27 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(120): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#28 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(63): Illuminate\Session\Middleware\StartSession->handleStatefulRequest()
-#29 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Session\Middleware\StartSession->handle()
-#30 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(36): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#31 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle()
-#32 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(74): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#33 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\EncryptCookies->handle()
-#34 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#35 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then()
-#36 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack()
-#37 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute()
-#38 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute()
-#39 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch()
-#40 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}()
-#41 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Features/SupportDisablingBackButtonCache/DisableBackButtonCacheMiddleware.php(19): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#42 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware->handle()
-#43 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#44 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#45 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#46 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#47 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
-#48 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#49 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#50 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
-#51 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#52 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle()
-#53 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#54 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
-#55 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#56 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle()
-#57 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#58 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle()
-#59 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#60 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle()
-#61 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#62 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle()
-#63 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#64 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then()
-#65 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
-#66 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle()
-#67 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(368): Illuminate\Foundation\Testing\TestCase->call()
-#68 /home/gg/dev/hrm-laravel-base/tests/Feature/Inventory/InventoryReportControllerTest.php(93): Illuminate\Foundation\Testing\TestCase->get()
-#69 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(1656): Tests\Feature\Inventory\InventoryReportControllerTest->it_displays_stock_movement_report()
-#70 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(514): PHPUnit\Framework\TestCase->runTest()
-#71 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(87): PHPUnit\Framework\TestCase->runBare()
-#72 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(361): PHPUnit\Framework\TestRunner->run()
-#73 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestCase->run()
-#74 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#75 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#76 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
-#77 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/Application.php(211): PHPUnit\TextUI\TestRunner->run()
-#78 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run()
-#79 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle()
-#80 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(192): {closure:/home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest:18}()
-#81 {main}
-
-Next Illuminate\View\ViewException: Call to a member function format() on null (View: /home/gg/dev/hrm-laravel-base/resources/views/inventory/reports/movement.blade.php) in /home/gg/dev/hrm-laravel-base/storage/framework/views/6d48479948324cf370985853fa49f4b8.php:396
-Stack trace:
-#0 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(58): Illuminate\View\Engines\CompilerEngine->handleViewException()
-#1 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(59): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->handleViewException()
-#2 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(22): Illuminate\View\Engines\PhpEngine->evaluatePath()
-#3 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(76): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->evaluatePath()
-#4 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(10): Illuminate\View\Engines\CompilerEngine->get()
-#5 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(208): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->get()
-#6 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(191): Illuminate\View\View->getContents()
-#7 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(160): Illuminate\View\View->renderContents()
-#8 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(78): Illuminate\View\View->render()
-#9 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(34): Illuminate\Http\Response->setContent()
-#10 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(939): Illuminate\Http\Response->__construct()
-#11 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(906): Illuminate\Routing\Router::toResponse()
-#12 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Routing\Router->prepareResponse()
-#13 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}()
-#14 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/EnsureEmailIsVerified.php(41): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#15 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\EnsureEmailIsVerified->handle()
-#16 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#17 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#18 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#19 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings->handle()
-#20 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#21 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle()
-#22 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(87): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#23 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle()
-#24 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#25 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\View\Middleware\ShareErrorsFromSession->handle()
-#26 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(120): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#27 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(63): Illuminate\Session\Middleware\StartSession->handleStatefulRequest()
-#28 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Session\Middleware\StartSession->handle()
-#29 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(36): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#30 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle()
-#31 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(74): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#32 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\EncryptCookies->handle()
-#33 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#34 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then()
-#35 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack()
-#36 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute()
-#37 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute()
-#38 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch()
-#39 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}()
-#40 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Features/SupportDisablingBackButtonCache/DisableBackButtonCacheMiddleware.php(19): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#41 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware->handle()
-#42 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#43 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#44 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#45 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#46 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
-#47 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#48 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#49 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
-#50 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#51 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle()
-#52 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#53 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
-#54 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#55 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle()
-#56 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#57 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle()
-#58 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#59 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle()
-#60 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#61 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle()
-#62 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#63 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then()
-#64 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
-#65 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle()
-#66 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(368): Illuminate\Foundation\Testing\TestCase->call()
-#67 /home/gg/dev/hrm-laravel-base/tests/Feature/Inventory/InventoryReportControllerTest.php(93): Illuminate\Foundation\Testing\TestCase->get()
-#68 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(1656): Tests\Feature\Inventory\InventoryReportControllerTest->it_displays_stock_movement_report()
-#69 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(514): PHPUnit\Framework\TestCase->runTest()
-#70 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(87): PHPUnit\Framework\TestCase->runBare()
-#71 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(361): PHPUnit\Framework\TestRunner->run()
-#72 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestCase->run()
-#73 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#74 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#75 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
-#76 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/Application.php(211): PHPUnit\TextUI\TestRunner->run()
-#77 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run()
-#78 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle()
-#79 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(192): {closure:/home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest:18}()
-#80 {main}
-
-----------------------------------------------------------------------------------
-
-Call to a member function format() on null (View: /home/gg/dev/hrm-laravel-base/resources/views/inventory/reports/movement.blade.php)
-
-  at tests/Feature/Inventory/InventoryReportControllerTest.php:94
-     90▕             'notes' => 'Test transaction',
-     91▕         ]);
-     92▕ 
-     93▕         $response = $this->get('/inventory/reports/movement');
-  ➜  94▕         $response->assertStatus(200);
-     95▕ 
-     96▕         // Debug what's returned
-     97▕         // dd([
-     98▕         //     'movements_count' => $response->viewData('movements')->count(),
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\Inventory\InventoryReportControllerTest > it filter…   
-  Expected response status code [200] but received 500.
-Failed asserting that 500 is identical to 200.
-
-The following exception occurred during the last request:
-
-Error: Call to a member function format() on null in /home/gg/dev/hrm-laravel-base/storage/framework/views/6d48479948324cf370985853fa49f4b8.php:396
-Stack trace:
-#0 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require()
-#1 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\Filesystem\Filesystem::{closure:Illuminate\Filesystem\Filesystem::getRequire():120}()
-#2 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(57): Illuminate\Filesystem\Filesystem->getRequire()
-#3 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(22): Illuminate\View\Engines\PhpEngine->evaluatePath()
-#4 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(76): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->evaluatePath()
-#5 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(10): Illuminate\View\Engines\CompilerEngine->get()
-#6 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(208): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->get()
-#7 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(191): Illuminate\View\View->getContents()
-#8 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(160): Illuminate\View\View->renderContents()
-#9 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(78): Illuminate\View\View->render()
-#10 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(34): Illuminate\Http\Response->setContent()
-#11 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(939): Illuminate\Http\Response->__construct()
-#12 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(906): Illuminate\Routing\Router::toResponse()
-#13 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Routing\Router->prepareResponse()
-#14 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}()
-#15 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/EnsureEmailIsVerified.php(41): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#16 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\EnsureEmailIsVerified->handle()
-#17 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#18 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#19 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#20 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings->handle()
-#21 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#22 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle()
-#23 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(87): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#24 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle()
-#25 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#26 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\View\Middleware\ShareErrorsFromSession->handle()
-#27 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(120): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#28 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(63): Illuminate\Session\Middleware\StartSession->handleStatefulRequest()
-#29 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Session\Middleware\StartSession->handle()
-#30 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(36): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#31 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle()
-#32 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(74): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#33 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\EncryptCookies->handle()
-#34 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#35 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then()
-#36 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack()
-#37 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute()
-#38 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute()
-#39 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch()
-#40 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}()
-#41 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Features/SupportDisablingBackButtonCache/DisableBackButtonCacheMiddleware.php(19): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#42 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware->handle()
-#43 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#44 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#45 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#46 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#47 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
-#48 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#49 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#50 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
-#51 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#52 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle()
-#53 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#54 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
-#55 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#56 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle()
-#57 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#58 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle()
-#59 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#60 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle()
-#61 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#62 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle()
-#63 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#64 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then()
-#65 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
-#66 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle()
-#67 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(368): Illuminate\Foundation\Testing\TestCase->call()
-#68 /home/gg/dev/hrm-laravel-base/tests/Feature/Inventory/InventoryReportControllerTest.php(123): Illuminate\Foundation\Testing\TestCase->get()
-#69 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(1656): Tests\Feature\Inventory\InventoryReportControllerTest->it_filters_movement_report_by_date_range()
-#70 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(514): PHPUnit\Framework\TestCase->runTest()
-#71 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(87): PHPUnit\Framework\TestCase->runBare()
-#72 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(361): PHPUnit\Framework\TestRunner->run()
-#73 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestCase->run()
-#74 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#75 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#76 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
-#77 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/Application.php(211): PHPUnit\TextUI\TestRunner->run()
-#78 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run()
-#79 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle()
-#80 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(192): {closure:/home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest:18}()
-#81 {main}
-
-Next Illuminate\View\ViewException: Call to a member function format() on null (View: /home/gg/dev/hrm-laravel-base/resources/views/inventory/reports/movement.blade.php) in /home/gg/dev/hrm-laravel-base/storage/framework/views/6d48479948324cf370985853fa49f4b8.php:396
-Stack trace:
-#0 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(58): Illuminate\View\Engines\CompilerEngine->handleViewException()
-#1 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(59): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->handleViewException()
-#2 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(22): Illuminate\View\Engines\PhpEngine->evaluatePath()
-#3 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(76): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->evaluatePath()
-#4 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(10): Illuminate\View\Engines\CompilerEngine->get()
-#5 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(208): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->get()
-#6 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(191): Illuminate\View\View->getContents()
-#7 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(160): Illuminate\View\View->renderContents()
-#8 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(78): Illuminate\View\View->render()
-#9 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(34): Illuminate\Http\Response->setContent()
-#10 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(939): Illuminate\Http\Response->__construct()
-#11 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(906): Illuminate\Routing\Router::toResponse()
-#12 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Routing\Router->prepareResponse()
-#13 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}()
-#14 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/EnsureEmailIsVerified.php(41): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#15 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\EnsureEmailIsVerified->handle()
-#16 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#17 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#18 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#19 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings->handle()
-#20 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#21 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle()
-#22 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(87): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#23 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle()
-#24 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#25 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\View\Middleware\ShareErrorsFromSession->handle()
-#26 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(120): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#27 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(63): Illuminate\Session\Middleware\StartSession->handleStatefulRequest()
-#28 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Session\Middleware\StartSession->handle()
-#29 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(36): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#30 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle()
-#31 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(74): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#32 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\EncryptCookies->handle()
-#33 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#34 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then()
-#35 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack()
-#36 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute()
-#37 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute()
-#38 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch()
-#39 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}()
-#40 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Features/SupportDisablingBackButtonCache/DisableBackButtonCacheMiddleware.php(19): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#41 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware->handle()
-#42 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#43 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#44 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#45 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#46 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
-#47 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#48 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#49 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
-#50 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#51 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle()
-#52 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#53 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
-#54 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#55 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle()
-#56 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#57 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle()
-#58 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#59 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle()
-#60 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#61 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle()
-#62 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#63 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then()
-#64 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
-#65 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle()
-#66 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(368): Illuminate\Foundation\Testing\TestCase->call()
-#67 /home/gg/dev/hrm-laravel-base/tests/Feature/Inventory/InventoryReportControllerTest.php(123): Illuminate\Foundation\Testing\TestCase->get()
-#68 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(1656): Tests\Feature\Inventory\InventoryReportControllerTest->it_filters_movement_report_by_date_range()
-#69 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(514): PHPUnit\Framework\TestCase->runTest()
-#70 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(87): PHPUnit\Framework\TestCase->runBare()
-#71 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(361): PHPUnit\Framework\TestRunner->run()
-#72 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestCase->run()
-#73 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#74 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#75 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
-#76 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/Application.php(211): PHPUnit\TextUI\TestRunner->run()
-#77 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run()
-#78 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle()
-#79 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(192): {closure:/home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest:18}()
-#80 {main}
-
-----------------------------------------------------------------------------------
-
-Call to a member function format() on null (View: /home/gg/dev/hrm-laravel-base/resources/views/inventory/reports/movement.blade.php)
-
-  at tests/Feature/Inventory/InventoryReportControllerTest.php:128
-    124▕             'start_date' => now()->subWeek()->format('Y-m-d'),
-    125▕             'end_date' => now()->addWeek()->format('Y-m-d')
-    126▕         ]));
-    127▕ 
-  ➜ 128▕         $response->assertStatus(200);
-    129▕ 
-    130▕         $transactions = $response->viewData('transactions');
-    131▕         $this->assertGreaterThan(0, $transactions->count());
-    132▕     }
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\Inventory\InventoryReportControllerTest > it displa…   
-  Expected response status code [200] but received 500.
-Failed asserting that 500 is identical to 200.
-
-The following exception occurred during the last request:
-
-Symfony\Component\Routing\Exception\RouteNotFoundException: Route [inventory.reports.export] not defined. in /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php:526
-Stack trace:
-#0 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(871): Illuminate\Routing\UrlGenerator->route()
-#1 /home/gg/dev/hrm-laravel-base/storage/framework/views/6cdc778b3dd86cf711c18a8ca6d7370a.php(27): route()
-#2 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require('...')
-#3 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\Filesystem\Filesystem::{closure:Illuminate\Filesystem\Filesystem::getRequire():120}()
-#4 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(57): Illuminate\Filesystem\Filesystem->getRequire()
-#5 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(22): Illuminate\View\Engines\PhpEngine->evaluatePath()
-#6 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(76): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->evaluatePath()
-#7 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(10): Illuminate\View\Engines\CompilerEngine->get()
-#8 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(208): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->get()
-#9 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(191): Illuminate\View\View->getContents()
-#10 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(160): Illuminate\View\View->renderContents()
-#11 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(78): Illuminate\View\View->render()
-#12 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(34): Illuminate\Http\Response->setContent()
-#13 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(939): Illuminate\Http\Response->__construct()
-#14 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(906): Illuminate\Routing\Router::toResponse()
-#15 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Routing\Router->prepareResponse()
-#16 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}()
-#17 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/EnsureEmailIsVerified.php(41): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#18 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\EnsureEmailIsVerified->handle()
-#19 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#20 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#21 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#22 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings->handle()
-#23 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#24 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle()
-#25 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(87): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#26 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle()
-#27 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#28 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\View\Middleware\ShareErrorsFromSession->handle()
-#29 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(120): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#30 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(63): Illuminate\Session\Middleware\StartSession->handleStatefulRequest()
-#31 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Session\Middleware\StartSession->handle()
-#32 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(36): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#33 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle()
-#34 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(74): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#35 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\EncryptCookies->handle()
-#36 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#37 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then()
-#38 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack()
-#39 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute()
-#40 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute()
-#41 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch()
-#42 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}()
-#43 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Features/SupportDisablingBackButtonCache/DisableBackButtonCacheMiddleware.php(19): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#44 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware->handle()
-#45 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#46 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#47 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#48 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#49 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
-#50 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#51 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#52 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
-#53 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#54 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle()
-#55 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#56 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
-#57 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#58 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle()
-#59 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#60 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle()
-#61 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#62 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle()
-#63 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#64 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle()
-#65 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#66 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then()
-#67 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
-#68 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle()
-#69 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(368): Illuminate\Foundation\Testing\TestCase->call()
-#70 /home/gg/dev/hrm-laravel-base/tests/Feature/Inventory/InventoryReportControllerTest.php(140): Illuminate\Foundation\Testing\TestCase->get()
-#71 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(1656): Tests\Feature\Inventory\InventoryReportControllerTest->it_displays_stock_levels_report()
-#72 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(514): PHPUnit\Framework\TestCase->runTest()
-#73 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(87): PHPUnit\Framework\TestCase->runBare()
-#74 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(361): PHPUnit\Framework\TestRunner->run()
-#75 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestCase->run()
-#76 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#77 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#78 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
-#79 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/Application.php(211): PHPUnit\TextUI\TestRunner->run()
-#80 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run()
-#81 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle()
-#82 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(192): {closure:/home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest:18}()
-#83 {main}
-
-Next Illuminate\View\ViewException: Route [inventory.reports.export] not defined. (View: /home/gg/dev/hrm-laravel-base/resources/views/inventory/reports/stock-levels.blade.php) in /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php:526
-Stack trace:
-#0 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(58): Illuminate\View\Engines\CompilerEngine->handleViewException()
-#1 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(59): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->handleViewException()
-#2 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(22): Illuminate\View\Engines\PhpEngine->evaluatePath()
-#3 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(76): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->evaluatePath()
-#4 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(10): Illuminate\View\Engines\CompilerEngine->get()
-#5 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(208): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->get()
-#6 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(191): Illuminate\View\View->getContents()
-#7 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(160): Illuminate\View\View->renderContents()
-#8 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(78): Illuminate\View\View->render()
-#9 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(34): Illuminate\Http\Response->setContent()
-#10 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(939): Illuminate\Http\Response->__construct()
-#11 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(906): Illuminate\Routing\Router::toResponse()
-#12 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Routing\Router->prepareResponse()
-#13 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}()
-#14 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/EnsureEmailIsVerified.php(41): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#15 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\EnsureEmailIsVerified->handle()
-#16 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#17 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#18 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#19 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings->handle()
-#20 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#21 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle()
-#22 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(87): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#23 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle()
-#24 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#25 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\View\Middleware\ShareErrorsFromSession->handle()
-#26 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(120): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#27 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(63): Illuminate\Session\Middleware\StartSession->handleStatefulRequest()
-#28 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Session\Middleware\StartSession->handle()
-#29 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(36): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#30 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle()
-#31 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(74): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#32 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\EncryptCookies->handle()
-#33 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#34 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then()
-#35 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack()
-#36 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute()
-#37 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute()
-#38 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch()
-#39 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}()
-#40 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Features/SupportDisablingBackButtonCache/DisableBackButtonCacheMiddleware.php(19): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#41 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware->handle()
-#42 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#43 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#44 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#45 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#46 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
-#47 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#48 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#49 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
-#50 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#51 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle()
-#52 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#53 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
-#54 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#55 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle()
-#56 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#57 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle()
-#58 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#59 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle()
-#60 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#61 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle()
-#62 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#63 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then()
-#64 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
-#65 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle()
-#66 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(368): Illuminate\Foundation\Testing\TestCase->call()
-#67 /home/gg/dev/hrm-laravel-base/tests/Feature/Inventory/InventoryReportControllerTest.php(140): Illuminate\Foundation\Testing\TestCase->get()
-#68 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(1656): Tests\Feature\Inventory\InventoryReportControllerTest->it_displays_stock_levels_report()
-#69 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(514): PHPUnit\Framework\TestCase->runTest()
-#70 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(87): PHPUnit\Framework\TestCase->runBare()
-#71 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(361): PHPUnit\Framework\TestRunner->run()
-#72 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestCase->run()
-#73 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#74 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#75 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
-#76 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/Application.php(211): PHPUnit\TextUI\TestRunner->run()
-#77 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run()
-#78 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle()
-#79 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(192): {closure:/home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest:18}()
-#80 {main}
-
-----------------------------------------------------------------------------------
-
-Route [inventory.reports.export] not defined. (View: /home/gg/dev/hrm-laravel-base/resources/views/inventory/reports/stock-levels.blade.php)
-
-  at tests/Feature/Inventory/InventoryReportControllerTest.php:142
-    138▕         $items = $this->createInventorySetup()['items'];
-    139▕ 
-    140▕         $response = $this->get(route('inventory.reports.stock-levels'));
-    141▕ 
-  ➜ 142▕         $response->assertStatus(200);
-    143▕         $response->assertViewIs('inventory.reports.stock-levels');
-    144▕         $response->assertViewHas('items');
-    145▕         $response->assertViewHas('stores');
-    146▕         $response->assertViewHas('categories');
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\Inventory\InventoryReportControllerTest > it filter…   
-  Expected response status code [200] but received 500.
-Failed asserting that 500 is identical to 200.
-
-The following exception occurred during the last request:
-
-Symfony\Component\Routing\Exception\RouteNotFoundException: Route [inventory.reports.export] not defined. in /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php:526
-Stack trace:
-#0 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(871): Illuminate\Routing\UrlGenerator->route()
-#1 /home/gg/dev/hrm-laravel-base/storage/framework/views/6cdc778b3dd86cf711c18a8ca6d7370a.php(27): route()
-#2 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require('...')
-#3 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\Filesystem\Filesystem::{closure:Illuminate\Filesystem\Filesystem::getRequire():120}()
-#4 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(57): Illuminate\Filesystem\Filesystem->getRequire()
-#5 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(22): Illuminate\View\Engines\PhpEngine->evaluatePath()
-#6 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(76): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->evaluatePath()
-#7 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(10): Illuminate\View\Engines\CompilerEngine->get()
-#8 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(208): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->get()
-#9 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(191): Illuminate\View\View->getContents()
-#10 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(160): Illuminate\View\View->renderContents()
-#11 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(78): Illuminate\View\View->render()
-#12 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(34): Illuminate\Http\Response->setContent()
-#13 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(939): Illuminate\Http\Response->__construct()
-#14 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(906): Illuminate\Routing\Router::toResponse()
-#15 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Routing\Router->prepareResponse()
-#16 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}()
-#17 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/EnsureEmailIsVerified.php(41): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#18 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\EnsureEmailIsVerified->handle()
-#19 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#20 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#21 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#22 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings->handle()
-#23 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#24 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle()
-#25 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(87): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#26 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle()
-#27 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#28 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\View\Middleware\ShareErrorsFromSession->handle()
-#29 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(120): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#30 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(63): Illuminate\Session\Middleware\StartSession->handleStatefulRequest()
-#31 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Session\Middleware\StartSession->handle()
-#32 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(36): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#33 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle()
-#34 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(74): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#35 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\EncryptCookies->handle()
-#36 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#37 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then()
-#38 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack()
-#39 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute()
-#40 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute()
-#41 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch()
-#42 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}()
-#43 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Features/SupportDisablingBackButtonCache/DisableBackButtonCacheMiddleware.php(19): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#44 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware->handle()
-#45 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#46 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#47 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#48 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#49 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
-#50 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#51 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#52 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
-#53 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#54 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle()
-#55 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#56 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
-#57 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#58 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle()
-#59 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#60 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle()
-#61 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#62 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle()
-#63 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#64 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle()
-#65 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#66 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then()
-#67 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
-#68 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle()
-#69 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(368): Illuminate\Foundation\Testing\TestCase->call()
-#70 /home/gg/dev/hrm-laravel-base/tests/Feature/Inventory/InventoryReportControllerTest.php(164): Illuminate\Foundation\Testing\TestCase->get()
-#71 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(1656): Tests\Feature\Inventory\InventoryReportControllerTest->it_filters_stock_levels_by_category()
-#72 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(514): PHPUnit\Framework\TestCase->runTest()
-#73 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(87): PHPUnit\Framework\TestCase->runBare()
-#74 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(361): PHPUnit\Framework\TestRunner->run()
-#75 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestCase->run()
-#76 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#77 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#78 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
-#79 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/Application.php(211): PHPUnit\TextUI\TestRunner->run()
-#80 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run()
-#81 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle()
-#82 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(192): {closure:/home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest:18}()
-#83 {main}
-
-Next Illuminate\View\ViewException: Route [inventory.reports.export] not defined. (View: /home/gg/dev/hrm-laravel-base/resources/views/inventory/reports/stock-levels.blade.php) in /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php:526
-Stack trace:
-#0 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(58): Illuminate\View\Engines\CompilerEngine->handleViewException()
-#1 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(59): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->handleViewException()
-#2 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(22): Illuminate\View\Engines\PhpEngine->evaluatePath()
-#3 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(76): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->evaluatePath()
-#4 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(10): Illuminate\View\Engines\CompilerEngine->get()
-#5 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(208): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->get()
-#6 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(191): Illuminate\View\View->getContents()
-#7 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(160): Illuminate\View\View->renderContents()
-#8 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(78): Illuminate\View\View->render()
-#9 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(34): Illuminate\Http\Response->setContent()
-#10 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(939): Illuminate\Http\Response->__construct()
-#11 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(906): Illuminate\Routing\Router::toResponse()
-#12 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Routing\Router->prepareResponse()
-#13 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}()
-#14 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/EnsureEmailIsVerified.php(41): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#15 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\EnsureEmailIsVerified->handle()
-#16 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#17 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#18 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#19 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings->handle()
-#20 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#21 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle()
-#22 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(87): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#23 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle()
-#24 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#25 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\View\Middleware\ShareErrorsFromSession->handle()
-#26 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(120): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#27 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(63): Illuminate\Session\Middleware\StartSession->handleStatefulRequest()
-#28 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Session\Middleware\StartSession->handle()
-#29 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(36): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#30 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle()
-#31 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(74): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#32 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\EncryptCookies->handle()
-#33 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#34 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then()
-#35 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack()
-#36 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute()
-#37 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute()
-#38 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch()
-#39 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}()
-#40 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Features/SupportDisablingBackButtonCache/DisableBackButtonCacheMiddleware.php(19): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#41 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware->handle()
-#42 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#43 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#44 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#45 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#46 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
-#47 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#48 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#49 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
-#50 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#51 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle()
-#52 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#53 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
-#54 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#55 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle()
-#56 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#57 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle()
-#58 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#59 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle()
-#60 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#61 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle()
-#62 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#63 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then()
-#64 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
-#65 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle()
-#66 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(368): Illuminate\Foundation\Testing\TestCase->call()
-#67 /home/gg/dev/hrm-laravel-base/tests/Feature/Inventory/InventoryReportControllerTest.php(164): Illuminate\Foundation\Testing\TestCase->get()
-#68 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(1656): Tests\Feature\Inventory\InventoryReportControllerTest->it_filters_stock_levels_by_category()
-#69 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(514): PHPUnit\Framework\TestCase->runTest()
-#70 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(87): PHPUnit\Framework\TestCase->runBare()
-#71 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(361): PHPUnit\Framework\TestRunner->run()
-#72 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestCase->run()
-#73 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#74 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#75 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
-#76 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/Application.php(211): PHPUnit\TextUI\TestRunner->run()
-#77 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run()
-#78 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle()
-#79 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(192): {closure:/home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest:18}()
-#80 {main}
-
-----------------------------------------------------------------------------------
-
-Route [inventory.reports.export] not defined. (View: /home/gg/dev/hrm-laravel-base/resources/views/inventory/reports/stock-levels.blade.php)
-
-  at tests/Feature/Inventory/InventoryReportControllerTest.php:168
-    164▕         $response = $this->get(route('inventory.reports.stock-levels', [
-    165▕             'category' => 'Electronics'
-    166▕         ]));
-    167▕ 
-  ➜ 168▕         $response->assertStatus(200);
-    169▕ 
-    170▕         $items = $response->viewData('items');
-    171▕         $this->assertTrue($items->contains('category', 'Electronics'));
-    172▕     }
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\Inventory\InventoryReportControllerTest > it handle…   
-  Expected response status code [200] but received 500.
-Failed asserting that 500 is identical to 200.
-
-The following exception occurred during the last request:
-
-Symfony\Component\Routing\Exception\RouteNotFoundException: Route [inventory.reports.export] not defined. in /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php:526
-Stack trace:
-#0 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(871): Illuminate\Routing\UrlGenerator->route()
-#1 /home/gg/dev/hrm-laravel-base/storage/framework/views/6cdc778b3dd86cf711c18a8ca6d7370a.php(27): route()
-#2 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require('...')
-#3 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\Filesystem\Filesystem::{closure:Illuminate\Filesystem\Filesystem::getRequire():120}()
-#4 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(57): Illuminate\Filesystem\Filesystem->getRequire()
-#5 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(22): Illuminate\View\Engines\PhpEngine->evaluatePath()
-#6 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(76): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->evaluatePath()
-#7 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(10): Illuminate\View\Engines\CompilerEngine->get()
-#8 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(208): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->get()
-#9 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(191): Illuminate\View\View->getContents()
-#10 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(160): Illuminate\View\View->renderContents()
-#11 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(78): Illuminate\View\View->render()
-#12 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(34): Illuminate\Http\Response->setContent()
-#13 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(939): Illuminate\Http\Response->__construct()
-#14 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(906): Illuminate\Routing\Router::toResponse()
-#15 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Routing\Router->prepareResponse()
-#16 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}()
-#17 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/EnsureEmailIsVerified.php(41): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#18 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\EnsureEmailIsVerified->handle()
-#19 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#20 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#21 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#22 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings->handle()
-#23 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#24 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle()
-#25 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(87): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#26 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle()
-#27 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#28 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\View\Middleware\ShareErrorsFromSession->handle()
-#29 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(120): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#30 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(63): Illuminate\Session\Middleware\StartSession->handleStatefulRequest()
-#31 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Session\Middleware\StartSession->handle()
-#32 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(36): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#33 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle()
-#34 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(74): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#35 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\EncryptCookies->handle()
-#36 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#37 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then()
-#38 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack()
-#39 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute()
-#40 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute()
-#41 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch()
-#42 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}()
-#43 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Features/SupportDisablingBackButtonCache/DisableBackButtonCacheMiddleware.php(19): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#44 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware->handle()
-#45 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#46 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#47 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#48 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#49 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
-#50 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#51 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#52 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
-#53 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#54 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle()
-#55 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#56 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
-#57 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#58 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle()
-#59 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#60 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle()
-#61 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#62 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle()
-#63 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#64 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle()
-#65 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#66 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then()
-#67 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
-#68 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle()
-#69 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(368): Illuminate\Foundation\Testing\TestCase->call()
-#70 /home/gg/dev/hrm-laravel-base/tests/Feature/Inventory/InventoryReportControllerTest.php(192): Illuminate\Foundation\Testing\TestCase->get()
-#71 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(1656): Tests\Feature\Inventory\InventoryReportControllerTest->it_handles_empty_reports_gracefully()
-#72 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(514): PHPUnit\Framework\TestCase->runTest()
-#73 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(87): PHPUnit\Framework\TestCase->runBare()
-#74 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(361): PHPUnit\Framework\TestRunner->run()
-#75 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestCase->run()
-#76 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#77 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#78 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
-#79 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/Application.php(211): PHPUnit\TextUI\TestRunner->run()
-#80 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run()
-#81 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle()
-#82 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(192): {closure:/home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest:18}()
-#83 {main}
-
-Next Illuminate\View\ViewException: Route [inventory.reports.export] not defined. (View: /home/gg/dev/hrm-laravel-base/resources/views/inventory/reports/stock-levels.blade.php) in /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php:526
-Stack trace:
-#0 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(58): Illuminate\View\Engines\CompilerEngine->handleViewException()
-#1 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(59): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->handleViewException()
-#2 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(22): Illuminate\View\Engines\PhpEngine->evaluatePath()
-#3 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(76): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->evaluatePath()
-#4 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(10): Illuminate\View\Engines\CompilerEngine->get()
-#5 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(208): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->get()
-#6 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(191): Illuminate\View\View->getContents()
-#7 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(160): Illuminate\View\View->renderContents()
-#8 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(78): Illuminate\View\View->render()
-#9 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(34): Illuminate\Http\Response->setContent()
-#10 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(939): Illuminate\Http\Response->__construct()
-#11 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(906): Illuminate\Routing\Router::toResponse()
-#12 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Routing\Router->prepareResponse()
-#13 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}()
-#14 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/EnsureEmailIsVerified.php(41): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#15 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\EnsureEmailIsVerified->handle()
-#16 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#17 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#18 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#19 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings->handle()
-#20 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#21 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle()
-#22 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(87): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#23 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle()
-#24 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#25 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\View\Middleware\ShareErrorsFromSession->handle()
-#26 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(120): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#27 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(63): Illuminate\Session\Middleware\StartSession->handleStatefulRequest()
-#28 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Session\Middleware\StartSession->handle()
-#29 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(36): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#30 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle()
-#31 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(74): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#32 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\EncryptCookies->handle()
-#33 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#34 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then()
-#35 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack()
-#36 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute()
-#37 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute()
-#38 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch()
-#39 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}()
-#40 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Features/SupportDisablingBackButtonCache/DisableBackButtonCacheMiddleware.php(19): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#41 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware->handle()
-#42 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#43 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#44 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#45 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#46 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
-#47 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#48 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#49 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
-#50 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#51 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle()
-#52 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#53 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
-#54 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#55 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle()
-#56 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#57 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle()
-#58 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#59 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle()
-#60 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#61 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle()
-#62 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#63 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then()
-#64 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
-#65 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle()
-#66 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(368): Illuminate\Foundation\Testing\TestCase->call()
-#67 /home/gg/dev/hrm-laravel-base/tests/Feature/Inventory/InventoryReportControllerTest.php(192): Illuminate\Foundation\Testing\TestCase->get()
-#68 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(1656): Tests\Feature\Inventory\InventoryReportControllerTest->it_handles_empty_reports_gracefully()
-#69 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(514): PHPUnit\Framework\TestCase->runTest()
-#70 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(87): PHPUnit\Framework\TestCase->runBare()
-#71 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(361): PHPUnit\Framework\TestRunner->run()
-#72 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestCase->run()
-#73 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#74 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#75 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
-#76 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/Application.php(211): PHPUnit\TextUI\TestRunner->run()
-#77 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run()
-#78 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle()
-#79 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(192): {closure:/home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest:18}()
-#80 {main}
-
-----------------------------------------------------------------------------------
-
-Route [inventory.reports.export] not defined. (View: /home/gg/dev/hrm-laravel-base/resources/views/inventory/reports/stock-levels.blade.php)
-
-  at tests/Feature/Inventory/InventoryReportControllerTest.php:193
-    189▕         $response = $this->get(route('inventory.reports.movement'));
-    190▕         $response->assertStatus(200);
-    191▕ 
-    192▕         $response = $this->get(route('inventory.reports.stock-levels'));
-  ➜ 193▕         $response->assertStatus(200);
-    194▕     }
-    195▕     #[Test]
-    196▕     public function debug_403_errors()
-    197▕     {
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\Inventory\ItemTest > it returns 403 for unauthorize…   
@@ -1685,13 +722,7 @@ Failed asserting that 404 is identical to 403.
     "status": "posted"
 }.
 
-Found: [
-    {
-        "entry_date": "2025-01-01 00:00:00",
-        "description": "Test entry",
-        "status": "posted"
-    }
-].
+The table is empty.
 
   at tests/Feature/Livewire/Accounting/JournalEntriesTest.php:50
      46▕             ->set('transactions.1.credit', 500);
@@ -1706,7 +737,7 @@ Found: [
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\Livewire\Organization\OrganizationListTest > it sho…   
-  Expected: <div wire:snapshot="" wire:effects="" wire:id="tO3P3rBggylZiMNmKAv9">\n
+  Expected: <div wire:snapshot="" wire:effects="" wire:id="ITA5EtjKj8JF6mHiVXo7">\n
       <!-- Header with Search and Actions -->\n
       <div class="flex flex-col sm:flex-row justify-between items-center mb-6 space-y-4 sm:space-y-0">\n
   ... (103 more lines)
@@ -1793,6 +824,6 @@ Found similar results: [
      69▕         ]);
 
 
-  Tests:    16 failed, 2 risky, 4 skipped, 269 passed (932 assertions)
-  Duration: 16.68s
+  Tests:    11 failed, 4 skipped, 274 passed (938 assertions)
+  Duration: 15.72s
 
