@@ -72,6 +72,31 @@ class User extends Authenticatable
     {
         return $this->units();
     }
+
+    /**
+     * Get current organization user pivot
+     */
+    public function currentOrganizationUser()
+    {
+        return $this->hasOne(OrganizationUser::class)
+            ->where('organization_id', $this->current_organization_id);
+    }
+
+    /**
+     * Get user's roles in current organization
+     */
+    public function getCurrentRolesAttribute()
+    {
+        return $this->currentOrganizationUser->roles ?? [];
+    }
+
+    /**
+     * Check if user has role in current organization
+     */
+    public function hasRoleInCurrentOrganization($role)
+    {
+        return in_array($role, $this->current_roles);
+    }
     // You might also add 'operating_organization_id' to $appends for API serialization
     // protected $appends = ['operating_organization_id'];
 

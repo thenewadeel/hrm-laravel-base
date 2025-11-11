@@ -138,7 +138,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // -------------------
     // HRM routes
     // -------------------
-    // In routes/web.php
+    // Include portal routes
+    require __DIR__ . '/portal.php';
+
     Route::get('/hrm/dashboard', [HrmDashboardController::class, 'index'])
         ->name('hrm.dashboard');
     // // Employee routes
