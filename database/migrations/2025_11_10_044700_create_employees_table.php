@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete(); // Changed to nullable
             $table->foreignId('organization_id')->constrained();
             $table->foreignId('organization_unit_id')->nullable()->constrained('organization_units');
+            $table->string('biometric_id')->nullable()->unique();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('middle_name')->nullable();
@@ -23,7 +24,7 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
-            $table->string('address')->nullable();
+            $table->text('address')->nullable(); // Changed to text for longer addresses
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('country')->nullable();
@@ -33,6 +34,14 @@ return new class extends Migration
             $table->boolean('is_admin')->default(false);
             $table->softDeletes();
             $table->timestamps();
+
+            // Add unique constraint to prevent duplicate employee records
+            $table->unique(['user_id', 'organization_id']);
+
+            // Add index for better query performance
+            $table->index(['organization_id', 'is_active']);
+            $table->index(['user_id']);
+            $table->index(['email']);
         });
     }
 

@@ -297,4 +297,21 @@ class User extends Authenticatable
 
         return array_unique($allRoles);
     }
+    /**
+     * Get employee record in current organization
+     */
+    public function currentEmployee()
+    {
+        return $this->hasOne(Employee::class, 'user_id')
+            ->where('organization_id', $this->current_organization_id)
+            ->where('is_active', true);
+    }
+
+    /**
+     * Check if user has employee record in current organization
+     */
+    public function isEmployeeInCurrentOrganization(): bool
+    {
+        return $this->currentEmployee()->exists();
+    }
 }

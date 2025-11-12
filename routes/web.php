@@ -144,7 +144,29 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/hrm/dashboard', [HrmDashboardController::class, 'index'])
         ->name('hrm.dashboard');
     // // Employee routes
-    Route::resource('hr/employees', EmployeeController::class);
+    Route::prefix('hr')->group(function () {
+        // Route::resource('hr/employees', EmployeeController::class)
+        // HR Employee Routes
+        Route::resource('employees', EmployeeController::class)->names([
+            'index' => 'hr.employees.index',
+            'create' => 'hr.employees.create',
+            'update' => 'hr.employees.update',
+            'store' => 'hr.employees.store',
+            'show' => 'hr.employees.show',
+            'edit' => 'hr.employees.edit',
+            'destroy' => 'hr.employees.destroy',
+        ]);;
+
+        // Additional routes for employee management
+        Route::put('employees/{employee}/biometric', [\App\Http\Controllers\HR\EmployeeController::class, 'updateBiometric'])
+            ->name('hr.employees.update-biometric');
+
+        Route::post('employees/{employee}/grant-access', [\App\Http\Controllers\HR\EmployeeController::class, 'grantSystemAccess'])
+            ->name('hr.employees.grant-access');
+
+        Route::post('employees/without-user', [\App\Http\Controllers\HR\EmployeeController::class, 'storeWithoutUser'])
+            ->name('hr.employees.store-without-user');
+    });
     Route::get('/attendance/dashboard', [AttendanceController::class, 'dashboard'])->name('attendance.dashboard');
     Route::get('/payroll/processing', [PayrollController::class, 'processing'])->name('payroll.processing');
     // Route::get('/employees', EmployeeList::class)->name('employees.index');

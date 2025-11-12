@@ -11,7 +11,7 @@ class LeaveRequest extends Model
     use HasFactory, BelongsToOrganization;
 
     protected $fillable = [
-        'user_id',
+        'employee_id',
         'organization_id',
         'leave_type',
         //, ['sick', 'vacation', 'personal', 'emergency', 'maternity', 'paternity']);

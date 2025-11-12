@@ -30,7 +30,10 @@ class OrganizationUser extends Pivot
 
         return in_array($role, $roles);
     }
-
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     /**
      * Check if user has any of the given roles
      */

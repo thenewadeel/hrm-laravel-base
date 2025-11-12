@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Portal;
 
 use App\Http\Controllers\Controller;
 use App\Models\AttendanceRecord;
+use App\Models\Employee;
 use App\Models\LeaveRequest;
 use App\Models\PayrollEntry;
 use Illuminate\Http\Request;
@@ -13,13 +14,18 @@ class EmployeePortalController extends Controller
 {
     public function dashboard()
     {
-        $user = auth()->user();
-        $todayAttendance = $this->getTodayAttendance();
-        $leaveBalance = $this->getLeaveBalance();
-        $recentPayslips = $this->getRecentPayslips();
+        $employee = $this->getCurrentEmployee();
+
+        if (!$employee) {
+            return redirect()->route('portal.employee.setup')->with('error', 'No employee profile found for your account.');
+        }
+
+        $todayAttendance = $this->getTodayAttendance($employee);
+        $leaveBalance = $this->getLeaveBalance($employee);
+        $recentPayslips = $this->getRecentPayslips($employee);
 
         return view('portal.employee.dashboard', compact(
-            'user',
+            'employee',
             'todayAttendance',
             'leaveBalance',
             'recentPayslips'
@@ -28,9 +34,15 @@ class EmployeePortalController extends Controller
 
     public function attendance(Request $request)
     {
+        $employee = $this->getCurrentEmployee();
+
+        if (!$employee) {
+            return redirect()->route('portal.employee.setup')->with('error', 'No employee profile found for your account.');
+        }
+
         $month = $request->get('month', now()->format('Y-m'));
 
-        $records = AttendanceRecord::where('user_id', auth()->id())
+        $records = AttendanceRecord::where('employee_id', $employee->id)
             ->whereYear('record_date', Carbon::parse($month)->year)
             ->whereMonth('record_date', Carbon::parse($month)->month)
             ->orderBy('record_date', 'desc')
@@ -38,28 +50,46 @@ class EmployeePortalController extends Controller
 
         $summary = $this->calculateAttendanceSummary($records, $month);
 
-        return view('portal.employee.attendance', compact('records', 'summary', 'month'));
+        return view('portal.employee.attendance', compact('employee', 'records', 'summary', 'month'));
     }
 
     public function leave()
     {
-        $leaveRequests = LeaveRequest::where('user_id', auth()->id())
+        $employee = $this->getCurrentEmployee();
+
+        if (!$employee) {
+            return redirect()->route('portal.employee.setup')->with('error', 'No employee profile found for your account.');
+        }
+
+        $leaveRequests = LeaveRequest::where('employee_id', $employee->id)
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $leaveBalance = $this->getLeaveBalance();
+        $leaveBalance = $this->getLeaveBalance($employee);
 
-        return view('portal.employee.leave', compact('leaveRequests', 'leaveBalance'));
+        return view('portal.employee.leave', compact('employee', 'leaveRequests', 'leaveBalance'));
     }
 
     public function createLeave()
     {
-        $leaveBalance = $this->getLeaveBalance();
-        return view('portal.employee.leave-create', compact('leaveBalance'));
+        $employee = $this->getCurrentEmployee();
+
+        if (!$employee) {
+            return redirect()->route('portal.employee.setup')->with('error', 'No employee profile found for your account.');
+        }
+
+        $leaveBalance = $this->getLeaveBalance($employee);
+        return view('portal.employee.leave-create', compact('employee', 'leaveBalance'));
     }
 
     public function storeLeave(Request $request)
     {
+        $employee = $this->getCurrentEmployee();
+
+        if (!$employee) {
+            return redirect()->route('portal.employee.setup')->with('error', 'No employee profile found for your account.');
+        }
+
         $validated = $request->validate([
             'leave_type' => 'required|in:sick,vacation,personal,emergency,maternity,paternity',
             'start_date' => 'required|date|after_or_equal:today',
@@ -68,15 +98,15 @@ class EmployeePortalController extends Controller
         ]);
 
         $totalDays = Carbon::parse($validated['start_date'])->diffInDays(Carbon::parse($validated['end_date'])) + 1;
-        $availableBalance = $this->getLeaveBalance();
+        $availableBalance = $this->getLeaveBalance($employee);
 
         if ($totalDays > $availableBalance) {
             return back()->withErrors(['leave_days' => "Insufficient leave balance. Available: {$availableBalance} days, Requested: {$totalDays} days"]);
         }
 
         LeaveRequest::create([
-            'user_id' => auth()->id(),
-            'organization_id' => auth()->user()->current_organization_id,
+            'employee_id' => $employee->id,
+            'organization_id' => $employee->organization_id,
             'leave_type' => $validated['leave_type'],
             'start_date' => $validated['start_date'],
             'end_date' => $validated['end_date'],
@@ -91,36 +121,51 @@ class EmployeePortalController extends Controller
 
     public function payslips()
     {
-        $payslips = PayrollEntry::where('user_id', auth()->id())
+        $employee = $this->getCurrentEmployee();
+
+        if (!$employee) {
+            return redirect()->route('portal.employee.setup')->with('error', 'No employee profile found for your account.');
+        }
+
+        $payslips = PayrollEntry::where('employee_id', $employee->id)
             ->orderBy('period', 'desc')
             ->get();
 
-        return view('portal.employee.payslips', compact('payslips'));
+        return view('portal.employee.payslips', compact('employee', 'payslips'));
     }
 
     public function showPayslip(PayrollEntry $payslip)
     {
-        // dd(['cp' => auth()->id()]);
-        if ($payslip->user_id !== auth()->id()) {
+        $employee = $this->getCurrentEmployee();
+
+        if (!$employee || $payslip->employee_id !== $employee->id) {
             abort(403);
         }
 
-        return view('portal.employee.payslip-show', compact('payslip'));
+        return view('portal.employee.payslip-show', compact('employee', 'payslip'));
     }
 
     public function downloadPayslip(PayrollEntry $payslip)
     {
-        if ($payslip->user_id !== auth()->id()) {
+        $employee = $this->getCurrentEmployee();
+
+        if (!$employee || $payslip->employee_id !== $employee->id) {
             abort(403);
         }
 
         // For now, return view - you can implement PDF generation later
-        return view('portal.employee.payslip-download', compact('payslip'));
+        return view('portal.employee.payslip-download', compact('employee', 'payslip'));
     }
 
     public function clockIn()
     {
-        $existingRecord = AttendanceRecord::where('user_id', auth()->id())
+        $employee = $this->getCurrentEmployee();
+
+        if (!$employee) {
+            return redirect()->route('portal.employee.setup')->with('error', 'No employee profile found for your account.');
+        }
+
+        $existingRecord = AttendanceRecord::where('employee_id', $employee->id)
             ->whereDate('record_date', today())
             ->first();
 
@@ -133,8 +178,8 @@ class EmployeePortalController extends Controller
         $status = $punchInTime->gt($scheduledTime->addMinutes(15)) ? 'late' : 'present';
 
         AttendanceRecord::create([
-            'user_id' => auth()->id(),
-            'organization_id' => auth()->user()->current_organization_id,
+            'employee_id' => $employee->id,
+            'organization_id' => $employee->organization_id,
             'record_date' => today(),
             'punch_in' => $punchInTime,
             'status' => $status
@@ -145,7 +190,13 @@ class EmployeePortalController extends Controller
 
     public function clockOut()
     {
-        $attendance = AttendanceRecord::where('user_id', auth()->id())
+        $employee = $this->getCurrentEmployee();
+
+        if (!$employee) {
+            return redirect()->route('portal.employee.setup')->with('error', 'No employee profile found for your account.');
+        }
+
+        $attendance = AttendanceRecord::where('employee_id', $employee->id)
             ->whereDate('record_date', today())
             ->first();
 
@@ -168,19 +219,37 @@ class EmployeePortalController extends Controller
         return back()->with('success', 'Successfully clocked out at ' . $punchOutTime->format('h:i A'));
     }
 
-    private function getTodayAttendance()
+    /**
+     * Get the current authenticated user's employee record
+     */
+    private function getCurrentEmployee()
     {
-        return AttendanceRecord::where('user_id', auth()->id())
+        $user = auth()->user();
+
+        if (!$user) {
+            return null;
+        }
+
+        // Get employee record for current organization
+        return Employee::where('user_id', $user->id)
+            ->where('organization_id', $user->current_organization_id)
+            ->where('is_active', true)
+            ->first();
+    }
+
+    private function getTodayAttendance(Employee $employee)
+    {
+        return AttendanceRecord::where('employee_id', $employee->id)
             ->whereDate('record_date', today())
             ->first();
     }
 
-    private function getLeaveBalance()
+    private function getLeaveBalance(Employee $employee)
     {
         $currentYear = now()->year;
         $totalAllowed = 18; // Annual leave days
 
-        $usedLeave = LeaveRequest::where('user_id', auth()->id())
+        $usedLeave = LeaveRequest::where('employee_id', $employee->id)
             ->where('status', 'approved')
             ->whereYear('start_date', $currentYear)
             ->sum('total_days');
@@ -188,9 +257,9 @@ class EmployeePortalController extends Controller
         return max(0, $totalAllowed - $usedLeave);
     }
 
-    private function getRecentPayslips()
+    private function getRecentPayslips(Employee $employee)
     {
-        return PayrollEntry::where('user_id', auth()->id())
+        return PayrollEntry::where('employee_id', $employee->id)
             ->where('status', 'paid')
             ->orderBy('period', 'desc')
             ->take(3)
@@ -221,5 +290,61 @@ class EmployeePortalController extends Controller
         return $startDate->diffInDaysFiltered(function ($date) {
             return !$date->isWeekend();
         }, $endDate);
+    }
+
+    /**
+     * Setup page for users without employee profiles
+     */
+    public function setup()
+    {
+        $user = auth()->user();
+
+        // Check if user already has an employee profile
+        $employee = $this->getCurrentEmployee();
+        if ($employee) {
+            return redirect()->route('portal.employee.dashboard');
+        }
+
+        return view('portal.employee.setup', compact('user'));
+    }
+
+    /**
+     * Handle employee profile setup
+     */
+    public function completeSetup(Request $request)
+    {
+        $user = auth()->user();
+
+        // Check if user already has an employee profile
+        $existingEmployee = $this->getCurrentEmployee();
+        if ($existingEmployee) {
+            return redirect()->route('portal.employee.dashboard');
+        }
+
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:500',
+            'date_of_birth' => 'nullable|date',
+            'gender' => 'nullable|in:male,female,other',
+        ]);
+
+        // Create employee profile
+        $employee = Employee::create([
+            'user_id' => $user->id,
+            'organization_id' => $user->current_organization_id,
+            'first_name' => $validated['first_name'],
+            'last_name' => $validated['last_name'],
+            'email' => $user->email,
+            'phone' => $validated['phone'] ?? null,
+            'address' => $validated['address'] ?? null,
+            'date_of_birth' => $validated['date_of_birth'] ?? null,
+            'gender' => $validated['gender'] ?? null,
+            'is_active' => true,
+        ]);
+
+        return redirect()->route('portal.employee.dashboard')
+            ->with('success', 'Employee profile setup completed successfully!');
     }
 }

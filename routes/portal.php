@@ -4,13 +4,16 @@ use App\Http\Controllers\Portal\EmployeePortalController;
 use App\Http\Controllers\Portal\ManagerPortalController;
 use Illuminate\Support\Facades\Route;
 
-
 // Employee Portal Routes
 Route::prefix('portal/employee')->name('portal.employee.')->group(function () {
     Route::get('/dashboard', [EmployeePortalController::class, 'dashboard'])->name('dashboard');
     Route::get('/attendance', [EmployeePortalController::class, 'attendance'])->name('attendance');
     Route::post('/clock-in', [EmployeePortalController::class, 'clockIn'])->name('clock-in');
     Route::post('/clock-out', [EmployeePortalController::class, 'clockOut'])->name('clock-out');
+
+    // Setup Routes
+    Route::get('/setup', [EmployeePortalController::class, 'setup'])->name('setup');
+    Route::post('/setup', [EmployeePortalController::class, 'completeSetup'])->name('complete-setup');
 
     // Leave Routes
     Route::get('/leave', [EmployeePortalController::class, 'leave'])->name('leave');

@@ -5,13 +5,14 @@ namespace App\Models;
 use App\Models\Traits\BelongsToOrganization;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class AttendanceRecord extends Model
 {
     use HasFactory, BelongsToOrganization;
 
     protected $fillable = [
-        'user_id',
+        'employee_id',
         'organization_id',
         'record_date',
         'punch_in',
@@ -21,8 +22,11 @@ class AttendanceRecord extends Model
         //['present', 'absent', 'late', 'leave', 'missed_punch', 'pending_regularization'])->default('present');
         'biometric_id',
         'device_serial_no',
-        'notes'
+        'late_minutes',
+        'overtime_minutes',
+        'notes',
     ];
+
     protected $casts = [
         'record_date' => 'date',
         'punch_in' => 'datetime',
@@ -30,19 +34,26 @@ class AttendanceRecord extends Model
         'total_hours' => 'decimal:2'
     ];
 
-    /**
-     * Relationships
-     */
-    public function user()
+    public function employee(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Employee::class);
     }
 
-    public function organization()
+    // Scopes
+    public function scopePresent($query)
     {
-        return $this->belongsTo(Organization::class);
+        return $query->where('status', 'present');
     }
 
+    public function scopeLate($query)
+    {
+        return $query->where('status', 'late');
+    }
+
+    public function scopeForDate($query, $date)
+    {
+        return $query->where('record_date', $date);
+    }
     /**
      * Scope for current organization
      */

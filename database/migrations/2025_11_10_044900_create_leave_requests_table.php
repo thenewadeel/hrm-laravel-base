@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('leave_requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('employee_id')->constrained()->onDelete('cascade');
             $table->foreignId('organization_id')->constrained()->onDelete('cascade');
             $table->string('leave_type'); //, ['sick', 'vacation', 'personal', 'emergency', 'maternity', 'paternity']);
             $table->date('start_date');

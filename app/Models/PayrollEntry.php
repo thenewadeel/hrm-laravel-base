@@ -11,7 +11,7 @@ class PayrollEntry extends Model
     use HasFactory, BelongsToOrganization;
 
     protected $fillable = [
-        'user_id',
+        'employee_id',
         'organization_id',
         'period', // Format: YYYY-MM
         'basic_salary',

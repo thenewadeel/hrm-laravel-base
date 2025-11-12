@@ -9,23 +9,26 @@ use App\Models\PayrollEntry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupEmployee;
 
 class EmployeePortalTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, SetupEmployee;
 
-    protected $employee;
+    // protected $employee;
 
     protected function setUp(): void
     {
         parent::setUp();
+        $this->setupEmployeeManagement();
 
-        $this->employee = User::factory()->create();
-        $this->actingAs($this->employee);
+        // $this->employee = User::factory()->create();
+        // $this->actingAs($this->employee);
+        $this->actingAsRegularEmployee();
     }
     #[Test]    public function employee_can_access_their_portal_dashboard()
     {
-        $response = $this->actingAs($this->employee)
+        $response = $this //->actingAs($this->employee)
             ->get(route('portal.employee.dashboard'));
 
         $response->assertStatus(200);
@@ -36,7 +39,7 @@ class EmployeePortalTest extends TestCase
     public function employee_can_view_attendance_page()
     {
         AttendanceRecord::factory()->create([
-            'user_id' => $this->employee->id,
+            'employee_id' => $this->employee->id,
             'record_date' => now(),
             'status' => 'present'
         ]);
@@ -58,8 +61,8 @@ class EmployeePortalTest extends TestCase
     }
     #[Test]    public function employee_can_apply_for_leave()
     {
-        $response = $this->actingAs($this->employee)
-            ->get(route('portal.employee.leave-request'));
+        $response = $this //->actingAs($this->employee)
+            ->get(route('portal.employee.leave.create'));
 
         $response->assertStatus(200);
         $response->assertSee('Apply for Leave');
@@ -70,7 +73,7 @@ class EmployeePortalTest extends TestCase
     public function employee_can_view_leave_page()
     {
         LeaveRequest::factory()->create([
-            'user_id' => $this->employee->id,
+            'employee_id' => $this->employee->id,
             'status' => 'pending'
         ]);
 
@@ -84,8 +87,11 @@ class EmployeePortalTest extends TestCase
     #[Test]
     public function employee_can_view_payslips_page()
     {
+        // dd([
+        //     'employee_id' => $this->employee,
+        // ]);
         PayrollEntry::factory()->create([
-            'user_id' => $this->employee->id,
+            'employee_id' => $this->employee->id,
             'status' => 'paid'
         ]);
 
@@ -107,12 +113,12 @@ class EmployeePortalTest extends TestCase
     }
     #[Test]    public function employee_can_clock_in_and_out()
     {
-        $response = $this->actingAs($this->employee)
+        $response = $this //->actingAs($this->employee)
             ->post(route('portal.employee.clock-in'));
 
         $response->assertStatus(200);
         $this->assertDatabaseHas('attendance_records', [
-            'user_id' => $this->employee->id,
+            'employee_id' => $this->employee->id,
             'type' => 'clock_in'
         ]);
     }

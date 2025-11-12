@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('payroll_entries', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('employee_id')->constrained()->onDelete('cascade');
             $table->foreignId('organization_id')->constrained()->onDelete('cascade');
             $table->string('period'); // Format: YYYY-MM
             $table->decimal('basic_salary', 12, 2)->default(0);
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->timestamp('paid_at')->nullable();
             $table->timestamps();
 
-            $table->unique(['user_id', 'period']);
+            $table->unique(['employee_id', 'period']);
             $table->index(['organization_id', 'period']);
             $table->index('status');
         });

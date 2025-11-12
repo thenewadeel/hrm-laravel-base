@@ -11,49 +11,51 @@ use App\Models\LeaveRequest;
 use App\Models\PayrollEntry;
 use App\Models\Organization;
 use App\Models\OrganizationUser;
+use Tests\Traits\SetupEmployee;
 
 class CompletePortalTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, SetupEmployee;
 
-    protected $employee;
-    protected $manager;
-    protected $organization;
+    // protected $employee;
+    // protected $manager;
+    // protected $organization;
 
     protected function setUp(): void
     {
         parent::setUp();
+        $this->setupEmployeeManagement();
 
-        $this->organization = Organization::factory()->create();
+        // $this->organization = Organization::factory()->create();
 
-        $this->employee = User::factory()->create([
-            'current_organization_id' => $this->organization->id
-        ]);
+        // $this->employee = User::factory()->create([
+        //     'current_organization_id' => $this->organization->id
+        // ]);
 
-        $this->manager = User::factory()->create([
-            'current_organization_id' => $this->organization->id
-        ]);
+        // $this->manager = User::factory()->create([
+        //     'current_organization_id' => $this->organization->id
+        // ]);
 
-        // Setup organization user relationships
-        OrganizationUser::create([
-            'user_id' => $this->employee->id,
-            'organization_id' => $this->organization->id,
-            'roles' => ['employee'],
-            'position' => 'Software Developer'
-        ]);
+        // // Setup organization user relationships
+        // OrganizationUser::create([
+        //     'user_id' => $this->employee->id,
+        //     'organization_id' => $this->organization->id,
+        //     'roles' => ['employee'],
+        //     'position' => 'Software Developer'
+        // ]);
 
-        OrganizationUser::create([
-            'user_id' => $this->manager->id,
-            'organization_id' => $this->organization->id,
-            'roles' => ['manager', 'employee'],
-            'position' => 'Engineering Manager'
-        ]);
+        // OrganizationUser::create([
+        //     'user_id' => $this->manager->id,
+        //     'organization_id' => $this->organization->id,
+        //     'roles' => ['manager', 'employee'],
+        //     'position' => 'Engineering Manager'
+        // ]);
     }
 
     #[Test]
     public function employee_can_access_all_portal_features()
     {
-        $this->actingAs($this->employee);
+        $this->actingAsRegularEmployee();
 
         // Dashboard
         $response = $this->get(route('portal.employee.dashboard'));
@@ -79,7 +81,7 @@ class CompletePortalTest extends TestCase
     #[Test]
     public function employee_can_clock_in_and_out()
     {
-        $this->actingAs($this->employee);
+        $this->actingAsRegularEmployee();
 
         // Clock in
         $response = $this->post(route('portal.employee.clock-in'));
@@ -87,7 +89,7 @@ class CompletePortalTest extends TestCase
         $response->assertSessionHas('success');
 
         $this->assertDatabaseHas('attendance_records', [
-            'user_id' => $this->employee->id,
+            'employee_id' => $this->employee->id,
             'record_date' => today()
         ]);
 
@@ -96,7 +98,7 @@ class CompletePortalTest extends TestCase
         $response->assertRedirect();
         $response->assertSessionHas('success');
 
-        $attendance = AttendanceRecord::where('user_id', $this->employee->id)
+        $attendance = AttendanceRecord::where('employee_id', $this->employee->id)
             ->whereDate('record_date', today())
             ->first();
 
@@ -106,7 +108,7 @@ class CompletePortalTest extends TestCase
     #[Test]
     public function employee_can_apply_for_leave()
     {
-        $this->actingAs($this->employee);
+        $this->actingAsRegularEmployee();
 
         $response = $this->get(route('portal.employee.leave.create'));
         $response->assertStatus(200);
@@ -124,7 +126,7 @@ class CompletePortalTest extends TestCase
         $response->assertSessionHas('success');
 
         $this->assertDatabaseHas('leave_requests', [
-            'user_id' => $this->employee->id,
+            'employee_id' => $this->employee->id,
             'leave_type' => 'vacation',
             'status' => 'pending'
         ]);
@@ -133,7 +135,7 @@ class CompletePortalTest extends TestCase
     #[Test]
     public function manager_can_access_manager_portal()
     {
-        $this->actingAs($this->manager);
+        $this->actingAsManager();
 
         $response = $this->get(route('portal.manager.dashboard'));
         $response->assertStatus(200);
@@ -151,9 +153,9 @@ class CompletePortalTest extends TestCase
     #[Test]
     public function employee_can_view_payslip_details()
     {
-        $this->actingAs($this->employee);
+        $this->actingAsRegularEmployee();
         $payslip = PayrollEntry::factory()->create([
-            'user_id' => $this->employee->id,
+            'employee_id' => $this->employee->id,
             'status' => 'paid'
         ]);
 
@@ -167,10 +169,10 @@ class CompletePortalTest extends TestCase
     {
         $otherEmployee = User::factory()->create();
         $payslip = PayrollEntry::factory()->create([
-            'user_id' => $otherEmployee->id
+            'employee_id' => $otherEmployee->id
         ]);
 
-        $this->actingAs($this->employee);
+        $this->actingAsRegularEmployee();
 
         $response = $this->get(route('portal.employee.payslips.show', $payslip));
         // dd(['cp' => $response]);
@@ -180,18 +182,18 @@ class CompletePortalTest extends TestCase
     #[Test]
     public function attendance_records_show_correct_summary()
     {
-        $this->actingAs($this->employee);
+        $this->actingAsRegularEmployee();
 
         // Create some attendance records
         AttendanceRecord::factory()->create([
-            'user_id' => $this->employee->id,
+            'employee_id' => $this->employee->id,
             'record_date' => now()->subDays(1),
             'status' => 'present',
             'total_hours' => 8
         ]);
 
         AttendanceRecord::factory()->create([
-            'user_id' => $this->employee->id,
+            'employee_id' => $this->employee->id,
             'record_date' => now()->subDays(2),
             'status' => 'late',
             'total_hours' => 7.5

@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('attendance_records', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('employee_id')->constrained()->onDelete('cascade');
             $table->foreignId('organization_id')->constrained()->onDelete('cascade');
             $table->date('record_date');
             $table->timestamp('punch_in')->nullable();
@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('status')->default('present'); // ['present', 'absent', 'late', 'leave', 'missed_punch', 'pending_regularization'])->default('present');
             $table->string('biometric_id')->nullable();
             $table->string('device_serial_no')->nullable();
+            $table->decimal('late_minutes', 5, 2)->default(0);
+            $table->decimal('overtime_minutes', 5, 2)->default(0);
             $table->text('notes')->nullable();
             $table->timestamps();
 
@@ -27,7 +29,6 @@ return new class extends Migration
             $table->index('status');
         });
     }
-
     public function down()
     {
         Schema::dropIfExists('attendance_records');
