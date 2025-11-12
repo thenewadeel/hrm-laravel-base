@@ -11,6 +11,7 @@ return new class extends Migration
     {
         Schema::create('journal_entries', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('organization_id')->nullable()->constrained('organizations');
             $table->string('reference_number')->unique();
             $table->date('entry_date');
             $table->text('description');

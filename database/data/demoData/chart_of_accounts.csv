@@ -1,0 +1,24 @@
+code,name,type,description
+1001,Cash on Hand (Petty Cash),asset,Physical cash held at various company locations
+1002,Cash in Operating Bank Account,asset,Primary bank account for daily business transactions
+1003,Cash in Payroll Bank Account,asset,Dedicated bank account for employee salary disbursements
+1004,Cash in Investment Accounts,asset,Funds held in short-term liquid investments or fixed deposits
+1005,Accounts Receivable,asset,Amounts owed by customers/distributors
+1006,Raw Materials Inventory,asset,Inventory of chemicals and materials for drug manufacturing
+1007,Finished Goods Inventory,asset,"Inventory of completed, marketable pharmaceutical products"
+1010,"Property, Plant, & Equipment",asset,"Manufacturing facilities, lab equipment, and operational equipment"
+1020,Patents and Intellectual Property,asset,Intangible assets related to drug formulations and processes
+1030,Prepaid Expenses,asset,"Advance payments for insurance, rent, etc."
+2001,Accounts Payable,liability,"Amounts owed to suppliers (e.g., raw material vendors)"
+2002,Loans Payable,liability,"Outstanding loans (e.g., for capital expenditures)"
+2003,Accrued Regulatory Fees,liability,"Estimated and unpaid fees to regulatory bodies (e.g., FDA, EMA)"
+3001,Common Stock,equity,Investment by shareholders in the business
+3002,Retained Earnings,equity,Accumulated profits or losses
+4001,Drug Sales Revenue,revenue,Revenue generated from the sale of pharmaceutical products
+4002,Licensing and Royalty Income,revenue,Income from licensing out proprietary drug formulations
+5001,Cost of Goods Manufactured (COGM),expense,Direct costs associated with producing the finished pharmaceutical goods
+5002,Research & Development (R&D) Expense,expense,Costs for discovery and clinical trials
+5003,Sales and Marketing Expense,expense,Costs for promoting and distributing pharmaceutical products
+5004,General and Administrative Expense,expense,"Office salaries, utilities, rent, and overhead"
+5005,Amortization Expense - Patents,expense,Expensing of intangible assets (patents) over their useful life
+5006,Regulatory Compliance Expense,expense,Costs associated with meeting and maintaining government standards

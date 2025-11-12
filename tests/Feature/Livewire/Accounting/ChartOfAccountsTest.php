@@ -7,11 +7,17 @@ use App\Models\Accounting\ChartOfAccount;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class ChartOfAccountsTest extends TestCase
 {
-    use RefreshDatabase;
-
+    use RefreshDatabase, SetupOrganization;
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setupOrganization();
+    }
     /**
      * Test that the chart of accounts page can be rendered.
      */
@@ -40,7 +46,7 @@ class ChartOfAccountsTest extends TestCase
             ->assertStatus(200);
     }
 
-    /** @test */
+    #[Test]
     public function it_displays_a_list_of_chart_of_accounts()
     {
         // Arrange: Create some accounts
@@ -56,7 +62,7 @@ class ChartOfAccountsTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_create_a_new_chart_of_account_record()
     {
         // Define the data for the new account
@@ -84,7 +90,7 @@ class ChartOfAccountsTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_update_an_existing_chart_of_account_record()
     {
         // Arrange: Create an account to be updated

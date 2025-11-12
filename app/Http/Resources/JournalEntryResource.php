@@ -20,6 +20,7 @@ class JournalEntryResource extends JsonResource
             'posted_at' => $this->posted_at,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'organization_id' => $this->organization_id,
             // Removed ledger_entries too if you don't need them in the response
         ];
     }

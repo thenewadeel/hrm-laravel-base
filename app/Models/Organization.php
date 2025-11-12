@@ -10,31 +10,24 @@ class Organization extends Model
 {
     use HasFactory, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = ['name', 'description', 'is_active'];
 
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
     protected $dates = ['deleted_at'];
 
-    /**
-     * Get the users that belong to the organization.
-     */
     public function users()
     {
+        // CRITICAL FIX: Link to the custom pivot model
         return $this->belongsToMany(User::class, 'organization_user')
-            ->withPivot(['roles', 'permissions'])
+            ->using(OrganizationUser::class)
+            ->withPivot(['roles', 'permissions', 'organization_unit_id', 'position'])
             ->withTimestamps();
     }
     public function units()
     {
         return $this->hasMany(OrganizationUnit::class);
+    }
+    public function employees()
+    {
+        return $this->hasMany(OrganizationUser::class);
     }
 }

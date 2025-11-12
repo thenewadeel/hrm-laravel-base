@@ -8,12 +8,19 @@ use App\Models\Dimension;
 use App\Models\TestTransaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class LedgerEntryTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, SetupOrganization;
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setupOrganization();
+    }
 
-    /** @test */
+    #[Test]
     public function it_belongs_to_a_chart_of_account()
     {
         $account = ChartOfAccount::factory()->create();
@@ -22,7 +29,7 @@ class LedgerEntryTest extends TestCase
         $this->assertTrue($entry->account->is($account));
     }
 
-    /** @test */
+    #[Test]
     public function it_has_a_debit_or_credit_type()
     {
         $debitEntry = LedgerEntry::factory()->create(['type' => 'debit']);
@@ -32,7 +39,7 @@ class LedgerEntryTest extends TestCase
         $this->assertEquals('credit', $creditEntry->type);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_be_linked_to_a_transaction_via_polymorphic_relation()
     {
         // We'll use a simple Test Transaction model for now
@@ -45,7 +52,7 @@ class LedgerEntryTest extends TestCase
         $this->assertTrue($entry->transactionable->is($testTransaction));
     }
 
-    /** @test */
+    #[Test]
     public function it_can_be_tagged_with_dimensions()
     {
         // This is the key integration point with your Organization Units!
@@ -58,7 +65,7 @@ class LedgerEntryTest extends TestCase
         $this->assertEquals($dimension->id, $entry->dimensions->first()->id);
     }
 
-    /** @test */
+    #[Test]
     public function it_must_have_a_positive_amount()
     {
         // For databases that support check constraints (MySQL, PostgreSQL)

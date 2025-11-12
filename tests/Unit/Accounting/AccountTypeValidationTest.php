@@ -8,20 +8,32 @@ use App\Models\Accounting\ChartOfAccount;
 use App\Services\AccountingService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class AccountTypeValidationTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, SetupOrganization;
 
     protected AccountingService $accountingService;
 
     protected function setUp(): void
     {
         parent::setUp();
+        $this->setupOrganization();
         $this->accountingService = app(AccountingService::class);
     }
 
-    /** @test */
+    /*************  ✨ Windsurf Command ⭐  *************/
+    /**
+     * Tests that the AccountingService allows debiting asset accounts.
+     *
+     * This test ensures that the AccountingService does not throw an
+     * exception when debiting an asset account.
+     *
+     * @return void
+     */
+    /*******  035c4e9d-be51-4bf5-a46e-a38c524a3910  *******/    #[Test]
     public function it_allows_debit_to_asset_accounts()
     {
         $assetAccount = ChartOfAccount::factory()->create(['type' => 'asset']);
@@ -31,7 +43,7 @@ class AccountTypeValidationTest extends TestCase
         $this->callPrivateMethod($this->accountingService, 'validateAccountType', [$assetAccount, 'debit']);
     }
 
-    /** @test */
+    #[Test]
     public function it_allows_debit_to_expense_accounts()
     {
         $expenseAccount = ChartOfAccount::factory()->create(['type' => 'expense']);
@@ -40,7 +52,7 @@ class AccountTypeValidationTest extends TestCase
         $this->callPrivateMethod($this->accountingService, 'validateAccountType', [$expenseAccount, 'debit']);
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_exception_when_debiting_liability_account()
     {
         $liabilityAccount = ChartOfAccount::factory()->create(['type' => 'liability']);
@@ -51,7 +63,7 @@ class AccountTypeValidationTest extends TestCase
         $this->callPrivateMethod($this->accountingService, 'validateAccountType', [$liabilityAccount, 'debit']);
     }
 
-    /** @test */
+    #[Test]
     public function it_allows_credit_to_liability_accounts()
     {
         $liabilityAccount = ChartOfAccount::factory()->create(['type' => 'liability']);
@@ -60,7 +72,7 @@ class AccountTypeValidationTest extends TestCase
         $this->callPrivateMethod($this->accountingService, 'validateAccountType', [$liabilityAccount, 'credit']);
     }
 
-    /** @test */
+    #[Test]
     public function it_allows_credit_to_revenue_accounts()
     {
         $revenueAccount = ChartOfAccount::factory()->create(['type' => 'revenue']);
@@ -69,7 +81,7 @@ class AccountTypeValidationTest extends TestCase
         $this->callPrivateMethod($this->accountingService, 'validateAccountType', [$revenueAccount, 'credit']);
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_exception_when_crediting_asset_account()
     {
         $assetAccount = ChartOfAccount::factory()->create(['type' => 'asset']);
@@ -80,7 +92,7 @@ class AccountTypeValidationTest extends TestCase
         $this->callPrivateMethod($this->accountingService, 'validateAccountType', [$assetAccount, 'credit']);
     }
 
-    /** @test */
+    #[Test]
     public function it_validates_account_types_during_transaction_posting()
     {
         $assetAccount = ChartOfAccount::factory()->create(['type' => 'asset']);

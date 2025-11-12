@@ -21,6 +21,7 @@ class StoreChartOfAccountRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'type' => ['required', Rule::in(['asset', 'liability', 'equity', 'revenue', 'expense'])],
             'description' => ['nullable', 'string', 'max:500'],
+            'organization_id' => ['required', 'exists:organizations,id'],
         ];
     }
 

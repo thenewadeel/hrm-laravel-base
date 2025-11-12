@@ -9,6 +9,11 @@ use App\Http\Controllers\Api\OrganizationUnitController;
 use App\Models\Accounting\JournalEntry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Inventory\StoreController;
+use App\Http\Controllers\Api\Inventory\ItemController;
+use App\Http\Controllers\Api\Inventory\TransactionController;
+use App\Http\Middleware\CheckInventoryPermission;
+use App\Permissions\InventoryPermissions;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -27,7 +32,7 @@ Route::get('/user', function (Request $request) {
  * )
  */
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['api', 'auth:sanctum'])->group(function () {
     /**
      * @OA\Tag(name="Organizations")
      */
@@ -101,4 +106,51 @@ Route::get('/debug/test-connection', function () {
         'timestamp' => now(),
         'data' => JournalEntry::count() // if you have this model
     ]);
+});
+
+
+Route::prefix('inventory')->middleware(['auth:sanctum'])->group(function () {
+
+    // Stores - using policy authorization
+    Route::apiResource('stores', StoreController::class);
+    Route::post('stores/{store}/items', [StoreController::class, 'addItem'])
+        ->name('stores.items.add');
+    Route::put('stores/{store}/items/{item}', [StoreController::class, 'updateItemQuantity'])
+        ->name('stores.items.update');
+    Route::delete('stores/{store}/items/{item}', [StoreController::class, 'removeItem'])
+        ->name('stores.items.remove');
+
+    // Items - using policy authorization
+    Route::apiResource('items', ItemController::class);
+    Route::get('items/{item}/availability', [ItemController::class, 'availability'])
+        ->name('items.availability');
+    Route::get('items/low-stock', [ItemController::class, 'lowStock'])
+        ->name('items.low-stock');
+    Route::get('items/out-of-stock', [ItemController::class, 'outOfStock'])
+        ->name('items.out-of-stock');
+
+    // Transactions - using policy authorization
+    Route::apiResource('transactions', TransactionController::class);
+
+    // Transaction actions
+    Route::post('transactions/{transaction}/items', [TransactionController::class, 'addItems'])
+        ->name('transactions.items.add');
+    Route::put('transactions/{transaction}/finalize', [TransactionController::class, 'finalize'])
+        ->name('transactions.finalize');
+    Route::put('transactions/{transaction}/cancel', [TransactionController::class, 'cancel'])
+        ->name('transactions.cancel');
+
+    // Store inventory management
+    Route::put('stores/{store}/inventory', [StoreController::class, 'updateInventory'])
+        ->middleware('can:manageInventory,store')
+        ->name('stores.inventory.update');
+
+    // Reports
+    // Route::get('reports/stock-levels', [\App\Http\Controllers\Api\Inventory\ReportController::class, 'stockLevels'])
+    // ->middleware('can:' . InventoryPermissions::VIEW_INVENTORY_REPORTS)
+    // ->name('inventory.reports.stock-levels');
+
+    // Route::get('reports/movement', [\App\Http\Controllers\Api\Inventory\ReportController::class, 'movement'])
+    // ->middleware('can:' . InventoryPermissions::VIEW_INVENTORY_REPORTS)
+    // ->name('inventory.reports.movement');
 });

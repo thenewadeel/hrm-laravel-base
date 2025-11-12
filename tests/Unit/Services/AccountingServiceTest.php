@@ -7,20 +7,23 @@ use App\Models\Accounting\ChartOfAccount;
 use App\Services\AccountingService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class AccountingServiceTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, SetupOrganization;
 
     protected AccountingService $accountingService;
 
     protected function setUp(): void
     {
         parent::setUp();
+        $this->setupOrganization();
         $this->accountingService = app(AccountingService::class);
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_an_exception_for_unbalanced_transactions()
     {
         $unbalancedEntries = [
@@ -32,7 +35,7 @@ class AccountingServiceTest extends TestCase
         $this->accountingService->postTransaction($unbalancedEntries, 'Test transaction that will fail');
     }
 
-    /** @test */
+    #[Test]
     public function it_successfully_posts_a_balanced_transaction_and_creates_ledger_entries()
     {
         // Arrange: Create the accounts we need
@@ -65,7 +68,7 @@ class AccountingServiceTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_handle_complex_but_balanced_transactions()
     {
         $cashAccount = ChartOfAccount::factory()->create(['type' => 'asset']);

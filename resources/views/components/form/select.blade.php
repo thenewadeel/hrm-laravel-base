@@ -1,4 +1,10 @@
-<div>
-    Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may
-    fear less. - Marie Curie
-</div>
+{{-- resources/views/components/form/select.blade.php --}}
+
+@props(['disabled' => false])
+
+<select {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge([
+    'class' =>
+        'border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm',
+]) !!}>
+    {{ $slot }}
+</select>

@@ -6,6 +6,7 @@ namespace Tests\Unit\Services;
 use App\Services\SequenceService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class SequenceServiceTest extends TestCase
 {
@@ -19,7 +20,7 @@ class SequenceServiceTest extends TestCase
         $this->sequenceService = app(SequenceService::class);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_sequential_codes()
     {
         $code1 = $this->sequenceService->generate('journal_entry_ref');
@@ -31,7 +32,7 @@ class SequenceServiceTest extends TestCase
         $this->assertEquals('JE-000003', $code3);
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_concurrent_requests_safely()
     {
         // This would be tested with concurrent processes in real scenarios

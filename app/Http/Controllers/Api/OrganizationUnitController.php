@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use App\Models\OrganizationUnit;
+use App\Models\OrganizationUser;
 use Illuminate\Support\Facades\Gate;
 
 class OrganizationUnitController extends Controller
@@ -25,6 +26,7 @@ class OrganizationUnitController extends Controller
     public function store(Request $request, Organization $organization)
     {
         // $this->authorize('create', [OrganizationUnit::class, $organization]);
+
         Gate::authorize('create', [OrganizationUnit::class, $organization]);
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -54,7 +56,7 @@ class OrganizationUnitController extends Controller
      */
     public function show(Organization $organization, OrganizationUnit $unit)
     {
-        // $this->authorize('view', [$unit, $organization]);
+        Gate::authorize('view', [OrganizationUnit::class, $organization]);
 
         return response()->json([
             'data' => $unit->load(['parent', 'children'])
@@ -132,8 +134,8 @@ class OrganizationUnitController extends Controller
         if (Gate::denies('assign', $unit)) {
             abort(403, 'You are not authorized to assign users to this unit');
         }
+        // dd(['ok', auth()->user()->getAllRoles(), auth()->user()->id, $request->user_id, $request->all()]);
 
-        // dd('ok');
         $validated = $request->validate([
             'user_id' => [
                 'required',
@@ -177,23 +179,23 @@ class OrganizationUnitController extends Controller
             ->push($unit->id);
 
         // Get users belonging to any of these units
-        $members = $organization->users()
-            ->whereIn('organization_user.organization_unit_id', $unitIds)
-            ->with(['organizationUnits' => function ($query) use ($organization) {
-                $query->where('organization_units.organization_id', $organization->id); // Explicit table name
-            }])
+        $members = OrganizationUser::query() //$organization->users()
+            ->whereIn('organization_unit_id', $unitIds)
+            // ->with(['organizationUnits' => function ($query) use ($organization) {
+            //     $query->where('organization_units.organization_id', $organization->id); // Explicit table name
+            // }])
             ->get()
             ->map(function ($user) {
-                $unit = $user->organizationUnits
-                    ->firstWhere('id', $user->pivot->organization_unit_id);
-
+                // $unit = $user->organizationUnits
+                // ->firstWhere('id', $user->pivot->organization_unit_id);
+                // dd($user);
                 return [
                     'id' => $user->id,
                     'name' => $user->name,
                     'email' => $user->email,
-                    'unit_id' => $user->pivot->organization_unit_id,
-                    'unit_name' => $unit ? $unit->name : null,
-                    'roles' => $user->pivot->roles
+                    'unit_id' => $user->organization_unit_id,
+                    'unit_name' => $user->unit ? $user->unit->name : null,
+                    'roles' => $user->roles
                 ];
             });
         $x = response()->json(['data' => $members]);

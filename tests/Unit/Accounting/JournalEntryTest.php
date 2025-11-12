@@ -8,12 +8,18 @@ use App\Models\Accounting\JournalEntry;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class JournalEntryTest extends TestCase
 {
-    use RefreshDatabase;
-
-    /** @test */
+    use RefreshDatabase, SetupOrganization;
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setupOrganization();
+    }
+    #[Test]
     public function it_can_create_a_journal_entry()
     {
         $user = User::factory()->create();
@@ -30,7 +36,7 @@ class JournalEntryTest extends TestCase
         $this->assertEquals('draft', $journalEntry->status);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_post_a_balanced_journal_entry()
     {
         $user = User::factory()->create();
@@ -55,7 +61,7 @@ class JournalEntryTest extends TestCase
         $this->assertNotNull($journalEntry->posted_at);
     }
 
-    /** @test */
+    #[Test]
     public function it_prevents_posting_unbalanced_journal_entries()
     {
         $user = User::factory()->create();

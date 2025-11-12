@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Inventory\Store;
 use App\Models\Organization;
+use App\Models\Traits\BelongsToOrganization;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OrganizationUnit extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, BelongsToOrganization;
     protected $casts = [
         'custom_fields' => 'array',
     ];
@@ -19,14 +21,9 @@ class OrganizationUnit extends Model
         'name',
         'type',
         'parent_id',
-        'depth',
+        'organization_id',
         'custom_fields',
     ];
-
-    public function organization()
-    {
-        return $this->belongsTo(Organization::class);
-    }
 
     public function parent()
     {
@@ -36,16 +33,16 @@ class OrganizationUnit extends Model
     public function children()
     {
         return $this->hasMany(OrganizationUnit::class, 'parent_id')
-            // ->withDepth()
             ->withTrashed();
     }
     public function users()
     {
-        // The 'is_active' pivot column does not exist in your schema.
+        // CRITICAL FIX: Link to the custom pivot model
         return $this->belongsToMany(User::class, 'organization_user')
+            ->using(OrganizationUser::class)
             ->withPivot(['position', 'roles', 'permissions']);
     }
-    // Recursive relationship for all descendants
+    // ... (rest of the file is omitted for brevity)  // Recursive relationship for all descendants
     public function allDescendants()
     {
         return $this->hasMany(OrganizationUnit::class, 'parent_id')
@@ -85,4 +82,9 @@ class OrganizationUnit extends Model
     // {
     //     $query->orderBy('depth')->orderBy('parent_id')->orderBy('name');
     // }
+
+    public function stores()
+    {
+        return $this->hasMany(Store::class);
+    }
 }

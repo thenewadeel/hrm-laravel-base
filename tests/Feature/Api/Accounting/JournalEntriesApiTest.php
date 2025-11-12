@@ -8,21 +8,23 @@ use App\Models\Accounting\JournalEntry;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class JournalEntriesApiTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, SetupOrganization;
 
-    protected $user;
+    // protected $user;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->user = User::factory()->create();
+        $this->setupOrganization();
+        // $this->user = User::factory()->create();
     }
 
-    /** @test */
-    /** @test */
+    #[Test]
     public function it_can_create_a_journal_entry()
     {
         $cashAccount = ChartOfAccount::factory()->create(['type' => 'asset']);
@@ -68,7 +70,7 @@ class JournalEntriesApiTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_validates_journal_entry_balances()
     {
         $account = ChartOfAccount::factory()->create();
@@ -89,7 +91,7 @@ class JournalEntriesApiTest extends TestCase
             ->assertJsonValidationErrors(['entries']);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_post_a_journal_entry()
     {
         $journalEntry = JournalEntry::factory()->draft()->create([

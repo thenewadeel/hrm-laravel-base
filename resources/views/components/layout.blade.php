@@ -39,7 +39,7 @@
             {{ $slot }}
         </main>
     </div>
-
+    <x-flash-message duration="9000" />
     @stack('modals')
 
     @livewireScripts

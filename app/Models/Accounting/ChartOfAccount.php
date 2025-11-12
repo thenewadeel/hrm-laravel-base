@@ -3,16 +3,19 @@
 
 namespace App\Models\Accounting;
 
+use App\Models\Organization;
+use App\Models\Traits\BelongsToOrganization;
 use Database\Factories\Accounting\ChartOfAccountFactory; // <-- Add this import
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ChartOfAccount extends Model
 {
-    use HasFactory;
+    use HasFactory, BelongsToOrganization;
 
-    protected $fillable = ['code', 'name', 'type', 'description'];
+    protected $fillable = ['organization_id', 'code', 'name', 'type', 'description'];
 
     /**
      * Create a new factory instance for the model.
@@ -22,6 +25,10 @@ class ChartOfAccount extends Model
         return ChartOfAccountFactory::new();
     }
 
+    // public function organization(): BelongsTo
+    // {
+    //     return $this->belongsTo(Organization::class);
+    // }
     public function ledgerEntries(): HasMany
     {
         return $this->hasMany(LedgerEntry::class, 'chart_of_account_id');

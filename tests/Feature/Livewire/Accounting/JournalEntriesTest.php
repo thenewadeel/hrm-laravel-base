@@ -9,11 +9,16 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
+use Tests\Traits\SetupOrganization;
 
 class JournalEntriesTest extends TestCase
 {
-    use RefreshDatabase;
-
+    use RefreshDatabase, SetupOrganization;
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setupOrganization();
+    }
     public function test_it_renders_successfully()
     {
         Livewire::test('accounting.journal-entries')
@@ -22,9 +27,13 @@ class JournalEntriesTest extends TestCase
 
     public function test_it_creates_a_journal_entry()
     {
-        $this->actingAs(User::factory()->create());
-        $account1 = ChartOfAccount::factory()->create();
-        $account2 = ChartOfAccount::factory()->create();
+        $this->actingAs($this->user);
+        $account1 = ChartOfAccount::factory()->create([
+            'organization_id' => $this->organization->id
+        ]);
+        $account2 = ChartOfAccount::factory()->create([
+            'organization_id' => $this->organization->id
+        ]);
 
         $component = Livewire::test('accounting.journal-entries')
             ->set('entry_date', '2025-01-01')
@@ -69,9 +78,13 @@ class JournalEntriesTest extends TestCase
 
     public function test_a_journal_entry_requires_balanced_debits_and_credits()
     {
-        $this->actingAs(User::factory()->create());
-        $account1 = ChartOfAccount::factory()->create();
-        $account2 = ChartOfAccount::factory()->create();
+        $this->actingAs($this->user);
+        $account1 = ChartOfAccount::factory()->create([
+            'organization_id' => $this->organization->id
+        ]);
+        $account2 = ChartOfAccount::factory()->create([
+            'organization_id' => $this->organization->id
+        ]);
 
         $component = Livewire::test('accounting.journal-entries')
             ->set('entry_date', '2025-01-01')

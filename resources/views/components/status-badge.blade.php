@@ -1,21 +1,27 @@
-@props([
-    'status' => 'idle', // idle, loading, success, error, warning
-    'text' => null,
-])
+@props(['status' => 'active'])
 
 @php
-    $statusConfig = [
-        'idle' => ['bg-gray-200', 'text-gray-800', 'Ready'],
-        'loading' => ['bg-blue-200', 'text-blue-800', 'Loading...'],
-        'success' => ['bg-green-200', 'text-green-800', 'Success'],
-        'error' => ['bg-red-200', 'text-red-800', 'Error'],
-        'warning' => ['bg-yellow-200', 'text-yellow-800', 'Warning'],
+    $styles = [
+        'active' => 'bg-green-100 text-green-800',
+        'inactive' => 'bg-gray-100 text-gray-800',
+        'draft' => 'bg-yellow-100 text-yellow-800',
+        'posted' => 'bg-blue-100 text-blue-800',
+        'void' => 'bg-red-100 text-red-800',
+        'finalized' => 'bg-green-100 text-green-800',
+        'cancelled' => 'bg-red-100 text-red-800',
     ];
-
-    [$bgColor, $textColor, $defaultText] = $statusConfig[$status] ?? $statusConfig['idle'];
-    $displayText = $text ?? $defaultText;
+    
+    $labels = [
+        'active' => 'Active',
+        'inactive' => 'Inactive', 
+        'draft' => 'Draft',
+        'posted' => 'Posted',
+        'void' => 'Void',
+        'finalized' => 'Finalized',
+        'cancelled' => 'Cancelled',
+    ];
 @endphp
 
-<span {{ $attributes->merge(['class' => "px-3 py-1 rounded-full text-sm font-medium {$bgColor} {$textColor}"]) }}>
-    {{ $displayText }}
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $styles[$status] ?? $styles['inactive'] }}">
+    {{ $labels[$status] ?? ucfirst($status) }}
 </span>

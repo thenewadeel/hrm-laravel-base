@@ -1,0 +1,6 @@
+name,type,parent_name
+Head Office,head_office,
+Sales Department,department,Head Office
+Warehouse Department,department,Head Office
+Accounting Department,department,Head Office
+HR Department,department,Head Office

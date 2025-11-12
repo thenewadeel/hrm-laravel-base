@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Organization;
 use App\Models\OrganizationUnit;
 use App\Models\User;
+use App\Permissions\OrganizationPermissions;
 use Illuminate\Auth\Access\Response;
 
 class OrganizationUnitPolicy
@@ -14,15 +15,16 @@ class OrganizationUnitPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->hasPermission(OrganizationPermissions::VIEW_ORGANIZATION_UNITS);
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, OrganizationUnit $organizationUnit): bool
+    public function view(User $user, OrganizationUnit $unit): bool
     {
-        return false;
+        return $user->hasPermission(OrganizationPermissions::VIEW_ORGANIZATION_UNITS) &&
+            $user->organizations->contains($unit->organization_id);
     }
 
     /**
@@ -30,71 +32,49 @@ class OrganizationUnitPolicy
      */
     public function create(User $user, Organization $organization)
     {
-        return $organization->users()
-            ->where('user_id', $user->id)
-            ->whereJsonContains('roles', 'admin')
-            ->exists();
+        return $user->hasPermission(OrganizationPermissions::CREATE_ORGANIZATION_UNITS);
     }
 
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, OrganizationUnit $organizationUnit): bool
+    public function update(User $user, OrganizationUnit $unit): bool
     {
-        return false;
+        return $user->hasPermission(OrganizationPermissions::EDIT_ORGANIZATION_UNITS) &&
+            $user->organizations->contains($unit->organization_id);
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, OrganizationUnit $organizationUnit): bool
+    public function delete(User $user, OrganizationUnit $unit): bool
     {
-        return false;
+        return $user->hasPermission(OrganizationPermissions::DELETE_ORGANIZATION_UNITS) &&
+            $user->organizations->contains($unit->organization_id);
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, OrganizationUnit $organizationUnit): bool
+    public function restore(User $user, OrganizationUnit $unit): bool
     {
-        return false;
+        return $user->hasPermission(OrganizationPermissions::EDIT_ORGANIZATION_UNITS) &&
+            $user->organizations->contains($unit->organization_id);
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, OrganizationUnit $organizationUnit): bool
+    public function forceDelete(User $user, OrganizationUnit $unit): bool
     {
-        return false;
+        return $user->hasPermission(OrganizationPermissions::DELETE_ORGANIZATION_UNITS) &&
+            $user->organizations->contains($unit->organization_id);
     }
 
     public function assign(User $user, OrganizationUnit $unit): bool
     {
-        // Only org admins can assign users to units
-        return $this->isAdmin($user, $unit->organization);
-    }
-    // ---------------------------
-    // Helper Methods
-    // ---------------------------
-
-    protected function isAdmin(User $user, Organization $organization): bool
-    {
-        return $this->hasAnyRole($user, $organization, ['admin']);
-    }
-
-    protected function hasAnyRole(
-        User $user,
-        Organization $organization,
-        array $roles
-    ): bool {
-        return $organization->users()
-            ->where('user_id', $user->id)
-            ->where(function ($query) use ($roles) {
-                foreach ($roles as $role) {
-                    $query->orWhereJsonContains('roles', $role);
-                }
-            })
-            ->exists();
+        return $user->hasPermission(OrganizationPermissions::ASSIGN_ORGANIZATION_USERS || OrganizationPermissions::CREATE_ORGANIZATION_USERS) &&
+            $user->organizations->contains($unit->organization_id);
     }
 }

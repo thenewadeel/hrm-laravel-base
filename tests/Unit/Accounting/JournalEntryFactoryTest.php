@@ -6,12 +6,19 @@ namespace Tests\Unit\Accounting;
 use App\Models\Accounting\JournalEntry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class JournalEntryFactoryTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, SetupOrganization;
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setupOrganization();
+    }
 
-    /** @test */
+    #[Test]
     public function it_can_create_a_journal_entry()
     {
         $journalEntry = JournalEntry::factory()->create();
@@ -21,7 +28,7 @@ class JournalEntryFactoryTest extends TestCase
         $this->assertNotNull($journalEntry->created_by);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_create_a_draft_journal_entry()
     {
         $journalEntry = JournalEntry::factory()->draft()->create();
@@ -30,7 +37,7 @@ class JournalEntryFactoryTest extends TestCase
         $this->assertNull($journalEntry->posted_at);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_create_a_posted_journal_entry()
     {
         $journalEntry = JournalEntry::factory()->posted()->create();
@@ -39,7 +46,7 @@ class JournalEntryFactoryTest extends TestCase
         $this->assertNotNull($journalEntry->posted_at);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_create_journal_entry_with_specific_approver()
     {
         $journalEntry = JournalEntry::factory()

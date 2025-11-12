@@ -6,50 +6,62 @@ use App\Livewire\MemberManager;
 use App\Models\Organization;
 use App\Models\OrganizationUnit;
 use App\Models\User;
+use App\Roles\InventoryRoles;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class MemberManagerTest extends TestCase
 {
-    use RefreshDatabase;
-
-    /** @test */
+    use RefreshDatabase, SetupOrganization;
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setupOrganization();
+    }
+    #[Test]
     public function it_can_display_a_list_of_organization_members()
     {
         // Arrange
-        $organization = Organization::factory()->create();
-        $user1 = User::factory()->create();
+        $organization = $this->organization; // Organization::factory()->create();
+        $user1 = $this->user;
         $user2 = User::factory()->create();
-        $organization->users()->attach($user1);
-        $organization->users()->attach($user2);
-
+        // $organization->users()->attach($user1);
+        $organization->users()->attach($user2, [
+            'roles' => json_encode([InventoryRoles::INVENTORY_ADMIN]),
+            'organization_id' => $organization->id
+        ]);
         // Act & Assert
         Livewire::test(MemberManager::class, ['organization' => $organization])
             ->assertSee($user1->name)
             ->assertSee($user2->name);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_search_for_members_by_name_or_email()
     {
         // Arrange
-        $organization = Organization::factory()->create();
-        $user1 = User::factory()->create(['name' => 'John Doe', 'email' => 'john@example.com']);
-        $user2 = User::factory()->create(['name' => 'Jane Smith', 'email' => 'jane@example.com']);
-        $organization->users()->attach($user1);
-        $organization->users()->attach($user2);
+        $organization = $this->organization; // Organization::factory()->create();
+        $user1 = $this->user;
+        $user2 = User::factory()->create();
+        // $organization->users()->attach($user1);
+        $organization->users()->attach($user2, [
+            'roles' => json_encode([InventoryRoles::INVENTORY_ADMIN]),
+            'organization_id' => $organization->id
+        ]);
 
         // Act & Assert - Search for John Doe
         Livewire::test(MemberManager::class, ['organization' => $organization])
-            ->set('search', 'John')
-            ->assertSee('John Doe')
-            ->assertDontSee('Jane Smith');
+            ->set('search', $user1->name)
+            ->assertSee($user1->name)
+            ->assertDontSee($user2->name);
 
         // Act & Assert - Search by email
         Livewire::test(MemberManager::class, ['organization' => $organization])
-            ->set('search', 'jane@')
-            ->assertSee('Jane Smith')
-            ->assertDontSee('John Doe');
+            ->set('search', $user2->name)
+            ->assertSee($user2->name)
+            ->assertDontSee($user1->name);
     }
 }

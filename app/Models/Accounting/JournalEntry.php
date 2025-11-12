@@ -4,6 +4,8 @@
 namespace App\Models\Accounting;
 
 use App\Exceptions\UnbalancedTransactionException;
+use App\Models\Organization;
+use App\Models\Traits\BelongsToOrganization;
 use App\Models\User;
 use App\Services\AccountingService;
 use App\Services\SequenceService;
@@ -18,9 +20,10 @@ use Illuminate\Support\Facades\Log;
 
 class JournalEntry extends Model
 {
-    use HasFactory;
+    use HasFactory, BelongsToOrganization;
 
     protected $fillable = [
+        'organization_id',
         'reference_number',
         'entry_date',
         'description',
@@ -90,6 +93,11 @@ class JournalEntry extends Model
     {
         return $this->belongsTo(User::class, 'approved_by');
     }
+
+    // public function organization(): BelongsTo
+    // {
+    //     return $this->belongsTo(Organization::class);
+    // }
 
     /**
      * Fix the ledger entries relationship

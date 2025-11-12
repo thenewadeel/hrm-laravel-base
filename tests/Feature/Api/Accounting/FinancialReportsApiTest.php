@@ -8,21 +8,23 @@ use App\Models\Accounting\LedgerEntry;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\Traits\SetupOrganization;
 
 class FinancialReportsApiTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, SetupOrganization;
 
-    protected $user;
+    // protected $user;
 
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->user = User::factory()->create();
+        $this->setupOrganization();
+        // $this->user = User::factory()->create();
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_trial_balance()
     {
         // Create some accounts with transactions
@@ -64,7 +66,7 @@ class FinancialReportsApiTest extends TestCase
             ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_balance_sheet()
     {
         // Setup assets and liabilities
@@ -109,7 +111,7 @@ class FinancialReportsApiTest extends TestCase
             ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_income_statement()
     {
         $revenueAccount = ChartOfAccount::factory()->create(['type' => 'revenue', 'code' => '4010']);
@@ -157,7 +159,7 @@ class FinancialReportsApiTest extends TestCase
             ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_validates_income_statement_date_range()
     {
         $this->actingAs($this->user);
@@ -168,7 +170,7 @@ class FinancialReportsApiTest extends TestCase
             ->assertJsonValidationErrors(['start_date', 'end_date']);
     }
 
-    /** @test */
+    #[Test]
     public function it_rejects_end_date_before_start_date()
     {
         $this->actingAs($this->user);
