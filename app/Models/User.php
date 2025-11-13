@@ -110,6 +110,8 @@ class User extends Authenticatable
         // 2. Fallback to the first organization if one exists
         // (Ensure 'organizations' relationship is loaded before calling this if used outside the query)
         if ($this->organizations->isNotEmpty()) {
+            $this->current_organization_id = $this->organizations->first()->id;
+            $this->save();
             return (int) $this->organizations->first()->id;
         }
 
