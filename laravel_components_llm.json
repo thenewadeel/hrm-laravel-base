@@ -25,8 +25,8 @@
             "yunyami/clockwork"
         ]
     },
-    "timestamp": "2025-11-07T10:24:12+00:00",
-    "component_count": 208,
+    "timestamp": "2025-11-13T18:10:12+00:00",
+    "component_count": 252,
     "components": [
         {
             "type": "Model",
@@ -150,6 +150,42 @@
             "content_preview": "<?php\n\nnamespace App\\Models;\n\nuse App\\Roles\\InventoryRoles;\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Foundation\\Auth\\User as Authenticatable;\nuse Illuminate\\Notifications\\Notifiable;\nuse Laravel\\Fortify\\TwoFactorAuthenticatable;\nuse Laravel\\Jetstream\\HasProfilePhoto;\nuse Laravel\\Jetstream\\HasTeams;\nuse Laravel\\Sanctum\\HasApiTokens;\n\nclass User extends Authenticatable\n{\n    use HasApiTokens;\n    use HasFactory;\n    use HasProfilePhoto;\n    use HasTeams;\n    use Notifi..."
         },
         {
+            "type": "Model",
+            "name": "Employee",
+            "file": "app/Models/Employee.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "PayrollRuns",
+            "file": "app/Models/PayrollRuns.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "PayrollSlip",
+            "file": "app/Models/PayrollSlip.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "AttendanceRecord",
+            "file": "app/Models/AttendanceRecord.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "LeaveRequest",
+            "file": "app/Models/LeaveRequest.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "PayrollEntry",
+            "file": "app/Models/PayrollEntry.php",
+            "essential": false
+        },
+        {
             "type": "Controller",
             "name": "Controller",
             "file": "app/Http/Controllers/Controller.php",
@@ -267,6 +303,78 @@
             "type": "Controller",
             "name": "InventoryTransactionController",
             "file": "app/Http/Controllers/Inventory/InventoryTransactionController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "HrmDashboardController",
+            "file": "app/Http/Controllers/HrmDashboardController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "OrganizationDashboardController",
+            "file": "app/Http/Controllers/OrganizationDashboardController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "EmployeeController",
+            "file": "app/Http/Controllers/HR/EmployeeController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "AttendanceController",
+            "file": "app/Http/Controllers/Attendance/AttendanceController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "PayrollController",
+            "file": "app/Http/Controllers/Payroll/PayrollController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "EmployeeController",
+            "file": "app/Http/Controllers/EmployeeController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "PayrollRunsController",
+            "file": "app/Http/Controllers/PayrollRunsController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "PayrollSlipController",
+            "file": "app/Http/Controllers/PayrollSlipController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "AttendanceRecordController",
+            "file": "app/Http/Controllers/AttendanceRecordController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "BasePortalController",
+            "file": "app/Http/Controllers/Portal/BasePortalController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "EmployeePortalController",
+            "file": "app/Http/Controllers/Portal/EmployeePortalController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "ManagerPortalController",
+            "file": "app/Http/Controllers/Portal/ManagerPortalController.php",
             "essential": false
         },
         {
@@ -1698,6 +1806,683 @@
             }
         },
         {
+            "type": "Migration",
+            "name": "2025_11_10_044700_create_employees_table",
+            "file": "database/migrations/2025_11_10_044700_create_employees_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "employees": [
+                        {
+                            "name": "user_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained()->nullOnDelete(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "organization_unit_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('organization_units'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "biometric_id",
+                            "type": "string",
+                            "options": ")->nullable()->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "first_name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "last_name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "middle_name",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "date_of_birth",
+                            "type": "date",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "gender",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "email",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "phone",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "address",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "city",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "state",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "country",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "zip_code",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "photo",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "is_active",
+                            "type": "boolean",
+                            "options": ")->default(true",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "is_admin",
+                            "type": "boolean",
+                            "options": ")->default(false",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "employees"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_10_044800_create_attendance_records_table",
+            "file": "database/migrations/2025_11_10_044800_create_attendance_records_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "attendance_records": [
+                        {
+                            "name": "employee_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "record_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "punch_in",
+                            "type": "timestamp",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "punch_out",
+                            "type": "timestamp",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "total_hours",
+                            "type": "decimal",
+                            "options": ", 5, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "status",
+                            "type": "string",
+                            "options": ")->default('present'",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "biometric_id",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "device_serial_no",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "late_minutes",
+                            "type": "decimal",
+                            "options": ", 5, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "overtime_minutes",
+                            "type": "decimal",
+                            "options": ", 5, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "status",
+                            "type": "index",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "attendance_records"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_10_044900_create_leave_requests_table",
+            "file": "database/migrations/2025_11_10_044900_create_leave_requests_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "leave_requests": [
+                        {
+                            "name": "employee_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "'pending'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "'pending'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "leave_type",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "start_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "end_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "total_days",
+                            "type": "integer",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "reason",
+                            "type": "text",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "status",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "approved_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users'",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "rejected_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users'",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "approved_at",
+                            "type": "timestamp",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "rejected_at",
+                            "type": "timestamp",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "rejection_reason",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "applied_at",
+                            "type": "timestamp",
+                            "options": ")->useCurrent(",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "leave_type",
+                            "type": "index",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'pending'"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "leave_requests"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_10_045000_create_payroll_entries_table",
+            "file": "database/migrations/2025_11_10_045000_create_payroll_entries_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "payroll_entries": [
+                        {
+                            "name": "employee_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "period",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "basic_salary",
+                            "type": "decimal",
+                            "options": ", 12, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "housing_allowance",
+                            "type": "decimal",
+                            "options": ", 12, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "transport_allowance",
+                            "type": "decimal",
+                            "options": ", 12, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "overtime_pay",
+                            "type": "decimal",
+                            "options": ", 12, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "bonus",
+                            "type": "decimal",
+                            "options": ", 12, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "gross_pay",
+                            "type": "decimal",
+                            "options": ", 12, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "tax_deduction",
+                            "type": "decimal",
+                            "options": ", 12, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "insurance_deduction",
+                            "type": "decimal",
+                            "options": ", 12, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "other_deductions",
+                            "type": "decimal",
+                            "options": ", 12, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "total_deductions",
+                            "type": "decimal",
+                            "options": ", 12, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "net_pay",
+                            "type": "decimal",
+                            "options": ", 12, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "status",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "paid_at",
+                            "type": "timestamp",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "status",
+                            "type": "index",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "payroll_entries"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_10_045100_create_payroll_runs_table",
+            "file": "database/migrations/2025_11_10_045100_create_payroll_runs_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "payroll_runs": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "'draft'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "period",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "start_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "end_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "status",
+                            "type": "string",
+                            "options": ")->default('draft'",
+                            "nullable": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "total_gross",
+                            "type": "decimal",
+                            "options": ", 12, 2",
+                            "nullable": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "total_net",
+                            "type": "decimal",
+                            "options": ", 12, 2",
+                            "nullable": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "journal_entry_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('journal_entries'",
+                            "nullable": true,
+                            "default": "'draft'",
+                            "primary_key": true
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "payroll_runs"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_10_045200_create_payroll_slips_table",
+            "file": "database/migrations/2025_11_10_045200_create_payroll_slips_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "payroll_slips": [
+                        {
+                            "name": "payroll_run_id",
+                            "type": "foreignId",
+                            "options": ")->constrained(",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "employee_id",
+                            "type": "foreignId",
+                            "options": ")->constrained(",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "gross_pay",
+                            "type": "decimal",
+                            "options": ", 12, 2"
+                        },
+                        {
+                            "name": "deductions",
+                            "type": "decimal",
+                            "options": ", 12, 2"
+                        },
+                        {
+                            "name": "net_pay",
+                            "type": "decimal",
+                            "options": ", 12, 2"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "payroll_slips"
+                    }
+                ]
+            }
+        },
+        {
             "type": "Route",
             "name": "console",
             "file": "routes/console.php",
@@ -1754,7 +2539,7 @@
             "name": "web",
             "file": "routes/web.php",
             "essential": true,
-            "content_preview": "<?php\n\nuse App\\Http\\Controllers\\AccountsController;\nuse App\\Http\\Controllers\\Api\\Inventory\\ItemController;\nuse App\\Http\\Controllers\\Api\\Inventory\\StoreController;\nuse App\\Http\\Controllers\\Api\\Inventory\\TransactionController;\nuse App\\Http\\Controllers\\Inventory\\InventoryController as InventoryInventoryController;\nuse App\\Http\\Controllers\\Inventory\\InventoryController;\nuse App\\Http\\Controllers\\Inventory\\InventoryItemController;\nuse App\\Http\\Controllers\\Inventory\\InventoryReportController;\nuse App\\H...",
+            "content_preview": "<?php\n\nuse App\\Http\\Controllers\\AccountsController;\nuse App\\Http\\Controllers\\Api\\Inventory\\ItemController;\nuse App\\Http\\Controllers\\Api\\Inventory\\StoreController;\nuse App\\Http\\Controllers\\Api\\Inventory\\TransactionController;\nuse App\\Http\\Controllers\\Attendance\\AttendanceController;\nuse App\\Http\\Controllers\\HR\\EmployeeController;\nuse App\\Http\\Controllers\\HrmDashboardController;\nuse App\\Http\\Controllers\\Inventory\\InventoryController as InventoryInventoryController;\nuse App\\Http\\Controllers\\Invento...",
             "route_summary": [
                 "Route::get('/', function () { return view('welcome');",
                 "Route::middleware([ // 'auth:sanctum', // config('jetstream.auth_session'), // 'verified', // ])->gr...",
@@ -1774,6 +2559,13 @@
                 "Route::get('/units', UnitTree::class)->name('units.index');",
                 "Route::get('/units/create', UnitForm::class)->name('units.create');",
                 "Route::get('/units/{unit}/edit', UnitForm::class)->name('units.edit');",
+                "Route::get('/hrm/dashboard', [HrmDashboardController::class, 'index']) ->name('hrm.dashboard');",
+                "Route::prefix('hr')->group(function () { // Route::resource('hr/employees', EmployeeController::clas...",
+                "Route::put('employees/{employee}/biometric', [\\App\\Http\\Controllers\\HR\\EmployeeController::class, 'u...",
+                "Route::post('employees/{employee}/grant-access', [\\App\\Http\\Controllers\\HR\\EmployeeController::class...",
+                "Route::post('employees/without-user', [\\App\\Http\\Controllers\\HR\\EmployeeController::class, 'storeWit...",
+                "Route::get('/attendance/dashboard', [AttendanceController::class, 'dashboard'])->name('attendance.da...",
+                "Route::get('/payroll/processing', [PayrollController::class, 'processing'])->name('payroll.processin...",
                 "Route::get('/employees', EmployeeList::class)->name('employees.index');",
                 "Route::get('/employees/create', EmployeeForm::class)->name('employees.create');",
                 "Route::get('/employees/{employee}/edit', EmployeeForm::class)->name('employees.edit');",
@@ -1827,6 +2619,31 @@
                 "Route::get('journal-entries', function () { try { $entries = \\App\\Models\\Accounting\\JournalEntry::wi...",
                 "Route::get('test-sequence', function () { try { $sequenceService = app(App\\Services\\SequenceService:...",
                 "Route::get('reports/all', function (AccountingReportService $service) { $trialBalance = $service->ge..."
+            ]
+        },
+        {
+            "type": "Route",
+            "name": "portal",
+            "file": "routes/portal.php",
+            "essential": false,
+            "route_summary": [
+                "Route::prefix('portal/employee')->name('portal.employee.')->group(function () { Route::get('/dashboa...",
+                "Route::get('/attendance', [EmployeePortalController::class, 'attendance'])->name('attendance');",
+                "Route::post('/clock-in', [EmployeePortalController::class, 'clockIn'])->name('clock-in');",
+                "Route::post('/clock-out', [EmployeePortalController::class, 'clockOut'])->name('clock-out');",
+                "Route::get('/setup', [EmployeePortalController::class, 'setup'])->name('setup');",
+                "Route::post('/setup', [EmployeePortalController::class, 'completeSetup'])->name('complete-setup');",
+                "Route::get('/leave', [EmployeePortalController::class, 'leave'])->name('leave');",
+                "Route::get('/leave/create', [EmployeePortalController::class, 'createLeave'])->name('leave.create');",
+                "Route::post('/leave', [EmployeePortalController::class, 'storeLeave'])->name('leave.store');",
+                "Route::get('/payslips', [EmployeePortalController::class, 'payslips'])->name('payslips');",
+                "Route::get('/payslips/{payslip}', [EmployeePortalController::class, 'showPayslip'])->name('payslips....",
+                "Route::get('/payslips/{payslip}/download', [EmployeePortalController::class, 'downloadPayslip'])->na...",
+                "Route::prefix('portal/manager')->name('portal.manager.')->group(function () { Route::get('/dashboard...",
+                "Route::get('/team-attendance', [ManagerPortalController::class, 'teamAttendance'])->name('team-atten...",
+                "Route::get('/reports', [ManagerPortalController::class, 'reports'])->name('reports');",
+                "Route::post('/leave/{leaveRequest}/approve', [ManagerPortalController::class, 'approveLeave'])->name...",
+                "Route::post('/leave/{leaveRequest}/reject', [ManagerPortalController::class, 'rejectLeave'])->name('..."
             ]
         },
         {
@@ -2035,14 +2852,14 @@
         },
         {
             "type": "View",
-            "name": "input-error.blade.php",
-            "file": "resources/views/components/form/input-error.blade.php",
+            "name": "label.blade.php",
+            "file": "resources/views/components/form/label.blade.php",
             "essential": false
         },
         {
             "type": "View",
-            "name": "label.blade.php",
-            "file": "resources/views/components/form/label.blade.php",
+            "name": "input-error.blade.php",
+            "file": "resources/views/components/form/input-error.blade.php",
             "essential": false
         },
         {
@@ -2187,6 +3004,12 @@
             "type": "View",
             "name": "flash-message.blade.php",
             "file": "resources/views/components/flash-message.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "stat-card.blade.php",
+            "file": "resources/views/components/dashboard/stat-card.blade.php",
             "essential": false
         },
         {
@@ -2355,6 +3178,12 @@
             "type": "View",
             "name": "index.blade.php",
             "file": "resources/views/organizations/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "dashboard.blade.php",
+            "file": "resources/views/organizations/dashboard.blade.php",
             "essential": false
         },
         {
@@ -2583,6 +3412,108 @@
             "type": "View",
             "name": "welcome.blade.php",
             "file": "resources/views/welcome.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "dashboard.blade.php",
+            "file": "resources/views/hrm/dashboard.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "show.blade.php",
+            "file": "resources/views/hr/employees/show.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/hr/employees/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "create.blade.php",
+            "file": "resources/views/hr/employees/create.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "edit.blade.php",
+            "file": "resources/views/hr/employees/edit.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "dashboard.blade.php",
+            "file": "resources/views/attendance/dashboard.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "processing.blade.php",
+            "file": "resources/views/payroll/processing.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "dashboard.blade.php",
+            "file": "resources/views/portal/employee/dashboard.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "attendance.blade.php",
+            "file": "resources/views/portal/employee/attendance.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "leave.blade.php",
+            "file": "resources/views/portal/employee/leave.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "payslips.blade.php",
+            "file": "resources/views/portal/employee/payslips.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "leave-create.blade.php",
+            "file": "resources/views/portal/employee/leave-create.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "payslip-show.blade.php",
+            "file": "resources/views/portal/employee/payslip-show.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "setup.blade.php",
+            "file": "resources/views/portal/employee/setup.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "dashboard.blade.php",
+            "file": "resources/views/portal/manager/dashboard.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "team-attendance.blade.php",
+            "file": "resources/views/portal/manager/team-attendance.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "reports.blade.php",
+            "file": "resources/views/portal/manager/reports.blade.php",
             "essential": false
         },
         {

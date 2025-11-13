@@ -1,434 +1,526 @@
 
    PASS  Tests\Unit\Accounting\AccountTypeValidationTest
-  ✓ it allows debit to asset accounts                                    0.23s  
-  ✓ it allows debit to expense accounts                                  0.02s  
-  ✓ it throws exception when debiting liability account                  0.02s  
-  ✓ it allows credit to liability accounts                               0.02s  
-  ✓ it allows credit to revenue accounts                                 0.02s  
-  ✓ it throws exception when crediting asset account                     0.02s  
-  ✓ it validates account types during transaction posting                0.02s  
+  ✓ it allows debit to asset accounts                                    0.20s
+  ✓ it allows debit to expense accounts                                  0.02s
+  ✓ it throws exception when debiting liability account                  0.02s
+  ✓ it allows credit to liability accounts                               0.02s
+  ✓ it allows credit to revenue accounts                                 0.02s
+  ✓ it throws exception when crediting asset account                     0.02s
+  ✓ it validates account types during transaction posting                0.02s
 
    PASS  Tests\Unit\Accounting\BalanceSheetTest
-  ✓ it generates balance sheet with no transactions                      0.03s  
-  ✓ it generates balanced balance sheet                                  0.02s  
-  ✓ it includes retained earnings from income statement                  0.03s  
+  ✓ it generates balance sheet with no transactions                      0.02s
+  ✓ it generates balanced balance sheet                                  0.02s
+  ✓ it includes retained earnings from income statement                  0.02s
 
    PASS  Tests\Unit\Accounting\ChartOfAccountTest
-  ✓ it has a code name and type                                          0.02s  
-  ✓ it can scope accounts by type                                        0.02s  
-  ✓ account code must be unique                                          0.02s  
-  ✓ it can calculate its current balance                                 0.02s  
+  ✓ it has a code name and type                                          0.02s
+  ✓ it can scope accounts by type                                        0.02s
+  ✓ account code must be unique                                          0.02s
+  ✓ it can calculate its current balance                                 0.02s
 
    PASS  Tests\Unit\Accounting\DimensionReportTest
-  ✓ example                                                              0.06s  
+  ✓ example                                                              0.06s
 
    PASS  Tests\Unit\Accounting\FinancialReportsTest
-  ✓ example                                                              0.05s  
+  ✓ example                                                              0.04s
 
    PASS  Tests\Unit\Accounting\IncomeStatementTest
-  ✓ it generates income statement with no transactions                   0.02s  
-  ✓ it generates income statement with revenue and expenses              0.02s  
-  ✓ it excludes transactions outside date range                          0.02s  
+  ✓ it generates income statement with no transactions                   0.02s
+  ✓ it generates income statement with revenue and expenses              0.02s
+  ✓ it excludes transactions outside date range                          0.02s
 
    PASS  Tests\Unit\Accounting\InvalidAccountTypeExceptionTest
-  ✓ it provides detailed error message                                   0.02s  
-  ✓ it provides contextual information                                   0.02s  
-  ✓ it allows custom message                                             0.02s  
+  ✓ it provides detailed error message                                   0.02s
+  ✓ it provides contextual information                                   0.02s
+  ✓ it allows custom message                                             0.02s
 
    PASS  Tests\Unit\Accounting\JournalEntryFactoryTest
-  ✓ it can create a journal entry                                        0.02s  
-  ✓ it can create a draft journal entry                                  0.02s  
-  ✓ it can create a posted journal entry                                 0.02s  
-  ✓ it can create journal entry with specific approver                   0.02s  
+  ✓ it can create a journal entry                                        0.02s
+  ✓ it can create a draft journal entry                                  0.02s
+  ✓ it can create a posted journal entry                                 0.02s
+  ✓ it can create journal entry with specific approver                   0.02s
 
    PASS  Tests\Unit\Accounting\JournalEntryTest
-  ✓ it can create a journal entry                                        0.02s  
-  ✓ it can post a balanced journal entry                                 0.02s  
-  ✓ it prevents posting unbalanced journal entries                       0.02s  
+  ✓ it can create a journal entry                                        0.02s
+  ✓ it can post a balanced journal entry                                 0.02s
+  ✓ it prevents posting unbalanced journal entries                       0.02s
 
    PASS  Tests\Unit\Accounting\LedgerEntryTest
-  ✓ it belongs to a chart of account                                     0.02s  
-  ✓ it has a debit or credit type                                        0.02s  
-  ✓ it can be linked to a transaction via polymorphic relation           0.02s  
-  ✓ it can be tagged with dimensions                                     0.02s  
-  ✓ it must have a positive amount                                       0.02s  
+  ✓ it belongs to a chart of account                                     0.02s
+  ✓ it has a debit or credit type                                        0.02s
+  ✓ it can be linked to a transaction via polymorphic relation           0.02s
+  ✓ it can be tagged with dimensions                                     0.02s
+  ✓ it must have a positive amount                                       0.02s
 
    PASS  Tests\Unit\Accounting\TrialBalanceTest
-  ✓ it generates trial balance with zero entries                         0.02s  
-  ✓ it generates trial balance with balanced entries                     0.02s  
-  ✓ it shows account balances in trial balance                           0.02s  
+  ✓ it generates trial balance with zero entries                         0.02s
+  ✓ it generates trial balance with balanced entries                     0.02s
+  ✓ it shows account balances in trial balance                           0.02s
 
    PASS  Tests\Unit\Models\Inventory\InventoryTransactionTest
-  ✓ example                                                              0.02s  
+  ✓ example                                                              0.01s
 
    PASS  Tests\Unit\Models\Inventory\ItemTest
-  ✓ example                                                              0.01s  
+  ✓ example                                                              0.01s
 
    PASS  Tests\Unit\Models\Inventory\StoreTest
-  ✓ example                                                              0.01s  
+  ✓ example                                                              0.01s
 
    PASS  Tests\Unit\AccountingReportServiceTest
-  ✓ it generates a correct trial balance                                 0.03s  
-  ✓ it generates a correct balance sheet                                 0.02s  
+  ✓ it generates a correct trial balance                                 0.02s
+  ✓ it generates a correct balance sheet                                 0.02s
 
    PASS  Tests\Unit\Accounting\AccountingServiceTest
-  ✓ it throws an exception for unbalanced transactions                   0.02s  
-  ✓ it successfully posts a balanced transaction and creates ledger ent… 0.02s  
-  ✓ it can handle complex but balanced transactions                      0.02s  
+  ✓ it throws an exception for unbalanced transactions                   0.02s
+  ✓ it successfully posts a balanced transaction and creates ledger ent… 0.02s
+  ✓ it can handle complex but balanced transactions                      0.02s
 
    PASS  Tests\Unit\Services\InventoryServiceTest
-  ✓ it can create a store                                                0.04s  
-  ✓ it can update store inventory                                        0.03s  
-  ✓ it can update store inventory with min max stock                     0.04s  
-  ✓ it can adjust store inventory                                        0.03s  
-  ✓ it can create and finalize transaction                               0.04s  
-  ✓ it can cancel transaction                                            0.03s  
-  ✓ it can get store stock levels                                        0.03s  
-  ✓ it can get item availability                                         0.03s  
-  ✓ it prevents modifying finalized transaction                          0.04s  
-  ✓ it prevents finalizing transaction with no items                     0.03s  
-  ✓ it prevents cancelling finalized transaction                         0.03s  
-  ✓ it calculates low stock correctly                                    0.03s  
-  ✓ it calculates overstock correctly                                    0.03s  
+  ✓ it can create a store                                                0.03s
+  ✓ it can update store inventory                                        0.03s
+  ✓ it can update store inventory with min max stock                     0.03s
+  ✓ it can adjust store inventory                                        0.03s
+  ✓ it can create and finalize transaction                               0.04s
+  ✓ it can cancel transaction                                            0.03s
+  ✓ it can get store stock levels                                        0.03s
+  ✓ it can get item availability                                         0.03s
+  ✓ it prevents modifying finalized transaction                          0.03s
+  ✓ it prevents finalizing transaction with no items                     0.03s
+  ✓ it prevents cancelling finalized transaction                         0.03s
+  ✓ it calculates low stock correctly                                    0.03s
+  ✓ it calculates overstock correctly                                    0.03s
 
    PASS  Tests\Unit\Services\SequenceServiceTest
-  ✓ it generates sequential codes                                        0.02s  
-  ✓ it handles concurrent requests safely                                0.01s  
+  ✓ it generates sequential codes                                        0.02s
+  ✓ it handles concurrent requests safely                                0.01s
 
    PASS  Tests\Unit\Teams\CreateTeamTest
-  ✓ teams can be created                                                 0.05s  
+  ✓ teams can be created                                                 0.04s
 
    PASS  Tests\Unit\Teams\DeleteTeamTest
-  ✓ teams can be deleted                                                 0.04s  
-  ✓ personal teams cant be deleted                                       0.04s  
+  ✓ teams can be deleted                                                 0.04s
+  ✓ personal teams cant be deleted                                       0.04s
 
    PASS  Tests\Unit\Teams\InviteTeamMemberTest
-  ✓ team members can be invited to team                                  0.07s  
-  ✓ team member invitations can be cancelled                             0.07s  
+  ✓ team members can be invited to team                                  0.06s
+  ✓ team member invitations can be cancelled                             0.06s
 
    PASS  Tests\Unit\Teams\LeaveTeamTest
-  ✓ users can leave teams                                                0.05s  
-  ✓ team owners cant leave their own team                                0.05s  
+  ✓ users can leave teams                                                0.04s
+  ✓ team owners cant leave their own team                                0.05s
 
    PASS  Tests\Unit\Teams\RemoveTeamMemberTest
-  ✓ team members can be removed from teams                               0.06s  
-  ✓ only team owner can remove team members                              0.05s  
+  ✓ team members can be removed from teams                               0.05s
+  ✓ only team owner can remove team members                              0.05s
 
    PASS  Tests\Unit\Teams\UpdateTeamMemberRoleTest
-  ✓ team member roles can be updated                                     0.07s  
-  ✓ only team owner can update team member roles                         0.06s  
+  ✓ team member roles can be updated                                     0.06s
+  ✓ only team owner can update team member roles                         0.05s
 
    PASS  Tests\Unit\Teams\UpdateTeamNameTest
-  ✓ team names can be updated                                            0.05s  
+  ✓ team names can be updated                                            0.05s
 
    PASS  Tests\Unit\base\ApiTokenPermissionsTest
-  ✓ api token permissions can be updated                                 0.07s  
+  ✓ api token permissions can be updated                                 0.06s
 
    PASS  Tests\Unit\base\AuthenticationTest
-  ✓ login screen can be rendered                                         0.04s  
-  ✓ users can authenticate using the login screen                        0.04s  
-  ✓ users cannot authenticate with invalid password                      0.03s  
+  ✓ login screen can be rendered                                         0.03s
+  ✓ users can authenticate using the login screen                        0.03s
+  ✓ users cannot authenticate with invalid password                      0.03s
 
    PASS  Tests\Unit\base\BrowserSessionsTest
-  ✓ other browser sessions can be logged out                             0.05s  
+  ✓ other browser sessions can be logged out                             0.04s
 
    PASS  Tests\Unit\base\CreateApiTokenTest
-  ✓ api tokens can be created                                            0.06s  
+  ✓ api tokens can be created                                            0.05s
 
    PASS  Tests\Unit\base\DeleteAccountTest
-  ✓ user accounts can be deleted                                         0.05s  
-  ✓ correct password must be provided before account can be deleted      0.04s  
+  ✓ user accounts can be deleted                                         0.04s
+  ✓ correct password must be provided before account can be deleted      0.04s
 
    PASS  Tests\Unit\base\DeleteApiTokenTest
-  ✓ api tokens can be deleted                                            0.06s  
+  ✓ api tokens can be deleted                                            0.05s
 
    WARN  Tests\Unit\base\EmailVerificationTest
-  - email verification screen can be rendered → Email verification not…  0.02s  
-  - email can be verified → Email verification not enabled.              0.01s  
-  - email can not verified with invalid hash → Email verification not e… 0.01s  
+  - email verification screen can be rendered → Email verification not…  0.02s
+  - email can be verified → Email verification not enabled.              0.01s
+  - email can not verified with invalid hash → Email verification not e… 0.01s
 
    PASS  Tests\Unit\base\PasswordConfirmationTest
-  ✓ confirm password screen can be rendered                              0.04s  
-  ✓ password can be confirmed                                            0.03s  
-  ✓ password is not confirmed with invalid password                      0.23s  
+  ✓ confirm password screen can be rendered                              0.04s
+  ✓ password can be confirmed                                            0.03s
+  ✓ password is not confirmed with invalid password                      0.23s
 
    PASS  Tests\Unit\base\PasswordResetTest
-  ✓ reset password link screen can be rendered                           0.05s  
-  ✓ reset password link can be requested                                 0.23s  
-  ✓ reset password screen can be rendered                                0.26s  
-  ✓ password can be reset with valid token                               0.26s  
+  ✓ reset password link screen can be rendered                           0.03s
+  ✓ reset password link can be requested                                 0.23s
+  ✓ reset password screen can be rendered                                0.26s
+  ✓ password can be reset with valid token                               0.27s
 
    PASS  Tests\Unit\base\ProfileInformationTest
-  ✓ current profile information is available                             0.05s  
-  ✓ profile information can be updated                                   0.04s  
+  ✓ current profile information is available                             0.05s
+  ✓ profile information can be updated                                   0.04s
 
    WARN  Tests\Unit\base\RegistrationTest
-  ✓ registration screen can be rendered                                  0.03s  
-  - registration screen cannot be rendered if support is disabled → Reg… 0.01s  
-  ✓ new users can register                                               0.03s  
+  ✓ registration screen can be rendered                                  0.03s
+  - registration screen cannot be rendered if support is disabled → Reg… 0.01s
+  ✓ new users can register                                               0.03s
 
    PASS  Tests\Unit\base\TwoFactorAuthenticationSettingsTest
-  ✓ two factor authentication can be enabled                             0.07s  
-  ✓ recovery codes can be regenerated                                    0.11s  
-  ✓ two factor authentication can be disabled                            0.07s  
+  ✓ two factor authentication can be enabled                             0.08s
+  ✓ recovery codes can be regenerated                                    0.12s
+  ✓ two factor authentication can be disabled                            0.07s
 
    PASS  Tests\Unit\base\UpdatePasswordTest
-  ✓ password can be updated                                              0.05s  
-  ✓ current password must be correct                                     0.04s  
-  ✓ new passwords must match                                             0.05s  
+  ✓ password can be updated                                              0.05s
+  ✓ current password must be correct                                     0.05s
+  ✓ new passwords must match                                             0.06s
 
    PASS  Tests\Feature\Api\Accounting\ChartOfAccountsApiTest
-  ✓ it can list chart of accounts                                        0.05s  
-  ✓ it can create a chart of account                                     0.04s  
-  ✓ it validates account creation                                        0.04s  
-  ✓ it can show a specific account                                       0.04s  
-  ✓ it returns 404 for nonexistent account                               0.04s  
+  ✓ it can list chart of accounts                                        0.04s
+  ✓ it can create a chart of account                                     0.04s
+  ✓ it validates account creation                                        0.04s
+  ✓ it can show a specific account                                       0.04s
+  ✓ it returns 404 for nonexistent account                               0.05s
 
    PASS  Tests\Feature\Api\Accounting\FinancialReportsApiTest
-  ✓ it can generate trial balance                                        0.04s  
-  ✓ it can generate balance sheet                                        0.05s  
-  ✓ it can generate income statement                                     0.04s  
-  ✓ it validates income statement date range                             0.04s  
-  ✓ it rejects end date before start date                                0.04s  
+  ✓ it can generate trial balance                                        0.05s
+  ✓ it can generate balance sheet                                        0.05s
+  ✓ it can generate income statement                                     0.05s
+  ✓ it validates income statement date range                             0.04s
+  ✓ it rejects end date before start date                                0.05s
 
    FAIL  Tests\Feature\Api\Accounting\JournalEntriesApiTest
-  ⨯ it can create a journal entry                                        0.04s  
-  ✓ it validates journal entry balances                                  0.04s  
-  ✓ it can post a journal entry                                          0.04s  
+  ⨯ it can create a journal entry                                        0.05s
+  ✓ it validates journal entry balances                                  0.04s
+  ✓ it can post a journal entry                                          0.04s
 
    PASS  Tests\Feature\OrganizationApiTest
-  ✓ can create organization                                              0.04s  
-  ✓ debug factory output                                                 0.02s  
-  ✓ verify organization factory works                                    0.02s  
-  ✓ can list organizations                                               0.04s  
-  ✓ can show organization                                                0.04s  
-  ✓ can update organization                                              0.04s  
-  ✓ can delete organization                                              0.04s  
-  ✓ guests cannot access organizations                                   0.04s  
-  ✓ name is required for creation                                        0.04s  
-  ✓ name must be unique                                                  0.04s  
-  ✓ user can view their organizations                                    0.04s  
-  ✓ organization admin can list members                                  0.04s  
-  ✓ admin can invite new members                                         0.04s  
-  ✓ cannot invite existing member                                        0.04s  
-  ✓ non admin cannot invite members                                      0.04s  
+  ✓ can create organization                                              0.04s
+  ✓ debug factory output                                                 0.02s
+  ✓ verify organization factory works                                    0.02s
+  ✓ can list organizations                                               0.05s
+  ✓ can show organization                                                0.04s
+  ✓ can update organization                                              0.04s
+  ✓ can delete organization                                              0.04s
+  ✓ guests cannot access organizations                                   0.05s
+  ✓ name is required for creation                                        0.04s
+  ✓ name must be unique                                                  0.05s
+  ✓ user can view their organizations                                    0.05s
+  ✓ organization admin can list members                                  0.04s
+  ✓ admin can invite new members                                         0.04s
+  ✓ cannot invite existing member                                        0.04s
+  ✓ non admin cannot invite members                                      0.04s
 
    FAIL  Tests\Feature\OrganizationUnitApiTest
-  ✓ can create organization unit                                         0.05s  
-  ✓ can create nested unit                                               0.04s  
-  ✓ can get unit hierarchy                                               0.05s  
-  ✓ can assign user to unit                                              0.05s  
-  ✓ can list users by organization unit                                  0.04s  
-  ✓ cannot create organization unit as non admin                         0.05s  
-  ⨯ cannot assign user as non admin                                      0.04s  
-  ✓ cannot create unit with invalid data                                 0.04s  
-  ✓ cannot assign non existent user to unit                              0.04s  
-  ✓ cannot assign user not in organization                               0.04s  
-  ✓ cannot get hierarchy for non existent unit                           0.04s  
-  ✓ can get hierarchy for unit with no children                          0.04s  
+  ✓ can create organization unit                                         0.05s
+  ✓ can create nested unit                                               0.05s
+  ✓ can get unit hierarchy                                               0.04s
+  ✓ can assign user to unit                                              0.05s
+  ✓ can list users by organization unit                                  0.05s
+  ✓ cannot create organization unit as non admin                         0.04s
+  ⨯ cannot assign user as non admin                                      0.04s
+  ✓ cannot create unit with invalid data                                 0.04s
+  ✓ cannot assign non existent user to unit                              0.05s
+  ✓ cannot assign user not in organization                               0.05s
+  ✓ cannot get hierarchy for non existent unit                           0.04s
+  ✓ can get hierarchy for unit with no children                          0.04s
+
+   WARN  Tests\Feature\Portal\AttendanceSyncTest
+  ! can view attendance dashboard → This test did not perform any asser… 0.02s
+  ! can filter attendance by date range → This test did not perform any… 0.02s
+  ! can identify attendance exceptions → This test did not perform any…  0.01s
+  ! can regularize missed punch → This test did not perform any asserti… 0.01s
+  ! attendance data integrates with payroll → This test did not perform… 0.02s
 
    FAIL  Tests\Feature\DashboardTest
-  ✓ it redirects to setup for users without organization                 0.06s  
-  ✓ it shows dashboard for users with organization                       0.06s  
-  ✓ it shows dashboard sections                                          0.06s  
-  ✓ it shows store inventory summary                                     0.06s  
-  ⨯ it shows low stock alerts                                            0.35s  
-  ✓ it shows recent transactions                                         0.09s  
-  ⨯ it shows quick action buttons                                        0.07s  
-  ✓ it shows stats cards                                                 0.07s  
-  ✓ it shows empty state for no stores                                   0.07s  
-  ✓ it shows all stocked message when no low stock                       0.06s  
-  ✓ it shows store with item counts                                      0.07s  
+  ✓ it redirects to setup for users without organization                 0.07s
+  ✓ it shows dashboard for users with organization                       0.07s
+  ✓ it shows dashboard sections                                          0.07s
+  ✓ it shows store inventory summary                                     0.07s
+  ⨯ it shows low stock alerts                                            0.39s
+  ✓ it shows recent transactions                                         0.11s
+  ⨯ it shows quick action buttons                                        0.07s
+  ✓ it shows stats cards                                                 0.07s
+  ✓ it shows empty state for no stores                                   0.07s
+  ✓ it shows all stocked message when no low stock                       0.08s
+  ✓ it shows store with item counts                                      0.07s
 
    PASS  Tests\Feature\ExampleTest
-  ✓ it returns a successful response                                     0.05s  
+  ✓ it returns a successful response                                     0.05s
+
+   FAIL  Tests\Feature\Portal\EmployeeManagementTest
+  ✓ can view employee list                                               0.07s
+  ✓ can view employee details                                            0.08s
+  ✓ can create employee                                                  0.06s
+  ✓ can update employee details                                          0.06s
+  ✓ can update biometric id                                              0.05s
+  ✓ employee belongs to organization unit                                0.07s
+  ⨯ employee creation requires authentication                            0.06s
+  ⨯ non hr users cannot create employees                                 0.06s
+  ✓ can search employees                                                 0.06s
+  ✓ can filter employees by department                                   0.07s
+  ✓ employee attendance integration                                      0.08s
+  ✓ employee leave balance calculation                                   0.07s
+  ✓ can create employee without user account                             0.05s
+  ✓ can grant system access to employee                                  0.06s
+
+   FAIL  Tests\Feature\HrmDashboardControllerTest
+  ✓ it displays hrm dashboard to authenticated users                     0.06s
+  ✓ it redirects guests to login page                                    0.04s
+  ✓ it passes hrm dashboard data to view                                 0.05s
+  ✓ it includes employee summary data                                    0.05s
+  ✓ it includes attendance overview data                                 0.06s
+  ✓ it includes leave management data                                    0.05s
+  ✓ it includes performance kpis data                                    0.05s
+  ✓ it includes recent activities data                                   0.05s
+  ✓ it includes upcoming events data                                     0.05s
+  ✓ it includes organization unit stats data                             0.05s
+  ✓ it includes training development data                                0.06s
+  ⨯ dashboard view contains expected hrm elements                        0.05s
+  ✓ it provides realistic hrm data values                                0.05s
+  ✓ recent activities are sorted by timestamp                            0.05s
+  ✓ upcoming events are sorted by date                                   0.05s
+  ✓ organization unit stats have consistent structure                    0.05s
+  ✓ it handles users with hrm permissions                                0.06s
+  ✓ it shows organization specific data                                  0.05s
 
    PASS  Tests\Feature\Inventory\InventoryControllerTest
-  ✓ it displays inventory dashboard                                      0.07s  
-  ✓ it shows correct statistics on dashboard                             0.11s  
-  ✓ it requires authentication for inventory dashboard                   0.10s  
-  ✓ it includes todays transactions in stats                             0.11s  
-  ✓ it handles empty inventory gracefully                                0.11s  
+  ✓ it displays inventory dashboard                                      0.08s
+  ✓ it shows correct statistics on dashboard                             0.07s
+  ✓ it requires authentication for inventory dashboard                   0.06s
+  ✓ it includes todays transactions in stats                             0.07s
+  ✓ it handles empty inventory gracefully                                0.07s
 
    PASS  Tests\Feature\Inventory\InventoryItemControllerTest
-  ✓ it displays items index                                              0.24s  
-  ✓ it filters items by search term                                      0.13s  
-  ✓ it shows item creation form                                          0.09s  
-  ✓ it stores new item with valid data                                   0.08s  
-  ✓ it validates required fields when storing item                       0.07s  
+  ✓ it displays items index                                              0.08s
+  ✓ it filters items by search term                                      0.08s
+  ✓ it shows item creation form                                          0.08s
+  ✓ it stores new item with valid data                                   0.06s
+  ✓ it validates required fields when storing item                       0.06s
 
    PASS  Tests\Feature\Inventory\InventoryReportControllerTest
-  ✓ it displays reports dashboard                                        0.08s  
-  ✓ it displays low stock report                                         0.08s  
-  ✓ it filters low stock by store                                        0.09s  
-  ✓ it displays stock movement report                                    0.07s  
-  ✓ it filters movement report by date range                             0.08s  
-  ✓ it displays stock levels report                                      0.08s  
-  ✓ it filters stock levels by category                                  0.07s  
-  ✓ it handles empty reports gracefully                                  0.10s  
+  ✓ it displays reports dashboard                                        0.08s
+  ✓ it displays low stock report                                         0.08s
+  ✓ it filters low stock by store                                        0.10s
+  ✓ it displays stock movement report                                    0.08s
+  ✓ it filters movement report by date range                             0.09s
+  ✓ it displays stock levels report                                      0.08s
+  ✓ it filters stock levels by category                                  0.08s
+  ✓ it handles empty reports gracefully                                  0.10s
 
    PASS  Tests\Feature\InventoryScopeTest
-  ✓ it finds low stock items using scope                                 0.05s  
-  ✓ it finds low stock items in specific store                           0.04s  
-  ✓ it finds out of stock items using scope                              0.04s  
-  ✓ store can retrieve its low stock items                               0.04s  
-  ✓ store can retrieve its out of stock items                            0.04s  
-  ✓ it calculates stock statistics for store                             0.04s  
-  ✓ it properly categorizes stock levels                                 0.04s  
+  ✓ it finds low stock items using scope                                 0.05s
+  ✓ it finds low stock items in specific store                           0.04s
+  ✓ it finds out of stock items using scope                              0.04s
+  ✓ store can retrieve its low stock items                               0.04s
+  ✓ store can retrieve its out of stock items                            0.04s
+  ✓ it calculates stock statistics for store                             0.04s
+  ✓ it properly categorizes stock levels                                 0.05s
 
    PASS  Tests\Feature\Inventory\InventoryStockControllerTest
-  ✓ it shows stock adjustment form                                       0.06s  
-  ✓ it processes stock adjustment                                        0.06s  
-  ✓ it shows stock count form                                            0.05s  
-  ✓ it processes stock count                                             0.06s  
-  ✓ it shows stock transfer form                                         0.06s  
-  ✓ it processes stock transfer                                          0.07s  
+  ✓ it shows stock adjustment form                                       0.06s
+  ✓ it processes stock adjustment                                        0.07s
+  ✓ it shows stock count form                                            0.06s
+  ✓ it processes stock count                                             0.08s
+  ✓ it shows stock transfer form                                         0.06s
+  ✓ it processes stock transfer                                          0.08s
 
    PASS  Tests\Feature\Inventory\InventoryStoreControllerTest
-  ✓ it displays stores index                                             0.07s  
-  ✓ it filters stores by search term                                     0.07s  
-  ✓ it shows store creation form                                         0.07s  
-  ✓ it stores new store with valid data                                  0.05s  
-  ✓ it shows store detail page                                           0.07s  
-  ✓ it updates store with valid data                                     0.05s  
-  ✓ it deletes store without transactions or items                       0.05s  
-  ✓ it prevents deletion of store with transactions                      0.06s  
+  ✓ it displays stores index                                             0.08s
+  ✓ it filters stores by search term                                     0.08s
+  ✓ it shows store creation form                                         0.07s
+  ✓ it stores new store with valid data                                  0.06s
+  ✓ it shows store detail page                                           0.08s
+  ✓ it updates store with valid data                                     0.07s
+  ✓ it deletes store without transactions or items                       0.06s
+  ✓ it prevents deletion of store with transactions                      0.06s
 
    PASS  Tests\Feature\Inventory\InventoryTenancyTest
-  ✓ it scopes items by organization                                      0.05s  
-  ✓ it scopes stores by organization                                     0.04s  
-  ✓ user cannot access other organizations inventory data                0.09s  
-  ✓ it enforces organization isolation in controllers                    0.10s  
+  ✓ it scopes items by organization                                      0.05s
+  ✓ it scopes stores by organization                                     0.05s
+  ✓ user cannot access other organizations inventory data                0.10s
+  ✓ it enforces organization isolation in controllers                    0.10s
 
    PASS  Tests\Feature\Inventory\InventoryTransactionControllerTest
-  ✓ it displays transactions index                                       0.07s  
-  ✓ it shows transaction creation form                                   0.06s  
-  ✓ it stores new transaction with items                                 0.06s  
+  ✓ it displays transactions index                                       0.08s
+  ✓ it shows transaction creation form                                   0.07s
+  ✓ it stores new transaction with items                                 0.06s
 
    FAIL  Tests\Feature\Inventory\ItemTest
-  ✓ it can create an item                                                0.06s  
-  ✓ it can search items by name or sku                                   0.06s  
-  ✓ it can filter items by category                                      0.06s  
-  ✓ it can sort items                                                    0.06s  
-  ✓ it returns only items from users organization                        0.06s  
-  ✓ it can get item availability across stores                           0.07s  
-  ✓ it shows low stock status correctly                                  0.06s  
-  ⨯ it returns 403 for unauthorized access                               0.06s  
-  ✓ it handles item with no stores                                       0.06s  
+  ✓ it can create an item                                                0.06s
+  ✓ it can search items by name or sku                                   0.07s
+  ✓ it can filter items by category                                      0.07s
+  ✓ it can sort items                                                    0.07s
+  ✓ it returns only items from users organization                        0.07s
+  ✓ it can get item availability across stores                           0.07s
+  ✓ it shows low stock status correctly                                  0.07s
+  ⨯ it returns 403 for unauthorized access                               0.07s
+  ✓ it handles item with no stores                                       0.07s
 
    FAIL  Tests\Feature\Inventory\PermissionTest
-  ✓ inventory admin has all permissions                                  0.07s  
-  ✓ store manager cannot delete stores                                   0.06s  
-  ✓ inventory clerk cannot finalize transactions                         0.06s  
-  ✓ auditor can only view inventory                                      0.06s  
-  ⨯ user cannot access other organization inventory                      0.06s  
+  ✓ inventory admin has all permissions                                  0.08s
+  ✓ store manager cannot delete stores                                   0.06s
+  ✓ inventory clerk cannot finalize transactions                         0.08s
+  ✓ auditor can only view inventory                                      0.07s
+  ⨯ user cannot access other organization inventory                      0.07s
 
    PASS  Tests\Feature\Inventory\StoreTest
-  ✓ it can create a store                                                0.07s  
-  ✓ it can add items to store                                            0.06s  
-  ✓ it can retrieve store with items                                     0.06s  
-  ✓ it can update item quantity in store                                 0.06s  
-  ✓ it can list all stores for organization                              0.06s  
-  ✓ it can use organization scope                                        0.04s  
-  ✓ it can use search scope                                              0.04s  
-  ✓ it can use active scope                                              0.04s  
+  ✓ it can create a store                                                0.07s
+  ✓ it can add items to store                                            0.07s
+  ✓ it can retrieve store with items                                     0.07s
+  ✓ it can update item quantity in store                                 0.06s
+  ✓ it can list all stores for organization                              0.07s
+  ✓ it can use organization scope                                        0.05s
+  ✓ it can use search scope                                              0.04s
+  ✓ it can use active scope                                              0.05s
 
    PASS  Tests\Feature\Inventory\TransactionTest
-  ✓ it can create draft transaction without items                        0.06s  
-  ✓ it can create draft transaction with items                           0.06s  
-  ✓ it can add items to empty draft transaction                          0.07s  
-  ✓ it can add items to transaction with existing items                  0.07s  
-  ✓ it can finalize transaction created without items after adding item… 0.07s  
-  ✓ it can finalize transaction created with items                       0.07s  
-  ✓ it cannot finalize empty transaction                                 0.06s  
-  ✓ it cannot add items to finalized transaction                         0.08s  
-  ✓ it can list transactions by status                                   0.09s  
-  ✓ it can calculate transaction totals                                  0.07s  
-  ✓ it cannot modify finalized transaction                               0.07s  
-  ✓ it can calculate totals for empty transaction                        0.07s  
+  ✓ it can create draft transaction without items                        0.07s
+  ✓ it can create draft transaction with items                           0.07s
+  ✓ it can add items to empty draft transaction                          0.07s
+  ✓ it can add items to transaction with existing items                  0.08s
+  ✓ it can finalize transaction created without items after adding item… 0.08s
+  ✓ it can finalize transaction created with items                       0.08s
+  ✓ it cannot finalize empty transaction                                 0.07s
+  ✓ it cannot add items to finalized transaction                         0.08s
+  ✓ it can list transactions by status                                   0.10s
+  ✓ it can calculate transaction totals                                  0.08s
+  ✓ it cannot modify finalized transaction                               0.08s
+  ✓ it can calculate totals for empty transaction                        0.07s
 
    PASS  Tests\Feature\Livewire\Accounting\ChartOfAccountsTest
-  ✓ chart of accounts page renders                                       0.05s  
-  ✓ it displays a list of accounts                                       0.04s  
-  ✓ it displays a list of chart of accounts                              0.04s  
-  ✓ it can create a new chart of account record                          0.05s  
-  ✓ it can update an existing chart of account record                    0.05s  
+  ✓ chart of accounts page renders                                       0.06s
+  ✓ it displays a list of accounts                                       0.05s
+  ✓ it displays a list of chart of accounts                              0.05s
+  ✓ it can create a new chart of account record                          0.06s
+  ✓ it can update an existing chart of account record                    0.06s
 
    FAIL  Tests\Feature\Livewire\Accounting\JournalEntriesTest
-  ✓ it renders successfully                                              0.05s  
-  ⨯ it creates a journal entry                                           0.07s  
-  ✓ a journal entry requires balanced debits and credits                 0.07s  
+  ✓ it renders successfully                                              0.06s
+  ⨯ it creates a journal entry                                           0.08s
+  ✓ a journal entry requires balanced debits and credits                 0.08s
 
    PASS  Tests\Feature\Livewire\Organization\MemberManagerTest
-  ✓ it can display a list of organization members                        0.04s  
-  ✓ it can search for members by name or email                           0.05s  
+  ✓ it can display a list of organization members                        0.05s
+  ✓ it can search for members by name or email                           0.05s
 
    PASS  Tests\Feature\Livewire\Organization\OrganizationFormTest
-  ✓ it shows create form                                                 0.04s  
-  ✓ it shows edit form                                                   0.05s  
-  ✓ it creates new organization                                          0.05s  
-  ✓ it updates existing organization                                     0.05s  
-  ✓ it validates required fields                                         0.04s  
-  ✓ it validates unique name                                             0.04s  
-  ✓ it closes modal                                                      0.04s  
+  ✓ it shows create form                                                 0.06s
+  ✓ it shows edit form                                                   0.05s
+  ✓ it creates new organization                                          0.05s
+  ✓ it updates existing organization                                     0.06s
+  ✓ it validates required fields                                         0.05s
+  ✓ it validates unique name                                             0.05s
+  ✓ it closes modal                                                      0.05s
 
    FAIL  Tests\Feature\Livewire\Organization\OrganizationListTest
-  ✓ it shows organizations list                                          0.05s  
-  ✓ it searches organizations by name                                    0.05s  
-  ✓ it sorts organizations by name ascending                             0.05s  
-  ✓ it sorts organizations by name descending                            0.05s  
-  ✓ it sorts organizations by status                                     0.05s  
-  ✓ it paginates organizations                                           0.06s  
-  ⨯ it shows empty state when no organizations                           0.04s  
+  ✓ it shows organizations list                                          0.06s
+  ✓ it searches organizations by name                                    0.05s
+  ✓ it sorts organizations by name ascending                             0.06s
+  ✓ it sorts organizations by name descending                            0.06s
+  ✓ it sorts organizations by status                                     0.05s
+  ✓ it paginates organizations                                           0.07s
+  ⨯ it shows empty state when no organizations                           0.05s
 
    FAIL  Tests\Feature\Livewire\Organization\OrganizationTreeTest
-  ✓ it can display the organization tree                                 0.05s  
-  ✓ an organization unit can be dragged and dropped to another parent    0.05s  
-  ✓ an organizational unit cannot be dropped onto itself                 0.04s  
-  ✓ an organizational unit can be dropped as a root node                 0.05s  
-  ✓ a parent cannot be dropped onto one of its descendants               0.05s  
-  ✓ a sibling can be dropped under another sibling                       0.05s  
-  ⨯ an empty tree renders correctly                                      0.02s  
-  ✓ it can handle a large number of units without crashing               0.09s  
-  ⨯ a dropped unit that does not exist does not cause an error           0.05s  
+  ✓ it can display the organization tree                                 0.06s
+  ✓ an organization unit can be dragged and dropped to another parent    0.05s
+  ✓ an organizational unit cannot be dropped onto itself                 0.05s
+  ✓ an organizational unit can be dropped as a root node                 0.05s
+  ✓ a parent cannot be dropped onto one of its descendants               0.05s
+  ✓ a sibling can be dropped under another sibling                       0.05s
+  ⨯ an empty tree renders correctly                                      0.02s
+  ✓ it can handle a large number of units without crashing               0.10s
+  ⨯ a dropped unit that does not exist does not cause an error           0.05s
 
    FAIL  UserPlacementTest
-  ✓ it can assign a user to a unit                                       0.05s  
-  ⨯ it can unassign a user by dropping them onto the root                0.05s  
+  ✓ it can assign a user to a unit                                       0.06s
+  ⨯ it can unassign a user by dropping them onto the root                0.05s
 
    PASS  Tests\Feature\MultiStepSetupWizardTest
-  ✓ it shows organization step for new users                             0.06s  
-  ✓ it can store organization and proceed to store step                  0.06s  
-  ✓ it shows store setup step after organization                         0.06s  
-  ✓ it can create first store and proceed to accounting                  0.07s  
-  ✓ it shows accounting setup step after store                           0.06s  
+  ✓ it shows organization step for new users                             0.08s
+  ✓ it can store organization and proceed to store step                  0.06s
+  ✓ it shows store setup step after organization                         0.07s
+  ✓ it can create first store and proceed to accounting                  0.06s
+  ✓ it shows accounting setup step after store                           0.07s
+
+   FAIL  Tests\Feature\Organization\OrganizationDashboardTest
+  ⨯ authenticated user can access organization dashboard                 0.22s
+  ⨯ dashboard displays correct organization metrics                      0.20s
+  ⨯ user can view organization structure                                 0.02s
+  ⨯ dashboard includes department distribution data                      0.21s
+  ⨯ analytics page displays trend data                                   0.02s
+
+   FAIL  Tests\Feature\Portal\OrganizationUserIntegrationTest
+  ⨯ organization user roles are properly cast                            0.03s
+  ✓ employee can access employee portal with employee role               0.07s
+  ⨯ manager can access both employee and manager portals
+  ⨯ user without organization access denied                              0.05s
+  ⨯ employee cannot access manager portal                                0.07s
+  ⨯ has role method works correctly                                      0.03s
+  ⨯ has any role method works correctly                                  0.03s
 
    PASS  OrganizationUserPivotTest
-  ✓ it can get all roles with the new pivot model                        0.02s  
+  ✓ it can get all roles with the new pivot model                        0.03s
+
+   WARN  Tests\Feature\Portal\PayrollProcessingTest
+  ! can calculate payroll with attendance → This test did not perform a… 0.02s
+  ! payroll includes correct deductions → This test did not perform any… 0.02s
+  ! can generate accounting journal entry → This test did not perform a… 0.02s
+  ! payslip generation → This test did not perform any assertions        0.02s
+  ! payroll uses correct chart of accounts → This test did not perform…  0.02s
+
+   PASS  Tests\Feature\Portal\CompletePortalTest
+  ✓ employee can access all portal features                              0.10s
+  ✓ employee can clock in and out                                        0.06s
+  ✓ employee can apply for leave                                         0.07s
+  ✓ manager can access manager portal                                    0.09s
+  ✓ employee can view payslip details                                    0.07s
+  ✓ employee cannot view other employee payslips                         0.06s
+  ✓ attendance records show correct summary                              0.07s
+
+   FAIL  Tests\Feature\Portal\EmployeePortalTest
+  ✓ employee can access their portal dashboard                           0.08s
+  ✓ employee can view attendance page                                    0.07s
+  ✓ employee can filter attendance by month                              0.06s
+  ✓ employee can apply for leave                                         0.06s
+  ✓ employee can view leave page                                         0.07s
+  ✓ employee can view payslips page                                      0.07s
+  ✓ employee can view leave application form                             0.06s
+  ⨯ employee can clock in and out                                        0.05s
+
+   FAIL  Tests\Feature\Portal\ManagerPortalTest
+  ✓ manager can access their portal dashboard                            0.07s
+  ✓ manager can view team attendance page                                0.07s
+  ⨯ manager can approve leave requests                                   0.06s
+  ✓ manager can filter team attendance by date                           0.07s
+  ⨯ manager can generate team reports                                    0.03s
 
    PASS  Tests\Feature\SetupChartOfAccountsTest
-  ✓ it creates default chart of accounts                                 0.06s  
-  ✓ it skips account creation if not requested                           0.05s  
-  ✓ it creates organization unit for accounting department               0.05s  
+  ✓ it creates default chart of accounts                                 0.06s
+  ✓ it skips account creation if not requested                           0.05s
+  ✓ it creates organization unit for accounting department               0.07s
 
    PASS  Tests\Feature\SetupStoreTest
-  ✓ it creates first store for organization                              0.06s  
-  ✓ it validates store creation                                          0.05s  
-  ✓ it auto generates store code if not provided                         0.06s  
+  ✓ it creates first store for organization                              0.06s
+  ✓ it validates store creation                                          0.06s
+  ✓ it auto generates store code if not provided                         0.06s
 
    PASS  Tests\Feature\SetupWizardTest
-  ✓ it shows setup wizard for new users                                  0.06s  
-  ✓ it redirects to dashboard if organization exists                     0.05s  
-  ✓ it can create organization through wizard                            0.05s  
-  ✓ it validates organization creation                                   0.05s  
-  ✓ it assigns admin role to creator                                     0.06s  
+  ✓ it shows setup wizard for new users                                  0.08s
+  ✓ it redirects to dashboard if organization exists                     0.07s
+  ✓ it can create organization through wizard                            0.10s
+  ✓ it validates organization creation                                   0.06s
+  ✓ it assigns admin role to creator                                     0.06s
 
    PASS  Tests\Feature\TenancyFeatureTest
-  ✓ queries are automatically scoped to the authenticated users organiz… 0.04s  
-  ✓ organization id is automatically set on creation                     0.04s  
-  ✓ global scope can be bypassed for admin queries                       0.04s  
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\Api\Accounting\JournalEntriesApiTest > it can creat…   
+  ✓ queries are automatically scoped to the authenticated users organiz… 0.06s
+  ✓ organization id is automatically set on creation                     0.05s
+  ✓ global scope can be bypassed for admin queries                       0.05s
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Api\Accounting\JournalEntriesApiTest > it can creat…
   Expected response status code [201] but received 422.
 Failed asserting that 422 is identical to 201.
 
@@ -454,8 +546,8 @@ The following errors occurred during the last request:
      47▕                     'id',
      48▕                     'reference_number',
 
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\OrganizationUnitApiTest > cannot assign user as non…   
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\OrganizationUnitApiTest > cannot assign user as non…
   Expected response status code [403] but received 404.
 Failed asserting that 404 is identical to 403.
 
@@ -463,190 +555,21 @@ Failed asserting that 404 is identical to 403.
     193▕                 'user_id' => $regularUser->id,
     194▕                 'position' => 'Mermaid Trainer'
     195▕             ]);
-    196▕ 
+    196▕
   ➜ 197▕         $response->assertStatus(403);
     198▕     }
-    199▕ 
+    199▕
     200▕     #[Test]
     201▕     public function cannot_create_unit_with_invalid_data()
 
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\DashboardTest > it shows low stock alerts              
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\DashboardTest > it shows low stock alerts
   Expected response status code [200] but received 500.
 Failed asserting that 500 is identical to 200.
 
 The following exception occurred during the last request:
 
-ErrorException: foreach() argument must be of type array|object, null given in /home/gg/dev/hrm-laravel-base/storage/framework/views/cbc6c49f60401dc694ac60624efc35fc.php:169
-Stack trace:
-#0 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(258): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError()
-#1 /home/gg/dev/hrm-laravel-base/storage/framework/views/cbc6c49f60401dc694ac60624efc35fc.php(169): Illuminate\Foundation\Bootstrap\HandleExceptions->{closure:Illuminate\Foundation\Bootstrap\HandleExceptions::forwardsTo():257}()
-#2 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require('...')
-#3 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\Filesystem\Filesystem::{closure:Illuminate\Filesystem\Filesystem::getRequire():120}()
-#4 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(57): Illuminate\Filesystem\Filesystem->getRequire()
-#5 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(22): Illuminate\View\Engines\PhpEngine->evaluatePath()
-#6 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(76): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->evaluatePath()
-#7 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(10): Illuminate\View\Engines\CompilerEngine->get()
-#8 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(208): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->get()
-#9 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(191): Illuminate\View\View->getContents()
-#10 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(160): Illuminate\View\View->renderContents()
-#11 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(78): Illuminate\View\View->render()
-#12 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(34): Illuminate\Http\Response->setContent()
-#13 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(939): Illuminate\Http\Response->__construct()
-#14 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(906): Illuminate\Routing\Router::toResponse()
-#15 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Routing\Router->prepareResponse()
-#16 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}()
-#17 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/EnsureEmailIsVerified.php(41): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#18 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\EnsureEmailIsVerified->handle()
-#19 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#20 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#21 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#22 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings->handle()
-#23 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#24 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle()
-#25 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(87): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#26 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle()
-#27 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#28 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\View\Middleware\ShareErrorsFromSession->handle()
-#29 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(120): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#30 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(63): Illuminate\Session\Middleware\StartSession->handleStatefulRequest()
-#31 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Session\Middleware\StartSession->handle()
-#32 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(36): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#33 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle()
-#34 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(74): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#35 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\EncryptCookies->handle()
-#36 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#37 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then()
-#38 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack()
-#39 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute()
-#40 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute()
-#41 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch()
-#42 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}()
-#43 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Features/SupportDisablingBackButtonCache/DisableBackButtonCacheMiddleware.php(19): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#44 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware->handle()
-#45 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#46 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#47 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#48 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#49 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
-#50 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#51 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#52 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
-#53 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#54 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle()
-#55 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#56 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
-#57 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#58 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle()
-#59 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#60 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle()
-#61 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#62 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle()
-#63 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#64 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle()
-#65 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#66 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then()
-#67 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
-#68 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle()
-#69 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(368): Illuminate\Foundation\Testing\TestCase->call()
-#70 /home/gg/dev/hrm-laravel-base/tests/Feature/DashboardTest.php(147): Illuminate\Foundation\Testing\TestCase->get()
-#71 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(1656): Tests\Feature\DashboardTest->it_shows_low_stock_alerts()
-#72 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(514): PHPUnit\Framework\TestCase->runTest()
-#73 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(87): PHPUnit\Framework\TestCase->runBare()
-#74 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(361): PHPUnit\Framework\TestRunner->run()
-#75 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestCase->run()
-#76 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#77 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#78 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
-#79 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/Application.php(211): PHPUnit\TextUI\TestRunner->run()
-#80 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run()
-#81 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle()
-#82 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(192): {closure:/home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest:18}()
-#83 {main}
-
-Next Illuminate\View\ViewException: foreach() argument must be of type array|object, null given (View: /home/gg/dev/hrm-laravel-base/resources/views/dashboard.blade.php) in /home/gg/dev/hrm-laravel-base/storage/framework/views/cbc6c49f60401dc694ac60624efc35fc.php:169
-Stack trace:
-#0 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(58): Illuminate\View\Engines\CompilerEngine->handleViewException()
-#1 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(59): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->handleViewException()
-#2 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(22): Illuminate\View\Engines\PhpEngine->evaluatePath()
-#3 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(76): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->evaluatePath()
-#4 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Mechanisms/ExtendBlade/ExtendedCompilerEngine.php(10): Illuminate\View\Engines\CompilerEngine->get()
-#5 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(208): Livewire\Mechanisms\ExtendBlade\ExtendedCompilerEngine->get()
-#6 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(191): Illuminate\View\View->getContents()
-#7 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/View.php(160): Illuminate\View\View->renderContents()
-#8 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(78): Illuminate\View\View->render()
-#9 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Response.php(34): Illuminate\Http\Response->setContent()
-#10 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(939): Illuminate\Http\Response->__construct()
-#11 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(906): Illuminate\Routing\Router::toResponse()
-#12 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Routing\Router->prepareResponse()
-#13 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}()
-#14 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/EnsureEmailIsVerified.php(41): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#15 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\EnsureEmailIsVerified->handle()
-#16 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#17 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#18 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#19 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings->handle()
-#20 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#21 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle()
-#22 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(87): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#23 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle()
-#24 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#25 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\View\Middleware\ShareErrorsFromSession->handle()
-#26 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(120): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#27 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(63): Illuminate\Session\Middleware\StartSession->handleStatefulRequest()
-#28 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Session\Middleware\StartSession->handle()
-#29 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(36): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#30 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle()
-#31 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(74): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#32 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Cookie\Middleware\EncryptCookies->handle()
-#33 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#34 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then()
-#35 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack()
-#36 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute()
-#37 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute()
-#38 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch()
-#39 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}()
-#40 /home/gg/dev/hrm-laravel-base/vendor/livewire/livewire/src/Features/SupportDisablingBackButtonCache/DisableBackButtonCacheMiddleware.php(19): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()
-#41 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware->handle()
-#42 /home/gg/dev/hrm-laravel-base/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(59): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#43 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Barryvdh\Debugbar\Middleware\InjectDebugbar->handle()
-#44 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#45 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#46 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
-#47 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#48 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
-#49 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
-#50 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#51 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle()
-#52 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#53 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
-#54 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(48): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#55 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle()
-#56 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#57 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle()
-#58 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#59 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle()
-#60 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#61 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle()
-#62 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()
-#63 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then()
-#64 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
-#65 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle()
-#66 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(368): Illuminate\Foundation\Testing\TestCase->call()
-#67 /home/gg/dev/hrm-laravel-base/tests/Feature/DashboardTest.php(147): Illuminate\Foundation\Testing\TestCase->get()
-#68 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(1656): Tests\Feature\DashboardTest->it_shows_low_stock_alerts()
-#69 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(514): PHPUnit\Framework\TestCase->runTest()
-#70 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(87): PHPUnit\Framework\TestCase->runBare()
-#71 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestCase.php(361): PHPUnit\Framework\TestRunner->run()
-#72 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestCase->run()
-#73 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#74 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/Framework/TestSuite.php(369): PHPUnit\Framework\TestSuite->run()
-#75 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
-#76 /home/gg/dev/hrm-laravel-base/vendor/phpunit/phpunit/src/TextUI/Application.php(211): PHPUnit\TextUI\TestRunner->run()
-#77 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run()
-#78 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle()
-#79 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(192): {closure:/home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest:18}()
-#80 {main}
+ErrorException: foreach() #80 {main}
 
 ----------------------------------------------------------------------------------
 
@@ -663,8 +586,8 @@ foreach() argument must be of type array|object, null given (View: /home/gg/dev/
     152▕     }
     153▕
 
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\DashboardTest > it shows quick action buttons          
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\DashboardTest > it shows quick action buttons
   Expected: <!DOCTYPE html>\n
   <html lang="en">\n
   \n
@@ -675,7 +598,7 @@ foreach() argument must be of type array|object, null given (View: /home/gg/dev/
   at tests/Feature/DashboardTest.php:190
     186▕         $response = $this->actingAs($user)
     187▕             ->get('/dashboard');
-    188▕ 
+    188▕
     189▕         $response->assertStatus(200)
   ➜ 190▕             ->assertSee('Add Store')
     191▕             ->assertSee('New Transaction')
@@ -683,8 +606,73 @@ foreach() argument must be of type array|object, null given (View: /home/gg/dev/
     193▕     }
     194▕
 
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\Inventory\ItemTest > it returns 403 for unauthorize…   
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Portal\EmployeeManagementTest > employee creation r…
+  Failed asserting that two strings are equal.
+
+The following errors occurred during the last request:
+
+The position field is required.
+The roles field is required.
+
+  -'http://localhost:8000/login'
+  +'http://localhost:8000'
+
+
+  at tests/Feature/HR/EmployeeManagementTest.php:171
+    167▕         ];
+    168▕
+    169▕         $response = $this->post(route('hr.employees.store'), $employeeData);
+    170▕
+  ➜ 171▕         $response->assertRedirect('/login');
+    172▕     }
+    173▕
+    174▕     #[Test]
+    175▕     public function test_non_hr_users_cannot_create_employees()
+
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Portal\EmployeeManagementTest > non hr users cannot…
+  Expected response status code [403] but received 302.
+Failed asserting that 302 is identical to 403.
+
+The following errors occurred during the last request:
+
+The position field is required.
+The roles field is required.
+
+  at tests/Feature/HR/EmployeeManagementTest.php:188
+    184▕         ];
+    185▕
+    186▕         $response = $this->post(route('hr.employees.store'), $employeeData);
+    187▕
+  ➜ 188▕         $response->assertStatus(403);
+    189▕     }
+    190▕
+    191▕     #[Test]
+    192▕     public function test_can_search_employees()
+
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\HrmDashboardControllerTest > dashboard view contain…
+  Expected: <!-- resources/views/hrm/dashboard.blade.php -->\n
+  <!DOCTYPE html>\n
+  <html lang="en">\n
+  ... (434 more lines)
+
+  To contain: Attendance Overview
+
+  at tests/Feature/HrmDashboardControllerTest.php:252
+    248▕         $response = $this->get(route('hrm.dashboard'));
+    249▕
+    250▕         $response->assertSee('HRM Dashboard');
+    251▕         $response->assertSee('Employee Summary');
+  ➜ 252▕         $response->assertSee('Attendance Overview');
+    253▕         $response->assertSee('Leave Management');
+    254▕         $response->assertSee('Performance KPIs');
+    255▕         $response->assertSee('Recent Activities');
+    256▕         $response->assertSee('OrganizationUnit Stats');
+
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Inventory\ItemTest > it returns 403 for unauthorize…
   Expected response status code [403] but received 404.
 Failed asserting that 404 is identical to 403.
 
@@ -692,15 +680,15 @@ Failed asserting that 404 is identical to 403.
     322▕         $response = $this->actingAs($setupA['user'])
     323▕             ->getJson("/api/inventory/items/{$itemB->id}/availability");
     324▕         // dd($response->json());
-    325▕ 
+    325▕
   ➜ 326▕         $response->assertStatus(403);
     327▕     }
-    328▕ 
+    328▕
     329▕     #[Test]
     330▕     public function it_handles_item_with_no_stores()
 
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\Inventory\PermissionTest > user cannot access other…   
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Inventory\PermissionTest > user cannot access other…
   Expected response status code [403] but received 404.
 Failed asserting that 404 is identical to 403.
 
@@ -714,30 +702,36 @@ Failed asserting that 404 is identical to 403.
      98▕ }
      99▕
 
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\Livewire\Accounting\JournalEntriesTest > it creates…   
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Livewire\Accounting\JournalEntriesTest > it creates…
   Failed asserting that a row in the table [journal_entries] matches the attributes {
     "entry_date": "2025-01-01",
     "description": "Test entry",
     "status": "posted"
 }.
 
-The table is empty.
+Found: [
+    {
+        "entry_date": "2025-01-01 00:00:00",
+        "description": "Test entry",
+        "status": "posted"
+    }
+].
 
   at tests/Feature/Livewire/Accounting/JournalEntriesTest.php:50
      46▕             ->set('transactions.1.credit', 500);
-     47▕ 
+     47▕
      48▕         $component->call('createEntry');
-     49▕ 
+     49▕
   ➜  50▕         $this->assertDatabaseHas('journal_entries', [
      51▕             'entry_date' => '2025-01-01',
      52▕             'description' => 'Test entry',
      53▕             'status' => 'posted',
      54▕         ]);
 
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\Livewire\Organization\OrganizationListTest > it sho…   
-  Expected: <div wire:snapshot="" wire:effects="" wire:id="ITA5EtjKj8JF6mHiVXo7">\n
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Livewire\Organization\OrganizationListTest > it sho…
+  Expected: <div wire:snapshot="" wire:effects="" wire:id="sLucffb1kPAstby9zTCs">\n
       <!-- Header with Search and Actions -->\n
       <div class="flex flex-col sm:flex-row justify-between items-center mb-6 space-y-4 sm:space-y-0">\n
   ... (103 more lines)
@@ -758,8 +752,8 @@ The table is empty.
       [2m+1 vendor frames [22m
   2   tests/Feature/Livewire/Organization/OrganizationListTest.php:148
 
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\Livewire\Organization\OrganizationTreeTest > an emp…   
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Livewire\Organization\OrganizationTreeTest > an emp…
   Failed asserting that 1 matches expected 0.
 
   at tests/Feature/Livewire/Organization/OrganizationTreeTest.php:125
@@ -768,21 +762,21 @@ The table is empty.
     123▕     {
     124▕         // Arrange: No units in the database
   ➜ 125▕         $this->assertEquals(0, OrganizationUnit::count());
-    126▕ 
+    126▕
     127▕         // Act & Assert
     128▕         Livewire::test(OrganizationTree::class)
     129▕             ->assertSee('No organizational units found.');
 
   1   tests/Feature/Livewire/Organization/OrganizationTreeTest.php:125
 
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\Livewire\Organization\OrganizationTreeTest > a drop…   
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Livewire\Organization\OrganizationTreeTest > a drop…
   Failed asserting that 2 matches expected 1.
 
   at tests/Feature/Livewire/Organization/OrganizationTreeTest.php:155
     151▕         Livewire::test(OrganizationTree::class)
     152▕             ->call('updateParent', $nonExistentId, $targetId);
-    153▕ 
+    153▕
     154▕         // Assert: The database state should be unchanged
   ➜ 155▕         $this->assertEquals(1, OrganizationUnit::count());
     156▕     }
@@ -791,8 +785,8 @@ The table is empty.
 
   1   tests/Feature/Livewire/Organization/OrganizationTreeTest.php:155
 
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  UserPlacementTest > it can unassign a user by dropping them onto…    
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  UserPlacementTest > it can unassign a user by dropping them onto…
   Failed asserting that a row in the table [organization_user] matches the attributes {
     "user_id": 2,
     "organization_id": 2,
@@ -815,7 +809,7 @@ Found similar results: [
   at tests/Feature/Livewire/Organization/UserPlacementTest.php:65
      61▕         Livewire::test(UserPlacement::class, ['organizationId' => $organization->id])
      62▕             ->call('assignUserToUnit', $user->id, null);
-     63▕ 
+     63▕
      64▕         // Assert
   ➜  65▕         $this->assertDatabaseHas('organization_user', [
      66▕             'user_id' => $user->id,
@@ -823,7 +817,268 @@ Found similar results: [
      68▕             'organization_unit_id' => null
      69▕         ]);
 
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Organization\OrganizationDashboardTest > authentica…
+  Expected response status code [200] but received 500.
+Failed asserting that 500 is identical to 200.
 
-  Tests:    11 failed, 4 skipped, 274 passed (938 assertions)
-  Duration: 15.72s
+The following exception occurred during the last request:
+
+Error: Call to undefined method App\Http\Controllers\OrganizationDashboardController::index() 70 {main}
+
+----------------------------------------------------------------------------------
+
+Call to undefined method App\Http\Controllers\OrganizationDashboardController::index()
+
+  at tests/Feature/OrganizationDashboardTest.php:35
+     31▕     {
+     32▕         $response = $this->actingAs($this->user)
+     33▕             ->get(route('organization.dashboard'));
+     34▕
+  ➜  35▕         $response->assertStatus(200);
+     36▕         $response->assertSee('Organization Management');
+     37▕     }
+     38▕
+     39▕     #[Test]    public function dashboard_displays_correct_organization_metrics()
+
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Organization\OrganizationDashboardTest > dashboard…
+  Expected response status code [200] but received 500.
+Failed asserting that 500 is identical to 200.
+
+The following exception occurred during the last request:
+
+Error: Call to undefined method App\Http\Controllers\OrganizationDashboardController::index()
+#70 {main}
+
+----------------------------------------------------------------------------------
+
+Call to undefined method App\Http\Controllers\OrganizationDashboardController::index()
+
+  at tests/Feature/OrganizationDashboardTest.php:54
+     50▕
+     51▕         $response = $this->actingAs($this->user)
+     52▕             ->get(route('organization.dashboard'));
+     53▕
+  ➜  54▕         $response->assertStatus(200);
+     55▕         $response->assertSee('Total Employees');
+     56▕         $response->assertSee('Departments');
+     57▕     }
+     58▕
+
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Organization\OrganizationDa…  RouteNotFoundException
+  Route [organization.structure] not defined.
+
+  at vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php:526
+    522▕             ! is_null($url = call_user_func($this->missingNamedRouteResolver, $name, $parameters, $absolute))) {
+    523▕             return $url;
+    524▕         }
+    525▕
+  ➜ 526▕         throw new RouteNotFoundException("Route [{$name}] not defined.");
+    527▕     }
+    528▕
+    529▕     /**
+    530▕      * Get the URL for a given route instance.
+
+      [2m+2 vendor frames [22m
+  3   tests/Feature/OrganizationDashboardTest.php:72
+
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Organization\OrganizationDashboardTest > dashboard…
+  Expected response status code [200] but received 500.
+Failed asserting that 500 is identical to 200.
+
+The following exception occurred during the last request:
+
+Error: Call to undefined method App\Http\Controllers\OrganizationDashboardController::index()
+#70 {main}
+
+----------------------------------------------------------------------------------
+
+Call to undefined method App\Http\Controllers\OrganizationDashboardController::index()
+
+  at tests/Feature/OrganizationDashboardTest.php:98
+     94▕
+     95▕         $response = $this->actingAs($this->user)
+     96▕             ->get(route('organization.dashboard'));
+     97▕
+  ➜  98▕         $response->assertStatus(200);
+     99▕         foreach ($departments as $dept) {
+    100▕             $response->assertSee($dept);
+    101▕         }
+    102▕     }
+
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Organization\OrganizationDa…  RouteNotFoundException
+  Route [organization.analytics] not defined.
+
+  at vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php:526
+    522▕             ! is_null($url = call_user_func($this->missingNamedRouteResolver, $name, $parameters, $absolute))) {
+    523▕             return $url;
+    524▕         }
+    525▕
+  ➜ 526▕         throw new RouteNotFoundException("Route [{$name}] not defined.");
+    527▕     }
+    528▕
+    529▕     /**
+    530▕      * Get the URL for a given route instance.
+
+      [2m+2 vendor frames [22m
+  3   tests/Feature/OrganizationDashboardTest.php:107
+
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Portal\OrganizationUserIntegrationTest > organizati…
+  Failed asserting that an array contains 'employee'.
+
+  at tests/Feature/OrganizationUserIntegrationTest.php:62
+     58▕     {
+     59▕         $orgUser = OrganizationUser::first();
+     60▕
+     61▕         $this->assertIsArray($orgUser->roles);
+  ➜  62▕         $this->assertContains('employee', $orgUser->roles);
+     63▕     }
+     64▕
+     65▕     #[Test]
+     66▕     public function employee_can_access_employee_portal_with_employee_role()
+
+  1   tests/Feature/OrganizationUserIntegrationTest.php:62
+
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Portal\Organiza…  UniqueConstraintViolationException
+  SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: organizations.name (Connection: sqlite, SQL: insert into "organizations" ("name", "description", "is_active", "created_at", "updated_at") values (Watsica Inc, Cumque asperiores ducimus sint id. Magni rerum ea cupiditate fugiat numquam voluptas voluptate. Vel eligendi nulla qui nihil enim non atque., 1, 2025-11-13 18:10:30, 2025-11-13 18:10:30))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:570
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕
+    568▕             $this->recordsHaveBeenModified();
+    569▕
+  ➜ 570▕             return $statement->execute();
+    571▕         });
+    572▕     }
+    573▕
+    574▕     /**
+
+      [2m+15 vendor frames [22m
+  16  tests/Feature/OrganizationUserIntegrationTest.php:27
+
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Portal\OrganizationUserIntegrationTest > user witho…
+  Expected response status code [403] but received 302.
+Failed asserting that 302 is identical to 403.
+
+  at tests/Feature/OrganizationUserIntegrationTest.php:103
+     99▕
+    100▕         $response = $this->actingAs($user)
+    101▕             ->get(route('portal.employee.dashboard'));
+    102▕
+  ➜ 103▕         $response->assertStatus(403);
+    104▕     }
+    105▕
+    106▕     #[Test]
+    107▕     public function employee_cannot_access_manager_portal()
+
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Portal\OrganizationUserIntegrationTest > employee c…
+  Expected response status code [403] but received 200.
+Failed asserting that 200 is identical to 403.
+
+  at tests/Feature/OrganizationUserIntegrationTest.php:116
+    112▕
+    113▕         $response = $this //->actingAs($this->employee)
+    114▕             ->get(route('portal.manager.dashboard'));
+    115▕
+  ➜ 116▕         $response->assertStatus(403);
+    117▕     }
+    118▕
+    119▕     #[Test]
+    120▕     public function hasRole_method_works_correctly()
+
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Portal\OrganizationUserIntegrationTest > has role m…
+  Failed asserting that false is true.
+
+  at tests/Feature/OrganizationUserIntegrationTest.php:125
+    121▕     {
+    122▕         $orgUser = OrganizationUser::where('user_id', $this->manager->id)->first();
+    123▕
+    124▕         $this->assertTrue($orgUser->hasRole('manager'));
+  ➜ 125▕         $this->assertTrue($orgUser->hasRole('employee'));
+    126▕         $this->assertFalse($orgUser->hasRole('hr'));
+    127▕     }
+    128▕
+    129▕     #[Test]
+
+  1   tests/Feature/OrganizationUserIntegrationTest.php:125
+
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Portal\OrganizationUserIntegrationTest > has any ro…
+  Failed asserting that false is true.
+
+  at tests/Feature/OrganizationUserIntegrationTest.php:134
+    130▕     public function hasAnyRole_method_works_correctly()
+    131▕     {
+    132▕         $orgUser = OrganizationUser::where('user_id', $this->hrUser->id)->first();
+    133▕
+  ➜ 134▕         $this->assertTrue($orgUser->hasAnyRole(['hr', 'admin']));
+    135▕         $this->assertTrue($orgUser->hasAnyRole(['manager', 'employee']));
+    136▕         $this->assertFalse($orgUser->hasAnyRole(['admin', 'super_admin']));
+    137▕     }
+    138▕ }
+
+  1   tests/Feature/OrganizationUserIntegrationTest.php:134
+
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Portal\EmployeePortalTest > employee can clock in a…
+  Expected response status code [200] but received 302.
+Failed asserting that 302 is identical to 200.
+
+  at tests/Feature/Portal/EmployeePortalTest.php:119
+    115▕     {
+    116▕         $response = $this //->actingAs($this->employee)
+    117▕             ->post(route('portal.employee.clock-in'));
+    118▕
+  ➜ 119▕         $response->assertStatus(200);
+    120▕         $this->assertDatabaseHas('attendance_records', [
+    121▕             'employee_id' => $this->employee->id,
+    122▕             'type' => 'clock_in'
+    123▕         ]);
+
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Portal\ManagerPortalTest > manager can approve leav…
+  Expected response status code [200] but received 403.
+Failed asserting that 403 is identical to 200.
+
+  at tests/Feature/Portal/ManagerPortalTest.php:65
+     61▕
+     62▕         $response = $this //->actingAs($this->manager)
+     63▕             ->post(route('portal.manager.leave.approve', $leaveRequest->id));
+     64▕
+  ➜  65▕         $response->assertStatus(200);
+     66▕         $this->assertDatabaseHas('leave_requests', [
+     67▕             'id' => $leaveRequest->id,
+     68▕             'status' => 'approved'
+     69▕         ]);
+
+  ────────────────────────────────────────────────────────────────────────────
+   FAILED  Tests\Feature\Portal\ManagerPortalTest >…   RouteNotFoundException
+  Route [portal.manager.team-report] not defined.
+
+  at vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php:526
+    522▕             ! is_null($url = call_user_func($this->missingNamedRouteResolver, $name, $parameters, $absolute))) {
+    523▕             return $url;
+    524▕         }
+    525▕
+  ➜ 526▕         throw new RouteNotFoundException("Route [{$name}] not defined.");
+    527▕     }
+    528▕
+    529▕     /**
+    530▕      * Get the URL for a given route instance.
+
+      [2m+2 vendor frames [22m
+  3   tests/Feature/Portal/ManagerPortalTest.php:82
+
+
+  Tests:    28 failed, 10 risky, 4 skipped, 321 passed (1203 assertions)
+  Duration: 20.51s
 
