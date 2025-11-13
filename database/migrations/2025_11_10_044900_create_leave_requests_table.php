@@ -26,7 +26,7 @@ return new class extends Migration
             $table->timestamp('applied_at')->useCurrent();
             $table->timestamps();
 
-            $table->index(['user_id', 'status']);
+            $table->index(['employee_id', 'status']);
             $table->index(['organization_id', 'start_date']);
             $table->index('leave_type');
         });

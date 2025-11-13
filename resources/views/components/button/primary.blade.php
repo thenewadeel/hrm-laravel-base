@@ -1,5 +1,5 @@
 {{-- resources/views/components/button/secondary.blade.php --}}
-@props(['size' => 'md', 'type' => 'button', 'href' => null])
+@props(['size' => 'md', 'type' => 'submit', 'href' => null])
 
 @if (isset($href))
     <a href="{{ $href }}"

@@ -36,29 +36,29 @@
 
                             <!-- First Name -->
                             <div>
-                                <x-input-label for="first_name" :value="__('First Name')" />
-                                <x-text-input id="first_name" class="block mt-1 w-full" type="text" name="first_name"
+                                <x-form.label for="first_name" :value="__('First Name')" />
+                                <x-form.input id="first_name" class="block mt-1 w-full" type="text" name="first_name"
                                     :value="old('first_name', $user->name ? explode(' ', $user->name)[0] : '')" required autofocus />
-                                <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
+                                <x-form.input-error :for="first_name" class="mt-2" />
                             </div>
 
                             <!-- Last Name -->
                             <div>
-                                <x-input-label for="last_name" :value="__('Last Name')" />
-                                <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name"
+                                <x-form.label for="last_name" :value="__('Last Name')" />
+                                <x-form.input id="last_name" class="block mt-1 w-full" type="text" name="last_name"
                                     :value="old(
                                         'last_name',
                                         $user->name && count(explode(' ', $user->name)) > 1
                                             ? explode(' ', $user->name)[1]
                                             : '',
                                     )" required />
-                                <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
+                                <x-form.input-error for="last_name" class="mt-2" />
                             </div>
 
                             <!-- Email (Read-only) -->
                             <div class="md:col-span-2">
-                                <x-input-label for="email" :value="__('Email Address')" />
-                                <x-text-input id="email" class="block mt-1 w-full bg-gray-50" type="email"
+                                <x-form.label for="email" :value="__('Email Address')" />
+                                <x-form.input id="email" class="block mt-1 w-full bg-gray-50" type="email"
                                     value="{{ $user->email }}" readonly disabled />
                                 <p class="mt-1 text-sm text-gray-500">Your email address is taken from your user
                                     account.</p>
@@ -71,19 +71,19 @@
 
                             <!-- Phone -->
                             <div class="md:col-span-2">
-                                <x-input-label for="phone" :value="__('Phone Number')" />
-                                <x-text-input id="phone" class="block mt-1 w-full" type="tel" name="phone"
+                                <x-form.label for="phone" :value="__('Phone Number')" />
+                                <x-form.input id="phone" class="block mt-1 w-full" type="tel" name="phone"
                                     :value="old('phone')" placeholder="+1 (555) 123-4567" />
-                                <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+                                <x-form.input-error for="phone" class="mt-2" />
                             </div>
 
                             <!-- Address -->
                             <div class="md:col-span-2">
-                                <x-input-label for="address" :value="__('Address')" />
+                                <x-form.label for="address" :value="__('Address')" />
                                 <textarea id="address" name="address" rows="3"
                                     class="block mt-1 w-full border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-md shadow-sm"
                                     placeholder="Enter your full address">{{ old('address') }}</textarea>
-                                <x-input-error :messages="$errors->get('address')" class="mt-2" />
+                                <x-form.input-error for="address" class="mt-2" />
                             </div>
 
                             <!-- Additional Information Section -->
@@ -93,15 +93,15 @@
 
                             <!-- Date of Birth -->
                             <div>
-                                <x-input-label for="date_of_birth" :value="__('Date of Birth')" />
-                                <x-text-input id="date_of_birth" class="block mt-1 w-full" type="date"
+                                <x-form.label for="date_of_birth" :value="__('Date of Birth')" />
+                                <x-form.input id="date_of_birth" class="block mt-1 w-full" type="date"
                                     name="date_of_birth" :value="old('date_of_birth')" />
-                                <x-input-error :messages="$errors->get('date_of_birth')" class="mt-2" />
+                                <x-form.input-error for="date_of_birth" class="mt-2" />
                             </div>
 
                             <!-- Gender -->
                             <div>
-                                <x-input-label for="gender" :value="__('Gender')" />
+                                <x-form.label for="gender" :value="__('Gender')" />
                                 <select id="gender" name="gender"
                                     class="block mt-1 w-full border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-md shadow-sm">
                                     <option value="">Select Gender</option>
@@ -111,7 +111,7 @@
                                     <option value="other" {{ old('gender') == 'other' ? 'selected' : '' }}>Other
                                     </option>
                                 </select>
-                                <x-input-error :messages="$errors->get('gender')" class="mt-2" />
+                                <x-form.input-error for="gender" class="mt-2" />
                             </div>
                         </div>
 
@@ -133,9 +133,9 @@
 
                         <!-- Form Actions -->
                         <div class="flex items-center justify-end mt-8">
-                            <x-primary-button class="ml-4">
+                            <x-button.primary class="ml-4">
                                 {{ __('Complete Setup & Enter Portal') }}
-                            </x-primary-button>
+                            </x-button.primary>
                         </div>
                     </form>
 

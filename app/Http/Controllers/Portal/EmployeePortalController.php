@@ -103,7 +103,12 @@ class EmployeePortalController extends Controller
         if ($totalDays > $availableBalance) {
             return back()->withErrors(['leave_days' => "Insufficient leave balance. Available: {$availableBalance} days, Requested: {$totalDays} days"]);
         }
-
+        // dd([
+        //     'employee' => $employee->toArray(),
+        //     'user' => $employee->user->toArray(),
+        //     $validated,
+        //     'days' => $totalDays
+        // ]);
         LeaveRequest::create([
             'employee_id' => $employee->id,
             'organization_id' => $employee->organization_id,
@@ -232,7 +237,7 @@ class EmployeePortalController extends Controller
 
         // Get employee record for current organization
         return Employee::where('user_id', $user->id)
-            ->where('organization_id', $user->current_organization_id)
+            ->where('organization_id', $user->operatingOrganizationId)
             ->where('is_active', true)
             ->first();
     }
