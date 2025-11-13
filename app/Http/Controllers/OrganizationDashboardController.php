@@ -8,167 +8,126 @@ use Illuminate\View\View;
 
 class OrganizationDashboardController extends Controller
 {
-    public function index(): View
+    public function dashboard()
     {
-        $organization = Organization::find(auth()->user()->operating_organization_id);
+        $organization = Organization::first(); // Or get current organization
 
-        return view('organizations.dashboard', [
-            'organization' => $organization,
-            'summary' => $this->getSummaryStats(),
-            'recentEnrollments' => $this->getRecentEnrollments(),
-            'attendanceData' => $this->getAttendanceData(),
-            'unitPerformance' => $this->getUnitPerformance(),
-            'quickStats' => $this->getQuickStats(),
-            'upcomingEvents' => $this->getUpcomingEvents(),
-        ]);
+        $metrics = $this->getOrganizationMetrics($organization);
+        $departmentStats = $this->getDepartmentStatistics($organization);
+        $recentActivities = $this->getRecentActivities($organization);
+
+        return view('organization.dashboard', compact('metrics', 'departmentStats', 'recentActivities'));
     }
 
-    private function getSummaryStats(): array
+    /**
+     * Get organization-wide metrics.
+     */
+    private function getOrganizationMetrics(Organization $organization)
     {
+        // Mock data - replace with actual queries
         return [
-            'total_units' => 8,
-            'total_employees' => 142,
-            'new_enrollments' => 12,
-            'attendance_rate' => 87.5,
-            'active_projects' => 6,
-            'completion_rate' => 72.3,
+            'total_employees' => 247,
+            'total_departments' => 14,
+            'attendance_rate' => 94.2,
+            'monthly_payroll' => 1200000,
+            'employee_growth' => 12, // percentage
+            'payroll_growth' => 5.3, // percentage
+            'attendance_improvement' => 2.1 // percentage
         ];
     }
 
-    private function getRecentEnrollments(): array
+    /**
+     * Get department-level statistics.
+     */
+    private function getDepartmentStatistics(Organization $organization)
     {
+        // Mock data - replace with actual department aggregation
         return [
-            [
-                'id' => 1,
-                'name' => 'John Smith',
-                'email' => 'john.smith@example.com',
-                'position' => 'Software Developer',
-                'unit' => 'IT Department',
-                'enrollment_date' => now()->subDays(2),
-                'avatar' => 'https://ui-avatars.com/api/?name=John+Smith&background=0D8ABC&color=fff',
-            ],
-            [
-                'id' => 2,
-                'name' => 'Sarah Johnson',
-                'email' => 'sarah.j@example.com',
-                'position' => 'HR Manager',
-                'unit' => 'Human Resources',
-                'enrollment_date' => now()->subDays(1),
-                'avatar' => 'https://ui-avatars.com/api/?name=Sarah+Johnson&background=00B894&color=fff',
-            ],
-            [
-                'id' => 3,
-                'name' => 'Mike Chen',
-                'email' => 'mike.chen@example.com',
-                'position' => 'Sales Executive',
-                'unit' => 'Sales Department',
-                'enrollment_date' => now()->subDays(1),
-                'avatar' => 'https://ui-avatars.com/api/?name=Mike+Chen&background=FD79A8&color=fff',
-            ],
-            [
-                'id' => 4,
-                'name' => 'Emily Davis',
-                'email' => 'emily.davis@example.com',
-                'position' => 'Marketing Specialist',
-                'unit' => 'Marketing',
-                'enrollment_date' => today(),
-                'avatar' => 'https://ui-avatars.com/api/?name=Emily+Davis&background=6C5CE7&color=fff',
-            ],
+            ['name' => 'Engineering', 'count' => 45, 'percentage' => 18],
+            ['name' => 'Sales', 'count' => 32, 'percentage' => 13],
+            ['name' => 'Marketing', 'count' => 28, 'percentage' => 11],
+            ['name' => 'Human Resources', 'count' => 18, 'percentage' => 7],
+            ['name' => 'Finance', 'count' => 22, 'percentage' => 9],
+            ['name' => 'Operations', 'count' => 35, 'percentage' => 14],
+            ['name' => 'Customer Support', 'count' => 42, 'percentage' => 17],
+            ['name' => 'Other', 'count' => 25, 'percentage' => 10],
         ];
     }
 
-    private function getAttendanceData(): array
+    /**
+     * Get recent organizational activities.
+     */
+    private function getRecentActivities(Organization $organization)
     {
+        // Mock data - replace with actual activity log
         return [
-            'labels' => ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            'present' => [132, 138, 140, 135, 142, 45, 32],
-            'absent' => [10, 4, 2, 7, 0, 97, 110],
-            'late' => [5, 3, 4, 2, 3, 1, 2],
+            [
+                'type' => 'employee_added',
+                'description' => 'John Smith joined Engineering department',
+                'time' => '2 hours ago',
+                'icon' => 'user-add'
+            ],
+            [
+                'type' => 'department_created',
+                'description' => 'New "Research & Development" department created',
+                'time' => '1 day ago',
+                'icon' => 'folder-add'
+            ],
+            [
+                'type' => 'attendance_regularized',
+                'description' => '15 attendance records regularized',
+                'time' => '2 days ago',
+                'icon' => 'clock'
+            ],
+            [
+                'type' => 'payroll_processed',
+                'description' => 'October payroll processed successfully',
+                'time' => '3 days ago',
+                'icon' => 'currency-dollar'
+            ]
         ];
     }
 
-    private function getUnitPerformance(): array
+    /**
+     * Get organization structure tree.
+     */
+    public function structure()
     {
-        return [
-            [
-                'name' => 'IT Department',
-                'employees' => 25,
-                'attendance' => 95.2,
-                'productivity' => 88.7,
-                'projects' => 3,
-            ],
-            [
-                'name' => 'Sales Department',
-                'employees' => 42,
-                'attendance' => 82.1,
-                'productivity' => 92.3,
-                'projects' => 2,
-            ],
-            [
-                'name' => 'Human Resources',
-                'employees' => 12,
-                'attendance' => 91.8,
-                'productivity' => 85.4,
-                'projects' => 1,
-            ],
-            [
-                'name' => 'Marketing',
-                'employees' => 18,
-                'attendance' => 88.5,
-                'productivity' => 90.1,
-                'projects' => 2,
-            ],
-            [
-                'name' => 'Operations',
-                'employees' => 35,
-                'attendance' => 94.2,
-                'productivity' => 87.9,
-                'projects' => 4,
-            ],
-        ];
+        $organization = Organization::first();
+        $tree = OrganizationUnit::with(['children', 'users'])->whereNull('parent_id')->get();
+
+        return view('organization.structure', compact('organization', 'tree'));
     }
 
-    private function getQuickStats(): array
+    /**
+     * Get organization analytics report.
+     */
+    public function analytics(Request $request)
     {
-        return [
-            'pending_requests' => 8,
-            'upcoming_leaves' => 5,
-            'training_sessions' => 3,
-            'active_recruitments' => 4,
+        $startDate = $request->get('start_date', now()->subMonth());
+        $endDate = $request->get('end_date', now());
+
+        $analytics = [
+            'headcount_trend' => $this->getHeadcountTrend($startDate, $endDate),
+            'attendance_trend' => $this->getAttendanceTrend($startDate, $endDate),
+            'department_performance' => $this->getDepartmentPerformance($startDate, $endDate),
+            'cost_analysis' => $this->getCostAnalysis($startDate, $endDate)
         ];
+
+        return view('organization.analytics', compact('analytics'));
     }
 
-    private function getUpcomingEvents(): array
-    {
-        return [
-            [
-                'title' => 'Monthly All-Hands Meeting',
-                'date' => now()->addDays(2),
-                'time' => '10:00 AM',
-                'type' => 'meeting',
-                'attendees' => 120,
-            ],
-            [
-                'title' => 'Team Building Workshop',
-                'date' => now()->addDays(5),
-                'time' => '9:00 AM',
-                'type' => 'training',
-                'attendees' => 45,
-            ],
-            [
-                'title' => 'Project Alpha Review',
-                'date' => now()->addDays(3),
-                'time' => '2:00 PM',
-                'type' => 'review',
-                'attendees' => 15,
-            ],
-            [
-                'title' => 'New Hire Orientation',
-                'date' => now()->addDays(7),
-                'time' => '9:30 AM',
-                'type' => 'orientation',
-                'attendees' => 12,
-            ],
-        ];
+    // Additional methods for data aggregation...
+    private function getHeadcountTrend($startDate, $endDate)
+    { /* Implementation */
+    }
+    private function getAttendanceTrend($startDate, $endDate)
+    { /* Implementation */
+    }
+    private function getDepartmentPerformance($startDate, $endDate)
+    { /* Implementation */
+    }
+    private function getCostAnalysis($startDate, $endDate)
+    { /* Implementation */
     }
 }
