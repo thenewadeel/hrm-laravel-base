@@ -1,0 +1,166 @@
+============================================================
+✨ Test Execution Summary - Professional Report v2.0 ✨
+============================================================
+
+--- Overall Test Status ---
++------------------+------------------+
+| Metric           | Count/Percentage |
++------------------+------------------+
+| Total Tests      | 365              |
+| Passed           | 327 (89.6%)      |
+| Failed           | 30 (8.2%)        |
+| Warnings/Skipped | 8 (2.2%)         |
++------------------+------------------+
+
+--- ❌ Detailed Failures (30 Total) ---
+
+ JournalEntriesApi (1/3 failures):
+   ⨯ it can create a journal entry
+
+ OrganizationUnitApi (1/12 failures):
+   ⨯ cannot assign user as non admin
+
+ AttendanceSync (2/10 failures):
+   ⨯ attendance data integrates with payroll
+   ⨯ employee can clock in and out
+
+ Dashboard (2/12 failures):
+   ⨯ it shows low stock alerts
+   ⨯ it shows quick action buttons
+
+ EmployeeManagement (2/15 failures):
+   ⨯ employee creation requires authentication
+   ⨯ non hr users cannot create employees
+
+ HrmDashboardController (1/18 failures):
+   ⨯ dashboard view contains expected hrm elements
+
+ Item (1/9 failures):
+   ⨯ it returns 403 for unauthorized access
+
+ Permission (1/5 failures):
+   ⨯ user cannot access other organization inventory
+
+ JournalEntries (1/3 failures):
+   ⨯ it creates a journal entry
+
+ OrganizationList (1/7 failures):
+   ⨯ it shows empty state when no organizations
+
+ OrganizationTree (2/9 failures):
+   ⨯ an empty tree renders correctly
+   ⨯ a dropped unit that does not exist does not cause an error
+
+ UserPlacement (1/2 failures):
+   ⨯ it can unassign a user by dropping them onto the root
+
+ OrganizationDashboard (5/5 failures):
+   ⨯ authenticated user can access organization dashboard
+   ⨯ dashboard displays correct organization metrics
+   ⨯ user can view organization structure
+   ⨯ dashboard includes department distribution data
+   ⨯ analytics page displays trend data
+
+ OrganizationUserIntegration (5/7 failures):
+   ⨯ organization user roles are properly cast
+   ⨯ user without organization access denied
+   ⨯ employee cannot access manager portal
+   ⨯ has role method works correctly
+   ⨯ has any role method works correctly
+
+ CompletePortal (1/7 failures):
+   ⨯ employee can clock in and out
+
+ EmployeePortal (1/8 failures):
+   ⨯ employee can clock in and out
+
+ ManagerPortal (2/5 failures):
+   ⨯ manager can approve leave requests
+   ⨯ manager can generate team reports
+
+
+--- ⚠️ Warnings/Skipped Tests (8 Total) ---
+
+ EmailVerification (3/3 warnings):
+   - email verification screen can be rendered → Email verification not…
+   - email can be verified → Email verification not enabled.
+   - email can not verified with invalid hash → Email verification not e…
+
+ Registration (1/3 warnings):
+   - registration screen cannot be rendered if support is disabled → Reg…
+
+ AttendanceSync (2/10 warnings):
+   - ---------------------------------------------------------------------------------
+   - ---------------------------------------------------------------------------------
+
+ Dashboard (1/12 warnings):
+   - ---------------------------------------------------------------------------------
+
+ EmployeeManagement (1/15 warnings):
+   - 'http://localhost:8000/login'
+
+
+--- ✅ Fully Passed Modules ---
++---------------------------------+--------------+
+| Module                          | Tests Passed |
++---------------------------------+--------------+
+| AccountTypeValidation           | 7/7          |
+| BalanceSheet                    | 3/3          |
+| ChartOfAccount                  | 4/4          |
+| DimensionReport                 | 1/1          |
+| FinancialReports                | 1/1          |
+| IncomeStatement                 | 3/3          |
+| InvalidAccountTypeException     | 3/3          |
+| JournalEntryFactory             | 4/4          |
+| JournalEntry                    | 3/3          |
+| LedgerEntry                     | 5/5          |
+| TrialBalance                    | 3/3          |
+| InventoryTransaction            | 1/1          |
+| Item                            | 1/1          |
+| Store                           | 1/1          |
+| AccountingReportService         | 2/2          |
+| AccountingService               | 3/3          |
+| InventoryService                | 13/13        |
+| SequenceService                 | 2/2          |
+| CreateTeam                      | 1/1          |
+| DeleteTeam                      | 2/2          |
+| InviteTeamMember                | 2/2          |
+| LeaveTeam                       | 2/2          |
+| RemoveTeamMember                | 2/2          |
+| UpdateTeamMemberRole            | 2/2          |
+| UpdateTeamName                  | 1/1          |
+| ApiTokenPermissions             | 1/1          |
+| Authentication                  | 3/3          |
+| BrowserSessions                 | 1/1          |
+| CreateApiToken                  | 1/1          |
+| DeleteAccount                   | 2/2          |
+| DeleteApiToken                  | 1/1          |
+| PasswordConfirmation            | 3/3          |
+| PasswordReset                   | 4/4          |
+| ProfileInformation              | 2/2          |
+| TwoFactorAuthenticationSettings | 3/3          |
+| UpdatePassword                  | 3/3          |
+| ChartOfAccountsApi              | 5/5          |
+| FinancialReportsApi             | 5/5          |
+| OrganizationApi                 | 15/15        |
+| Example                         | 1/1          |
+| InventoryController             | 5/5          |
+| InventoryItemController         | 5/5          |
+| InventoryReportController       | 8/8          |
+| InventoryScope                  | 7/7          |
+| InventoryStockController        | 6/6          |
+| InventoryStoreController        | 8/8          |
+| InventoryTenancy                | 4/4          |
+| InventoryTransactionController  | 3/3          |
+| Store                           | 8/8          |
+| Transaction                     | 12/12        |
+| ChartOfAccounts                 | 5/5          |
+| MemberManager                   | 2/2          |
+| OrganizationForm                | 7/7          |
+| MultiStepSetupWizard            | 5/5          |
+| OrganizationUserPivot           | 1/1          |
+| SetupChartOfAccounts            | 3/3          |
+| SetupStore                      | 3/3          |
+| SetupWizard                     | 5/5          |
+| TenancyFeature                  | 3/3          |
++---------------------------------+--------------+

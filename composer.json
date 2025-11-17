@@ -73,6 +73,9 @@
             "@php scripts/laraCrawler.php",
             "tree resources/views/ > \"docs/list of views.txt\"",
             "@php artisan test > docs/testResults.txt"
+        ],
+        "testSummary": [
+            "@php artisan test:summarize docs/testResults.txt > docs/testSummary.txt"
         ]
     },
     "extra": {
