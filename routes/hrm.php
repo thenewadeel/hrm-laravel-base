@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Attendance\AttendanceController;
 use App\Http\Controllers\HR\EmployeeController;
+use App\Http\Controllers\HR\JobPositionController;
+use App\Http\Controllers\HR\ShiftController;
 use App\Http\Controllers\HrmDashboardController;
 use App\Http\Controllers\Payroll\PayrollController;
 use App\Http\Controllers\Portal\EmployeePortalController;
@@ -33,7 +35,6 @@ Route::prefix('portal/employee')->name('portal.employee.')->group(function () {
     Route::get('/payslips/{payslip}/download', [EmployeePortalController::class, 'downloadPayslip'])->name('payslips.download');
 });
 
-
 // Employee Portal Routes
 Route::prefix('portal/employee')->name('portal.employee.')->group(function () {
     Route::post('/clock-in', [AttendanceController::class, 'clockIn'])->name('clock-in');
@@ -42,8 +43,6 @@ Route::prefix('portal/employee')->name('portal.employee.')->group(function () {
 
 // Payroll Routes (if separate)
 Route::get('/payroll/processing', [PayrollController::class, 'processing'])->name('payroll.processing');
-
-
 
 // Manager Portal Routes
 Route::prefix('portal/manager')->name('portal.manager.')->group(function () {
@@ -78,7 +77,7 @@ Route::prefix('hr')->group(function () {
         'show' => 'hr.employees.show',
         'edit' => 'hr.employees.edit',
         'destroy' => 'hr.employees.destroy',
-    ]);;
+    ]);
 
     // Additional routes for employee management
     Route::put('employees/{employee}/biometric', [\App\Http\Controllers\HR\EmployeeController::class, 'updateBiometric'])
@@ -89,20 +88,40 @@ Route::prefix('hr')->group(function () {
 
     Route::post('employees/without-user', [\App\Http\Controllers\HR\EmployeeController::class, 'storeWithoutUser'])
         ->name('hr.employees.store-without-user');
+
+    // Job Positions Routes
+    Route::resource('positions', JobPositionController::class)->names([
+        'index' => 'hr.positions.index',
+        'create' => 'hr.positions.create',
+        'update' => 'hr.positions.update',
+        'store' => 'hr.positions.store',
+        'show' => 'hr.positions.show',
+        'edit' => 'hr.positions.edit',
+        'destroy' => 'hr.positions.destroy',
+    ]);
+
+    // Shifts Routes
+    Route::resource('shifts', ShiftController::class)->names([
+        'index' => 'hr.shifts.index',
+        'create' => 'hr.shifts.create',
+        'update' => 'hr.shifts.update',
+        'store' => 'hr.shifts.store',
+        'show' => 'hr.shifts.show',
+        'edit' => 'hr.shifts.edit',
+        'destroy' => 'hr.shifts.destroy',
+    ]);
 });
 
+// Route::get('/attendance/dashboard', [AttendanceController::class, 'dashboard'])->name('attendance.dashboard');
+// Route::get('/payroll/processing', [PayrollController::class, 'processing'])->name('payroll.processing');
+// Route::get('/employees', EmployeeList::class)->name('employees.index');
+// Route::get('/employees/create', EmployeeForm::class)->name('employees.create');
+// Route::get('/employees/{employee}/edit', EmployeeForm::class)->name('employees.edit');
+// Route::get('/employees/{employee}', EmployeeShow::class)->name('employees.show');
 
-
- // Route::get('/attendance/dashboard', [AttendanceController::class, 'dashboard'])->name('attendance.dashboard');
-    // Route::get('/payroll/processing', [PayrollController::class, 'processing'])->name('payroll.processing');
-    // Route::get('/employees', EmployeeList::class)->name('employees.index');
-    // Route::get('/employees/create', EmployeeForm::class)->name('employees.create');
-    // Route::get('/employees/{employee}/edit', EmployeeForm::class)->name('employees.edit');
-    // Route::get('/employees/{employee}', EmployeeShow::class)->name('employees.show');
-
-    // // User management routes
-    // Route::get('/users', UserList::class)->name('users.index');
-    // Route::get('/users/create', UserForm::class)->name('users.create');
-    // Route::get('/users/{user}/edit', UserForm::class)->name('users.edit');
-    // Route::get('/roles', RoleManager::class)->name('roles.index');
-    // });
+// // User management routes
+// Route::get('/users', UserList::class)->name('users.index');
+// Route::get('/users/create', UserForm::class)->name('users.create');
+// Route::get('/users/{user}/edit', UserForm::class)->name('users.edit');
+// Route::get('/roles', RoleManager::class)->name('roles.index');
+// });

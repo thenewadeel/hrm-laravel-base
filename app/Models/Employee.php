@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Employee extends Model
 {
-    use HasFactory, BelongsToOrganization, SoftDeletes;
+    use BelongsToOrganization, HasFactory, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +20,8 @@ class Employee extends Model
         'user_id',
         'organization_id',
         'organization_unit_id',
+        'position_id',
+        'shift_id',
         'first_name',
         'last_name',
         'biometric_id',
@@ -57,6 +59,16 @@ class Employee extends Model
     public function organizationUnit()
     {
         return $this->belongsTo(OrganizationUnit::class);
+    }
+
+    public function position()
+    {
+        return $this->belongsTo(JobPosition::class, 'position_id');
+    }
+
+    public function shift()
+    {
+        return $this->belongsTo(Shift::class, 'shift_id');
     }
 
     public function leaveRequests()
@@ -99,8 +111,10 @@ class Employee extends Model
     public function isClockedIn()
     {
         $attendance = $this->todayAttendance;
-        return $attendance && $attendance->punch_in && !$attendance->punch_out;
+
+        return $attendance && $attendance->punch_in && ! $attendance->punch_out;
     }
+
     /**
      * Scope for employees with user accounts
      */
@@ -134,6 +148,7 @@ class Employee extends Model
         return $this->hasOne(OrganizationUser::class, 'user_id', 'user_id')
             ->where('organization_id', $this->organization_id);
     }
+
     /**
      * Get the user associated with the employee (for login access)
      */
@@ -141,12 +156,13 @@ class Employee extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     /**
      * Check if employee has login access
      */
     public function hasLoginAccess(): bool
     {
-        return !is_null($this->user_id) && $this->organizationUser()->exists();
+        return ! is_null($this->user_id) && $this->organizationUser()->exists();
     }
 
     /**

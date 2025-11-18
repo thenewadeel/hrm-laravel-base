@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Inventory\Store;
-use App\Models\Inventory\Item;
-use App\Models\Inventory\Transaction;
+use App\Models\JobPosition;
+use App\Models\Shift;
 use App\Models\User;
 use App\Permissions\InventoryPermissions;
 use App\Roles\InventoryRoles;
@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
+    protected $policies = [
+        JobPosition::class => \App\Policies\JobPositionPolicy::class,
+        Shift::class => \App\Policies\ShiftPolicy::class,
+    ];
+
     public function boot(): void
     {
         // Inventory Permission Gates - organization context aware

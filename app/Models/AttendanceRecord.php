@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class AttendanceRecord extends Model
 {
-    use HasFactory, BelongsToOrganization;
+    use BelongsToOrganization, HasFactory;
 
     protected $fillable = [
         'employee_id',
@@ -19,7 +19,7 @@ class AttendanceRecord extends Model
         'punch_out',
         'total_hours',
         'status',
-        //['present', 'absent', 'late', 'leave', 'missed_punch', 'pending_regularization'])->default('present');
+        // ['present', 'absent', 'late', 'leave', 'missed_punch', 'pending_regularization'])->default('present');
         'biometric_id',
         'device_serial_no',
         'late_minutes',
@@ -31,7 +31,7 @@ class AttendanceRecord extends Model
         'record_date' => 'date',
         'punch_in' => 'datetime',
         'punch_out' => 'datetime',
-        'total_hours' => 'decimal:2'
+        'total_hours' => 'decimal:2',
     ];
 
     public function employee(): BelongsTo
@@ -54,6 +54,12 @@ class AttendanceRecord extends Model
     {
         return $query->where('record_date', $date);
     }
+
+    public function scopeOfEmployee($query, $employeeId)
+    {
+        return $query->where('employee_id', $employeeId);
+    }
+
     /**
      * Scope for current organization
      */
@@ -86,6 +92,7 @@ class AttendanceRecord extends Model
         if ($this->punch_in && $this->punch_out) {
             return $this->punch_out->diffInHours($this->punch_in);
         }
+
         return 0;
     }
 }
