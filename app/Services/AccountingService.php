@@ -1,4 +1,5 @@
 <?php
+
 // app/Services/AccountingService.php
 
 namespace App\Services;
@@ -6,6 +7,7 @@ namespace App\Services;
 use App\Exceptions\InvalidAccountTypeException;
 use App\Exceptions\UnbalancedTransactionException;
 use App\Models\Accounting\ChartOfAccount;
+use App\Models\Accounting\JournalEntry;
 use App\Models\Accounting\LedgerEntry;
 use Illuminate\Support\Facades\DB;
 
@@ -67,12 +69,24 @@ class AccountingService
         $validDebitAccounts = ['asset', 'expense'];
         $validCreditAccounts = ['liability', 'equity', 'revenue'];
 
-        if ($entryType === 'debit' && !in_array($account->type, $validDebitAccounts)) {
+        if ($entryType === 'debit' && ! in_array($account->type, $validDebitAccounts)) {
             throw new InvalidAccountTypeException($account, $entryType);
         }
 
-        if ($entryType === 'credit' && !in_array($account->type, $validCreditAccounts)) {
+        if ($entryType === 'credit' && ! in_array($account->type, $validCreditAccounts)) {
             throw new InvalidAccountTypeException($account, $entryType);
         }
+    }
+
+    public function createPayrollJournalEntry($payrollRun)
+    {
+        return JournalEntry::create([
+            'organization_id' => $payrollRun->organization_id,
+            'reference_number' => 'PAY-'.$payrollRun->period,
+            'entry_date' => now(),
+            'description' => 'Payroll for '.$payrollRun->period,
+            'status' => 'posted',
+            // Debit Salary Expense, Credit Payroll Payable
+        ]);
     }
 }

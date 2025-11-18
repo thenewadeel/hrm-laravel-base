@@ -1,19 +1,17 @@
 <?php
 
 use App\Http\Controllers\Api\OrganizationController;
-use App\Http\Controllers\Attendance\AttendanceController;
-use App\Http\Controllers\HR\EmployeeController;
-use App\Http\Controllers\HrmDashboardController;
 use App\Http\Controllers\OrganizationDashboardController;
-use App\Http\Controllers\Payroll\PayrollController;
-use App\Http\Controllers\Portal\EmployeePortalController;
-use App\Http\Controllers\Portal\ManagerPortalController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('/organizations')->name('organiazations.')->group(function () {
+Route::prefix('/organizations')->name('organization.')->group(function () {
     Route::get('/', [OrganizationController::class, 'index'])->name('index');
     Route::get('/dashboard', [OrganizationDashboardController::class, 'index'])
         ->name('dashboard');
+    Route::get('/structure', [OrganizationDashboardController::class, 'structure'])
+        ->name('structure');
+    Route::get('/analytics', [OrganizationDashboardController::class, 'analytics'])
+        ->name('analytics');
 });
 // Route::livewire(['/organizations', OrganizationList::class])->name('organizations.index');
 // Route::get('/companies/create', CompanyForm::class)->name('companies.create');

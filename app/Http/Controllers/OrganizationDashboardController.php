@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Organization;
+use App\Models\OrganizationUnit;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -16,7 +17,7 @@ class OrganizationDashboardController extends Controller
         $departmentStats = $this->getDepartmentStatistics($organization);
         $recentActivities = $this->getRecentActivities($organization);
 
-        return view('organization.dashboard', compact('metrics', 'departmentStats', 'recentActivities'));
+        return view('organizations.dashboard', compact('metrics', 'departmentStats', 'recentActivities'));
     }
 
     /**
@@ -96,7 +97,7 @@ class OrganizationDashboardController extends Controller
         $organization = Organization::first();
         $tree = OrganizationUnit::with(['children', 'users'])->whereNull('parent_id')->get();
 
-        return view('organization.structure', compact('organization', 'tree'));
+        return view('organizations.structure', compact('organization', 'tree'));
     }
 
     /**
@@ -114,7 +115,7 @@ class OrganizationDashboardController extends Controller
             'cost_analysis' => $this->getCostAnalysis($startDate, $endDate)
         ];
 
-        return view('organization.analytics', compact('analytics'));
+        return view('organizations.analytics', compact('analytics'));
     }
 
     // Additional methods for data aggregation...
