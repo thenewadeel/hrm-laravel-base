@@ -4,15 +4,21 @@ namespace Tests\Feature;
 
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\JournalEntry;
+use App\Models\AttendanceRecord;
+use App\Models\Employee;
 use App\Models\Inventory\Item;
 use App\Models\Inventory\Store;
+use App\Models\LeaveRequest;
 use App\Models\OrganizationUnit;
+use App\Models\PayrollEntry;
+use App\Models\PayrollRuns;
+use App\Models\PayrollSlip;
 use App\Models\Scopes\OrganizationScope;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use Tests\Traits\SetupTenancy;
-use PHPUnit\Framework\Attributes\Test;
 
 /**
  * A generic feature test to validate the integrity of the Organization Global Scope
@@ -38,6 +44,12 @@ class TenancyFeatureTest extends TestCase
             Item::class,            // Add other models here:
             // \App\Models\Invoice::class,
             // \App\Models\Customer::class,
+            // Employee::class,
+            // AttendanceRecord::class,
+            // LeaveRequest::class,
+            // PayrollEntry::class,
+            // PayrollRuns::class,
+            // PayrollSlip::class
         ];
     }
 
@@ -74,7 +86,7 @@ class TenancyFeatureTest extends TestCase
 
             // Assertion 2: All returned records must belong to Org A
             $this->assertTrue(
-                $records->every(fn($record) => $record->organization_id === $this->orgA->id),
+                $records->every(fn ($record) => $record->organization_id === $this->orgA->id),
                 "Model $modelClass failed Isolation (Contains Foreign Data)."
             );
         }
