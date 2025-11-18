@@ -6,31 +6,40 @@
 +------------------+------------------+
 | Metric           | Count/Percentage |
 +------------------+------------------+
-| Total Tests      | 365              |
-| Passed           | 327 (89.6%)      |
-| Failed           | 30 (8.2%)        |
-| Warnings/Skipped | 8 (2.2%)         |
+| Total Tests      | 399              |
+| Passed           | 353 (88.5%)      |
+| Failed           | 35 (8.8%)        |
+| Warnings/Skipped | 11 (2.8%)        |
 +------------------+------------------+
 
---- ❌ Detailed Failures (30 Total) ---
-
- JournalEntriesApi (1/3 failures):
-   ⨯ it can create a journal entry
+--- ❌ Detailed Failures (35 Total) ---
 
  OrganizationUnitApi (1/12 failures):
    ⨯ cannot assign user as non admin
 
- AttendanceSync (2/10 failures):
-   ⨯ attendance data integrates with payroll
+ AttendanceSync (1/9 failures):
    ⨯ employee can clock in and out
 
- Dashboard (2/12 failures):
+ Dashboard (4/11 failures):
+   ⨯ it shows dashboard for users with organization
+   ⨯ it shows dashboard sections
    ⨯ it shows low stock alerts
    ⨯ it shows quick action buttons
 
  EmployeeManagement (2/15 failures):
    ⨯ employee creation requires authentication
    ⨯ non hr users cannot create employees
+
+ EmployeePositionShiftIntegration (2/5 failures):
+   ⨯ it assigns position and shift to employee during creation
+   ⨯ it prevents assigning inactive position to employee
+
+ JobPositionController (1/6 failures):
+   ⨯ it deletes a job position
+
+ ShiftController (2/5 failures):
+   ⨯ it updates a shift
+   ⨯ it deletes a shift
 
  HrmDashboardController (1/18 failures):
    ⨯ dashboard view contains expected hrm elements
@@ -54,7 +63,7 @@
  UserPlacement (1/2 failures):
    ⨯ it can unassign a user by dropping them onto the root
 
- OrganizationDashboard (5/5 failures):
+ OrganizationDashboard (5/10 failures):
    ⨯ authenticated user can access organization dashboard
    ⨯ dashboard displays correct organization metrics
    ⨯ user can view organization structure
@@ -79,7 +88,7 @@
    ⨯ manager can generate team reports
 
 
---- ⚠️ Warnings/Skipped Tests (8 Total) ---
+--- ⚠️ Warnings/Skipped Tests (11 Total) ---
 
  EmailVerification (3/3 warnings):
    - email verification screen can be rendered → Email verification not…
@@ -89,15 +98,18 @@
  Registration (1/3 warnings):
    - registration screen cannot be rendered if support is disabled → Reg…
 
- AttendanceSync (2/10 warnings):
-   - ---------------------------------------------------------------------------------
-   - ---------------------------------------------------------------------------------
-
- Dashboard (1/12 warnings):
+ AttendanceSync (1/9 warnings):
    - ---------------------------------------------------------------------------------
 
  EmployeeManagement (1/15 warnings):
    - 'http://localhost:8000/login'
+
+ OrganizationDashboard (5/10 warnings):
+   - ---------------------------------------------------------------------------------
+   - ---------------------------------------------------------------------------------
+   - ---------------------------------------------------------------------------------
+   - ---------------------------------------------------------------------------------
+   - ---------------------------------------------------------------------------------
 
 
 --- ✅ Fully Passed Modules ---
@@ -115,9 +127,12 @@
 | JournalEntry                    | 3/3          |
 | LedgerEntry                     | 5/5          |
 | TrialBalance                    | 3/3          |
+| HRMSchema                       | 4/4          |
 | InventoryTransaction            | 1/1          |
 | Item                            | 1/1          |
 | Store                           | 1/1          |
+| JobPosition                     | 5/5          |
+| Shift                           | 6/6          |
 | AccountingReportService         | 2/2          |
 | AccountingService               | 3/3          |
 | InventoryService                | 13/13        |
@@ -142,6 +157,7 @@
 | UpdatePassword                  | 3/3          |
 | ChartOfAccountsApi              | 5/5          |
 | FinancialReportsApi             | 5/5          |
+| JournalEntriesApi               | 3/3          |
 | OrganizationApi                 | 15/15        |
 | Example                         | 1/1          |
 | InventoryController             | 5/5          |

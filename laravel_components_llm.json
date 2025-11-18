@@ -15,6 +15,7 @@
         "require-dev": [
             "barryvdh/laravel-debugbar",
             "fakerphp/faker",
+            "laravel/boost",
             "laravel/pail",
             "laravel/pint",
             "laravel/sail",
@@ -25,8 +26,8 @@
             "yunyami/clockwork"
         ]
     },
-    "timestamp": "2025-11-17T05:38:48+00:00",
-    "component_count": 258,
+    "timestamp": "2025-11-18T04:23:51+00:00",
+    "component_count": 269,
     "components": [
         {
             "type": "Model",
@@ -186,6 +187,18 @@
             "essential": false
         },
         {
+            "type": "Model",
+            "name": "JobPosition",
+            "file": "app/Models/JobPosition.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "Shift",
+            "file": "app/Models/Shift.php",
+            "essential": false
+        },
+        {
             "type": "Controller",
             "name": "Controller",
             "file": "app/Http/Controllers/Controller.php",
@@ -321,6 +334,18 @@
             "type": "Controller",
             "name": "EmployeeController",
             "file": "app/Http/Controllers/HR/EmployeeController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "JobPositionController",
+            "file": "app/Http/Controllers/HR/JobPositionController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "ShiftController",
+            "file": "app/Http/Controllers/HR/ShiftController.php",
             "essential": false
         },
         {
@@ -2483,6 +2508,216 @@
             }
         },
         {
+            "type": "Migration",
+            "name": "2025_11_17_062301_create_job_positions_table",
+            "file": "database/migrations/2025_11_17_062301_create_job_positions_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "job_positions": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "organization_unit_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained()->onDelete('set null'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "title",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "code",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "min_salary",
+                            "type": "decimal",
+                            "options": ", 10, 2)->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "max_salary",
+                            "type": "decimal",
+                            "options": ", 10, 2)->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "requirements",
+                            "type": "json",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "is_active",
+                            "type": "boolean",
+                            "options": ")->default(true",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "job_positions"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_17_062312_create_shifts_table",
+            "file": "database/migrations/2025_11_17_062312_create_shifts_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "shifts": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "8",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "8"
+                        },
+                        {
+                            "name": "code",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "8"
+                        },
+                        {
+                            "name": "start_time",
+                            "type": "time",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "8"
+                        },
+                        {
+                            "name": "end_time",
+                            "type": "time",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "8"
+                        },
+                        {
+                            "name": "days_of_week",
+                            "type": "json",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "8"
+                        },
+                        {
+                            "name": "working_hours",
+                            "type": "integer",
+                            "options": ")->default(8",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "8"
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "8"
+                        },
+                        {
+                            "name": "is_active",
+                            "type": "boolean",
+                            "options": ")->default(true",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "8"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "shifts"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_17_062323_add_position_and_shift_to_employees_table",
+            "file": "database/migrations/2025_11_17_062323_add_position_and_shift_to_employees_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": [],
+                "operations": [
+                    {
+                        "type": "update_table",
+                        "table": "employees",
+                        "changes": [
+                            {
+                                "operation": "foreignId",
+                                "column": "position_id",
+                                "options": ")->nullable()->constrained('job_positions')->onDelete('set null'"
+                            },
+                            {
+                                "operation": "foreignId",
+                                "column": "shift_id",
+                                "options": ")->nullable()->constrained('shifts')->onDelete('set null'"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
             "type": "Route",
             "name": "console",
             "file": "routes/console.php",
@@ -2597,8 +2832,10 @@
             "file": "routes/organization.php",
             "essential": false,
             "route_summary": [
-                "Route::prefix('/organizations')->name('organiazations.')->group(function () { Route::get('/', [Organ...",
+                "Route::prefix('/organizations')->name('organization.')->group(function () { Route::get('/', [Organiz...",
                 "Route::get('/dashboard', [OrganizationDashboardController::class, 'index']) ->name('dashboard');",
+                "Route::get('/structure', [OrganizationDashboardController::class, 'structure']) ->name('structure');",
+                "Route::get('/analytics', [OrganizationDashboardController::class, 'analytics']) ->name('analytics');",
                 "Route::livewire(['/organizations', OrganizationList::class])->name('organizations.index');",
                 "Route::get('/companies/create', CompanyForm::class)->name('companies.create');",
                 "Route::get('/companies/{company}/edit', CompanyForm::class)->name('companies.edit');",
@@ -2689,6 +2926,8 @@
                 "Route::put('employees/{employee}/biometric', [\\App\\Http\\Controllers\\HR\\EmployeeController::class, 'u...",
                 "Route::post('employees/{employee}/grant-access', [\\App\\Http\\Controllers\\HR\\EmployeeController::class...",
                 "Route::post('employees/without-user', [\\App\\Http\\Controllers\\HR\\EmployeeController::class, 'storeWit...",
+                "Route::resource('positions', JobPositionController::class)->names([ 'index' => 'hr.positions.index',...",
+                "Route::resource('shifts', ShiftController::class)->names([ 'index' => 'hr.shifts.index', 'create' =>...",
                 "Route::get('/attendance/dashboard', [AttendanceController::class, 'dashboard'])->name('attendance.da...",
                 "Route::get('/payroll/processing', [PayrollController::class, 'processing'])->name('payroll.processin...",
                 "Route::get('/employees', EmployeeList::class)->name('employees.index');",
@@ -3497,6 +3736,30 @@
             "type": "View",
             "name": "edit.blade.php",
             "file": "resources/views/hr/employees/edit.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/hr/positions/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "create.blade.php",
+            "file": "resources/views/hr/positions/create.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/hr/shifts/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "create.blade.php",
+            "file": "resources/views/hr/shifts/create.blade.php",
             "essential": false
         },
         {

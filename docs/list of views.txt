@@ -82,11 +82,17 @@ resources/views/
 ├── emails
 │   └── team-invitation.blade.php
 ├── hr
-│   └── employees
+│   ├── employees
+│   │   ├── create.blade.php
+│   │   ├── edit.blade.php
+│   │   ├── index.blade.php
+│   │   └── show.blade.php
+│   ├── positions
+│   │   ├── create.blade.php
+│   │   └── index.blade.php
+│   └── shifts
 │       ├── create.blade.php
-│       ├── edit.blade.php
-│       ├── index.blade.php
-│       └── show.blade.php
+│       └── index.blade.php
 ├── hrm
 │   └── dashboard.blade.php
 ├── inventory
@@ -183,4 +189,4 @@ resources/views/
 ├── terms.blade.php
 └── welcome.blade.php
 
-39 directories, 145 files
+41 directories, 149 files
