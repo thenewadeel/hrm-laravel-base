@@ -129,9 +129,13 @@ resources/views/
 │   ├── accounting
 │   │   ├── chart-of-accounts.blade.php
 │   │   ├── dashboard.blade.php
+│   │   ├── expense-voucher-form.blade.php
 │   │   ├── journal-entries.blade.php
 │   │   ├── ledger-entries.blade.php
-│   │   └── reports.blade.php
+│   │   ├── purchase-voucher-form.blade.php
+│   │   ├── reports.blade.php
+│   │   ├── salary-voucher-form.blade.php
+│   │   └── sales-voucher-form.blade.php
 │   ├── member-manager.blade.php
 │   ├── organization
 │   │   ├── organization-form.blade.php
@@ -189,4 +193,4 @@ resources/views/
 ├── terms.blade.php
 └── welcome.blade.php
 
-41 directories, 149 files
+41 directories, 153 files

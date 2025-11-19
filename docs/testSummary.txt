@@ -6,13 +6,13 @@
 +------------------+------------------+
 | Metric           | Count/Percentage |
 +------------------+------------------+
-| Total Tests      | 399              |
-| Passed           | 353 (88.5%)      |
-| Failed           | 35 (8.8%)        |
-| Warnings/Skipped | 11 (2.8%)        |
+| Total Tests      | 403              |
+| Passed           | 355 (88.1%)      |
+| Failed           | 37 (9.2%)        |
+| Warnings/Skipped | 11 (2.7%)        |
 +------------------+------------------+
 
---- ❌ Detailed Failures (35 Total) ---
+--- ❌ Detailed Failures (37 Total) ---
 
  OrganizationUnitApi (1/12 failures):
    ⨯ cannot assign user as non admin
@@ -86,6 +86,10 @@
  ManagerPortal (2/5 failures):
    ⨯ manager can approve leave requests
    ⨯ manager can generate team reports
+
+ VoucherSystem (2/4 failures):
+   ⨯ can create salary voucher
+   ⨯ can create expense voucher
 
 
 --- ⚠️ Warnings/Skipped Tests (11 Total) ---
