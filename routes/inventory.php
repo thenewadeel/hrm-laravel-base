@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\Inventory\ItemController;
-use App\Http\Controllers\Api\Inventory\StoreController;
-use App\Http\Controllers\Api\Inventory\TransactionController;
 use App\Http\Controllers\Inventory\InventoryController;
 use App\Http\Controllers\Inventory\InventoryItemController;
 use App\Http\Controllers\Inventory\InventoryReportController;
@@ -11,12 +8,8 @@ use App\Http\Controllers\Inventory\InventoryStoreController;
 use App\Http\Controllers\Inventory\InventoryTransactionController;
 use Illuminate\Support\Facades\Route;
 
-// Inventory Base Routes
-Route::get('/items/low-stock', [ItemController::class, 'lowStock'])->name('items.low-stock');
-Route::get('/items/out-of-stock', [ItemController::class, 'outOfStock'])->name('items.out-of-stock');
-Route::resource('items', ItemController::class);
-Route::resource('stores', StoreController::class);
-Route::resource('transactions', TransactionController::class);
+// Inventory Base Routes - API routes moved to api.php
+// Web routes for inventory management only
 
 Route::prefix('inventory')->name('inventory.')->group(function () {
     Route::get('/', [InventoryController::class, 'index'])->name('index');

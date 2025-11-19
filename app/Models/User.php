@@ -283,6 +283,15 @@ class User extends Authenticatable
 
     public function getAllRoles(): array
     {
+        // Temporary? fix for memory Dump in testing caused by jsom parsing
+        return $this->organizations
+            ->flatMap(function ($org) {
+                // The pivot should already be cast to array via the pivot model
+                return $org->pivot->roles ?? [];
+            })
+            ->unique()
+            ->values()
+            ->toArray();
         $allRoles = [];
 
         foreach ($this->organizations as $org) {
