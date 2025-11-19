@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\OrganizationController;
 use App\Http\Controllers\Api\OrganizationInvitationController;
 use App\Http\Controllers\Api\OrganizationUnitController;
 use App\Http\Controllers\Api\VoucherController;
+use App\Http\Controllers\Api\OutstandingStatementsController;
 use App\Models\Accounting\JournalEntry;
 use App\Permissions\InventoryPermissions;
 use Illuminate\Http\Request;
@@ -105,6 +106,14 @@ Route::middleware(['api', 'auth:sanctum'])->group(function () {
     Route::post('vouchers/expense', [VoucherController::class, 'createExpense']);
     Route::put('vouchers/{voucher}/post', [VoucherController::class, 'post']);
     Route::put('vouchers/{voucher}/void', [VoucherController::class, 'void']);
+
+    // Outstanding Statements routes
+    Route::prefix('outstanding')->group(function () {
+        Route::get('receivables/aging', [OutstandingStatementsController::class, 'receivablesAging']);
+        Route::get('payables/aging', [OutstandingStatementsController::class, 'payablesAging']);
+        Route::get('customers/summary', [OutstandingStatementsController::class, 'customerSummary']);
+        Route::get('vendors/summary', [OutstandingStatementsController::class, 'vendorSummary']);
+    });
 });
 
 // Temporary test route

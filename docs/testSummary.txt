@@ -6,9 +6,9 @@
 +------------------+------------------+
 | Metric           | Count/Percentage |
 +------------------+------------------+
-| Total Tests      | 403              |
-| Passed           | 355 (88.1%)      |
-| Failed           | 37 (9.2%)        |
+| Total Tests      | 407              |
+| Passed           | 359 (88.2%)      |
+| Failed           | 37 (9.1%)        |
 | Warnings/Skipped | 11 (2.7%)        |
 +------------------+------------------+
 
@@ -179,6 +179,7 @@
 | OrganizationForm                | 7/7          |
 | MultiStepSetupWizard            | 5/5          |
 | OrganizationUserPivot           | 1/1          |
+| OutstandingStatements           | 4/4          |
 | SetupChartOfAccounts            | 3/3          |
 | SetupStore                      | 3/3          |
 | SetupWizard                     | 5/5          |
