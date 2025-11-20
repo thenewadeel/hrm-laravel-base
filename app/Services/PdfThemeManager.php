@@ -1,5 +1,8 @@
 <?php
 
+
+namespace App\Services;
+
 /**
  * PDF Theme Manager
  *
@@ -229,18 +232,39 @@ HTML;
         $footerStyle = $this->getFooterStyle();
         $tocStyle = $this->getTocStyle();
 
+        // Extract all variables with defaults to avoid null coalescing in heredoc
+        $bodyFont = $layout['body_font'] ?? 'Georgia, serif';
+        $fontSize = $layout['font_size'] ?? '11pt';
+        $lineHeight = $layout['line_height'] ?? '1.6';
+        $textColor = $theme['text_color'] ?? '#1f2937';
+        $backgroundColor = $theme['background_color'] ?? '#ffffff';
+        $marginTop = $layout['margin_top'] ?? '20mm';
+        $marginRight = $layout['margin_right'] ?? '20mm';
+        $marginBottom = $layout['margin_bottom'] ?? '20mm';
+        $marginLeft = $layout['margin_left'] ?? '20mm';
+        $headerFont = $layout['header_font'] ?? 'Arial, sans-serif';
+        $primaryColor = $theme['primary_color'] ?? '#2563eb';
+        $secondaryColor = $theme['secondary_color'] ?? '#64748b';
+        $accentColor = $theme['accent_color'] ?? '#3b82f6';
+        $borderColor = $theme['border_color'] ?? '#e5e7eb';
+        $codeFont = $layout['code_font'] ?? "'Courier New', monospace";
+        $headerHeight = $layout['header_height'] ?? '15mm';
+        $footerHeight = $layout['footer_height'] ?? '15mm';
+        $successColor = $theme['success_color'] ?? '#10b981';
+        $errorColor = $theme['error_color'] ?? '#ef4444';
+
         return <<<CSS
 /* ===== PDF STYLES ===== */
 
 /* Base Styles */
 body {
-    font-family: {$layout['body_font'] ?? 'Georgia, serif'};
-    font-size: {$layout['font_size'] ?? '11pt'};
-    line-height: {$layout['line_height'] ?? '1.6'};
-    color: {$theme['text_color'] ?? '#1f2937'};
-    background-color: {$theme['background_color'] ?? '#ffffff'};
+    font-family: {$bodyFont};
+    font-size: {$fontSize};
+    line-height: {$lineHeight};
+    color: {$textColor};
+    background-color: {$backgroundColor};
     margin: 0;
-    padding: {$layout['margin_top'] ?? '20mm'} {$layout['margin_right'] ?? '20mm'} {$layout['margin_bottom'] ?? '20mm'} {$layout['margin_left'] ?? '20mm'};
+    padding: {$marginTop} {$marginRight} {$marginBottom} {$marginLeft};
 }
 .document {
     max-width: 100%;
@@ -249,8 +273,8 @@ body {
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
-    font-family: {$layout['header_font'] ?? 'Arial, sans-serif'};
-    color: {$theme['primary_color'] ?? '#2563eb'};
+    font-family: {$headerFont};
+    color: {$primaryColor};
     font-weight: 600;
     line-height: 1.3;
     page-break-after: avoid;
@@ -260,10 +284,10 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
     font-size: 28pt;
-    border-bottom: 3px solid {$theme['primary_color'] ?? '#2563eb'};
+    border-bottom: 3px solid {$primaryColor};
     padding-bottom: 12px;
     margin-top: 0;
-    background: linear-gradient(135deg, {$theme['primary_color'] ?? '#2563eb'}20 0%, transparent 100%);
+    background: linear-gradient(135deg, {$primaryColor}20 0%, transparent 100%);
     padding: 20px;
     margin: 0 0 20px 0;
     border-radius: 8px;
@@ -271,26 +295,26 @@ h1 {
 
 h2 {
     font-size: 20pt;
-    border-bottom: 2px solid {$theme['border_color'] ?? '#e5e7eb'};
+    border-bottom: 2px solid {$borderColor};
     padding-bottom: 8px;
-    background: {$theme['background_color'] ?? '#ffffff'};
+    background: {$backgroundColor};
     padding-left: 10px;
-    border-left: 4px solid {$theme['accent_color'] ?? '#3b82f6'};
+    border-left: 4px solid {$accentColor};
 }
 
 h3 {
     font-size: 16pt;
-    color: {$theme['secondary_color'] ?? '#64748b'};
+    color: {$secondaryColor};
 }
 
 h4 {
     font-size: 14pt;
-    color: {$theme['secondary_color'] ?? '#64748b'};
+    color: {$secondaryColor};
 }
 
 h5, h6 {
     font-size: 12pt;
-    color: {$theme['secondary_color'] ?? '#64748b'};
+    color: {$secondaryColor};
 }
 
 p {
@@ -302,24 +326,24 @@ p {
 
 /* Links */
 a {
-    color: {$theme['primary_color'] ?? '#2563eb'};
+    color: {$primaryColor};
     border-bottom: 1px solid transparent;
     transition: all 0.2s ease;
 }
 
 a:hover {
-    border-bottom-color: {$theme['primary_color'] ?? '#2563eb'};
+    border-bottom-color: {$primaryColor};
 }
 
 /* Code Blocks */
 code {
-    font-family: {$layout['code_font'] ?? "'Courier New', monospace"};
+    font-family: {$codeFont};
     background-color: #f8f9fa;
     color: #e11d48;
     padding: 3px 6px;
     border-radius: 4px;
     font-size: 10pt;
-    border: 1px solid {$theme['border_color'] ?? '#e5e7eb'};
+    border: 1px solid {$borderColor};
 }
 
 pre {
@@ -344,7 +368,7 @@ pre code {
 
 /* Blockquotes */
 blockquote {
-    border-left: 4px solid {$theme['primary_color'] ?? '#2563eb'};
+    border-left: 4px solid {$primaryColor};
     margin: 16px 0;
     padding: 12px 20px;
     background-color: #f8fafc;
@@ -365,13 +389,13 @@ table {
 }
 
 th, td {
-    border: 1px solid {$theme['border_color'] ?? '#e5e7eb'};
+    border: 1px solid {$borderColor};
     padding: 8px 12px;
     text-align: left;
 }
 
 th {
-    background-color: {$theme['primary_color'] ?? '#2563eb'};
+    background-color: {$primaryColor};
     color: white;
     font-weight: 600;
 }
@@ -393,7 +417,7 @@ li {
 /* Horizontal Rule */
 hr {
     border: none;
-    border-top: 2px solid {$theme['border_color'] ?? '#e5e7eb'};
+    border-top: 2px solid {$borderColor};
     margin: 24px 0;
 }
 
@@ -404,10 +428,10 @@ hr {
     top: 0;
     left: 0;
     right: 0;
-    height: {$layout['header_height'] ?? '15mm'};
-    padding: 0 {$layout['margin_left'] ?? '20mm'} 0 {$layout['margin_right'] ?? '20mm'};
-    border-bottom: 1px solid {$theme['border_color'] ?? '#e5e7eb'};
-    background: linear-gradient(135deg, {$theme['primary_color'] ?? '#2563eb'}10 0%, {$theme['background_color'] ?? '#ffffff'} 100%);
+    height: {$headerHeight};
+    padding: 0 {$marginLeft} 0 {$marginRight};
+    border-bottom: 1px solid {$borderColor};
+    background: linear-gradient(135deg, {$primaryColor}10 0%, {$backgroundColor} 100%);
     z-index: 1000;
 }
 
@@ -420,7 +444,7 @@ hr {
 
 .logo {
     font-size: 24px;
-    color: {$theme['primary_color'] ?? '#2563eb'};
+    color: {$primaryColor};
 }
 
 .brand-info {
@@ -429,16 +453,16 @@ hr {
 }
 
 .brand-name {
-    font-family: {$layout['header_font'] ?? 'Arial, sans-serif'};
+    font-family: {$headerFont};
     font-size: 14px;
     font-weight: 600;
-    color: {$theme['primary_color'] ?? '#2563eb'};
+    color: {$primaryColor};
 }
 
 .brand-tagline {
-    font-family: {$layout['header_font'] ?? 'Arial, sans-serif'};
+    font-family: {$headerFont};
     font-size: 10px;
-    color: {$theme['secondary_color'] ?? '#64748b'};
+    color: {$secondaryColor};
     font-style: italic;
 }
 
@@ -448,23 +472,23 @@ hr {
 }
 
 .document-title {
-    font-family: {$layout['header_font'] ?? 'Arial, sans-serif'};
+    font-family: {$headerFont};
     font-size: 12px;
     font-weight: 600;
-    color: {$theme['primary_color'] ?? '#2563eb'};
+    color: {$primaryColor};
     margin-bottom: 4px;
 }
 
 .document-meta {
     display: flex;
     gap: 12px;
-    font-family: {$layout['header_font'] ?? 'Arial, sans-serif'};
+    font-family: {$headerFont};
     font-size: 9px;
-    color: {$theme['secondary_color'] ?? '#64748b'};
+    color: {$secondaryColor};
 }
 
 .version {
-    background: {$theme['success_color'] ?? '#10b981'};
+    background: {$successColor};
     color: white;
     padding: 2px 6px;
     border-radius: 12px;
@@ -472,7 +496,7 @@ hr {
 }
 
 .date {
-    background: {$theme['accent_color'] ?? '#3b82f6'};
+    background: {$accentColor};
     color: white;
     padding: 2px 6px;
     border-radius: 12px;
@@ -480,7 +504,7 @@ hr {
 }
 
 .page {
-    background: {$theme['secondary_color'] ?? '#64748b'};
+    background: {$secondaryColor};
     color: white;
     padding: 2px 6px;
     border-radius: 12px;
@@ -494,23 +518,23 @@ hr {
     bottom: 0;
     left: 0;
     right: 0;
-    height: {$layout['footer_height'] ?? '15mm'};
-    padding: 0 {$layout['margin_left'] ?? '20mm'} 0 {$layout['margin_right'] ?? '20mm'};
-    border-top: 1px solid {$theme['border_color'] ?? '#e5e7eb'};
-    background: linear-gradient(135deg, {$theme['background_color'] ?? '#ffffff'} 0%, {$theme['primary_color'] ?? '#2563eb'}10 100%);
+    height: {$footerHeight};
+    padding: 0 {$marginLeft} 0 {$marginRight};
+    border-top: 1px solid {$borderColor};
+    background: linear-gradient(135deg, {$backgroundColor} 0%, {$primaryColor}10 100%);
     z-index: 1000;
 }
 
 .footer-left {
     float: left;
-    font-family: {$layout['header_font'] ?? 'Arial, sans-serif'};
+    font-family: {$headerFont};
     font-size: 9px;
-    color: {$theme['secondary_color'] ?? '#64748b'};
+    color: {$secondaryColor};
 }
 
 .company {
     font-weight: 600;
-    color: {$theme['primary_color'] ?? '#2563eb'};
+    color: {$primaryColor};
 }
 
 .copyright {
@@ -520,25 +544,25 @@ hr {
 .footer-right {
     float: right;
     text-align: right;
-    font-family: {$layout['header_font'] ?? 'Arial, sans-serif'};
+    font-family: {$headerFont};
     font-size: 9px;
-    color: {$theme['secondary_color'] ?? '#64748b'};
+    color: {$secondaryColor};
 }
 
 .page-info {
     font-weight: 600;
-    color: {$theme['primary_color'] ?? '#2563eb'};
+    color: {$primaryColor};
 }
 
 .website {
-    color: {$theme['primary_color'] ?? '#2563eb'};
+    color: {$primaryColor};
 }
 
 /* ===== TABLE OF CONTENTS ===== */
 
 .table-of-contents {
     background: #f8fafc;
-    border: 1px solid {$theme['border_color'] ?? '#e5e7eb'};
+    border: 1px solid {$borderColor};
     border-radius: 8px;
     padding: 20px;
     margin: 20px 0;
@@ -546,12 +570,12 @@ hr {
 }
 
 .toc-title {
-    font-family: {$layout['header_font'] ?? 'Arial, sans-serif'};
+    font-family: {$headerFont};
     font-size: 18px;
-    color: {$theme['primary_color'] ?? '#2563eb'};
+    color: {$primaryColor};
     margin: 0 0 16px 0;
     text-align: center;
-    border-bottom: 2px solid {$theme['border_color'] ?? '#e5e7eb'};
+    border-bottom: 2px solid {$borderColor};
     padding-bottom: 8px;
 }
 
@@ -576,7 +600,7 @@ hr {
 }
 
 .toc-link {
-    color: {$theme['primary_color'] ?? '#2563eb'};
+    color: {$primaryColor};
     text-decoration: none;
     display: flex;
     justify-content: space-between;
@@ -588,9 +612,9 @@ hr {
 }
 
 .toc-page-number {
-    color: {$theme['secondary_color'] ?? '#64748b'};
+    color: {$secondaryColor};
     font-size: 0.8em;
-    background: {$theme['border_color'] ?? '#e5e7eb'};
+    background: {$borderColor};
     padding: 2px 6px;
     border-radius: 10px;
 }
@@ -598,7 +622,7 @@ hr {
 /* ===== SPECIAL STYLES ===== */
 
 .confidential {
-    background: {$theme['error_color'] ?? '#ef4444'};
+    background: {$errorColor};
     color: white;
     padding: 4px 8px;
     border-radius: 4px;
@@ -657,11 +681,5 @@ CSS;
     {
         $styling = $this->config['styling'] ?? [];
         return $styling['toc_style'] ?? 'numbered';
-    }
-
-    private function getFooterStyle(): string
-    {
-        $styling = $this->config['styling'] ?? [];
-        return $styling['footer_style'] ?? 'modern';
     }
 }

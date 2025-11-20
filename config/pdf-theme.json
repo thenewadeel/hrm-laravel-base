@@ -1,0 +1,62 @@
+{
+    "brand": {
+        "name": "HRM Laravel Base",
+        "tagline": "Enterprise ERP System",
+        "logo": "🏢",
+        "website": "https://hrm-laravel-base.example.com",
+        "company": "HRM Solutions",
+        "version": "2.0.0",
+        "copyright": "© 2025 HRM Solutions. All rights reserved."
+    },
+    "theme": {
+        "primary_color": "#2563eb",
+        "secondary_color": "#64748b",
+        "accent_color": "#3b82f6",
+        "success_color": "#10b981",
+        "warning_color": "#f59e0b",
+        "error_color": "#ef4444",
+        "background_color": "#ffffff",
+        "text_color": "#1f2937",
+        "border_color": "#e5e7eb",
+        "header_font": "Arial, sans-serif",
+        "body_font": "Georgia, serif",
+        "code_font": "'Courier New', monospace"
+    },
+    "layout": {
+        "page_size": "A4",
+        "margin_top": "2mm",
+        "margin_bottom": "2mm",
+        "margin_left": "2mm",
+        "margin_right": "2mm",
+        "font_size": "11pt",
+        "line_height": "1.6",
+        "header_height": "15mm",
+        "footer_height": "15mm",
+        "header_spacing": "8mm",
+        "footer_spacing": "8mm"
+    },
+    "styling": {
+        "header_style": "modern",
+        "footer_style": "modern",
+        "toc_style": "numbered",
+        "code_theme": "pygments",
+        "table_style": "striped",
+        "link_style": "underline",
+        "blockquote_style": "bordered"
+    },
+    "features": {
+        "auto_toc": true,
+        "page_numbers": true,
+        "section_breaks": true,
+        "watermark": false,
+        "bookmarks": true,
+        "links": true
+    },
+    "custom": {
+        "watermark_text": "",
+        "confidential_text": "",
+        "draft_mode": false,
+        "print_date": true,
+        "author_info": true
+    }
+}
