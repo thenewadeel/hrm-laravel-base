@@ -6,13 +6,27 @@
 +------------------+------------------+
 | Metric           | Count/Percentage |
 +------------------+------------------+
-| Total Tests      | 407              |
-| Passed           | 359 (88.2%)      |
-| Failed           | 37 (9.1%)        |
-| Warnings/Skipped | 11 (2.7%)        |
+| Total Tests      | 455              |
+| Passed           | 395 (86.8%)      |
+| Failed           | 49 (10.8%)       |
+| Warnings/Skipped | 11 (2.4%)        |
 +------------------+------------------+
 
---- ❌ Detailed Failures (37 Total) ---
+--- ❌ Detailed Failures (49 Total) ---
+
+ PdfGeneration (12/12 failures):
+   ⨯ payslip download should fail initially
+   ⨯ payslip download should return pdf response
+   ⨯ payslip pdf should have correct filename
+   ⨯ trial balance download should return pdf response
+   ⨯ trial balance pdf should have correct filename
+   ⨯ income statement download should return pdf response
+   ⨯ balance sheet download should return pdf response
+   ⨯ low stock pdf download should return pdf response
+   ⨯ stock levels pdf download should return pdf response
+   ⨯ movement pdf download should return pdf response
+   ⨯ pdf generation should handle missing data gracefully
+   ⨯ pdf generation should not exceed memory limits
 
  OrganizationUnitApi (1/12 failures):
    ⨯ cannot assign user as non admin
@@ -122,6 +136,8 @@
 +---------------------------------+--------------+
 | AccountTypeValidation           | 7/7          |
 | BalanceSheet                    | 3/3          |
+| CashPaymentService              | 5/5          |
+| CashReceiptService              | 4/4          |
 | ChartOfAccount                  | 4/4          |
 | DimensionReport                 | 1/1          |
 | FinancialReports                | 1/1          |
@@ -159,6 +175,8 @@
 | ProfileInformation              | 2/2          |
 | TwoFactorAuthenticationSettings | 3/3          |
 | UpdatePassword                  | 3/3          |
+| CashPayment                     | 7/7          |
+| CashReceipt                     | 7/7          |
 | ChartOfAccountsApi              | 5/5          |
 | FinancialReportsApi             | 5/5          |
 | JournalEntriesApi               | 3/3          |
@@ -174,11 +192,12 @@
 | InventoryTransactionController  | 3/3          |
 | Store                           | 8/8          |
 | Transaction                     | 12/12        |
+| Create                          | 7/7          |
+| Create                          | 7/7          |
 | ChartOfAccounts                 | 5/5          |
 | MemberManager                   | 2/2          |
 | OrganizationForm                | 7/7          |
 | MultiStepSetupWizard            | 5/5          |
-| OrganizationUserPivot           | 1/1          |
 | OutstandingStatements           | 4/4          |
 | SetupChartOfAccounts            | 3/3          |
 | SetupStore                      | 3/3          |

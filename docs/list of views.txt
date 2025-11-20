@@ -1,4 +1,13 @@
 resources/views/
+├── accounting
+│   ├── cash-payments
+│   │   └── index.blade.php
+│   ├── cash-receipts
+│   │   └── index.blade.php
+│   └── pdf
+│       ├── balance-sheet.blade.php
+│       ├── income-statement.blade.php
+│       └── trial-balance.blade.php
 ├── accounts
 │   └── index.blade.php
 ├── alerts
@@ -104,6 +113,10 @@ resources/views/
 │   ├── mobile
 │   │   ├── dashboard.blade.php
 │   │   └── stock-count.blade.php
+│   ├── pdf
+│   │   ├── low-stock.blade.php
+│   │   ├── movement.blade.php
+│   │   └── stock-levels.blade.php
 │   ├── reports
 │   │   ├── index.blade.php
 │   │   ├── low-stock.blade.php
@@ -127,6 +140,10 @@ resources/views/
 │   └── guest.blade.php
 ├── livewire
 │   ├── accounting
+│   │   ├── cash-payments
+│   │   │   └── create.blade.php
+│   │   ├── cash-receipts
+│   │   │   └── create.blade.php
 │   │   ├── chart-of-accounts.blade.php
 │   │   ├── dashboard.blade.php
 │   │   ├── expense-voucher-form.blade.php
@@ -163,6 +180,7 @@ resources/views/
 │   │   ├── dashboard.blade.php
 │   │   ├── leave.blade.php
 │   │   ├── leave-create.blade.php
+│   │   ├── payslip-download.blade.php
 │   │   ├── payslips.blade.php
 │   │   ├── payslip-show.blade.php
 │   │   └── setup.blade.php
@@ -193,4 +211,4 @@ resources/views/
 ├── terms.blade.php
 └── welcome.blade.php
 
-41 directories, 153 files
+48 directories, 164 files

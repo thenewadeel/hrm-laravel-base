@@ -6,6 +6,7 @@ use App\Models\Inventory\Store;
 use App\Models\JobPosition;
 use App\Models\Shift;
 use App\Models\User;
+use App\Permissions\AccountingPermissions;
 use App\Permissions\InventoryPermissions;
 use App\Roles\InventoryRoles;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -38,6 +39,31 @@ class AuthServiceProvider extends ServiceProvider
         // Report permissions gate - ADD THIS
         Gate::define('inventory.reports.view', function (User $user) {
             return $user->hasPermission('inventory.reports.view');
+        });
+
+        // Accounting Permission Gates
+        Gate::define(AccountingPermissions::CREATE_CASH_RECEIPTS, function (User $user) {
+            return $user->hasPermission(AccountingPermissions::CREATE_CASH_RECEIPTS);
+        });
+
+        Gate::define(AccountingPermissions::CREATE_CASH_PAYMENTS, function (User $user) {
+            return $user->hasPermission(AccountingPermissions::CREATE_CASH_PAYMENTS);
+        });
+
+        Gate::define(AccountingPermissions::VIEW_CASH_RECEIPTS, function (User $user) {
+            return $user->hasPermission(AccountingPermissions::VIEW_CASH_RECEIPTS);
+        });
+
+        Gate::define(AccountingPermissions::VIEW_CASH_PAYMENTS, function (User $user) {
+            return $user->hasPermission(AccountingPermissions::VIEW_CASH_PAYMENTS);
+        });
+
+        Gate::define(AccountingPermissions::VIEW_CASH_REPORTS, function (User $user) {
+            return $user->hasPermission(AccountingPermissions::VIEW_CASH_REPORTS);
+        });
+
+        Gate::define(AccountingPermissions::GENERATE_CASH_REPORTS, function (User $user) {
+            return $user->hasPermission(AccountingPermissions::GENERATE_CASH_REPORTS);
         });
 
         // Role-based gates with organization context
