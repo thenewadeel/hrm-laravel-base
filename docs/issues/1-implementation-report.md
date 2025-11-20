@@ -74,7 +74,7 @@ All critical structural issues identified in the HRM Laravel application have be
 - Error handling and logging
 
 ### 3. Updated Critical Issues Document
-**File**: `docs/critical-structural-issues.md`  
+**File**: `docs/issues/1-critical-structural-issues.md`  
 **Status**: All critical issues resolved with implementation details
 
 ## 🚀 Production Readiness Checklist

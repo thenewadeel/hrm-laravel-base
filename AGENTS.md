@@ -1,4 +1,7 @@
-# AGENTS.md - Development Guidelines for HRM Laravel Base
+# AGENTS.md - Development Guidelines for HRM Laravel Base ERP System
+
+## Project Overview
+**HRM Laravel Base** is a comprehensive, production-ready ERP system that has evolved from a simple HRM concept into a full-featured business management platform. The system follows a multi-tenant architecture with complete data isolation and supports Financial Management, Human Resources, Inventory Management, and Organization Management modules.
 
 ## Build/Lint/Test Commands
 - **Run all tests**: `composer test` (outputs to docs/testResults.txt)
@@ -7,6 +10,42 @@
 - **Lint PHP code**: `vendor/bin/pint` (Laravel Pint code formatter)
 - **Build frontend assets**: `npm run build`
 - **Development server**: `composer run dev` (runs Laravel, queue, logs, and Vite concurrently)
+- **Database migrations**: `php artisan migrate`
+- **Seed demo data**: `php artisan db:seed --class=DemoDataSeeder`
+
+## Architecture Overview
+
+### Multi-Tenant Structure
+- **Organization-based isolation**: All business data is scoped to organizations
+- **Shared system tables**: Users, teams, and other system-wide data
+- **Role-based access control**: Granular permissions per organization
+- **Data integrity**: Foreign key constraints and soft deletes
+
+### Module Organization
+```
+app/
+├── Actions/          # Laravel Actions (Fortify, Jetstream)
+├── Console/Commands/  # Artisan commands
+├── Exceptions/        # Custom exception classes
+├── Http/
+│   ├── Controllers/   # HTTP controllers by feature
+│   ├── Middleware/    # Custom middleware
+│   └── Requests/      # Form request validation
+├── Livewire/         # Livewire components by module
+│   ├── Accounting/    # Financial management components
+│   ├── Organization/  # Organization management
+│   └── Traits/        # Shared Livewire traits
+├── Models/           # Eloquent models
+│   ├── Accounting/   # Financial models
+│   ├── Inventory/    # Inventory models
+│   ├── Scopes/       # Query scopes
+│   └── Traits/       # Model traits
+├── Permissions/      # Permission definitions
+├── Policies/         # Authorization policies
+├── Roles/           # Role definitions
+├── Services/        # Business logic services
+└── View/Components/ # Blade view components
+```
 
 ## Code Style Guidelines
 
@@ -19,29 +58,175 @@
 - **Error Handling**: Use Laravel's exception handling; validate requests with `Request::validate()`
 - **Database**: Use Eloquent models with proper relationships and scopes
 
+### Model Conventions
+- **Organization scoping**: All business models must use `BelongsToOrganization` trait
+- **Soft deletes**: Use soft deletes for business data retention
+- **Casts**: Use `casts()` method instead of `$casts` property (Laravel 12+)
+- **Relationships**: Always define return types for relationship methods
+- **Factories**: Create factories for all models with realistic test data
+
+### Service Layer Patterns
+- **Single responsibility**: Each service handles one business domain
+- **Dependency injection**: Use constructor property promotion
+- **Transaction management**: Use database transactions for multi-table operations
+- **Event handling**: Dispatch events for significant business actions
+- **Validation**: Validate data in services, not just controllers
+
+### Livewire Component Guidelines
+- **Single root element**: All components must have one root element
+- **Wire keys**: Always use `wire:key` in loops for proper reactivity
+- **Loading states**: Use `wire:loading` and `wire:dirty` for UX
+- **Authorization**: Check permissions in component methods
+- **Validation**: Use Livewire's built-in validation with proper error messages
+
 ### Testing Standards
 - **Framework**: Pest/PHPUnit with `#[Test]` attributes
 - **Traits**: Use `RefreshDatabase` for database tests
 - **Setup**: Use `setUp()` methods for common test initialization
 - **Assertions**: Prefer specific assertions (`assertDatabaseHas`, `assertStatus`, etc.)
 - **Factories/Seeders**: Use for test data creation
+- **Coverage**: Maintain 85%+ test coverage for critical business logic
 
 ### Frontend/JavaScript
 - **Build Tool**: Vite with Laravel Vite plugin
 - **Styling**: Tailwind CSS with custom components
 - **JavaScript**: ES6+ modules, axios for API calls
+- **Dark mode**: Support dark mode in all new components
+- **Responsive**: Mobile-first design approach
+- **Accessibility**: WCAG 2.1 compliance
 
 ### File Organization
 - **Controllers**: Group by feature (e.g., `Attendance/AttendanceController`)
 - **Models**: Use traits for shared functionality (e.g., `BelongsToOrganization`)
 - **Views**: Blade templates with consistent component structure
 - **Routes**: Feature-based grouping in separate files
+- **Services**: Business logic separated from controllers
+- **Tests**: Mirror application structure in test directories
 
 ### Security & Best Practices
-- **Validation**: Always validate user input
-- **Authorization**: Use Laravel policies and gates
+- **Validation**: Always validate user input with Form Requests
+- **Authorization**: Use Laravel policies and gates for all actions
 - **Database**: Use migrations, avoid raw queries when possible
-- **Environment**: Never commit secrets, use `.env` files</content>
+- **Environment**: Never commit secrets, use `.env` files
+- **Multi-tenancy**: Ensure all queries are properly scoped to organization
+- **Audit trails**: Log important business actions
+- **Data privacy**: Implement GDPR-compliant data handling
+
+## Module-Specific Guidelines
+
+### Financial Management (Accounting)
+- **Double-entry**: Always maintain balanced debits and credits
+- **Chart of Accounts**: Use hierarchical account structure
+- **Voucher system**: Implement proper voucher numbering and validation
+- **Reporting**: Use proper accounting periods and consolidation
+- **Audit trail**: Track all financial transactions with user attribution
+
+### Human Resources
+- **Employee lifecycle**: Manage complete employee data with privacy
+- **Attendance**: Handle biometric integration and shift management
+- **Payroll**: Ensure accurate calculations with proper tax handling
+- **Leave management**: Implement approval workflows
+- **Performance**: Track performance metrics and reviews
+
+### Inventory Management
+- **Multi-store**: Support multiple inventory locations
+- **Stock tracking**: Real-time inventory updates with proper costing
+- **Transactions**: Record all stock movements (IN, OUT, TRANSFER, ADJUST)
+- **Reorder points**: Automated alerts for low stock
+- **Valuation**: Support FIFO and weighted average costing methods
+
+### Organization Management
+- **Multi-tenancy**: Strict data isolation between organizations
+- **Hierarchical structure**: Support complex organizational trees
+- **Member management**: Invitation-based member onboarding
+- **Role-based access**: Granular permission system
+- **Analytics**: Organization-level metrics and reporting
+
+## Database Design Principles
+
+### Schema Organization
+- **Business tables**: Prefix with organization_id for multi-tenancy
+- **System tables**: Shared across all organizations
+- **Foreign keys**: Always define proper foreign key constraints
+- **Indexing**: Strategic indexes for performance optimization
+- **Soft deletes**: Use for audit trail and data recovery
+
+### Migration Best Practices
+- **Column modifications**: Include all existing attributes when modifying columns
+- **Rollback support**: Always provide proper down() methods
+- **Data integrity**: Use transactions for complex migrations
+- **Testing**: Test migrations on both empty and populated databases
+
+## API Development
+
+### RESTful Conventions
+- **Resource naming**: Use plural nouns for resource endpoints
+- **HTTP methods**: Use appropriate HTTP verbs (GET, POST, PUT, DELETE)
+- **Status codes**: Return proper HTTP status codes
+- **Error handling**: Consistent error response format
+- **Versioning**: Implement API versioning strategy
+
+### Authentication & Authorization
+- **Sanctum tokens**: Use Laravel Sanctum for API authentication
+- **Scoping**: API responses should be scoped to user's organization
+- **Rate limiting**: Implement proper rate limiting for API endpoints
+- **Documentation**: Provide comprehensive API documentation
+
+## Performance Optimization
+
+### Database Optimization
+- **Eager loading**: Prevent N+1 queries with proper eager loading
+- **Query optimization**: Use query scopes and efficient queries
+- **Caching**: Implement multi-level caching strategy
+- **Connection pooling**: Optimize database connection management
+
+### Frontend Performance
+- **Asset optimization**: Minify and compress assets
+- **Lazy loading**: Load components on-demand
+- **Caching**: Implement browser caching strategies
+- **CDN**: Use CDN for static assets in production
+
+## Deployment & DevOps
+
+### Environment Management
+- **Configuration**: Use environment-specific configuration files
+- **Secrets management**: Never commit sensitive information
+- **Backup strategy**: Implement automated backup systems
+- **Monitoring**: Set up application and infrastructure monitoring
+
+### Production Deployment
+- **Zero downtime**: Use blue-green deployment strategy
+- **Rollback capability**: Maintain ability to rollback quickly
+- **Health checks**: Implement comprehensive health checks
+- **Performance monitoring**: Track application performance metrics
+
+## Quality Assurance
+
+### Code Review Process
+- **Static analysis**: Use PHPStan and Laravel Pint
+- **Security scanning**: Regular security vulnerability scans
+- **Performance testing**: Load testing for critical paths
+- **Accessibility testing**: Ensure WCAG compliance
+
+### Testing Strategy
+- **Unit tests**: Test individual components in isolation
+- **Feature tests**: Test complete user workflows
+- **Integration tests**: Test module interactions
+- **End-to-end tests**: Test critical business scenarios
+
+## Documentation Standards
+
+### Code Documentation
+- **PHPDoc**: Comprehensive documentation for all classes and methods
+- **API docs**: Auto-generated API documentation
+- **Architecture docs**: Maintain up-to-date architecture documentation
+- **User guides**: Create user-friendly documentation for all features
+
+### Project Documentation
+- **README**: Keep README.md current with setup instructions
+- **Changelog**: Maintain detailed changelog for all releases
+- **Architecture diagrams**: Use visual diagrams for complex systems
+- **Deployment guides**: Step-by-step deployment instructions</content>
 <parameter name="filePath">AGENTS.md
 
 ===
@@ -54,20 +239,20 @@
 The Laravel Boost guidelines are specifically curated by Laravel maintainers for this application. These guidelines should be followed closely to enhance the user's satisfaction building Laravel applications.
 
 ## Foundational Context
-This application is a Laravel application and its main Laravel ecosystems package & versions are below. You are an expert with them all. Ensure you abide by these specific packages & versions.
+This application is a Laravel-based ERP system and its main Laravel ecosystem package & versions are below. You are an expert with them all. Ensure you abide by these specific packages & versions.
 
-- php - 8.4.12
-- laravel/fortify (FORTIFY) - v1
-- laravel/framework (LARAVEL) - v12
-- laravel/prompts (PROMPTS) - v0
-- laravel/sanctum (SANCTUM) - v4
-- livewire/livewire (LIVEWIRE) - v3
-- laravel/mcp (MCP) - v0
-- laravel/pint (PINT) - v1
-- laravel/sail (SAIL) - v1
-- pestphp/pest (PEST) - v3
-- phpunit/phpunit (PHPUNIT) - v11
-- tailwindcss (TAILWINDCSS) - v3
+- **php** - 8.4.12
+- **laravel/fortify** (FORTIFY) - v1.31.2
+- **laravel/framework** (LARAVEL) - v12.35.1
+- **laravel/prompts** (PROMPTS) - v0.3.7
+- **laravel/sanctum** (SANCTUM) - v4.2.0
+- **livewire/livewire** (LIVEWIRE) - v3.6.4
+- **laravel/mcp** (MCP) - v0.3.3
+- **laravel/pint** (PINT) - v1.25.1
+- **laravel/sail** (SAIL) - v1.46.0
+- **pestphp/pest** (PEST) - v3.8.4
+- **phpunit/phpunit** (PHPUNIT) - v11.5.33
+- **tailwindcss** (TAILWINDCSS) - v3.4.17
 
 ## Conventions
 - You must follow all existing code conventions used in this application. When creating or editing a file, check sibling files for the correct structure, approach, naming.
@@ -80,6 +265,10 @@ This application is a Laravel application and its main Laravel ecosystems packag
 ## Application Structure & Architecture
 - Stick to existing directory structure - don't create new base folders without approval.
 - Do not change the application's dependencies without approval.
+- **Current Modules**: Financial Management (95% complete), Human Resources (90% complete), Inventory Management (100% complete), Organization Management (95% complete)
+- **Database Engine**: SQLite (development), MySQL (production ready)
+- **Multi-tenant Architecture**: Complete organization-based data isolation
+- **Portal Ecosystem**: Employee, Manager, HR Admin, and Mobile Kiosk portals
 
 ## Frontend Bundling
 - If the user doesn't see a frontend change reflected in the UI, it could mean they need to run `npm run build`, `npm run dev`, or `composer run dev`. Ask them.
@@ -219,13 +408,33 @@ protected function isAccessible(User $user, ?string $path = null): bool
 - `bootstrap/providers.php` contains application specific service providers.
 - **No app\Console\Kernel.php** - use `bootstrap/app.php` or `routes/console.php` for console configuration.
 - **Commands auto-register** - files in `app/Console/Commands/` are automatically available and do not require manual registration.
+- **Route files**: Feature-based routing with separate files for each module:
+  - `web.php` - Main web routes
+  - `api.php` - API routes
+  - `accounts.php` - Financial management routes
+  - `hrm.php` - Human resources routes
+  - `inventory.php` - Inventory management routes
+  - `organization.php` - Organization management routes
+  - `setup.php` - System setup routes
+  - `demo.php` - Demo and testing routes
 
 ### Database
 - When modifying a column, the migration must include all of the attributes that were previously defined on the column. Otherwise, they will be dropped and lost.
 - Laravel 11 allows limiting eagerly loaded records natively, without external packages: `$query->latest()->limit(10);`.
+- **Multi-tenant design**: All business tables include `organization_id` for data isolation
+- **Key tables**: organizations, users, employees, chart_of_accounts, journal_entries, ledger_entries, items, stores, transactions
+- **Soft deletes**: Implemented on business-critical tables for audit trails
+- **Foreign keys**: Comprehensive foreign key constraints for data integrity
 
 ### Models
 - Casts can and likely should be set in a `casts()` method on a model rather than the `$casts` property. Follow existing conventions from other models.
+- **Organization trait**: All business models use `BelongsToOrganization` trait for multi-tenancy
+- **Model organization**: 
+  - `App\Models\Accounting\` - Financial models (ChartOfAccount, JournalEntry, LedgerEntry)
+  - `App\Models\Inventory\` - Inventory models (Item, Store, Transaction, Head)
+  - `App\Models\` - Core business models (Employee, Organization, User, etc.)
+- **Scopes**: Use `App\Models\Scopes\OrganizationScope` for automatic organization filtering
+- **Relationships**: Define proper relationships with return type hints
 
 
 === livewire/core rules ===
@@ -331,6 +540,15 @@ document.addEventListener('livewire:init', function () {
 - You must not remove any tests or test files from the tests directory without approval. These are not temporary or helper files - these are core to the application.
 - Tests should test all of the happy paths, failure paths, and weird paths.
 - Tests live in the `tests/Feature` and `tests/Unit` directories.
+- **Test organization**: Mirror application structure in test directories
+- **Test traits**: Use `SetupEmployee`, `SetupInventory` and other traits for test setup
+- **Current coverage**: 85%+ coverage for core business logic
+- **Test categories**:
+  - `tests/Feature/Accounting/` - Financial management tests
+  - `tests/Feature/Attendance/` - HR attendance tests
+  - `tests/Feature/Inventory/` - Inventory management tests
+  - `tests/Feature/Api/` - API endpoint tests
+  - `tests/Unit/Accounting/` - Unit tests for financial logic
 - Pest tests look and behave like this:
 <code-snippet name="Basic Pest Test Example" lang="php">
 it('is true', function () {
