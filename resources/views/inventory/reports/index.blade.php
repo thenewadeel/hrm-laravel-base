@@ -236,33 +236,12 @@
                     <div class="p-6 bg-white border-b border-gray-200">
                         <h3 class="text-lg font-semibold mb-4">📤 Export Reports</h3>
                         <div class="space-y-3">
-                            {{-- <x-button.outline
-                                href="{{ route('inventory.reports.export', ['type' => 'stock_levels', 'format' => 'pdf']) }}?{{ http_build_query(request()->query()) }}"
+                            <x-button.outline
+                                href="{{ route('inventory.reports.download.stock-levels') }}?{{ http_build_query(request()->query()) }}"
                                 class="w-full justify-start">
                                 <x-heroicon-s-document-arrow-down class="w-4 h-4 mr-2" />
                                 Export Stock Levels (PDF)
                             </x-button.outline>
-
-                            <x-button.outline
-                                href="{{ route('inventory.reports.export', ['type' => 'movement', 'format' => 'csv']) }}?{{ http_build_query(request()->query()) }}"
-                                class="w-full justify-start">
-                                <x-heroicon-s-document-arrow-down class="w-4 h-4 mr-2" />
-                                Export Movement Data (CSV)
-                            </x-button.outline>
-
-                            <x-button.outline
-                                href="{{ route('inventory.reports.export', ['type' => 'valuation', 'format' => 'excel']) }}?{{ http_build_query(request()->query()) }}"
-                                class="w-full justify-start">
-                                <x-heroicon-s-document-arrow-down class="w-4 h-4 mr-2" />
-                                Export Valuation (Excel)
-                            </x-button.outline>
-
-                            <x-button.outline
-                                href="{{ route('inventory.reports.export', ['type' => 'transactions', 'format' => 'csv']) }}?{{ http_build_query(request()->query()) }}"
-                                class="w-full justify-start">
-                                <x-heroicon-s-document-arrow-down class="w-4 h-4 mr-2" />
-                                Export All Transactions (CSV)
-                            </x-button.outline> --}}
                         </div>
 
                         <div class="mt-6 p-4 bg-gray-50 rounded-lg">

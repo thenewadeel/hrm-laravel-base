@@ -158,8 +158,26 @@ class EmployeePortalController extends Controller
             abort(403);
         }
 
-        // For now, return view - you can implement PDF generation later
-        return view('portal.employee.payslip-download', compact('employee', 'payslip'));
+        // Generate PDF
+        $pdf = new \Dompdf\Dompdf();
+        $pdf->setPaper('A4', 'portrait');
+        
+        // Load payslip user relationship if not loaded
+        if (!$payslip->relationLoaded('user')) {
+            $payslip->load('user');
+        }
+        
+        $html = view('portal.employee.payslip-download', compact('employee', 'payslip'))->render();
+        $pdf->loadHtml($html);
+        $pdf->render();
+        
+        $filename = $payslip->payslip_filename;
+        
+        return response($pdf->output())
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
+            ->header('Cache-Control', 'private, max-age=0, must-revalidate')
+            ->header('Pragma', 'public');
     }
 
     public function clockIn()

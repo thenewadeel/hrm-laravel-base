@@ -214,6 +214,31 @@ app/
 - **Integration tests**: Test module interactions
 - **End-to-end tests**: Test critical business scenarios
 
+## Test-Driven Development (TDD) Implementation
+
+### TDD Process for PDF Generation (Completed)
+- **RED Phase**: Write failing tests first to specify expected behavior
+- **GREEN Phase**: Implement functionality to make tests pass
+- **REFACTOR Phase**: Optimize and clean up implementation
+
+### TDD Guidelines for Future Development
+1. **Always write tests first** - Before implementing any feature, write failing tests
+2. **Use RED-GREEN-REFACTOR cycle** - Follow proper TDD methodology
+3. **Test-driven specifications** - Let tests define the requirements and behavior
+4. **Regression prevention** - Comprehensive test coverage ensures functionality stays working
+
+### PDF Generation TDD Implementation
+- **Created comprehensive test suite** in `tests/Feature/PdfGenerationTest.php`
+- **Implemented PDF services** to satisfy test requirements
+- **Applied proper dependency injection** and service architecture
+- **Ensured all tests pass** before considering implementation complete
+
+### Key TDD Benefits Achieved
+- **Specification by example** - Tests clearly define expected behavior
+- **Confidence building** - Each passing test increases implementation confidence
+- **Refactoring safety** - Tests prevent breaking changes during optimization
+- **Documentation through tests** - Test cases serve as living documentation
+
 ## Documentation Standards
 
 ### Code Documentation
@@ -221,12 +246,18 @@ app/
 - **API docs**: Auto-generated API documentation
 - **Architecture docs**: Maintain up-to-date architecture documentation
 - **User guides**: Create user-friendly documentation for all features
+- **Development sessions**: Document development sessions with key decisions and patterns
 
 ### Project Documentation
 - **README**: Keep README.md current with setup instructions
 - **Changelog**: Maintain detailed changelog for all releases
 - **Architecture diagrams**: Use visual diagrams for complex systems
-- **Deployment guides**: Step-by-step deployment instructions</content>
+- **Deployment guides**: Step-by-step deployment instructions
+
+### Development Session Documentation
+- **Session summaries**: Document each development session with objectives, decisions, and outcomes
+- **TDD implementation**: Record test-driven development cycles and lessons learned
+- **Pattern library**: Document reusable patterns and best practices discovered during development</content>
 <parameter name="filePath">AGENTS.md
 
 ===

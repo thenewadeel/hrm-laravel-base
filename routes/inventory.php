@@ -51,6 +51,11 @@ Route::prefix('inventory')->name('inventory.')->group(function () {
         Route::get('/low-stock', [InventoryReportController::class, 'lowStock'])->name('low-stock');
         Route::get('/movement', [InventoryReportController::class, 'movement'])->name('movement');
         Route::get('/stock-levels', [InventoryReportController::class, 'stockLevels'])->name('stock-levels');
+        
+        // PDF Downloads
+        Route::get('/download/low-stock', [InventoryReportController::class, 'downloadLowStock'])->name('download.low-stock');
+        Route::get('/download/stock-levels', [InventoryReportController::class, 'downloadStockLevels'])->name('download.stock-levels');
+        Route::get('/download/movement', [InventoryReportController::class, 'downloadMovement'])->name('download.movement');
     });
 
     // Inventory Stock Operations

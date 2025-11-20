@@ -6,11 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Inventory\Item;
 use App\Models\Inventory\Store;
 use App\Models\Inventory\Transaction;
+use App\Services\InventoryPdfService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class InventoryReportController extends Controller
 {
+    private InventoryPdfService $pdfService;
+
+    public function __construct(InventoryPdfService $pdfService)
+    {
+        $this->pdfService = $pdfService;
+    }
     /**
      * Display the inventory reports dashboard.
      */
@@ -515,5 +522,244 @@ class InventoryReportController extends Controller
             'totalValue',
             'lowStockItems'
         ));
+    }
+
+    /**
+     * Download Low Stock Report PDF
+     */
+    public function downloadLowStock(Request $request)
+    {
+        // Get the same data as the view method
+        $storeId = $request->get('store_id');
+        $category = $request->get('category');
+        $severity = $request->get('severity');
+
+        // Base query for items in current organization
+        $itemsQuery = Item::query()
+            ->with(['stores' => function ($query) use ($storeId) {
+                if ($storeId) {
+                    $query->where('inventory_stores.id', $storeId);
+                }
+            }])
+            ->where('organization_id', auth()->user()->operatingOrganizationId)
+            ->where('is_active', true);
+
+        // Apply category filter
+        if ($category) {
+            $itemsQuery->where('category', $category);
+        }
+
+        // Get all items with their store quantities
+        $items = $itemsQuery->get()->map(function ($item) use ($storeId) {
+            // Calculate total quantity across all stores or specific store
+            if ($storeId) {
+                $storeItem = $item->stores->firstWhere('id', $storeId);
+                $item->total_quantity = $storeItem ? $storeItem->pivot->quantity : 0;
+                $item->store = $storeItem;
+            } else {
+                $item->total_quantity = $item->stores->sum('pivot.quantity');
+                $item->store = $item->stores->first();
+            }
+
+            return $item;
+        });
+
+        // Filter out-of-stock items (quantity = 0)
+        $outOfStockItems = $items->filter(function ($item) {
+            return $item->total_quantity <= 0;
+        });
+        // Filter low stock items (quantity > 0 but below reorder level)
+        $lowStockItems = $items->filter(function ($item) {
+            return $item->total_quantity > 0 && $item->total_quantity <= $item->reorder_level;
+        });
+
+        // Apply severity filter if specified
+        if ($severity) {
+            if ($severity === 'critical') {
+                $lowStockItems = collect(); // Only show out of stock
+            } elseif ($severity === 'warning') {
+                $outOfStockItems = collect(); // Only show low stock
+            } elseif ($severity === 'info') {
+                // Show items near reorder level (within 20%)
+                $lowStockItems = $items->filter(function ($item) {
+                    $threshold = $item->reorder_level * 1.2;
+                    return $item->total_quantity > $item->reorder_level && $item->total_quantity <= $threshold;
+                });
+                $outOfStockItems = collect();
+            }
+        }
+
+        // Generate reorder suggestions
+        $reorderSuggestions = $items->filter(function ($item) {
+            return $item->total_quantity <= $item->reorder_level;
+        })->map(function ($item) {
+            $suggestedOrder = max(
+                $item->reorder_level - $item->total_quantity + 10, // Base suggestion + buffer
+                $item->min_order_quantity ?? 1 // Minimum order quantity if set
+            );
+
+            return [
+                'item' => $item,
+                'current' => $item->total_quantity,
+                'reorder_level' => $item->reorder_level,
+                'suggested_order' => $suggestedOrder,
+            ];
+        })->values();
+
+        $filters = [
+            'store_id' => $storeId,
+            'category' => $category,
+            'severity' => $severity
+        ];
+
+        return $this->pdfService->downloadLowStock(
+            $outOfStockItems->toArray(),
+            $lowStockItems->toArray(),
+            $reorderSuggestions->toArray(),
+            $filters
+        );
+    }
+
+    /**
+     * Download Stock Levels Report PDF
+     */
+    public function downloadStockLevels(Request $request)
+    {
+        // Get the same data as the view method
+        $query = Item::with(['stores', 'stores' => function ($query) {
+            $query->withPivot(['quantity', 'min_stock', 'max_stock']);
+        }])->where('is_active', true);
+
+        // Filter by store
+        if ($request->has('store_id') && $request->store_id) {
+            $query->where('store_id', $request->store_id);
+        }
+
+        // Filter by category
+        if ($request->has('category') && $request->category) {
+            $query->where('category', $request->category);
+        }
+
+        // Filter by stock status (matching blade values)
+        if ($request->has('status') && $request->status) {
+            switch ($request->status) {
+                case 'low_stock':
+                    $query->whereHas('stores', function ($q) {
+                        $q->whereRaw('inventory_store_items.quantity <= inventory_store_items.min_stock')
+                            ->where('inventory_store_items.quantity', '>', 0);
+                    });
+                    break;
+                case 'out_of_stock':
+                    $query->whereHas('stores', function ($q) {
+                        $q->where('inventory_store_items.quantity', '<=', 0);
+                    });
+                    break;
+                case 'in_stock':
+                    $query->whereHas('stores', function ($q) {
+                        $q->whereRaw('inventory_store_items.quantity > inventory_store_items.min_stock')
+                            ->where('inventory_store_items.quantity', '>', 0);
+                    });
+                    break;
+            }
+        }
+
+        // Get all items (not paginated for PDF)
+        $items = $query->get();
+
+        // Calculate summary statistics
+        $totalItems = Item::where('is_active', true)->count();
+        $lowStockCount = Item::where('is_active', true)
+            ->whereHas('stores', function ($q) {
+                $q->whereRaw('inventory_store_items.quantity <= inventory_store_items.min_stock')
+                    ->where('inventory_store_items.quantity', '>', 0);
+            })->count();
+        $outOfStockCount = Item::where('is_active', true)
+            ->whereHas('stores', function ($q) {
+                $q->where('inventory_store_items.quantity', '<=', 0);
+            })->count();
+
+        // Calculate total inventory value
+        $totalValue = Item::where('is_active', true)
+            ->with(['stores' => function ($query) {
+                $query->withPivot('quantity');
+            }])
+            ->get()
+            ->sum(function ($item) {
+                return ($item->cost_price ?? 0) * ($item->total_quantity ?? 0);
+            });
+
+        $summary = [
+            'totalItems' => $totalItems,
+            'lowStockCount' => $lowStockCount,
+            'outOfStockCount' => $outOfStockCount,
+            'totalValue' => $totalValue
+        ];
+
+        $filters = $request->only(['store_id', 'category', 'status']);
+
+        return $this->pdfService->downloadStockLevels(
+            $items->toArray(),
+            $summary,
+            $filters
+        );
+    }
+
+    /**
+     * Download Movement Report PDF
+     */
+    public function downloadMovement(Request $request)
+    {
+        // Get filter parameters with defaults
+        $startDate = $request->get('start_date', now()->subDays(30)->format('Y-m-d'));
+        $endDate = $request->get('end_date', now()->format('Y-m-d'));
+        $itemId = $request->get('item_id');
+        $transactionType = $request->get('transaction_type');
+
+        // Base query for transaction items within date range
+        $movementsQuery = TransactionItem::query()
+            ->with(['transaction.store', 'item'])
+            ->whereHas('transaction', function ($query) use ($startDate, $endDate, $transactionType) {
+                $query->where('status', 'completed');
+                $query->whereBetween('transaction_date', [$startDate, $endDate . ' 23:59:59']);
+
+                if ($transactionType) {
+                    $query->where('type', $transactionType);
+                }
+
+                // Scope to user's organization
+                $query->whereHas('store.organization_unit', function ($q) {
+                    $q->where('organization_id', auth()->user()->operatingOrganizationId);
+                });
+            });
+
+        // Apply item filter
+        if ($itemId) {
+            $movementsQuery->where('item_id', $itemId);
+        }
+
+        // Get all movements (not paginated for PDF)
+        $movements = $movementsQuery->orderBy('transaction_date', 'desc')->get();
+
+        // Calculate summary statistics
+        $summary = $this->calculateMovementSummary($startDate, $endDate, $itemId, $transactionType);
+
+        // Get top received and issued items
+        $topReceived = $this->getTopReceived($startDate, $endDate, 5);
+        $topIssued = $this->getTopIssued($startDate, $endDate, 5);
+
+        $filters = [
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+            'item_id' => $itemId,
+            'transaction_type' => $transactionType
+        ];
+
+        return $this->pdfService->downloadMovement(
+            $movements,
+            $summary,
+            $topReceived->toArray(),
+            $topIssued->toArray(),
+            $filters
+        );
     }
 }
