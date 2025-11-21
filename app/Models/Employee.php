@@ -38,6 +38,7 @@ class Employee extends Model
         'photo',
         'is_active',
         'is_admin',
+        'basic_salary',
     ];
 
     /**
@@ -49,6 +50,7 @@ class Employee extends Model
         'date_of_birth' => 'date',
         'is_active' => 'boolean',
         'is_admin' => 'boolean',
+        'basic_salary' => 'decimal:2',
     ];
 
     public function attendanceRecords()
@@ -85,6 +87,34 @@ class Employee extends Model
     {
         // Assuming OrganizationUser is the pivot model for a many-to-many relationship
         return $this->hasMany(OrganizationUser::class);
+    }
+
+    /**
+     * Payroll enhancement relationships
+     */
+    public function increments()
+    {
+        return $this->hasMany(EmployeeIncrement::class);
+    }
+
+    public function allowances()
+    {
+        return $this->hasMany(EmployeeAllowance::class);
+    }
+
+    public function deductions()
+    {
+        return $this->hasMany(EmployeeDeduction::class);
+    }
+
+    public function loans()
+    {
+        return $this->hasMany(EmployeeLoan::class);
+    }
+
+    public function salaryAdvances()
+    {
+        return $this->hasMany(SalaryAdvance::class);
     }
 
     /**

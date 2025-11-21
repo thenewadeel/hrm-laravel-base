@@ -5,6 +5,7 @@ use App\Http\Controllers\HR\EmployeeController;
 use App\Http\Controllers\HR\JobPositionController;
 use App\Http\Controllers\HR\ShiftController;
 use App\Http\Controllers\HrmDashboardController;
+use App\Http\Controllers\Payroll\EnhancedPayrollController;
 use App\Http\Controllers\Payroll\PayrollController;
 use App\Http\Controllers\Portal\EmployeePortalController;
 use App\Http\Controllers\Portal\ManagerPortalController;
@@ -41,8 +42,39 @@ Route::prefix('portal/employee')->name('portal.employee.')->group(function () {
     Route::post('/clock-out', [AttendanceController::class, 'clockOut'])->name('clock-out');
 });
 
+// Enhanced Payroll Routes
+Route::prefix('payroll')->name('payroll.')->group(function () {
+    Route::get('/dashboard', [EnhancedPayrollController::class, 'dashboard'])->name('dashboard');
+    Route::get('/processing', [EnhancedPayrollController::class, 'processing'])->name('processing');
+    Route::post('/process', [EnhancedPayrollController::class, 'processPayroll'])->name('process');
+    Route::get('/employee/{employee}', [EnhancedPayrollController::class, 'employeePayroll'])->name('employee');
+
+    // Increments
+    Route::get('/increments', [EnhancedPayrollController::class, 'increments'])->name('increments');
+    Route::post('/increments', [EnhancedPayrollController::class, 'storeIncrement'])->name('increments.store');
+    Route::post('/increments/{increment}/approve', [EnhancedPayrollController::class, 'approveIncrement'])->name('increments.approve');
+    Route::post('/increments/{increment}/implement', [EnhancedPayrollController::class, 'implementIncrement'])->name('increments.implement');
+
+    // Loans
+    Route::get('/loans', [EnhancedPayrollController::class, 'loans'])->name('loans');
+    Route::post('/loans', [EnhancedPayrollController::class, 'storeLoan'])->name('loans.store');
+    Route::post('/loans/{loan}/approve', [EnhancedPayrollController::class, 'approveLoan'])->name('loans.approve');
+    Route::post('/loans/{loan}/disburse', [EnhancedPayrollController::class, 'disburseLoan'])->name('loans.disburse');
+
+    // Salary Advances
+    Route::get('/advances', [EnhancedPayrollController::class, 'advances'])->name('advances');
+    Route::post('/advances', [EnhancedPayrollController::class, 'storeAdvance'])->name('advances.store');
+    Route::post('/advances/{advance}/approve', [EnhancedPayrollController::class, 'approveAdvance'])->name('advances.approve');
+    Route::get('/advance-reports', \App\Livewire\Payroll\AdvanceReports::class)->name('advance-reports');
+
 // Payroll Routes (if separate)
 Route::get('/payroll/processing', [PayrollController::class, 'processing'])->name('payroll.processing');
+    // Reports
+    Route::post('/report', [EnhancedPayrollController::class, 'generateReport'])->name('report');
+});
+
+// Legacy Payroll Routes (if separate)
+Route::get('/payroll/processing', [PayrollController::class, 'processing'])->name('payroll.processing.legacy');
 
 // Manager Portal Routes
 Route::prefix('portal/manager')->name('portal.manager.')->group(function () {
