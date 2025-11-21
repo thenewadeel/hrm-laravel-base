@@ -6,6 +6,7 @@
         "require": [
             "php",
             "blade-ui-kit/blade-heroicons",
+            "dompdf/dompdf",
             "laravel/framework",
             "laravel/jetstream",
             "laravel/sanctum",
@@ -26,8 +27,8 @@
             "yunyami/clockwork"
         ]
     },
-    "timestamp": "2025-11-19T06:44:26+00:00",
-    "component_count": 279,
+    "timestamp": "2025-11-21T07:30:09+00:00",
+    "component_count": 409,
     "components": [
         {
             "type": "Model",
@@ -63,6 +64,132 @@
             "type": "Model",
             "name": "LedgerEntry",
             "file": "app/Models/Accounting/LedgerEntry.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "CashReceipt",
+            "file": "app/Models/Accounting/CashReceipt.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "CashPayment",
+            "file": "app/Models/Accounting/CashPayment.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "Voucher",
+            "file": "app/Models/Accounting/Voucher.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "BankAccount",
+            "file": "app/Models/Accounting/BankAccount.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "BankReconciliation",
+            "file": "app/Models/Accounting/BankReconciliation.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "BankStatement",
+            "file": "app/Models/Accounting/BankStatement.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "BankTransaction",
+            "file": "app/Models/Accounting/BankTransaction.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "FixedAsset",
+            "file": "app/Models/Accounting/FixedAsset.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "FixedAssetCategory",
+            "file": "app/Models/Accounting/FixedAssetCategory.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "Depreciation",
+            "file": "app/Models/Accounting/Depreciation.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "AssetDisposal",
+            "file": "app/Models/Accounting/AssetDisposal.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "AssetTransfer",
+            "file": "app/Models/Accounting/AssetTransfer.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "AssetMaintenance",
+            "file": "app/Models/Accounting/AssetMaintenance.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "FinancialYear",
+            "file": "app/Models/Accounting/FinancialYear.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "OpeningBalance",
+            "file": "app/Models/Accounting/OpeningBalance.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "ClosingEntry",
+            "file": "app/Models/Accounting/ClosingEntry.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "TaxRate",
+            "file": "app/Models/Accounting/TaxRate.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "TaxJurisdiction",
+            "file": "app/Models/Accounting/TaxJurisdiction.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "TaxExemption",
+            "file": "app/Models/Accounting/TaxExemption.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "TaxCalculation",
+            "file": "app/Models/Accounting/TaxCalculation.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "TaxFiling",
+            "file": "app/Models/Accounting/TaxFiling.php",
             "essential": false
         },
         {
@@ -211,6 +338,72 @@
             "content_preview": "<?php\n\nnamespace App\\Models;\n\nuse App\\Roles\\InventoryRoles;\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Foundation\\Auth\\User as Authenticatable;\nuse Illuminate\\Notifications\\Notifiable;\nuse Laravel\\Fortify\\TwoFactorAuthenticatable;\nuse Laravel\\Jetstream\\HasProfilePhoto;\nuse Laravel\\Jetstream\\HasTeams;\nuse Laravel\\Sanctum\\HasApiTokens;\n\nclass User extends Authenticatable\n{\n    use HasApiTokens;\n    use HasFactory;\n    use HasProfilePhoto;\n    use HasTeams;\n    use Notifi..."
         },
         {
+            "type": "Model",
+            "name": "EmployeeIncrement",
+            "file": "app/Models/EmployeeIncrement.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "AllowanceType",
+            "file": "app/Models/AllowanceType.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "EmployeeAllowance",
+            "file": "app/Models/EmployeeAllowance.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "DeductionType",
+            "file": "app/Models/DeductionType.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "EmployeeDeduction",
+            "file": "app/Models/EmployeeDeduction.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "TaxBracket",
+            "file": "app/Models/TaxBracket.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "EmployeeLoan",
+            "file": "app/Models/EmployeeLoan.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "SalaryAdvance",
+            "file": "app/Models/SalaryAdvance.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "Payment",
+            "file": "app/Models/Payment.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "InvoiceItem",
+            "file": "app/Models/InvoiceItem.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "Invoice",
+            "file": "app/Models/Invoice.php",
+            "essential": false
+        },
+        {
             "type": "Controller",
             "name": "Controller",
             "file": "app/Http/Controllers/Controller.php",
@@ -278,8 +471,8 @@
         },
         {
             "type": "Controller",
-            "name": "DashboardController",
-            "file": "app/Http/Controllers/DashboardController.php",
+            "name": "OutstandingStatementsController",
+            "file": "app/Http/Controllers/Api/OutstandingStatementsController.php",
             "essential": false
         },
         {
@@ -292,12 +485,6 @@
             "type": "Controller",
             "name": "InventoryItemController",
             "file": "app/Http/Controllers/Inventory/InventoryItemController.php",
-            "essential": false
-        },
-        {
-            "type": "Controller",
-            "name": "InventoryReportController",
-            "file": "app/Http/Controllers/Inventory/InventoryReportController.php",
             "essential": false
         },
         {
@@ -316,6 +503,12 @@
             "type": "Controller",
             "name": "InventoryTransactionController",
             "file": "app/Http/Controllers/Inventory/InventoryTransactionController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "InventoryReportController",
+            "file": "app/Http/Controllers/Inventory/InventoryReportController.php",
             "essential": false
         },
         {
@@ -350,6 +543,12 @@
         },
         {
             "type": "Controller",
+            "name": "EnhancedPayrollController",
+            "file": "app/Http/Controllers/Payroll/EnhancedPayrollController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
             "name": "PayrollRunsController",
             "file": "app/Http/Controllers/PayrollRunsController.php",
             "essential": false
@@ -374,20 +573,14 @@
         },
         {
             "type": "Controller",
-            "name": "EmployeePortalController",
-            "file": "app/Http/Controllers/Portal/EmployeePortalController.php",
-            "essential": false
-        },
-        {
-            "type": "Controller",
             "name": "ManagerPortalController",
             "file": "app/Http/Controllers/Portal/ManagerPortalController.php",
             "essential": false
         },
         {
             "type": "Controller",
-            "name": "AccountsController",
-            "file": "app/Http/Controllers/AccountsController.php",
+            "name": "EmployeePortalController",
+            "file": "app/Http/Controllers/Portal/EmployeePortalController.php",
             "essential": false
         },
         {
@@ -418,6 +611,36 @@
             "type": "Controller",
             "name": "SetupController",
             "file": "app/Http/Controllers/SetupController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "AccountsController",
+            "file": "app/Http/Controllers/AccountsController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "FixedAssetController",
+            "file": "app/Http/Controllers/Accounting/FixedAssetController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "FinancialYearController",
+            "file": "app/Http/Controllers/FinancialYearController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "TaxController",
+            "file": "app/Http/Controllers/TaxController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "DashboardController",
+            "file": "app/Http/Controllers/DashboardController.php",
             "essential": false
         },
         {
@@ -2952,6 +3175,3406 @@
             }
         },
         {
+            "type": "Migration",
+            "name": "2025_11_20_152033_create_cash_receipts_table",
+            "file": "database/migrations/2025_11_20_152033_create_cash_receipts_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "cash_receipts": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "receipt_number",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "received_from",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "amount",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "cash_account_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('chart_of_accounts')->onDelete('restrict'",
+                            "nullable": true,
+                            "unique": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "credit_account_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('chart_of_accounts')->onDelete('restrict'",
+                            "nullable": true,
+                            "unique": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "receipt_number",
+                            "type": "index",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "cash_receipts"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_152406_create_cash_payments_table",
+            "file": "database/migrations/2025_11_20_152406_create_cash_payments_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "cash_payments": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "voucher_number",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "paid_to",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "amount",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "cash_account_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('chart_of_accounts')->onDelete('restrict'",
+                            "nullable": true,
+                            "unique": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "debit_account_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('chart_of_accounts')->onDelete('restrict'",
+                            "nullable": true,
+                            "unique": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "purpose",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true
+                        },
+                        {
+                            "name": "voucher_number",
+                            "type": "index",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "cash_payments"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_163105_add_deleted_at_to_vouchers_table",
+            "file": "database/migrations/2025_11_20_163105_add_deleted_at_to_vouchers_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": [],
+                "operations": [
+                    {
+                        "type": "update_table",
+                        "table": "vouchers",
+                        "changes": []
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_174901_create_bank_accounts_table",
+            "file": "database/migrations/2025_11_20_174901_create_bank_accounts_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "bank_accounts": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'USD'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "chart_of_account_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('restrict'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'USD'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "account_number",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'USD'"
+                        },
+                        {
+                            "name": "account_name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'USD'"
+                        },
+                        {
+                            "name": "bank_name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'USD'"
+                        },
+                        {
+                            "name": "branch_name",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'USD'"
+                        },
+                        {
+                            "name": "routing_number",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'USD'"
+                        },
+                        {
+                            "name": "swift_code",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'USD'"
+                        },
+                        {
+                            "name": "currency",
+                            "type": "string",
+                            "options": ", 3)->default('USD'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'USD'"
+                        },
+                        {
+                            "name": "opening_balance",
+                            "type": "decimal",
+                            "options": ", 15, 2)->default(0",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'USD'"
+                        },
+                        {
+                            "name": "current_balance",
+                            "type": "decimal",
+                            "options": ", 15, 2)->default(0",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'USD'"
+                        },
+                        {
+                            "name": "opening_balance_date",
+                            "type": "date",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'USD'"
+                        },
+                        {
+                            "name": "account_type",
+                            "type": "enum",
+                            "options": ", ['checking', 'savings', 'money_market', 'cd'])->default('checking'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'USD'"
+                        },
+                        {
+                            "name": "status",
+                            "type": "enum",
+                            "options": ", ['active', 'inactive', 'closed'])->default('active'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'USD'"
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'USD'"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "bank_accounts"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_174921_create_bank_statements_table",
+            "file": "database/migrations/2025_11_20_174921_create_bank_statements_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "bank_statements": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "bank_account_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "statement_number",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "statement_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "period_start_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "period_end_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "opening_balance",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "closing_balance",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "total_debits",
+                            "type": "decimal",
+                            "options": ", 15, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "total_credits",
+                            "type": "decimal",
+                            "options": ", 15, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "transaction_count",
+                            "type": "integer",
+                            "options": ")->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "status",
+                            "type": "enum",
+                            "options": ", ['imported', 'reconciled', 'partial'])->default('imported'",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "file_path",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "bank_statements"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_174924_create_bank_transactions_table",
+            "file": "database/migrations/2025_11_20_174924_create_bank_transactions_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "bank_transactions": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "'pending'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "bank_account_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "'pending'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "bank_statement_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "'pending'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "transaction_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "transaction_number",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "reference_number",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "transaction_type",
+                            "type": "enum",
+                            "options": ", ['debit', 'credit']",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "amount",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "balance_after",
+                            "type": "decimal",
+                            "options": ", 15, 2)->nullable(",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "status",
+                            "type": "enum",
+                            "options": ", ['pending', 'cleared', 'reconciled'])->default('pending'",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "reconciliation_status",
+                            "type": "enum",
+                            "options": ", ['unmatched', 'matched', 'partially_matched'])->default('unmatched'",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "matched_ledger_entry_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('ledger_entries')->onDelete('set null'",
+                            "nullable": true,
+                            "default": "'pending'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "metadata",
+                            "type": "json",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "'pending'"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "bank_transactions"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_174929_create_bank_reconciliations_table",
+            "file": "database/migrations/2025_11_20_174929_create_bank_reconciliations_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "bank_reconciliations": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "bank_account_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "bank_statement_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "reconciliation_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "statement_balance",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "book_balance",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "difference",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "outstanding_deposits",
+                            "type": "decimal",
+                            "options": ", 15, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "outstanding_withdrawals",
+                            "type": "decimal",
+                            "options": ", 15, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "transactions_reconciled",
+                            "type": "integer",
+                            "options": ")->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "total_transactions",
+                            "type": "integer",
+                            "options": ")->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "status",
+                            "type": "enum",
+                            "options": ", ['in_progress', 'completed', 'failed'])->default('in_progress'",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "reconciled_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users')->onDelete('set null'",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "reconciled_at",
+                            "type": "timestamp",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "bank_reconciliations"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_180249_create_fixed_assets_table",
+            "file": "database/migrations/2025_11_20_180249_create_fixed_assets_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "fixed_assets": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "fixed_asset_category_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('restrict'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "chart_of_account_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained()->onDelete('set null'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "accumulated_depreciation_account_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('chart_of_accounts')->onDelete('set null'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "asset_tag",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "serial_number",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "location",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "department",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "assigned_to",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "purchase_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "purchase_cost",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "salvage_value",
+                            "type": "decimal",
+                            "options": ", 15, 2)->default(0",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "useful_life_years",
+                            "type": "integer",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "depreciation_method",
+                            "type": "string",
+                            "options": ")->default('straight_line'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "current_book_value",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "accumulated_depreciation",
+                            "type": "decimal",
+                            "options": ", 15, 2)->default(0",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "last_depreciation_date",
+                            "type": "date",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "status",
+                            "type": "string",
+                            "options": ")->default('active'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "created_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users')->onDelete('set null'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "updated_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users')->onDelete('set null'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "fixed_assets"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_180253_create_fixed_asset_categories_table",
+            "file": "database/migrations/2025_11_20_180253_create_fixed_asset_categories_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "fixed_asset_categories": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "5",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "5"
+                        },
+                        {
+                            "name": "code",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "5"
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "5"
+                        },
+                        {
+                            "name": "default_useful_life_years",
+                            "type": "integer",
+                            "options": ")->default(5",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "5"
+                        },
+                        {
+                            "name": "default_depreciation_method",
+                            "type": "string",
+                            "options": ")->default('straight_line'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "5"
+                        },
+                        {
+                            "name": "default_depreciation_rate",
+                            "type": "decimal",
+                            "options": ", 5, 2)->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "5"
+                        },
+                        {
+                            "name": "is_active",
+                            "type": "boolean",
+                            "options": ")->default(true",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "5"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "fixed_asset_categories"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_180256_create_depreciations_table",
+            "file": "database/migrations/2025_11_20_180256_create_depreciations_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "depreciations": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "fixed_asset_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "journal_entry_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained()->onDelete('set null'",
+                            "nullable": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "depreciation_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true
+                        },
+                        {
+                            "name": "depreciation_amount",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true
+                        },
+                        {
+                            "name": "accumulated_depreciation_before",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true
+                        },
+                        {
+                            "name": "accumulated_depreciation_after",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true
+                        },
+                        {
+                            "name": "book_value_before",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true
+                        },
+                        {
+                            "name": "book_value_after",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true
+                        },
+                        {
+                            "name": "depreciation_method",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true
+                        },
+                        {
+                            "name": "created_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users')->onDelete('set null'",
+                            "nullable": true
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "depreciations"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_180300_create_asset_disposals_table",
+            "file": "database/migrations/2025_11_20_180300_create_asset_disposals_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "asset_disposals": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "fixed_asset_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "journal_entry_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained()->onDelete('set null'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "disposal_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "disposal_type",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "disposal_value",
+                            "type": "decimal",
+                            "options": ", 15, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "proceeds",
+                            "type": "decimal",
+                            "options": ", 15, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "gain_loss",
+                            "type": "decimal",
+                            "options": ", 15, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "book_value_at_disposal",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "accumulated_depreciation_at_disposal",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "disposed_to",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "reason",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "approved_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users')->onDelete('set null'",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "created_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users')->onDelete('set null'",
+                            "nullable": true,
+                            "default": "0"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "asset_disposals"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_180303_create_asset_transfers_table",
+            "file": "database/migrations/2025_11_20_180303_create_asset_transfers_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "asset_transfers": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "fixed_asset_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "transfer_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true
+                        },
+                        {
+                            "name": "from_location",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true
+                        },
+                        {
+                            "name": "to_location",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true
+                        },
+                        {
+                            "name": "from_department",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true
+                        },
+                        {
+                            "name": "to_department",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true
+                        },
+                        {
+                            "name": "from_assigned_to",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true
+                        },
+                        {
+                            "name": "to_assigned_to",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true
+                        },
+                        {
+                            "name": "reason",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true
+                        },
+                        {
+                            "name": "approved_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users')->onDelete('set null'",
+                            "nullable": true
+                        },
+                        {
+                            "name": "created_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users')->onDelete('set null'",
+                            "nullable": true
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "asset_transfers"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_180315_create_asset_maintenances_table",
+            "file": "database/migrations/2025_11_20_180315_create_asset_maintenances_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "asset_maintenances": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "fixed_asset_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "maintenance_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "maintenance_type",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "cost",
+                            "type": "decimal",
+                            "options": ", 15, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "performed_by",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "vendor",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "next_maintenance_date",
+                            "type": "date",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "created_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users')->onDelete('set null'",
+                            "nullable": true,
+                            "default": "0"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "asset_maintenances"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_182146_create_employee_increments_table",
+            "file": "database/migrations/2025_11_20_182146_create_employee_increments_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "employee_increments": [
+                        {
+                            "name": "employee_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "'pending'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "'pending'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "approved_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users')->onDelete('set null'",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "increment_type",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "increment_value",
+                            "type": "decimal",
+                            "options": ", 12, 2",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "previous_salary",
+                            "type": "decimal",
+                            "options": ", 12, 2",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "new_salary",
+                            "type": "decimal",
+                            "options": ", 12, 2",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "effective_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "reason",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "status",
+                            "type": "string",
+                            "options": ")->default('pending'",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "approval_notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "approved_at",
+                            "type": "timestamp",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "'pending'"
+                        },
+                        {
+                            "name": "status",
+                            "type": "index",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'pending'"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "employee_increments"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_182151_create_allowance_types_table",
+            "file": "database/migrations/2025_11_20_182151_create_allowance_types_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "allowance_types": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "code",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "calculation_type",
+                            "type": "enum",
+                            "options": ", ['fixed_amount', 'percentage_of_basic', 'percentage_of_gross']",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "default_value",
+                            "type": "decimal",
+                            "options": ", 12, 2)->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "is_taxable",
+                            "type": "boolean",
+                            "options": ")->default(true",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "is_recurring",
+                            "type": "boolean",
+                            "options": ")->default(true",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "is_active",
+                            "type": "boolean",
+                            "options": ")->default(true",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "account_code",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "allowance_types"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_182155_create_employee_allowances_table",
+            "file": "database/migrations/2025_11_20_182155_create_employee_allowances_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "employee_allowances": [
+                        {
+                            "name": "employee_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "true",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "true",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "allowance_type_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "true",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "amount",
+                            "type": "decimal",
+                            "options": ", 12, 2",
+                            "nullable": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "percentage",
+                            "type": "decimal",
+                            "options": ", 5, 2)->nullable(",
+                            "nullable": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "effective_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "end_date",
+                            "type": "date",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "is_active",
+                            "type": "boolean",
+                            "options": ")->default(true",
+                            "nullable": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "true"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "employee_allowances"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_182159_create_deduction_types_table",
+            "file": "database/migrations/2025_11_20_182159_create_deduction_types_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "deduction_types": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false"
+                        },
+                        {
+                            "name": "code",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false"
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false"
+                        },
+                        {
+                            "name": "calculation_type",
+                            "type": "enum",
+                            "options": ", ['fixed_amount', 'percentage_of_basic', 'percentage_of_gross']",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false"
+                        },
+                        {
+                            "name": "default_value",
+                            "type": "decimal",
+                            "options": ", 12, 2)->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false"
+                        },
+                        {
+                            "name": "is_tax_exempt",
+                            "type": "boolean",
+                            "options": ")->default(false",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false"
+                        },
+                        {
+                            "name": "is_recurring",
+                            "type": "boolean",
+                            "options": ")->default(true",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false"
+                        },
+                        {
+                            "name": "is_active",
+                            "type": "boolean",
+                            "options": ")->default(true",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false"
+                        },
+                        {
+                            "name": "account_code",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "deduction_types"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_182203_create_employee_deductions_table",
+            "file": "database/migrations/2025_11_20_182203_create_employee_deductions_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "employee_deductions": [
+                        {
+                            "name": "employee_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "true",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "true",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "deduction_type_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "true",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "amount",
+                            "type": "decimal",
+                            "options": ", 12, 2",
+                            "nullable": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "percentage",
+                            "type": "decimal",
+                            "options": ", 5, 2)->nullable(",
+                            "nullable": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "effective_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "end_date",
+                            "type": "date",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "is_active",
+                            "type": "boolean",
+                            "options": ")->default(true",
+                            "nullable": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "true"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "employee_deductions"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_182207_create_tax_brackets_table",
+            "file": "database/migrations/2025_11_20_182207_create_tax_brackets_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "tax_brackets": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "min_income",
+                            "type": "decimal",
+                            "options": ", 12, 2",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "max_income",
+                            "type": "decimal",
+                            "options": ", 12, 2)->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "rate",
+                            "type": "decimal",
+                            "options": ", 5, 2",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "base_tax",
+                            "type": "decimal",
+                            "options": ", 12, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "exemption_amount",
+                            "type": "decimal",
+                            "options": ", 12, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "is_active",
+                            "type": "boolean",
+                            "options": ")->default(true",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "effective_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "end_date",
+                            "type": "date",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "tax_brackets"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_182210_create_employee_loans_table",
+            "file": "database/migrations/2025_11_20_182210_create_employee_loans_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "employee_loans": [
+                        {
+                            "name": "employee_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "approved_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users')->onDelete('set null'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "loan_reference",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "loan_type",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "principal_amount",
+                            "type": "decimal",
+                            "options": ", 12, 2",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "interest_rate",
+                            "type": "decimal",
+                            "options": ", 5, 2",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "repayment_period_months",
+                            "type": "integer",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "monthly_installment",
+                            "type": "decimal",
+                            "options": ", 12, 2",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "total_interest",
+                            "type": "decimal",
+                            "options": ", 12, 2",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "total_repayment",
+                            "type": "decimal",
+                            "options": ", 12, 2",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "balance_amount",
+                            "type": "decimal",
+                            "options": ", 12, 2",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "installments_paid",
+                            "type": "integer",
+                            "options": ")->default(0",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "disbursement_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "first_payment_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "maturity_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "purpose",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "status",
+                            "type": "string",
+                            "options": ")->default('pending'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "approval_notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "approved_at",
+                            "type": "timestamp",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "disbursed_at",
+                            "type": "timestamp",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "loan_reference",
+                            "type": "index",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "employee_loans"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_182214_create_salary_advances_table",
+            "file": "database/migrations/2025_11_20_182214_create_salary_advances_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "salary_advances": [
+                        {
+                            "name": "employee_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "approved_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users')->onDelete('set null'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "advance_reference",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "amount",
+                            "type": "decimal",
+                            "options": ", 12, 2",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "balance_amount",
+                            "type": "decimal",
+                            "options": ", 12, 2",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "repayment_months",
+                            "type": "integer",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "monthly_deduction",
+                            "type": "decimal",
+                            "options": ", 12, 2",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "months_repaid",
+                            "type": "integer",
+                            "options": ")->default(0",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "request_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "approval_date",
+                            "type": "date",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "first_deduction_month",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "reason",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "status",
+                            "type": "string",
+                            "options": ")->default('pending'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "approval_notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "approved_at",
+                            "type": "timestamp",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "advance_reference",
+                            "type": "index",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "salary_advances"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_182624_add_basic_salary_to_employees_table",
+            "file": "database/migrations/2025_11_20_182624_add_basic_salary_to_employees_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": [],
+                "operations": [
+                    {
+                        "type": "update_table",
+                        "table": "employees",
+                        "changes": [
+                            {
+                                "operation": "decimal",
+                                "column": "basic_salary",
+                                "options": ", 12, 2)->default(0)->after('is_admin'"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_184513_create_financial_years_table",
+            "file": "database/migrations/2025_11_20_184513_create_financial_years_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "financial_years": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('organizations'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "code",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "start_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "end_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "status",
+                            "type": "enum",
+                            "options": ", ['draft', 'active', 'closing', 'closed'])->default('draft'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "is_locked",
+                            "type": "boolean",
+                            "options": ")->default(false",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "locked_at",
+                            "type": "date",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "locked_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "closed_at",
+                            "type": "date",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "closed_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "financial_years"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_184550_create_opening_balances_table",
+            "file": "database/migrations/2025_11_20_184550_create_opening_balances_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "opening_balances": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('organizations'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "financial_year_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('financial_years'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "chart_of_account_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('chart_of_accounts'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "debit_amount",
+                            "type": "decimal",
+                            "options": ", 15, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "credit_amount",
+                            "type": "decimal",
+                            "options": ", 15, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "created_by",
+                            "type": "foreignId",
+                            "options": ")->constrained('users'",
+                            "nullable": true,
+                            "default": "0"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "opening_balances"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_184640_create_closing_entries_table",
+            "file": "database/migrations/2025_11_20_184640_create_closing_entries_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "closing_entries": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('organizations'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "financial_year_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('financial_years'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "journal_entry_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('journal_entries'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "type",
+                            "type": "enum",
+                            "options": ", ['revenue_closure', 'expense_closure', 'profit_transfer']"
+                        },
+                        {
+                            "name": "amount",
+                            "type": "decimal",
+                            "options": ", 15, 2"
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": ""
+                        },
+                        {
+                            "name": "created_by",
+                            "type": "foreignId",
+                            "options": ")->constrained('users'"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "closing_entries"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_184727_add_financial_year_id_to_ledger_entries_table",
+            "file": "database/migrations/2025_11_20_184727_add_financial_year_id_to_ledger_entries_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": [],
+                "operations": [
+                    {
+                        "type": "update_table",
+                        "table": "ledger_entries",
+                        "changes": [
+                            {
+                                "operation": "foreignId",
+                                "column": "organization_id",
+                                "options": ")->nullable()->after('id')->constrained('organizations'"
+                            },
+                            {
+                                "operation": "foreignId",
+                                "column": "financial_year_id",
+                                "options": ")->nullable()->after('organization_id')->constrained('financial_years'"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_185734_add_closing_to_journal_entries_voucher_type",
+            "file": "database/migrations/2025_11_20_185734_add_closing_to_journal_entries_voucher_type.php",
+            "essential": false,
+            "database_schema": {
+                "tables": [],
+                "operations": [
+                    {
+                        "type": "update_table",
+                        "table": "journal_entries",
+                        "changes": [
+                            {
+                                "operation": "enum",
+                                "column": "voucher_type",
+                                "options": ", ['GENERAL', 'SALES', 'PURCHASE', 'SALARY', 'EXPENSE', 'CLOSING'])->default('GENERAL')->change("
+                            },
+                            {
+                                "operation": "modify_enum",
+                                "column": "voucher_type",
+                                "options": ", ['GENERAL', 'SALES', 'PURCHASE', 'SALARY', 'EXPENSE', 'CLOSING'])->default('GENERAL'"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_190023_create_tax_rates_table",
+            "file": "database/migrations/2025_11_20_190023_create_tax_rates_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "tax_rates": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "tax_jurisdiction_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('tax_jurisdictions')->onDelete('set null'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false"
+                        },
+                        {
+                            "name": "code",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false"
+                        },
+                        {
+                            "name": "type",
+                            "type": "enum",
+                            "options": ", ['sales', 'purchase', 'withholding', 'income', 'vat', 'service', 'other']",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false"
+                        },
+                        {
+                            "name": "rate",
+                            "type": "decimal",
+                            "options": ", 8, 4",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false"
+                        },
+                        {
+                            "name": "is_compound",
+                            "type": "boolean",
+                            "options": ")->default(false",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false"
+                        },
+                        {
+                            "name": "is_active",
+                            "type": "boolean",
+                            "options": ")->default(true",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false"
+                        },
+                        {
+                            "name": "effective_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false"
+                        },
+                        {
+                            "name": "end_date",
+                            "type": "date",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false"
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false"
+                        },
+                        {
+                            "name": "applicable_accounts",
+                            "type": "json",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false"
+                        },
+                        {
+                            "name": "gl_account_code",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "false"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "tax_rates"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_190026_create_tax_jurisdictions_table",
+            "file": "database/migrations/2025_11_20_190026_create_tax_jurisdictions_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "tax_jurisdictions": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "code",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "type",
+                            "type": "enum",
+                            "options": ", ['country', 'state', 'province', 'city', 'county', 'municipality', 'other']",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "parent_code",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "tax_id_number",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "is_active",
+                            "type": "boolean",
+                            "options": ")->default(true",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "address",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "contact_email",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "contact_phone",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "filing_requirements",
+                            "type": "json",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "tax_jurisdictions"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_190029_create_tax_exemptions_table",
+            "file": "database/migrations/2025_11_20_190029_create_tax_exemptions_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "tax_exemptions": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "100",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "exemptible",
+                            "type": "morphs",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "100"
+                        },
+                        {
+                            "name": "tax_rate_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "100",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "certificate_number",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "100"
+                        },
+                        {
+                            "name": "exemption_type",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "100"
+                        },
+                        {
+                            "name": "exemption_percentage",
+                            "type": "decimal",
+                            "options": ", 5, 2)->default(100",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "100"
+                        },
+                        {
+                            "name": "issue_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "100"
+                        },
+                        {
+                            "name": "expiry_date",
+                            "type": "date",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "100"
+                        },
+                        {
+                            "name": "is_active",
+                            "type": "boolean",
+                            "options": ")->default(true",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "100"
+                        },
+                        {
+                            "name": "reason",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "100"
+                        },
+                        {
+                            "name": "applicable_taxes",
+                            "type": "json",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "100"
+                        },
+                        {
+                            "name": "issuing_authority",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "100"
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "100"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "tax_exemptions"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_190032_create_tax_calculations_table",
+            "file": "database/migrations/2025_11_20_190032_create_tax_calculations_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "tax_calculations": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "calculable",
+                            "type": "morphs",
+                            "options": "",
+                            "nullable": true
+                        },
+                        {
+                            "name": "tax_rate_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "tax_exemption_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained()->onDelete('set null'",
+                            "nullable": true,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "base_amount",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true
+                        },
+                        {
+                            "name": "taxable_amount",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true
+                        },
+                        {
+                            "name": "tax_rate",
+                            "type": "decimal",
+                            "options": ", 8, 4",
+                            "nullable": true
+                        },
+                        {
+                            "name": "tax_amount",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true
+                        },
+                        {
+                            "name": "calculation_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true
+                        },
+                        {
+                            "name": "calculation_method",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true
+                        },
+                        {
+                            "name": "calculation_details",
+                            "type": "json",
+                            "options": ")->nullable(",
+                            "nullable": true
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "tax_calculations"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_190035_create_tax_filings_table",
+            "file": "database/migrations/2025_11_20_190035_create_tax_filings_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "tax_filings": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "tax_jurisdiction_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "tax_rate_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "filing_number",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "filing_type",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "period_start",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "period_end",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "filing_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "due_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "status",
+                            "type": "enum",
+                            "options": ", ['draft', 'filed', 'accepted', 'rejected', 'paid', 'overdue']",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "total_tax_collected",
+                            "type": "decimal",
+                            "options": ", 15, 2)->default(0",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "total_tax_paid",
+                            "type": "decimal",
+                            "options": ", 15, 2)->default(0",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "tax_due",
+                            "type": "decimal",
+                            "options": ", 15, 2)->default(0",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "penalty_amount",
+                            "type": "decimal",
+                            "options": ", 15, 2)->default(0",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "interest_amount",
+                            "type": "decimal",
+                            "options": ", 15, 2)->default(0",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "confirmation_number",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "filing_notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "filing_data",
+                            "type": "json",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "created_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users')->onDelete('set null'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "approved_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users')->onDelete('set null'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "approved_at",
+                            "type": "timestamp",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "0"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "tax_filings"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_191440_add_soft_deletes_to_tax_tables",
+            "file": "database/migrations/2025_11_20_191440_add_soft_deletes_to_tax_tables.php",
+            "essential": false,
+            "database_schema": {
+                "tables": [],
+                "operations": [
+                    {
+                        "type": "update_table",
+                        "table": "tax_rates",
+                        "changes": []
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_20_162850_create_vouchers_table",
+            "file": "database/migrations/2025_11_20_162850_create_vouchers_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "vouchers": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained()->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "type",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "number",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "amount",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "description",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "status",
+                            "type": "string",
+                            "options": ")->default('draft'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "created_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users')->onDelete('set null'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        },
+                        {
+                            "name": "updated_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users')->onDelete('set null'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'draft'"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "vouchers"
+                    }
+                ]
+            }
+        },
+        {
             "type": "Route",
             "name": "console",
             "file": "routes/console.php",
@@ -2978,15 +6601,6 @@
         },
         {
             "type": "Route",
-            "name": "accounts",
-            "file": "routes/accounts.php",
-            "essential": false,
-            "route_summary": [
-                "Route::prefix('/accounts')->name('accounting.')->group(function () { Route::get('/', [AccountsContro..."
-            ]
-        },
-        {
-            "type": "Route",
             "name": "hrm",
             "file": "routes/hrm.php",
             "essential": false,
@@ -3005,6 +6619,25 @@
                 "Route::get('/payslips/{payslip}/download', [EmployeePortalController::class, 'downloadPayslip'])->na...",
                 "Route::prefix('portal/employee')->name('portal.employee.')->group(function () { Route::post('/clock-...",
                 "Route::post('/clock-out', [AttendanceController::class, 'clockOut'])->name('clock-out');",
+                "Route::prefix('payroll')->name('payroll.')->group(function () { Route::get('/dashboard', [EnhancedPa...",
+                "Route::get('/processing', [EnhancedPayrollController::class, 'processing'])->name('processing');",
+                "Route::post('/process', [EnhancedPayrollController::class, 'processPayroll'])->name('process');",
+                "Route::get('/employee/{employee}', [EnhancedPayrollController::class, 'employeePayroll'])->name('emp...",
+                "Route::get('/increments', [EnhancedPayrollController::class, 'increments'])->name('increments');",
+                "Route::post('/increments', [EnhancedPayrollController::class, 'storeIncrement'])->name('increments.s...",
+                "Route::post('/increments/{increment}/approve', [EnhancedPayrollController::class, 'approveIncrement'...",
+                "Route::post('/increments/{increment}/implement', [EnhancedPayrollController::class, 'implementIncrem...",
+                "Route::get('/loans', [EnhancedPayrollController::class, 'loans'])->name('loans');",
+                "Route::post('/loans', [EnhancedPayrollController::class, 'storeLoan'])->name('loans.store');",
+                "Route::post('/loans/{loan}/approve', [EnhancedPayrollController::class, 'approveLoan'])->name('loans...",
+                "Route::post('/loans/{loan}/disburse', [EnhancedPayrollController::class, 'disburseLoan'])->name('loa...",
+                "Route::get('/advances', [EnhancedPayrollController::class, 'advances'])->name('advances');",
+                "Route::post('/advances', [EnhancedPayrollController::class, 'storeAdvance'])->name('advances.store')...",
+                "Route::post('/advances/{advance}/approve', [EnhancedPayrollController::class, 'approveAdvance'])->na...",
+                "Route::get('/advance-reports', \\App\\Livewire\\Payroll\\AdvanceReports::class)->name('advance-reports')...",
+                "Route::get('/tax', [EnhancedPayrollController::class, 'taxConfiguration'])->name('tax');",
+                "Route::post('/tax', [EnhancedPayrollController::class, 'storeTaxBracket'])->name('tax.store');",
+                "Route::post('/report', [EnhancedPayrollController::class, 'generateReport'])->name('report');",
                 "Route::get('/payroll/processing', [PayrollController::class, 'processing'])->name('payroll.processin...",
                 "Route::prefix('portal/manager')->name('portal.manager.')->group(function () { Route::get('/dashboard...",
                 "Route::get('/team-attendance', [ManagerPortalController::class, 'teamAttendance'])->name('team-atten...",
@@ -3085,51 +6718,6 @@
         },
         {
             "type": "Route",
-            "name": "inventory",
-            "file": "routes/inventory.php",
-            "essential": false,
-            "route_summary": [
-                "Route::get('/items/low-stock', [ItemController::class, 'lowStock'])->name('items.low-stock');",
-                "Route::get('/items/out-of-stock', [ItemController::class, 'outOfStock'])->name('items.out-of-stock')...",
-                "Route::resource('items', ItemController::class);",
-                "Route::resource('stores', StoreController::class);",
-                "Route::resource('transactions', TransactionController::class);",
-                "Route::prefix('inventory')->name('inventory.')->group(function () { Route::get('/', [InventoryContro...",
-                "Route::prefix('/items')->name('items.')->group(function () { Route::get('/', [InventoryItemControlle...",
-                "Route::get('/create', [InventoryItemController::class, 'create'])->name('create');",
-                "Route::post('/', [InventoryItemController::class, 'store'])->name('store');",
-                "Route::get('/{item}', [InventoryItemController::class, 'show'])->name('show');",
-                "Route::get('/{item}/edit', [InventoryItemController::class, 'edit'])->name('edit');",
-                "Route::put('/{item}', [InventoryItemController::class, 'update'])->name('update');",
-                "Route::delete('/{item}', [InventoryItemController::class, 'destroy'])->name('destroy');",
-                "Route::prefix('/stores')->name('stores.')->group(function () { Route::get('/', [InventoryStoreContro...",
-                "Route::get('/create', [InventoryStoreController::class, 'create'])->name('create');",
-                "Route::post('/', [InventoryStoreController::class, 'store'])->name('store');",
-                "Route::get('/{store}', [InventoryStoreController::class, 'show'])->name('show');",
-                "Route::get('/{store}/edit', [InventoryStoreController::class, 'edit'])->name('edit');",
-                "Route::put('/{store}', [InventoryStoreController::class, 'update'])->name('update');",
-                "Route::delete('/{store}', [InventoryStoreController::class, 'destroy'])->name('destroy');",
-                "Route::prefix('/transactions')->name('transactions.')->group(function () { Route::get('/', [Inventor...",
-                "Route::get('/create', [InventoryTransactionController::class, 'create'])->name('create');",
-                "Route::get('/wizard', [InventoryTransactionController::class, 'wizard'])->name('wizard');",
-                "Route::post('/', [InventoryTransactionController::class, 'store'])->name('store');",
-                "Route::get('/{transaction}', [InventoryTransactionController::class, 'show'])->name('show');",
-                "Route::prefix('/reports')->name('reports.')->group(function () { Route::get('/', [InventoryReportCon...",
-                "Route::get('/low-stock', [InventoryReportController::class, 'lowStock'])->name('low-stock');",
-                "Route::get('/movement', [InventoryReportController::class, 'movement'])->name('movement');",
-                "Route::get('/stock-levels', [InventoryReportController::class, 'stockLevels'])->name('stock-levels')...",
-                "Route::prefix('/stock')->name('stock.')->group(function () { Route::get('/adjustment', [InventorySto...",
-                "Route::post('/adjustment', [InventoryStockController::class, 'processAdjustment'])->name('process-ad...",
-                "Route::get('/count', [InventoryStockController::class, 'count'])->name('count');",
-                "Route::post('/count', [InventoryStockController::class, 'processCount'])->name('process-count');",
-                "Route::get('/transfer', [InventoryStockController::class, 'transfer'])->name('transfer');",
-                "Route::post('/transfer', [InventoryStockController::class, 'processTransfer'])->name('process-transf...",
-                "Route::prefix('mobile/inventory')->name('mobile.inventory.')->group(function () { // Route::get('/da...",
-                "Route::get('/stock-count', [MobileInventoryController::class, 'stockCount'])->name('mobile.stock-cou..."
-            ]
-        },
-        {
-            "type": "Route",
             "name": "api",
             "file": "routes/api.php",
             "essential": true,
@@ -3163,6 +6751,10 @@
                 "Route::post('vouchers/expense', [VoucherController::class, 'createExpense']);",
                 "Route::put('vouchers/{voucher}/post', [VoucherController::class, 'post']);",
                 "Route::put('vouchers/{voucher}/void', [VoucherController::class, 'void']);",
+                "Route::prefix('outstanding')->group(function () { Route::get('receivables/aging', [OutstandingStatem...",
+                "Route::get('payables/aging', [OutstandingStatementsController::class, 'payablesAging']);",
+                "Route::get('customers/summary', [OutstandingStatementsController::class, 'customerSummary']);",
+                "Route::get('vendors/summary', [OutstandingStatementsController::class, 'vendorSummary']);",
                 "Route::get('/debug/test-connection', function () { return response()->json([ 'message' => 'API is wo...",
                 "Route::prefix('inventory')->middleware(['auth:sanctum'])->group(function () { // Stores - using poli...",
                 "Route::post('stores/{store}/items', [StoreController::class, 'addItem']) ->name('stores.items.add');",
@@ -3179,6 +6771,118 @@
                 "Route::put('stores/{store}/inventory', [StoreController::class, 'updateInventory']) ->middleware('ca...",
                 "Route::get('reports/stock-levels', [\\App\\Http\\Controllers\\Api\\Inventory\\ReportController::class, 'st...",
                 "Route::get('reports/movement', [\\App\\Http\\Controllers\\Api\\Inventory\\ReportController::class, 'moveme..."
+            ]
+        },
+        {
+            "type": "Route",
+            "name": "accounts",
+            "file": "routes/accounts.php",
+            "essential": false,
+            "route_summary": [
+                "Route::prefix('/accounts')->name('accounting.')->group(function () { Route::get('/', [AccountsContro...",
+                "Route::prefix('/cash-receipts')->name('cash-receipts.')->group(function () { Route::get('/', functio...",
+                "Route::get('/create', CreateCashReceipt::class)->name('create');",
+                "Route::prefix('/cash-payments')->name('cash-payments.')->group(function () { Route::get('/', functio...",
+                "Route::get('/create', CreateCashPayment::class)->name('create');",
+                "Route::prefix('/vouchers')->name('vouchers.')->group(function () { // Sales Vouchers Route::prefix('...",
+                "Route::prefix('/purchase')->name('purchase.')->group(function () { Route::get('/create', PurchaseVou...",
+                "Route::prefix('/salary')->name('salary.')->group(function () { Route::get('/create', SalaryVoucherFo...",
+                "Route::prefix('/expense')->name('expense.')->group(function () { Route::get('/create', ExpenseVouche...",
+                "Route::prefix('/outstanding')->name('outstanding.')->group(function () { Route::get('/receivables', ...",
+                "Route::get('/payables', \\App\\Livewire\\Accounting\\PayablesOutstanding::class)->name('payables');",
+                "Route::prefix('/bank-accounts')->name('bank-accounts.')->group(function () { Route::get('/', BankAcc...",
+                "Route::get('/create', CreateBankAccount::class)->name('create');",
+                "Route::post('/', [CreateBankAccount::class, 'save'])->name('store');",
+                "Route::prefix('/bank-statements')->name('bank-statements.')->group(function () { Route::get('/', Ban...",
+                "Route::get('/import', ImportBankStatement::class)->name('import');",
+                "Route::prefix('/bank-transactions')->name('bank-transactions.')->group(function () { Route::get('/',...",
+                "Route::prefix('/bank-reconciliation')->name('bank-reconciliation.')->group(function () { Route::get(...",
+                "Route::get('/reconcile/{bankAccountId}/{bankStatementId?}', BankReconciliation::class)->name('reconc...",
+                "Route::prefix('/fixed-assets')->name('fixed-assets.')->group(function () { Route::get('/', FixedAsse...",
+                "Route::get('/create', FixedAssetForm::class)->name('create');",
+                "Route::post('/', [FixedAssetController::class, 'store'])->name('store');",
+                "Route::get('/edit/{asset}', FixedAssetForm::class)->name('edit');",
+                "Route::put('/{asset}', [FixedAssetController::class, 'update'])->name('update');",
+                "Route::delete('/{asset}', [FixedAssetController::class, 'destroy'])->name('destroy');",
+                "Route::get('/depreciation', DepreciationPosting::class)->name('depreciation');",
+                "Route::get('/transfer/{asset}', AssetTransferForm::class)->name('transfer');",
+                "Route::get('/maintenance/{asset}', AssetMaintenanceForm::class)->name('maintenance');",
+                "Route::get('/dispose/{asset}', AssetDisposalForm::class)->name('dispose');",
+                "Route::get('/download/trial-balance', [AccountsController::class, 'downloadTrialBalance'])->name('do...",
+                "Route::get('/download/income-statement', [AccountsController::class, 'downloadIncomeStatement'])->na...",
+                "Route::get('/download/balance-sheet', [AccountsController::class, 'downloadBalanceSheet'])->name('do...",
+                "Route::get('/download/receivables-outstanding', [AccountsController::class, 'downloadReceivablesOuts...",
+                "Route::get('/download/payables-outstanding', [AccountsController::class, 'downloadPayablesOutstandin...",
+                "Route::get('/download/bank-statement/{bankStatement}', [AccountsController::class, 'downloadBankStat...",
+                "Route::get('/download/bank-transactions/{bankAccount}', [AccountsController::class, 'downloadBankTra...",
+                "Route::get('/download/bank-reconciliation/{bankAccount}', [AccountsController::class, 'downloadBankR...",
+                "Route::get('/download/asset-register', [FixedAssetController::class, 'downloadAssetRegister'])->name...",
+                "Route::get('/download/depreciation-schedule', [FixedAssetController::class, 'downloadDepreciationSch...",
+                "Route::prefix('/tax')->name('tax.')->group(function () { // Tax Rates Route::prefix('/tax-rates')->n...",
+                "Route::get('/create', \\App\\Livewire\\Accounting\\TaxRateForm::class)->name('create');",
+                "Route::get('/edit/{taxRate}', \\App\\Livewire\\Accounting\\TaxRateForm::class)->name('edit');",
+                "Route::prefix('/tax-exemptions')->name('tax-exemptions.')->group(function () { Route::get('/', \\App\\...",
+                "Route::get('/create', \\App\\Livewire\\Accounting\\TaxExemptionForm::class)->name('create');",
+                "Route::get('/edit/{taxExemption}', \\App\\Livewire\\Accounting\\TaxExemptionForm::class)->name('edit');",
+                "Route::prefix('/reporting')->name('reporting.')->group(function () { Route::get('/', \\App\\Livewire\\A...",
+                "Route::prefix('/filings')->name('filings.')->group(function () { Route::get('/', \\App\\Livewire\\Accou...",
+                "Route::get('/download/tax-report', [\\App\\Http\\Controllers\\TaxController::class, 'downloadTaxReport']...",
+                "Route::get('/download/tax-liability', [\\App\\Http\\Controllers\\TaxController::class, 'downloadTaxLiabi...",
+                "Route::get('/download/filing-schedule', [\\App\\Http\\Controllers\\TaxController::class, 'downloadFiling...",
+                "Route::prefix('/financial-years')->name('financial-years.')->group(function () { Route::get('/', \\Ap...",
+                "Route::get('/create', \\App\\Livewire\\Accounting\\FinancialYears\\FinancialYearForm::class)->name('creat...",
+                "Route::post('/', [\\App\\Http\\Controllers\\FinancialYearController::class, 'store'])->name('store');",
+                "Route::get('/edit/{financialYear}', \\App\\Livewire\\Accounting\\FinancialYears\\FinancialYearForm::class...",
+                "Route::put('/{financialYear}', [\\App\\Http\\Controllers\\FinancialYearController::class, 'update'])->na...",
+                "Route::delete('/{financialYear}', [\\App\\Http\\Controllers\\FinancialYearController::class, 'destroy'])...",
+                "Route::post('/{financialYear}/activate', [\\App\\Http\\Controllers\\FinancialYearController::class, 'act...",
+                "Route::post('/{financialYear}/lock', [\\App\\Http\\Controllers\\FinancialYearController::class, 'lock'])...",
+                "Route::post('/{financialYear}/unlock', [\\App\\Http\\Controllers\\FinancialYearController::class, 'unloc...",
+                "Route::get('/opening-balances/{financialYear}', \\App\\Livewire\\Accounting\\FinancialYears\\OpeningBalan...",
+                "Route::get('/close/{financialYear}', \\App\\Livewire\\Accounting\\FinancialYears\\YearEndClosing::class)-..."
+            ]
+        },
+        {
+            "type": "Route",
+            "name": "inventory",
+            "file": "routes/inventory.php",
+            "essential": false,
+            "route_summary": [
+                "Route::prefix('inventory')->name('inventory.')->group(function () { Route::get('/', [InventoryContro...",
+                "Route::prefix('/items')->name('items.')->group(function () { Route::get('/', [InventoryItemControlle...",
+                "Route::get('/create', [InventoryItemController::class, 'create'])->name('create');",
+                "Route::post('/', [InventoryItemController::class, 'store'])->name('store');",
+                "Route::get('/{item}', [InventoryItemController::class, 'show'])->name('show');",
+                "Route::get('/{item}/edit', [InventoryItemController::class, 'edit'])->name('edit');",
+                "Route::put('/{item}', [InventoryItemController::class, 'update'])->name('update');",
+                "Route::delete('/{item}', [InventoryItemController::class, 'destroy'])->name('destroy');",
+                "Route::prefix('/stores')->name('stores.')->group(function () { Route::get('/', [InventoryStoreContro...",
+                "Route::get('/create', [InventoryStoreController::class, 'create'])->name('create');",
+                "Route::post('/', [InventoryStoreController::class, 'store'])->name('store');",
+                "Route::get('/{store}', [InventoryStoreController::class, 'show'])->name('show');",
+                "Route::get('/{store}/edit', [InventoryStoreController::class, 'edit'])->name('edit');",
+                "Route::put('/{store}', [InventoryStoreController::class, 'update'])->name('update');",
+                "Route::delete('/{store}', [InventoryStoreController::class, 'destroy'])->name('destroy');",
+                "Route::prefix('/transactions')->name('transactions.')->group(function () { Route::get('/', [Inventor...",
+                "Route::get('/create', [InventoryTransactionController::class, 'create'])->name('create');",
+                "Route::get('/wizard', [InventoryTransactionController::class, 'wizard'])->name('wizard');",
+                "Route::post('/', [InventoryTransactionController::class, 'store'])->name('store');",
+                "Route::get('/{transaction}', [InventoryTransactionController::class, 'show'])->name('show');",
+                "Route::prefix('/reports')->name('reports.')->group(function () { Route::get('/', [InventoryReportCon...",
+                "Route::get('/low-stock', [InventoryReportController::class, 'lowStock'])->name('low-stock');",
+                "Route::get('/movement', [InventoryReportController::class, 'movement'])->name('movement');",
+                "Route::get('/stock-levels', [InventoryReportController::class, 'stockLevels'])->name('stock-levels')...",
+                "Route::get('/download/low-stock', [InventoryReportController::class, 'downloadLowStock'])->name('dow...",
+                "Route::get('/download/stock-levels', [InventoryReportController::class, 'downloadStockLevels'])->nam...",
+                "Route::get('/download/movement', [InventoryReportController::class, 'downloadMovement'])->name('down...",
+                "Route::prefix('/stock')->name('stock.')->group(function () { Route::get('/adjustment', [InventorySto...",
+                "Route::post('/adjustment', [InventoryStockController::class, 'processAdjustment'])->name('process-ad...",
+                "Route::get('/count', [InventoryStockController::class, 'count'])->name('count');",
+                "Route::post('/count', [InventoryStockController::class, 'processCount'])->name('process-count');",
+                "Route::get('/transfer', [InventoryStockController::class, 'transfer'])->name('transfer');",
+                "Route::post('/transfer', [InventoryStockController::class, 'processTransfer'])->name('process-transf...",
+                "Route::prefix('mobile/inventory')->name('mobile.inventory.')->group(function () { // Route::get('/da...",
+                "Route::get('/stock-count', [MobileInventoryController::class, 'stockCount'])->name('mobile.stock-cou..."
             ]
         },
         {
@@ -3735,6 +7439,258 @@
         },
         {
             "type": "View",
+            "name": "create.blade.php",
+            "file": "resources/views/livewire/accounting/cash-receipts/create.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "create.blade.php",
+            "file": "resources/views/livewire/accounting/cash-payments/create.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "create.blade.php",
+            "file": "resources/views/livewire/accounting/vouchers/create.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "receivables-outstanding.blade.php",
+            "file": "resources/views/livewire/accounting/receivables-outstanding.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "payables-outstanding.blade.php",
+            "file": "resources/views/livewire/accounting/payables-outstanding.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/livewire/accounting/bank-accounts/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "create.blade.php",
+            "file": "resources/views/livewire/accounting/bank-accounts/create.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/livewire/accounting/bank-statements/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "import.blade.php",
+            "file": "resources/views/livewire/accounting/bank-statements/import.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "reconcile.blade.php",
+            "file": "resources/views/livewire/accounting/bank-reconciliation/reconcile.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/livewire/accounting/bank-transactions/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "fixed-asset-index.blade.php",
+            "file": "resources/views/livewire/accounting/fixed-asset-index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "fixed-asset-form.blade.php",
+            "file": "resources/views/livewire/accounting/fixed-asset-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "depreciation-posting.blade.php",
+            "file": "resources/views/livewire/accounting/depreciation-posting.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "asset-disposal-form.blade.php",
+            "file": "resources/views/livewire/accounting/asset-disposal-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "asset-transfer-form.blade.php",
+            "file": "resources/views/livewire/accounting/asset-transfer-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "asset-maintenance-form.blade.php",
+            "file": "resources/views/livewire/accounting/asset-maintenance-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "financial-year-index.blade.php",
+            "file": "resources/views/livewire/accounting/financial-years/financial-year-index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "financial-year-form.blade.php",
+            "file": "resources/views/livewire/accounting/financial-years/financial-year-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "opening-balance-form.blade.php",
+            "file": "resources/views/livewire/accounting/financial-years/opening-balance-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "year-end-closing.blade.php",
+            "file": "resources/views/livewire/accounting/financial-years/year-end-closing.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "tax-rate-index.blade.php",
+            "file": "resources/views/livewire/accounting/tax-rate-index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "tax-rate-form.blade.php",
+            "file": "resources/views/livewire/accounting/tax-rate-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "tax-exemption-index.blade.php",
+            "file": "resources/views/livewire/accounting/tax-exemption-index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "tax-exemption-form.blade.php",
+            "file": "resources/views/livewire/accounting/tax-exemption-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "tax-reporting-dashboard.blade.php",
+            "file": "resources/views/livewire/accounting/tax-reporting-dashboard.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "tax-filing-manager.blade.php",
+            "file": "resources/views/livewire/accounting/tax-filing-manager.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "increment-management.blade.php",
+            "file": "resources/views/livewire/payroll/increment-management.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "allowance-management.blade.php",
+            "file": "resources/views/livewire/payroll/allowance-management.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "deduction-management.blade.php",
+            "file": "resources/views/livewire/payroll/deduction-management.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "loan-management.blade.php",
+            "file": "resources/views/livewire/payroll/loan-management.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "advance-management.blade.php",
+            "file": "resources/views/livewire/payroll/advance-management.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "tax-configuration.blade.php",
+            "file": "resources/views/livewire/payroll/tax-configuration.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "payroll-dashboard.blade.php",
+            "file": "resources/views/livewire/payroll/payroll-dashboard.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "advance-reports.blade.php",
+            "file": "resources/views/livewire/payroll/advance-reports.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "analytics-overview.blade.php",
+            "file": "resources/views/livewire/payroll/reports/analytics-overview.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "employee-statement.blade.php",
+            "file": "resources/views/livewire/payroll/reports/employee-statement.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "aging-analysis.blade.php",
+            "file": "resources/views/livewire/payroll/reports/aging-analysis.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "monthly-summary.blade.php",
+            "file": "resources/views/livewire/payroll/reports/monthly-summary.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "department-report.blade.php",
+            "file": "resources/views/livewire/payroll/reports/department-report.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "advance-vs-salary.blade.php",
+            "file": "resources/views/livewire/payroll/reports/advance-vs-salary.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "outstanding-advances.blade.php",
+            "file": "resources/views/livewire/payroll/reports/outstanding-advances.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
             "name": "index.blade.php",
             "file": "resources/views/organizations/index.blade.php",
             "essential": false
@@ -3765,14 +7721,14 @@
         },
         {
             "type": "View",
-            "name": "income-statement.blade.php",
-            "file": "resources/views/partials/accounting/income-statement.blade.php",
+            "name": "balance-sheet.blade.php",
+            "file": "resources/views/partials/accounting/balance-sheet.blade.php",
             "essential": false
         },
         {
             "type": "View",
-            "name": "balance-sheet.blade.php",
-            "file": "resources/views/partials/accounting/balance-sheet.blade.php",
+            "name": "income-statement.blade.php",
+            "file": "resources/views/partials/accounting/income-statement.blade.php",
             "essential": false
         },
         {
@@ -3963,6 +7919,24 @@
         },
         {
             "type": "View",
+            "name": "low-stock.blade.php",
+            "file": "resources/views/inventory/pdf/low-stock.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "movement.blade.php",
+            "file": "resources/views/inventory/pdf/movement.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "stock-levels.blade.php",
+            "file": "resources/views/inventory/pdf/stock-levels.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
             "name": "navigation-menu.blade.php",
             "file": "resources/views/navigation-menu.blade.php",
             "essential": false
@@ -4041,6 +8015,18 @@
         },
         {
             "type": "View",
+            "name": "advance-reports.blade.php",
+            "file": "resources/views/payroll/advance-reports.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "advances.blade.php",
+            "file": "resources/views/payroll/advances.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
             "name": "dashboard.blade.php",
             "file": "resources/views/portal/employee/dashboard.blade.php",
             "essential": false
@@ -4083,6 +8069,12 @@
         },
         {
             "type": "View",
+            "name": "payslip-download.blade.php",
+            "file": "resources/views/portal/employee/payslip-download.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
             "name": "dashboard.blade.php",
             "file": "resources/views/portal/manager/dashboard.blade.php",
             "essential": false
@@ -4097,6 +8089,66 @@
             "type": "View",
             "name": "reports.blade.php",
             "file": "resources/views/portal/manager/reports.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "balance-sheet.blade.php",
+            "file": "resources/views/accounting/pdf/balance-sheet.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "income-statement.blade.php",
+            "file": "resources/views/accounting/pdf/income-statement.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "trial-balance.blade.php",
+            "file": "resources/views/accounting/pdf/trial-balance.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "receivables-outstanding.blade.php",
+            "file": "resources/views/accounting/pdf/receivables-outstanding.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "payables-outstanding.blade.php",
+            "file": "resources/views/accounting/pdf/payables-outstanding.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "asset-register.blade.php",
+            "file": "resources/views/accounting/pdf/asset-register.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "depreciation-schedule.blade.php",
+            "file": "resources/views/accounting/pdf/depreciation-schedule.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/accounting/cash-receipts/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/accounting/cash-payments/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/accounting/fixed-assets/index.blade.php",
             "essential": false
         },
         {
@@ -4181,6 +8233,12 @@
             "type": "Config",
             "name": "jetstream",
             "file": "config/jetstream.php",
+            "essential": false
+        },
+        {
+            "type": "Config",
+            "name": "livewire",
+            "file": "config/livewire.php",
             "essential": false
         }
     ]

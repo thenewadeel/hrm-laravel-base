@@ -65,7 +65,7 @@
         ],
         "test": [
             "@php artisan config:clear --ansi",
-            "@php artisan test > docs/testResults.txt"
+            "@php -d memory_limit=1G artisan test > docs/testResults.txt"
         ],
         "llm-summarize": [
             "@php scripts/laraCrawler.php"
@@ -74,7 +74,7 @@
             "@php artisan config:clear --ansi",
             "@php scripts/laraCrawler.php",
             "tree resources/views/ > \"docs/list of views.txt\"",
-            "@php artisan test --no-coverage > docs/testResults.txt || true",
+            "@php -d memory_limit=1G artisan test --no-coverage > docs/testResults.txt || true",
             "@testSummary"
         ],
         "dev-cp-pdf": [

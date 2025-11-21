@@ -1,34 +1,47 @@
 
-   PASS  Tests\Unit\Accounting\AccountTypeValidationTest
-  ✓ it allows debit to asset accounts                                    0.52s  
-  ✓ it allows debit to expense accounts                                  0.05s  
-  ✓ it throws exception when debiting liability account                  0.05s  
-  ✓ it allows credit to liability accounts                               0.06s  
-  ✓ it allows credit to revenue accounts                                 0.05s  
-  ✓ it throws exception when crediting asset account                     0.05s  
-  ✓ it validates account types during transaction posting                0.05s  
+   FAIL  Tests\Unit\Accounting\AccountTypeValidationTest
+  ✓ it allows debit to asset accounts                                    1.23s  
+  ✓ it allows debit to expense accounts                                  0.02s  
+  ⨯ it throws exception when debiting liability account                  0.02s  
+  ✓ it allows credit to liability accounts                               0.02s  
+  ✓ it allows credit to revenue accounts                                 0.01s  
+  ⨯ it throws exception when crediting asset account                     0.02s  
+  ⨯ it validates account types during transaction posting                0.02s  
 
    PASS  Tests\Unit\Accounting\BalanceSheetTest
-  ✓ it generates balance sheet with no transactions                      0.05s  
-  ✓ it generates balanced balance sheet                                  0.04s  
-  ✓ it includes retained earnings from income statement                  0.04s  
+  ✓ it generates balance sheet with no transactions                      0.02s  
+  ✓ it generates balanced balance sheet                                  0.02s  
+  ✓ it includes retained earnings from income statement                  0.03s  
+
+   PASS  Tests\Unit\Accounting\CashPaymentServiceTest
+  ✓ cash payment service creates payment with journal entry              0.02s  
+  ✓ cash payment service validates amount is positive                    0.01s  
+  ✓ cash payment service generates sequential voucher numbers            0.02s  
+  ✓ cash payment service validates account ownership                     0.01s  
+  ✓ cash payment service validates sufficient cash balance               0.01s  
+
+   PASS  Tests\Unit\Accounting\CashReceiptServiceTest
+  ✓ cash receipt service creates receipt with journal entry              0.02s  
+  ✓ cash receipt service validates amount is positive                    0.02s  
+  ✓ cash receipt service generates sequential receipt numbers            0.02s  
+  ✓ cash receipt service validates account ownership                     0.01s  
 
    PASS  Tests\Unit\Accounting\ChartOfAccountTest
-  ✓ it has a code name and type                                          0.03s  
-  ✓ it can scope accounts by type                                        0.04s  
+  ✓ it has a code name and type                                          0.02s  
+  ✓ it can scope accounts by type                                        0.02s  
   ✓ account code must be unique                                          0.02s  
-  ✓ it can calculate its current balance                                 0.03s  
+  ✓ it can calculate its current balance                                 0.02s  
 
    PASS  Tests\Unit\Accounting\DimensionReportTest
-  ✓ example                                                              0.09s  
+  ✓ example                                                              0.04s  
 
    PASS  Tests\Unit\Accounting\FinancialReportsTest
-  ✓ example                                                              0.05s  
+  ✓ example                                                              0.02s  
 
    PASS  Tests\Unit\Accounting\IncomeStatementTest
-  ✓ it generates income statement with no transactions                   0.03s  
-  ✓ it generates income statement with revenue and expenses              0.04s  
-  ✓ it excludes transactions outside date range                          0.03s  
+  ✓ it generates income statement with no transactions                   0.02s  
+  ✓ it generates income statement with revenue and expenses              0.02s  
+  ✓ it excludes transactions outside date range                          0.02s  
 
    PASS  Tests\Unit\Accounting\InvalidAccountTypeExceptionTest
   ✓ it provides detailed error message                                   0.02s  
@@ -36,13 +49,13 @@
   ✓ it allows custom message                                             0.02s  
 
    PASS  Tests\Unit\Accounting\JournalEntryFactoryTest
-  ✓ it can create a journal entry                                        0.03s  
+  ✓ it can create a journal entry                                        0.02s  
   ✓ it can create a draft journal entry                                  0.02s  
-  ✓ it can create a posted journal entry                                 0.03s  
+  ✓ it can create a posted journal entry                                 0.02s  
   ✓ it can create journal entry with specific approver                   0.02s  
 
    PASS  Tests\Unit\Accounting\JournalEntryTest
-  ✓ it can create a journal entry                                        0.03s  
+  ✓ it can create a journal entry                                        0.02s  
   ✓ it can post a balanced journal entry                                 0.02s  
   ✓ it prevents posting unbalanced journal entries                       0.02s  
 
@@ -51,18 +64,27 @@
   ✓ it has a debit or credit type                                        0.02s  
   ✓ it can be linked to a transaction via polymorphic relation           0.02s  
   ✓ it can be tagged with dimensions                                     0.02s  
-  ✓ it must have a positive amount                                       0.03s  
+  ✓ it must have a positive amount                                       0.02s  
 
    PASS  Tests\Unit\Accounting\TrialBalanceTest
-  ✓ it generates trial balance with zero entries                         0.02s  
+  ✓ it generates trial balance with zero entries                         0.03s  
   ✓ it generates trial balance with balanced entries                     0.02s  
   ✓ it shows account balances in trial balance                           0.02s  
 
+   PASS  Tests\Unit\Accounting\VoucherServiceTest
+  ✓ voucher service creates voucher with required data                   0.02s  
+  ✓ voucher service generates sequential voucher numbers                 0.01s  
+  ✓ voucher service validates amount is positive                         0.01s  
+  ✓ voucher service validates voucher type                               0.02s  
+  ✓ voucher service can post voucher                                     0.02s  
+  ✓ voucher service updates voucher                                      0.02s  
+  ✓ voucher service handles posting posted voucher                       0.01s  
+
    PASS  Tests\Unit\Database\HRMSchemaTest
   ✓ it has job_positions table with correct columns                      0.02s  
-  ✓ it has shifts table with correct columns                             0.02s  
-  ✓ it has employees table with position and shift foreign keys          0.02s  
-  ✓ it has foreign key constraints                                       0.02s  
+  ✓ it has shifts table with correct columns                             0.01s  
+  ✓ it has employees table with position and shift foreign keys          0.01s  
+  ✓ it has foreign key constraints                                       0.01s  
 
    PASS  Tests\Unit\Models\Inventory\InventoryTransactionTest
   ✓ example                                                              0.02s  
@@ -71,506 +93,913 @@
   ✓ example                                                              0.02s  
 
    PASS  Tests\Unit\Models\Inventory\StoreTest
-  ✓ example                                                              0.02s  
+  ✓ example                                                              0.01s  
 
    PASS  Tests\Unit\Models\JobPositionTest
   ✓ it can create a job position                                         0.02s  
   ✓ it belongs to an organization unit                                   0.02s  
-  ✓ it has many employees                                                0.04s  
-  ✓ it has active scope                                                  0.05s  
-  ✓ it has search scope                                                  0.03s  
+  ✓ it has many employees                                                0.02s  
+  ✓ it has active scope                                                  0.02s  
+  ✓ it has search scope                                                  0.02s  
 
    PASS  Tests\Unit\Models\ShiftTest
-  ✓ it can create a shift                                                0.04s  
-  ✓ it calculates working hours correctly                                0.03s  
-  ✓ it handles overnight shifts                                          0.03s  
-  ✓ it has many employees                                                0.04s  
-  ✓ it has active scope                                                  0.03s  
-  ✓ it validates days of week format                                     0.03s  
+  ✓ it can create a shift                                                0.02s  
+  ✓ it calculates working hours correctly                                0.01s  
+  ✓ it handles overnight shifts                                          0.01s  
+  ✓ it has many employees                                                0.02s  
+  ✓ it has active scope                                                  0.02s  
+  ✓ it validates days of week format                                     0.01s  
 
    PASS  Tests\Unit\AccountingReportServiceTest
-  ✓ it generates a correct trial balance                                 0.05s  
-  ✓ it generates a correct balance sheet                                 0.04s  
+  ✓ it generates a correct trial balance                                 0.02s  
+  ✓ it generates a correct balance sheet                                 0.03s  
 
    PASS  Tests\Unit\Accounting\AccountingServiceTest
-  ✓ it throws an exception for unbalanced transactions                   0.03s  
-  ✓ it successfully posts a balanced transaction and creates ledger ent… 0.03s  
-  ✓ it can handle complex but balanced transactions                      0.03s  
+  ✓ it throws an exception for unbalanced transactions                   0.02s  
+  ✓ it successfully posts a balanced transaction and creates ledger ent… 0.02s  
+  ✓ it can handle complex but balanced transactions                      0.02s  
 
    PASS  Tests\Unit\Services\InventoryServiceTest
-  ✓ it can create a store                                                0.05s  
-  ✓ it can update store inventory                                        0.04s  
-  ✓ it can update store inventory with min max stock                     0.04s  
-  ✓ it can adjust store inventory                                        0.05s  
-  ✓ it can create and finalize transaction                               0.06s  
-  ✓ it can cancel transaction                                            0.06s  
-  ✓ it can get store stock levels                                        0.05s  
-  ✓ it can get item availability                                         0.04s  
+  ✓ it can create a store                                                0.03s  
+  ✓ it can update store inventory                                        0.03s  
+  ✓ it can update store inventory with min max stock                     0.03s  
+  ✓ it can adjust store inventory                                        0.03s  
+  ✓ it can create and finalize transaction                               0.03s  
+  ✓ it can cancel transaction                                            0.03s  
+  ✓ it can get store stock levels                                        0.03s  
+  ✓ it can get item availability                                         0.03s  
   ✓ it prevents modifying finalized transaction                          0.04s  
-  ✓ it prevents finalizing transaction with no items                     0.05s  
-  ✓ it prevents cancelling finalized transaction                         0.04s  
-  ✓ it calculates low stock correctly                                    0.04s  
-  ✓ it calculates overstock correctly                                    0.04s  
+  ✓ it prevents finalizing transaction with no items                     0.03s  
+  ✓ it prevents cancelling finalized transaction                         0.03s  
+  ✓ it calculates low stock correctly                                    0.03s  
+  ✓ it calculates overstock correctly                                    0.03s  
 
    PASS  Tests\Unit\Services\SequenceServiceTest
   ✓ it generates sequential codes                                        0.02s  
   ✓ it handles concurrent requests safely                                0.02s  
 
    PASS  Tests\Unit\Teams\CreateTeamTest
-  ✓ teams can be created                                                 0.06s  
+  ✓ teams can be created                                                 0.03s  
 
    PASS  Tests\Unit\Teams\DeleteTeamTest
-  ✓ teams can be deleted                                                 0.05s  
-  ✓ personal teams cant be deleted                                       0.05s  
+  ✓ teams can be deleted                                                 0.02s  
+  ✓ personal teams cant be deleted                                       0.02s  
 
    PASS  Tests\Unit\Teams\InviteTeamMemberTest
-  ✓ team members can be invited to team                                  0.08s  
-  ✓ team member invitations can be cancelled                             0.07s  
+  ✓ team members can be invited to team                                  0.05s  
+  ✓ team member invitations can be cancelled                             0.05s  
 
    PASS  Tests\Unit\Teams\LeaveTeamTest
-  ✓ users can leave teams                                                0.06s  
-  ✓ team owners cant leave their own team                                0.06s  
+  ✓ users can leave teams                                                0.03s  
+  ✓ team owners cant leave their own team                                0.03s  
 
    PASS  Tests\Unit\Teams\RemoveTeamMemberTest
-  ✓ team members can be removed from teams                               0.07s  
-  ✓ only team owner can remove team members                              0.06s  
+  ✓ team members can be removed from teams                               0.04s  
+  ✓ only team owner can remove team members                              0.03s  
 
    PASS  Tests\Unit\Teams\UpdateTeamMemberRoleTest
-  ✓ team member roles can be updated                                     0.08s  
-  ✓ only team owner can update team member roles                         0.06s  
+  ✓ team member roles can be updated                                     0.10s  
+  ✓ only team owner can update team member roles                         0.04s  
 
    PASS  Tests\Unit\Teams\UpdateTeamNameTest
-  ✓ team names can be updated                                            0.06s  
+  ✓ team names can be updated                                            0.03s  
 
    PASS  Tests\Unit\base\ApiTokenPermissionsTest
-  ✓ api token permissions can be updated                                 0.07s  
+  ✓ api token permissions can be updated                                 0.05s  
 
    PASS  Tests\Unit\base\AuthenticationTest
-  ✓ login screen can be rendered                                         0.04s  
-  ✓ users can authenticate using the login screen                        0.04s  
-  ✓ users cannot authenticate with invalid password                      0.04s  
+  ✓ login screen can be rendered                                         0.02s  
+  ✓ users can authenticate using the login screen                        0.02s  
+  ✓ users cannot authenticate with invalid password                      0.02s  
 
    PASS  Tests\Unit\base\BrowserSessionsTest
-  ✓ other browser sessions can be logged out                             0.05s  
+  ✓ other browser sessions can be logged out                             0.03s  
 
    PASS  Tests\Unit\base\CreateApiTokenTest
-  ✓ api tokens can be created                                            0.07s  
+  ✓ api tokens can be created                                            0.04s  
 
    PASS  Tests\Unit\base\DeleteAccountTest
-  ✓ user accounts can be deleted                                         0.05s  
-  ✓ correct password must be provided before account can be deleted      0.05s  
+  ✓ user accounts can be deleted                                         0.03s  
+  ✓ correct password must be provided before account can be deleted      0.03s  
 
    PASS  Tests\Unit\base\DeleteApiTokenTest
-  ✓ api tokens can be deleted                                            0.06s  
+  ✓ api tokens can be deleted                                            0.04s  
 
    WARN  Tests\Unit\base\EmailVerificationTest
-  - email verification screen can be rendered → Email verification not…  0.02s  
-  - email can be verified → Email verification not enabled.              0.01s  
+  - email verification screen can be rendered → Email verification not…  0.01s  
+  - email can be verified → Email verification not enabled.              0.02s  
   - email can not verified with invalid hash → Email verification not e… 0.01s  
 
    PASS  Tests\Unit\base\PasswordConfirmationTest
-  ✓ confirm password screen can be rendered                              0.05s  
-  ✓ password can be confirmed                                            0.04s  
-  ✓ password is not confirmed with invalid password                      0.24s  
+  ✓ confirm password screen can be rendered                              0.02s  
+  ✓ password can be confirmed                                            0.02s  
+  ✓ password is not confirmed with invalid password                      0.22s  
 
    PASS  Tests\Unit\base\PasswordResetTest
-  ✓ reset password link screen can be rendered                           0.05s  
-  ✓ reset password link can be requested                                 0.23s  
-  ✓ reset password screen can be rendered                                0.25s  
-  ✓ password can be reset with valid token                               0.26s  
+  ✓ reset password link screen can be rendered                           0.02s  
+  ✓ reset password link can be requested                                 0.22s  
+  ✓ reset password screen can be rendered                                0.24s  
+  ✓ password can be reset with valid token                               0.24s  
 
    PASS  Tests\Unit\base\ProfileInformationTest
-  ✓ current profile information is available                             0.05s  
-  ✓ profile information can be updated                                   0.04s  
+  ✓ current profile information is available                             0.02s  
+  ✓ profile information can be updated                                   0.03s  
 
    WARN  Tests\Unit\base\RegistrationTest
-  ✓ registration screen can be rendered                                  0.03s  
+  ✓ registration screen can be rendered                                  0.02s  
   - registration screen cannot be rendered if support is disabled → Reg… 0.01s  
-  ✓ new users can register                                               0.03s  
+  ✓ new users can register                                               0.02s  
 
    PASS  Tests\Unit\base\TwoFactorAuthenticationSettingsTest
-  ✓ two factor authentication can be enabled                             0.08s  
-  ✓ recovery codes can be regenerated                                    0.12s  
-  ✓ two factor authentication can be disabled                            0.07s  
+  ✓ two factor authentication can be enabled                             0.05s  
+  ✓ recovery codes can be regenerated                                    0.09s  
+  ✓ two factor authentication can be disabled                            0.04s  
 
    PASS  Tests\Unit\base\UpdatePasswordTest
-  ✓ password can be updated                                              0.05s  
-  ✓ current password must be correct                                     0.05s  
-  ✓ new passwords must match                                             0.05s  
+  ✓ password can be updated                                              0.03s  
+  ✓ current password must be correct                                     0.03s  
+  ✓ new passwords must match                                             0.02s  
+
+   PASS  Tests\Feature\Accounting\CashPaymentTest
+  ✓ cash payment can be created with required fields                     0.02s  
+  ✓ cash payment belongs to organization                                 0.01s  
+  ✓ cash payment belongs to cash account                                 0.01s  
+  ✓ cash payment belongs to debit account                                0.02s  
+  ✓ cash payment uses soft deletes                                       0.01s  
+  ✓ cash payment casts amount as decimal                                 0.01s  
+  ✓ cash payment casts date properly                                     0.01s  
+
+   PASS  Tests\Feature\Accounting\CashReceiptTest
+  ✓ cash receipt can be created with required fields                     0.02s  
+  ✓ cash receipt belongs to organization                                 0.01s  
+  ✓ cash receipt belongs to cash account                                 0.01s  
+  ✓ cash receipt belongs to credit account                               0.02s  
+  ✓ cash receipt uses soft deletes                                       0.01s  
+  ✓ cash receipt casts amount as decimal                                 0.01s  
+  ✓ cash receipt casts date properly                                     0.01s  
+
+   FAIL  Tests\Feature\Accounting\FinancialYearTest
+  ✓ user can view financial years index                                  0.03s  
+  ⨯ user can create financial year                                       0.02s  
+  ✓ user can store financial year                                        0.02s  
+  ✓ user can edit financial year                                         0.02s  
+  ⨯ user can update financial year                                       0.02s  
+  ✓ user can set opening balances                                        0.03s  
+  ✓ user can save opening balances                                       0.02s  
+  ⨯ financial year can be activated                                      0.02s  
+  ⨯ financial year can be locked                                         0.02s  
+  ⨯ financial year can be unlocked                                       0.02s  
+  ✓ financial year service can close financial year                      0.02s  
+  ⨯ financial year service can carry forward balances                    0.02s  
+  ⨯ financial year validation works correctly                            0.02s  
+  ✓ user cannot delete active financial year                             0.02s  
+  ⨯ user can delete draft financial year                                 0.02s  
+
+   PASS  Tests\Feature\Accounting\SpecializedVoucherTest
+  ✓ sales voucher can be created with line items                         0.03s  
+  ✓ purchase voucher can be created with line items                      0.02s  
+  ✓ salary voucher can be created with deductions                        0.02s  
+  ✓ expense voucher can be created                                       0.02s  
+  ✓ sales voucher requires customer                                      0.02s  
+  ✓ purchase voucher requires vendor                                     0.02s  
+  ✓ salary voucher requires employee and valid amount                    0.02s  
+  ✓ expense voucher requires account and valid amount                    0.02s  
+  ✓ voucher reference numbers are sequential                             0.02s  
+  ✓ vouchers maintain double entry bookkeeping                           0.02s  
+
+   PASS  Tests\Feature\Accounting\VoucherTest
+  ✓ voucher can be created with required fields                          0.02s  
+  ✓ voucher belongs to organization                                      0.02s  
+  ✓ voucher belongs to creator                                           0.01s  
+  ✓ voucher belongs to updater                                           0.01s  
+  ✓ voucher uses soft deletes                                            0.02s  
+  ✓ voucher casts amount as decimal                                      0.01s  
+  ✓ voucher casts date properly                                          0.01s  
+  ✓ voucher can have different types                                     0.02s  
+  ✓ voucher can be drafted                                               0.02s  
+  ✓ voucher can be posted                                                0.01s  
+  ✓ voucher generates sequential numbers                                 0.01s  
+
+   PASS  Tests\Feature\AdvanceReportServiceTest
+  ✓ can generate employee statement for all employees                    0.03s  
+  ✓ can generate employee statement for specific employee                0.02s  
+  ✓ can generate aging analysis                                          0.02s  
+  ✓ can generate monthly summary                                         0.02s  
+  ✓ can generate department report                                       0.01s  
+  ✓ can generate advance vs salary analysis                              0.02s  
+  ✓ can generate outstanding advances report                             0.02s  
+  ✓ can get comprehensive advance analytics                              0.02s  
+  ✓ employee statement respects date filters                             0.02s  
+  ✓ monthly summary returns correct number of months                     0.02s  
+  ✓ department report handles employees without departments              0.01s  
+
+   PASS  Tests\Feature\AdvanceReportsLivewireTest
+  ✓ advance reports page renders successfully                            0.04s  
+  ✓ livewire component loads with default values                         0.02s  
+  ✓ can switch between report types                                      0.03s  
+  ✓ can filter by employee                                               0.03s  
+  ✓ can filter by date range                                             0.03s  
+  ✓ report data is computed correctly                                    0.03s  
+  ✓ employees list is available for filtering                            0.01s  
+  ✓ departments list is available for filtering                          0.01s  
+  ✓ reset filters works correctly                                        0.04s  
+  ✓ report types list is available                                       0.02s  
+  ✓ component respects organization scoping                              0.02s  
+  ✓ date filters are properly initialized                                0.02s  
 
    PASS  Tests\Feature\Api\Accounting\ChartOfAccountsApiTest
-  ✓ it can list chart of accounts                                        0.05s  
-  ✓ it can create a chart of account                                     0.04s  
-  ✓ it validates account creation                                        0.04s  
-  ✓ it can show a specific account                                       0.04s  
-  ✓ it returns 404 for nonexistent account                               0.04s  
+  ✓ it can list chart of accounts                                        0.03s  
+  ✓ it can create a chart of account                                     0.02s  
+  ✓ it validates account creation                                        0.02s  
+  ✓ it can show a specific account                                       0.02s  
+  ✓ it returns 404 for nonexistent account                               0.02s  
 
    PASS  Tests\Feature\Api\Accounting\FinancialReportsApiTest
-  ✓ it can generate trial balance                                        0.05s  
-  ✓ it can generate balance sheet                                        0.05s  
-  ✓ it can generate income statement                                     0.05s  
-  ✓ it validates income statement date range                             0.05s  
-  ✓ it rejects end date before start date                                0.05s  
+  ✓ it can generate trial balance                                        0.03s  
+  ✓ it can generate balance sheet                                        0.02s  
+  ✓ it can generate income statement                                     0.02s  
+  ✓ it validates income statement date range                             0.02s  
+  ✓ it rejects end date before start date                                0.02s  
 
    PASS  Tests\Feature\Api\Accounting\JournalEntriesApiTest
-  ✓ it can create a journal entry                                        0.06s  
-  ✓ it validates journal entry balances                                  0.05s  
-  ✓ it can post a journal entry                                          0.04s  
+  ✓ it can create a journal entry                                        0.04s  
+  ✓ it validates journal entry balances                                  0.03s  
+  ✓ it can post a journal entry                                          0.03s  
 
    PASS  Tests\Feature\OrganizationApiTest
-  ✓ can create organization                                              0.05s  
-  ✓ debug factory output                                                 0.02s  
-  ✓ verify organization factory works                                    0.02s  
+  ✓ can create organization                                              0.03s  
+  ✓ debug factory output                                                 0.03s  
+  ✓ verify organization factory works                                    0.03s  
   ✓ can list organizations                                               0.04s  
-  ✓ can show organization                                                0.04s  
-  ✓ can update organization                                              0.05s  
+  ✓ can show organization                                                0.03s  
+  ✓ can update organization                                              0.02s  
   ✓ can delete organization                                              0.04s  
   ✓ guests cannot access organizations                                   0.04s  
-  ✓ name is required for creation                                        0.04s  
-  ✓ name must be unique                                                  0.04s  
-  ✓ user can view their organizations                                    0.04s  
-  ✓ organization admin can list members                                  0.04s  
-  ✓ admin can invite new members                                         0.05s  
-  ✓ cannot invite existing member                                        0.04s  
-  ✓ non admin cannot invite members                                      0.04s  
+  ✓ name is required for creation                                        0.05s  
+  ✓ name must be unique                                                  0.05s  
+  ✓ user can view their organizations                                    0.05s  
+  ✓ organization admin can list members                                  0.08s  
+  ✓ admin can invite new members                                         0.04s  
+  ✓ cannot invite existing member                                        0.03s  
+  ✓ non admin cannot invite members                                      0.02s  
 
    FAIL  Tests\Feature\OrganizationUnitApiTest
-  ✓ can create organization unit                                         0.05s  
-  ✓ can create nested unit                                               0.04s  
-  ✓ can get unit hierarchy                                               0.04s  
-  ✓ can assign user to unit                                              0.05s  
-  ✓ can list users by organization unit                                  0.04s  
-  ✓ cannot create organization unit as non admin                         0.04s  
-  ⨯ cannot assign user as non admin                                      0.04s  
-  ✓ cannot create unit with invalid data                                 0.04s  
-  ✓ cannot assign non existent user to unit                              0.05s  
-  ✓ cannot assign user not in organization                               0.08s  
-  ✓ cannot get hierarchy for non existent unit                           0.05s  
-  ✓ can get hierarchy for unit with no children                          0.04s  
+  ✓ can create organization unit                                         0.03s  
+  ✓ can create nested unit                                               0.02s  
+  ✓ can get unit hierarchy                                               0.03s  
+  ✓ can assign user to unit                                              0.02s  
+  ✓ can list users by organization unit                                  0.02s  
+  ✓ cannot create organization unit as non admin                         0.02s  
+  ⨯ cannot assign user as non admin                                      0.02s  
+  ✓ cannot create unit with invalid data                                 0.02s  
+  ✓ cannot assign non existent user to unit                              0.02s  
+  ✓ cannot assign user not in organization                               0.03s  
+  ✓ cannot get hierarchy for non existent unit                           0.02s  
+  ✓ can get hierarchy for unit with no children                          0.02s  
 
    FAIL  Tests\Feature\Portal\AttendanceSyncTest
-  ✓ can view attendance dashboard                                        0.08s  
-  ✓ can filter attendance by date range                                  0.07s  
-  ✓ can identify attendance exceptions                                   0.06s  
-  ✓ can regularize missed punch                                          0.06s  
-  ✓ attendance data integrates with payroll                              0.08s  
-  ⨯ employee can clock in and out                                        0.44s  
-  ✓ can calculate attendance summary                                     0.07s  
-  ✓ biometric attendance sync                                            0.05s  
+  ✓ can view attendance dashboard                                        0.05s  
+  ✓ can filter attendance by date range                                  0.04s  
+  ✓ can identify attendance exceptions                                   0.04s  
+  ✓ can regularize missed punch                                          0.03s  
+  ⨯ attendance data integrates with payroll                              0.03s  
+  ⨯ employee can clock in and out                                        0.03s  
+  ✓ can calculate attendance summary                                     0.04s  
+  ✓ biometric attendance sync                                            0.03s  
 
    FAIL  Tests\Feature\DashboardTest
-  ✓ it redirects to setup for users without organization                 0.07s  
-  ⨯ it shows dashboard for users with organization                       0.06s  
-  ⨯ it shows dashboard sections                                          0.06s  
-  ✓ it shows store inventory summary                                     0.07s  
-  ⨯ it shows low stock alerts                                            0.06s  
-  ✓ it shows recent transactions                                         0.11s  
-  ⨯ it shows quick action buttons                                        0.07s  
-  ✓ it shows stats cards                                                 0.07s  
-  ✓ it shows empty state for no stores                                   0.07s  
-  ✓ it shows all stocked message when no low stock                       0.07s  
-  ✓ it shows store with item counts                                      0.07s  
+  ✓ it redirects to setup for users without organization                 0.04s  
+  ⨯ it shows dashboard for users with organization                       0.03s  
+  ⨯ it shows dashboard sections                                          0.03s  
+  ✓ it shows store inventory summary                                     0.04s  
+  ⨯ it shows low stock alerts                                            0.03s  
+  ✓ it shows recent transactions                                         0.09s  
+  ⨯ it shows quick action buttons                                        0.04s  
+  ✓ it shows stats cards                                                 0.05s  
+  ✓ it shows empty state for no stores                                   0.04s  
+  ✓ it shows all stocked message when no low stock                       0.04s  
+  ✓ it shows store with item counts                                      0.05s  
 
    PASS  Tests\Feature\ExampleTest
-  ✓ it returns a successful response                                     0.05s  
+  ✓ it returns a successful response                                     0.03s  
 
-   FAIL  Tests\Feature\Portal\EmployeeManagementTest
-  ✓ can view employee list                                               0.07s  
-  ✓ can view employee details                                            0.07s  
-  ✓ can create employee                                                  0.05s  
-  ✓ can update employee details                                          0.05s  
-  ✓ can update biometric id                                              0.06s  
-  ✓ employee belongs to organization unit                                0.06s  
-  ⨯ employee creation requires authentication                            0.06s  
-  ⨯ non hr users cannot create employees                                 0.05s  
-  ✓ can search employees                                                 0.06s  
-  ✓ can filter employees by department                                   0.06s  
-  ✓ employee attendance integration                                      0.08s  
-  ✓ employee leave balance calculation                                   0.07s  
-  ✓ can create employee without user account                             0.05s  
-  ✓ can grant system access to employee                                  0.05s  
+   FAIL  Tests\Feature\Feature\Accounting\BankAccountTest
+  ✓ user can view bank accounts index                                    0.04s  
+  ⨯ user can create bank account                                         0.02s  
+  ✓ bank account belongs to organization                                 0.01s  
+  ⨯ bank account has chart of account relationship                       0.01s  
+  ⨯ bank account can have bank transactions                              0.01s  
+  ✓ bank account scope active works correctly                            0.02s  
+  ✓ bank account formatted balance returns correct format                0.01s  
+  ✓ bank account type label returns correct label                        0.02s  
+  ✓ bank account status label returns correct label                      0.02s  
+
+   FAIL  Tests\Feature\Feature\Accounting\FixedAssetTest
+  ✓ user can view fixed assets index                                     0.03s  
+  ⨯ user can register a new fixed asset                                  0.02s  
+  ✓ fixed asset calculates straight line depreciation correctly          0.02s  
+  ✓ fixed asset calculates declining balance depreciation correctly      0.02s  
+  ⨯ fixed asset calculates sum of years depreciation correctly           0.02s  
+  ⨯ can post depreciation for asset                                      0.02s  
+  ⨯ can dispose asset with gain                                          0.02s  
+  ✓ can transfer asset between locations                                 0.02s  
+  ⨯ can record asset maintenance                                         0.02s  
+  ✓ asset knows when it is fully depreciated                             0.02s  
+  ✓ asset knows when it can be depreciated                               0.02s  
+
+   PASS  Tests\Feature\Portal\EmployeeManagementTest
+  ✓ can view employee list                                               0.05s  
+  ✓ can view employee details                                            0.04s  
+  ✓ can create employee                                                  0.03s  
+  ✓ can update employee details                                          0.03s  
+  ✓ can update biometric id                                              0.03s  
+  ✓ employee belongs to organization unit                                0.04s  
+  ✓ employee creation requires authentication                            0.04s  
+  ✓ non hr users cannot create employees                                 0.03s  
+  ✓ can search employees                                                 0.04s  
+  ✓ can filter employees by department                                   0.04s  
+  ✓ employee attendance integration                                      0.04s  
+  ✓ employee leave balance calculation                                   0.04s  
+  ✓ can create employee without user account                             0.03s  
+  ✓ can grant system access to employee                                  0.03s  
 
    FAIL  Tests\Feature\HR\EmployeePositionShiftIntegrationTest
-  ⨯ it assigns position and shift to employee during creation            0.05s  
+  ⨯ it assigns position and shift to employee during creation            0.03s  
   ✓ it loads employee with position and shift relationships              0.02s  
-  ⨯ it prevents assigning inactive position to employee                  0.05s  
+  ⨯ it prevents assigning inactive position to employee                  0.02s  
   ✓ it filters employees by position                                     0.02s  
   ✓ it filters employees by shift                                        0.03s  
 
    FAIL  Tests\Feature\HR\JobPositionControllerTest
-  ✓ it displays job positions index                                      0.06s  
-  ✓ it creates a job position                                            0.04s  
-  ✓ it validates required fields on create                               0.04s  
-  ✓ it updates a job position                                            0.05s  
-  ⨯ it deletes a job position                                            0.04s  
-  ✓ it searches job positions                                            0.05s  
+  ✓ it displays job positions index                                      0.03s  
+  ✓ it creates a job position                                            0.02s  
+  ✓ it validates required fields on create                               0.02s  
+  ✓ it updates a job position                                            0.02s  
+  ⨯ it deletes a job position                                            0.02s  
+  ✓ it searches job positions                                            0.03s  
 
    FAIL  Tests\Feature\HR\ShiftControllerTest
-  ✓ it displays shifts index                                             0.06s  
-  ✓ it creates a shift                                                   0.04s  
-  ✓ it validates required fields on create                               0.05s  
-  ⨯ it updates a shift                                                   0.04s  
-  ⨯ it deletes a shift                                                   0.04s  
+  ✓ it displays shifts index                                             0.03s  
+  ✓ it creates a shift                                                   0.02s  
+  ✓ it validates required fields on create                               0.02s  
+  ⨯ it updates a shift                                                   0.02s  
+  ⨯ it deletes a shift                                                   0.02s  
 
    FAIL  Tests\Feature\HrmDashboardControllerTest
-  ✓ it displays hrm dashboard to authenticated users                     0.05s  
-  ✓ it redirects guests to login page                                    0.04s  
-  ✓ it passes hrm dashboard data to view                                 0.06s  
-  ✓ it includes employee summary data                                    0.05s  
-  ✓ it includes attendance overview data                                 0.05s  
-  ✓ it includes leave management data                                    0.05s  
-  ✓ it includes performance kpis data                                    0.05s  
-  ✓ it includes recent activities data                                   0.05s  
-  ✓ it includes upcoming events data                                     0.06s  
-  ✓ it includes organization unit stats data                             0.05s  
-  ✓ it includes training development data                                0.05s  
-  ⨯ dashboard view contains expected hrm elements                        0.05s  
-  ✓ it provides realistic hrm data values                                0.05s  
-  ✓ recent activities are sorted by timestamp                            0.05s  
-  ✓ upcoming events are sorted by date                                   0.06s  
-  ✓ organization unit stats have consistent structure                    0.05s  
-  ✓ it handles users with hrm permissions                                0.05s  
-  ✓ it shows organization specific data                                  0.05s  
+  ✓ it displays hrm dashboard to authenticated users                     0.03s  
+  ✓ it redirects guests to login page                                    0.02s  
+  ✓ it passes hrm dashboard data to view                                 0.02s  
+  ✓ it includes employee summary data                                    0.02s  
+  ✓ it includes attendance overview data                                 0.03s  
+  ✓ it includes leave management data                                    0.02s  
+  ✓ it includes performance kpis data                                    0.02s  
+  ✓ it includes recent activities data                                   0.02s  
+  ✓ it includes upcoming events data                                     0.03s  
+  ✓ it includes organization unit stats data                             0.02s  
+  ✓ it includes training development data                                0.03s  
+  ⨯ dashboard view contains expected hrm elements                        0.02s  
+  ✓ it provides realistic hrm data values                                0.02s  
+  ✓ recent activities are sorted by timestamp                            0.02s  
+  ✓ upcoming events are sorted by date                                   0.02s  
+  ✓ organization unit stats have consistent structure                    0.03s  
+  ✓ it handles users with hrm permissions                                0.03s  
+  ✓ it shows organization specific data                                  0.02s  
 
    PASS  Tests\Feature\Inventory\InventoryControllerTest
-  ✓ it displays inventory dashboard                                      0.09s  
-  ✓ it shows correct statistics on dashboard                             0.07s  
-  ✓ it requires authentication for inventory dashboard                   0.06s  
-  ✓ it includes todays transactions in stats                             0.07s  
-  ✓ it handles empty inventory gracefully                                0.07s  
+  ✓ it displays inventory dashboard                                      0.05s  
+  ✓ it shows correct statistics on dashboard                             0.05s  
+  ✓ it requires authentication for inventory dashboard                   0.04s  
+  ✓ it includes todays transactions in stats                             0.04s  
+  ✓ it handles empty inventory gracefully                                0.04s  
 
    PASS  Tests\Feature\Inventory\InventoryItemControllerTest
-  ✓ it displays items index                                              0.09s  
-  ✓ it filters items by search term                                      0.07s  
-  ✓ it shows item creation form                                          0.07s  
-  ✓ it stores new item with valid data                                   0.06s  
-  ✓ it validates required fields when storing item                       0.06s  
+  ✓ it displays items index                                              0.06s  
+  ✓ it filters items by search term                                      0.04s  
+  ✓ it shows item creation form                                          0.04s  
+  ✓ it stores new item with valid data                                   0.03s  
+  ✓ it validates required fields when storing item                       0.03s  
 
    PASS  Tests\Feature\Inventory\InventoryReportControllerTest
-  ✓ it displays reports dashboard                                        0.07s  
-  ✓ it displays low stock report                                         0.08s  
-  ✓ it filters low stock by store                                        0.10s  
-  ✓ it displays stock movement report                                    0.08s  
-  ✓ it filters movement report by date range                             0.08s  
-  ✓ it displays stock levels report                                      0.08s  
-  ✓ it filters stock levels by category                                  0.08s  
-  ✓ it handles empty reports gracefully                                  0.11s  
+  ✓ it displays reports dashboard                                        0.05s  
+  ✓ it displays low stock report                                         0.05s  
+  ✓ it filters low stock by store                                        0.06s  
+  ✓ it displays stock movement report                                    0.06s  
+  ✓ it filters movement report by date range                             0.05s  
+  ✓ it displays stock levels report                                      0.05s  
+  ✓ it filters stock levels by category                                  0.05s  
+  ✓ it handles empty reports gracefully                                  0.08s  
 
    PASS  Tests\Feature\InventoryScopeTest
   ✓ it finds low stock items using scope                                 0.04s  
-  ✓ it finds low stock items in specific store                           0.04s  
-  ✓ it finds out of stock items using scope                              0.04s  
-  ✓ store can retrieve its low stock items                               0.04s  
-  ✓ store can retrieve its out of stock items                            0.05s  
-  ✓ it calculates stock statistics for store                             0.04s  
-  ✓ it properly categorizes stock levels                                 0.04s  
+  ✓ it finds low stock items in specific store                           0.03s  
+  ✓ it finds out of stock items using scope                              0.03s  
+  ✓ store can retrieve its low stock items                               0.03s  
+  ✓ store can retrieve its out of stock items                            0.04s  
+  ✓ it calculates stock statistics for store                             0.03s  
+  ✓ it properly categorizes stock levels                                 0.03s  
 
    PASS  Tests\Feature\Inventory\InventoryStockControllerTest
-  ✓ it shows stock adjustment form                                       0.06s  
-  ✓ it processes stock adjustment                                        0.08s  
-  ✓ it shows stock count form                                            0.06s  
-  ✓ it processes stock count                                             0.07s  
-  ✓ it shows stock transfer form                                         0.06s  
-  ✓ it processes stock transfer                                          0.08s  
+  ✓ it shows stock adjustment form                                       0.04s  
+  ✓ it processes stock adjustment                                        0.04s  
+  ✓ it shows stock count form                                            0.04s  
+  ✓ it processes stock count                                             0.04s  
+  ✓ it shows stock transfer form                                         0.03s  
+  ✓ it processes stock transfer                                          0.05s  
 
    PASS  Tests\Feature\Inventory\InventoryStoreControllerTest
-  ✓ it displays stores index                                             0.08s  
-  ✓ it filters stores by search term                                     0.07s  
-  ✓ it shows store creation form                                         0.07s  
-  ✓ it stores new store with valid data                                  0.06s  
-  ✓ it shows store detail page                                           0.09s  
-  ✓ it updates store with valid data                                     0.06s  
-  ✓ it deletes store without transactions or items                       0.06s  
-  ✓ it prevents deletion of store with transactions                      0.06s  
+  ✓ it displays stores index                                             0.05s  
+  ✓ it filters stores by search term                                     0.04s  
+  ✓ it shows store creation form                                         0.05s  
+  ✓ it stores new store with valid data                                  0.07s  
+  ✓ it shows store detail page                                           0.06s  
+  ✓ it updates store with valid data                                     0.03s  
+  ✓ it deletes store without transactions or items                       0.03s  
+  ✓ it prevents deletion of store with transactions                      0.04s  
 
    PASS  Tests\Feature\Inventory\InventoryTenancyTest
   ✓ it scopes items by organization                                      0.05s  
-  ✓ it scopes stores by organization                                     0.06s  
-  ✓ user cannot access other organizations inventory data                0.10s  
-  ✓ it enforces organization isolation in controllers                    0.10s  
+  ✓ it scopes stores by organization                                     0.04s  
+  ✓ user cannot access other organizations inventory data                0.06s  
+  ✓ it enforces organization isolation in controllers                    0.07s  
 
    PASS  Tests\Feature\Inventory\InventoryTransactionControllerTest
-  ✓ it displays transactions index                                       0.08s  
-  ✓ it shows transaction creation form                                   0.07s  
-  ✓ it stores new transaction with items                                 0.06s  
+  ✓ it displays transactions index                                       0.06s  
+  ✓ it shows transaction creation form                                   0.04s  
+  ✓ it stores new transaction with items                                 0.04s  
 
    FAIL  Tests\Feature\Inventory\ItemTest
-  ✓ it can create an item                                                0.06s  
-  ✓ it can search items by name or sku                                   0.07s  
-  ✓ it can filter items by category                                      0.07s  
-  ✓ it can sort items                                                    0.07s  
-  ✓ it returns only items from users organization                        0.07s  
-  ✓ it can get item availability across stores                           0.07s  
-  ✓ it shows low stock status correctly                                  0.07s  
-  ⨯ it returns 403 for unauthorized access                               0.07s  
-  ✓ it handles item with no stores                                       0.07s  
+  ✓ it can create an item                                                0.04s  
+  ✓ it can search items by name or sku                                   0.04s  
+  ✓ it can filter items by category                                      0.05s  
+  ✓ it can sort items                                                    0.04s  
+  ✓ it returns only items from users organization                        0.04s  
+  ✓ it can get item availability across stores                           0.04s  
+  ✓ it shows low stock status correctly                                  0.04s  
+  ⨯ it returns 403 for unauthorized access                               0.05s  
+  ✓ it handles item with no stores                                       0.04s  
 
    FAIL  Tests\Feature\Inventory\PermissionTest
-  ✓ inventory admin has all permissions                                  0.07s  
-  ✓ store manager cannot delete stores                                   0.06s  
-  ✓ inventory clerk cannot finalize transactions                         0.07s  
-  ✓ auditor can only view inventory                                      0.07s  
-  ⨯ user cannot access other organization inventory                      0.06s  
+  ✓ inventory admin has all permissions                                  0.04s  
+  ✓ store manager cannot delete stores                                   0.04s  
+  ✓ inventory clerk cannot finalize transactions                         0.05s  
+  ✓ auditor can only view inventory                                      0.04s  
+  ⨯ user cannot access other organization inventory                      0.04s  
 
    PASS  Tests\Feature\Inventory\StoreTest
-  ✓ it can create a store                                                0.07s  
-  ✓ it can add items to store                                            0.07s  
-  ✓ it can retrieve store with items                                     0.06s  
-  ✓ it can update item quantity in store                                 0.07s  
-  ✓ it can list all stores for organization                              0.09s  
-  ✓ it can use organization scope                                        0.05s  
-  ✓ it can use search scope                                              0.04s  
-  ✓ it can use active scope                                              0.05s  
+  ✓ it can create a store                                                0.04s  
+  ✓ it can add items to store                                            0.04s  
+  ✓ it can retrieve store with items                                     0.04s  
+  ✓ it can update item quantity in store                                 0.04s  
+  ✓ it can list all stores for organization                              0.04s  
+  ✓ it can use organization scope                                        0.04s  
+  ✓ it can use search scope                                              0.03s  
+  ✓ it can use active scope                                              0.04s  
 
    PASS  Tests\Feature\Inventory\TransactionTest
-  ✓ it can create draft transaction without items                        0.08s  
-  ✓ it can create draft transaction with items                           0.07s  
-  ✓ it can add items to empty draft transaction                          0.08s  
-  ✓ it can add items to transaction with existing items                  0.09s  
-  ✓ it can finalize transaction created without items after adding item… 0.08s  
-  ✓ it can finalize transaction created with items                       0.08s  
-  ✓ it cannot finalize empty transaction                                 0.07s  
-  ✓ it cannot add items to finalized transaction                         0.08s  
-  ✓ it can list transactions by status                                   0.10s  
-  ✓ it can calculate transaction totals                                  0.07s  
-  ✓ it cannot modify finalized transaction                               0.08s  
-  ✓ it can calculate totals for empty transaction                        0.07s  
+  ✓ it can create draft transaction without items                        0.04s  
+  ✓ it can create draft transaction with items                           0.04s  
+  ✓ it can add items to empty draft transaction                          0.04s  
+  ✓ it can add items to transaction with existing items                  0.05s  
+  ✓ it can finalize transaction created without items after adding item… 0.06s  
+  ✓ it can finalize transaction created with items                       0.05s  
+  ✓ it cannot finalize empty transaction                                 0.04s  
+  ✓ it cannot add items to finalized transaction                         0.05s  
+  ✓ it can list transactions by status                                   0.07s  
+  ✓ it can calculate transaction totals                                  0.04s  
+  ✓ it cannot modify finalized transaction                               0.05s  
+  ✓ it can calculate totals for empty transaction                        0.04s  
+
+   PASS  Tests\Feature\Livewire\Accounting\CashPayments\CreateTest
+  ✓ cash payment create component renders successfully                   0.04s  
+  ✓ cash payment create component has required fields                    0.02s  
+  ✓ cash payment create component loads cash and expense accounts        0.02s  
+  ✓ cash payment create component validates required fields              0.05s  
+  ✓ cash payment create component validates amount is positive           0.05s  
+  ✓ cash payment create component creates payment successfully           0.06s  
+  ✓ cash payment create component handles creation errors                0.06s  
+
+   PASS  Tests\Feature\Livewire\Accounting\CashReceipts\CreateTest
+  ✓ cash receipt create component renders successfully                   0.02s  
+  ✓ cash receipt create component has required fields                    0.02s  
+  ✓ cash receipt create component loads cash accounts                    0.02s  
+  ✓ cash receipt create component validates required fields              0.05s  
+  ✓ cash receipt create component validates amount is positive           0.05s  
+  ✓ cash receipt create component creates receipt successfully           0.07s  
+  ✓ cash receipt create component handles creation errors                0.05s  
 
    PASS  Tests\Feature\Livewire\Accounting\ChartOfAccountsTest
-  ✓ chart of accounts page renders                                       0.06s  
-  ✓ it displays a list of accounts                                       0.05s  
-  ✓ it displays a list of chart of accounts                              0.05s  
-  ✓ it can create a new chart of account record                          0.06s  
-  ✓ it can update an existing chart of account record                    0.06s  
+  ✓ chart of accounts page renders                                       0.02s  
+  ✓ it displays a list of accounts                                       0.02s  
+  ✓ it displays a list of chart of accounts                              0.02s  
+  ✓ it can create a new chart of account record                          0.03s  
+  ✓ it can update an existing chart of account record                    0.04s  
 
    FAIL  Tests\Feature\Livewire\Accounting\JournalEntriesTest
-  ✓ it renders successfully                                              0.05s  
-  ⨯ it creates a journal entry                                           0.09s  
-  ✓ a journal entry requires balanced debits and credits                 0.08s  
+  ✓ it renders successfully                                              0.02s  
+  ⨯ it creates a journal entry                                           0.05s  
+  ✓ a journal entry requires balanced debits and credits                 0.04s  
+
+   FAIL  Tests\Feature\Livewire\Accounting\Vouchers\CreateTest
+  ✓ voucher create component renders successfully                        0.02s  
+  ✓ voucher create component has required fields                         0.03s  
+  ⨯ voucher create component loads chart of accounts                     0.02s  
+  ✓ voucher create component validates required fields                   0.03s  
+  ✓ voucher create component validates amount is positive                0.03s  
+  ✓ voucher create component creates voucher successfully                0.03s  
+  ✓ voucher create component handles creation errors                     0.03s  
 
    PASS  Tests\Feature\Livewire\Organization\MemberManagerTest
-  ✓ it can display a list of organization members                        0.05s  
-  ✓ it can search for members by name or email                           0.06s  
+  ✓ it can display a list of organization members                        0.03s  
+  ✓ it can search for members by name or email                           0.03s  
 
    PASS  Tests\Feature\Livewire\Organization\OrganizationFormTest
-  ✓ it shows create form                                                 0.05s  
-  ✓ it shows edit form                                                   0.06s  
-  ✓ it creates new organization                                          0.05s  
-  ✓ it updates existing organization                                     0.06s  
-  ✓ it validates required fields                                         0.05s  
-  ✓ it validates unique name                                             0.05s  
-  ✓ it closes modal                                                      0.05s  
+  ✓ it shows create form                                                 0.02s  
+  ✓ it shows edit form                                                   0.02s  
+  ✓ it creates new organization                                          0.03s  
+  ✓ it updates existing organization                                     0.03s  
+  ✓ it validates required fields                                         0.03s  
+  ✓ it validates unique name                                             0.02s  
+  ✓ it closes modal                                                      0.02s  
 
    FAIL  Tests\Feature\Livewire\Organization\OrganizationListTest
-  ✓ it shows organizations list                                          0.06s  
-  ✓ it searches organizations by name                                    0.05s  
-  ✓ it sorts organizations by name ascending                             0.05s  
-  ✓ it sorts organizations by name descending                            0.06s  
-  ✓ it sorts organizations by status                                     0.05s  
-  ✓ it paginates organizations                                           0.06s  
-  ⨯ it shows empty state when no organizations                           0.05s  
+  ✓ it shows organizations list                                          0.03s  
+  ✓ it searches organizations by name                                    0.03s  
+  ✓ it sorts organizations by name ascending                             0.03s  
+  ✓ it sorts organizations by name descending                            0.04s  
+  ✓ it sorts organizations by status                                     0.03s  
+  ✓ it paginates organizations                                           0.04s  
+  ⨯ it shows empty state when no organizations                           0.02s  
 
    FAIL  Tests\Feature\Livewire\Organization\OrganizationTreeTest
-  ✓ it can display the organization tree                                 0.06s  
-  ✓ an organization unit can be dragged and dropped to another parent    0.05s  
-  ✓ an organizational unit cannot be dropped onto itself                 0.05s  
-  ✓ an organizational unit can be dropped as a root node                 0.05s  
-  ✓ a parent cannot be dropped onto one of its descendants               0.05s  
-  ✓ a sibling can be dropped under another sibling                       0.05s  
+  ✓ it can display the organization tree                                 0.03s  
+  ✓ an organization unit can be dragged and dropped to another parent    0.03s  
+  ✓ an organizational unit cannot be dropped onto itself                 0.03s  
+  ✓ an organizational unit can be dropped as a root node                 0.02s  
+  ✓ a parent cannot be dropped onto one of its descendants               0.03s  
+  ✓ a sibling can be dropped under another sibling                       0.03s  
   ⨯ an empty tree renders correctly                                      0.02s  
-  ✓ it can handle a large number of units without crashing               0.10s  
-  ⨯ a dropped unit that does not exist does not cause an error           0.05s  
+  ✓ it can handle a large number of units without crashing               0.06s  
+  ⨯ a dropped unit that does not exist does not cause an error           0.02s  
 
    FAIL  UserPlacementTest
-  ✓ it can assign a user to a unit                                       0.06s  
-  ⨯ it can unassign a user by dropping them onto the root                0.06s  
+  ✓ it can assign a user to a unit                                       0.04s  
+  ⨯ it can unassign a user by dropping them onto the root                0.03s  
+
+   FAIL  Tests\Feature\Models\CustomerTest
+  ⨯ customer can be created with financial fields                        0.02s  
+  ✓ customer belongs to organization                                     0.01s  
+  ⨯ customer uses soft deletes                                           0.01s  
+  ⨯ customer casts financial fields correctly                            0.01s  
+  ⨯ customer scope active works correctly                                0.02s  
+  ⨯ customer scope with balance works correctly                          0.01s  
+  ⨯ customer full address concatenates correctly                         0.01s  
+  ⨯ customer display name includes balance                               0.01s  
+
+   FAIL  Tests\Feature\Models\FinancialManagementTest
+  ⨯ customer financial fields work correctly                             0.02s  
+  ✓ customer relationships work correctly                                0.01s  
+  ⨯ customer soft deletes work                                           0.01s  
+  ⨯ customer scopes work correctly                                       0.02s  
+  ⨯ customer full address concatenates correctly                         0.01s  
+  ⨯ invoice can be created with all relationships                        0.02s  
+  ⨯ invoice status scopes work correctly                                 0.02s  
+  ⨯ invoice amount due calculation works                                 0.02s  
+  ⨯ invoice overdue detection works                                      0.02s  
+  ⨯ payment can be created with relationships                            0.02s  
+  ⨯ payment status scopes work correctly                                 0.01s  
+  ⨯ payment fully applied calculation works                              0.02s  
+
+   FAIL  Tests\Feature\Models\InvoiceTest
+  ⨯ invoice can be created with required fields                          0.02s  
+  ⨯ invoice belongs to customer                                          0.02s  
+  ⨯ invoice belongs to vendor                                            0.02s  
+  ⨯ invoice uses soft deletes                                            0.02s  
+  ⨯ invoice casts amounts correctly                                      0.02s  
+  ⨯ invoice casts dates correctly                                        0.02s  
+  ⨯ invoice status scope works                                           0.02s  
 
    PASS  Tests\Feature\MultiStepSetupWizardTest
-  ✓ it shows organization step for new users                             0.07s  
-  ✓ it can store organization and proceed to store step                  0.07s  
-  ✓ it shows store setup step after organization                         0.07s  
-  ✓ it can create first store and proceed to accounting                  0.06s  
-  ✓ it shows accounting setup step after store                           0.07s  
+  ✓ it shows organization step for new users                             0.04s  
+  ✓ it can store organization and proceed to store step                  0.03s  
+  ✓ it shows store setup step after organization                         0.04s  
+  ✓ it can create first store and proceed to accounting                  0.04s  
+  ✓ it shows accounting setup step after store                           0.05s  
 
    FAIL  Tests\Feature\Organization\OrganizationDashboardTest
-  ⨯ authenticated user can access organization dashboard                 0.21s  
-  ⨯ dashboard displays correct organization metrics                      0.22s  
-  ⨯ user can view organization structure                                 0.23s  
-  ⨯ dashboard includes department distribution data                      0.23s  
-  ⨯ analytics page displays trend data                                   0.22s  
+  ⨯ authenticated user can access organization dashboard                 0.03s  
+  ⨯ dashboard displays correct organization metrics                      0.02s  
+  ⨯ user can view organization structure                                 0.02s  
+  ⨯ dashboard includes department distribution data                      0.03s  
+  ⨯ analytics page displays trend data                                   0.03s  
 
    FAIL  Tests\Feature\Portal\OrganizationUserIntegrationTest
   ⨯ organization user roles are properly cast                            0.03s  
-  ✓ employee can access employee portal with employee role               0.07s  
-  ✓ manager can access both employee and manager portals                 0.08s  
-  ⨯ user without organization access denied                              0.05s  
-  ⨯ employee cannot access manager portal                                0.07s  
-  ⨯ has role method works correctly                                      0.03s  
-  ⨯ has any role method works correctly                                  0.03s  
+  ✓ employee can access employee portal with employee role               0.04s  
+  ✓ manager can access both employee and manager portals                 0.05s  
+  ⨯ user without organization access denied                              0.03s  
+  ⨯ employee cannot access manager portal                                0.05s  
+  ⨯ has role method works correctly                                      0.02s  
+  ⨯ has any role method works correctly                                  0.02s  
 
-   PASS  OrganizationUserPivotTest
-  ✓ it can get all roles with the new pivot model                        0.03s  
+   WARN  OrganizationUserPivotTest
+  ! it can get all roles with the new pivot model → This test did not p… 0.02s  
+
+   PASS  Tests\Feature\OutstandingStatementsBasicTest
+  ✓ outstanding statements service basic functionality                   0.02s  
+
+   FAIL  Tests\Feature\OutstandingStatementsTest
+  ✓ can generate receivables aging report                                0.02s  
+  ⨯ can generate payables aging report                                   0.02s  
+  ✓ can get customer outstanding summary                                 0.03s  
+  ✓ can get vendor outstanding summary                                   0.02s  
+  ⨯ can generate comprehensive receivables statement with aging          0.02s  
+  ⨯ can generate comprehensive payables statement with aging             0.02s  
+  ⨯ can filter receivables statement by customer                         0.02s  
+  ⨯ can filter payables statement by vendor                              0.02s  
+  ⨯ can filter statements by date range                                  0.02s  
+  ⨯ can export statement data                                            0.03s  
+  ⨯ can get aging summary for dashboard                                  0.02s  
+  ✓ respects organization isolation                                      0.02s  
+
+   PASS  Tests\Feature\Payroll\EmployeeIncrementTest
+  ✓ employee increment can be created                                    0.02s  
+  ✓ employee increment can be approved                                   0.02s  
+  ✓ employee increment can be implemented                                0.02s  
+  ✓ increment calculation works correctly for percentage                 0.02s  
+  ✓ increment calculation works correctly for fixed amount               0.02s  
+  ✓ only approved increments can be implemented                          0.01s  
+
+   PASS  Tests\Feature\Payroll\PayrollCalculationTest
+  ✓ payroll calculation service calculates basic payroll correctly       0.02s  
+  ✓ payroll calculation includes allowances correctly                    0.02s  
+  ✓ payroll calculation includes deductions correctly                    0.02s  
+  ✓ tax calculation works correctly                                      0.02s  
+  ✓ effective basic salary considers increments                          0.03s  
+  ✓ batch payroll processing works correctly                             0.02s  
+  ✓ payroll summary generation works correctly                           0.02s  
 
    WARN  Tests\Feature\Portal\PayrollProcessingTest
-  ! can calculate payroll with attendance → This test did not perform a… 0.01s  
+  ! can calculate payroll with attendance → This test did not perform a… 0.02s  
   ! payroll includes correct deductions → This test did not perform any… 0.01s  
   ! can generate accounting journal entry → This test did not perform a… 0.01s  
   ! payslip generation → This test did not perform any assertions        0.01s  
   ! payroll uses correct chart of accounts → This test did not perform…  0.01s  
 
+   FAIL  Tests\Feature\PdfGenerationTest
+  ⨯ payslip download should fail initially                               0.03s  
+  ⨯ payslip download should return pdf response                          0.01s  
+  ⨯ payslip pdf should have correct filename                             0.01s  
+  ⨯ trial balance download should return pdf response                    0.02s  
+  ⨯ trial balance pdf should have correct filename                       0.02s  
+  ⨯ income statement download should return pdf response                 0.02s  
+  ⨯ balance sheet download should return pdf response                    0.02s  
+  ⨯ low stock pdf download should return pdf response                    0.03s  
+  ⨯ stock levels pdf download should return pdf response                 0.02s  
+  ⨯ movement pdf download should return pdf response                     0.02s  
+  ⨯ pdf generation should handle missing data gracefully                 0.02s  
+  ⨯ pdf generation should not exceed memory limits                       0.02s  
+
    FAIL  Tests\Feature\Portal\CompletePortalTest
-  ✓ employee can access all portal features                              0.10s  
-  ⨯ employee can clock in and out                                        0.06s  
-  ✓ employee can apply for leave                                         0.07s  
-  ✓ manager can access manager portal                                    0.09s  
-  ✓ employee can view payslip details                                    0.07s  
-  ✓ employee cannot view other employee payslips                         0.06s  
-  ✓ attendance records show correct summary                              0.07s  
+  ✓ employee can access all portal features                              0.08s  
+  ⨯ employee can clock in and out                                        0.03s  
+  ✓ employee can apply for leave                                         0.04s  
+  ✓ manager can access manager portal                                    0.06s  
+  ✓ employee can view payslip details                                    0.04s  
+  ✓ employee cannot view other employee payslips                         0.03s  
+  ✓ attendance records show correct summary                              0.05s  
 
    FAIL  Tests\Feature\Portal\EmployeePortalTest
-  ✓ employee can access their portal dashboard                           0.08s  
-  ✓ employee can view attendance page                                    0.07s  
-  ✓ employee can filter attendance by month                              0.06s  
-  ✓ employee can apply for leave                                         0.06s  
-  ✓ employee can view leave page                                         0.06s  
-  ✓ employee can view payslips page                                      0.07s  
-  ✓ employee can view leave application form                             0.06s  
-  ⨯ employee can clock in and out                                        0.05s  
+  ✓ employee can access their portal dashboard                           0.04s  
+  ✓ employee can view attendance page                                    0.04s  
+  ✓ employee can filter attendance by month                              0.04s  
+  ✓ employee can apply for leave                                         0.04s  
+  ✓ employee can view leave page                                         0.04s  
+  ✓ employee can view payslips page                                      0.04s  
+  ✓ employee can view leave application form                             0.03s  
+  ⨯ employee can clock in and out                                        0.03s  
 
    FAIL  Tests\Feature\Portal\ManagerPortalTest
-  ✓ manager can access their portal dashboard                            0.07s  
-  ✓ manager can view team attendance page                                0.07s  
-  ⨯ manager can approve leave requests                                   0.06s  
-  ✓ manager can filter team attendance by date                           0.07s  
-  ⨯ manager can generate team reports                                    0.03s  
+  ✓ manager can access their portal dashboard                            0.04s  
+  ✓ manager can view team attendance page                                0.05s  
+  ⨯ manager can approve leave requests                                   0.03s  
+  ✓ manager can filter team attendance by date                           0.04s  
+  ⨯ manager can generate team reports                                    0.02s  
 
    PASS  Tests\Feature\SetupChartOfAccountsTest
-  ✓ it creates default chart of accounts                                 0.06s  
-  ✓ it skips account creation if not requested                           0.06s  
-  ✓ it creates organization unit for accounting department               0.07s  
+  ✓ it creates default chart of accounts                                 0.03s  
+  ✓ it skips account creation if not requested                           0.04s  
+  ✓ it creates organization unit for accounting department               0.03s  
 
    PASS  Tests\Feature\SetupStoreTest
-  ✓ it creates first store for organization                              0.06s  
-  ✓ it validates store creation                                          0.06s  
-  ✓ it auto generates store code if not provided                         0.07s  
+  ✓ it creates first store for organization                              0.04s  
+  ✓ it validates store creation                                          0.03s  
+  ✓ it auto generates store code if not provided                         0.03s  
 
    PASS  Tests\Feature\SetupWizardTest
-  ✓ it shows setup wizard for new users                                  0.08s  
-  ✓ it redirects to dashboard if organization exists                     0.06s  
-  ✓ it can create organization through wizard                            0.06s  
-  ✓ it validates organization creation                                   0.06s  
-  ✓ it assigns admin role to creator                                     0.06s  
+  ✓ it shows setup wizard for new users                                  0.05s  
+  ✓ it redirects to dashboard if organization exists                     0.03s  
+  ✓ it can create organization through wizard                            0.03s  
+  ✓ it validates organization creation                                   0.03s  
+  ✓ it assigns admin role to creator                                     0.03s  
+
+   FAIL  Tests\Feature\TaxManagementTest
+  ⨯ user can create tax rate                                             0.03s  
+  ⨯ user can update tax rate                                             0.01s  
+  ⨯ tax rate scope active works correctly                                0.01s  
+  ✓ user can create tax jurisdiction                                     0.01s  
+  ✓ user can create tax exemption                                        0.01s  
+  ✓ tax exemption validity check works                                   0.02s  
+  ⨯ tax calculation service calculates taxes correctly                   0.02s  
+  ⨯ tax calculation service applies exemptions correctly                 0.02s  
+  ⨯ tax calculation service handles compound taxes                       0.03s  
+  ⨯ tax reporting service generates correct reports                      0.01s  
+  ⨯ tax compliance service creates filings correctly                     0.01s  
+  ✓ tax compliance service checks expiry dates                           0.02s  
+  ✓ voucher tax integration works end-to-end                             0.02s  
+  ✓ tax calculations are properly scoped to organization                 0.02s  
 
    PASS  Tests\Feature\TenancyFeatureTest
-  ✓ queries are automatically scoped to the authenticated users organiz… 0.06s  
-  ✓ organization id is automatically set on creation                     0.05s  
-  ✓ global scope can be bypassed for admin queries                       0.05s  
+  ✓ queries are automatically scoped to the authenticated users organiz… 0.05s  
+  ✓ organization id is automatically set on creation                     0.04s  
+  ✓ global scope can be bypassed for admin queries                       0.04s  
 
-   FAIL  Tests\Feature\VoucherSystemTest
+   PASS  Tests\Feature\VoucherSystemTest
   ✓ can create sales voucher                                             0.03s  
-  ✓ can create purchase voucher                                          0.03s  
-  ⨯ can create salary voucher                                            0.03s  
-  ⨯ can create expense voucher                                           0.02s  
+  ✓ can create purchase voucher                                          0.02s  
+  ✓ can create salary voucher                                            0.02s  
+  ✓ can create expense voucher                                           0.03s  
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Unit\Accounting\AccountTypeValidationTest > it throws excep…   
+  Failed asserting that exception of type "App\Exceptions\InvalidAccountTypeException" is thrown.
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Unit\Accounting\AccountTypeValidationTest > it throws excep…   
+  Failed asserting that exception of type "App\Exceptions\InvalidAccountTypeException" is thrown.
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Unit\Accounting\AccountTypeValidationTest > it validates ac…   
+  Failed asserting that exception of type "App\Exceptions\InvalidAccountTypeException" is thrown.
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Accounting\FinancialYearTest > user can create fina…   
+  Expected response status code [>=200, <300] but received 404.
+Failed asserting that false is true.
+
+  at tests/Feature/Accounting/FinancialYearTest.php:38
+     34▕     $user = User::factory()->create(['current_organization_id' => $organization->id]);
+     35▕ 
+     36▕     actingAs($user)
+     37▕         ->get(route('accounting.financial-years.create'))
+  ➜  38▕         ->assertSuccessful()
+     39▕         ->assertSee('Create Financial Year')
+     40▕         ->assertSee('name')
+     41▕         ->assertSee('code')
+     42▕         ->assertSee('start_date')
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Accounting\FinancialYearTest > user can update fina…   
+  Failed asserting that a row in the table [financial_years] matches the attributes {
+    "id": 1,
+    "name": "Updated Fiscal Year 2024-2025",
+    "code": "UFY2024-25",
+    "notes": "Updated notes"
+}.
+
+Found similar results: [
+    {
+        "id": 1,
+        "name": "Fiscal Year 1985-1986",
+        "code": "FY1985-1986",
+        "notes": null
+    }
+].
+
+  at tests/Feature/Accounting/FinancialYearTest.php:96
+     92▕     actingAs($user)
+     93▕         ->put(route('accounting.financial-years.update', $financialYear), $data)
+     94▕         ->assertRedirect(route('accounting.financial-years.index'));
+     95▕ 
+  ➜  96▕     $this->assertDatabaseHas('financial_years', [
+     97▕         'id' => $financialYear->id,
+     98▕         'name' => $data['name'],
+     99▕         'code' => $data['code'],
+    100▕         'notes' => $data['notes'],
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Accounting\FinancialYearTest > financial year can b…   
+  Failed asserting that a row in the table [financial_years] matches the attributes {
+    "id": 1,
+    "status": "active"
+}.
+
+Found similar results: [
+    {
+        "id": 1,
+        "status": "draft"
+    }
+].
+
+  at tests/Feature/Accounting/FinancialYearTest.php:160
+    156▕     actingAs($user)
+    157▕         ->post(route('accounting.financial-years.activate', $financialYear))
+    158▕         ->assertRedirect();
+    159▕ 
+  ➜ 160▕     $this->assertDatabaseHas('financial_years', [
+    161▕         'id' => $financialYear->id,
+    162▕         'status' => 'active',
+    163▕     ]);
+    164▕ });
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Accounting\FinancialYearTest > financial year can b…   
+  Failed asserting that false is true.
+
+  at tests/Feature/Accounting/FinancialYearTest.php:178
+    174▕         ->post(route('accounting.financial-years.lock', $financialYear))
+    175▕         ->assertRedirect();
+    176▕ 
+    177▕     $financialYear->refresh();
+  ➜ 178▕     expect($financialYear->is_locked)->toBeTrue();
+    179▕     expect($financialYear->locked_by)->toBe($user->id);
+    180▕ });
+    181▕ 
+    182▕ test('financial year can be unlocked', function () {
+
+  1   tests/Feature/Accounting/FinancialYearTest.php:178
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Accounting\FinancialYearTest > financial year can b…   
+  Failed asserting that true is false.
+
+  at tests/Feature/Accounting/FinancialYearTest.php:196
+    192▕         ->post(route('accounting.financial-years.unlock', $financialYear))
+    193▕         ->assertRedirect();
+    194▕ 
+    195▕     $financialYear->refresh();
+  ➜ 196▕     expect($financialYear->is_locked)->toBeFalse();
+    197▕     expect($financialYear->locked_by)->toBeNull();
+    198▕ });
+    199▕ 
+    200▕ test('financial year service can close financial year', function () {
+
+  1   tests/Feature/Accounting/FinancialYearTest.php:196
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Accounting\FinancialYearTest > financial year servi…   
+  Failed asserting that '10000.00' is identical to 10000.
+
+  at tests/Feature/Accounting/FinancialYearTest.php:289
+    285▕     $carriedForward = $service->carryForwardBalances($fromYear, $toYear);
+    286▕ 
+    287▕     expect($carriedForward)->toHaveCount(1);
+    288▕     expect($carriedForward[0]->financial_year_id)->toBe($toYear->id);
+  ➜ 289▕     expect($carriedForward[0]->debit_amount)->toBe(10000);
+    290▕ 
+    291▕     $this->assertDatabaseHas('opening_balances', [
+    292▕         'financial_year_id' => $toYear->id,
+    293▕         'chart_of_account_id' => $assetAccount->id,
+
+  1   tests/Feature/Accounting/FinancialYearTest.php:289
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Accounting\FinancialYearTest > financial year valid…   
+  Session is missing expected key [errors].
+Failed asserting that false is true.
+
+  at tests/Feature/Accounting/FinancialYearTest.php:312
+    308▕     ];
+    309▕ 
+    310▕     actingAs($user)
+    311▕         ->post(route('accounting.financial-years.store'), $data)
+  ➜ 312▕         ->assertSessionHasErrors('end_date');
+    313▕ });
+    314▕ 
+    315▕ test('user cannot delete active financial year', function () {
+    316▕     $organization = Organization::factory()->create();
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Accounting\FinancialYearTest > user can delete draf…   
+  Failed asserting that a row in the table [financial_years] does not match the attributes {
+    "id": 1
+}.
+
+Found similar results: [
+    {
+        "id": 1
+    }
+].
+
+  at tests/Feature/Accounting/FinancialYearTest.php:342
+    338▕     actingAs($user)
+    339▕         ->delete(route('accounting.financial-years.destroy', $financialYear))
+    340▕         ->assertRedirect();
+    341▕ 
+  ➜ 342▕     $this->assertDatabaseMissing('financial_years', [
+    343▕         'id' => $financialYear->id,
+    344▕     ]);
+    345▕ });
+    346▕
+
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\OrganizationUnitApiTest > cannot assign user as non…   
   Expected response status code [403] but received 404.
@@ -586,6 +1015,24 @@ Failed asserting that 404 is identical to 403.
     199▕ 
     200▕     #[Test]
     201▕     public function cannot_create_unit_with_invalid_data()
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Portal\AttendanceSyncTest >…  RouteNotFoundException   
+  Route [payroll.processing] not defined.
+
+  at vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php:526
+    522▕             ! is_null($url = call_user_func($this->missingNamedRouteResolver, $name, $parameters, $absolute))) {
+    523▕             return $url;
+    524▕         }
+    525▕ 
+  ➜ 526▕         throw new RouteNotFoundException("Route [{$name}] not defined.");
+    527▕     }
+    528▕ 
+    529▕     /**
+    530▕      * Get the URL for a given route instance.
+
+      [2m+2 vendor frames [22m
+  3   tests/Feature/Attendance/AttendanceSyncTest.php:239
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\Portal\AttendanceSyncTest > employee can clock in a…   
@@ -681,7 +1128,7 @@ Stack trace:
 #82 /home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest(192): {closure:/home/gg/dev/hrm-laravel-base/vendor/pestphp/pest/bin/pest:18}()
 #83 {main}
 
-Next Illuminate\Database\UniqueConstraintViolationException: SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: attendance_records.employee_id, attendance_records.record_date (Connection: sqlite, SQL: insert into "attendance_records" ("employee_id", "record_date", "organization_id", "punch_in", "punch_out", "status", "total_hours", "late_minutes", "overtime_minutes", "updated_at", "created_at") values (3, 2025-11-19 00:00:00, 1, 2025-11-19 06:44:35, ?, present, 0, 0, 0, 2025-11-19 06:44:35, 2025-11-19 06:44:35)) in /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Connection.php:819
+Next Illuminate\Database\UniqueConstraintViolationException: SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: attendance_records.employee_id, attendance_records.record_date (Connection: sqlite, SQL: insert into "attendance_records" ("employee_id", "record_date", "organization_id", "punch_in", "punch_out", "status", "total_hours", "late_minutes", "overtime_minutes", "updated_at", "created_at") values (3, 2025-11-21 00:00:00, 1, 2025-11-21 07:30:18, ?, present, 0, 0, 0, 2025-11-21 07:30:18, 2025-11-21 07:30:18)) in /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Connection.php:819
 Stack trace:
 #0 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Connection.php(778): Illuminate\Database\Connection->runQueryCallback()
 #1 /home/gg/dev/hrm-laravel-base/vendor/laravel/framework/src/Illuminate/Database/Connection.php(559): Illuminate\Database\Connection->run()
@@ -768,7 +1215,7 @@ Stack trace:
 
 ----------------------------------------------------------------------------------
 
-SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: attendance_records.employee_id, attendance_records.record_date (Connection: sqlite, SQL: insert into "attendance_records" ("employee_id", "record_date", "organization_id", "punch_in", "punch_out", "status", "total_hours", "late_minutes", "overtime_minutes", "updated_at", "created_at") values (3, 2025-11-19 00:00:00, 1, 2025-11-19 06:44:35, ?, present, 0, 0, 0, 2025-11-19 06:44:35, 2025-11-19 06:44:35))
+SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: attendance_records.employee_id, attendance_records.record_date (Connection: sqlite, SQL: insert into "attendance_records" ("employee_id", "record_date", "organization_id", "punch_in", "punch_out", "status", "total_hours", "late_minutes", "overtime_minutes", "updated_at", "created_at") values (3, 2025-11-21 00:00:00, 1, 2025-11-21 07:30:18, ?, present, 0, 0, 0, 2025-11-21 07:30:18, 2025-11-21 07:30:18))
 
   at tests/Feature/Attendance/AttendanceSyncTest.php:278
     274▕         //     'cp'
@@ -834,7 +1281,7 @@ Failed asserting that 302 is identical to 200.
   Expected: <!DOCTYPE html>\n
   <html lang="en">\n
   \n
-  ... (557 more lines)
+  ... (556 more lines)
 
   To contain: Add Store
 
@@ -850,42 +1297,152 @@ Failed asserting that 302 is identical to 200.
     194▕
 
   ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\Portal\EmployeeManagementTest > employee creation r…   
+   FAILED  Tests\Feature\Feature\Accounting\BankAccountTest > user can creat…   
   Failed asserting that two strings are equal.
-  -'http://localhost:8000/login'
-  +'http://localhost:8000/hr/employees'
-  
-
-  at tests/Feature/HR/EmployeeManagementTest.php:168
-    164▕         ];
-    165▕ 
-    166▕         $response = $this->post(route('hr.employees.store'), $employeeData);
-    167▕ 
-  ➜ 168▕         $response->assertRedirect('/login');
-    169▕     }
-    170▕ 
-    171▕     #[Test]
-    172▕     public function test_non_hr_users_cannot_create_employees()
-
-  ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\Portal\EmployeeManagementTest > non hr users cannot…   
-  Expected response status code [403] but received 302.
-Failed asserting that 302 is identical to 403.
 
 The following errors occurred during the last request:
 
-The roles field is required.
+The chart of account id field is required.
+The account number field is required.
+The account name field is required.
+The bank name field is required.
 
-  at tests/Feature/HR/EmployeeManagementTest.php:185
-    181▕         ];
-    182▕ 
-    183▕         $response = $this->post(route('hr.employees.store'), $employeeData);
-    184▕ 
-  ➜ 185▕         $response->assertStatus(403);
-    186▕     }
-    187▕ 
-    188▕     #[Test]
-    189▕     public function test_can_search_employees()
+  -'http://localhost/accounts/bank-accounts'
+  +'http://localhost'
+  
+
+  at tests/Feature/Feature/Accounting/BankAccountTest.php:50
+     46▕             'opening_balance' => 1000.00,
+     47▕             'status' => 'active',
+     48▕         ]);
+     49▕ 
+  ➜  50▕     $response->assertRedirect(route('accounting.bank-accounts.index'));
+     51▕ 
+     52▕     $this->assertDatabaseHas('bank_accounts', [
+     53▕         'organization_id' => $organization->id,
+     54▕         'account_number' => '123456789',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Feature\Accounting\BankAccountTest…   QueryException   
+  SQLSTATE[23000]: Integrity constraint violation: 19 FOREIGN KEY constraint failed (Connection: sqlite, SQL: insert into "chart_of_accounts" ("code", "name", "type", "description", "organization_id", "updated_at", "created_at") values (9346, molestiae, liability, Consectetur ipsa et officia minus et., 1, 2025-11-21 07:30:19, 2025-11-21 07:30:19))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:570
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+    569▕ 
+  ➜ 570▕             return $statement->execute();
+    571▕         });
+    572▕     }
+    573▕ 
+    574▕     /**
+
+      [2m+15 vendor frames [22m
+  16  tests/Feature/Feature/Accounting/BankAccountTest.php:72
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Feature\Accounting\BankAccountTest > bank ac…  Error   
+  Call to a member function numerify() on null
+
+  at database/factories/Accounting/BankTransactionFactory.php:28
+     24▕             'organization_id' => Organization::factory(),
+     25▕             'bank_account_id' => BankAccount::factory(),
+     26▕             'bank_statement_id' => BankStatement::factory(),
+     27▕             'transaction_date' => $this->faker->dateTimeBetween('-6 months', 'now'),
+  ➜  28▕             'transaction_number' => $this->faker->optional()->unique()->numerify('TXN########'),
+     29▕             'reference_number' => $this->faker->optional()->numerify('REF########'),
+     30▕             'description' => $this->faker->sentence(6),
+     31▕             'transaction_type' => $transactionType,
+     32▕             'amount' => $amount,
+
+  1   database/factories/Accounting/BankTransactionFactory.php:28
+      [2m+8 vendor frames [22m
+  10  tests/Feature/Feature/Accounting/BankAccountTest.php:82
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Feature\Accounting\FixedAssetTest > user can regist…   
+  Expected response status code [200] but received 500.
+Failed asserting that 500 is identical to 200.
+
+  at tests/Feature/Feature/Accounting/FixedAssetTest.php:58
+     54▕ 
+     55▕     $response = $this->actingAs($user)
+     56▕         ->post(route('accounting.fixed-assets.store'), $assetData);
+     57▕ 
+  ➜  58▕     $response->assertStatus(200);
+     59▕     $response->assertJson([
+     60▕         'success' => true,
+     61▕         'message' => 'Asset registered successfully.',
+     62▕     ]);
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Feature\Accounting\FixedAssetTest > fixed asset cal…   
+  Failed asserting that 1800.0 is identical to 2400.
+
+  at tests/Feature/Feature/Accounting/FixedAssetTest.php:112
+    108▕     // Sum of years: 1+2+3+4+5 = 15
+    109▕     // Second year: 4/15 * (10000-1000) = 2400
+    110▕     $expectedDepreciation = 2400;
+    111▕ 
+  ➜ 112▕     expect($asset->calculateSumOfYearsDepreciation())->toBe($expectedDepreciation);
+    113▕ });
+    114▕ 
+    115▕ test('can post depreciation for asset', function () {
+    116▕     $user = User::factory()->create();
+
+  1   tests/Feature/Feature/Accounting/FixedAssetTest.php:112
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Feature\Accounting\FixedAssetTe…  ArgumentCountError   
+  Too few arguments to function App\Services\FixedAssetService::createDepreciationJournalEntry(), 3 passed in /home/gg/dev/hrm-laravel-base/app/Services/FixedAssetService.php on line 92 and exactly 4 expected
+
+  at app/Services/FixedAssetService.php:253
+    249▕             'created_by' => $createdBy,
+    250▕         ]);
+    251▕     }
+    252▕ 
+  ➜ 253▕     private function createDepreciationJournalEntry(FixedAsset $asset, float $amount, \DateTime $date, int $createdBy): JournalEntry
+    254▕     {
+    255▕         $description = "Depreciation for {$asset->name} ({$asset->asset_tag}) - {$date->format('F Y')}";
+    256▕ 
+    257▕         $entries = [
+
+  1   app/Services/FixedAssetService.php:253
+  2   app/Services/FixedAssetService.php:92
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Feature\Accounting\FixedAssetTest > can dispose ass…   
+  Failed asserting that '1000.00' is identical to 1000.
+
+  at tests/Feature/Feature/Accounting/FixedAssetTest.php:165
+    161▕ 
+    162▕     $fixedAssetService = app(FixedAssetService::class);
+    163▕     $disposal = $fixedAssetService->disposeAsset($asset, $disposalData);
+    164▕ 
+  ➜ 165▕     expect($disposal->gain_loss)->toBe(1000); // 8000 - 7000 = 1000 gain
+    166▕ 
+    167▕     $asset->refresh();
+    168▕     expect($asset->status)->toBe('disposed');
+    169▕ });
+
+  1   tests/Feature/Feature/Accounting/FixedAssetTest.php:165
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Feature\Accounting\FixedAssetTest > can record asse…   
+  Failed asserting that '150.00' is identical to 150.0.
+
+  at tests/Feature/Feature/Accounting/FixedAssetTest.php:226
+    222▕     $fixedAssetService = app(FixedAssetService::class);
+    223▕     $maintenance = $fixedAssetService->recordMaintenance($asset, $maintenanceData);
+    224▕ 
+    225▕     expect($maintenance)->toBeInstanceOf(\App\Models\Accounting\AssetMaintenance::class);
+  ➜ 226▕     expect($maintenance->cost)->toBe(150.00);
+    227▕     expect($maintenance->maintenance_type)->toBe('repair');
+    228▕ });
+    229▕ 
+    230▕ test('asset knows when it is fully depreciated', function () {
+
+  1   tests/Feature/Feature/Accounting/FixedAssetTest.php:226
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\HR\EmployeePositionShiftIntegrationTest > it assign…   
@@ -999,7 +1556,7 @@ Found similar results: [
   Expected: <!-- resources/views/hrm/dashboard.blade.php -->\n
   <!DOCTYPE html>\n
   <html lang="en">\n
-  ... (434 more lines)
+  ... (433 more lines)
 
   To contain: Attendance Overview
 
@@ -1073,8 +1630,156 @@ Found: [
      54▕         ]);
 
   ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Livewire\Accounting\Vouchers\CreateTest > voucher c…   
+  Failed asserting that Failed asserting that '<div wire:snapshot="{&quot;data&quot;:{&quot;date&quot;:&quot;2025-11-21&quot;,&quot;type&quot;:&quot;&quot;,&quot;amount&quot;:&quot;&quot;,&quot;description&quot;:&quot;&quot;,&quot;notes&quot;:&quot;&quot;},&quot;memo&quot;:{&quot;id&quot;:&quot;atQXvjRL2tPQ9Mo22E4s&quot;,&quot;name&quot;:&quot;accounting.vouchers.create&quot;,&quot;path&quot;:&quot;livewire-unit-test-endpoint\/Kja4eWSjQzv59pKhayl1&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;7f3a8b7e0b9b3c188625c164f481fdde0524daec6e73b998e057dab90d6275dc&quot;}" wire:effects="[]" wire:id="atQXvjRL2tPQ9Mo22E4s">
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <div class="md:grid md:grid-cols-3 md:gap-6">
+            <div class="md:col-span-1">
+                <div class="px-4 sm:px-0">
+                    <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+                        Create Voucher
+                    </h3>
+                    <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                        Create a new voucher for your organization.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-5 md:col-span-2 md:mt-0">
+                <form wire:submit="createVoucher">
+                    <div class="shadow sm:rounded-md sm:overflow-hidden">
+                        <div class="bg-white dark:bg-gray-800 px-4 py-5 sm:p-6">
+                            <div class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
+                                <!-- Voucher Type -->
+                                <div class="sm:col-span-3">
+                                    <label for="type" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Voucher Type</label>
+                                    <select
+                                        wire:model.live="type"
+                                        id="type"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                    >
+                                        <option value="">Select a type...</option>
+                                        <!--[if BLOCK]><![endif]-->                                            <option value="sales">Sales</option>
+                                                                                    <option value="sales_return">Sales Return</option>
+                                                                                    <option value="purchase">Purchase</option>
+                                                                                    <option value="purchase_return">Purchase Return</option>
+                                                                                    <option value="salary">Salary</option>
+                                                                                    <option value="expense">Expense</option>
+                                                                                    <option value="fixed_asset">Fixed Asset</option>
+                                                                                    <option value="depreciation">Depreciation</option>
+                                        <!--[if ENDBLOCK]><![endif]-->
+                                    </select>
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                                </div>
+
+                                <!-- Date -->
+                                <div class="sm:col-span-3">
+                                    <label for="date" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Date</label>
+                                    <input
+                                        wire:model="date"
+                                        type="date"
+                                        id="date"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                    />
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                                </div>
+
+                                <!-- Amount -->
+                                <div class="sm:col-span-3">
+                                    <label for="amount" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Amount</label>
+                                    <input
+                                        wire:model="amount"
+                                        type="number"
+                                        step="0.01"
+                                        min="0.01"
+                                        id="amount"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                    />
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                                </div>
+
+                                <!-- Description -->
+                                <div class="sm:col-span-6">
+                                    <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
+                                    <textarea
+                                        wire:model="description"
+                                        id="description"
+                                        rows="3"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                    ></textarea>
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                                </div>
+
+                                <!-- Notes -->
+                                <div class="sm:col-span-6">
+                                    <label for="notes" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Notes</label>
+                                    <textarea
+                                        wire:model="notes"
+                                        id="notes"
+                                        rows="3"
+                                        placeholder="Optional notes..."
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                    ></textarea>
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 dark:bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                            <button
+                                type="submit"
+                                class="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                                wire:loading.attr="disabled"
+                                wire:target="createVoucher"
+                            >
+                                <span wire:loading.remove>
+                                    Create Voucher
+                                </span>
+                                <span wire:loading class="flex items-center">
+                                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12c0 5.514 4.486 10 10 10s10-4.486 10-10S17.514 2 12 20.709a8.008 8.008 0 01-8.709 8z"></path>
+                                    </svg>
+                                    Creating...
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Listeners -->
+    <script>
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('show-message', (event) => {
+                // You can implement a toast notification system here
+                const { message, type } = event.detail;
+                
+                // Simple alert for now - replace with your notification system
+                alert(`${type.toUpperCase()}: ${message}`);
+            });
+        });
+    </script>
+</div>' contains "adipisci" in specified order..
+
+  at vendor/livewire/livewire/src/Features/SupportTesting/Testable.php:398
+    394▕         if (static::hasMacro($method)) {
+    395▕             return $this->macroCall($method, $params);
+    396▕         }
+    397▕ 
+  ➜ 398▕         $this->lastState->getResponse()->{$method}(...$params);
+    399▕ 
+    400▕         return $this;
+    401▕     }
+    402▕ }
+
+  1   tests/Feature/Livewire/Accounting/Vouchers/CreateTest.php:62
+
+  ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\Livewire\Organization\OrganizationListTest > it sho…   
-  Expected: <div wire:snapshot="" wire:effects="" wire:id="2wq9obiePuBKlt5V8FrV">\n
+  Expected: <div wire:snapshot="" wire:effects="" wire:id="QZJ2GJ1FparB5ADZ6gO2">\n
       <!-- Header with Search and Actions -->\n
       <div class="flex flex-col sm:flex-row justify-between items-center mb-6 space-y-4 sm:space-y-0">\n
   ... (103 more lines)
@@ -1159,6 +1864,455 @@ Found similar results: [
      67▕             'organization_id' => $organization->id,
      68▕             'organization_unit_id' => null
      69▕         ]);
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\CustomerTest > customer can…   QueryException   
+  SQLSTATE[HY000]: General error: 1 table customers has no column named city (Connection: sqlite, SQL: insert into "customers" ("organization_id", "name", "email", "phone", "address", "tax_number", "customer_type", "credit_limit", "status", "city", "state", "postal_code", "country", "opening_balance", "current_balance", "is_active", "updated_at", "created_at") values (1, Test Customer, test@example.com, +1234567890, 123 Test St, TX-123456, BUSINESS, 10000, ACTIVE, Test City, TS, 12345, US, 5000, 2500, 1, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/CustomerTest.php:14
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\CustomerTest > custo…  BadMethodCallException   
+  Call to undefined method App\Models\Customer::trashed()
+
+  at vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:67
+     63▕      * @throws \BadMethodCallException
+     64▕      */
+     65▕     protected static function throwBadMethodCallException($method)
+     66▕     {
+  ➜  67▕         throw new BadMethodCallException(sprintf(
+     68▕             'Call to undefined method %s::%s()', static::class, $method
+     69▕         ));
+     70▕     }
+     71▕ }
+
+      [2m+3 vendor frames [22m
+  4   tests/Feature/Models/CustomerTest.php:55
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\CustomerTest > customer cast…  QueryException   
+  SQLSTATE[HY000]: General error: 1 table customers has no column named opening_balance (Connection: sqlite, SQL: insert into "customers" ("organization_id", "name", "email", "phone", "address", "tax_number", "customer_type", "credit_limit", "status", "opening_balance", "current_balance", "updated_at", "created_at") values (1, Padberg, Harber and Emmerich, rempel.viola@example.com, +16784517787, 996 Roob Lights Apt. 889, TX-48667545, BUSINESS, 10000.5, ACTIVE, 5000.75, 2500.25, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/CustomerTest.php:61
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\CustomerTest > customer scop…  QueryException   
+  SQLSTATE[HY000]: General error: 1 table customers has no column named is_active (Connection: sqlite, SQL: insert into "customers" ("organization_id", "name", "email", "phone", "address", "tax_number", "customer_type", "credit_limit", "status", "is_active", "updated_at", "created_at") values (1, Stamm LLC, gnikolaus@example.org, +12523629880, 17960 Nikita Valley Apt. 166, TX-03032687, INDIVIDUAL, 14845.449239274, ACTIVE, 1, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/CustomerTest.php:79
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\CustomerTest > customer scop…  QueryException   
+  SQLSTATE[HY000]: General error: 1 table customers has no column named current_balance (Connection: sqlite, SQL: insert into "customers" ("organization_id", "name", "email", "phone", "address", "tax_number", "customer_type", "credit_limit", "status", "current_balance", "updated_at", "created_at") values (1, Hintz-Murazik, duncan.boehm@example.net, +1 (860) 713-9700, 91696 Edwina Views, TX-26421989, INDIVIDUAL, 18878.117029185, ACTIVE, 5000, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/CustomerTest.php:98
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\CustomerTest > customer full…  QueryException   
+  SQLSTATE[HY000]: General error: 1 table customers has no column named city (Connection: sqlite, SQL: insert into "customers" ("organization_id", "name", "email", "phone", "address", "tax_number", "customer_type", "credit_limit", "status", "city", "state", "postal_code", "country", "updated_at", "created_at") values (1, Walker PLC, ahoeger@example.net, +1 (804) 814-4878, 123 Main St, TX-52054146, INDIVIDUAL, 13495.291941554, ACTIVE, Test City, TX, 12345, US, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/CustomerTest.php:115
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\CustomerTest > customer disp…  QueryException   
+  SQLSTATE[HY000]: General error: 1 table customers has no column named current_balance (Connection: sqlite, SQL: insert into "customers" ("organization_id", "name", "email", "phone", "address", "tax_number", "customer_type", "credit_limit", "status", "current_balance", "updated_at", "created_at") values (1, Test Customer, lang.jacques@example.net, 321-336-6713, 97575 Denesik Meadows, TX-04399169, BUSINESS, 30785.966976395, ACTIVE, 2500, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/CustomerTest.php:129
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\FinancialManagementTest > cu…  QueryException   
+  SQLSTATE[HY000]: General error: 1 table customers has no column named opening_balance (Connection: sqlite, SQL: insert into "customers" ("organization_id", "name", "email", "phone", "address", "tax_number", "customer_type", "credit_limit", "status", "opening_balance", "current_balance", "updated_at", "created_at") values (1, Kris Ltd, filiberto.bartell@example.com, +1.551.415.3338, 7881 Eileen Mills, TX-25719016, BUSINESS, 10000, ACTIVE, 5000, 2500, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/FinancialManagementTest.php:16
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\FinancialManagementT…  BadMethodCallException   
+  Call to undefined method App\Models\Customer::trashed()
+
+  at vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:67
+     63▕      * @throws \BadMethodCallException
+     64▕      */
+     65▕     protected static function throwBadMethodCallException($method)
+     66▕     {
+  ➜  67▕         throw new BadMethodCallException(sprintf(
+     68▕             'Call to undefined method %s::%s()', static::class, $method
+     69▕         ));
+     70▕     }
+     71▕ }
+
+      [2m+3 vendor frames [22m
+  4   tests/Feature/Models/FinancialManagementTest.php:42
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\FinancialManagementTest > cu…  QueryException   
+  SQLSTATE[HY000]: General error: 1 table customers has no column named is_active (Connection: sqlite, SQL: insert into "customers" ("organization_id", "name", "email", "phone", "address", "tax_number", "customer_type", "credit_limit", "status", "is_active", "updated_at", "created_at") values (1, Deckow, Bradtke and Halvorson, ymarks@example.net, +12706793433, 617 Gianni Crescent, TX-68924445, INDIVIDUAL, 969.53707008508, ACTIVE, 1, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/FinancialManagementTest.php:49
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\FinancialManagementTest > cu…  QueryException   
+  SQLSTATE[HY000]: General error: 1 table customers has no column named city (Connection: sqlite, SQL: insert into "customers" ("organization_id", "name", "email", "phone", "address", "tax_number", "customer_type", "credit_limit", "status", "city", "state", "postal_code", "country", "updated_at", "created_at") values (1, Braun, Bailey and Orn, baumbach.jules@example.net, 940-228-6198, 123 Main St, TX-20838246, BUSINESS, 28667.41116503, ACTIVE, Test City, TX, 12345, US, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/FinancialManagementTest.php:66
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\FinancialManagementTest > in…  QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: invoices (Connection: sqlite, SQL: insert into "invoices" ("organization_id", "customer_id", "vendor_id", "invoice_number", "invoice_date", "due_date", "total_amount", "tax_amount", "status", "notes", "created_by", "updated_at", "created_at") values (1, 1, 1, INV-4408, 2005-06-27 00:00:00, 2026-02-09 10:44:13, 5000, 400, draft, Illo vitae corrupti ipsa dolorum possimus voluptas optio., 1, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/FinancialManagementTest.php:85
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\FinancialManagementTest > in…  QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: invoices (Connection: sqlite, SQL: insert into "invoices" ("organization_id", "customer_id", "vendor_id", "invoice_number", "invoice_date", "due_date", "total_amount", "tax_amount", "status", "notes", "created_by", "updated_at", "created_at") values (1, 1, 1, INV-7913, 2021-02-06 00:00:00, 2025-12-28 21:18:16, 534485517.99208, 18706503, draft, Est reiciendis cum cum rerum magnam quis eveniet et., 1, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/FinancialManagementTest.php:105
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\FinancialManagementTest > in…  QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: invoices (Connection: sqlite, SQL: insert into "invoices" ("organization_id", "customer_id", "vendor_id", "invoice_number", "invoice_date", "due_date", "total_amount", "tax_amount", "status", "notes", "created_by", "updated_at", "created_at") values (1, 1, 1, INV-6110, 1974-07-27 00:00:00, 2025-12-25 12:50:10, 5000, 378247, sent, ?, 1, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/FinancialManagementTest.php:129
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\FinancialManagementTest > in…  QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: invoices (Connection: sqlite, SQL: insert into "invoices" ("organization_id", "customer_id", "vendor_id", "invoice_number", "invoice_date", "due_date", "total_amount", "tax_amount", "status", "notes", "created_by", "updated_at", "created_at") values (1, 1, 1, INV-1557, 1996-04-13 00:00:00, 2025-12-21 07:30:26, 5000, 2000, paid, Delectus quo dolorem dolor dolores provident., 1, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/FinancialManagementTest.php:147
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\FinancialManagementTest > pa…  QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: invoices (Connection: sqlite, SQL: insert into "invoices" ("organization_id", "customer_id", "vendor_id", "invoice_number", "invoice_date", "due_date", "total_amount", "tax_amount", "status", "notes", "created_by", "updated_at", "created_at") values (1, 2, 1, INV-3319, 1999-10-08 00:00:00, 2026-02-14 12:22:58, 5022375.0263891, 2000, sent, ?, 1, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/FinancialManagementTest.php:168
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\FinancialManagementTest > payment sta…  Error   
+  Class "App\Models\Payment" not found
+
+  at tests/Feature/Models/FinancialManagementTest.php:192
+    188▕ 
+    189▕ test('payment status scopes work correctly', function () {
+    190▕     $organization = Organization::factory()->create();
+    191▕     
+  ➜ 192▕     $receivedPayment = Payment::factory()->create([
+    193▕         'organization_id' => $organization->id,
+    194▕         'status' => 'received',
+    195▕     ]);
+    196▕
+
+  1   tests/Feature/Models/FinancialManagementTest.php:192
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\FinancialManagementTest > pa…  QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: invoices (Connection: sqlite, SQL: insert into "invoices" ("organization_id", "customer_id", "vendor_id", "invoice_number", "invoice_date", "due_date", "total_amount", "tax_amount", "status", "notes", "created_by", "updated_at", "created_at") values (1, 1, 1, INV-8197, 1999-12-31 00:00:00, 2026-02-17 22:38:54, 5000, 54375, draft, Facere aut assumenda sit qui aut., 1, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/FinancialManagementTest.php:210
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\InvoiceTest > invoice can be…  QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: invoices (Connection: sqlite, SQL: insert into "invoices" ("organization_id", "customer_id", "vendor_id", "invoice_number", "invoice_date", "due_date", "total_amount", "tax_amount", "status", "notes", "created_by", "updated_at", "created_at") values (1, 1, 1, INV-2025-0001, 2025-11-21 00:00:00, 2025-12-21 00:00:00, 5000, 400, draft, Aut minus eaque error laborum doloremque excepturi fugiat., 1, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/InvoiceTest.php:17
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\InvoiceTest > invoice belong…  QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: invoices (Connection: sqlite, SQL: insert into "invoices" ("organization_id", "customer_id", "vendor_id", "invoice_number", "invoice_date", "due_date", "total_amount", "tax_amount", "status", "notes", "created_by", "updated_at", "created_at") values (1, 1, 1, INV-2846, 2010-11-27 00:00:00, 2026-02-10 17:52:00, 63749.451521812, 1021172, draft, Dolorem laborum quia voluptatem qui ut., 1, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/InvoiceTest.php:43
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\InvoiceTest > invoice belong…  QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: invoices (Connection: sqlite, SQL: insert into "invoices" ("organization_id", "customer_id", "vendor_id", "invoice_number", "invoice_date", "due_date", "total_amount", "tax_amount", "status", "notes", "created_by", "updated_at", "created_at") values (1, 1, 1, INV-9099, 1986-01-10 00:00:00, 2026-02-11 03:04:19, 10000, 4673599, draft, ?, 1, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/InvoiceTest.php:55
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\InvoiceTest > invoice uses s…  QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: invoices (Connection: sqlite, SQL: insert into "invoices" ("organization_id", "customer_id", "vendor_id", "invoice_number", "invoice_date", "due_date", "total_amount", "tax_amount", "status", "notes", "created_by", "updated_at", "created_at") values (1, 1, 1, INV-5832, 2024-04-11 00:00:00, 2026-01-07 05:26:49, 10051.066386004, 1280471, draft, Cumque dicta ut voluptatum nam., 1, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+15 vendor frames [22m
+  16  tests/Feature/Models/InvoiceTest.php:65
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\InvoiceTest > invoice casts…   QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: invoices (Connection: sqlite, SQL: insert into "invoices" ("organization_id", "customer_id", "vendor_id", "invoice_number", "invoice_date", "due_date", "total_amount", "tax_amount", "status", "notes", "created_by", "updated_at", "created_at") values (1, 1, 1, INV-9365, 2002-11-14 00:00:00, 2026-02-03 03:56:22, 5000.5, 400.25, paid, Aut nobis libero cupiditate itaque., 1, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/InvoiceTest.php:75
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\InvoiceTest > invoice casts…   QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: invoices (Connection: sqlite, SQL: insert into "invoices" ("organization_id", "customer_id", "vendor_id", "invoice_number", "invoice_date", "due_date", "total_amount", "tax_amount", "status", "notes", "created_by", "updated_at", "created_at") values (1, 1, 1, INV-5539, 2025-11-21 07:30:26, 2025-12-21 07:30:26, 10000, 23057, draft, ?, 1, 2025-11-21 07:30:26, 2025-11-21 07:30:26))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/InvoiceTest.php:90
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Models\InvoiceTest > invoice status…  QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: invoices (Connection: sqlite, SQL: insert into "invoices" ("organization_id", "customer_id", "vendor_id", "invoice_number", "invoice_date", "due_date", "total_amount", "tax_amount", "status", "notes", "created_by", "updated_at", "created_at") values (1, 1, 1, INV-3169, 1981-02-16 00:00:00, 2025-12-13 22:51:38, 82325.871285222, 2000, draft, Pariatur cum quae impedit quasi voluptatem ducimus., 1, 2025-11-21 07:30:27, 2025-11-21 07:30:27))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:564
+    560▕             if ($this->pretending()) {
+    561▕                 return true;
+    562▕             }
+    563▕ 
+  ➜ 564▕             $statement = $this->getPdo()->prepare($query);
+    565▕ 
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/Models/InvoiceTest.php:104
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\Organization\OrganizationDashboardTest > authentica…   
@@ -1734,6 +2888,335 @@ Failed asserting that 200 is identical to 403.
   1   tests/Feature/OrganizationUserIntegrationTest.php:137
 
   ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OutstandingStatementsTest > can generate payables a…   
+  Failed asserting that actual size 0 matches expected size 1.
+
+  at tests/Feature/OutstandingStatementsTest.php:64
+     60▕ 
+     61▕     $aging = app(OutstandingStatementsService::class)->generatePayablesAging();
+     62▕     $summary = app(OutstandingStatementsService::class)->getPayablesAgingSummary();
+     63▕ 
+  ➜  64▕     expect($aging)->toHaveCount(1);
+     65▕     expect($aging->first()['aging_bucket'])->toBe('Current');
+     66▕     expect($summary['Total'])->toBe(2000.0);
+     67▕ });
+     68▕
+
+  1   tests/Feature/OutstandingStatementsTest.php:64
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OutstandingStatementsTest > can generate comprehens…   
+  Failed asserting that 3500.0 is identical to 5000.
+
+  at tests/Feature/OutstandingStatementsTest.php:175
+    171▕     $statement = app(OutstandingStatementsService::class)->generateReceivablesStatement();
+    172▕ 
+    173▕     expect($statement['type'])->toBe('receivables');
+    174▕     expect($statement['summary']['total_customers'])->toBe(1);
+  ➜ 175▕     expect($statement['summary']['total_outstanding'])->toBe(5000);
+    176▕     expect($statement['summary']['aging']['current'])->toBe(3000); // 1000 + 2000
+    177▕     expect($statement['summary']['aging']['30_days'])->toBe(1500); // 45 days = 30 days bucket
+    178▕     expect($statement['summary']['aging']['60_days'])->toBe(0); // No entries in 60 days bucket
+    179▕     expect($statement['summary']['aging']['90_days'])->toBe(500);
+
+  1   tests/Feature/OutstandingStatementsTest.php:175
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OutstandingStatementsTest > can generate comprehens…   
+  Failed asserting that 1500.0 is identical to 4500.
+
+  at tests/Feature/OutstandingStatementsTest.php:227
+    223▕     $statement = app(OutstandingStatementsService::class)->generatePayablesStatement();
+    224▕ 
+    225▕     expect($statement['type'])->toBe('payables');
+    226▕     expect($statement['summary']['total_vendors'])->toBe(1);
+  ➜ 227▕     expect($statement['summary']['total_outstanding'])->toBe(4500);
+    228▕     expect($statement['summary']['aging']['current'])->toBe(1000);
+    229▕     expect($statement['summary']['aging']['30_days'])->toBe(2000);
+    230▕     expect($statement['summary']['aging']['60_days'])->toBe(1500);
+    231▕ });
+
+  1   tests/Feature/OutstandingStatementsTest.php:227
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OutstandingStatementsTest > can filter receivables…    
+  Failed asserting that 0 is identical to 1.
+
+  at tests/Feature/OutstandingStatementsTest.php:267
+    263▕     $statement = app(OutstandingStatementsService::class)->generateReceivablesStatement(
+    264▕         customerId: $customer1->id
+    265▕     );
+    266▕ 
+  ➜ 267▕     expect($statement['summary']['total_customers'])->toBe(1);
+    268▕     expect($statement['summary']['total_outstanding'])->toBe(1000);
+    269▕     expect($statement['customer_statements']->first()['customer']['id'])->toBe($customer1->id);
+    270▕ });
+    271▕
+
+  1   tests/Feature/OutstandingStatementsTest.php:267
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OutstandingStatementsTest > can filter payables sta…   
+  Failed asserting that 0 is identical to 1.
+
+  at tests/Feature/OutstandingStatementsTest.php:306
+    302▕     $statement = app(OutstandingStatementsService::class)->generatePayablesStatement(
+    303▕         vendorId: $vendor1->id
+    304▕     );
+    305▕ 
+  ➜ 306▕     expect($statement['summary']['total_vendors'])->toBe(1);
+    307▕     expect($statement['summary']['total_outstanding'])->toBe(1000);
+    308▕     expect($statement['vendor_statements']->first()['vendor']['id'])->toBe($vendor1->id);
+    309▕ });
+    310▕
+
+  1   tests/Feature/OutstandingStatementsTest.php:306
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OutstandingStatementsTest > can filter statements b…   
+  Failed asserting that 0 is identical to 1000.
+
+  at tests/Feature/OutstandingStatementsTest.php:349
+    345▕         startDate: $startDate,
+    346▕         endDate: $endDate
+    347▕     );
+    348▕ 
+  ➜ 349▕     expect($statement['summary']['total_outstanding'])->toBe(1000);
+    350▕ });
+    351▕ 
+    352▕ test('can export statement data', function () {
+    353▕     $setup = $this->createOrganizationWithUser();
+
+  1   tests/Feature/OutstandingStatementsTest.php:349
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OutstandingStatementsTest > can export statement da…   
+  Failed asserting that actual size 0 matches expected size 1.
+
+  at tests/Feature/OutstandingStatementsTest.php:376
+    372▕ 
+    373▕     expect($exportData)->toHaveKey('title');
+    374▕     expect($exportData['title'])->toBe('Accounts Receivable Outstanding Statement');
+    375▕     expect($exportData)->toHaveKey('customers');
+  ➜ 376▕     expect($exportData['customers'])->toHaveCount(1);
+    377▕     expect($exportData['customers']->first()['customer_name'])->toBe($customer->name);
+    378▕ });
+    379▕ 
+    380▕ test('can get aging summary for dashboard', function () {
+
+  1   tests/Feature/OutstandingStatementsTest.php:376
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OutstandingStatementsTest > can get aging summary f…   
+  Failed asserting that 0 is identical to 1000.
+
+  at tests/Feature/OutstandingStatementsTest.php:411
+    407▕     $summary = app(OutstandingStatementsService::class)->getAgingSummary();
+    408▕ 
+    409▕     expect($summary)->toHaveKey('receivables');
+    410▕     expect($summary)->toHaveKey('payables');
+  ➜ 411▕     expect($summary['receivables']['total'])->toBe(1000);
+    412▕     expect($summary['payables']['total'])->toBe(1500);
+    413▕ });
+    414▕ 
+    415▕ test('respects organization isolation', function () {
+
+  1   tests/Feature/OutstandingStatementsTest.php:411
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PdfGenerationTest > payslip download sho…  TypeError   
+  Cannot assign null to property Tests\Feature\PdfGenerationTest::$user of type App\Models\User
+
+  at tests/Feature/PdfGenerationTest.php:35
+     31▕     public function payslip_download_should_fail_initially(): void
+     32▕     {
+     33▕         // Create test payroll entry
+     34▕         $employee = \App\Models\Employee::factory()->create();
+  ➜  35▕         $this->user = $employee->user;
+     36▕ 
+     37▕         $payslip = PayrollEntry::factory()->create([
+     38▕             'employee_id' => $employee->id,
+     39▕             'organization_id' => $this->organization->id,
+
+  1   tests/Feature/PdfGenerationTest.php:35
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PdfGenerationTest > payslip downloa…  ErrorException   
+  Attempt to read property "id" on null
+
+  at tests/Feature/PdfGenerationTest.php:60
+     56▕     {
+     57▕         // Create test payroll entry with user relationship loaded
+     58▕         $payslip = PayrollEntry::factory()->create([
+     59▕             'employee_id' => $this->user->id,
+  ➜  60▕             'organization_id' => $this->organization->id,
+     61▕             'period' => '2024-01',
+     62▕             'net_pay' => 1500.00,
+     63▕         ]);
+     64▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PdfGenerationTest > payslip pdf sho…  ErrorException   
+  Attempt to read property "id" on null
+
+  at tests/Feature/PdfGenerationTest.php:85
+     81▕     public function payslip_pdf_should_have_correct_filename(): void
+     82▕     {
+     83▕         $payslip = PayrollEntry::factory()->create([
+     84▕             'employee_id' => $this->user->id,
+  ➜  85▕             'organization_id' => $this->organization->id,
+     86▕             'period' => '2024-01',
+     87▕             'net_pay' => 1500.00,
+     88▕         ]);
+     89▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PdfGenerationTest > trial balance download should r…   
+  Expected response status code [>=200, <300] but received 302.
+Failed asserting that false is true.
+
+  at tests/Feature/PdfGenerationTest.php:109
+    105▕     public function trial_balance_download_should_return_pdf_response(): void
+    106▕     {
+    107▕         $response = $this->get(route('accounting.download.trial-balance'));
+    108▕ 
+  ➜ 109▕         $response->assertSuccessful();
+    110▕         $response->assertHeader('Content-Type', 'application/pdf');
+    111▕         $response->assertHeader('Content-Disposition');
+    112▕     }
+    113▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PdfGenerationTest > trial balance pdf sh…  TypeError   
+  PHPUnit\Framework\Assert::assertStringContainsString(): Argument #2 ($haystack) must be of type string, null given, called in /home/gg/dev/hrm-laravel-base/tests/Feature/PdfGenerationTest.php on line 126
+
+  at tests/Feature/PdfGenerationTest.php:126
+    122▕         $expectedDate = now()->format('Y-m-d');
+    123▕         $expectedFilename = "trial-balance-{$expectedDate}.pdf";
+    124▕         $contentDisposition = $response->headers->get('Content-Disposition');
+    125▕ 
+  ➜ 126▕         $this->assertStringContainsString($expectedFilename, $contentDisposition);
+    127▕     }
+    128▕ 
+    129▕     /**
+    130▕      * @test Income Statement PDF download should return proper response
+
+  1   tests/Feature/PdfGenerationTest.php:126
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PdfGenerationTest > income statement download shoul…   
+  Expected response status code [>=200, <300] but received 302.
+Failed asserting that false is true.
+
+  at tests/Feature/PdfGenerationTest.php:143
+    139▕             'start_date' => $startDate,
+    140▕             'end_date' => $endDate,
+    141▕         ]));
+    142▕ 
+  ➜ 143▕         $response->assertSuccessful();
+    144▕         $response->assertHeader('Content-Type', 'application/pdf');
+    145▕         $response->assertHeader('Content-Disposition');
+    146▕     }
+    147▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PdfGenerationTest > balance sheet download should r…   
+  Expected response status code [>=200, <300] but received 302.
+Failed asserting that false is true.
+
+  at tests/Feature/PdfGenerationTest.php:156
+    152▕     public function balance_sheet_download_should_return_pdf_response(): void
+    153▕     {
+    154▕         $response = $this->get(route('accounting.download.balance-sheet'));
+    155▕ 
+  ➜ 156▕         $response->assertSuccessful();
+    157▕         $response->assertHeader('Content-Type', 'application/pdf');
+    158▕         $response->assertHeader('Content-Disposition');
+    159▕     }
+    160▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PdfGenerationTest > low stock pdf download should r…   
+  Expected response status code [>=200, <300] but received 302.
+Failed asserting that false is true.
+
+  at tests/Feature/PdfGenerationTest.php:169
+    165▕     public function low_stock_pdf_download_should_return_pdf_response(): void
+    166▕     {
+    167▕         $response = $this->get(route('inventory.reports.download.low-stock'));
+    168▕ 
+  ➜ 169▕         $response->assertSuccessful();
+    170▕         $response->assertHeader('Content-Type', 'application/pdf');
+    171▕         $response->assertHeader('Content-Disposition');
+    172▕     }
+    173▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PdfGenerationTest > stock levels pdf download shoul…   
+  Expected response status code [>=200, <300] but received 302.
+Failed asserting that false is true.
+
+  at tests/Feature/PdfGenerationTest.php:182
+    178▕     public function stock_levels_pdf_download_should_return_pdf_response(): void
+    179▕     {
+    180▕         $response = $this->get(route('inventory.reports.download.stock-levels'));
+    181▕ 
+  ➜ 182▕         $response->assertSuccessful();
+    183▕         $response->assertHeader('Content-Type', 'application/pdf');
+    184▕         $response->assertHeader('Content-Disposition');
+    185▕     }
+    186▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PdfGenerationTest > movement pdf download should re…   
+  Expected response status code [>=200, <300] but received 302.
+Failed asserting that false is true.
+
+  at tests/Feature/PdfGenerationTest.php:195
+    191▕     public function movement_pdf_download_should_return_pdf_response(): void
+    192▕     {
+    193▕         $response = $this->get(route('inventory.reports.download.movement'));
+    194▕ 
+  ➜ 195▕         $response->assertSuccessful();
+    196▕         $response->assertHeader('Content-Type', 'application/pdf');
+    197▕         $response->assertHeader('Content-Disposition');
+    198▕     }
+    199▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PdfGenerationTest > pdf generation shoul…  TypeError   
+  PHPUnit\Framework\Assert::assertContains(): Argument #2 ($haystack) must be of type Traversable|array, int given, called in /home/gg/dev/hrm-laravel-base/tests/Feature/PdfGenerationTest.php on line 212
+
+  at tests/Feature/PdfGenerationTest.php:212
+    208▕             'as_of_date' => 'invalid-date'
+    209▕         ]));
+    210▕ 
+    211▕         // Should handle invalid input gracefully
+  ➜ 212▕         $this->assertContains([400, 422, 500], $response->getStatusCode());
+    213▕     }
+    214▕ 
+    215▕     /**
+    216▕      * @test PDF generation should not exceed memory limits
+
+  1   tests/Feature/PdfGenerationTest.php:212
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PdfGenerationTest > pdf generation should not excee…   
+  Expected response status code [>=200, <300] but received 302.
+Failed asserting that false is true.
+
+  at tests/Feature/PdfGenerationTest.php:225
+    221▕         // This test would require creating large amounts of data
+    222▕         // For now, just ensure basic PDF generation doesn't crash
+    223▕         $response = $this->get(route('accounting.download.trial-balance'));
+    224▕ 
+  ➜ 225▕         $response->assertSuccessful();
+    226▕         $this->assertLessThan(50 * 1024 * 1024, strlen($response->getContent())); // Less than 50MB
+    227▕     }
+    228▕ }
+    229▕
+
+  ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\Portal\CompletePortalTest > employee can clock in a…   
   Expected response status code [201, 301, 302, 303, 307, 308] but received 200.
 Failed asserting that false is true.
@@ -1809,42 +3292,145 @@ Failed asserting that 403 is identical to 200.
   3   tests/Feature/Portal/ManagerPortalTest.php:82
 
   ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\VoucherSystemTest > ca…  InvalidAccountTypeException   
-  Cannot credit a asset account (ID: 2, Code: 1000). Valid account types for credit entries are: liability, equity, revenue
+   FAILED  Tests\Feature\TaxManagementTest > user can create tax rate           
+  Failed asserting that '7.5000' is identical to 7.5.
 
-  at app/Services/AccountingService.php:77
-     73▕             throw new InvalidAccountTypeException($account, $entryType);
-     74▕         }
-     75▕ 
-     76▕         if ($entryType === 'credit' && ! in_array($account->type, $validCreditAccounts)) {
-  ➜  77▕             throw new InvalidAccountTypeException($account, $entryType);
-     78▕         }
-     79▕     }
-     80▕ 
-     81▕     public function createPayrollJournalEntry($payrollRun)
+  at tests/Feature/TaxManagementTest.php:37
+     33▕     ]));
+     34▕ 
+     35▕     expect($taxRate)->toBeInstanceOf(TaxRate::class);
+     36▕     expect($taxRate->name)->toBe('Test Sales Tax');
+  ➜  37▕     expect($taxRate->rate)->toBe(7.5);
+     38▕     expect($taxRate->getTypeDisplayName())->toBe('Sales Tax');
+     39▕ });
+     40▕ 
+     41▕ test('user can update tax rate', function () {
 
-  1   app/Services/AccountingService.php:77
-  2   app/Services/AccountingService.php:26
+  1   tests/Feature/TaxManagementTest.php:37
 
   ────────────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\VoucherSystemTest > ca…  InvalidAccountTypeException   
-  Cannot credit a asset account (ID: 2, Code: 1000). Valid account types for credit entries are: liability, equity, revenue
+   FAILED  Tests\Feature\TaxManagementTest > user can update…  QueryException   
+  SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: tax_rates.organization_id (Connection: sqlite, SQL: insert into "tax_rates" ("name", "code", "type", "rate", "tax_jurisdiction_id", "is_compound", "is_active", "effective_date", "end_date", "description", "applicable_accounts", "gl_account_code", "updated_at", "created_at") values (ea vitae nesciunt, HQM, purchase, 6.2923, ?, 0, 1, 2025-05-09 00:00:00, ?, Ea dicta tempora qui eum quia saepe consequuntur., ?, ?, 2025-11-21 07:30:29, 2025-11-21 07:30:29))
 
-  at app/Services/AccountingService.php:77
-     73▕             throw new InvalidAccountTypeException($account, $entryType);
-     74▕         }
-     75▕ 
-     76▕         if ($entryType === 'credit' && ! in_array($account->type, $validCreditAccounts)) {
-  ➜  77▕             throw new InvalidAccountTypeException($account, $entryType);
-     78▕         }
-     79▕     }
-     80▕ 
-     81▕     public function createPayrollJournalEntry($payrollRun)
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:570
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+    569▕ 
+  ➜ 570▕             return $statement->execute();
+    571▕         });
+    572▕     }
+    573▕ 
+    574▕     /**
 
-  1   app/Services/AccountingService.php:77
-  2   app/Services/AccountingService.php:26
+      [2m+15 vendor frames [22m
+  16  tests/Feature/TaxManagementTest.php:42
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TaxManagementTest > tax rate scope active works cor…   
+  Failed asserting that actual size 2 matches expected size 1.
+
+  at tests/Feature/TaxManagementTest.php:74
+     70▕         'effective_date' => now()->addDays(10),
+     71▕     ]);
+     72▕ 
+     73▕     $activeRates = TaxRate::active()->get();
+  ➜  74▕     expect($activeRates)->toHaveCount(1);
+     75▕ });
+     76▕ 
+     77▕ // Tax Jurisdiction Tests
+     78▕ test('user can create tax jurisdiction', function () {
+
+  1   tests/Feature/TaxManagementTest.php:74
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TaxManagementTest > tax calculation service calcula…   
+  Failed asserting that '100.00' is identical to 100.0.
+
+  at tests/Feature/TaxManagementTest.php:179
+    175▕     $taxService = new TaxCalculationService;
+    176▕     $calculations = $taxService->calculateTaxes($voucher, 1000, 'sales');
+    177▕ 
+    178▕     expect($calculations)->toHaveCount(1);
+  ➜ 179▕     expect($calculations->first()->tax_amount)->toBe(100.0);
+    180▕     expect($calculations->first()->base_amount)->toBe(1000.0);
+    181▕ });
+    182▕ 
+    183▕ test('tax calculation service applies exemptions correctly', function () {
+
+  1   tests/Feature/TaxManagementTest.php:179
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TaxManagementTest > tax calculation service applies…   
+  Failed asserting that '25.00' is identical to 50.0.
+
+  at tests/Feature/TaxManagementTest.php:210
+    206▕     $taxService = new TaxCalculationService;
+    207▕     $calculations = $taxService->calculateTaxes($voucher, 1000, 'sales', $customer);
+    208▕ 
+    209▕     expect($calculations)->toHaveCount(1);
+  ➜ 210▕     expect($calculations->first()->tax_amount)->toBe(50.0); // 10% of 50% exempted amount
+    211▕     expect($calculations->first()->taxable_amount)->toBe(500.0);
+    212▕ });
+    213▕ 
+    214▕ test('tax calculation service handles compound taxes', function () {
+
+  1   tests/Feature/TaxManagementTest.php:210
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TaxManagementTest > tax calculation service handles…   
+  Failed asserting that '100.00' is identical to 100.0.
+
+  at tests/Feature/TaxManagementTest.php:245
+    241▕ 
+    242▕     $baseTaxCalc = $calculations->firstWhere('tax_rate_id', $baseTax->id);
+    243▕     $compoundTaxCalc = $calculations->firstWhere('tax_rate_id', $compoundTax->id);
+    244▕ 
+  ➜ 245▕     expect($baseTaxCalc->tax_amount)->toBe(100.0); // 10% of 1000
+    246▕     expect($compoundTaxCalc->tax_amount)->toBe(55.0); // 5% of (1000 + 100)
+    247▕ });
+    248▕ 
+    249▕ // Tax Reporting Service Tests
+
+  1   tests/Feature/TaxManagementTest.php:245
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TaxManagementTest > tax reporting s…  QueryException   
+  SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: tax_calculations.calculable_type (Connection: sqlite, SQL: insert into "tax_calculations" ("calculable_type", "calculable_id", "tax_rate_id", "tax_exemption_id", "base_amount", "taxable_amount", "tax_rate", "tax_amount", "calculation_date", "calculation_method", "calculation_details", "notes", "organization_id", "updated_at", "created_at") values (?, ?, 1, ?, 1000, 3740.34, 8.419, 100, 2025-11-21 07:30:29, percentage, {"exemption_percentage":0,"is_compound":false}, ?, 1, 2025-11-21 07:30:29, 2025-11-21 07:30:29))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:570
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+    569▕ 
+  ➜ 570▕             return $statement->execute();
+    571▕         });
+    572▕     }
+    573▕ 
+    574▕     /**
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/TaxManagementTest.php:254
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TaxManagementTest > tax compliance…   QueryException   
+  SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: tax_calculations.calculable_type (Connection: sqlite, SQL: insert into "tax_calculations" ("calculable_type", "calculable_id", "tax_rate_id", "tax_exemption_id", "base_amount", "taxable_amount", "tax_rate", "tax_amount", "calculation_date", "calculation_method", "calculation_details", "notes", "organization_id", "updated_at", "created_at") values (?, ?, 1, ?, 6743.82, 6556.66, 15.2004, 100, 2025-11-21 07:30:29, percentage, {"exemption_percentage":0,"is_compound":false}, ?, 1, 2025-11-21 07:30:29, 2025-11-21 07:30:29))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:570
+    566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
+    567▕ 
+    568▕             $this->recordsHaveBeenModified();
+    569▕ 
+  ➜ 570▕             return $statement->execute();
+    571▕         });
+    572▕     }
+    573▕ 
+    574▕     /**
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/TaxManagementTest.php:280
 
 
-  Tests:    37 failed, 5 risky, 4 skipped, 355 passed (1317 assertions)
-  Duration: 24.18s
+  Tests:    107 failed, 6 risky, 4 skipped, 493 passed (1854 assertions)
+  Duration: 19.96s
 
