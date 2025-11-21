@@ -66,16 +66,16 @@ class AccountingService
 
     private function validateAccountType(ChartOfAccount $account, string $entryType): void
     {
-        $validDebitAccounts = ['asset', 'expense'];
-        $validCreditAccounts = ['liability', 'equity', 'revenue'];
+        // All account types can be debited or credited depending on the transaction
+        // This validation is too restrictive for real accounting scenarios
+        // Assets: Debit to increase, Credit to decrease
+        // Liabilities: Credit to increase, Debit to decrease
+        // Equity: Credit to increase, Debit to decrease
+        // Revenue: Credit to increase, Debit to decrease
+        // Expenses: Debit to increase, Credit to decrease
 
-        if ($entryType === 'debit' && ! in_array($account->type, $validDebitAccounts)) {
-            throw new InvalidAccountTypeException($account, $entryType);
-        }
-
-        if ($entryType === 'credit' && ! in_array($account->type, $validCreditAccounts)) {
-            throw new InvalidAccountTypeException($account, $entryType);
-        }
+        // For now, we'll allow all account types to be debited or credited
+        // The business logic in services should ensure proper double-entry bookkeeping
     }
 
     public function createPayrollJournalEntry($payrollRun)
