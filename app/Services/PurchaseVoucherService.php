@@ -18,7 +18,7 @@ class PurchaseVoucherService extends VoucherService
     protected function generateReferenceNumber(): string
     {
         $latest = JournalEntry::where('voucher_type', 'PURCHASE')
-            ->where('organization_id', auth()->user()->organization_id)
+            ->where('organization_id', auth()->user()->current_organization_id)
             ->orderBy('reference_number', 'desc')
             ->first();
 

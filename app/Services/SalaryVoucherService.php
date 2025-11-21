@@ -18,7 +18,7 @@ class SalaryVoucherService extends VoucherService
     protected function generateReferenceNumber(): string
     {
         $latest = JournalEntry::where('voucher_type', 'SALARY')
-            ->where('organization_id', auth()->user()->organization_id)
+            ->where('organization_id', auth()->user()->current_organization_id)
             ->orderBy('reference_number', 'desc')
             ->first();
 
@@ -41,7 +41,7 @@ class SalaryVoucherService extends VoucherService
     protected function prepareLedgerEntries(array $data): array
     {
         $entries = [];
-        $employee = Employee::find($data['employee_id']);
+        $employee = $this->validateEmployee($data['employee_id']);
 
         // Get salary expense account (default: 5100)
         $salaryAccount = $this->getAccountByCode('5100');
@@ -105,5 +105,12 @@ class SalaryVoucherService extends VoucherService
         $data['tax_amount'] = $data['tax_deduction'] ?? 0;
 
         return $this->createVoucher($data);
+    }
+
+    protected function validateEmployee(int $employeeId): Employee
+    {
+        return Employee::where('id', $employeeId)
+            ->where('organization_id', auth()->user()->current_organization_id)
+            ->firstOrFail();
     }
 }

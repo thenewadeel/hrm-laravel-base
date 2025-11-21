@@ -27,17 +27,10 @@ class CustomerFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->phoneNumber(),
             'address' => fake()->streetAddress(),
-            'city' => fake()->city(),
-            'state' => fake()->stateAbbr(),
-            'postal_code' => fake()->postcode(),
-            'country' => fake()->countryCode(),
-            'tax_id' => fake()->numerify('TX-'),
-            'customer_type' => fake()->randomElement(['BUSINESS', 'INDIVIDUAL', 'GOVERNMENT']),
-            'credit_limit' => fake()->randomFloat(1000, 50000),
-            'opening_balance' => fake()->randomFloat(0, 10000),
-            'current_balance' => fake()->randomFloat(0, 10000),
-            'notes' => fake()->optional()->sentence(),
-            'is_active' => true,
+            'tax_number' => fake()->numerify('TX-########'),
+            'customer_type' => fake()->randomElement(['BUSINESS', 'INDIVIDUAL']),
+            'credit_limit' => fake()->randomFloat(1000, 50000, 2),
+            'status' => 'ACTIVE',
         ];
     }
 }

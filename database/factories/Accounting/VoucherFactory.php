@@ -23,11 +23,11 @@ class VoucherFactory extends Factory
     public function definition(): array
     {
         $types = ['sales', 'sales_return', 'purchase', 'purchase_return', 'salary', 'expense', 'fixed_asset', 'depreciation'];
-        
+
         return [
             'organization_id' => Organization::factory(),
             'type' => fake()->randomElement($types),
-            'number' => 'SALES-2025-' . str_pad(fake()->unique()->numberBetween(1, 9999), 4, '0', STR_PAD_LEFT),
+            'number' => 'SALES-2025-'.str_pad(fake()->unique()->numberBetween(1, 9999), 4, '0', STR_PAD_LEFT),
             'date' => fake()->date(),
             'amount' => fake()->randomFloat(2, 100, 10000),
             'description' => fake()->sentence(),

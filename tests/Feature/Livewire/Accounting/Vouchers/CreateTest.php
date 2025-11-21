@@ -13,13 +13,13 @@ uses(RefreshDatabase::class);
 test('voucher create component renders successfully', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create(['current_organization_id' => $organization->id]);
-    
+
     // Grant permission to user
     $user->organizations()->attach($organization->id, ['roles' => ['accounting_admin']]);
     $user->givePermissionTo(AccountingPermissions::CREATE_VOUCHERS, $organization);
-    
+
     $this->actingAs($user);
-    
+
     Livewire::test(Create::class)
         ->assertStatus(200);
 });
@@ -27,13 +27,13 @@ test('voucher create component renders successfully', function () {
 test('voucher create component has required fields', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create(['current_organization_id' => $organization->id]);
-    
+
     // Grant permission to user
     $user->organizations()->attach($organization->id, ['roles' => ['accounting_admin']]);
     $user->givePermissionTo(AccountingPermissions::CREATE_VOUCHERS, $organization);
-    
+
     $this->actingAs($user);
-    
+
     Livewire::test(Create::class)
         ->assertSet('date', now()->format('Y-m-d'))
         ->assertSet('type', '')
@@ -45,18 +45,18 @@ test('voucher create component has required fields', function () {
 test('voucher create component loads chart of accounts', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create(['current_organization_id' => $organization->id]);
-    
+
     // Grant permission to user
     $user->organizations()->attach($organization->id, ['roles' => ['accounting_admin']]);
     $user->givePermissionTo(AccountingPermissions::CREATE_VOUCHERS, $organization);
-    
+
     // Create test accounts
     $accounts = ChartOfAccount::factory()->count(3)->create([
         'organization_id' => $organization->id,
     ]);
-    
+
     $this->actingAs($user);
-    
+
     Livewire::test(Create::class)
         ->assertViewHas('accounts')
         ->assertSeeInOrder([$accounts[0]->name, $accounts[1]->name, $accounts[2]->name]);
@@ -65,13 +65,13 @@ test('voucher create component loads chart of accounts', function () {
 test('voucher create component validates required fields', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create(['current_organization_id' => $organization->id]);
-    
+
     // Grant permission to user
     $user->organizations()->attach($organization->id, ['roles' => ['accounting_admin']]);
     $user->givePermissionTo(AccountingPermissions::CREATE_VOUCHERS, $organization);
-    
+
     $this->actingAs($user);
-    
+
     Livewire::test(Create::class)
         ->set('date', '')
         ->set('type', '')
@@ -89,13 +89,13 @@ test('voucher create component validates required fields', function () {
 test('voucher create component validates amount is positive', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create(['current_organization_id' => $organization->id]);
-    
+
     // Grant permission to user
     $user->organizations()->attach($organization->id, ['roles' => ['accounting_admin']]);
     $user->givePermissionTo(AccountingPermissions::CREATE_VOUCHERS, $organization);
-    
+
     $this->actingAs($user);
-    
+
     Livewire::test(Create::class)
         ->set('date', now()->format('Y-m-d'))
         ->set('type', 'sales')
@@ -108,13 +108,13 @@ test('voucher create component validates amount is positive', function () {
 test('voucher create component creates voucher successfully', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create(['current_organization_id' => $organization->id]);
-    
+
     // Grant permission to user
     $user->organizations()->attach($organization->id, ['roles' => ['accounting_admin']]);
     $user->givePermissionTo(AccountingPermissions::CREATE_VOUCHERS, $organization);
-    
+
     $this->actingAs($user);
-    
+
     Livewire::test(Create::class)
         ->set('date', now()->format('Y-m-d'))
         ->set('type', 'sales')
@@ -129,18 +129,18 @@ test('voucher create component creates voucher successfully', function () {
 test('voucher create component handles creation errors', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create(['current_organization_id' => $organization->id]);
-    
+
     // Grant permission to user
     $user->organizations()->attach($organization->id, ['roles' => ['accounting_admin']]);
     $user->givePermissionTo(AccountingPermissions::CREATE_VOUCHERS, $organization);
-    
+
     $this->actingAs($user);
-    
+
     // Mock the service to throw an exception
     $this->mock(\App\Services\GeneralVoucherService::class)
         ->shouldReceive('createVoucher')
         ->andThrow(new \Exception('Service error'));
-    
+
     Livewire::test(Create::class)
         ->set('date', now()->format('Y-m-d'))
         ->set('type', 'sales')
