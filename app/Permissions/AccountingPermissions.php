@@ -108,6 +108,17 @@ class AccountingPermissions
 
     const GENERATE_CASH_REPORTS = 'accounting.cash_reports.generate';
 
+    // Voucher Management
+    const VIEW_VOUCHERS = 'accounting.vouchers.view';
+
+    const CREATE_VOUCHERS = 'accounting.vouchers.create';
+
+    const EDIT_VOUCHERS = 'accounting.vouchers.edit';
+
+    const DELETE_VOUCHERS = 'accounting.vouchers.delete';
+
+    const POST_VOUCHERS = 'accounting.vouchers.post';
+
     // Financial Reports
     const VIEW_FINANCIAL_REPORTS = 'accounting.reports.view';
 
@@ -194,9 +205,12 @@ class AccountingPermissions
             self::EDIT_CASH_PAYMENTS,
             self::DELETE_CASH_PAYMENTS,
 
-            // Cash Reports
-            self::VIEW_CASH_REPORTS,
-            self::GENERATE_CASH_REPORTS,
+            // Vouchers
+            self::VIEW_VOUCHERS,
+            self::CREATE_VOUCHERS,
+            self::EDIT_VOUCHERS,
+            self::DELETE_VOUCHERS,
+            self::POST_VOUCHERS,
 
             // Reports
             self::VIEW_FINANCIAL_REPORTS,
@@ -284,6 +298,13 @@ class AccountingPermissions
             'cash_reports' => [
                 self::VIEW_CASH_REPORTS,
                 self::GENERATE_CASH_REPORTS,
+            ],
+            'voucher_management' => [
+                self::VIEW_VOUCHERS,
+                self::CREATE_VOUCHERS,
+                self::EDIT_VOUCHERS,
+                self::DELETE_VOUCHERS,
+                self::POST_VOUCHERS,
             ],
             'approval_workflows' => [
                 self::MANAGE_APPROVAL_WORKFLOWS,

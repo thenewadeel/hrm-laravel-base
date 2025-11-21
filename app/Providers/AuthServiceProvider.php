@@ -66,6 +66,27 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasPermission(AccountingPermissions::GENERATE_CASH_REPORTS);
         });
 
+        // Voucher Management Gates
+        Gate::define(AccountingPermissions::CREATE_VOUCHERS, function (User $user) {
+            return $user->hasPermission(AccountingPermissions::CREATE_VOUCHERS);
+        });
+
+        Gate::define(AccountingPermissions::VIEW_VOUCHERS, function (User $user) {
+            return $user->hasPermission(AccountingPermissions::VIEW_VOUCHERS);
+        });
+
+        Gate::define(AccountingPermissions::EDIT_VOUCHERS, function (User $user) {
+            return $user->hasPermission(AccountingPermissions::EDIT_VOUCHERS);
+        });
+
+        Gate::define(AccountingPermissions::DELETE_VOUCHERS, function (User $user) {
+            return $user->hasPermission(AccountingPermissions::DELETE_VOUCHERS);
+        });
+
+        Gate::define(AccountingPermissions::POST_VOUCHERS, function (User $user) {
+            return $user->hasPermission(AccountingPermissions::POST_VOUCHERS);
+        });
+
         // Role-based gates with organization context
         Gate::define('inventory.admin', function (User $user, $organization = null) {
             return $user->hasRole(InventoryRoles::INVENTORY_ADMIN, $organization);
