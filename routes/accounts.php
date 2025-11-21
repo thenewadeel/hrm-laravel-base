@@ -124,4 +124,18 @@ Route::prefix('/accounts')->name('accounting.')->group(function () {
     Route::get('/download/asset-register', [FixedAssetController::class, 'downloadAssetRegister'])->name('fixed-assets.download.asset-register');
     Route::get('/download/depreciation-schedule', [FixedAssetController::class, 'downloadDepreciationSchedule'])->name('fixed-assets.download.depreciation-schedule');
 
+    // Financial Years Management
+    Route::prefix('/financial-years')->name('financial-years.')->group(function () {
+        Route::get('/', \App\Livewire\Accounting\FinancialYears\FinancialYearIndex::class)->name('index');
+        Route::get('/create', \App\Livewire\Accounting\FinancialYears\FinancialYearForm::class)->name('create');
+        Route::post('/', [\App\Http\Controllers\FinancialYearController::class, 'store'])->name('store');
+        Route::get('/edit/{financialYear}', \App\Livewire\Accounting\FinancialYears\FinancialYearForm::class)->name('edit');
+        Route::put('/{financialYear}', [\App\Http\Controllers\FinancialYearController::class, 'update'])->name('update');
+        Route::delete('/{financialYear}', [\App\Http\Controllers\FinancialYearController::class, 'destroy'])->name('destroy');
+        Route::post('/{financialYear}/activate', [\App\Http\Controllers\FinancialYearController::class, 'activate'])->name('activate');
+        Route::post('/{financialYear}/lock', [\App\Http\Controllers\FinancialYearController::class, 'lock'])->name('lock');
+        Route::post('/{financialYear}/unlock', [\App\Http\Controllers\FinancialYearController::class, 'unlock'])->name('unlock');
+        Route::get('/opening-balances/{financialYear}', \App\Livewire\Accounting\FinancialYears\OpeningBalanceForm::class)->name('opening-balances');
+        Route::get('/close/{financialYear}', \App\Livewire\Accounting\FinancialYears\YearEndClosing::class)->name('close');
+    });
 });
