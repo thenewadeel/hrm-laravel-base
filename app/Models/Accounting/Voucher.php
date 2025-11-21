@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Voucher extends Model
@@ -92,6 +93,56 @@ class Voucher extends Model
             'depreciation' => 'Depreciation',
             default => ucfirst($this->type),
         };
+    }
+
+    /**
+     * Get tax calculations for this voucher.
+     */
+    public function taxCalculations(): MorphMany
+    {
+        return $this->morphMany(TaxCalculation::class, 'calculable');
+    }
+
+    /**
+     * Get total tax amount for this voucher.
+     */
+    public function getTotalTaxAttribute(): float
+    {
+        return $this->taxCalculations->sum('tax_amount');
+    }
+
+    /**
+     * Get total amount including tax.
+     */
+    public function getTotalWithTaxAttribute(): float
+    {
+        return $this->amount + $this->total_tax;
+    }
+
+    /**
+     * Calculate and save taxes for this voucher.
+     */
+    public function calculateTaxes(): void
+    {
+        if ($this->isPosted()) {
+            return; // Don't recalculate posted vouchers
+        }
+
+        $taxService = app(\App\Services\TaxCalculationService::class);
+        $taxService->calculateTaxes($this, $this->amount, $this->type);
+    }
+
+    /**
+     * Recalculate taxes for this voucher.
+     */
+    public function recalculateTaxes(): void
+    {
+        if ($this->isPosted()) {
+            throw new \Exception('Cannot recalculate taxes for posted vouchers');
+        }
+
+        $taxService = app(\App\Services\TaxCalculationService::class);
+        $taxService->recalculateTaxes($this);
     }
 
     /**

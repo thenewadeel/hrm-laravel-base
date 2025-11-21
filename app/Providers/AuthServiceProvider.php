@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Accounting\TaxExemption;
+use App\Models\Accounting\TaxFiling;
+use App\Models\Accounting\TaxRate;
 use App\Models\Inventory\Store;
 use App\Models\JobPosition;
 use App\Models\Shift;
@@ -17,6 +20,9 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         JobPosition::class => \App\Policies\JobPositionPolicy::class,
         Shift::class => \App\Policies\ShiftPolicy::class,
+        TaxRate::class => \App\Policies\TaxRatePolicy::class,
+        TaxExemption::class => \App\Policies\TaxExemptionPolicy::class,
+        TaxFiling::class => \App\Policies\TaxFilingPolicy::class,
     ];
 
     public function boot(): void
@@ -101,6 +107,25 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasRole(InventoryRoles::INVENTORY_CLERK, $organization) ||
                 $user->hasRole(InventoryRoles::STORE_MANAGER, $organization) ||
                 $user->hasRole(InventoryRoles::INVENTORY_ADMIN, $organization);
+        });
+
+        // Tax Management Gates
+        Gate::define('manage accounting', function (User $user) {
+            return $user->hasPermission(AccountingPermissions::VIEW_VOUCHERS) ||
+                   $user->hasPermission(AccountingPermissions::CREATE_VOUCHERS) ||
+                   $user->hasPermission(AccountingPermissions::EDIT_VOUCHERS);
+        });
+
+        Gate::define('tax.manage', function (User $user) {
+            return $user->hasPermission('tax.manage');
+        });
+
+        Gate::define('tax.report', function (User $user) {
+            return $user->hasPermission('tax.report');
+        });
+
+        Gate::define('tax.file', function (User $user) {
+            return $user->hasPermission('tax.file');
         });
     }
 }

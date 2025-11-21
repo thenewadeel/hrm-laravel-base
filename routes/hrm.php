@@ -67,8 +67,10 @@ Route::prefix('payroll')->name('payroll.')->group(function () {
     Route::post('/advances/{advance}/approve', [EnhancedPayrollController::class, 'approveAdvance'])->name('advances.approve');
     Route::get('/advance-reports', \App\Livewire\Payroll\AdvanceReports::class)->name('advance-reports');
 
-// Payroll Routes (if separate)
-Route::get('/payroll/processing', [PayrollController::class, 'processing'])->name('payroll.processing');
+    // Tax Configuration
+    Route::get('/tax', [EnhancedPayrollController::class, 'taxConfiguration'])->name('tax');
+    Route::post('/tax', [EnhancedPayrollController::class, 'storeTaxBracket'])->name('tax.store');
+
     // Reports
     Route::post('/report', [EnhancedPayrollController::class, 'generateReport'])->name('report');
 });

@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/accounts')->name('accounting.')->group(function () {
     Route::get('/', [AccountsController::class, 'index'])->name('index');
-    
+
     // Cash Receipts Management
     Route::prefix('/cash-receipts')->name('cash-receipts.')->group(function () {
         Route::get('/', function () {
@@ -33,7 +33,7 @@ Route::prefix('/accounts')->name('accounting.')->group(function () {
         Route::get('/create', CreateCashReceipt::class)->name('create');
         // TODO: Add edit, show, delete routes when implemented
     });
-    
+
     // Cash Payments Management
     Route::prefix('/cash-payments')->name('cash-payments.')->group(function () {
         Route::get('/', function () {
@@ -123,6 +123,38 @@ Route::prefix('/accounts')->name('accounting.')->group(function () {
     // Fixed Assets PDF Downloads
     Route::get('/download/asset-register', [FixedAssetController::class, 'downloadAssetRegister'])->name('fixed-assets.download.asset-register');
     Route::get('/download/depreciation-schedule', [FixedAssetController::class, 'downloadDepreciationSchedule'])->name('fixed-assets.download.depreciation-schedule');
+
+    // Tax Management
+    Route::prefix('/tax')->name('tax.')->group(function () {
+        // Tax Rates
+        Route::prefix('/tax-rates')->name('tax-rates.')->group(function () {
+            Route::get('/', \App\Livewire\Accounting\TaxRateIndex::class)->name('index');
+            Route::get('/create', \App\Livewire\Accounting\TaxRateForm::class)->name('create');
+            Route::get('/edit/{taxRate}', \App\Livewire\Accounting\TaxRateForm::class)->name('edit');
+        });
+
+        // Tax Exemptions
+        Route::prefix('/tax-exemptions')->name('tax-exemptions.')->group(function () {
+            Route::get('/', \App\Livewire\Accounting\TaxExemptionIndex::class)->name('index');
+            Route::get('/create', \App\Livewire\Accounting\TaxExemptionForm::class)->name('create');
+            Route::get('/edit/{taxExemption}', \App\Livewire\Accounting\TaxExemptionForm::class)->name('edit');
+        });
+
+        // Tax Reporting
+        Route::prefix('/reporting')->name('reporting.')->group(function () {
+            Route::get('/', \App\Livewire\Accounting\TaxReportingDashboard::class)->name('dashboard');
+        });
+
+        // Tax Filings
+        Route::prefix('/filings')->name('filings.')->group(function () {
+            Route::get('/', \App\Livewire\Accounting\TaxFilingManager::class)->name('index');
+        });
+
+        // Tax Downloads
+        Route::get('/download/tax-report', [\App\Http\Controllers\TaxController::class, 'downloadTaxReport'])->name('download.tax-report');
+        Route::get('/download/tax-liability', [\App\Http\Controllers\TaxController::class, 'downloadTaxLiability'])->name('download.tax-liability');
+        Route::get('/download/filing-schedule', [\App\Http\Controllers\TaxController::class, 'downloadFilingSchedule'])->name('download.filing-schedule');
+    });
 
     // Financial Years Management
     Route::prefix('/financial-years')->name('financial-years.')->group(function () {
