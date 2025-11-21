@@ -21,4 +21,14 @@ abstract class TestCase extends BaseTestCase
     //         $this->setupOrganization();
     //     }
     // }
+    // In tests/TestCase.php (or similar)
+    // protected function tearDown(): void
+    // {
+    //     // ... (parent::tearDown() logic if any)
+
+    //     // Force Garbage Collection
+    //     gc_collect_cycles();
+
+    //     parent::tearDown();
+    // }
 }

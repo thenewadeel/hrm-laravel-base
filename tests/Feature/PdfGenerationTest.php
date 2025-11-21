@@ -6,6 +6,7 @@ use App\Models\PayrollEntry;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class PdfGenerationTest extends TestCase
 {
@@ -17,7 +18,7 @@ class PdfGenerationTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         // Create test user and organization
         $this->user = User::factory()->create();
         $this->organization = $this->user->organizations()->first();
@@ -26,12 +27,13 @@ class PdfGenerationTest extends TestCase
     /**
      * @test Payslip PDF download should fail initially (RED phase)
      */
+    #[Test]
     public function payslip_download_should_fail_initially(): void
     {
         // Create test payroll entry
         $employee = \App\Models\Employee::factory()->create();
         $this->user = $employee->user;
-        
+
         $payslip = PayrollEntry::factory()->create([
             'employee_id' => $employee->id,
             'organization_id' => $this->organization->id,
@@ -41,7 +43,7 @@ class PdfGenerationTest extends TestCase
 
         // This should fail initially because PDF generation isn't fully implemented
         $response = $this->get(route('portal.employee.payslips.download', $payslip));
-        
+
         // Expecting failure - this is the RED phase
         $response->assertStatus(500);
     }
@@ -49,6 +51,7 @@ class PdfGenerationTest extends TestCase
     /**
      * @test Payslip PDF download should return proper PDF response (GREEN phase)
      */
+    #[Test]
     public function payslip_download_should_return_pdf_response(): void
     {
         // Create test payroll entry with user relationship loaded
@@ -74,6 +77,7 @@ class PdfGenerationTest extends TestCase
     /**
      * @test Payslip PDF should have correct filename
      */
+    #[Test]
     public function payslip_pdf_should_have_correct_filename(): void
     {
         $payslip = PayrollEntry::factory()->create([
@@ -90,13 +94,14 @@ class PdfGenerationTest extends TestCase
         // Should contain expected filename pattern
         $expectedFilename = "payslip-{$this->user->name}-2024-01.pdf";
         $contentDisposition = $response->headers->get('Content-Disposition');
-        
+
         $this->assertStringContainsString($expectedFilename, $contentDisposition);
     }
 
     /**
      * @test Trial Balance PDF download should return proper response
      */
+    #[Test]
     public function trial_balance_download_should_return_pdf_response(): void
     {
         $response = $this->get(route('accounting.download.trial-balance'));
@@ -109,20 +114,22 @@ class PdfGenerationTest extends TestCase
     /**
      * @test Trial Balance PDF should have correct filename
      */
+    #[Test]
     public function trial_balance_pdf_should_have_correct_filename(): void
     {
         $response = $this->get(route('accounting.download.trial-balance'));
-        
+
         $expectedDate = now()->format('Y-m-d');
         $expectedFilename = "trial-balance-{$expectedDate}.pdf";
         $contentDisposition = $response->headers->get('Content-Disposition');
-        
+
         $this->assertStringContainsString($expectedFilename, $contentDisposition);
     }
 
     /**
      * @test Income Statement PDF download should return proper response
      */
+    #[Test]
     public function income_statement_download_should_return_pdf_response(): void
     {
         $startDate = now()->startOfMonth()->format('Y-m-d');
@@ -141,6 +148,7 @@ class PdfGenerationTest extends TestCase
     /**
      * @test Balance Sheet PDF download should return proper response
      */
+    #[Test]
     public function balance_sheet_download_should_return_pdf_response(): void
     {
         $response = $this->get(route('accounting.download.balance-sheet'));
@@ -153,6 +161,7 @@ class PdfGenerationTest extends TestCase
     /**
      * @test Low Stock PDF download should return proper response
      */
+    #[Test]
     public function low_stock_pdf_download_should_return_pdf_response(): void
     {
         $response = $this->get(route('inventory.reports.download.low-stock'));
@@ -165,6 +174,7 @@ class PdfGenerationTest extends TestCase
     /**
      * @test Stock Levels PDF download should return proper response
      */
+    #[Test]
     public function stock_levels_pdf_download_should_return_pdf_response(): void
     {
         $response = $this->get(route('inventory.reports.download.stock-levels'));
@@ -177,6 +187,7 @@ class PdfGenerationTest extends TestCase
     /**
      * @test Movement PDF download should return proper response
      */
+    #[Test]
     public function movement_pdf_download_should_return_pdf_response(): void
     {
         $response = $this->get(route('inventory.reports.download.movement'));
@@ -189,6 +200,7 @@ class PdfGenerationTest extends TestCase
     /**
      * @test PDF generation should handle missing data gracefully
      */
+    #[Test]
     public function pdf_generation_should_handle_missing_data_gracefully(): void
     {
         // Test with invalid date that should return 400 or proper error handling
@@ -203,12 +215,13 @@ class PdfGenerationTest extends TestCase
     /**
      * @test PDF generation should not exceed memory limits
      */
+    #[Test]
     public function pdf_generation_should_not_exceed_memory_limits(): void
     {
         // This test would require creating large amounts of data
         // For now, just ensure basic PDF generation doesn't crash
         $response = $this->get(route('accounting.download.trial-balance'));
-        
+
         $response->assertSuccessful();
         $this->assertLessThan(50 * 1024 * 1024, strlen($response->getContent())); // Less than 50MB
     }
