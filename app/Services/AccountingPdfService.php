@@ -2,10 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Accounting\ChartOfAccount;
-use App\Services\PdfThemeManager;
 use Dompdf\Dompdf;
-use Dompdf\Options;
 
 class AccountingPdfService
 {
@@ -32,14 +29,14 @@ class AccountingPdfService
     {
         $asOfDate = $asOfDate ?? now();
         $data = $this->reportService->generateTrialBalance($asOfDate);
-        
-        $pdf = new Dompdf();
+
+        $pdf = new Dompdf;
         $pdf->setPaper('A4', 'portrait');
-        
+
         $html = $this->getTrialBalanceHtml($data, $asOfDate);
         $pdf->loadHtml($html);
         $pdf->render();
-        
+
         return $pdf->output();
     }
 
@@ -49,14 +46,14 @@ class AccountingPdfService
     public function generateIncomeStatementPdf(\DateTimeInterface $startDate, \DateTimeInterface $endDate): string
     {
         $data = $this->reportService->generateIncomeStatement($startDate, $endDate);
-        
-        $pdf = new Dompdf();
+
+        $pdf = new Dompdf;
         $pdf->setPaper('A4', 'portrait');
-        
+
         $html = $this->getIncomeStatementHtml($data, $startDate, $endDate);
         $pdf->loadHtml($html);
         $pdf->render();
-        
+
         return $pdf->output();
     }
 
@@ -66,14 +63,14 @@ class AccountingPdfService
     public function generateBalanceSheetPdf(\DateTimeInterface $asOfDate): string
     {
         $data = $this->reportService->generateBalanceSheet($asOfDate);
-        
-        $pdf = new Dompdf();
+
+        $pdf = new Dompdf;
         $pdf->setPaper('A4', 'portrait');
-        
+
         $html = $this->getBalanceSheetHtml($data, $asOfDate);
         $pdf->loadHtml($html);
         $pdf->render();
-        
+
         return $pdf->output();
     }
 
@@ -84,12 +81,12 @@ class AccountingPdfService
     {
         $theme = $this->themeManager->getTheme();
         $brand = $this->themeManager->getBrand();
-        
+
         return view('accounting.pdf.trial-balance', [
             'data' => $data,
             'asOfDate' => $asOfDate,
             'theme' => $theme,
-            'brand' => $brand
+            'brand' => $brand,
         ])->render();
     }
 
@@ -100,13 +97,13 @@ class AccountingPdfService
     {
         $theme = $this->themeManager->getTheme();
         $brand = $this->themeManager->getBrand();
-        
+
         return view('accounting.pdf.income-statement', [
             'data' => $data,
             'startDate' => $startDate,
             'endDate' => $endDate,
             'theme' => $theme,
-            'brand' => $brand
+            'brand' => $brand,
         ])->render();
     }
 
@@ -117,7 +114,7 @@ class AccountingPdfService
     {
         $theme = $this->themeManager->getTheme();
         $brand = $this->themeManager->getBrand();
-        
+
         return view('accounting.pdf.balance-sheet', [
             'data' => $data,
             'asOfDate' => $asOfDate,
@@ -159,12 +156,12 @@ class AccountingPdfService
     /**
      * Download Trial Balance PDF
      */
-    public function downloadTrialBalance(\DateTimeInterface $asOfDate = null)
+    public function downloadTrialBalance(?\DateTimeInterface $asOfDate = null)
     {
         $asOfDate = $asOfDate ?? now();
         $pdfContent = $this->generateTrialBalancePdf($asOfDate);
-        $filename = "trial-balance-" . $asOfDate->format('Y-m-d') . ".pdf";
-        
+        $filename = 'trial-balance-' . $asOfDate->format('Y-m-d') . '.pdf';
+
         return response($pdfContent)
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
@@ -178,8 +175,8 @@ class AccountingPdfService
     public function downloadIncomeStatement(\DateTimeInterface $startDate, \DateTimeInterface $endDate)
     {
         $pdfContent = $this->generateIncomeStatementPdf($startDate, $endDate);
-        $filename = "income-statement-" . $startDate->format('Y-m-d') . "-to-" . $endDate->format('Y-m-d') . ".pdf";
-        
+        $filename = 'income-statement-' . $startDate->format('Y-m-d') . '-to-' . $endDate->format('Y-m-d') . '.pdf';
+
         return response($pdfContent)
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
@@ -245,11 +242,11 @@ class AccountingPdfService
     public function downloadBalanceSheet(\DateTimeInterface $asOfDate)
     {
         $pdfContent = $this->generateBalanceSheetPdf($asOfDate);
-        $filename = 'balance-sheet-'.$asOfDate->format('Y-m-d').'.pdf';
+        $filename = 'balance-sheet-' . $asOfDate->format('Y-m-d') . '.pdf';
 
         return response($pdfContent)
             ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"')
+            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
             ->header('Cache-Control', 'private, max-age=0, must-revalidate')
             ->header('Pragma', 'public');
     }
@@ -271,11 +268,11 @@ class AccountingPdfService
         );
 
         $asOfDate = $asOfDate ?? now();
-        $filename = 'receivables-outstanding-'.$asOfDate->format('Y-m-d').'.pdf';
+        $filename = 'receivables-outstanding-' . $asOfDate->format('Y-m-d') . '.pdf';
 
         return response($pdfContent)
             ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"')
+            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
             ->header('Cache-Control', 'private, max-age=0, must-revalidate')
             ->header('Pragma', 'public');
     }
@@ -306,17 +303,146 @@ class AccountingPdfService
             ->header('Pragma', 'public');
     }
 
-        return response($pdfContent)
-            ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"')
-            ->header('Cache-Control', 'private, max-age=0, must-revalidate')
-            ->header('Pragma', 'public');
+    /**
+     * Generate Asset Register PDF
+     */
+    public function generateAssetRegister($assets): string
+    {
+        $pdf = new Dompdf;
+        $pdf->setPaper('A4', 'portrait');
+
+        $html = $this->getAssetRegisterHtml($assets);
+        $pdf->loadHtml($html);
+        $pdf->render();
+
+        return $pdf->output();
     }
+
+    /**
+     * Generate Depreciation Schedule PDF
+     */
+    public function generateDepreciationSchedule($assets): string
+    {
+        $pdf = new Dompdf;
+        $pdf->setPaper('A4', 'portrait');
+
+        $html = $this->getDepreciationScheduleHtml($assets);
+        $pdf->loadHtml($html);
+        $pdf->render();
+
+        return $pdf->output();
+    }
+
+    /**
+     * Download Asset Register PDF
+     */
+    public function downloadAssetRegister($assets)
+    {
+        $pdfContent = $this->generateAssetRegister($assets);
+        $filename = 'asset-register-' . now()->format('Y-m-d') . '.pdf';
 
         return response($pdfContent)
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
             ->header('Cache-Control', 'private, max-age=0, must-revalidate')
             ->header('Pragma', 'public');
+    }
+
+    /**
+     * Download Depreciation Schedule PDF
+     */
+    public function downloadDepreciationSchedule($assets)
+    {
+        $pdfContent = $this->generateDepreciationSchedule($assets);
+        $filename = 'depreciation-schedule-' . now()->format('Y-m-d') . '.pdf';
+
+        return response($pdfContent)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
+            ->header('Cache-Control', 'private, max-age=0, must-revalidate')
+            ->header('Pragma', 'public');
+    }
+
+    /**
+     * Get Asset Register HTML
+     */
+    private function getAssetRegisterHtml($assets): string
+    {
+        $totalCost = $assets->sum('purchase_cost');
+        $totalAccumulatedDepreciation = $assets->sum('accumulated_depreciation');
+        $totalBookValue = $assets->sum('current_book_value');
+
+        return view('accounting.pdf.asset-register', compact(
+            'assets',
+            'totalCost',
+            'totalAccumulatedDepreciation',
+            'totalBookValue'
+        ))->render();
+    }
+
+    /**
+     * Get Depreciation Schedule HTML
+     */
+    private function getDepreciationScheduleHtml($assets): string
+    {
+        $scheduleData = [];
+
+        foreach ($assets as $asset) {
+            $annualDepreciation = $asset->calculateAnnualDepreciation();
+            $remainingLife = $asset->useful_life_years - $asset->getCurrentDepreciationYear() + 1;
+
+            $scheduleData[] = [
+                'asset' => $asset,
+                'annual_depreciation' => $annualDepreciation,
+                'remaining_life' => max(0, $remainingLife),
+                'projected_depreciation' => $this->calculateProjectedDepreciation($asset),
+            ];
+        }
+
+        return view('accounting.pdf.depreciation-schedule', compact('scheduleData'))->render();
+    }
+
+    /**
+     * Calculate projected depreciation for remaining years
+     */
+    private function calculateProjectedDepreciation($asset): array
+    {
+        $projected = [];
+        $currentBookValue = $asset->current_book_value;
+        $currentYear = $asset->getCurrentDepreciationYear();
+
+        for ($year = $currentYear + 1; $year <= $asset->useful_life_years; $year++) {
+            $depreciation = match ($asset->depreciation_method) {
+                'straight_line' => $asset->calculateStraightLineDepreciation(),
+                'declining_balance' => min(
+                    $currentBookValue * ($asset->category?->default_depreciation_rate / 100 ?? 20),
+                    $currentBookValue - $asset->salvage_value
+                ),
+                'sum_of_years' => $this->calculateSumOfYearsForYear($asset, $year),
+                default => 0,
+            };
+
+            $currentBookValue -= $depreciation;
+            $projected[] = [
+                'year' => $year,
+                'depreciation' => $depreciation,
+                'book_value' => max($currentBookValue, $asset->salvage_value),
+            ];
+        }
+
+        return $projected;
+    }
+
+    /**
+     * Calculate sum of years depreciation for specific year
+     */
+    private function calculateSumOfYearsForYear($asset, $year): float
+    {
+        $years = range(1, $asset->useful_life_years);
+        $sumOfYears = array_sum($years);
+        $remainingYears = $asset->useful_life_years - $year + 1;
+        $depreciableAmount = $asset->purchase_cost - $asset->salvage_value;
+
+        return ($depreciableAmount * $remainingYears) / $sumOfYears;
     }
 }
