@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Accounting\JournalEntry;
 use App\Models\Traits\BelongsToOrganization;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -148,5 +149,13 @@ class Customer extends Model
             ->where('status', 'posted')
             ->where('voucher_type', 'SALES')
             ->sum('total_amount');
+    }
+
+    /**
+     * Get journal entries for the customer.
+     */
+    public function journalEntries(): HasMany
+    {
+        return $this->hasMany(JournalEntry::class);
     }
 }

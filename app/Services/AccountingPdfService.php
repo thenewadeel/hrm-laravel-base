@@ -10,11 +10,18 @@ use Dompdf\Options;
 class AccountingPdfService
 {
     private AccountingReportService $reportService;
+
+    private OutstandingStatementsService $outstandingService;
+
     private PdfThemeManager $themeManager;
 
-    public function __construct(AccountingReportService $reportService, PdfThemeManager $themeManager)
-    {
+    public function __construct(
+        AccountingReportService $reportService,
+        OutstandingStatementsService $outstandingService,
+        PdfThemeManager $themeManager
+    ) {
         $this->reportService = $reportService;
+        $this->outstandingService = $outstandingService;
         $this->themeManager = $themeManager;
     }
 
@@ -115,7 +122,37 @@ class AccountingPdfService
             'data' => $data,
             'asOfDate' => $asOfDate,
             'theme' => $theme,
-            'brand' => $brand
+            'brand' => $brand,
+        ])->render();
+    }
+
+    /**
+     * Generate HTML for Receivables Outstanding
+     */
+    private function getReceivablesOutstandingHtml(array $data): string
+    {
+        $theme = $this->themeManager->getTheme();
+        $brand = $this->themeManager->getBrand();
+
+        return view('accounting.pdf.receivables-outstanding', [
+            'data' => $data,
+            'theme' => $theme,
+            'brand' => $brand,
+        ])->render();
+    }
+
+    /**
+     * Generate HTML for Payables Outstanding
+     */
+    private function getPayablesOutstandingHtml(array $data): string
+    {
+        $theme = $this->themeManager->getTheme();
+        $brand = $this->themeManager->getBrand();
+
+        return view('accounting.pdf.payables-outstanding', [
+            'data' => $data,
+            'theme' => $theme,
+            'brand' => $brand,
         ])->render();
     }
 
@@ -151,13 +188,131 @@ class AccountingPdfService
     }
 
     /**
+     * Generate Receivables Outstanding PDF
+     */
+    public function generateReceivablesOutstandingPdf(
+        ?int $customerId = null,
+        ?\DateTimeInterface $asOfDate = null,
+        ?\DateTimeInterface $startDate = null,
+        ?\DateTimeInterface $endDate = null
+    ): string {
+        $data = $this->outstandingService->generateReceivablesStatement(
+            customerId: $customerId,
+            asOfDate: $asOfDate,
+            startDate: $startDate,
+            endDate: $endDate
+        );
+
+        $pdf = new Dompdf;
+        $pdf->setPaper('A4', 'portrait');
+
+        $html = $this->getReceivablesOutstandingHtml($data);
+        $pdf->loadHtml($html);
+        $pdf->render();
+
+        return $pdf->output();
+    }
+
+    /**
+     * Generate Payables Outstanding PDF
+     */
+    public function generatePayablesOutstandingPdf(
+        ?int $vendorId = null,
+        ?\DateTimeInterface $asOfDate = null,
+        ?\DateTimeInterface $startDate = null,
+        ?\DateTimeInterface $endDate = null
+    ): string {
+        $data = $this->outstandingService->generatePayablesStatement(
+            vendorId: $vendorId,
+            asOfDate: $asOfDate,
+            startDate: $startDate,
+            endDate: $endDate
+        );
+
+        $pdf = new Dompdf;
+        $pdf->setPaper('A4', 'portrait');
+
+        $html = $this->getPayablesOutstandingHtml($data);
+        $pdf->loadHtml($html);
+        $pdf->render();
+
+        return $pdf->output();
+    }
+
+    /**
      * Download Balance Sheet PDF
      */
     public function downloadBalanceSheet(\DateTimeInterface $asOfDate)
     {
         $pdfContent = $this->generateBalanceSheetPdf($asOfDate);
-        $filename = "balance-sheet-" . $asOfDate->format('Y-m-d') . ".pdf";
-        
+        $filename = 'balance-sheet-'.$asOfDate->format('Y-m-d').'.pdf';
+
+        return response($pdfContent)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"')
+            ->header('Cache-Control', 'private, max-age=0, must-revalidate')
+            ->header('Pragma', 'public');
+    }
+
+    /**
+     * Download Receivables Outstanding PDF
+     */
+    public function downloadReceivablesOutstanding(
+        ?int $customerId = null,
+        ?\DateTimeInterface $asOfDate = null,
+        ?\DateTimeInterface $startDate = null,
+        ?\DateTimeInterface $endDate = null
+    ) {
+        $pdfContent = $this->generateReceivablesOutstandingPdf(
+            customerId: $customerId,
+            asOfDate: $asOfDate,
+            startDate: $startDate,
+            endDate: $endDate
+        );
+
+        $asOfDate = $asOfDate ?? now();
+        $filename = 'receivables-outstanding-'.$asOfDate->format('Y-m-d').'.pdf';
+
+        return response($pdfContent)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"')
+            ->header('Cache-Control', 'private, max-age=0, must-revalidate')
+            ->header('Pragma', 'public');
+    }
+
+    /**
+     * Download Payables Outstanding PDF
+     */
+    public function downloadPayablesOutstanding(
+        ?int $vendorId = null,
+        ?\DateTimeInterface $asOfDate = null,
+        ?\DateTimeInterface $startDate = null,
+        ?\DateTimeInterface $endDate = null
+    ) {
+        $pdfContent = $this->generatePayablesOutstandingPdf(
+            vendorId: $vendorId,
+            asOfDate: $asOfDate,
+            startDate: $startDate,
+            endDate: $endDate
+        );
+
+        $asOfDate = $asOfDate ?? now();
+        $filename = 'payables-outstanding-' . $asOfDate->format('Y-m-d') . '.pdf';
+
+        return response($pdfContent)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
+            ->header('Cache-Control', 'private, max-age=0, must-revalidate')
+            ->header('Pragma', 'public');
+    }
+
+        return response($pdfContent)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"')
+            ->header('Cache-Control', 'private, max-age=0, must-revalidate')
+            ->header('Pragma', 'public');
+    }
+
         return response($pdfContent)
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')

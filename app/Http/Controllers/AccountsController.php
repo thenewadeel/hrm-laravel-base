@@ -60,4 +60,53 @@ class AccountsController extends Controller
 
         return $this->pdfService->downloadBalanceSheet($asOfDate);
     }
+
+    /**
+     * Download Receivables Outstanding PDF
+     */
+    public function downloadReceivablesOutstanding(Request $request)
+    {
+        $customerId = $request->get('customer_id') ? (int) $request->get('customer_id') : null;
+        $asOfDate = $request->get('as_of_date')
+            ? \DateTime::createFromFormat('Y-m-d', $request->get('as_of_date'))
+            : null;
+        $startDate = $request->get('start_date')
+            ? \DateTime::createFromFormat('Y-m-d', $request->get('start_date'))
+            : null;
+        $endDate = $request->get('end_date')
+            ? \DateTime::createFromFormat('Y-m-d', $request->get('end_date'))
+            : null;
+
+        return $this->pdfService->downloadReceivablesOutstanding(
+            customerId: $customerId,
+            asOfDate: $asOfDate,
+            startDate: $startDate,
+            endDate: $endDate
+        );
+    }
+
+    /**
+     * Download Payables Outstanding PDF
+     */
+    public function downloadPayablesOutstanding(Request $request)
+    {
+        $vendorId = $request->get('vendor_id') ? (int) $request->get('vendor_id') : null;
+        $asOfDate = $request->get('as_of_date')
+            ? \DateTime::createFromFormat('Y-m-d', $request->get('as_of_date'))
+            : null;
+        $startDate = $request->get('start_date')
+            ? \DateTime::createFromFormat('Y-m-d', $request->get('start_date'))
+            : null;
+        $endDate = $request->get('end_date')
+            ? \DateTime::createFromFormat('Y-m-d', $request->get('end_date'))
+            : null;
+
+        return $this->pdfService->downloadPayablesOutstanding(
+            vendorId: $vendorId,
+            asOfDate: $asOfDate,
+            startDate: $startDate,
+            endDate: $endDate
+        );
+    }
+
 }

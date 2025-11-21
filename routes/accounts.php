@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountsController;
+use App\Livewire\Accounting\CashPayments\Create as CreateCashPayment;
 use App\Livewire\Accounting\CashReceipts\Create as CreateCashReceipt;
 use App\Livewire\Accounting\ExpenseVoucherForm;
 use App\Livewire\Accounting\PurchaseVoucherForm;
@@ -52,8 +53,17 @@ Route::prefix('/accounts')->name('accounting.')->group(function () {
         });
     });
 
+    // Outstanding Statements
+    Route::prefix('/outstanding')->name('outstanding.')->group(function () {
+        Route::get('/receivables', \App\Livewire\Accounting\ReceivablesOutstanding::class)->name('receivables');
+        Route::get('/payables', \App\Livewire\Accounting\PayablesOutstanding::class)->name('payables');
+    });
+
+
     // PDF Downloads
     Route::get('/download/trial-balance', [AccountsController::class, 'downloadTrialBalance'])->name('download.trial-balance');
     Route::get('/download/income-statement', [AccountsController::class, 'downloadIncomeStatement'])->name('download.income-statement');
     Route::get('/download/balance-sheet', [AccountsController::class, 'downloadBalanceSheet'])->name('download.balance-sheet');
+    Route::get('/download/receivables-outstanding', [AccountsController::class, 'downloadReceivablesOutstanding'])->name('download.receivables-outstanding');
+    Route::get('/download/payables-outstanding', [AccountsController::class, 'downloadPayablesOutstanding'])->name('download.payables-outstanding');
 });

@@ -43,6 +43,11 @@
                             class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
                             Journal Entries
                         </button>
+                        <button type="button" @click="activeTab = 'outstanding'"
+                            :class="{ 'border-indigo-500 text-indigo-600': activeTab === 'outstanding', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'outstanding' }"
+                            class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                            Outstanding Statements
+                        </button>
                         <button type="button" @click="activeTab = 'reports'"
                             :class="{ 'border-indigo-500 text-indigo-600': activeTab === 'reports', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'reports' }"
                             class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
@@ -67,6 +72,39 @@
                     </div>
                     <div x-show="activeTab === 'journal-entries'">
                         @livewire('accounting.journal-entries')
+                    </div>
+                    <div x-show="activeTab === 'outstanding'" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <a href="{{ route('accounting.outstanding.receivables') }}" 
+                               class="block p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0">
+                                        <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v2m0-4c0 1.11-.89 2-2 2H8m8 0c1.11 0 2-.89 2-2V8m0 0V6a2 2 0 00-2-2H8a2 2 0 00-2 2v2"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-lg font-medium text-gray-900">Receivables Outstanding</h3>
+                                        <p class="text-sm text-gray-500">Customer outstanding balances with aging analysis</p>
+                                    </div>
+                                </div>
+                            </a>
+                            
+                            <a href="{{ route('accounting.outstanding.payables') }}" 
+                               class="block p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0">
+                                        <svg class="h-8 w-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 002-2v-4a2 2 0 00-2-2H5m0 0a2 2 0 00-2 2v4a2 2 0 002 2h16z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-lg font-medium text-gray-900">Payables Outstanding</h3>
+                                        <p class="text-sm text-gray-500">Vendor outstanding balances with aging analysis</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                     <div x-show="activeTab === 'reports'">
                         @livewire('accounting.reports')
