@@ -6,7 +6,6 @@ use App\Models\Organization;
 use App\Models\OrganizationUnit;
 use App\Models\User;
 use App\Permissions\OrganizationPermissions;
-use Illuminate\Auth\Access\Response;
 
 class OrganizationUnitPolicy
 {
@@ -34,7 +33,6 @@ class OrganizationUnitPolicy
     {
         return $user->hasPermission(OrganizationPermissions::CREATE_ORGANIZATION_UNITS);
     }
-
 
     /**
      * Determine whether the user can update the model.
@@ -74,7 +72,8 @@ class OrganizationUnitPolicy
 
     public function assign(User $user, OrganizationUnit $unit): bool
     {
-        return $user->hasPermission(OrganizationPermissions::ASSIGN_ORGANIZATION_USERS || OrganizationPermissions::CREATE_ORGANIZATION_USERS) &&
+        return ($user->hasPermission(OrganizationPermissions::ASSIGN_ORGANIZATION_USERS) ||
+                $user->hasPermission(OrganizationPermissions::CREATE_ORGANIZATION_USERS)) &&
             $user->organizations->contains($unit->organization_id);
     }
 }

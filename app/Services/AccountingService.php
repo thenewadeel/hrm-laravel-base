@@ -57,25 +57,26 @@ class AccountingService
     }
 
     /**
-     * Validate that the account type can receive the given entry type
+     * Validate that account type can receive given entry type
      *
      * @throws InvalidAccountTypeException
      */
-
-    // In app/Services/AccountingService.php - validateAccountType method
-
     private function validateAccountType(ChartOfAccount $account, string $entryType): void
     {
-        // All account types can be debited or credited depending on the transaction
-        // This validation is too restrictive for real accounting scenarios
-        // Assets: Debit to increase, Credit to decrease
-        // Liabilities: Credit to increase, Debit to decrease
-        // Equity: Credit to increase, Debit to decrease
-        // Revenue: Credit to increase, Debit to decrease
-        // Expenses: Debit to increase, Credit to decrease
+        // In accounting, all account types can receive both debits and credits
+        // The validation should only ensure the entry type is valid
+        // Normal balance rules are:
+        // Assets: Normal debit balance (debit increases, credit decreases)
+        // Liabilities: Normal credit balance (credit increases, debit decreases)
+        // Equity: Normal credit balance (credit increases, debit decreases)
+        // Revenue: Normal credit balance (credit increases, debit decreases)
+        // Expenses: Normal debit balance (debit increases, credit decreases)
 
-        // For now, we'll allow all account types to be debited or credited
-        // The business logic in services should ensure proper double-entry bookkeeping
+        // All account types can have both debits and credits in proper accounting
+        // We only need to validate that the entry type is valid
+        if (! in_array($entryType, ['debit', 'credit'])) {
+            throw new InvalidAccountTypeException($account, $entryType, "Entry type must be 'debit' or 'credit'");
+        }
     }
 
     public function createPayrollJournalEntry($payrollRun)

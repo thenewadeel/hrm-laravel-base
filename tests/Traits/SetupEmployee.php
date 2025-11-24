@@ -77,7 +77,7 @@ trait SetupEmployee
         $this->manager = $this->createEmployeeWithUser(
             'Engineering Manager',
             'manager@test.com',
-            ['manager'],
+            ['manager', 'employee'],
             'Engineering Manager'
         );
 
@@ -170,7 +170,7 @@ trait SetupEmployee
 
         // Create user account
         $user = User::factory()->create([
-            'name' => $employee->first_name . ' ' . $employee->last_name,
+            'name' => $employee->first_name.' '.$employee->last_name,
             'email' => $employee->email,
             'current_organization_id' => $this->organization->id,
         ]);
