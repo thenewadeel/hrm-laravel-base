@@ -1,9 +1,7 @@
 <?php
 
-use App\Models\Customer;
-use App\Models\Invoice;
-use App\Models\Organization;
-use App\Models\Vendor;
+namespace App\Models;
+
 use App\Models\Traits\BelongsToOrganization;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Payment extends Model
 {
-    use HasFactory, SoftDeletes, BelongsToOrganization;
+    use BelongsToOrganization, HasFactory, SoftDeletes;
 
     protected $fillable = [
         'organization_id',
@@ -33,7 +31,7 @@ class Payment extends Model
     {
         return [
             'payment_date' => 'date',
-            'amount' => 'decimal:2',
+            'amount' => 'float',
             'status' => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -117,7 +115,7 @@ class Payment extends Model
      */
     public function getStatusDisplayNameAttribute(): string
     {
-        return match($this->status) {
+        return match ($this->status) {
             'pending' => 'Pending',
             'received' => 'Received',
             'processed' => 'Processed',
@@ -141,7 +139,7 @@ class Payment extends Model
     {
         $totalInvoiceAmount = $this->invoice?->total_amount ?? 0;
         $totalPayments = $this->invoice->payments()->sum('amount');
-        
+
         return $totalPayments >= $totalInvoiceAmount;
     }
 }

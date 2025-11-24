@@ -7,10 +7,11 @@ use App\Models\Traits\BelongsToOrganization;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Customer extends Model
 {
-    use BelongsToOrganization, HasFactory;
+    use BelongsToOrganization, HasFactory, SoftDeletes;
 
     /**
      * The table associated with the model.
@@ -39,9 +40,9 @@ class Customer extends Model
     protected function casts(): array
     {
         return [
-            'credit_limit' => 'decimal:2',
-            'opening_balance' => 'decimal:2',
-            'current_balance' => 'decimal:2',
+            'credit_limit' => 'float',
+            'opening_balance' => 'float',
+            'current_balance' => 'float',
             'is_active' => 'boolean',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -117,7 +118,7 @@ class Customer extends Model
      */
     public function getDisplayNameAttribute(): string
     {
-        return "{$this->name} (Balance: {$this->current_balance})";
+        return "{$this->name} (Balance: ".sprintf('%.2f', $this->current_balance).')';
     }
 
     /**

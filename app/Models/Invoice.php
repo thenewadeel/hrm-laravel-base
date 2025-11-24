@@ -2,10 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Customer;
-use App\Models\Organization;
 use App\Models\Traits\BelongsToOrganization;
-use App\Models\Vendor;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Invoice extends Model
 {
-    use HasFactory, SoftDeletes, BelongsToOrganization;
+    use BelongsToOrganization, HasFactory, SoftDeletes;
 
     protected $fillable = [
         'organization_id',
@@ -36,8 +33,8 @@ class Invoice extends Model
         return [
             'invoice_date' => 'date',
             'due_date' => 'date',
-            'total_amount' => 'decimal:2',
-            'tax_amount' => 'decimal:2',
+            'total_amount' => 'float',
+            'tax_amount' => 'float',
             'status' => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -141,7 +138,7 @@ class Invoice extends Model
         $paidAmount = $this->payments()
             ->where('status', 'paid')
             ->sum('amount');
-            
+
         return $this->total_amount - $paidAmount;
     }
 
@@ -150,7 +147,7 @@ class Invoice extends Model
      */
     public function getStatusDisplayNameAttribute(): string
     {
-        return match($this->status) {
+        return match ($this->status) {
             'draft' => 'Draft',
             'sent' => 'Sent',
             'paid' => 'Paid',
@@ -181,7 +178,7 @@ class Invoice extends Model
     public static function generateNumber(int $organizationId): string
     {
         $year = now()->year;
-        
+
         $lastNumber = static::where('organization_id', $organizationId)
             ->whereYear('invoice_date', $year)
             ->orderBy('invoice_number', 'desc')

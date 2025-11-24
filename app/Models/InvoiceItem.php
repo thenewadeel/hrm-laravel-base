@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Invoice;
 use App\Models\Traits\BelongsToOrganization;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class InvoiceItem extends Model
 {
-    use HasFactory, BelongsToOrganization;
+    use BelongsToOrganization, HasFactory;
 
     protected $fillable = [
         'organization_id',
@@ -24,9 +23,9 @@ class InvoiceItem extends Model
     protected function casts(): array
     {
         return [
-            'quantity' => 'decimal:2',
-            'unit_price' => 'decimal:2',
-            'total_amount' => 'decimal:2',
+            'quantity' => 'float',
+            'unit_price' => 'float',
+            'total_amount' => 'float',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
