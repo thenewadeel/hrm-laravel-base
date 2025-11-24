@@ -21,7 +21,6 @@ return new class extends Migration
             $table->text('notes')->nullable();
             // $table->text('notes')->nullable()->default('NULL');
 
-
             $table->timestamps();
 
             $table->index(['transaction_id', 'item_id']);

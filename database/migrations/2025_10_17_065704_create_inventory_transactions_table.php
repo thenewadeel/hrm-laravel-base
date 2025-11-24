@@ -17,14 +17,13 @@ return new class extends Migration
             $table->foreignId('approved_by')->nullable()->constrained('users')->nullOnDelete();
             $table->string('type'); // ['incoming', 'outgoing', 'adjustment']
             // $table->enum('type', ["UP", "DOWN"])->default('UP');
-            $table->string('status')->default('draft'); //['draft', 'finalized', 'cancelled']
+            $table->string('status')->default('draft'); // ['draft', 'finalized', 'cancelled']
             $table->string('reference')->unique();
             // $table->foreignId('vendor_id');
             $table->text('notes')->nullable();
             $table->timestamp('transaction_date')->useCurrent();
             $table->timestamp('finalized_at')->nullable();
             // $table->timestamp('applied_on')->nullable()->default(null);
-
 
             $table->softDeletes();
             $table->timestamps();
