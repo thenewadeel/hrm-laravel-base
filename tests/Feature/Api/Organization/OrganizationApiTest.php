@@ -6,13 +6,10 @@ use App\Models\Organization;
 use App\Models\User;
 use App\Permissions\OrganizationPermissions;
 use App\Roles\OrganizationRoles;
-use Illuminate\Container\Attributes\Log;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Log\Logger;
-use Illuminate\Support\Facades\App;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
-use PHPUnit\Framework\Attributes\Test;
 
 class OrganizationApiTest extends TestCase
 {
@@ -42,19 +39,19 @@ class OrganizationApiTest extends TestCase
         $response = $this->actingAs($this->user)
             ->postJson('/api/organizations', [
                 'name' => 'Test Org',
-                'description' => 'Test Description'
+                'description' => 'Test Description',
             ]);
 
         $response->assertStatus(201)
             ->assertJson([
                 'data' => [
                     'name' => 'Test Org',
-                    'description' => 'Test Description'
-                ]
+                    'description' => 'Test Description',
+                ],
             ]);
 
         $this->assertDatabaseHas('organizations', [
-            'name' => 'Test Org'
+            'name' => 'Test Org',
         ]);
     }
 
@@ -111,8 +108,8 @@ class OrganizationApiTest extends TestCase
             ->assertJson([
                 'data' => [
                     'id' => $this->organization->id,
-                    'name' => $this->organization->name
-                ]
+                    'name' => $this->organization->name,
+                ],
             ]);
     }
 
@@ -135,36 +132,37 @@ class OrganizationApiTest extends TestCase
         $response = $this->actingAs($this->user)
             ->putJson("/api/organizations/{$this->organization->id}", [
                 'name' => 'Updated Name',
-                'description' => 'Updated Description'
+                'description' => 'Updated Description',
             ]);
 
         $response->assertStatus(200)
             ->assertJson([
                 'data' => [
                     'name' => 'Updated Name',
-                    'description' => 'Updated Description'
-                ]
+                    'description' => 'Updated Description',
+                ],
             ]);
     }
 
     #[Test]
     public function can_delete_organization()
-    { {
-            $organization = $this->organization; //Organization::factory()->create();
-            $user = $this->user; //User::factory()->create();
+    {
+        $organization = $this->organization; // Organization::factory()->create();
+        $user = $this->user; // User::factory()->create();
 
-            // Ensure user has proper permissions
-            $user->addRole('admin', $organization);
+        // Ensure user has proper permissions
+        $user->addRole('admin', $organization);
 
-            $response = $this->actingAs($user)
-                ->deleteJson("/api/organizations/{$organization->id}");
+        $response = $this->actingAs($user)
+            ->deleteJson("/api/organizations/{$organization->id}");
 
-            $response->assertStatus(204); // or 200 depending on your implementation
+        $response->assertStatus(204); // or 200 depending on your implementation
 
-            // Use soft delete check if applicable
-            $this->assertSoftDeleted('organizations', ['id' => $organization->id]);
-        }
+        // Use soft delete check if applicable
+        $this->assertSoftDeleted('organizations', ['id' => $organization->id]);
+
     }
+
     #[Test]
     public function guests_cannot_access_organizations()
     {
@@ -182,7 +180,7 @@ class OrganizationApiTest extends TestCase
     {
         $response = $this->actingAs($this->user)
             ->postJson('/api/organizations', [
-                'description' => 'No name provided'
+                'description' => 'No name provided',
             ]);
 
         $response->assertStatus(422)
@@ -196,7 +194,7 @@ class OrganizationApiTest extends TestCase
 
         $response = $this->actingAs($this->user)
             ->postJson('/api/organizations', [
-                'name' => 'Existing Org'
+                'name' => 'Existing Org',
             ]);
 
         $response->assertStatus(422)
@@ -216,19 +214,18 @@ class OrganizationApiTest extends TestCase
         // dd($response);
         $response->assertStatus(200)
             ->assertJsonCount(1, 'data')
-            ->assertJsonPath('data.0.id', $this->organization->id)
-        ;
+            ->assertJsonPath('data.0.id', $this->organization->id);
     }
+
     #[Test]
     public function organization_admin_can_list_members()
     {
         // [$org, $admin] = $this->createOrganizationWithUser();
         $member = User::factory()->create();
 
-
         // Attach with properly formatted JSON
         $this->organization->users()->attach($member, [
-            'roles' => json_encode(['member'])
+            'roles' => ['member'],
         ]);
 
         $response = $this->actingAs($this->user)
@@ -250,7 +247,7 @@ class OrganizationApiTest extends TestCase
             ->postJson("/api/organizations/{$this->organization->id}/invitations", [
                 'email' => $newUser->email,
                 // 'role' => 'manager' // Send as plain string
-                'roles' => 'manager'
+                'roles' => 'manager',
 
             ]);
 
@@ -266,7 +263,7 @@ class OrganizationApiTest extends TestCase
         $this->assertDatabaseHas('organization_user', [
             'organization_id' => $this->organization->id,
             'user_id' => $newUser->id,
-            'roles' => json_encode(['manager']) // Check for exact JSON string
+            'roles' => json_encode(['manager']), // Check for exact JSON string
         ]);
     }
 
@@ -275,12 +272,12 @@ class OrganizationApiTest extends TestCase
     {
         // [$org, $admin] = $this->createOrganizationWithUser();
         $existingMember = User::factory()->create();
-        $this->organization->users()->attach($existingMember, ['roles' => json_encode(['member'])]);
+        $this->organization->users()->attach($existingMember, ['roles' => ['member']]);
         // dd();
         $response = $this->actingAs($this->user)
             ->postJson("/api/organizations/{$this->organization->id}/invitations", [
                 'email' => $existingMember->email,
-                'roles' => json_encode(['manager'])
+                'roles' => json_encode(['manager']),
             ]);
 
         $response->assertStatus(422)
@@ -295,7 +292,7 @@ class OrganizationApiTest extends TestCase
 
         $response = $this->actingAs($newUser)
             ->postJson("/api/organizations/{$this->organization->id}/invitations", [
-                'email' => $newUser->email
+                'email' => $newUser->email,
             ]);
 
         $response->assertStatus(403);

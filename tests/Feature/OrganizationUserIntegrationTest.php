@@ -14,11 +14,6 @@ class OrganizationUserIntegrationTest extends TestCase
 {
     use RefreshDatabase, SetupEmployee;
 
-    // protected $organization;
-    // protected $employee;
-    // protected $manager;
-    // protected $hrUser;
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -26,11 +21,7 @@ class OrganizationUserIntegrationTest extends TestCase
 
         $this->organization = Organization::factory()->create();
 
-        // $this->employee = User::factory()->create();
-        // $this->manager = User::factory()->create();
-        // $this->hrUser = User::factory()->create();
-
-        // // Create OrganizationUser records with different roles
+        // Create OrganizationUser records with different roles
         OrganizationUser::create([
             'user_id' => $this->employee->id,
             'organization_id' => $this->organization->id,
@@ -51,15 +42,12 @@ class OrganizationUserIntegrationTest extends TestCase
             'roles' => json_encode(['hr']),
             'position' => 'HR Manager',
         ]);
-        //     'roles' => ['hr', 'manager'],
-        //     'position' => 'HR Manager'
-        // ]);
     }
 
     #[Test]
     public function organization_user_roles_are_properly_cast()
     {
-        $orgUser = OrganizationUser::first();
+        $orgUser = OrganizationUser::where('user_id', $this->employee->id)->first();
 
         $this->assertIsArray($orgUser->roles);
         $this->assertContains('employee', $orgUser->roles);
@@ -68,12 +56,9 @@ class OrganizationUserIntegrationTest extends TestCase
     #[Test]
     public function employee_can_access_employee_portal_with_employee_role()
     {
-        // $this->employee->current_organization_id = $this->organization->id;
-        // $this->employee->save();
         $this->actingAsRegularEmployee();
 
-        $response = $this // ->actingAs($this->employee)
-            ->get(route('portal.employee.dashboard'));
+        $response = $this->get(route('portal.employee.dashboard'));
 
         $response->assertStatus(200);
     }
@@ -81,17 +66,14 @@ class OrganizationUserIntegrationTest extends TestCase
     #[Test]
     public function manager_can_access_both_employee_and_manager_portals()
     {
-        // $this->manager->current_organization_id = $this->organization->id;
-        // $this->manager->save();
         $this->actingAsRegularEmployee();
+
         // Can access employee portal
-        $response1 = $this // ->actingAs($this->manager)
-            ->get(route('portal.employee.dashboard'));
+        $response1 = $this->get(route('portal.employee.dashboard'));
         $response1->assertStatus(200);
 
         // Can access manager portal
-        $response2 = $this // ->actingAs($this->manager)
-            ->get(route('portal.manager.dashboard'));
+        $response2 = $this->get(route('portal.manager.dashboard'));
         $response2->assertStatus(200);
     }
 
@@ -103,18 +85,15 @@ class OrganizationUserIntegrationTest extends TestCase
         $response = $this->actingAs($user)
             ->get(route('portal.employee.dashboard'));
 
-        $response->assertStatus(403);
+        $response->assertRedirect(route('portal.employee.setup'));
     }
 
     #[Test]
     public function employee_cannot_access_manager_portal()
     {
-        // $this->employee->current_organization_id = $this->organization->id;
-        // $this->employee->save();
         $this->actingAsRegularEmployee();
 
-        $response = $this // ->actingAs($this->employee)
-            ->get(route('portal.manager.dashboard'));
+        $response = $this->get(route('portal.manager.dashboard'));
 
         $response->assertStatus(403);
     }
@@ -122,20 +101,32 @@ class OrganizationUserIntegrationTest extends TestCase
     #[Test]
     public function has_role_method_works_correctly()
     {
-        $orgUser = OrganizationUser::where('user_id', $this->manager->id)->first();
+        $managerUser = OrganizationUser::where('user_id', $this->manager->id)
+            ->where('organization_id', $this->organization->id)
+            ->first();
 
-        $this->assertTrue($orgUser->hasRole('manager'));
-        $this->assertTrue($orgUser->hasRole('employee'));
-        $this->assertFalse($orgUser->hasRole('hr'));
+        $this->assertNotNull($managerUser, 'OrganizationUser should exist for manager');
+        $this->assertIsArray($managerUser->roles, 'Roles should be cast to array');
+        $this->assertContains('manager', $managerUser->roles, 'Roles should contain manager');
+        $this->assertContains('employee', $managerUser->roles, 'Roles should contain employee');
+        $this->assertFalse($managerUser->hasRole('hr'));
+
+        $this->assertTrue($managerUser->hasRole('manager'));
+        $this->assertTrue($managerUser->hasRole('employee'));
     }
 
     #[Test]
     public function has_any_role_method_works_correctly()
     {
-        $orgUser = OrganizationUser::where('user_id', $this->hrUser->id)->first();
+        $hrUser = OrganizationUser::where('user_id', $this->hrUser->id)->first();
 
-        $this->assertTrue($orgUser->hasAnyRole(['hr', 'admin']));
-        $this->assertTrue($orgUser->hasAnyRole(['manager', 'employee']));
-        $this->assertFalse($orgUser->hasAnyRole(['admin', 'super_admin']));
+        $roles = $hrUser->roles;
+        if (is_string($roles)) {
+            $roles = json_decode($roles, true);
+        }
+
+        $this->assertTrue($hrUser->hasAnyRole(['hr', 'admin']));
+        $this->assertTrue($hrUser->hasAnyRole(['manager', 'employee']));
+        $this->assertFalse($hrUser->hasAnyRole(['admin', 'super_admin']));
     }
 }

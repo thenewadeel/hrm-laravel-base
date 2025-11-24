@@ -31,10 +31,15 @@ test('user can view financial years index', function () {
 
 test('user can create financial year', function () {
     $organization = Organization::factory()->create();
-    $user = User::factory()->create(['current_organization_id' => $organization->id]);
+    $user = User::factory()->create([
+        'current_organization_id' => $organization->id,
+        'email_verified_at' => now(),
+    ]);
 
-    actingAs($user)
-        ->get(route('accounting.financial-years.create'))
+    $response = actingAs($user)
+        ->get(route('accounting.financial-years.create'));
+
+    $response
         ->assertSuccessful()
         ->assertSee('Create Financial Year')
         ->assertSee('name')
@@ -286,12 +291,12 @@ test('financial year service can carry forward balances', function () {
 
     expect($carriedForward)->toHaveCount(1);
     expect($carriedForward[0]->financial_year_id)->toBe($toYear->id);
-    expect($carriedForward[0]->debit_amount)->toBe(10000);
+    expect((float) $carriedForward[0]->debit_amount)->toBe(10000.00);
 
     $this->assertDatabaseHas('opening_balances', [
         'financial_year_id' => $toYear->id,
         'chart_of_account_id' => $assetAccount->id,
-        'debit_amount' => 10000,
+        'debit_amount' => 10000.00,
     ]);
 });
 
