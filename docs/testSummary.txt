@@ -6,35 +6,18 @@
 +------------------+------------------+
 | Metric           | Count/Percentage |
 +------------------+------------------+
-| Total Tests      | 611              |
-| Passed           | 493 (80.7%)      |
-| Failed           | 107 (17.5%)      |
-| Warnings/Skipped | 11 (1.8%)        |
+| Total Tests      | 623              |
+| Passed           | 541 (86.8%)      |
+| Failed           | 70 (11.2%)       |
+| Warnings/Skipped | 12 (1.9%)        |
 +------------------+------------------+
 
---- ❌ Detailed Failures (107 Total) ---
+--- ❌ Detailed Failures (70 Total) ---
 
  AccountTypeValidation (3/7 failures):
    ⨯ it throws exception when debiting liability account
    ⨯ it throws exception when crediting asset account
    ⨯ it validates account types during transaction posting
-
- FinancialYear (8/15 failures):
-   ⨯ user can create financial year
-   ⨯ user can update financial year
-   ⨯ financial year can be activated
-   ⨯ financial year can be locked
-   ⨯ financial year can be unlocked
-   ⨯ financial year service can carry forward balances
-   ⨯ financial year validation works correctly
-   ⨯ user can delete draft financial year
-
- OrganizationUnitApi (1/12 failures):
-   ⨯ cannot assign user as non admin
-
- AttendanceSync (2/9 failures):
-   ⨯ attendance data integrates with payroll
-   ⨯ employee can clock in and out
 
  Dashboard (4/11 failures):
    ⨯ it shows dashboard for users with organization
@@ -42,10 +25,8 @@
    ⨯ it shows low stock alerts
    ⨯ it shows quick action buttons
 
- BankAccount (3/10 failures):
-   ⨯ user can create bank account
+ BankAccount (1/9 failures):
    ⨯ bank account has chart of account relationship
-   ⨯ bank account can have bank transactions
 
  FixedAsset (5/11 failures):
    ⨯ user can register a new fixed asset
@@ -53,6 +34,10 @@
    ⨯ can post depreciation for asset
    ⨯ can dispose asset with gain
    ⨯ can record asset maintenance
+
+ EmployeeManagement (2/14 failures):
+   ⨯ employee attendance integration
+   ⨯ employee leave balance calculation
 
  EmployeePositionShiftIntegration (2/5 failures):
    ⨯ it assigns position and shift to employee during creation
@@ -80,46 +65,25 @@
  Create (1/7 failures):
    ⨯ voucher create component loads chart of accounts
 
+ CashManagementDemo (2/11 failures):
+   ⨯ it creates a cash payment successfully
+   ⨯ it resets form after successful payment creation
+
  OrganizationList (1/7 failures):
    ⨯ it shows empty state when no organizations
 
- OrganizationTree (2/9 failures):
+ OrganizationTree (5/9 failures):
+   ⨯ it can display the organization tree
+   ⨯ an organization unit can be dragged and dropped to another parent
+   ⨯ an organizational unit can be dropped as a root node
+   ⨯ a sibling can be dropped under another sibling
    ⨯ an empty tree renders correctly
-   ⨯ a dropped unit that does not exist does not cause an error
 
  UserPlacement (1/2 failures):
    ⨯ it can unassign a user by dropping them onto the root
 
- Customer (7/8 failures):
-   ⨯ customer can be created with financial fields
-   ⨯ customer uses soft deletes
-   ⨯ customer casts financial fields correctly
-   ⨯ customer scope active works correctly
-   ⨯ customer scope with balance works correctly
-   ⨯ customer full address concatenates correctly
-   ⨯ customer display name includes balance
-
- FinancialManagement (11/12 failures):
-   ⨯ customer financial fields work correctly
-   ⨯ customer soft deletes work
-   ⨯ customer scopes work correctly
-   ⨯ customer full address concatenates correctly
-   ⨯ invoice can be created with all relationships
-   ⨯ invoice status scopes work correctly
+ FinancialManagement (1/12 failures):
    ⨯ invoice amount due calculation works
-   ⨯ invoice overdue detection works
-   ⨯ payment can be created with relationships
-   ⨯ payment status scopes work correctly
-   ⨯ payment fully applied calculation works
-
- Invoice (7/7 failures):
-   ⨯ invoice can be created with required fields
-   ⨯ invoice belongs to customer
-   ⨯ invoice belongs to vendor
-   ⨯ invoice uses soft deletes
-   ⨯ invoice casts amounts correctly
-   ⨯ invoice casts dates correctly
-   ⨯ invoice status scope works
 
  OrganizationDashboard (5/10 failures):
    ⨯ authenticated user can access organization dashboard
@@ -128,10 +92,8 @@
    ⨯ dashboard includes department distribution data
    ⨯ analytics page displays trend data
 
- OrganizationUserIntegration (5/7 failures):
-   ⨯ organization user roles are properly cast
-   ⨯ user without organization access denied
-   ⨯ employee cannot access manager portal
+ OrganizationUserIntegration (3/7 failures):
+   ⨯ manager can access both employee and manager portals
    ⨯ has role method works correctly
    ⨯ has any role method works correctly
 
@@ -145,31 +107,27 @@
    ⨯ can export statement data
    ⨯ can get aging summary for dashboard
 
- PdfGeneration (12/12 failures):
-   ⨯ payslip download should fail initially
-   ⨯ payslip download should return pdf response
-   ⨯ payslip pdf should have correct filename
-   ⨯ trial balance download should return pdf response
-   ⨯ trial balance pdf should have correct filename
-   ⨯ income statement download should return pdf response
-   ⨯ balance sheet download should return pdf response
-   ⨯ low stock pdf download should return pdf response
-   ⨯ stock levels pdf download should return pdf response
+ PdfGeneration (1/13 failures):
    ⨯ movement pdf download should return pdf response
-   ⨯ pdf generation should handle missing data gracefully
-   ⨯ pdf generation should not exceed memory limits
 
- CompletePortal (1/7 failures):
+ CompletePortal (4/8 failures):
    ⨯ employee can clock in and out
+   ⨯ manager can access manager portal
+   ⨯ employee can view payslip details
+   ⨯ employee cannot view other employee payslips
 
  EmployeePortal (1/8 failures):
    ⨯ employee can clock in and out
 
- ManagerPortal (2/5 failures):
+ ManagerPortal (3/6 failures):
+   ⨯ manager can access their portal dashboard
    ⨯ manager can approve leave requests
    ⨯ manager can generate team reports
 
- TaxManagement (8/14 failures):
+ SetupWizard (1/5 failures):
+   ⨯ it assigns admin role to creator
+
+ TaxManagement (9/14 failures):
    ⨯ user can create tax rate
    ⨯ user can update tax rate
    ⨯ tax rate scope active works correctly
@@ -178,9 +136,10 @@
    ⨯ tax calculation service handles compound taxes
    ⨯ tax reporting service generates correct reports
    ⨯ tax compliance service creates filings correctly
+   ⨯ tax calculations are properly scoped to organization
 
 
---- ⚠️ Warnings/Skipped Tests (11 Total) ---
+--- ⚠️ Warnings/Skipped Tests (12 Total) ---
 
  EmailVerification (3/3 warnings):
    - email verification screen can be rendered → Email verification not…
@@ -190,17 +149,20 @@
  Registration (1/3 warnings):
    - registration screen cannot be rendered if support is disabled → Reg…
 
- AttendanceSync (1/9 warnings):
-   - ---------------------------------------------------------------------------------
-
- BankAccount (1/10 warnings):
-   - 'http://localhost/accounts/bank-accounts'
-
  OrganizationDashboard (5/10 warnings):
    - ---------------------------------------------------------------------------------
    - ---------------------------------------------------------------------------------
    - ---------------------------------------------------------------------------------
    - ---------------------------------------------------------------------------------
+   - ---------------------------------------------------------------------------------
+
+ PdfGeneration (1/13 warnings):
+   - ---------------------------------------------------------------------------------
+
+ CompletePortal (1/8 warnings):
+   - ---------------------------------------------------------------------------------
+
+ ManagerPortal (1/6 warnings):
    - ---------------------------------------------------------------------------------
 
 
@@ -251,6 +213,7 @@
 | UpdatePassword                  | 3/3          |
 | CashPayment                     | 7/7          |
 | CashReceipt                     | 7/7          |
+| FinancialYear                   | 15/15        |
 | SpecializedVoucher              | 10/10        |
 | Voucher                         | 11/11        |
 | AdvanceReportService            | 11/11        |
@@ -259,8 +222,9 @@
 | FinancialReportsApi             | 5/5          |
 | JournalEntriesApi               | 3/3          |
 | OrganizationApi                 | 15/15        |
+| OrganizationUnitApi             | 12/12        |
+| AttendanceSync                  | 8/8          |
 | Example                         | 1/1          |
-| EmployeeManagement              | 14/14        |
 | InventoryController             | 5/5          |
 | InventoryItemController         | 5/5          |
 | InventoryReportController       | 8/8          |
@@ -276,13 +240,14 @@
 | ChartOfAccounts                 | 5/5          |
 | MemberManager                   | 2/2          |
 | OrganizationForm                | 7/7          |
+| Customer                        | 8/8          |
+| Invoice                         | 7/7          |
 | MultiStepSetupWizard            | 5/5          |
 | OutstandingStatementsBasic      | 1/1          |
 | EmployeeIncrement               | 6/6          |
 | PayrollCalculation              | 7/7          |
 | SetupChartOfAccounts            | 3/3          |
 | SetupStore                      | 3/3          |
-| SetupWizard                     | 5/5          |
 | TenancyFeature                  | 3/3          |
 | VoucherSystem                   | 4/4          |
 +---------------------------------+--------------+

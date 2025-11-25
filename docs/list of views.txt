@@ -4,6 +4,9 @@ resources/views/
 │   │   └── index.blade.php
 │   ├── cash-receipts
 │   │   └── index.blade.php
+│   ├── financial-years
+│   │   ├── create.blade.php
+│   │   └── edit.blade.php
 │   ├── fixed-assets
 │   │   └── index.blade.php
 │   └── pdf
@@ -93,6 +96,7 @@ resources/views/
 │   └── welcome.blade.php
 ├── dashboard.blade.php
 ├── demo
+│   ├── cash-management.blade.php
 │   └── inventory-components.blade.php
 ├── emails
 │   └── team-invitation.blade.php
@@ -190,6 +194,7 @@ resources/views/
 │   │   ├── tax-reporting-dashboard.blade.php
 │   │   └── vouchers
 │   │       └── create.blade.php
+│   ├── cash-management-demo.blade.php
 │   ├── member-manager.blade.php
 │   ├── organization
 │   │   ├── organization-form.blade.php
@@ -267,4 +272,4 @@ resources/views/
 ├── terms.blade.php
 └── welcome.blade.php
 
-57 directories, 211 files
+58 directories, 215 files

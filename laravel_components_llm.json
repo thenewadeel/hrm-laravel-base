@@ -27,8 +27,8 @@
             "yunyami/clockwork"
         ]
     },
-    "timestamp": "2025-11-21T07:30:09+00:00",
-    "component_count": 409,
+    "timestamp": "2025-11-25T06:34:22+00:00",
+    "component_count": 418,
     "components": [
         {
             "type": "Model",
@@ -623,6 +623,12 @@
             "type": "Controller",
             "name": "FixedAssetController",
             "file": "app/Http/Controllers/Accounting/FixedAssetController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "BankAccountController",
+            "file": "app/Http/Controllers/Accounting/BankAccountController.php",
             "essential": false
         },
         {
@@ -1251,551 +1257,6 @@
                     {
                         "type": "create_table",
                         "table": "dimensions"
-                    }
-                ]
-            }
-        },
-        {
-            "type": "Migration",
-            "name": "2025_10_17_065345_create_inventory_stores_table",
-            "file": "database/migrations/inventory/2025_10_17_065345_create_inventory_stores_table.php",
-            "essential": false,
-            "database_schema": {
-                "tables": {
-                    "inventory_stores": [
-                        {
-                            "name": "organization_unit_id",
-                            "type": "foreignId",
-                            "options": ")->nullable()->constrained('organization_units'",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "true",
-                            "primary_key": true
-                        },
-                        {
-                            "name": "name",
-                            "type": "string",
-                            "options": "",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "true"
-                        },
-                        {
-                            "name": "code",
-                            "type": "string",
-                            "options": ")->unique(",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "true"
-                        },
-                        {
-                            "name": "location",
-                            "type": "string",
-                            "options": ")->nullable(",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "true"
-                        },
-                        {
-                            "name": "description",
-                            "type": "text",
-                            "options": ")->nullable(",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "true"
-                        },
-                        {
-                            "name": "is_active",
-                            "type": "boolean",
-                            "options": ")->default(true",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "true"
-                        }
-                    ]
-                },
-                "operations": [
-                    {
-                        "type": "create_table",
-                        "table": "inventory_stores"
-                    }
-                ]
-            }
-        },
-        {
-            "type": "Migration",
-            "name": "2025_10_17_065546_create_inventory_items_table",
-            "file": "database/migrations/inventory/2025_10_17_065546_create_inventory_items_table.php",
-            "essential": false,
-            "database_schema": {
-                "tables": {
-                    "inventory_items": [
-                        {
-                            "name": "organization_id",
-                            "type": "foreignId",
-                            "options": ")->constrained('organizations')->onDelete('cascade'",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'pcs'",
-                            "primary_key": true
-                        },
-                        {
-                            "name": "name",
-                            "type": "string",
-                            "options": "",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'pcs'"
-                        },
-                        {
-                            "name": "sku",
-                            "type": "string",
-                            "options": ")->unique(",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'pcs'"
-                        },
-                        {
-                            "name": "description",
-                            "type": "text",
-                            "options": ")->nullable(",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'pcs'"
-                        },
-                        {
-                            "name": "category",
-                            "type": "string",
-                            "options": ")->nullable(",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'pcs'"
-                        },
-                        {
-                            "name": "unit",
-                            "type": "string",
-                            "options": ")->default('pcs'",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'pcs'"
-                        },
-                        {
-                            "name": "cost_price",
-                            "type": "decimal",
-                            "options": ", 10, 2)->nullable()->comment('in cents'",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'pcs'"
-                        },
-                        {
-                            "name": "selling_price",
-                            "type": "decimal",
-                            "options": ", 10, 2)->nullable()->comment('in cents'",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'pcs'"
-                        },
-                        {
-                            "name": "reorder_level",
-                            "type": "integer",
-                            "options": ")->default(0",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'pcs'"
-                        },
-                        {
-                            "name": "is_active",
-                            "type": "boolean",
-                            "options": ")->default(true",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'pcs'"
-                        },
-                        {
-                            "name": "head_id",
-                            "type": "foreignId",
-                            "options": ")->nullable()->constrained('inventory_heads')->nullOnDelete(",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'pcs'",
-                            "primary_key": true
-                        },
-                        {
-                            "name": "code",
-                            "type": "string",
-                            "options": ")->nullable(",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'pcs'"
-                        },
-                        {
-                            "name": "balance",
-                            "type": "decimal",
-                            "options": ", 8, 2",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'pcs'"
-                        },
-                        {
-                            "name": "item_id",
-                            "type": "foreignId",
-                            "options": "",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'pcs'",
-                            "primary_key": true
-                        },
-                        {
-                            "name": "inventory_id",
-                            "type": "foreignId",
-                            "options": "",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'pcs'",
-                            "primary_key": true
-                        }
-                    ]
-                },
-                "operations": [
-                    {
-                        "type": "create_table",
-                        "table": "inventory_items"
-                    }
-                ]
-            }
-        },
-        {
-            "type": "Migration",
-            "name": "2025_10_17_065638_create_inventory_store_items_table",
-            "file": "database/migrations/inventory/2025_10_17_065638_create_inventory_store_items_table.php",
-            "essential": false,
-            "database_schema": {
-                "tables": {
-                    "inventory_store_items": [
-                        {
-                            "name": "store_id",
-                            "type": "foreignId",
-                            "options": ")->constrained('inventory_stores')->nullOnDelete(",
-                            "nullable": true,
-                            "default": "0",
-                            "primary_key": true
-                        },
-                        {
-                            "name": "item_id",
-                            "type": "foreignId",
-                            "options": ")->constrained('inventory_items')->nullOnDelete(",
-                            "nullable": true,
-                            "default": "0",
-                            "primary_key": true
-                        },
-                        {
-                            "name": "head_id",
-                            "type": "foreignId",
-                            "options": ")->nullable()->constrained('inventory_heads')->nullOnDelete(",
-                            "nullable": true,
-                            "default": "0",
-                            "primary_key": true
-                        },
-                        {
-                            "name": "quantity",
-                            "type": "integer",
-                            "options": ")->default(0",
-                            "nullable": true,
-                            "default": "0"
-                        },
-                        {
-                            "name": "min_stock",
-                            "type": "integer",
-                            "options": ")->nullable(",
-                            "nullable": true,
-                            "default": "0"
-                        },
-                        {
-                            "name": "max_stock",
-                            "type": "integer",
-                            "options": ")->nullable(",
-                            "nullable": true,
-                            "default": "0"
-                        }
-                    ]
-                },
-                "operations": [
-                    {
-                        "type": "create_table",
-                        "table": "inventory_store_items"
-                    }
-                ]
-            }
-        },
-        {
-            "type": "Migration",
-            "name": "2025_10_18_075344_create_inventory_heads_table",
-            "file": "database/migrations/inventory/2025_10_18_075344_create_inventory_heads_table.php",
-            "essential": false,
-            "database_schema": {
-                "tables": {
-                    "inventory_heads": [
-                        {
-                            "name": "name",
-                            "type": "string",
-                            "options": "",
-                            "nullable": true,
-                            "default": "'NULL'"
-                        },
-                        {
-                            "name": "description",
-                            "type": "text",
-                            "options": ")->nullable()->default('NULL'",
-                            "nullable": true,
-                            "default": "'NULL'"
-                        },
-                        {
-                            "name": "image",
-                            "type": "string",
-                            "options": ")->nullable()->default('NULL'",
-                            "nullable": true,
-                            "default": "'NULL'"
-                        },
-                        {
-                            "name": "store_id",
-                            "type": "foreignId",
-                            "options": ")->constrained('inventory_stores')->nullOnDelete(",
-                            "nullable": true,
-                            "default": "'NULL'",
-                            "primary_key": true
-                        }
-                    ]
-                },
-                "operations": [
-                    {
-                        "type": "create_table",
-                        "table": "inventory_heads"
-                    }
-                ]
-            }
-        },
-        {
-            "type": "Migration",
-            "name": "2025_10_17_065704_create_inventory_transactions_table",
-            "file": "database/migrations/inventory/2025_10_17_065704_create_inventory_transactions_table.php",
-            "essential": false,
-            "database_schema": {
-                "tables": {
-                    "inventory_transactions": [
-                        {
-                            "name": "store_id",
-                            "type": "foreignId",
-                            "options": ")->constrained('inventory_stores')->nullOnDelete(",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'UP'",
-                            "primary_key": true
-                        },
-                        {
-                            "name": "inventory_id",
-                            "type": "foreignId",
-                            "options": "",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'UP'",
-                            "primary_key": true
-                        },
-                        {
-                            "name": "created_by",
-                            "type": "foreignId",
-                            "options": ")->constrained('users')->onDelete('cascade'",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'UP'"
-                        },
-                        {
-                            "name": "staff_id",
-                            "type": "foreignId",
-                            "options": "",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'UP'",
-                            "primary_key": true
-                        },
-                        {
-                            "name": "approved_by",
-                            "type": "foreignId",
-                            "options": ")->nullable()->constrained('users')->nullOnDelete(",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'UP'"
-                        },
-                        {
-                            "name": "type",
-                            "type": "string",
-                            "options": "",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'UP'"
-                        },
-                        {
-                            "name": "type",
-                            "type": "enum",
-                            "options": ", [\"UP\", \"DOWN\"])->default('UP'",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'UP'"
-                        },
-                        {
-                            "name": "status",
-                            "type": "string",
-                            "options": ")->default('draft'",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'UP'"
-                        },
-                        {
-                            "name": "reference",
-                            "type": "string",
-                            "options": ")->unique(",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'UP'"
-                        },
-                        {
-                            "name": "vendor_id",
-                            "type": "foreignId",
-                            "options": "",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'UP'",
-                            "primary_key": true
-                        },
-                        {
-                            "name": "notes",
-                            "type": "text",
-                            "options": ")->nullable(",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'UP'"
-                        },
-                        {
-                            "name": "transaction_date",
-                            "type": "timestamp",
-                            "options": ")->useCurrent(",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'UP'"
-                        },
-                        {
-                            "name": "finalized_at",
-                            "type": "timestamp",
-                            "options": ")->nullable(",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'UP'"
-                        },
-                        {
-                            "name": "applied_on",
-                            "type": "timestamp",
-                            "options": ")->nullable()->default(null",
-                            "nullable": true,
-                            "unique": true,
-                            "default": "'UP'"
-                        }
-                    ]
-                },
-                "operations": [
-                    {
-                        "type": "create_table",
-                        "table": "inventory_transactions"
-                    }
-                ]
-            }
-        },
-        {
-            "type": "Migration",
-            "name": "2025_10_17_065723_create_inventory_transactions_items_table",
-            "file": "database/migrations/inventory/2025_10_17_065723_create_inventory_transactions_items_table.php",
-            "essential": false,
-            "database_schema": {
-                "tables": {
-                    "inventory_transaction_items": [
-                        {
-                            "name": "transaction_id",
-                            "type": "foreignId",
-                            "options": ")->constrained('inventory_transactions')->onDelete('cascade'",
-                            "nullable": true,
-                            "default": "'NULL'",
-                            "primary_key": true
-                        },
-                        {
-                            "name": "inventory_transaction_id",
-                            "type": "foreignId",
-                            "options": "",
-                            "nullable": true,
-                            "default": "'NULL'",
-                            "primary_key": true
-                        },
-                        {
-                            "name": "item_id",
-                            "type": "foreignId",
-                            "options": ")->constrained('inventory_items')->onDelete('cascade'",
-                            "nullable": true,
-                            "default": "'NULL'",
-                            "primary_key": true
-                        },
-                        {
-                            "name": "item_id",
-                            "type": "foreignId",
-                            "options": "",
-                            "nullable": true,
-                            "default": "'NULL'",
-                            "primary_key": true
-                        },
-                        {
-                            "name": "quantity",
-                            "type": "integer",
-                            "options": "",
-                            "nullable": true,
-                            "default": "'NULL'"
-                        },
-                        {
-                            "name": "qty",
-                            "type": "integer",
-                            "options": "",
-                            "nullable": true,
-                            "default": "'NULL'"
-                        },
-                        {
-                            "name": "unit_price",
-                            "type": "integer",
-                            "options": ")->nullable(",
-                            "nullable": true,
-                            "default": "'NULL'"
-                        },
-                        {
-                            "name": "rate",
-                            "type": "decimal",
-                            "options": ", 8, 2",
-                            "nullable": true,
-                            "default": "'NULL'"
-                        },
-                        {
-                            "name": "notes",
-                            "type": "text",
-                            "options": ")->nullable(",
-                            "nullable": true,
-                            "default": "'NULL'"
-                        },
-                        {
-                            "name": "notes",
-                            "type": "text",
-                            "options": ")->nullable()->default('NULL'",
-                            "nullable": true,
-                            "default": "'NULL'"
-                        }
-                    ]
-                },
-                "operations": [
-                    {
-                        "type": "create_table",
-                        "table": "inventory_transaction_items"
                     }
                 ]
             }
@@ -6575,6 +6036,869 @@
             }
         },
         {
+            "type": "Migration",
+            "name": "2025_11_21_073320_add_missing_fields_to_customers_table",
+            "file": "database/migrations/2025_11_21_073320_add_missing_fields_to_customers_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": [],
+                "operations": [
+                    {
+                        "type": "update_table",
+                        "table": "customers",
+                        "changes": [
+                            {
+                                "operation": "string",
+                                "column": "city",
+                                "options": ")->nullable("
+                            },
+                            {
+                                "operation": "string",
+                                "column": "state",
+                                "options": ")->nullable("
+                            },
+                            {
+                                "operation": "string",
+                                "column": "postal_code",
+                                "options": ")->nullable("
+                            },
+                            {
+                                "operation": "string",
+                                "column": "country",
+                                "options": ")->nullable("
+                            },
+                            {
+                                "operation": "decimal",
+                                "column": "opening_balance",
+                                "options": ", 15, 2)->default(0"
+                            },
+                            {
+                                "operation": "decimal",
+                                "column": "current_balance",
+                                "options": ", 15, 2)->default(0"
+                            },
+                            {
+                                "operation": "boolean",
+                                "column": "is_active",
+                                "options": ")->default(true"
+                            },
+                            {
+                                "operation": "text",
+                                "column": "notes",
+                                "options": ")->nullable("
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_21_073705_create_invoices_table",
+            "file": "database/migrations/2025_11_21_073705_create_invoices_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "invoices": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('organizations'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "customer_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('customers'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "vendor_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('vendors'",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "invoice_number",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "invoice_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "due_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "total_amount",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "tax_amount",
+                            "type": "decimal",
+                            "options": ", 15, 2)->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "status",
+                            "type": "enum",
+                            "options": ", ['draft', 'sent', 'paid', 'overdue', 'cancelled'])->default('draft'",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "created_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users'",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "updated_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users'",
+                            "nullable": true,
+                            "default": "0"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "invoices"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_21_073801_create_payments_table",
+            "file": "database/migrations/2025_11_21_073801_create_payments_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "payments": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('organizations'",
+                            "nullable": true,
+                            "default": "'bank_transfer'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "customer_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('customers'",
+                            "nullable": true,
+                            "default": "'bank_transfer'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "vendor_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('vendors'",
+                            "nullable": true,
+                            "default": "'bank_transfer'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "invoice_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('invoices'",
+                            "nullable": true,
+                            "default": "'bank_transfer'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "payment_date",
+                            "type": "date",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'bank_transfer'"
+                        },
+                        {
+                            "name": "amount",
+                            "type": "decimal",
+                            "options": ", 15, 2",
+                            "nullable": true,
+                            "default": "'bank_transfer'"
+                        },
+                        {
+                            "name": "payment_method",
+                            "type": "enum",
+                            "options": ", ['cash', 'bank_transfer', 'check', 'credit_card', 'other'])->default('bank_transfer'",
+                            "nullable": true,
+                            "default": "'bank_transfer'"
+                        },
+                        {
+                            "name": "reference_number",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "'bank_transfer'"
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "'bank_transfer'"
+                        },
+                        {
+                            "name": "status",
+                            "type": "enum",
+                            "options": ", ['pending', 'received', 'processed', 'failed'])->default('pending'",
+                            "nullable": true,
+                            "default": "'bank_transfer'"
+                        },
+                        {
+                            "name": "created_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users'",
+                            "nullable": true,
+                            "default": "'bank_transfer'"
+                        },
+                        {
+                            "name": "updated_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users'",
+                            "nullable": true,
+                            "default": "'bank_transfer'"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "payments"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_11_21_073839_create_invoice_items_table",
+            "file": "database/migrations/2025_11_21_073839_create_invoice_items_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "invoice_items": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('organizations'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "invoice_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('invoices'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "description",
+                            "type": "string",
+                            "options": ""
+                        },
+                        {
+                            "name": "quantity",
+                            "type": "decimal",
+                            "options": ", 10, 2"
+                        },
+                        {
+                            "name": "unit_price",
+                            "type": "decimal",
+                            "options": ", 15, 2"
+                        },
+                        {
+                            "name": "total_amount",
+                            "type": "decimal",
+                            "options": ", 15, 2"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "invoice_items"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_10_17_065345_create_inventory_stores_table",
+            "file": "database/migrations/2025_10_17_065345_create_inventory_stores_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "inventory_stores": [
+                        {
+                            "name": "organization_unit_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('organization_units'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "code",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "location",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        },
+                        {
+                            "name": "is_active",
+                            "type": "boolean",
+                            "options": ")->default(true",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "true"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "inventory_stores"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_10_17_065546_create_inventory_items_table",
+            "file": "database/migrations/2025_10_17_065546_create_inventory_items_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "inventory_items": [
+                        {
+                            "name": "organization_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('organizations')->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "sku",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "category",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "unit",
+                            "type": "string",
+                            "options": ")->default('pcs'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "cost_price",
+                            "type": "decimal",
+                            "options": ", 10, 2)->nullable()->comment('in cents'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "selling_price",
+                            "type": "decimal",
+                            "options": ", 10, 2)->nullable()->comment('in cents'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "reorder_level",
+                            "type": "integer",
+                            "options": ")->default(0",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "is_active",
+                            "type": "boolean",
+                            "options": ")->default(true",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "head_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('inventory_heads')->nullOnDelete(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "code",
+                            "type": "string",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "balance",
+                            "type": "decimal",
+                            "options": ", 8, 2",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'"
+                        },
+                        {
+                            "name": "item_id",
+                            "type": "foreignId",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "inventory_id",
+                            "type": "foreignId",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'pcs'",
+                            "primary_key": true
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "inventory_items"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_10_17_065638_create_inventory_store_items_table",
+            "file": "database/migrations/2025_10_17_065638_create_inventory_store_items_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "inventory_store_items": [
+                        {
+                            "name": "store_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('inventory_stores')->nullOnDelete(",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "item_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('inventory_items')->nullOnDelete(",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "head_id",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('inventory_heads')->nullOnDelete(",
+                            "nullable": true,
+                            "default": "0",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "quantity",
+                            "type": "integer",
+                            "options": ")->default(0",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "min_stock",
+                            "type": "integer",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        },
+                        {
+                            "name": "max_stock",
+                            "type": "integer",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "0"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "inventory_store_items"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_10_17_065704_create_inventory_transactions_table",
+            "file": "database/migrations/2025_10_17_065704_create_inventory_transactions_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "inventory_transactions": [
+                        {
+                            "name": "store_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('inventory_stores')->nullOnDelete(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "inventory_id",
+                            "type": "foreignId",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "created_by",
+                            "type": "foreignId",
+                            "options": ")->constrained('users')->onDelete('cascade'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'"
+                        },
+                        {
+                            "name": "staff_id",
+                            "type": "foreignId",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "approved_by",
+                            "type": "foreignId",
+                            "options": ")->nullable()->constrained('users')->nullOnDelete(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'"
+                        },
+                        {
+                            "name": "type",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'"
+                        },
+                        {
+                            "name": "type",
+                            "type": "enum",
+                            "options": ", [\"UP\", \"DOWN\"])->default('UP'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'"
+                        },
+                        {
+                            "name": "status",
+                            "type": "string",
+                            "options": ")->default('draft'",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'"
+                        },
+                        {
+                            "name": "reference",
+                            "type": "string",
+                            "options": ")->unique(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'"
+                        },
+                        {
+                            "name": "vendor_id",
+                            "type": "foreignId",
+                            "options": "",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'"
+                        },
+                        {
+                            "name": "transaction_date",
+                            "type": "timestamp",
+                            "options": ")->useCurrent(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'"
+                        },
+                        {
+                            "name": "finalized_at",
+                            "type": "timestamp",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'"
+                        },
+                        {
+                            "name": "applied_on",
+                            "type": "timestamp",
+                            "options": ")->nullable()->default(null",
+                            "nullable": true,
+                            "unique": true,
+                            "default": "'UP'"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "inventory_transactions"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_10_17_065723_create_inventory_transactions_items_table",
+            "file": "database/migrations/2025_10_17_065723_create_inventory_transactions_items_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "inventory_transaction_items": [
+                        {
+                            "name": "transaction_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('inventory_transactions')->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "'NULL'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "inventory_transaction_id",
+                            "type": "foreignId",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'NULL'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "item_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('inventory_items')->onDelete('cascade'",
+                            "nullable": true,
+                            "default": "'NULL'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "item_id",
+                            "type": "foreignId",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'NULL'",
+                            "primary_key": true
+                        },
+                        {
+                            "name": "quantity",
+                            "type": "integer",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'NULL'"
+                        },
+                        {
+                            "name": "qty",
+                            "type": "integer",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'NULL'"
+                        },
+                        {
+                            "name": "unit_price",
+                            "type": "integer",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "'NULL'"
+                        },
+                        {
+                            "name": "rate",
+                            "type": "decimal",
+                            "options": ", 8, 2",
+                            "nullable": true,
+                            "default": "'NULL'"
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable(",
+                            "nullable": true,
+                            "default": "'NULL'"
+                        },
+                        {
+                            "name": "notes",
+                            "type": "text",
+                            "options": ")->nullable()->default('NULL'",
+                            "nullable": true,
+                            "default": "'NULL'"
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "inventory_transaction_items"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_10_18_075344_create_inventory_heads_table",
+            "file": "database/migrations/2025_10_18_075344_create_inventory_heads_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": {
+                    "inventory_heads": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "options": "",
+                            "nullable": true,
+                            "default": "'NULL'"
+                        },
+                        {
+                            "name": "description",
+                            "type": "text",
+                            "options": ")->nullable()->default('NULL'",
+                            "nullable": true,
+                            "default": "'NULL'"
+                        },
+                        {
+                            "name": "image",
+                            "type": "string",
+                            "options": ")->nullable()->default('NULL'",
+                            "nullable": true,
+                            "default": "'NULL'"
+                        },
+                        {
+                            "name": "store_id",
+                            "type": "foreignId",
+                            "options": ")->constrained('inventory_stores')->nullOnDelete(",
+                            "nullable": true,
+                            "default": "'NULL'",
+                            "primary_key": true
+                        }
+                    ]
+                },
+                "operations": [
+                    {
+                        "type": "create_table",
+                        "table": "inventory_heads"
+                    }
+                ]
+            }
+        },
+        {
             "type": "Route",
             "name": "console",
             "file": "routes/console.php",
@@ -6607,8 +6931,8 @@
             "route_summary": [
                 "Route::prefix('portal/employee')->name('portal.employee.')->group(function () { Route::get('/dashboa...",
                 "Route::get('/attendance', [EmployeePortalController::class, 'attendance'])->name('attendance');",
-                "Route::post('/clock-in', [EmployeePortalController::class, 'clockIn'])->name('clock-in');",
-                "Route::post('/clock-out', [EmployeePortalController::class, 'clockOut'])->name('clock-out');",
+                "Route::post('/clock-in', [AttendanceController::class, 'clockIn'])->name('clock-in');",
+                "Route::post('/clock-out', [AttendanceController::class, 'clockOut'])->name('clock-out');",
                 "Route::get('/setup', [EmployeePortalController::class, 'setup'])->name('setup');",
                 "Route::post('/setup', [EmployeePortalController::class, 'completeSetup'])->name('complete-setup');",
                 "Route::get('/leave', [EmployeePortalController::class, 'leave'])->name('leave');",
@@ -6617,8 +6941,6 @@
                 "Route::get('/payslips', [EmployeePortalController::class, 'payslips'])->name('payslips');",
                 "Route::get('/payslips/{payslip}', [EmployeePortalController::class, 'showPayslip'])->name('payslips....",
                 "Route::get('/payslips/{payslip}/download', [EmployeePortalController::class, 'downloadPayslip'])->na...",
-                "Route::prefix('portal/employee')->name('portal.employee.')->group(function () { Route::post('/clock-...",
-                "Route::post('/clock-out', [AttendanceController::class, 'clockOut'])->name('clock-out');",
                 "Route::prefix('payroll')->name('payroll.')->group(function () { Route::get('/dashboard', [EnhancedPa...",
                 "Route::get('/processing', [EnhancedPayrollController::class, 'processing'])->name('processing');",
                 "Route::post('/process', [EnhancedPayrollController::class, 'processPayroll'])->name('process');",
@@ -6673,7 +6995,7 @@
             "name": "web",
             "file": "routes/web.php",
             "essential": true,
-            "content_preview": "<?php\n\nuse App\\Http\\Controllers\\AccountsController;\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::get('/', function () {\n    return view('welcome');\n});\n\n// Route::middleware([\n//     'auth:sanctum',\n//     config('jetstream.auth_session'),\n//     'verified',\n// ])->group(function () {\n//     Route::get('/dashboard', function () {\n//         return view('dashboard');\n//     })->name('dashboard');\n// });\n\n\n// routes/web.php\nRoute::middleware(['auth', 'verified'])->group(function () {\n    Route::g...",
+            "content_preview": "<?php\n\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::get('/', function () {\n    return view('welcome');\n});\n\n// Route::middleware([\n//     'auth:sanctum',\n//     config('jetstream.auth_session'),\n//     'verified',\n// ])->group(function () {\n//     Route::get('/dashboard', function () {\n//         return view('dashboard');\n//     })->name('dashboard');\n// });\n\n// routes/web.php\nRoute::middleware(['auth', 'verified'])->group(function () {\n    Route::get('/dashboard', [App\\Http\\Controllers\\Dashboa...",
             "route_summary": [
                 "Route::get('/', function () { return view('welcome');",
                 "Route::middleware([ // 'auth:sanctum', // config('jetstream.auth_session'), // 'verified', // ])->gr...",
@@ -6713,7 +7035,8 @@
             "file": "routes/demo.php",
             "essential": false,
             "route_summary": [
-                "Route::get('/demo/inventory-components', function () { return view('demo.inventory-components');"
+                "Route::get('/demo/inventory-components', function () { return view('demo.inventory-components');",
+                "Route::get('/demo/cash-management', function () { $organization = \\App\\Models\\Organization::first();"
             ]
         },
         {
@@ -6792,7 +7115,7 @@
                 "Route::get('/payables', \\App\\Livewire\\Accounting\\PayablesOutstanding::class)->name('payables');",
                 "Route::prefix('/bank-accounts')->name('bank-accounts.')->group(function () { Route::get('/', BankAcc...",
                 "Route::get('/create', CreateBankAccount::class)->name('create');",
-                "Route::post('/', [CreateBankAccount::class, 'save'])->name('store');",
+                "Route::post('/', [BankAccountController::class, 'store'])->name('store');",
                 "Route::prefix('/bank-statements')->name('bank-statements.')->group(function () { Route::get('/', Ban...",
                 "Route::get('/import', ImportBankStatement::class)->name('import');",
                 "Route::prefix('/bank-transactions')->name('bank-transactions.')->group(function () { Route::get('/',...",
@@ -6826,20 +7149,20 @@
                 "Route::get('/edit/{taxExemption}', \\App\\Livewire\\Accounting\\TaxExemptionForm::class)->name('edit');",
                 "Route::prefix('/reporting')->name('reporting.')->group(function () { Route::get('/', \\App\\Livewire\\A...",
                 "Route::prefix('/filings')->name('filings.')->group(function () { Route::get('/', \\App\\Livewire\\Accou...",
-                "Route::get('/download/tax-report', [\\App\\Http\\Controllers\\TaxController::class, 'downloadTaxReport']...",
-                "Route::get('/download/tax-liability', [\\App\\Http\\Controllers\\TaxController::class, 'downloadTaxLiabi...",
-                "Route::get('/download/filing-schedule', [\\App\\Http\\Controllers\\TaxController::class, 'downloadFiling...",
-                "Route::prefix('/financial-years')->name('financial-years.')->group(function () { Route::get('/', \\Ap...",
-                "Route::get('/create', \\App\\Livewire\\Accounting\\FinancialYears\\FinancialYearForm::class)->name('creat...",
-                "Route::post('/', [\\App\\Http\\Controllers\\FinancialYearController::class, 'store'])->name('store');",
+                "Route::get('/download/tax-report', [TaxController::class, 'downloadTaxReport'])->name('download.tax-...",
+                "Route::get('/download/tax-liability', [TaxController::class, 'downloadTaxLiability'])->name('downloa...",
+                "Route::get('/download/filing-schedule', [TaxController::class, 'downloadFilingSchedule'])->name('dow...",
+                "Route::prefix('/financial-years')->name('financial-years.')->group(function () { // Routes without p...",
+                "Route::get('/create', [FinancialYearController::class, 'create'])->name('create');",
+                "Route::post('/', [FinancialYearController::class, 'store'])->name('store');",
                 "Route::get('/edit/{financialYear}', \\App\\Livewire\\Accounting\\FinancialYears\\FinancialYearForm::class...",
-                "Route::put('/{financialYear}', [\\App\\Http\\Controllers\\FinancialYearController::class, 'update'])->na...",
-                "Route::delete('/{financialYear}', [\\App\\Http\\Controllers\\FinancialYearController::class, 'destroy'])...",
-                "Route::post('/{financialYear}/activate', [\\App\\Http\\Controllers\\FinancialYearController::class, 'act...",
-                "Route::post('/{financialYear}/lock', [\\App\\Http\\Controllers\\FinancialYearController::class, 'lock'])...",
-                "Route::post('/{financialYear}/unlock', [\\App\\Http\\Controllers\\FinancialYearController::class, 'unloc...",
+                "Route::put('/{financialYear}', [FinancialYearController::class, 'update']) ->where('financialYear', ...",
+                "Route::delete('/{financialYear}', [FinancialYearController::class, 'destroy']) ->where('financialYea...",
+                "Route::post('/{financialYear}/activate', [FinancialYearController::class, 'activate']) ->where('fina...",
+                "Route::post('/{financialYear}/lock', [FinancialYearController::class, 'lock']) ->where('financialYea...",
+                "Route::post('/{financialYear}/unlock', [FinancialYearController::class, 'unlock']) ->where('financia...",
                 "Route::get('/opening-balances/{financialYear}', \\App\\Livewire\\Accounting\\FinancialYears\\OpeningBalan...",
-                "Route::get('/close/{financialYear}', \\App\\Livewire\\Accounting\\FinancialYears\\YearEndClosing::class)-..."
+                "Route::get('/close/{financialYear}', \\App\\Livewire\\Accounting\\FinancialYears\\YearEndClosing::class) ..."
             ]
         },
         {
@@ -7691,6 +8014,12 @@
         },
         {
             "type": "View",
+            "name": "cash-management-demo.blade.php",
+            "file": "resources/views/livewire/cash-management-demo.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
             "name": "index.blade.php",
             "file": "resources/views/organizations/index.blade.php",
             "essential": false
@@ -7795,6 +8124,12 @@
             "type": "View",
             "name": "inventory-components.blade.php",
             "file": "resources/views/demo/inventory-components.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "cash-management.blade.php",
+            "file": "resources/views/demo/cash-management.blade.php",
             "essential": false
         },
         {
@@ -8149,6 +8484,18 @@
             "type": "View",
             "name": "index.blade.php",
             "file": "resources/views/accounting/fixed-assets/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "create.blade.php",
+            "file": "resources/views/accounting/financial-years/create.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "edit.blade.php",
+            "file": "resources/views/accounting/financial-years/edit.blade.php",
             "essential": false
         },
         {
