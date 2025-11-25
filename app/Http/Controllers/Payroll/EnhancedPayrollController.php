@@ -55,19 +55,74 @@ class EnhancedPayrollController extends Controller
     public function processing(Request $request)
     {
         $period = $request->get('period', now()->format('Y-m'));
-        $organizationId = auth()->user()->currentOrganization->id;
+        $employeeId = $request->get('employee_id');
 
-        $employees = Employee::where('organization_id', $organizationId)
-            ->where('is_active', true)
-            ->with(['allowances.allowanceType', 'deductions.deductionType', 'loans', 'salaryAdvances'])
-            ->get();
+        // Convert period string to Carbon object for view
+        $period = \Carbon\Carbon::createFromFormat('Y-m', $period);
 
-        $payrollData = [];
-        foreach ($employees as $employee) {
-            $payrollData[$employee->id] = $this->payrollService->calculateEmployeePayroll($employee, $period);
+        // Get organization ID from authenticated user
+        $organizationId = auth()->user()->current_organization_id ??
+                        auth()->user()->organizations()->first()->id;
+
+        // If specific employee requested, filter for that employee only
+        if ($employeeId) {
+            $employees = Employee::where('organization_id', $organizationId)
+                ->where('id', $employeeId)
+                ->where('is_active', true)
+                ->with(['allowances.allowanceType', 'deductions.deductionType', 'loans', 'salaryAdvances'])
+                ->get();
+            $employee = $employees->first();
+        } else {
+            $employees = Employee::where('organization_id', $organizationId)
+                ->where('is_active', true)
+                ->with(['allowances.allowanceType', 'deductions.deductionType', 'loans', 'salaryAdvances'])
+                ->get();
+            $employee = null;
         }
 
-        return view('payroll.processing', compact('employees', 'payrollData', 'period'));
+        $payrollData = [];
+        $totalHours = 0;
+        $regularHours = 0;
+        $overtimeHours = 0;
+        $attendanceData = collect();
+
+        foreach ($employees as $employee) {
+            $payrollData[$employee->id] = $this->payrollService->calculateEmployeePayroll($employee, $period);
+
+            // Calculate attendance totals for period
+            $startDate = $period->copy()->startOfMonth();
+            $endDate = $period->copy()->endOfMonth();
+
+            $attendanceRecords = \App\Models\AttendanceRecord::where('employee_id', $employee->id)
+                ->where('record_date', '>=', $startDate)
+                ->where('record_date', '<=', $endDate)
+                ->get();
+
+            $attendanceData = $attendanceData->merge($attendanceRecords);
+
+            $employeeTotalHours = $attendanceRecords->sum('total_hours');
+            $employeeRegularHours = $attendanceRecords->sum(function ($record) {
+                return min($record->total_hours, 8); // Regular hours capped at 8 per day
+            });
+            $employeeOvertimeHours = $attendanceRecords->sum(function ($record) {
+                return max(0, $record->total_hours - 8); // Overtime is hours beyond 8 per day
+            });
+
+            $totalHours += $employeeTotalHours;
+            $regularHours += $employeeRegularHours;
+            $overtimeHours += $employeeOvertimeHours;
+        }
+
+        return view('payroll.processing', compact(
+            'employees',
+            'employee',
+            'payrollData',
+            'attendanceData',
+            'period',
+            'totalHours',
+            'regularHours',
+            'overtimeHours'
+        ));
     }
 
     /**

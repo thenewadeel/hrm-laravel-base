@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('portal/employee')->name('portal.employee.')->group(function () {
     Route::get('/dashboard', [EmployeePortalController::class, 'dashboard'])->name('dashboard');
     Route::get('/attendance', [EmployeePortalController::class, 'attendance'])->name('attendance');
-    Route::post('/clock-in', [EmployeePortalController::class, 'clockIn'])->name('clock-in');
-    Route::post('/clock-out', [EmployeePortalController::class, 'clockOut'])->name('clock-out');
+    Route::post('/clock-in', [AttendanceController::class, 'clockIn'])->name('clock-in');
+    Route::post('/clock-out', [AttendanceController::class, 'clockOut'])->name('clock-out');
 
     // Setup Routes
     Route::get('/setup', [EmployeePortalController::class, 'setup'])->name('setup');
@@ -34,12 +34,6 @@ Route::prefix('portal/employee')->name('portal.employee.')->group(function () {
     Route::get('/payslips', [EmployeePortalController::class, 'payslips'])->name('payslips');
     Route::get('/payslips/{payslip}', [EmployeePortalController::class, 'showPayslip'])->name('payslips.show');
     Route::get('/payslips/{payslip}/download', [EmployeePortalController::class, 'downloadPayslip'])->name('payslips.download');
-});
-
-// Employee Portal Routes
-Route::prefix('portal/employee')->name('portal.employee.')->group(function () {
-    Route::post('/clock-in', [AttendanceController::class, 'clockIn'])->name('clock-in');
-    Route::post('/clock-out', [AttendanceController::class, 'clockOut'])->name('clock-out');
 });
 
 // Enhanced Payroll Routes
@@ -76,7 +70,7 @@ Route::prefix('payroll')->name('payroll.')->group(function () {
 });
 
 // Legacy Payroll Routes (if separate)
-Route::get('/payroll/processing', [PayrollController::class, 'processing'])->name('payroll.processing.legacy');
+// Route::get('/payroll/processing', [PayrollController::class, 'processing'])->name('payroll.processing.legacy');
 
 // Manager Portal Routes
 Route::prefix('portal/manager')->name('portal.manager.')->group(function () {

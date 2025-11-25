@@ -21,6 +21,7 @@ All Software Requirements Specification (SRS) requirements have been successfull
 - **Development server**: `composer run dev` (runs Laravel, queue, logs, and Vite concurrently)
 - **Database migrations**: `php artisan migrate`
 - **Seed demo data**: `php artisan db:seed --class=DemoDataSeeder`
+- **Test snapshot & summary**: `composer run dev-cp` (captures test results to docs/testResults.txt & docs/testSummary.txt)
 
 ## Architecture Overview
 
@@ -306,7 +307,13 @@ Located in `docs/features/complete/`:
 - `fin-year-mgmt.md` - Financial year management and closing
 - `tax-mgmt.md` - Multi-jurisdiction tax compliance
 - `advanced-reporting.md` - Comprehensive analytics and insights
-- `cash-management-system.md` - Cash receipts and payments</content>
+- `cash-management-system.md` - Cash receipts and payments
+
+### Feature Development Workflow
+- **Work in Progress**: `docs/features/plans/` directory contains implementation recipes and feature specifications
+- **Implementation**: Agents work from plans directory to develop new features
+- **Completion**: Implemented features are moved to `docs/features/complete/` directory with full documentation
+- **Process**: Plans → Development → Testing → Documentation → Complete</content>
 <parameter name="filePath">AGENTS.md
 
 ===
@@ -341,6 +348,7 @@ This application is a Laravel-based ERP system and its main Laravel ecosystem pa
 
 ## Verification Scripts
 - Do not create verification scripts or tinker when tests cover that functionality and prove it works. Unit and feature tests are more important.
+- **Test Results Capture**: Use `composer run dev-cp` to snapshot test results and generate summaries for progress tracking
 
 ## Application Structure & Architecture
 - Stick to existing directory structure - don't create new base folders without approval.
@@ -358,6 +366,9 @@ This application is a Laravel-based ERP system and its main Laravel ecosystem pa
 
 ## Documentation Files
 - You must only create documentation files if explicitly requested by the user.
+- **Feature Documentation**: `docs/features/` is the working directory for agents to develop and document features
+  - `docs/features/plans/` - Contains implementation recipes and feature specifications
+  - `docs/features/complete/` - Contains completed feature documentation
 
 
 === boost rules ===

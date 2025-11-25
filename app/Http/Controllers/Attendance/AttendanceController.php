@@ -508,11 +508,10 @@ class AttendanceController extends Controller
         $now = Carbon::now();
         $today = $now->format('Y-m-d');
 
-        // Find existing record or create new one
-        $attendanceRecord = AttendanceRecord::where([
-            'employee_id' => $employee->id,
-            'record_date' => $today,
-        ])->first();
+        // Find existing record for today
+        $attendanceRecord = AttendanceRecord::where('employee_id', $employee->id)
+            ->whereDate('record_date', $today)
+            ->first();
 
         // Check if already clocked in today
         if ($attendanceRecord && $attendanceRecord->punch_in) {
@@ -522,20 +521,21 @@ class AttendanceController extends Controller
             ], 422);
         }
 
-        // Create new record if doesn't exist
+        // Create new record if doesn't exist, or update existing
         if (! $attendanceRecord) {
             $attendanceRecord = new AttendanceRecord;
             $attendanceRecord->employee_id = $employee->id;
             $attendanceRecord->record_date = $today;
             $attendanceRecord->organization_id = $employee->organization_id;
+            $attendanceRecord->punch_out = null;
+            $attendanceRecord->status = 'present';
+            $attendanceRecord->total_hours = 0;
+            $attendanceRecord->late_minutes = 0;
+            $attendanceRecord->overtime_minutes = 0;
         }
 
         $attendanceRecord->punch_in = $now;
-        $attendanceRecord->punch_out = null; // Ensure punch_out is null for new clock-in
         $attendanceRecord->status = 'present';
-        $attendanceRecord->total_hours = 0;
-        $attendanceRecord->late_minutes = 0;
-        $attendanceRecord->overtime_minutes = 0;
 
         $attendanceRecord->save();
 
@@ -566,7 +566,7 @@ class AttendanceController extends Controller
 
         // Find existing record for today
         $attendanceRecord = AttendanceRecord::where('employee_id', $employee->id)
-            ->where('record_date', $today)
+            ->whereDate('record_date', $today)
             ->first();
 
         if (! $attendanceRecord) {

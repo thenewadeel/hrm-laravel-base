@@ -1,0 +1,1 @@
+@livewire('accounting.financial-years.financial-year-form')

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Payslip - {{ $payslip->user->name }} - {{ \Carbon\Carbon::parse($payslip->period)->format('F Y') }}</title>
+    <title>Payslip - {{ $payslip->employee->user->name }} - {{ \Carbon\Carbon::parse($payslip->period)->format('F Y') }}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -215,7 +215,7 @@
         <div class="employee-details">
             <div>
                 <strong>Employee Name:</strong>
-                {{ $payslip->user->name }}
+                {{ $payslip->employee->user->name }}
             </div>
             <div>
                 <strong>Employee ID:</strong>

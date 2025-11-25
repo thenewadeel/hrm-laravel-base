@@ -16,7 +16,7 @@ class EmployeePortalController extends Controller
     {
         $employee = $this->getCurrentEmployee();
 
-        if (!$employee) {
+        if (! $employee) {
             return redirect()->route('portal.employee.setup')->with('error', 'No employee profile found for your account.');
         }
 
@@ -36,7 +36,7 @@ class EmployeePortalController extends Controller
     {
         $employee = $this->getCurrentEmployee();
 
-        if (!$employee) {
+        if (! $employee) {
             return redirect()->route('portal.employee.setup')->with('error', 'No employee profile found for your account.');
         }
 
@@ -57,7 +57,7 @@ class EmployeePortalController extends Controller
     {
         $employee = $this->getCurrentEmployee();
 
-        if (!$employee) {
+        if (! $employee) {
             return redirect()->route('portal.employee.setup')->with('error', 'No employee profile found for your account.');
         }
 
@@ -74,11 +74,12 @@ class EmployeePortalController extends Controller
     {
         $employee = $this->getCurrentEmployee();
 
-        if (!$employee) {
+        if (! $employee) {
             return redirect()->route('portal.employee.setup')->with('error', 'No employee profile found for your account.');
         }
 
         $leaveBalance = $this->getLeaveBalance($employee);
+
         return view('portal.employee.leave-create', compact('employee', 'leaveBalance'));
     }
 
@@ -86,7 +87,7 @@ class EmployeePortalController extends Controller
     {
         $employee = $this->getCurrentEmployee();
 
-        if (!$employee) {
+        if (! $employee) {
             return redirect()->route('portal.employee.setup')->with('error', 'No employee profile found for your account.');
         }
 
@@ -94,7 +95,7 @@ class EmployeePortalController extends Controller
             'leave_type' => 'required|in:sick,vacation,personal,emergency,maternity,paternity',
             'start_date' => 'required|date|after_or_equal:today',
             'end_date' => 'required|date|after_or_equal:start_date',
-            'reason' => 'required|string|max:500'
+            'reason' => 'required|string|max:500',
         ]);
 
         $totalDays = Carbon::parse($validated['start_date'])->diffInDays(Carbon::parse($validated['end_date'])) + 1;
@@ -118,7 +119,7 @@ class EmployeePortalController extends Controller
             'total_days' => $totalDays,
             'reason' => $validated['reason'],
             'status' => 'pending',
-            'applied_at' => now()
+            'applied_at' => now(),
         ]);
 
         return redirect()->route('portal.employee.leave')->with('success', 'Leave request submitted successfully!');
@@ -128,7 +129,7 @@ class EmployeePortalController extends Controller
     {
         $employee = $this->getCurrentEmployee();
 
-        if (!$employee) {
+        if (! $employee) {
             return redirect()->route('portal.employee.setup')->with('error', 'No employee profile found for your account.');
         }
 
@@ -143,7 +144,7 @@ class EmployeePortalController extends Controller
     {
         $employee = $this->getCurrentEmployee();
 
-        if (!$employee || $payslip->employee_id !== $employee->id) {
+        if (! $employee || $payslip->employee_id !== $employee->id) {
             abort(403);
         }
 
@@ -154,28 +155,26 @@ class EmployeePortalController extends Controller
     {
         $employee = $this->getCurrentEmployee();
 
-        if (!$employee || $payslip->employee_id !== $employee->id) {
+        if (! $employee || $payslip->employee_id !== $employee->id) {
             abort(403);
         }
 
         // Generate PDF
-        $pdf = new \Dompdf\Dompdf();
+        $pdf = new \Dompdf\Dompdf;
         $pdf->setPaper('A4', 'portrait');
-        
-        // Load payslip user relationship if not loaded
-        if (!$payslip->relationLoaded('user')) {
-            $payslip->load('user');
-        }
-        
+
+        // Load payslip employee relationship with user
+        $payslip->load('employee.user');
+
         $html = view('portal.employee.payslip-download', compact('employee', 'payslip'))->render();
         $pdf->loadHtml($html);
         $pdf->render();
-        
+
         $filename = $payslip->payslip_filename;
-        
+
         return response($pdf->output())
             ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
+            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"')
             ->header('Cache-Control', 'private, max-age=0, must-revalidate')
             ->header('Pragma', 'public');
     }
@@ -184,7 +183,7 @@ class EmployeePortalController extends Controller
     {
         $employee = $this->getCurrentEmployee();
 
-        if (!$employee) {
+        if (! $employee) {
             return redirect()->route('portal.employee.setup')->with('error', 'No employee profile found for your account.');
         }
 
@@ -205,17 +204,17 @@ class EmployeePortalController extends Controller
             'organization_id' => $employee->organization_id,
             'record_date' => today(),
             'punch_in' => $punchInTime,
-            'status' => $status
+            'status' => $status,
         ]);
 
-        return back()->with('success', 'Successfully clocked in at ' . $punchInTime->format('h:i A'));
+        return back()->with('success', 'Successfully clocked in at '.$punchInTime->format('h:i A'));
     }
 
     public function clockOut()
     {
         $employee = $this->getCurrentEmployee();
 
-        if (!$employee) {
+        if (! $employee) {
             return redirect()->route('portal.employee.setup')->with('error', 'No employee profile found for your account.');
         }
 
@@ -223,7 +222,7 @@ class EmployeePortalController extends Controller
             ->whereDate('record_date', today())
             ->first();
 
-        if (!$attendance) {
+        if (! $attendance) {
             return back()->with('error', 'No clock-in record found for today');
         }
 
@@ -236,10 +235,10 @@ class EmployeePortalController extends Controller
 
         $attendance->update([
             'punch_out' => $punchOutTime,
-            'total_hours' => $totalHours
+            'total_hours' => $totalHours,
         ]);
 
-        return back()->with('success', 'Successfully clocked out at ' . $punchOutTime->format('h:i A'));
+        return back()->with('success', 'Successfully clocked out at '.$punchOutTime->format('h:i A'));
     }
 
     /**
@@ -249,7 +248,7 @@ class EmployeePortalController extends Controller
     {
         $user = auth()->user();
 
-        if (!$user) {
+        if (! $user) {
             return null;
         }
 
@@ -304,14 +303,14 @@ class EmployeePortalController extends Controller
             'late' => $records->where('status', 'late')->count(),
             'absent' => $records->where('status', 'absent')->count(),
             'leave' => $records->where('status', 'leave')->count(),
-            'total_hours' => $records->sum('total_hours')
+            'total_hours' => $records->sum('total_hours'),
         ];
     }
 
     private function getWorkingDaysCount($startDate, $endDate)
     {
         return $startDate->diffInDaysFiltered(function ($date) {
-            return !$date->isWeekend();
+            return ! $date->isWeekend();
         }, $endDate);
     }
 

@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Accounting\BankAccountController;
 use App\Http\Controllers\Accounting\FixedAssetController;
 use App\Http\Controllers\AccountsController;
+use App\Http\Controllers\FinancialYearController;
+use App\Http\Controllers\TaxController;
 use App\Livewire\Accounting\AssetDisposalForm;
 use App\Livewire\Accounting\AssetMaintenanceForm;
 use App\Livewire\Accounting\AssetTransferForm;
@@ -76,7 +79,7 @@ Route::prefix('/accounts')->name('accounting.')->group(function () {
     Route::prefix('/bank-accounts')->name('bank-accounts.')->group(function () {
         Route::get('/', BankAccountsIndex::class)->name('index');
         Route::get('/create', CreateBankAccount::class)->name('create');
-        Route::post('/', [CreateBankAccount::class, 'save'])->name('store');
+        Route::post('/', [BankAccountController::class, 'store'])->name('store');
     });
 
     // Bank Statements Management
@@ -151,23 +154,42 @@ Route::prefix('/accounts')->name('accounting.')->group(function () {
         });
 
         // Tax Downloads
-        Route::get('/download/tax-report', [\App\Http\Controllers\TaxController::class, 'downloadTaxReport'])->name('download.tax-report');
-        Route::get('/download/tax-liability', [\App\Http\Controllers\TaxController::class, 'downloadTaxLiability'])->name('download.tax-liability');
-        Route::get('/download/filing-schedule', [\App\Http\Controllers\TaxController::class, 'downloadFilingSchedule'])->name('download.filing-schedule');
+        Route::get('/download/tax-report', [TaxController::class, 'downloadTaxReport'])->name('download.tax-report');
+        Route::get('/download/tax-liability', [TaxController::class, 'downloadTaxLiability'])->name('download.tax-liability');
+        Route::get('/download/filing-schedule', [TaxController::class, 'downloadFilingSchedule'])->name('download.filing-schedule');
     });
 
     // Financial Years Management
     Route::prefix('/financial-years')->name('financial-years.')->group(function () {
+        // Routes without parameters (specific routes first)
         Route::get('/', \App\Livewire\Accounting\FinancialYears\FinancialYearIndex::class)->name('index');
-        Route::get('/create', \App\Livewire\Accounting\FinancialYears\FinancialYearForm::class)->name('create');
-        Route::post('/', [\App\Http\Controllers\FinancialYearController::class, 'store'])->name('store');
-        Route::get('/edit/{financialYear}', \App\Livewire\Accounting\FinancialYears\FinancialYearForm::class)->name('edit');
-        Route::put('/{financialYear}', [\App\Http\Controllers\FinancialYearController::class, 'update'])->name('update');
-        Route::delete('/{financialYear}', [\App\Http\Controllers\FinancialYearController::class, 'destroy'])->name('destroy');
-        Route::post('/{financialYear}/activate', [\App\Http\Controllers\FinancialYearController::class, 'activate'])->name('activate');
-        Route::post('/{financialYear}/lock', [\App\Http\Controllers\FinancialYearController::class, 'lock'])->name('lock');
-        Route::post('/{financialYear}/unlock', [\App\Http\Controllers\FinancialYearController::class, 'unlock'])->name('unlock');
-        Route::get('/opening-balances/{financialYear}', \App\Livewire\Accounting\FinancialYears\OpeningBalanceForm::class)->name('opening-balances');
-        Route::get('/close/{financialYear}', \App\Livewire\Accounting\FinancialYears\YearEndClosing::class)->name('close');
+        Route::get('/create', [FinancialYearController::class, 'create'])->name('create');
+        Route::post('/', [FinancialYearController::class, 'store'])->name('store');
+
+        // Routes with financialYear parameter - add explicit constraints
+        Route::get('/edit/{financialYear}', \App\Livewire\Accounting\FinancialYears\FinancialYearForm::class)
+            ->where('financialYear', '[0-9]+')
+            ->name('edit');
+        Route::put('/{financialYear}', [FinancialYearController::class, 'update'])
+            ->where('financialYear', '[0-9]+')
+            ->name('update');
+        Route::delete('/{financialYear}', [FinancialYearController::class, 'destroy'])
+            ->where('financialYear', '[0-9]+')
+            ->name('destroy');
+        Route::post('/{financialYear}/activate', [FinancialYearController::class, 'activate'])
+            ->where('financialYear', '[0-9]+')
+            ->name('activate');
+        Route::post('/{financialYear}/lock', [FinancialYearController::class, 'lock'])
+            ->where('financialYear', '[0-9]+')
+            ->name('lock');
+        Route::post('/{financialYear}/unlock', [FinancialYearController::class, 'unlock'])
+            ->where('financialYear', '[0-9]+')
+            ->name('unlock');
+        Route::get('/opening-balances/{financialYear}', \App\Livewire\Accounting\FinancialYears\OpeningBalanceForm::class)
+            ->where('financialYear', '[0-9]+')
+            ->name('opening-balances');
+        Route::get('/close/{financialYear}', \App\Livewire\Accounting\FinancialYears\YearEndClosing::class)
+            ->where('financialYear', '[0-9]+')
+            ->name('close');
     });
 });
