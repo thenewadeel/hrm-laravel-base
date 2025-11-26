@@ -6,6 +6,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Static documentation routes
+Route::get('/docs', function () {
+    return view('docs');
+});
+
+Route::get('/docs/{path?}', function ($path = null) {
+    $docsPath = public_path('docs');
+    $filePath = $docsPath . '/' . $path;
+    
+    // Security: prevent directory traversal
+    if (str_contains($path, '..') || !file_exists($filePath)) {
+        abort(404);
+    }
+    
+    // If directory requested, serve index.html
+    if (is_dir($filePath) && file_exists($filePath . '/index.html')) {
+        $filePath = $filePath . '/index.html';
+    }
+    
+    return response()->file($filePath);
+})->where('path', '.*');
+
 // Route::middleware([
 //     'auth:sanctum',
 //     config('jetstream.auth_session'),

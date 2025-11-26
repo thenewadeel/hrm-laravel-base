@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Index - HRM Laravel Base Documentation</title>
+    <style>
+/* PDF Documentation Theme */
+body {
+    font-family: var(--font-family, "Inter", system-ui, sans-serif);
+    font-size: var(--font-size, 10pt);
+    line-height: var(--line-height, 1.25);
+    color: #151c27;
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+
+/* Ensure no default margins interfere with PDF tool margins */
+@page {
+    margin: var(--page-margin, 8mm 8mm 8mm 8mm) !important;
+    size: var(--page-size, A4);
+    padding: 0 !important;
+}
+
+/* For PDF generation tools */
+@media print {
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    @page {
+        margin: var(--page-margin, 8mm 8mm 8mm 8mm) !important;
+        padding: 0 !important;
+    }
+    
+    .document {
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    * {
+        box-sizing: border-box !important;
+    }
+    
+    /* Force zero margins on all elements */
+    h1, h2, h3, h4, h5, h6, p, ul, ol, li, pre, blockquote, table, hr {
+        page-break-inside: avoid;
+        margin-top: 0.5em !important;
+        margin-bottom: 0.5em !important;
+    }
+}
+
+.document {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #000c27;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+    page-break-after: avoid;
+}
+
+h1 {
+    font-size: 1.5em;
+    border-bottom: 3px solid #3b82f6;
+    padding-bottom: 0.5em;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.25em;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.5em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+p {
+    margin: 0 0 1em 0;
+    text-align: justify;
+    orphans: 3;
+    widows: 3;
+}
+
+/* Links */
+a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Code */
+code {
+    font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
+        monospace;
+    background-color: #f3f4f6;
+    padding: 0.125em 0.25em;
+    border-radius: 0.25em;
+    font-size: 0.875em;
+    border: 1px solid #e5e7eb;
+}
+
+pre {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin: 1em 0;
+    overflow-x: auto;
+    page-break-inside: avoid;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+    border: none;
+    font-size: 0.875em;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid #3b82f6;
+    margin: 1.5em 0;
+    padding: 0.5em 1.5em;
+    background-color: #f9fafb;
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* Lists */
+ul,
+ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5em 0;
+    page-break-inside: avoid;
+}
+
+th,
+td {
+    border: 1px solid #e5e7eb;
+    padding: 0.5em 1em;
+    text-align: left;
+}
+
+th {
+    background-color: #f9fafb;
+    font-weight: 600;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    margin: 1em 0;
+}
+
+/* Horizontal Rule */
+hr {
+    border: none;
+    border-top: 2px solid #e5e7eb;
+    margin: 2em 0;
+}
+
+/* Table of Contents */
+.toc {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin-bottom: 2em;
+}
+
+.toc h3 {
+    margin-top: 0;
+    margin-bottom: 1em;
+    font-size: 14pt;
+    color: #111827;
+}
+
+.toc ul {
+    padding-left: 1.5em;
+    margin: 0;
+}
+
+.toc li {
+    margin-bottom: 0.25em;
+}
+
+.toc a {
+    color: #374151;
+}
+
+.toc a:hover {
+    color: #3b82f6;
+}
+
+/* Page Breaks */
+.page-break {
+    page-break-before: always;
+}
+
+.page-break-after {
+    page-break-after: always;
+}
+
+/* Header and Footer */
+.header {
+    text-align: center;
+    font-size: 1.25em;
+    color: #424c5f;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+}
+
+.footer {
+    text-align: center;
+    font-size: 0.75em;
+    color: #383a3d;
+    border-top: 1px solid #233b6b;
+    padding-top: 0.5em;
+    margin-top: 1em;
+}
+
+/* Watermark */
+.watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 72pt;
+    color: rgba(156, 163, 175, 0.1);
+    font-weight: bold;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Print Optimization */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .document {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        page-break-after: avoid;
+    }
+
+    p,
+    ul,
+    ol {
+        orphans: 3;
+        widows: 3;
+    }
+
+    pre,
+    blockquote,
+    table,
+    img {
+        page-break-inside: avoid;
+    }
+
+    .toc {
+        page-break-after: avoid;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="document">
+        <div class="header" style="font-size: 9pt; text-align: right; line-height: 1.0; border-bottom: 1px solid #e5e7eb; padding-bottom: 5px; margin-bottom: 10px;">
+    Documentation Index - HRM Laravel Base Documentation
+</div>
+        
+        <nav class="toc">
+    <h3>📚 Navigation</h3>
+    <ul>
+        <li><a href="SRS.html">📋 Requirements</a></li><li><a href="big picture.html">📊 Big Picture</a></li><li><a href="ERD.html">🗄️ Database Design</a></li><li><a href="project plan.html">📅 Project Plan</a></li><li><a href="timeline.html">⏰ Timeline</a></li>
+    </ul>
+</nav>
+        
+        <main class="content">
+            <p><h1 id="HRM Laravel Base Documentation">HRM Laravel Base Documentation</h1></p><br><p><strong>Generated on:</strong> 2025-11-26 07:02:02</p><br><p><h2 id="📚 Available Documentation">📚 Available Documentation</h2></p><br><p>- 🌐 <a href="ERD.html">ERD</a><br>- 📄 <a href="ERD.pdf">ERD</a><br>- 🌐 <a href="SRS.html">SRS</a><br>- 📄 <a href="SRS.pdf">SRS</a><br>- 🌐 <a href="big picture.html">big picture</a><br>- 📄 <a href="big picture.pdf">big picture</a><br>- 🌐 <a href="ceo-customer-briefing.html">ceo-customer-briefing</a><br>- 📄 <a href="ceo-customer-briefing.pdf">ceo-customer-briefing</a><br>- 🌐 <a href="development-session-pdf-tdd-summary.html">development-session-pdf-tdd-summary</a><br>- 📄 <a href="development-session-pdf-tdd-summary.pdf">development-session-pdf-tdd-summary</a><br>- 🌐 <a href="documentation-update-summary.html">documentation-update-summary</a><br>- 📄 <a href="documentation-update-summary.pdf">documentation-update-summary</a><br>- 🌐 <a href="enhanced-pdf-system.html">enhanced-pdf-system</a><br>- 📄 <a href="enhanced-pdf-system.pdf">enhanced-pdf-system</a><br>- 🌐 <a href="erp-evolution.html">erp-evolution</a><br>- 📄 <a href="erp-evolution.pdf">erp-evolution</a><br>- 🌐 <a href="features/complete/README.html">README</a><br>- 📄 <a href="features/complete/README.pdf">README</a><br>- 🌐 <a href="features/complete/advanced-reporting.html">advanced-reporting</a><br>- 📄 <a href="features/complete/advanced-reporting.pdf">advanced-reporting</a><br>- 🌐 <a href="features/complete/bank-statements.html">bank-statements</a><br>- 📄 <a href="features/complete/bank-statements.pdf">bank-statements</a><br>- 🌐 <a href="features/complete/cash-management-demo.html">cash-management-demo</a><br>- 📄 <a href="features/complete/cash-management-demo.pdf">cash-management-demo</a><br>- 🌐 <a href="features/complete/cash-management-implementation-progress.html">cash-management-implementation-progress</a><br>- 📄 <a href="features/complete/cash-management-implementation-progress.pdf">cash-management-implementation-progress</a><br>- 🌐 <a href="features/complete/cash-management-system.html">cash-management-system</a><br>- 📄 <a href="features/complete/cash-management-system.pdf">cash-management-system</a><br>- 🌐 <a href="features/complete/development-session-summary.html">development-session-summary</a><br>- 📄 <a href="features/complete/development-session-summary.pdf">development-session-summary</a><br>- 🌐 <a href="features/complete/enhanced-customer-management.html">enhanced-customer-management</a><br>- 📄 <a href="features/complete/enhanced-customer-management.pdf">enhanced-customer-management</a><br>- 🌐 <a href="features/complete/fin-year-mgmt.html">fin-year-mgmt</a><br>- 📄 <a href="features/complete/fin-year-mgmt.pdf">fin-year-mgmt</a><br>- 🌐 <a href="features/complete/fixed-asset-mgmt.html">fixed-asset-mgmt</a><br>- 📄 <a href="features/complete/fixed-asset-mgmt.pdf">fixed-asset-mgmt</a><br>- 🌐 <a href="features/complete/html-cleanup-fix-summary.html">html-cleanup-fix-summary</a><br>- 📄 <a href="features/complete/html-cleanup-fix-summary.pdf">html-cleanup-fix-summary</a><br>- 🌐 <a href="features/complete/invoice-mgmt-system.html">invoice-mgmt-system</a><br>- 📄 <a href="features/complete/invoice-mgmt-system.pdf">invoice-mgmt-system</a><br>- 🌐 <a href="features/complete/invoice-payment-management.html">invoice-payment-management</a><br>- 📄 <a href="features/complete/invoice-payment-management.pdf">invoice-payment-management</a><br>- 🌐 <a href="features/complete/margin-refactoring-summary.html">margin-refactoring-summary</a><br>- 📄 <a href="features/complete/margin-refactoring-summary.pdf">margin-refactoring-summary</a><br>- 🌐 <a href="features/complete/outstandings.html">outstandings</a><br>- 📄 <a href="features/complete/outstandings.pdf">outstandings</a><br>- 🌐 <a href="features/complete/payroll.html">payroll</a><br>- 📄 <a href="features/complete/payroll.pdf">payroll</a><br>- 🌐 <a href="features/complete/pdf-generation-fixed.html">pdf-generation-fixed</a><br>- 📄 <a href="features/complete/pdf-generation-fixed.pdf">pdf-generation-fixed</a><br>- 🌐 <a href="features/complete/pdf-generation-scripts.html">pdf-generation-scripts</a><br>- 📄 <a href="features/complete/pdf-generation-scripts.pdf">pdf-generation-scripts</a><br>- 🌐 <a href="features/complete/pdf-margin-fix-summary.html">pdf-margin-fix-summary</a><br>- 📄 <a href="features/complete/pdf-margin-fix-summary.pdf">pdf-margin-fix-summary</a><br>- 🌐 <a href="features/complete/pdf-setup-guide.html">pdf-setup-guide</a><br>- 📄 <a href="features/complete/pdf-setup-guide.pdf">pdf-setup-guide</a><br>- 🌐 <a href="features/complete/pdf-styling-guide.html">pdf-styling-guide</a><br>- 📄 <a href="features/complete/pdf-styling-guide.pdf">pdf-styling-guide</a><br>- 🌐 <a href="features/complete/pdf-system-cleanup-summary.html">pdf-system-cleanup-summary</a><br>- 📄 <a href="features/complete/pdf-system-cleanup-summary.pdf">pdf-system-cleanup-summary</a><br>- 🌐 <a href="features/complete/srs-compliance.html">srs-compliance</a><br>- 📄 <a href="features/complete/srs-compliance.pdf">srs-compliance</a><br>- 🌐 <a href="features/complete/tax-mgmt.html">tax-mgmt</a><br>- 📄 <a href="features/complete/tax-mgmt.pdf">tax-mgmt</a><br>- 🌐 <a href="features/complete/voucher-system.html">voucher-system</a><br>- 📄 <a href="features/complete/voucher-system.pdf">voucher-system</a><br>- 🌐 <a href="features/plans/receipts feature for accounting.html">receipts feature for accounting</a><br>- 📄 <a href="features/plans/receipts feature for accounting.pdf">receipts feature for accounting</a><br>- 🌐 <a href="index.html">index</a><br>- 🌐 <a href="interfaces spec.html">interfaces spec</a><br>- 📄 <a href="interfaces spec.pdf">interfaces spec</a><br>- 🌐 <a href="issues/1-critical-structural-issues.html">1-critical-structural-issues</a><br>- 📄 <a href="issues/1-critical-structural-issues.pdf">1-critical-structural-issues</a><br>- 🌐 <a href="issues/1-implementation-report.html">1-implementation-report</a><br>- 📄 <a href="issues/1-implementation-report.pdf">1-implementation-report</a><br>- 🌐 <a href="list of interfaces.html">list of interfaces</a><br>- 📄 <a href="list of interfaces.pdf">list of interfaces</a><br>- 🌐 <a href="list of modules.html">list of modules</a><br>- 📄 <a href="list of modules.pdf">list of modules</a><br>- 🌐 <a href="list of reqs.html">list of reqs</a><br>- 📄 <a href="list of reqs.pdf">list of reqs</a><br>- 🌐 <a href="list of routes.html">list of routes</a><br>- 📄 <a href="list of routes.pdf">list of routes</a><br>- 🌐 <a href="list of screens.html">list of screens</a><br>- 📄 <a href="list of screens.pdf">list of screens</a><br>- 🌐 <a href="production-database-setup.html">production-database-setup</a><br>- 📄 <a href="production-database-setup.pdf">production-database-setup</a><br>- 🌐 <a href="professional-pdf-system-complete.html">professional-pdf-system-complete</a><br>- 📄 <a href="professional-pdf-system-complete.pdf">professional-pdf-system-complete</a><br>- 🌐 <a href="project log.html">project log</a><br>- 📄 <a href="project log.pdf">project log</a><br>- 🌐 <a href="project plan.html">project plan</a><br>- 📄 <a href="project plan.pdf">project plan</a><br>- 🌐 <a href="report-executive-progress.html">report-executive-progress</a><br>- 📄 <a href="report-executive-progress.pdf">report-executive-progress</a><br>- 🌐 <a href="report-srs-progress.html">report-srs-progress</a><br>- 📄 <a href="report-srs-progress.pdf">report-srs-progress</a><br>- 🌐 <a href="report-status.html">report-status</a><br>- 📄 <a href="report-status.pdf">report-status</a><br>- 🌐 <a href="report-technical-progress.html">report-technical-progress</a><br>- 📄 <a href="report-technical-progress.pdf">report-technical-progress</a><br>- 🌐 <a href="static-documentation-setup-summary.html">static-documentation-setup-summary</a><br>- 📄 <a href="static-documentation-setup-summary.pdf">static-documentation-setup-summary</a><br>- 🌐 <a href="timeline.html">timeline</a><br>- 📄 <a href="timeline.pdf">timeline</a><br>- 🌐 <a href="ui dev.html">ui dev</a><br>- 📄 <a href="ui dev.pdf">ui dev</a><br>- 🌐 <a href="use cases.html">use cases</a><br>- 📄 <a href="use cases.pdf">use cases</a><br>- 🌐 <a href="voucher-management-implementation-complete.html">voucher-management-implementation-complete</a><br>- 📄 <a href="voucher-management-implementation-complete.pdf">voucher-management-implementation-complete</a><br>- 🌐 <a href="workflows.html">workflows</a><br>- 📄 <a href="workflows.pdf">workflows</a><br></p>
+        </main>
+        
+        <div class="footer" style="font-size: 4pt; text-align: center; line-height: 1.0; border-top: 1px solid #e5e7eb; padding-top: 5px; margin-top: 10px;">
+    Page {page} of {total} | Generated on 2025-11-26 07:02:02
+</div>
+    </div>
+</body>
+</html>

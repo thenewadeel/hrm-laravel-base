@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRS - HRM Laravel Base Documentation</title>
+    <style>
+/* PDF Documentation Theme */
+body {
+    font-family: var(--font-family, "Inter", system-ui, sans-serif);
+    font-size: var(--font-size, 10pt);
+    line-height: var(--line-height, 1.25);
+    color: #151c27;
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+
+/* Ensure no default margins interfere with PDF tool margins */
+@page {
+    margin: var(--page-margin, 12mm 8mm 4mm 10mm) !important;
+    size: var(--page-size, A4);
+    padding: 0 !important;
+}
+
+/* For PDF generation tools */
+@media print {
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    @page {
+        margin: var(--page-margin, 12mm 8mm 4mm 10mm) !important;
+        padding: 0 !important;
+    }
+    
+    .document {
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    * {
+        box-sizing: border-box !important;
+    }
+    
+    /* Force zero margins on all elements */
+    h1, h2, h3, h4, h5, h6, p, ul, ol, li, pre, blockquote, table, hr {
+        page-break-inside: avoid;
+        margin-top: 0.5em !important;
+        margin-bottom: 0.5em !important;
+    }
+}
+
+.document {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #000c27;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+    page-break-after: avoid;
+}
+
+h1 {
+    font-size: 1.5em;
+    border-bottom: 3px solid #3b82f6;
+    padding-bottom: 0.5em;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.25em;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.5em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+p {
+    margin: 0 0 1em 0;
+    text-align: justify;
+    orphans: 3;
+    widows: 3;
+}
+
+/* Links */
+a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Code */
+code {
+    font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
+        monospace;
+    background-color: #f3f4f6;
+    padding: 0.125em 0.25em;
+    border-radius: 0.25em;
+    font-size: 0.875em;
+    border: 1px solid #e5e7eb;
+}
+
+pre {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin: 1em 0;
+    overflow-x: auto;
+    page-break-inside: avoid;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+    border: none;
+    font-size: 0.875em;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid #3b82f6;
+    margin: 1.5em 0;
+    padding: 0.5em 1.5em;
+    background-color: #f9fafb;
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* Lists */
+ul,
+ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5em 0;
+    page-break-inside: avoid;
+}
+
+th,
+td {
+    border: 1px solid #e5e7eb;
+    padding: 0.5em 1em;
+    text-align: left;
+}
+
+th {
+    background-color: #f9fafb;
+    font-weight: 600;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    margin: 1em 0;
+}
+
+/* Horizontal Rule */
+hr {
+    border: none;
+    border-top: 2px solid #e5e7eb;
+    margin: 2em 0;
+}
+
+/* Table of Contents */
+.toc {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin-bottom: 2em;
+}
+
+.toc h3 {
+    margin-top: 0;
+    margin-bottom: 1em;
+    font-size: 14pt;
+    color: #111827;
+}
+
+.toc ul {
+    padding-left: 1.5em;
+    margin: 0;
+}
+
+.toc li {
+    margin-bottom: 0.25em;
+}
+
+.toc a {
+    color: #374151;
+}
+
+.toc a:hover {
+    color: #3b82f6;
+}
+
+/* Page Breaks */
+.page-break {
+    page-break-before: always;
+}
+
+.page-break-after {
+    page-break-after: always;
+}
+
+/* Header and Footer */
+.header {
+    text-align: center;
+    font-size: 1.25em;
+    color: #424c5f;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+}
+
+.footer {
+    text-align: center;
+    font-size: 0.75em;
+    color: #383a3d;
+    border-top: 1px solid #233b6b;
+    padding-top: 0.5em;
+    margin-top: 1em;
+}
+
+/* Watermark */
+.watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 72pt;
+    color: rgba(156, 163, 175, 0.1);
+    font-weight: bold;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Print Optimization */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .document {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        page-break-after: avoid;
+    }
+
+    p,
+    ul,
+    ol {
+        orphans: 3;
+        widows: 3;
+    }
+
+    pre,
+    blockquote,
+    table,
+    img {
+        page-break-inside: avoid;
+    }
+
+    .toc {
+        page-break-after: avoid;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="document">
+        <div class="header" style="font-size: 9pt; text-align: center; line-height: 1.0; border-bottom: 1px solid #e5e7eb; padding-bottom: 5px; margin-bottom: 10px;">
+    SRS - HRM Laravel Base Documentation
+</div>
+        
+        <nav class="toc">
+    <h3>📚 Navigation</h3>
+    <ul>
+        <li><a href="SRS.html" style="font-weight: bold;">📋 Requirements</a></li><li><a href="big picture.html">📊 Big Picture</a></li><li><a href="ERD.html">🗄️ Database Design</a></li><li><a href="project plan.html">📅 Project Plan</a></li><li><a href="timeline.html">⏰ Timeline</a></li>
+    </ul>
+</nav>
+        
+        <main class="content">
+            <p><h1 id="<strong>Software Requirements Specification (SRS) for SaaS Application</strong>"><strong>Software Requirements Specification (SRS) for SaaS Application</strong></h1></p><br><p><h2 id="<strong>1\. Introduction</strong>"><strong>1\. Introduction</strong></h2></p><br><p><h3 id="<strong>1.1 Purpose</strong>"><strong>1.1 Purpose</strong></h3></p><br><p>This document specifies the functional and non-functional requirements for a new SaaS application. The purpose of this application is to streamline and automate key business processes for both the Accounts and Human Resources (HR) departments.</p><br><p><h3 id="<strong>1.2 Scope</strong>"><strong>1.2 Scope</strong></h3></p><br><p>The system will be an online, multi-tenant SaaS application with distinct modules for managing financial and human resource operations. It will include a web-based user interface accessible via a browser. The backend will be powered by a RESTful API.</p><br><p><h3 id="<strong>1.3 Definitions and Acronyms</strong>"><strong>1.3 Definitions and Acronyms</strong></h3></p><br><p><em> <strong>SRS:</strong> Software Requirements Specification  <br></em> <strong>SaaS:</strong> Software as a Service  <br><em> <strong>API:</strong> Application Programming Interface  <br></em> <strong>Voucher:</strong> A document representing a financial transaction.  <br><em> <strong>Livewire:</strong> A full-stack framework for Laravel that simplifies building dynamic interfaces.  <br></em> <strong>Jetstream:</strong> An application starter kit for Laravel.</p><br><p><h2 id="<strong>2\. Overall Description</strong>"><strong>2\. Overall Description</strong></h2></p><br><p><h3 id="<strong>2.1 Product Perspective</strong>"><strong>2.1 Product Perspective</strong></h3></p><br><p>This is a standalone SaaS application intended to be used by multiple organizations. It will not be part of a larger enterprise system.</p><br><p><h3 id="<strong>2.2 User Characteristics</strong>"><strong>2.2 User Characteristics</strong></h3></p><br><p>The system will be used by:</p><br><p><em> <strong>Accounts Department Staff:</strong> Professionals who will manage financial records, create vouchers, and generate financial statements. They require an intuitive interface for data entry and reporting.  <br></em> <strong>HR Department Staff:</strong> Administrators who will manage employee data, payroll, and leave. They require tools for efficient record-keeping and payroll processing.  <br><em> <strong>General Employees:</strong> Users who may access the system to view their pay slips and apply for leave.</p><br><p><h3 id="<strong>2.3 Constraints</strong>"><strong>2.3 Constraints</strong></h3></p><br><p></em> <strong>Technology Stack:</strong> The application must be built using Laravel 12, Livewire 3, Tailwind CSS, and Alpine.js.  <br><em> <strong>Backend:</strong> The system must use an existing API for data operations.  <br></em> <strong>Authentication:</strong> Authentication will be handled by Laravel Jetstream.</p><br><p><h3 id="<strong>2.4 Assumptions and Dependencies</strong>"><strong>2.4 Assumptions and Dependencies</strong></h3></p><br><p><em> The existing API is stable, documented, and fully functional.  <br></em> All necessary endpoints for the specified features exist within the API.  <br><em> Users will have stable internet connectivity.  <br></em> The underlying infrastructure (servers, database) will meet performance and scalability requirements.</p><br><p><h2 id="<strong>3\. Specific Requirements</strong>"><strong>3\. Specific Requirements</strong></h2></p><br><p><h3 id="<strong>3.1 Functional Requirements for Accounts Department</strong>"><strong>3.1 Functional Requirements for Accounts Department</strong></h3></p><br><p><h4 id="<strong>3.1.1 Voucher Management</strong>"><strong>3.1.1 Voucher Management</strong></h4></p><br><p><em> <strong>REQ-AC-001:</strong> The system shall allow authenticated users to create new vouchers of various types (Sales, Purchase, Salary, Expense).  <br></em> <strong>REQ-AC-002:</strong> The system shall allow users to edit and update existing vouchers.  <br><em> <strong>REQ-AC-003:</strong> The system shall allow users to post vouchers, finalizing them for accounting records.  <br></em> <strong>REQ-AC-004:</strong> The system shall support both Sales and Sales Return vouchers.  <br><em> <strong>REQ-AC-005:</strong> The system shall support both Purchase and Purchase Return vouchers.  <br></em> <strong>REQ-AC-006:</strong> The system shall manage salary vouchers.  <br><em> <strong>REQ-AC-007:</strong> The system shall handle expense vouchers.  <br></em> <strong>REQ-AC-008:</strong> The system shall allow for the creation of vouchers for fixed assets.  <br><em> <strong>REQ-AC-009:</strong> The system shall allow for the creation of depreciation vouchers.</p><br><p><h4 id="<strong>3.1.2 Financial Management</strong>"><strong>3.1.2 Financial Management</strong></h4></p><br><p></em> <strong>REQ-AC-010:</strong> The system shall manage accounts receivable and accounts payable.  <br><em> <strong>REQ-AC-011:</strong> The system shall handle accounts adjustments.  <br></em> <strong>REQ-AC-012:</strong> The system shall manage ledger accounts for customers and vendors.  <br><em> <strong>REQ-AC-013:</strong> The system shall manage bank and cash accounts.  <br></em> <strong>REQ-AC-014:</strong> The system shall generate an advance report.  <br><em> <strong>REQ-AC-015:</strong> The system shall include a comprehensive financial system module.</p><br><p><h4 id="<strong>3.1.3 Reporting and Statements</strong>"><strong>3.1.3 Reporting and Statements</strong></h4></p><br><p></em> <strong>REQ-AC-016:</strong> The system shall generate and display a Trial Balance report.  <br><em> <strong>REQ-AC-017:</strong> The system shall generate and display a Balance Sheet.  <br></em> <strong>REQ-AC-018:</strong> The system shall generate and display a Profit and Loss statement.  <br><em> <strong>REQ-AC-019:</strong> The system shall generate and display an Income Statement.  <br></em> <strong>REQ-AC-020:</strong> The system shall generate and display an Outstanding Statement.  <br><em> <strong>REQ-AC-021:</strong> The system shall generate and display Bank Statements.</p><br><p><h4 id="<strong>3.1.4 Accounting Operations</strong>"><strong>3.1.4 Accounting Operations</strong></h4></p><br><p></em> <strong>REQ-AC-022:</strong> The system shall manage a Chart of Accounts.  <br><em> <strong>REQ-AC-023:</strong> The system shall manage fixed asset depreciation and registration.  <br></em> <strong>REQ-AC-024:</strong> The system shall handle financial year opening and closing procedures.  <br><em> <strong>REQ-AC-025:</strong> The system shall manage inventory costs.  <br></em> <strong>REQ-AC-026:</strong> The system shall manage tax.</p><br><p><h3 id="<strong>3.2 Functional Requirements for Human Resource Department</strong>"><strong>3.2 Functional Requirements for Human Resource Department</strong></h3></p><br><p><h4 id="<strong>3.2.1 Employee Management</strong>"><strong>3.2.1 Employee Management</strong></h4></p><br><p><em> <strong>REQ-HR-001:</strong> The system shall include an administrative system for managing HR functions.  <br></em> <strong>REQ-HR-002:</strong> The system shall maintain a database of all employees.  <br><em> <strong>REQ-HR-003:</strong> The system shall generate an employee list.</p><br><p><h4 id="<strong>3.2.2 Payroll and Compensation</strong>"><strong>3.2.2 Payroll and Compensation</strong></h4></p><br><p></em> <strong>REQ-HR-004:</strong> The system shall include a payroll system for calculating employee salaries.  <br><em> <strong>REQ-HR-005:</strong> The system shall manage employee increments.  <br></em> <strong>REQ-HR-006:</strong> The system shall manage employee allowances and deductions.  <br><em> <strong>REQ-HR-007:</strong> The system shall generate pay slips for employees.  <br></em> <strong>REQ-HR-008:</strong> The system shall handle withholding tax.  <br><em> <strong>REQ-HR-009:</strong> The system shall manage employee loans.  <br></em> <strong>REQ-HR-010:</strong> The system shall include an advance salary system.</p><br><p><h4 id="<strong>3.2.3 Leave Management</strong>"><strong>3.2.3 Leave Management</strong></h4></p><br><p><em> <strong>REQ-HR-011:</strong> The system shall include a leave system for tracking and managing employee leave requests and balances.</p><br><p><h2 id="<strong>4\. Non-functional Requirements</strong>"><strong>4\. Non-functional Requirements</strong></h2></p><br><p></em> <strong>Performance:</strong> The application's pages and data operations must load within a reasonable time (e.g., under 3 seconds).  <br><em> <strong>Security:</strong> The system shall be secure against common web vulnerabilities. It must ensure that users can only access data relevant to their role and permissions.  <br></em> <strong>Usability:</strong> The user interface must be intuitive and easy to navigate, minimizing the learning curve for new users.  <br><em> <strong>Scalability:</strong> The system must be able to handle an increasing number of users and data without a significant degradation in performance.  <br></em> <strong>Maintainability:</strong> The codebase must be well-structured and documented to facilitate future updates and maintenance.  <br>* <strong>Reliability:</strong> The system shall be available 99.9% of the time, with minimal downtime.</p><br><p><h2 id="<strong>5\. User Interaction and Workflows</strong>"><strong>5\. User Interaction and Workflows</strong></h2></p><br><p>This section outlines the key user journeys and the screens and forms associated with the core functional requirements.</p><br><p><h3 id="<strong>5.1 Accounts Department Workflows</strong>"><strong>5.1 Accounts Department Workflows</strong></h3></p><br><p><h4 id="<strong>5.1.1 Voucher Creation and Posting</strong>"><strong>5.1.1 Voucher Creation and Posting</strong></h4></p><br><p>This workflow describes how an Accounts user creates and finalizes a new financial voucher.</p><br><p>1. <strong>Dashboard:</strong> The user logs in and is presented with a dashboard showing key financial metrics.  <br>2. <strong>Navigate to Vouchers:</strong> The user clicks on a "Vouchers" menu item to view a list of existing vouchers.  <br>3. <strong>Create New Voucher:</strong> The user clicks a "New Voucher" button, which opens a dedicated form.  <br>4. <strong>Voucher Creation Form:</strong> The user fills out the form, selecting a voucher type (e.g., Sales, Purchase), entering transaction details (date, amount), and specifying ledger accounts.  <br>5. <strong>Save as Draft:</strong> The user can save the voucher as a draft for later editing.  <br>6. <strong>Post Voucher:</strong> Once all details are correct, the user clicks "Post Voucher" which sends a request to the API.  <br>7. <strong>Confirmation:</strong> The system displays a confirmation message, and the voucher's status is updated to "Posted."</p><br><p><h3 id="<strong>5.2 Human Resources Department Workflows</strong>"><strong>5.2 Human Resources Department Workflows</strong></h3></p><br><p><h4 id="<strong>5.2.1 Employee Management</strong>"><strong>5.2.1 Employee Management</strong></h4></p><br><p>This workflow describes the process of adding, editing, and viewing employee records.</p><br><p>1. <strong>Dashboard:</strong> The HR user logs in and views their dashboard with quick links to HR tasks.  <br>2. <strong>Navigate to Employees:</strong> The user clicks on an "Employees" menu item to see a searchable and sortable list of all employees.  <br>3. <strong>Add New Employee:</strong> The user clicks a "New Employee" button, which opens the employee creation form.  <br>4. <strong>Employee Profile Form:</strong> The user fills out the form with the employee's personal details, contact information, job role, salary, and other relevant data.  <br>5. <strong>Save Employee:</strong> Upon clicking "Save," the system sends the data to the API and adds the new employee to the database.  <br>6. <strong>View/Edit Profile:</strong> From the employee list, the user can click on an employee's name to view or edit their full profile.</p><br><p><h4 id="<strong>5.2.2 Leave Management</strong>"><strong>5.2.2 Leave Management</strong></h4></p><br><p>This workflow outlines how an employee requests leave.</p><br><p>1. <strong>User Dashboard:</strong> An employee logs in and navigates to their dashboard, where they can see their leave balances.  <br>2. <strong>Request Leave:</strong> The employee clicks a "Request Leave" button.  <br>3. <strong>Leave Request Form:</strong> The user selects the type of leave, the start and end dates, and provides a reason for the request.  <br>4. <strong>Submit Request:</strong> The user submits the request, which is then sent to a manager or HR for approval.  <br>5. <strong>Status Tracking:</strong> The user can view the status of their leave request (Pending, Approved, Rejected) from their dashboard.</p><br><p><h2 id="<strong>6\. Appendices</strong>"><strong>6\. Appendices</strong></h2></p><br><p><h3 id="<strong>6.1 Source Document</strong>"><strong>6.1 Source Document</strong></h3></p><br><p>The functional requirements were derived from a hand-written list provided by the user.</p>
+        </main>
+        
+        <div class="footer" style="font-size: 8pt; text-align: center; line-height: 1.0; border-top: 1px solid #e5e7eb; padding-top: 5px; margin-top: 10px;">
+    Page {page} of {total} | Generated on 2025-11-26 06:46:36
+</div>
+    </div>
+</body>
+</html>

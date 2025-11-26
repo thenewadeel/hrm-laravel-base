@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERD - HRM Laravel Base Documentation</title>
+    <style>
+/* PDF Documentation Theme */
+body {
+    font-family: var(--font-family, "Inter", system-ui, sans-serif);
+    font-size: var(--font-size, 10pt);
+    line-height: var(--line-height, 1.25);
+    color: #151c27;
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+
+/* Ensure no default margins interfere with PDF tool margins */
+@page {
+    margin: var(--page-margin, 12mm 8mm 4mm 10mm) !important;
+    size: var(--page-size, A4);
+    padding: 0 !important;
+}
+
+/* For PDF generation tools */
+@media print {
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    @page {
+        margin: var(--page-margin, 12mm 8mm 4mm 10mm) !important;
+        padding: 0 !important;
+    }
+    
+    .document {
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    * {
+        box-sizing: border-box !important;
+    }
+    
+    /* Force zero margins on all elements */
+    h1, h2, h3, h4, h5, h6, p, ul, ol, li, pre, blockquote, table, hr {
+        page-break-inside: avoid;
+        margin-top: 0.5em !important;
+        margin-bottom: 0.5em !important;
+    }
+}
+
+.document {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #000c27;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+    page-break-after: avoid;
+}
+
+h1 {
+    font-size: 1.5em;
+    border-bottom: 3px solid #3b82f6;
+    padding-bottom: 0.5em;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.25em;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.5em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+p {
+    margin: 0 0 1em 0;
+    text-align: justify;
+    orphans: 3;
+    widows: 3;
+}
+
+/* Links */
+a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Code */
+code {
+    font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
+        monospace;
+    background-color: #f3f4f6;
+    padding: 0.125em 0.25em;
+    border-radius: 0.25em;
+    font-size: 0.875em;
+    border: 1px solid #e5e7eb;
+}
+
+pre {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin: 1em 0;
+    overflow-x: auto;
+    page-break-inside: avoid;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+    border: none;
+    font-size: 0.875em;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid #3b82f6;
+    margin: 1.5em 0;
+    padding: 0.5em 1.5em;
+    background-color: #f9fafb;
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* Lists */
+ul,
+ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5em 0;
+    page-break-inside: avoid;
+}
+
+th,
+td {
+    border: 1px solid #e5e7eb;
+    padding: 0.5em 1em;
+    text-align: left;
+}
+
+th {
+    background-color: #f9fafb;
+    font-weight: 600;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    margin: 1em 0;
+}
+
+/* Horizontal Rule */
+hr {
+    border: none;
+    border-top: 2px solid #e5e7eb;
+    margin: 2em 0;
+}
+
+/* Table of Contents */
+.toc {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin-bottom: 2em;
+}
+
+.toc h3 {
+    margin-top: 0;
+    margin-bottom: 1em;
+    font-size: 14pt;
+    color: #111827;
+}
+
+.toc ul {
+    padding-left: 1.5em;
+    margin: 0;
+}
+
+.toc li {
+    margin-bottom: 0.25em;
+}
+
+.toc a {
+    color: #374151;
+}
+
+.toc a:hover {
+    color: #3b82f6;
+}
+
+/* Page Breaks */
+.page-break {
+    page-break-before: always;
+}
+
+.page-break-after {
+    page-break-after: always;
+}
+
+/* Header and Footer */
+.header {
+    text-align: center;
+    font-size: 1.25em;
+    color: #424c5f;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+}
+
+.footer {
+    text-align: center;
+    font-size: 0.75em;
+    color: #383a3d;
+    border-top: 1px solid #233b6b;
+    padding-top: 0.5em;
+    margin-top: 1em;
+}
+
+/* Watermark */
+.watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 72pt;
+    color: rgba(156, 163, 175, 0.1);
+    font-weight: bold;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Print Optimization */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .document {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        page-break-after: avoid;
+    }
+
+    p,
+    ul,
+    ol {
+        orphans: 3;
+        widows: 3;
+    }
+
+    pre,
+    blockquote,
+    table,
+    img {
+        page-break-inside: avoid;
+    }
+
+    .toc {
+        page-break-after: avoid;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="document">
+        <div class="header" style="font-size: 9pt; text-align: center; line-height: 1.0; border-bottom: 1px solid #e5e7eb; padding-bottom: 5px; margin-bottom: 10px;">
+    ERD - HRM Laravel Base Documentation
+</div>
+        
+        <nav class="toc">
+    <h3>📚 Navigation</h3>
+    <ul>
+        <li><a href="SRS.html">📋 Requirements</a></li><li><a href="big picture.html">📊 Big Picture</a></li><li><a href="ERD.html" style="font-weight: bold;">🗄️ Database Design</a></li><li><a href="project plan.html">📅 Project Plan</a></li><li><a href="timeline.html">⏰ Timeline</a></li>
+    </ul>
+</nav>
+        
+        <main class="content">
+            <p><h1 id="Database Schema Documentation (ERD)">Database Schema Documentation (ERD)</h1></p><br><p><em>Generated: November 19, 2025</em>  <br><em>Database Engine: SQLite</em>  <br><em>Total Tables: 32</em></p><br><p><hr></p><br><p><h2 id="<strong>Core Architecture</strong>"><strong>Core Architecture</strong></h2></p><br><p>The HRM Laravel Base system uses a <strong>multi-tenant architecture</strong> with organization-based data isolation. The database schema supports comprehensive ERP functionality including Financial Management, HR, Inventory, and advanced business operations.</p><br><p><hr></p><br><p><h2 id="<strong>1. Core Tables</strong>"><strong>1. Core Tables</strong></h2></p><br><p><h3 id="<strong>organizations</strong>"><strong>organizations</strong></h3><br>Multi-tenant organization management with hierarchical structure.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | Unique identifier |<br>| name | varchar | UNIQUE | Organization name |<br>| description | text | NULLABLE | Organization description |<br>| is_active | tinyint | DEFAULT 1 | Active status |<br>| deleted_at | datetime | NULLABLE | Soft delete timestamp |<br>| created_at | datetime | | Creation timestamp |<br>| updated_at | datetime | | Last update timestamp |</p><br><p><strong>Relationships:</strong><br>- Has many: users, employees, chart_of_accounts, inventory_stores, etc.</p><br><p><hr></p><br><p><h3 id="<strong>users</strong>"><strong>users</strong></h3><br>Laravel Jetstream-based user authentication with multi-organization support.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | User ID |<br>| name | varchar | | Full name |<br>| email | varchar | UNIQUE | Email address |<br>| email_verified_at | datetime | NULLABLE | Email verification |<br>| password | varchar | | Hashed password |<br>| current_organization_id | integer | FOREIGN KEY → organizations.id | Active organization |<br>| two_factor_secret | text | NULLABLE | 2FA secret |<br>| two_factor_recovery_codes | text | NULLABLE | 2FA recovery codes |<br>| two_factor_confirmed_at | datetime | NULLABLE | 2FA confirmation |<br>| remember_token | varchar | NULLABLE | Remember me token |<br>| current_team_id | integer | FOREIGN KEY → teams.id | Current team |<br>| profile_photo_path | varchar | NULLABLE | Profile photo |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><hr></p><br><p><h2 id="<strong>2. HR Management Tables</strong>"><strong>2. HR Management Tables</strong></h2></p><br><p><h3 id="<strong>employees</strong>"><strong>employees</strong></h3><br>Comprehensive employee management with organizational structure integration.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | Employee ID |<br>| user_id | integer | FOREIGN KEY → users.id | Linked user account |<br>| organization_id | integer | FOREIGN KEY → organizations.id | Organization |<br>| organization_unit_id | integer | FOREIGN KEY → organization_units.id | Department/Unit |<br>| position_id | integer | FOREIGN KEY → job_positions.id | Job position |<br>| shift_id | integer | FOREIGN KEY → shifts.id | Work shift |<br>| biometric_id | varchar | UNIQUE | Biometric device ID |<br>| first_name | varchar | | First name |<br>| last_name | varchar | | Last name |<br>| middle_name | varchar | NULLABLE | Middle name |<br>| date_of_birth | date | | Birth date |<br>| gender | varchar | | Gender |<br>| email | varchar | INDEX | Email address |<br>| phone | varchar | | Phone number |<br>| address | text | | Full address |<br>| city | varchar | | City |<br>| state | varchar | | State |<br>| country | varchar | | Country |<br>| zip_code | varchar | | Postal code |<br>| photo | varchar | NULLABLE | Photo path |<br>| is_active | tinyint | DEFAULT 1 | Active status |<br>| is_admin | tinyint | DEFAULT 0 | Admin status |<br>| deleted_at | datetime | NULLABLE | Soft delete |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><strong>Indexes:</strong><br>- UNIQUE: biometric_id<br>- UNIQUE: user_id + organization_id<br>- INDEX: email, organization_id + is_active</p><br><p><h3 id="<strong>job_positions</strong>"><strong>job_positions</strong></h3><br>Job position and role management.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | Position ID |<br>| organization_id | integer | FOREIGN KEY → organizations.id | Organization |<br>| organization_unit_id | integer | FOREIGN KEY → organization_units.id | Unit |<br>| title | varchar | | Position title |<br>| code | varchar | UNIQUE | Position code |<br>| description | text | NULLABLE | Description |<br>| min_salary | numeric | NULLABLE | Minimum salary |<br>| max_salary | numeric | NULLABLE | Maximum salary |<br>| requirements | text | NULLABLE | Job requirements |<br>| is_active | tinyint | DEFAULT 1 | Active status |<br>| deleted_at | datetime | NULLABLE | Soft delete |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><h3 id="<strong>shifts</strong>"><strong>shifts</strong></h3><br>Work shift management with flexible scheduling.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | Shift ID |<br>| organization_id | integer | FOREIGN KEY → organizations.id | Organization |<br>| name | varchar | | Shift name |<br>| code | varchar | UNIQUE | Shift code |<br>| start_time | time | | Start time |<br>| end_time | time | | End time |<br>| days_of_week | text | | JSON days array |<br>| working_hours | integer | | Hours per shift |<br>| description | text | NULLABLE | Description |<br>| is_active | tinyint | DEFAULT 1 | Active status |<br>| deleted_at | datetime | NULLABLE | Soft delete |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><h3 id="<strong>attendance_records</strong>"><strong>attendance_records</strong></h3><br>Biometric-integrated attendance tracking.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | Record ID |<br>| employee_id | integer | FOREIGN KEY → employees.id | Employee |<br>| organization_id | integer | FOREIGN KEY → organizations.id | Organization |<br>| record_date | date | | Attendance date |<br>| punch_in | datetime | NULLABLE | Clock in time |<br>| punch_out | datetime | NULLABLE | Clock out time |<br>| total_hours | numeric | NULLABLE | Total hours worked |<br>| status | varchar | INDEX | Attendance status |<br>| biometric_id | varchar | | Biometric device ID |<br>| device_serial_no | varchar | | Device serial |<br>| late_minutes | numeric | NULLABLE | Late minutes |<br>| overtime_minutes | numeric | NULLABLE | Overtime minutes |<br>| notes | text | NULLABLE | Notes |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><strong>Indexes:</strong><br>- UNIQUE: employee_id + record_date<br>- INDEX: organization_id + record_date, status</p><br><p><h3 id="<strong>leave_requests</strong>"><strong>leave_requests</strong></h3><br>Leave management with approval workflows.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | Request ID |<br>| employee_id | integer | FOREIGN KEY → employees.id | Employee |<br>| organization_id | integer | FOREIGN KEY → organizations.id | Organization |<br>| leave_type | varchar | INDEX | Type of leave |<br>| start_date | date | | Leave start |<br>| end_date | date | | Leave end |<br>| total_days | integer | | Total days |<br>| reason | text | | Leave reason |<br>| status | varchar | INDEX | Request status |<br>| approved_by | integer | FOREIGN KEY → users.id | Approver |<br>| rejected_by | integer | FOREIGN KEY → users.id | Rejecter |<br>| approved_at | datetime | NULLABLE | Approval time |<br>| rejected_at | datetime | NULLABLE | Rejection time |<br>| rejection_reason | text | NULLABLE | Rejection reason |<br>| applied_at | datetime | | Application time |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><hr></p><br><p><h2 id="<strong>3. Financial Management Tables</strong>"><strong>3. Financial Management Tables</strong></h2></p><br><p><h3 id="<strong>chart_of_accounts</strong>"><strong>chart_of_accounts</strong></h3><br>Double-entry accounting chart of accounts.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | Account ID |<br>| organization_id | integer | FOREIGN KEY → organizations.id | Organization |<br>| code | varchar | | Account code |<br>| name | varchar | | Account name |<br>| type | varchar | | Account type |<br>| description | text | NULLABLE | Description |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><strong>Indexes:</strong><br>- UNIQUE: organization_id + code</p><br><p><h3 id="<strong>journal_entries</strong>"><strong>journal_entries</strong></h3><br>Financial transaction management.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | Entry ID |<br>| organization_id | integer | FOREIGN KEY → organizations.id | Organization |<br>| reference_number | varchar | UNIQUE | Reference number |<br>| entry_date | date | | Entry date |<br>| description | text | | Description |<br>| status | varchar | | Entry status |<br>| created_by | integer | FOREIGN KEY → users.id | Creator |<br>| approved_by | integer | FOREIGN KEY → users.id | Approver |<br>| posted_at | datetime | NULLABLE | Posting time |<br>| voucher_type | varchar | | Voucher type |<br>| customer_id | integer | FOREIGN KEY → customers.id | Customer |<br>| vendor_id | integer | FOREIGN KEY → vendors.id | Vendor |<br>| total_amount | numeric | NULLABLE | Total amount |<br>| tax_amount | numeric | NULLABLE | Tax amount |<br>| invoice_number | varchar | NULLABLE | Invoice number |<br>| due_date | date | NULLABLE | Due date |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><h3 id="<strong>ledger_entries</strong>"><strong>ledger_entries</strong></h3><br>Detailed ledger entry lines for double-entry accounting.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | Entry ID |<br>| entry_date | date | | Entry date |<br>| chart_of_account_id | integer | FOREIGN KEY → chart_of_accounts.id | Account |<br>| type | varchar | | Debit/Credit |<br>| amount | numeric | | Entry amount |<br>| description | text | NULLABLE | Description |<br>| transactionable_type | varchar | INDEX | Related model type |<br>| transactionable_id | integer | INDEX | Related model ID |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><strong>Indexes:</strong><br>- INDEX: transactionable_type + transactionable_id</p><br><p><h3 id="<strong>customers & vendors</strong>"><strong>customers & vendors</strong></h3><br>Customer and vendor management for AR/AP.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | ID |<br>| organization_id | integer | FOREIGN KEY → organizations.id | Organization |<br>| name | varchar | | Name |<br>| email | varchar | NULLABLE | Email |<br>| phone | varchar | NULLABLE | Phone |<br>| address | text | NULLABLE | Address |<br>| tax_number | varchar | NULLABLE | Tax ID |<br>| customer_type/vendor_type | varchar | NULLABLE | Type classification |<br>| credit_limit/payment_terms | varchar | NULLABLE | Credit terms |<br>| status | varchar | | Status |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><hr></p><br><p><h2 id="<strong>4. Inventory Management Tables</strong>"><strong>4. Inventory Management Tables</strong></h2></p><br><p><h3 id="<strong>inventory_stores</strong>"><strong>inventory_stores</strong></h3><br>Multi-store inventory management.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | Store ID |<br>| organization_id | integer | FOREIGN KEY → organizations.id | Organization |<br>| name | varchar | | Store name |<br>| code | varchar | UNIQUE | Store code |<br>| location | varchar | NULLABLE | Location |<br>| manager_id | integer | FOREIGN KEY → employees.id | Store manager |<br>| is_active | tinyint | DEFAULT 1 | Active status |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><h3 id="<strong>inventory_items</strong>"><strong>inventory_items</strong></h3><br>Item catalog and product management.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | Item ID |<br>| organization_id | integer | FOREIGN KEY → organizations.id | Organization |<br>| name | varchar | | Item name |<br>| code | varchar | UNIQUE | Item code/SKU |<br>| description | text | NULLABLE | Description |<br>| category | varchar | NULLABLE | Category |<br>| unit | varchar | NULLABLE | Unit of measure |<br>| cost_price | numeric | NULLABLE | Cost price |<br>| selling_price | numeric | NULLABLE | Selling price |<br>| min_stock_level | numeric | NULLABLE | Minimum stock |<br>| max_stock_level | numeric | NULLABLE | Maximum stock |<br>| is_active | tinyint | DEFAULT 1 | Active status |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><h3 id="<strong>inventory_transactions</strong>"><strong>inventory_transactions</strong></h3><br>Stock movement tracking.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | Transaction ID |<br>| organization_id | integer | FOREIGN KEY → organizations.id | Organization |<br>| store_id | integer | FOREIGN KEY → inventory_stores.id | Store |<br>| transaction_type | varchar | | IN/OUT/TRANSFER/ADJUST |<br>| reference_number | varchar | UNIQUE | Reference |<br>| transaction_date | datetime | | Transaction date |<br>| notes | text | NULLABLE | Notes |<br>| status | varchar | | Status |<br>| created_by | integer | FOREIGN KEY → users.id | Creator |<br>| approved_by | integer | FOREIGN KEY → users.id | Approver |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><h3 id="<strong>inventory_transaction_items</strong>"><strong>inventory_transaction_items</strong></h3><br>Detailed transaction line items.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | Line ID |<br>| transaction_id | integer | FOREIGN KEY → inventory_transactions.id | Transaction |<br>| item_id | integer | FOREIGN KEY → inventory_items.id | Item |<br>| quantity | numeric | | Quantity |<br>| unit_cost | numeric | NULLABLE | Unit cost |<br>| total_cost | numeric | NULLABLE | Total cost |<br>| batch_number | varchar | NULLABLE | Batch number |<br>| expiry_date | date | NULLABLE | Expiry date |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><hr></p><br><p><h2 id="<strong>5. Organizational Structure Tables</strong>"><strong>5. Organizational Structure Tables</strong></h2></p><br><p><h3 id="<strong>organization_units</strong>"><strong>organization_units</strong></h3><br>Hierarchical organizational structure.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | Unit ID |<br>| organization_id | integer | FOREIGN KEY → organizations.id | Organization |<br>| name | varchar | | Unit name |<br>| type | varchar | | Unit type |<br>| parent_id | integer | FOREIGN KEY → organization_units.id | Parent unit |<br>| custom_fields | text | NULLABLE | JSON custom fields |<br>| deleted_at | datetime | NULLABLE | Soft delete |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><h3 id="<strong>organization_user</strong>"><strong>organization_user</strong></h3><br>User-organization membership with roles.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | Membership ID |<br>| organization_id | integer | FOREIGN KEY → organizations.id | Organization |<br>| user_id | integer | FOREIGN KEY → users.id | User |<br>| organization_unit_id | integer | FOREIGN KEY → organization_units.id | Unit |<br>| roles | text | NULLABLE | JSON roles array |<br>| permissions | text | NULLABLE | JSON permissions |<br>| position | varchar | NULLABLE | Position |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><hr></p><br><p><h2 id="<strong>6. Payroll Management Tables</strong>"><strong>6. Payroll Management Tables</strong></h2></p><br><p><h3 id="<strong>payroll_runs</strong>"><strong>payroll_runs</strong></h3><br>Payroll processing batches.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | Run ID |<br>| organization_id | integer | FOREIGN KEY → organizations.id | Organization |<br>| period | varchar | | Pay period |<br>| start_date | date | | Period start |<br>| end_date | date | | Period end |<br>| status | varchar | | Run status |<br>| total_gross | numeric | NULLABLE | Total gross pay |<br>| total_net | numeric | NULLABLE | Total net pay |<br>| journal_entry_id | integer | FOREIGN KEY → journal_entries.id | Accounting entry |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><h3 id="<strong>payroll_entries</strong>"><strong>payroll_entries</strong></h3><br>Individual employee payroll calculations.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | Entry ID |<br>| employee_id | integer | FOREIGN KEY → employees.id | Employee |<br>| organization_id | integer | FOREIGN KEY → organizations.id | Organization |<br>| period | varchar | | Pay period |<br>| basic_salary | numeric | NULLABLE | Basic salary |<br>| housing_allowance | numeric | NULLABLE | Housing allowance |<br>| transport_allowance | numeric | NULLABLE | Transport allowance |<br>| overtime_pay | numeric | NULLABLE | Overtime pay |<br>| bonus | numeric | NULLABLE | Bonus |<br>| gross_pay | numeric | NULLABLE | Gross pay |<br>| tax_deduction | numeric | NULLABLE | Tax deduction |<br>| insurance_deduction | numeric | NULLABLE | Insurance deduction |<br>| other_deductions | numeric | NULLABLE | Other deductions |<br>| total_deductions | numeric | NULLABLE | Total deductions |<br>| net_pay | numeric | NULLABLE | Net pay |<br>| status | varchar | INDEX | Status |<br>| paid_at | datetime | NULLABLE | Payment date |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><strong>Indexes:</strong><br>- UNIQUE: employee_id + period<br>- INDEX: organization_id + period, status</p><br><p><hr></p><br><p><h2 id="<strong>7. System & Support Tables</strong>"><strong>7. System & Support Tables</strong></h2></p><br><p><h3 id="<strong>sequences</strong>"><strong>sequences</strong></h3><br>Sequence number generation for documents.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| name | varchar | PRIMARY KEY | Sequence name |<br>| last_value | integer | | Last value |<br>| increment_by | integer | DEFAULT 1 | Increment |<br>| prefix | varchar | NULLABLE | Number prefix |<br>| suffix | varchar | NULLABLE | Number suffix |<br>| pad_length | integer | NULLABLE | Zero padding |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><h3 id="<strong>dimensions & dimensionables</strong>"><strong>dimensions & dimensionables</strong></h3><br>Business dimension tracking for reporting.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | Dimension ID |<br>| name | varchar | | Dimension name |<br>| code | varchar | UNIQUE | Dimension code |<br>| type | varchar | INDEX | Dimension type |<br>| description | text | NULLABLE | Description |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><h3 id="<strong>dimensionables</strong>"><strong>dimensionables</strong></h3><br>Polymorphic relationship for dimensions.</p><br><p>| Column | Type | Constraints | Description |<br>|---------|------|-------------|-------------|<br>| id | integer | PRIMARY KEY | ID |<br>| dimension_id | integer | FOREIGN KEY → dimensions.id | Dimension |<br>| dimensionable_type | varchar | | Related model type |<br>| dimensionable_id | integer | | Related model ID |<br>| created_at | datetime | | Creation |<br>| updated_at | datetime | | Last update |</p><br><p><strong>Indexes:</strong><br>- UNIQUE: dimension_id + dimensionable_id + dimensionable_type<br>- INDEX: dimensionable_type + dimensionable_id</p><br><p><hr></p><br><p><h2 id="<strong>8. Laravel Framework Tables</strong>"><strong>8. Laravel Framework Tables</strong></h2></p><br><p>Standard Laravel tables for authentication, teams, queues, etc.:</p><br><p>- <strong>teams</strong> - Jetstream team management<br>- <strong>team_user</strong> - Team memberships<br>- <strong>team_invitations</strong> - Team invitations<br>- <strong>personal_access_tokens</strong> - Sanctum API tokens<br>- <strong>sessions</strong> - User sessions<br>- <strong>failed_jobs</strong> - Failed queue jobs<br>- <strong>jobs</strong> - Queue jobs<br>- <strong>job_batches</strong> - Job batches<br>- <strong>cache</strong> & <strong>cache_locks</strong> - Cache storage<br>- <strong>password_reset_tokens</strong> - Password reset tokens<br>- <strong>migrations</strong> - Database migrations</p><br><p><hr></p><br><p><h2 id="<strong>9. Key Relationships & Data Flow</strong>"><strong>9. Key Relationships & Data Flow</strong></h2></p><br><p><h3 id="<strong>Multi-Tenant Data Isolation</strong>"><strong>Multi-Tenant Data Isolation</strong></h3><br>- All business tables have <code>organization_id</code> foreign keys<br>- Data access is scoped by user's current organization<br>- Cross-organization data access is prevented at model level</p><br><p><h3 id="<strong>Core Business Flows</strong>"><strong>Core Business Flows</strong></h3></p><br><p>1. <strong>HR Flow</strong>: organizations → organization_units → employees → attendance_records → payroll_entries<br>2. <strong>Accounting Flow</strong>: chart_of_accounts → journal_entries → ledger_entries → financial_reports<br>3. <strong>Inventory Flow</strong>: inventory_stores → inventory_items → inventory_transactions → stock_levels<br>4. <strong>User Management</strong>: users → organization_user → permissions → role_based_access</p><br><p><h3 id="<strong>Integration Points</strong>"><strong>Integration Points</strong></h3></p><br><p>- <strong>Payroll → Accounting</strong>: payroll_runs → journal_entries (automatic posting)<br>- <strong>Inventory → Accounting</strong>: inventory_transactions → ledger_entries (COGS calculation)<br>- <strong>HR → Payroll</strong>: employees + attendance_records → payroll_entries (salary calculation)</p><br><p><hr></p><br><p><h2 id="<strong>10. Performance Optimizations</strong>"><strong>10. Performance Optimizations</strong></h2></p><br><p><h3 id="<strong>Strategic Indexes</strong>"><strong>Strategic Indexes</strong></h3><br>- Composite indexes for common queries (organization + status, employee + date)<br>- Unique constraints for data integrity<br>- Foreign key indexes for join performance</p><br><p><h3 id="<strong>Query Optimization</strong>"><strong>Query Optimization</strong></h3><br>- Eager loading for related data<br>- Database-level scoping for multi-tenancy<br>- Efficient pagination for large datasets</p><br><p><hr></p><br><p><h2 id="<strong>11. Security & Compliance</strong>"><strong>11. Security & Compliance</strong></h2></p><br><p><h3 id="<strong>Data Protection</strong>"><strong>Data Protection</strong></h3><br>- Soft deletes for audit trails<br>- User activity logging through timestamps<br>- Role-based access control through organization_user</p><br><p><h3 id="<strong>Audit Trail</strong>"><strong>Audit Trail</strong></h3><br>- created_at/updated_at on all tables<br>- created_by/approved_by for critical operations<br>- Status tracking for workflow processes</p><br><p><hr></p><br><p><h2 id="<strong>12. Scalability Considerations</strong>"><strong>12. Scalability Considerations</strong></h2></p><br><p><h3 id="<strong>Multi-Organization Support</strong>"><strong>Multi-Organization Support</strong></h3><br>- Schema designed for horizontal scaling<br>- Organization-based data partitioning<br>- Efficient cross-organization reporting</p><br><p><h3 id="<strong>High Volume Tables</strong>"><strong>High Volume Tables</strong></h3><br>- Optimized for high transaction volumes<br>- Efficient indexing strategies<br>- Bulk operation support</p><br><p><hr></p><br><p><em>This ERD documentation reflects the current production database schema as of November 19, 2025. The schema supports comprehensive ERP functionality with multi-tenant architecture.</em></p>
+        </main>
+        
+        <div class="footer" style="font-size: 8pt; text-align: center; line-height: 1.0; border-top: 1px solid #e5e7eb; padding-top: 5px; margin-top: 10px;">
+    Page {page} of {total} | Generated on 2025-11-26 06:46:36
+</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list of screens - HRM Laravel Base Documentation</title>
+    <style>
+/* PDF Documentation Theme */
+body {
+    font-family: var(--font-family, "Inter", system-ui, sans-serif);
+    font-size: var(--font-size, 10pt);
+    line-height: var(--line-height, 1.25);
+    color: #151c27;
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+
+/* Ensure no default margins interfere with PDF tool margins */
+@page {
+    margin: var(--page-margin, 12mm 8mm 4mm 10mm) !important;
+    size: var(--page-size, A4);
+    padding: 0 !important;
+}
+
+/* For PDF generation tools */
+@media print {
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    @page {
+        margin: var(--page-margin, 12mm 8mm 4mm 10mm) !important;
+        padding: 0 !important;
+    }
+    
+    .document {
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    * {
+        box-sizing: border-box !important;
+    }
+    
+    /* Force zero margins on all elements */
+    h1, h2, h3, h4, h5, h6, p, ul, ol, li, pre, blockquote, table, hr {
+        page-break-inside: avoid;
+        margin-top: 0.5em !important;
+        margin-bottom: 0.5em !important;
+    }
+}
+
+.document {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #000c27;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+    page-break-after: avoid;
+}
+
+h1 {
+    font-size: 1.5em;
+    border-bottom: 3px solid #3b82f6;
+    padding-bottom: 0.5em;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.25em;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.5em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+p {
+    margin: 0 0 1em 0;
+    text-align: justify;
+    orphans: 3;
+    widows: 3;
+}
+
+/* Links */
+a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Code */
+code {
+    font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
+        monospace;
+    background-color: #f3f4f6;
+    padding: 0.125em 0.25em;
+    border-radius: 0.25em;
+    font-size: 0.875em;
+    border: 1px solid #e5e7eb;
+}
+
+pre {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin: 1em 0;
+    overflow-x: auto;
+    page-break-inside: avoid;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+    border: none;
+    font-size: 0.875em;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid #3b82f6;
+    margin: 1.5em 0;
+    padding: 0.5em 1.5em;
+    background-color: #f9fafb;
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* Lists */
+ul,
+ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5em 0;
+    page-break-inside: avoid;
+}
+
+th,
+td {
+    border: 1px solid #e5e7eb;
+    padding: 0.5em 1em;
+    text-align: left;
+}
+
+th {
+    background-color: #f9fafb;
+    font-weight: 600;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    margin: 1em 0;
+}
+
+/* Horizontal Rule */
+hr {
+    border: none;
+    border-top: 2px solid #e5e7eb;
+    margin: 2em 0;
+}
+
+/* Table of Contents */
+.toc {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin-bottom: 2em;
+}
+
+.toc h3 {
+    margin-top: 0;
+    margin-bottom: 1em;
+    font-size: 14pt;
+    color: #111827;
+}
+
+.toc ul {
+    padding-left: 1.5em;
+    margin: 0;
+}
+
+.toc li {
+    margin-bottom: 0.25em;
+}
+
+.toc a {
+    color: #374151;
+}
+
+.toc a:hover {
+    color: #3b82f6;
+}
+
+/* Page Breaks */
+.page-break {
+    page-break-before: always;
+}
+
+.page-break-after {
+    page-break-after: always;
+}
+
+/* Header and Footer */
+.header {
+    text-align: center;
+    font-size: 1.25em;
+    color: #424c5f;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+}
+
+.footer {
+    text-align: center;
+    font-size: 0.75em;
+    color: #383a3d;
+    border-top: 1px solid #233b6b;
+    padding-top: 0.5em;
+    margin-top: 1em;
+}
+
+/* Watermark */
+.watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 72pt;
+    color: rgba(156, 163, 175, 0.1);
+    font-weight: bold;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Print Optimization */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .document {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        page-break-after: avoid;
+    }
+
+    p,
+    ul,
+    ol {
+        orphans: 3;
+        widows: 3;
+    }
+
+    pre,
+    blockquote,
+    table,
+    img {
+        page-break-inside: avoid;
+    }
+
+    .toc {
+        page-break-after: avoid;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="document">
+        <div class="header" style="font-size: 9pt; text-align: center; line-height: 1.0; border-bottom: 1px solid #e5e7eb; padding-bottom: 5px; margin-bottom: 10px;">
+    list of screens - HRM Laravel Base Documentation
+</div>
+        
+        <nav class="toc">
+    <h3>📚 Navigation</h3>
+    <ul>
+        <li><a href="SRS.html">📋 Requirements</a></li><li><a href="big picture.html">📊 Big Picture</a></li><li><a href="ERD.html">🗄️ Database Design</a></li><li><a href="project plan.html">📅 Project Plan</a></li><li><a href="timeline.html">⏰ Timeline</a></li>
+    </ul>
+</nav>
+        
+        <main class="content">
+            <p><h1 id="Complete Screen Inventory">Complete Screen Inventory</h1></p><br><p><em>Generated: November 19, 2025</em>  <br><em>Total Screens: 45+</em>  <br><em>Technology: Livewire 3 + Blade Templates</em></p><br><p><hr></p><br><p><h2 id="<strong>1. Screen Architecture Overview</strong>"><strong>1. Screen Architecture Overview</strong></h2></p><br><p><h3 id="<strong>Screen Categories</strong>"><strong>Screen Categories</strong></h3><br>- <strong>Authentication Screens</strong> - Login, registration, password management<br>- <strong>Dashboard Screens</strong> - Main and role-specific dashboards  <br>- <strong>Financial Management Screens</strong> - Accounting, vouchers, reports<br>- <strong>HR Management Screens</strong> - Employee, payroll, leave management<br>- <strong>Inventory Management Screens</strong> - Items, stores, transactions<br>- <strong>Portal Screens</strong> - Employee and manager self-service portals<br>- <strong>Administration Screens</strong> - System settings and user management<br>- <strong>Setup Wizard Screens</strong> - Initial organization setup</p><br><p><hr></p><br><p><h2 id="<strong>2. Authentication Screens</strong>"><strong>2. Authentication Screens</strong></h2></p><br><p><h3 id="<strong>2.1 Login Screen</strong> ✅"><strong>2.1 Login Screen</strong> ✅</h3><br><strong>Route:</strong> <code>/login</code>  <br><strong>View:</strong> <code>auth/login.blade.php</code>  <br><strong>Component:</strong> Login authentication form</p><br><p><strong>Features:</strong><br>- Email and password input fields<br>- "Remember me" checkbox<br>- Two-factor authentication support<br>- Forgot password link<br>- Social login options (configurable)<br>- Session management<br>- Device tracking</p><br><p><strong>User Flow:</strong><br>1. User enters credentials<br>2. System validates authentication<br>3. On success, redirect to dashboard<br>4. On failure, show error messages</p><br><p><hr></p><br><p><h3 id="<strong>2.2 Registration Screen</strong> ✅"><strong>2.2 Registration Screen</strong> ✅</h3><br><strong>Route:</strong> <code>/register</code>  <br><strong>View:</strong> <code>auth/register.blade.php</code>  <br><strong>Component:</strong> User registration form</p><br><p><strong>Features:</strong><br>- Name, email, password fields<br>- Password confirmation<br>- Organization selection/creation<br>- Terms and conditions acceptance<br>- Email verification<br>- Role assignment</p><br><p><strong>User Flow:</strong><br>1. User fills registration form<br>2. System validates input<br>3. Creates user account and organization<br>4. Sends verification email<br>5. Redirects to setup wizard</p><br><p><hr></p><br><p><h3 id="<strong>2.3 Password Management Screens</strong> ✅"><strong>2.3 Password Management Screens</strong> ✅</h3><br><strong>Forgot Password Screen</strong><br>- Route: <code>/forgot-password</code><br>- Email input for password reset<br>- Security question support (optional)</p><br><p><strong>Reset Password Screen</strong><br>- Route: <code>/reset-password/{token}</code><br>- New password input with confirmation<br>- Token validation<br>- Password strength requirements</p><br><p><strong>Password Confirmation Screen</strong><br>- Route: <code>/user/confirm-password</code><br>- Re-authentication for sensitive actions<br>- Secure password verification</p><br><p><hr></p><br><p><h2 id="<strong>3. Dashboard Screens</strong>"><strong>3. Dashboard Screens</strong></h2></p><br><p><h3 id="<strong>3.1 Main Dashboard</strong> ✅"><strong>3.1 Main Dashboard</strong> ✅</h3><br><strong>Route:</strong> <code>/dashboard</code>  <br><strong>View:</strong> <code>dashboard.blade.php</code>  <br><strong>Component:</strong> Dashboard with KPIs and quick actions</p><br><p><strong>Features:</strong><br>- Organization statistics cards (employees, stores, transactions)<br>- Recent activity feed<br>- Quick action buttons<br>- Interactive charts and graphs<br>- Low stock alerts<br>- Performance metrics<br>- Customizable widgets</p><br><p><strong>User Flow:</strong><br>1. User logs in and lands on dashboard<br>2. Views organization overview<br>3. Can navigate to specific modules<br>4. Interacts with real-time data updates</p><br><p><hr></p><br><p><h3 id="<strong>3.2 HR Dashboard</strong> ✅"><strong>3.2 HR Dashboard</strong> ✅</h3><br><strong>Route:</strong> <code>/hrm/dashboard</code>  <br><strong>View:</strong> <code>hrm/dashboard.blade.php</code>  <br><strong>Component:</strong> HR-specific dashboard</p><br><p><strong>Features:</strong><br>- Employee statistics and metrics<br>- Department-wise headcount<br>- Attendance overview<br>- Leave requests pending approval<br>- Payroll processing status<br>- Recruitment metrics<br>- Training and development tracking</p><br><p><hr></p><br><p><h3 id="<strong>3.3 Employee Portal Dashboard</strong> ✅"><strong>3.3 Employee Portal Dashboard</strong> ✅</h3><br><strong>Route:</strong> <code>/portal/employee/dashboard</code>  <br><strong>View:</strong> <code>portal/employee/dashboard.blade.php</code>  <br><strong>Component:</strong> Employee self-service dashboard</p><br><p><strong>Features:</strong><br>- Personal information summary<br>- Leave balance display<br>- Recent payslips<br>- Clock in/out functionality<br>- Attendance summary<br>- Quick leave request<br>- Document access</p><br><p><hr></p><br><p><h3 id="<strong>3.4 Manager Portal Dashboard</strong> ✅"><strong>3.4 Manager Portal Dashboard</strong> ✅</h3><br><strong>Route:</strong> <code>/portal/manager/dashboard</code>  <br><strong>View:</strong> <code>portal/manager/dashboard.blade.php</code>  <br><strong>Component:</strong> Manager oversight dashboard</p><br><p><strong>Features:</strong><br>- Team overview and statistics<br>- Team attendance summary<br>- Pending leave approvals<br>- Team performance metrics<br>- Reports access<br>- Quick actions for team management</p><br><p><hr></p><br><p><h2 id="<strong>4. Financial Management Screens</strong>"><strong>4. Financial Management Screens</strong></h2></p><br><p><h3 id="<strong>4.1 Accounts Dashboard</strong> ✅"><strong>4.1 Accounts Dashboard</strong> ✅</h3><br><strong>Route:</strong> <code>/accounts</code>  <br><strong>View:</strong> <code>accounts/index.blade.php</code>  <br><strong>Component:</strong> Financial management dashboard</p><br><p><strong>Features:</strong><br>- Chart of accounts overview<br>- Account balance summaries<br>- Quick access to voucher creation<br>- Financial KPIs<br>- Recent transactions<br>- Bank account status</p><br><p><hr></p><br><p><h3 id="<strong>4.2 Voucher Management Screens</strong> ✅"><strong>4.2 Voucher Management Screens</strong> ✅</h3></p><br><p><h4 id="<strong>Voucher List Screen</strong>"><strong>Voucher List Screen</strong></h4><br>- Route: Voucher listing endpoint<br>- View: Voucher management interface<br>- Features: Searchable, filterable voucher list<br>- Status indicators (draft, posted, void)<br>- Bulk operations support</p><br><p><h4 id="<strong>Voucher Creation Screen</strong>"><strong>Voucher Creation Screen</strong></h4><br>- Dynamic form based on voucher type<br>- Line items management<br>- Account selection with search<br>- Auto-balance calculation<br>- Draft saving and posting</p><br><p><strong>Voucher Types Supported:</strong><br>- Sales Vouchers with customer details<br>- Purchase Vouchers with vendor information<br>- Expense Vouchers with categorization<br>- Salary Vouchers with payroll integration<br>- General Journal Entries</p><br><p><hr></p><br><p><h3 id="<strong>4.3 Financial Reporting Screens</strong> ✅"><strong>4.3 Financial Reporting Screens</strong> ✅</h3></p><br><p><h4 id="<strong>Trial Balance Report</strong>"><strong>Trial Balance Report</strong></h4><br>- Route: <code>/api/reports/trial-balance</code><br>- Interactive trial balance with date filtering<br>- Account balance drill-down<br>- Export capabilities (PDF, Excel)</p><br><p><h4 id="<strong>Balance Sheet Report</strong>"><strong>Balance Sheet Report</strong></h4><br>- Route: <code>/api/reports/balance-sheet</code><br>- Automated balance sheet generation<br>- Asset, liability, equity sections<br>- Comparative periods support</p><br><p><h4 id="<strong>Income Statement Report</strong>"><strong>Income Statement Report</strong></h4><br>- Route: <code>/api/reports/income-statement</code><br>- Revenue and expense breakdown<br>- Period comparisons<br>- Profit/loss calculations</p><br><p><hr></p><br><p><h3 id="<strong>4.4 Chart of Accounts Management</strong> ✅"><strong>4.4 Chart of Accounts Management</strong> ✅</h3><br><strong>Features:</strong><br>- Hierarchical account structure<br>- Account type management<br>- Balance calculations<br>- Import/export functionality<br>- Account search and filtering</p><br><p><hr></p><br><p><h2 id="<strong>5. Human Resources Screens</strong>"><strong>5. Human Resources Screens</strong></h2></p><br><p><h3 id="<strong>5.1 Employee Management Screens</strong> ✅"><strong>5.1 Employee Management Screens</strong> ✅</h3></p><br><p><h4 id="<strong>Employee List Screen</strong>"><strong>Employee List Screen</strong></h4><br><strong>Route:</strong> <code>/hr/employees</code>  <br><strong>View:</strong> <code>hr/employees/index.blade.php</code>  <br><strong>Component:</strong> Employee directory with advanced filtering</p><br><p><strong>Features:</strong><br>- Searchable employee directory<br>- Filter by department, position, status<br>- Bulk operations (import, export)<br>- Employee status indicators<br>- Quick actions (view, edit, delete)</p><br><p><h4 id="<strong>Employee Profile Screen</strong>"><strong>Employee Profile Screen</strong></h4><br><strong>Route:</strong> <code>/hr/employees/{id}</code>  <br><strong>View:</strong> <code>hr/employees/show.blade.php</code>  <br><strong>Component:</strong> Comprehensive employee profile</p><br><p><strong>Features:</strong><br>- Personal information tab<br>- Employment details tab<br>- Payroll information tab<br>- Leave history tab<br>- Document management tab<br>- Performance records tab</p><br><p><h4 id="<strong>Employee Creation/Editing Screen</strong>"><strong>Employee Creation/Editing Screen</strong></h4><br><strong>Route:</strong> <code>/hr/employees/create</code> and <code>/hr/employees/{id}/edit</code>  <br><strong>View:</strong> <code>hr/employees/create.blade.php</code> and <code>hr/employees/edit.blade.php</code>  <br><strong>Component:</strong> Employee form with validation</p><br><p><strong>Features:</strong><br>- Multi-step employee creation<br>- Position and shift assignment<br>- Organization unit assignment<br>- User account creation option<br>- Document upload<br>- Biometric ID assignment</p><br><p><hr></p><br><p><h3 id="<strong>5.2 Position & Shift Management</strong> ✅"><strong>5.2 Position & Shift Management</strong> ✅</h3></p><br><p><h4 id="<strong>Job Positions Screen</strong>"><strong>Job Positions Screen</strong></h4><br><strong>Route:</strong> <code>/hr/positions</code>  <br><strong>View:</strong> <code>hr/positions/index.blade.php</code>  <br><strong>Component:</strong> Job position management</p><br><p><strong>Features:</strong><br>- Position listing with search<br>- Salary range configuration<br>- Requirements definition<br>- Department assignment<br>- Status management</p><br><p><h4 id="<strong>Work Shifts Screen</strong>"><strong>Work Shifts Screen</strong></h4><br><strong>Route:</strong> <code>/hr/shifts</code>  <br><strong>View:</strong> <code>hr/shifts/index.blade.php</code>  <br><strong>Component:</strong> Shift management</p><br><p><strong>Features:</strong><br>- Shift creation and scheduling<br>- Working hours calculation<br>- Days of week configuration<br>- Overnight shift support<br>- Employee assignment</p><br><p><hr></p><br><p><h3 id="<strong>5.3 Payroll Management Screen</strong> ✅"><strong>5.3 Payroll Management Screen</strong> ✅</h3><br><strong>Route:</strong> <code>/payroll/processing</code>  <br><strong>View:</strong> <code>payroll/processing.blade.php</code>  <br><strong>Component:</strong> Payroll processing interface</p><br><p><strong>Features:</strong><br>- Payroll period selection<br>- Employee listing with calculations<br>- Allowance and deduction management<br>- Bulk payroll generation<br>- Payslip distribution<br>- Integration with accounting system</p><br><p><hr></p><br><p><h3 id="<strong>5.4 Leave Management Screens</strong> ✅"><strong>5.4 Leave Management Screens</strong> ✅</h3></p><br><p><h4 id="<strong>Leave Request Screen (Employee)</strong>"><strong>Leave Request Screen (Employee)</strong></h4><br><strong>Route:</strong> <code>/portal/employee/leave</code>  <br><strong>View:</strong> <code>portal/employee/leave.blade.php</code>  <br><strong>Component:</strong> Leave application interface</p><br><p><strong>Features:</strong><br>- Leave type selection<br>- Date picker with availability<br>- Balance checking<br>- Reason entry<br>- Attachment upload<br>- Status tracking</p><br><p><h4 id="<strong>Leave Approval Screen (Manager/HR)</strong>"><strong>Leave Approval Screen (Manager/HR)</strong></h4><br><strong>Route:</strong> <code>/portal/manager/reports</code> (includes leave approvals)  <br><strong>View:</strong> Leave management interface<br>- Features: Pending requests listing<br>- Approval/rejection workflow<br>- Comment system for rejections<br>- Bulk approval support<br>- Calendar view</p><br><p><hr></p><br><p><h2 id="<strong>6. Inventory Management Screens</strong>"><strong>6. Inventory Management Screens</strong></h2></p><br><p><h3 id="<strong>6.1 Inventory Dashboard</strong> ✅"><strong>6.1 Inventory Dashboard</strong> ✅</h3><br><strong>Route:</strong> <code>/inventory</code>  <br><strong>View:</strong> <code>inventory/index.blade.php</code>  <br><strong>Component:</strong> Inventory overview dashboard</p><br><p><strong>Features:</strong><br>- Total items and stores count<br>- Stock value summary<br>- Low stock alerts<br>- Recent transactions<br>- Quick action buttons<br>- Store performance metrics</p><br><p><hr></p><br><p><h3 id="<strong>6.2 Item Management Screens</strong> ✅"><strong>6.2 Item Management Screens</strong> ✅</h3></p><br><p><h4 id="<strong>Item List Screen</strong>"><strong>Item List Screen</strong></h4><br><strong>Route:</strong> <code>/inventory/items</code>  <br><strong>View:</strong> <code>inventory/items/index.blade.php</code>  <br><strong>Component:</strong> Item catalog with filtering</p><br><p><strong>Features:</strong><br>- Advanced search and filtering<br>- Category-based browsing<br>- Stock level indicators<br>- Price information<br>- Barcode/QR code support<br>- Bulk operations</p><br><p><h4 id="<strong>Item Details Screen</strong>"><strong>Item Details Screen</strong></h4><br><strong>Route:</strong> <code>/inventory/items/{id}</code>  <br><strong>View:</strong> <code>inventory/items/show.blade.php</code>  <br><strong>Component:</strong> Detailed item information</p><br><p><strong>Features:</strong><br>- Complete item information<br>- Stock levels by store<br>- Transaction history<br>- Batch and expiry tracking<br>- Supplier information<br>- Movement history</p><br><p><h4 id="<strong>Item Creation/Editing Screen</strong>"><strong>Item Creation/Editing Screen</strong></h4><br><strong>Route:</strong> <code>/inventory/items/create</code> and <code>/inventory/items/{id}/edit</code>  <br><strong>View:</strong> <code>inventory/items/form.blade.php</code>  <br><strong>Component:</strong> Item form with validation</p><br><p><strong>Features:</strong><br>- Multi-step item creation<br>- Category assignment<br>- Pricing configuration<br>- Stock level settings<br>- Image upload<br>- Specification management</p><br><p><hr></p><br><p><h3 id="<strong>6.3 Store Management Screens</strong> ✅"><strong>6.3 Store Management Screens</strong> ✅</h3></p><br><p><h4 id="<strong>Store List Screen</strong>"><strong>Store List Screen</strong></h4><br><strong>Route:</strong> <code>/inventory/stores</code>  <br><strong>View:</strong> <code>inventory/stores/index.blade.php</code>  <br><strong>Component:</strong> Store directory</p><br><p><strong>Features:</strong><br>- Store listing with search<br>- Location information<br>- Manager assignment<br>- Stock summaries<br>- Performance metrics</p><br><p><h4 id="<strong>Store Details Screen</strong>"><strong>Store Details Screen</strong></h4><br><strong>Route:</strong> <code>/inventory/stores/{id}</code>  <br><strong>View:</strong> <code>inventory/stores/show.blade.php</code>  <br><strong>Component:</strong> Store details</p><br><p><strong>Features:</strong><br>- Store information and location<br>- Stock levels by item<br>- Transfer history<br>- Staff assignment<br>- Performance analytics</p><br><p><hr></p><br><p><h3 id="<strong>6.4 Transaction Management Screens</strong> ✅"><strong>6.4 Transaction Management Screens</strong> ✅</h3></p><br><p><h4 id="<strong>Transaction List Screen</strong>"><strong>Transaction List Screen</strong></h4><br><strong>Route:</strong> <code>/inventory/transactions</code>  <br><strong>View:</strong> <code>inventory/transactions/index.blade.php</code>  <br><strong>Component:</strong> Transaction listing</p><br><p><strong>Features:</strong><br>- Filterable transaction list<br>- Status tracking (draft, finalized, cancelled)<br>- Transaction type indicators<br>- Value summaries<br>- Export functionality</p><br><p><h4 id="<strong>Transaction Creation Screen</strong>"><strong>Transaction Creation Screen</strong></h4><br><strong>Route:</strong> <code>/inventory/transactions/create</code>  <br><strong>View:</strong> <code>inventory/transactions/create.blade.php</code>  <br><strong>Component:</strong> Transaction form</p><br><p><strong>Features:</strong><br>- Transaction type selection<br>- Store and item selection<br>- Quantity and cost entry<br>- Batch number assignment<br>- Expiry date tracking</p><br><p><h4 id="<strong>Transaction Wizard Screen</strong>"><strong>Transaction Wizard Screen</strong></h4><br><strong>Route:</strong> <code>/inventory/transactions/wizard</code>  <br><strong>View:</strong> <code>inventory/transactions/wizard.blade.php</code>  <br><strong>Component:</strong> Multi-step transaction wizard</p><br><p><strong>Wizard Steps:</strong><br>1. Select transaction type and store<br>2. Add items with quantities<br>3. Review transaction details<br>4. Confirmation and finalization</p><br><p><hr></p><br><p><h3 id="<strong>6.5 Stock Management Screens</strong> ✅"><strong>6.5 Stock Management Screens</strong> ✅</h3></p><br><p><h4 id="<strong>Stock Adjustment Screen</strong>"><strong>Stock Adjustment Screen</strong></h4><br><strong>Route:</strong> <code>/inventory/stock/adjustment</code>  <br><strong>View:</strong> <code>inventory/stock/adjustment.blade.php</code>  <br><strong>Component:</strong> Stock adjustment form</p><br><p><strong>Features:</strong><br>- Stock increase/decrease<br>- Reason entry<br>- Item selection<br>- Quantity validation<br>- Approval workflow</p><br><p><h4 id="<strong>Stock Count Screen</strong>"><strong>Stock Count Screen</strong></h4><br><strong>Route:</strong> <code>/inventory/stock/count</code>  <br><strong>View:</strong> <code>inventory/stock/count.blade.php</code>  <br><strong>Component:</strong> Stock counting interface</p><br><p><strong>Features:</strong><br>- Mobile-optimized counting<br>- Barcode scanning support<br>- Variance calculation<br>- Batch tracking<br>- Adjustment generation</p><br><p><h4 id="<strong>Stock Transfer Screen</strong>"><strong>Stock Transfer Screen</strong></h4><br><strong>Route:</strong> <code>/inventory/stock/transfer</code>  <br><strong>View:</strong> <code>inventory/stock/transfer.blade.php</code>  <br><strong>Component:</strong> Stock transfer form</p><br><p><strong>Features:</strong><br>- Source and destination store selection<br>- Item selection with availability<br>- Transfer quantity validation<br>- Transfer tracking<br>- Approval workflow</p><br><p><hr></p><br><p><h2 id="<strong>7. Portal System Screens</strong>"><strong>7. Portal System Screens</strong></h2></p><br><p><h3 id="<strong>7.1 Employee Portal Screens</strong> ✅"><strong>7.1 Employee Portal Screens</strong> ✅</h3></p><br><p><h4 id="<strong>Employee Setup Screen</strong>"><strong>Employee Setup Screen</strong></h4><br><strong>Route:</strong> <code>/portal/employee/setup</code>  <br><strong>View:</strong> <code>portal/employee/setup.blade.php</code>  <br><strong>Component:</strong> Employee profile setup</p><br><p><strong>Features:</strong><br>- Profile completion wizard<br>- Document upload<br>- Preference settings<br>- Notification configuration<br>- Security setup</p><br><p><h4 id="<strong>Payslips Screen</strong>"><strong>Payslips Screen</strong></h4><br><strong>Route:</strong> <code>/portal/employee/payslips</code>  <br><strong>View:</strong> <code>portal/employee/payslips.blade.php</code>  <br><strong>Component:</strong> Payslip listing</p><br><p><strong>Features:</strong><br>- Historical payslip listing<br>- Detailed payslip view<br>- PDF download<br>- Email payslip<br>- Tax summary</p><br><p><h4 id="<strong>Attendance Screen</strong>"><strong>Attendance Screen</strong></h4><br><strong>Route:</strong> <code>/portal/employee/attendance</code>  <br><strong>View:</strong> <code>portal/employee/attendance.blade.php</code>  <br><strong>Component:</strong> Personal attendance tracking</p><br><p><strong>Features:</strong><br>- Clock in/out functionality<br>- Attendance history<br>- Regularization requests<br>- Overtime tracking<br>- Calendar view</p><br><p><hr></p><br><p><h3 id="<strong>7.2 Manager Portal Screens</strong> ✅"><strong>7.2 Manager Portal Screens</strong> ✅</h3></p><br><p><h4 id="<strong>Team Attendance Screen</strong>"><strong>Team Attendance Screen</strong></h4><br><strong>Route:</strong> <code>/portal/manager/team-attendance</code>  <br><strong>View:</strong> <code>portal/manager/team-attendance.blade.php</code>  <br><strong>Component:</strong> Team attendance management</p><br><p><strong>Features:</strong><br>- Team attendance overview<br>- Exception handling<br>- Bulk regularization<br>- Attendance reports<br>- Export functionality</p><br><p><h4 id="<strong>Reports Screen</strong>"><strong>Reports Screen</strong></h4><br><strong>Route:</strong> <code>/portal/manager/reports</code>  <br><strong>View:</strong> <code>portal/manager/reports.blade.php</code>  <br><strong>Component:</strong> Team reports</p><br><p><strong>Features:</strong><br>- Team performance reports<br>- Attendance analytics<br>- Leave summary reports<br>- Custom report builder<br>- Scheduled reports</p><br><p><hr></p><br><p><h2 id="<strong>8. System Administration Screens</strong>"><strong>8. System Administration Screens</strong></h2></p><br><p><h3 id="<strong>8.1 User Profile Management</strong> ✅"><strong>8.1 User Profile Management</strong> ✅</h3><br><strong>Features:</strong><br>- Profile information editing<br>- Password change<br>- Two-factor authentication setup<br>- API token management<br>- Session management<br>- Notification preferences</p><br><p><h3 id="<strong>8.2 Organization Settings</strong> ✅"><strong>8.2 Organization Settings</strong> ✅</h3><br><strong>Features:</strong><br>- Organization details configuration<br>- Financial year management<br>- User role management<br>- Permission configuration<br>- System settings<br>- Integration settings</p><br><p><h3 id="<strong>8.3 User Management</strong> ✅"><strong>8.3 User Management</strong> ✅</h3><br><strong>Features:</strong><br>- User directory with search<br>- Role assignment<br>- Permission management<br>- Account status control<br>- Bulk operations<br>- Activity logging</p><br><p><hr></p><br><p><h2 id="<strong>9. Setup Wizard Screens</strong> ✅"><strong>9. Setup Wizard Screens</strong> ✅</h2></p><br><p><h3 id="<strong>9.1 Welcome Screen</strong>"><strong>9.1 Welcome Screen</strong></h3><br><strong>Route:</strong> <code>/setup</code>  <br><strong>View:</strong> <code>setup/welcome.blade.php</code>  <br><strong>Component:</strong> Setup welcome and introduction</p><br><p><strong>Features:</strong><br>- Welcome message and overview<br>- Setup progress tracking<br>- Quick start options<br>- Tutorial access</p><br><p><h3 id="<strong>9.2 Organization Setup</strong>"><strong>9.2 Organization Setup</strong></h3><br><strong>Route:</strong> <code>/setup/organization</code>  <br><strong>View:</strong> <code>setup/organization.blade.php</code>  <br><strong>Component:</strong> Organization creation</p><br><p><strong>Features:</strong><br>- Organization details form<br>- Industry selection<br>- Time zone configuration<br>- Currency setup<br>- Initial user creation</p><br><p><h3 id="<strong>9.3 Stores Setup</strong>"><strong>9.3 Stores Setup</strong></h3><br><strong>Route:</strong> <code>/setup/stores</code>  <br><strong>View:</strong> <code>setup/stores.blade.php</code>  <br><strong>Component:</strong> Initial store setup</p><br><p><strong>Features:</strong><br>- Store creation wizard<br>- Location configuration<br>- Manager assignment<br>- Initial stock setup<br>- Supplier configuration</p><br><p><h3 id="<strong>9.4 Accounts Setup</strong>"><strong>9.4 Accounts Setup</strong></h3><br><strong>Route:</strong> <code>/setup/accounts</code>  <br><strong>View:</strong> <code>setup/accounts.blade.php</code>  <br><strong>Component:</strong> Initial accounting setup</p><br><p><strong>Features:</strong><br>- Chart of accounts template<br>- Financial year configuration<br>- Opening balances<br>- Account hierarchy setup<br>- Tax configuration</p><br><p><hr></p><br><p><h2 id="<strong>10. Screen Features & UX Patterns</strong>"><strong>10. Screen Features & UX Patterns</strong></h2></p><br><p><h3 id="<strong>10.1 Responsive Design</strong>"><strong>10.1 Responsive Design</strong></h3><br>- Mobile-first responsive layouts<br>- Touch-friendly interface elements<br>- Progressive enhancement<br>- Adaptive design for different screen sizes</p><br><p><h3 id="<strong>10.2 Accessibility</strong>"><strong>10.2 Accessibility</strong></h3><br>- WCAG 2.1 AA compliance<br>- Keyboard navigation support<br>- Screen reader compatibility<br>- High contrast mode<br>- Focus management</p><br><p><h3 id="<strong>10.3 Real-time Features</strong>"><strong>10.3 Real-time Features</strong></h3><br>- Live data updates via Livewire<br>- Real-time notifications<br>- Collaborative editing indicators<br>- Live search results<br>- Auto-save functionality</p><br><p><h3 id="<strong>10.4 Performance Optimization</strong>"><strong>10.4 Performance Optimization</strong></h3><br>- Lazy loading for large datasets<br>- Virtual scrolling for big lists<br>- Optimized images and assets<br>- Efficient state management<br>- Background processing</p><br><p><hr></p><br><p><h2 id="<strong>11. Future Screen Enhancements</strong>"><strong>11. Future Screen Enhancements</strong></h2></p><br><p><h3 id="<strong>11.1 Planned Screens</strong>"><strong>11.1 Planned Screens</strong></h3><br>- Advanced analytics dashboard<br>- Business intelligence screens<br>- Quality management interface<br>- Production planning screens<br>- Supply chain management<br>- Fixed asset management</p><br><p><h3 id="<strong>11.2 Mobile App Screens</strong>"><strong>11.2 Mobile App Screens</strong></h3><br>- Native mobile application screens<br>- Offline capability<br>- Push notification integration<br>- Biometric device integration<br>- GPS-enabled features</p><br><p><hr></p><br><p><h2 id="<strong>12. Screen Status Summary</strong>"><strong>12. Screen Status Summary</strong></h2></p><br><p><h3 id="<strong>12.1 Completed Screens</strong> ✅"><strong>12.1 Completed Screens</strong> ✅</h3><br>- <strong>Authentication</strong>: Login, registration, password management<br>- <strong>Dashboards</strong>: Main, HR, employee, manager portals<br>- <strong>Financial</strong>: Accounts, vouchers, reports, chart of accounts<br>- <strong>HR</strong>: Employee management, positions, shifts, payroll, leave<br>- <strong>Inventory</strong>: Items, stores, transactions, stock management<br>- <strong>Portals</strong>: Complete employee and manager self-service<br>- <strong>Administration</strong>: User management, organization settings<br>- <strong>Setup</strong>: Complete organization setup wizard</p><br><p><h3 id="<strong>12.2 In Progress Screens</strong> 🚧"><strong>12.2 In Progress Screens</strong> 🚧</h3><br>- Advanced reporting and analytics<br>- Business intelligence features<br>- Quality management modules<br>- Fixed asset management</p><br><p><h3 id="<strong>12.3 Planned Screens</strong> 📋"><strong>12.3 Planned Screens</strong> 📋</h3><br>- Mobile application screens<br>- Advanced analytics dashboards<br>- Production planning interfaces<br>- Supply chain management screens</p><br><p><hr></p><br><p><em>This screen inventory documents all user interfaces available in the HRM Laravel Base system as of November 19, 2025.</em></p>
+        </main>
+        
+        <div class="footer" style="font-size: 8pt; text-align: center; line-height: 1.0; border-top: 1px solid #e5e7eb; padding-top: 5px; margin-top: 10px;">
+    Page {page} of {total} | Generated on 2025-11-26 06:46:36
+</div>
+    </div>
+</body>
+</html>

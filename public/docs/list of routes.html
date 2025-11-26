@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list of routes - HRM Laravel Base Documentation</title>
+    <style>
+/* PDF Documentation Theme */
+body {
+    font-family: var(--font-family, "Inter", system-ui, sans-serif);
+    font-size: var(--font-size, 10pt);
+    line-height: var(--line-height, 1.25);
+    color: #151c27;
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+
+/* Ensure no default margins interfere with PDF tool margins */
+@page {
+    margin: var(--page-margin, 12mm 8mm 4mm 10mm) !important;
+    size: var(--page-size, A4);
+    padding: 0 !important;
+}
+
+/* For PDF generation tools */
+@media print {
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    @page {
+        margin: var(--page-margin, 12mm 8mm 4mm 10mm) !important;
+        padding: 0 !important;
+    }
+    
+    .document {
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    * {
+        box-sizing: border-box !important;
+    }
+    
+    /* Force zero margins on all elements */
+    h1, h2, h3, h4, h5, h6, p, ul, ol, li, pre, blockquote, table, hr {
+        page-break-inside: avoid;
+        margin-top: 0.5em !important;
+        margin-bottom: 0.5em !important;
+    }
+}
+
+.document {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #000c27;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+    page-break-after: avoid;
+}
+
+h1 {
+    font-size: 1.5em;
+    border-bottom: 3px solid #3b82f6;
+    padding-bottom: 0.5em;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.25em;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.5em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+p {
+    margin: 0 0 1em 0;
+    text-align: justify;
+    orphans: 3;
+    widows: 3;
+}
+
+/* Links */
+a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Code */
+code {
+    font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
+        monospace;
+    background-color: #f3f4f6;
+    padding: 0.125em 0.25em;
+    border-radius: 0.25em;
+    font-size: 0.875em;
+    border: 1px solid #e5e7eb;
+}
+
+pre {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin: 1em 0;
+    overflow-x: auto;
+    page-break-inside: avoid;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+    border: none;
+    font-size: 0.875em;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid #3b82f6;
+    margin: 1.5em 0;
+    padding: 0.5em 1.5em;
+    background-color: #f9fafb;
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* Lists */
+ul,
+ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5em 0;
+    page-break-inside: avoid;
+}
+
+th,
+td {
+    border: 1px solid #e5e7eb;
+    padding: 0.5em 1em;
+    text-align: left;
+}
+
+th {
+    background-color: #f9fafb;
+    font-weight: 600;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    margin: 1em 0;
+}
+
+/* Horizontal Rule */
+hr {
+    border: none;
+    border-top: 2px solid #e5e7eb;
+    margin: 2em 0;
+}
+
+/* Table of Contents */
+.toc {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin-bottom: 2em;
+}
+
+.toc h3 {
+    margin-top: 0;
+    margin-bottom: 1em;
+    font-size: 14pt;
+    color: #111827;
+}
+
+.toc ul {
+    padding-left: 1.5em;
+    margin: 0;
+}
+
+.toc li {
+    margin-bottom: 0.25em;
+}
+
+.toc a {
+    color: #374151;
+}
+
+.toc a:hover {
+    color: #3b82f6;
+}
+
+/* Page Breaks */
+.page-break {
+    page-break-before: always;
+}
+
+.page-break-after {
+    page-break-after: always;
+}
+
+/* Header and Footer */
+.header {
+    text-align: center;
+    font-size: 1.25em;
+    color: #424c5f;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+}
+
+.footer {
+    text-align: center;
+    font-size: 0.75em;
+    color: #383a3d;
+    border-top: 1px solid #233b6b;
+    padding-top: 0.5em;
+    margin-top: 1em;
+}
+
+/* Watermark */
+.watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 72pt;
+    color: rgba(156, 163, 175, 0.1);
+    font-weight: bold;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Print Optimization */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .document {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        page-break-after: avoid;
+    }
+
+    p,
+    ul,
+    ol {
+        orphans: 3;
+        widows: 3;
+    }
+
+    pre,
+    blockquote,
+    table,
+    img {
+        page-break-inside: avoid;
+    }
+
+    .toc {
+        page-break-after: avoid;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="document">
+        <div class="header" style="font-size: 9pt; text-align: center; line-height: 1.0; border-bottom: 1px solid #e5e7eb; padding-bottom: 5px; margin-bottom: 10px;">
+    list of routes - HRM Laravel Base Documentation
+</div>
+        
+        <nav class="toc">
+    <h3>📚 Navigation</h3>
+    <ul>
+        <li><a href="SRS.html">📋 Requirements</a></li><li><a href="big picture.html">📊 Big Picture</a></li><li><a href="ERD.html">🗄️ Database Design</a></li><li><a href="project plan.html">📅 Project Plan</a></li><li><a href="timeline.html">⏰ Timeline</a></li>
+    </ul>
+</nav>
+        
+        <main class="content">
+            <p><h1 id="Complete Route Documentation">Complete Route Documentation</h1></p><br><p><em>Generated: November 19, 2025</em>  <br><em>Total Routes: 224</em>  <br><em>Framework: Laravel 12</em></p><br><p><hr></p><br><p><h2 id="<strong>Route Overview</strong>"><strong>Route Overview</strong></h2></p><br><p>The HRM Laravel Base system provides comprehensive RESTful API routes and web routes for a full-featured ERP system. All routes are protected by authentication and organization-based multi-tenancy.</p><br><p><hr></p><br><p><h2 id="<strong>1. Core Application Routes</strong>"><strong>1. Core Application Routes</strong></h2></p><br><p><h3 id="<strong>Root & Dashboard</strong>"><strong>Root & Dashboard</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>/</code> | generated::lgLnEbIM1AFkXhsb | - | web |<br>| GET/HEAD | <code>dashboard</code> | dashboard | DashboardController@index | web,auth |</p><br><p><h3 id="<strong>Authentication (Laravel Fortify)</strong>"><strong>Authentication (Laravel Fortify)</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>login</code> | login | AuthenticatedSessionController@create | web,guest |<br>| POST | <code>login</code> | login.store | AuthenticatedSessionController@store | web,guest |<br>| POST | <code>logout</code> | logout | AuthenticatedSessionController@destroy | web,auth |<br>| GET/HEAD | <code>register</code> | register | RegisteredUserController@create | web,guest |<br>| POST | <code>register</code> | register.store | RegisteredUserController@store | web,guest |<br>| GET/HEAD | <code>forgot-password</code> | password.request | PasswordResetLinkController@create | web,guest |<br>| POST | <code>forgot-password</code> | password.email | PasswordResetLinkController@store | web,guest |<br>| GET/HEAD | <code>reset-password/{token}</code> | password.reset | NewPasswordController@create | web,guest |<br>| POST | <code>reset-password</code> | password.update | NewPasswordController@store | web,guest |<br>| GET/HEAD | <code>two-factor-challenge</code> | two-factor.login | TwoFactorAuthenticatedSessionController@create | web,guest |<br>| POST | <code>two-factor-challenge</code> | two-factor.login.store | TwoFactorAuthenticatedSessionController@store | web,guest |</p><br><p><hr></p><br><p><h2 id="<strong>2. Organization Management</strong>"><strong>2. Organization Management</strong></h2></p><br><p><h3 id="<strong>Web Routes</strong>"><strong>Web Routes</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>organizations</code> | organization.index | Api\OrganizationController@index | web,auth |<br>| GET/HEAD | <code>organizations/analytics</code> | organization.analytics | OrganizationController@analytics | web,auth |<br>| GET/HEAD | <code>organizations/dashboard</code> | organization.dashboard | OrganizationController@dashboard | web,auth |<br>| GET/HEAD | <code>organizations/structure</code> | organization.structure | OrganizationController@structure | web,auth |</p><br><p><h3 id="<strong>API Routes</strong>"><strong>API Routes</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>api/organizations</code> | organizations.index | Api\OrganizationController@index | api,auth:sanctum |<br>| POST | <code>api/organizations</code> | organizations.store | Api\OrganizationController@store | api,auth:sanctum |<br>| GET/HEAD | <code>api/organizations/{organization}</code> | organizations.show | Api\OrganizationController@show | api,auth:sanctum |<br>| PUT/PATCH | <code>api/organizations/{organization}</code> | organizations.update | Api\OrganizationController@update | api,auth:sanctum |<br>| DELETE | <code>api/organizations/{organization}</code> | organizations.destroy | Api\OrganizationController@destroy | api,auth:sanctum |<br>| GET/HEAD | <code>api/organizations/{organization}/members</code> | generated::PvDSi1x | - | api,auth:sanctum |<br>| POST | <code>api/organizations/{organization}/invitations</code> | generated::oHF | - | api,auth:sanctum |<br>| GET/HEAD | <code>api/organizations/{organization}/units</code> | generated::Szy6XmfDd | - | api,auth:sanctum |<br>| POST | <code>api/organizations/{organization}/units</code> | generated::hAeWQWYNN | - | api,auth:sanctum |<br>| GET/HEAD | <code>api/organizations/{organization}/units/{unit}</code> | generated::0k | - | api,auth:sanctum |<br>| PUT | <code>api/organizations/{organization}/units/{unit}</code> | generated::GL | - | api,auth:sanctum |<br>| DELETE | <code>api/organizations/{organization}/units/{unit}</code> | generated::Wo | - | api,auth:sanctum |<br>| PUT | <code>api/organizations/{organization}/units/{unit}/assign</code> | generated:: | - | api,auth:sanctum |<br>| POST | <code>api/organizations/{organization}/units/{unit}/bulk-assign</code> | generated:: | - | api,auth:sanctum |<br>| GET/HEAD | <code>api/organizations/{organization}/units/{unit}/hierarchy</code> | generated:: | - | api,auth:sanctum |<br>| GET/HEAD | <code>api/organizations/{organization}/units/{unit}/members</code> | generated:: | - | api,auth:sanctum |</p><br><p><hr></p><br><p><h2 id="<strong>3. Financial Management</strong>"><strong>3. Financial Management</strong></h2></p><br><p><h3 id="<strong>Accounting Web Routes</strong>"><strong>Accounting Web Routes</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>accounts</code> | accounting.index | AccountsController@index | web,auth |</p><br><p><h3 id="<strong>Accounting API Routes</strong>"><strong>Accounting API Routes</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>api/accounts</code> | accounts.index | Api\Accounting\ChartOfAccountsController@index | api,auth:sanctum |<br>| POST | <code>api/accounts</code> | accounts.store | Api\Accounting\ChartOfAccountsController@store | api,auth:sanctum |<br>| GET/HEAD | <code>api/accounts/{account}</code> | accounts.show | Api\Accounting\ChartOfAccountsController@show | api,auth:sanctum |<br>| PUT/PATCH | <code>api/accounts/{account}</code> | accounts.update | Api\Accounting\ChartOfAccountsController@update | api,auth:sanctum |<br>| DELETE | <code>api/accounts/{account}</code> | accounts.destroy | Api\Accounting\ChartOfAccountsController@destroy | api,auth:sanctum |</p><br><p><h3 id="<strong>Journal Entries API</strong>"><strong>Journal Entries API</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>api/journal-entries</code> | journal-entries.index | Api\Accounting\JournalEntryController@index | api,auth:sanctum |<br>| POST | <code>api/journal-entries</code> | journal-entries.store | Api\Accounting\JournalEntryController@store | api,auth:sanctum |<br>| GET/HEAD | <code>api/journal-entries/{journal_entry}</code> | journal-entries.show | Api\Accounting\JournalEntryController@show | api,auth:sanctum |<br>| PUT/PATCH | <code>api/journal-entries/{journal_entry}</code> | journal-entries.update | Api\Accounting\JournalEntryController@update | api,auth:sanctum |<br>| DELETE | <code>api/journal-entries/{journal_entry}</code> | journal-entries.destroy | Api\Accounting\JournalEntryController@destroy | api,auth:sanctum |<br>| PUT | <code>api/journal-entries/{journal_entry}/post</code> | generated::gG081tw | - | api,auth:sanctum |<br>| PUT | <code>api/journal-entries/{journal_entry}/void</code> | generated::a3xDbT6 | - | api,auth:sanctum |</p><br><p><h3 id="<strong>Voucher System API</strong>"><strong>Voucher System API</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>api/vouchers</code> | vouchers.index | Api\VoucherController@index | api,auth:sanctum |<br>| POST | <code>api/vouchers</code> | vouchers.store | Api\VoucherController@store | api,auth:sanctum |<br>| POST | <code>api/vouchers/expense</code> | generated::Ufl8CjLhRImIcuyq | Api\VoucherController@expense | api,auth:sanctum |<br>| POST | <code>api/vouchers/purchase</code> | generated::iNpU0gNtbPP3WYV | Api\VoucherController@purchase | api,auth:sanctum |<br>| POST | <code>api/vouchers/salary</code> | generated::qDoRW5TfLo8gQh7y | Api\VoucherController@salary | api,auth:sanctum |<br>| POST | <code>api/vouchers/sales</code> | generated::uc9q31P4cls1awIf | Api\VoucherController@sales | api,auth:sanctum |<br>| GET/HEAD | <code>api/vouchers/{voucher}</code> | vouchers.show | Api\VoucherController@show | api,auth:sanctum |<br>| PUT/PATCH | <code>api/vouchers/{voucher}</code> | vouchers.update | Api\VoucherController@update | api,auth:sanctum |<br>| DELETE | <code>api/vouchers/{voucher}</code> | vouchers.destroy | Api\VoucherController@destroy | api,auth:sanctum |<br>| PUT | <code>api/vouchers/{voucher}/post</code> | generated::go82ilheJ4Exlz5v | - | api,auth:sanctum |<br>| PUT | <code>api/vouchers/{voucher}/void</code> | generated::JcoopEbIzo6Plcsz | - | api,auth:sanctum |</p><br><p><h3 id="<strong>Financial Reports API</strong>"><strong>Financial Reports API</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>api/reports/trial-balance</code> | generated::be3MX8gJudsMo8FJ | Api\Accounting\ReportsController@trialBalance | api,auth:sanctum |<br>| GET/HEAD | <code>api/reports/balance-sheet</code> | generated::OHlKYWIpJzAS7QIv | Api\Accounting\ReportsController@balanceSheet | api,auth:sanctum |<br>| GET/HEAD | <code>api/reports/income-statement</code> | generated::i8MnW7UOnvgcMmWC | Api\Accounting\ReportsController@incomeStatement | api,auth:sanctum |</p><br><p><h3 id="<strong>Outstandings API</strong>"><strong>Outstandings API</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>api/outstanding/customers/summary</code> | generated::HSOitO84a4APii | - | api,auth:sanctum |<br>| GET/HEAD | <code>api/outstanding/receivables/aging</code> | generated::jKjVA2DfzpkRJT | - | api,auth:sanctum |<br>| GET/HEAD | <code>api/outstanding/payables/aging</code> | generated::knvIsK3L7gBm4ySv | - | api,auth:sanctum |<br>| GET/HEAD | <code>api/outstanding/vendors/summary</code> | generated::YmqHw7szcd3fw6bK | - | api,auth:sanctum |</p><br><p><hr></p><br><p><h2 id="<strong>4. Inventory Management</strong>"><strong>4. Inventory Management</strong></h2></p><br><p><h3 id="<strong>Inventory Web Routes</strong>"><strong>Inventory Web Routes</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>inventory</code> | inventory.index | Inventory\InventoryController@index | web,auth |<br>| GET/HEAD | <code>inventory/items</code> | inventory.items.index | Inventory\InventoryItemController@index | web,auth |<br>| GET/HEAD | <code>inventory/items/create</code> | inventory.items.create | Inventory\InventoryItemController@create | web,auth |<br>| GET/HEAD | <code>inventory/items/{item}</code> | inventory.items.show | Inventory\InventoryItemController@show | web,auth |<br>| GET/HEAD | <code>inventory/items/{item}/edit</code> | inventory.items.edit | Inventory\InventoryItemController@edit | web,auth |<br>| PUT | <code>inventory/items/{item}</code> | inventory.items.update | Inventory\InventoryItemController@update | web,auth |<br>| DELETE | <code>inventory/items/{item}</code> | inventory.items.destroy | Inventory\InventoryItemController@destroy | web,auth |<br>| POST | <code>inventory/items</code> | inventory.items.store | Inventory\InventoryItemController@store | web,auth |<br>| GET/HEAD | <code>inventory/reports</code> | inventory.reports.index | Inventory\InventoryReportController@index | web,auth |<br>| GET/HEAD | <code>inventory/reports/low-stock</code> | inventory.reports.low-stock | Inventory\InventoryReportController@lowStock | web,auth |<br>| GET/HEAD | <code>inventory/reports/movement</code> | inventory.reports.movement | Inventory\InventoryReportController@movement | web,auth |<br>| GET/HEAD | <code>inventory/reports/stock-levels</code> | inventory.reports.stock-levels | Inventory\InventoryReportController@stockLevels | web,auth |<br>| GET/HEAD | <code>inventory/stock/adjustment</code> | inventory.stock.adjustment | Inventory\InventoryStockController@adjustment | web,auth |<br>| POST | <code>inventory/stock/adjustment</code> | inventory.stock.process-adjustment | Inventory\InventoryStockController@processAdjustment | web,auth |<br>| GET/HEAD | <code>inventory/stock/count</code> | inventory.stock.count | Inventory\InventoryStockController@count | web,auth |<br>| POST | <code>inventory/stock/count</code> | inventory.stock.process-count | Inventory\InventoryStockController@processCount | web,auth |<br>| GET/HEAD | <code>inventory/stock/transfer</code> | inventory.stock.transfer | Inventory\InventoryStockController@transfer | web,auth |<br>| POST | <code>inventory/stock/transfer</code> | inventory.stock.process-transfer | Inventory\InventoryStockController@processTransfer | web,auth |<br>| GET/HEAD | <code>inventory/stores</code> | inventory.stores.index | Inventory\InventoryStoreController@index | web,auth |<br>| GET/HEAD | <code>inventory/stores/create</code> | inventory.stores.create | Inventory\InventoryStoreController@create | web,auth |<br>| GET/HEAD | <code>inventory/stores/{store}</code> | inventory.stores.show | Inventory\InventoryStoreController@show | web,auth |<br>| GET/HEAD | <code>inventory/stores/{store}/edit</code> | inventory.stores.edit | Inventory\InventoryStoreController@edit | web,auth |<br>| PUT | <code>inventory/stores/{store}</code> | inventory.stores.update | Inventory\InventoryStoreController@update | web,auth |<br>| DELETE | <code>inventory/stores/{store}</code> | inventory.stores.destroy | Inventory\InventoryStoreController@destroy | web,auth |<br>| POST | <code>inventory/stores</code> | inventory.stores.store | Inventory\InventoryStoreController@store | web,auth |<br>| GET/HEAD | <code>inventory/transactions</code> | inventory.transactions.index | Inventory\InventoryTransactionController@index | web,auth |<br>| GET/HEAD | <code>inventory/transactions/create</code> | inventory.transactions.create | Inventory\InventoryTransactionController@create | web,auth |<br>| GET/HEAD | <code>inventory/transactions/wizard</code> | inventory.transactions.wizard | Inventory\InventoryTransactionController@wizard | web,auth |<br>| GET/HEAD | <code>inventory/transactions/{transaction}</code> | inventory.transactions.show | Inventory\InventoryTransactionController@show | web,auth |<br>| POST | <code>inventory/transactions</code> | inventory.transactions.store | Inventory\InventoryTransactionController@store | web,auth |</p><br><p><h3 id="<strong>Inventory API Routes</strong>"><strong>Inventory API Routes</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>api/inventory/items</code> | items.index | Api\Inventory\ItemController@index | api,auth:sanctum |<br>| POST | <code>api/inventory/items</code> | items.store | Api\Inventory\ItemController@store | api,auth:sanctum |<br>| GET/HEAD | <code>api/inventory/items/low-stock</code> | items.low-stock | Api\Inventory\ItemController@lowStock | api,auth:sanctum |<br>| GET/HEAD | <code>api/inventory/items/out-of-stock</code> | items.out-of-stock | Api\Inventory\ItemController@outOfStock | api,auth:sanctum |<br>| GET/HEAD | <code>api/inventory/items/{item}</code> | items.show | Api\Inventory\ItemController@show | api,auth:sanctum |<br>| PUT/PATCH | <code>api/inventory/items/{item}</code> | items.update | Api\Inventory\ItemController@update | api,auth:sanctum |<br>| DELETE | <code>api/inventory/items/{item}</code> | items.destroy | Api\Inventory\ItemController@destroy | api,auth:sanctum |<br>| GET/HEAD | <code>api/inventory/items/{item}/availability</code> | items.availability | Api\Inventory\ItemController@availability | api,auth:sanctum |<br>| GET/HEAD | <code>api/inventory/stores</code> | stores.index | Api\Inventory\StoreController@index | api,auth:sanctum |<br>| POST | <code>api/inventory/stores</code> | stores.store | Api\Inventory\StoreController@store | api,auth:sanctum |<br>| GET/HEAD | <code>api/inventory/stores/{store}</code> | stores.show | Api\Inventory\StoreController@show | api,auth:sanctum |<br>| PUT/PATCH | <code>api/inventory/stores/{store}</code> | stores.update | Api\Inventory\StoreController@update | api,auth:sanctum |<br>| DELETE | <code>api/inventory/stores/{store}</code> | stores.destroy | Api\Inventory\StoreController@destroy | api,auth:sanctum |<br>| PUT | <code>api/inventory/stores/{store}/inventory</code> | stores.inventory.update | Api\Inventory\StoreController@updateInventory | api,auth:sanctum |<br>| POST | <code>api/inventory/stores/{store}/items</code> | stores.items.add | Api\Inventory\StoreController@addItems | api,auth:sanctum |<br>| PUT | <code>api/inventory/stores/{store}/items/{item}</code> | stores.items.update | Api\Inventory\StoreController@updateItem | api,auth:sanctum |<br>| DELETE | <code>api/inventory/stores/{store}/items/{item}</code> | stores.items.remove | Api\Inventory\StoreController@removeItem | api,auth:sanctum |<br>| GET/HEAD | <code>api/inventory/transactions</code> | transactions.index | Api\Inventory\TransactionController@index | api,auth:sanctum |<br>| POST | <code>api/inventory/transactions</code> | transactions.store | Api\Inventory\TransactionController@store | api,auth:sanctum |<br>| GET/HEAD | <code>api/inventory/transactions/{transaction}</code> | transactions.show | Api\Inventory\TransactionController@show | api,auth:sanctum |<br>| PUT/PATCH | <code>api/inventory/transactions/{transaction}</code> | transactions.update | Api\Inventory\TransactionController@update | api,auth:sanctum |<br>| DELETE | <code>api/inventory/transactions/{transaction}</code> | transactions.destroy | Api\Inventory\TransactionController@destroy | api,auth:sanctum |<br>| PUT | <code>api/inventory/transactions/{transaction}/cancel</code> | transaction.cancel | Api\Inventory\TransactionController@cancel | api,auth:sanctum |<br>| PUT | <code>api/inventory/transactions/{transaction}/finalize</code> | transaction.finalize | Api\Inventory\TransactionController@finalize | api,auth:sanctum |<br>| POST | <code>api/inventory/transactions/{transaction}/items</code> | transactions.items | Api\Inventory\TransactionController@addItems | api,auth:sanctum |</p><br><p><hr></p><br><p><h2 id="<strong>5. Human Resources Management</strong>"><strong>5. Human Resources Management</strong></h2></p><br><p><h3 id="<strong>HR Web Routes</strong>"><strong>HR Web Routes</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>hr/employees</code> | hr.employees.index | HR\EmployeeController@index | web,auth |<br>| POST | <code>hr/employees</code> | hr.employees.store | HR\EmployeeController@store | web,auth |<br>| GET/HEAD | <code>hr/employees/create</code> | hr.employees.create | HR\EmployeeController@create | web,auth |<br>| GET/HEAD | <code>hr/employees/{employee}</code> | hr.employees.show | HR\EmployeeController@show | web,auth |<br>| GET/HEAD | <code>hr/employees/{employee}/edit</code> | hr.employees.edit | HR\EmployeeController@edit | web,auth |<br>| PUT/PATCH | <code>hr/employees/{employee}</code> | hr.employees.update | HR\EmployeeController@update | web,auth |<br>| DELETE | <code>hr/employees/{employee}</code> | hr.employees.destroy | HR\EmployeeController@destroy | web,auth |<br>| POST | <code>hr/employees/without-user</code> | hr.employees.store-without-user | HR\EmployeeController@storeWithoutUser | web,auth |<br>| PUT | <code>hr/employees/{employee}/biometric</code> | hr.employees.update-biometric | HR\EmployeeController@updateBiometric | web,auth |<br>| POST | <code>hr/employees/{employee}/grant-access</code> | hr.employees.grant-access | HR\EmployeeController@grantAccess | web,auth |<br>| GET/HEAD | <code>hr/positions</code> | hr.positions.index | HR\JobPositionController@index | web,auth |<br>| POST | <code>hr/positions</code> | hr.positions.store | HR\JobPositionController@store | web,auth |<br>| GET/HEAD | <code>hr/positions/create</code> | hr.positions.create | HR\JobPositionController@create | web,auth |<br>| GET/HEAD | <code>hr/positions/{position}</code> | hr.positions.show | HR\JobPositionController@show | web,auth |<br>| GET/HEAD | <code>hr/positions/{position}/edit</code> | hr.positions.edit | HR\JobPositionController@edit | web,auth |<br>| PUT/PATCH | <code>hr/positions/{position}</code> | hr.positions.update | HR\JobPositionController@update | web,auth |<br>| DELETE | <code>hr/positions/{position}</code> | hr.positions.destroy | HR\JobPositionController@destroy | web,auth |<br>| GET/HEAD | <code>hr/shifts</code> | hr.shifts.index | HR\ShiftController@index | web,auth |<br>| POST | <code>hr/shifts</code> | hr.shifts.store | HR\ShiftController@store | web,auth |<br>| GET/HEAD | <code>hr/shifts/create</code> | hr.shifts.create | HR\ShiftController@create | web,auth |<br>| GET/HEAD | <code>hr/shifts/{shift}</code> | hr.shifts.show | HR\ShiftController@show | web,auth |<br>| GET/HEAD | <code>hr/shifts/{shift}/edit</code> | hr.shifts.edit | HR\ShiftController@edit | web,auth |<br>| PUT/PATCH | <code>hr/shifts/{shift}</code> | hr.shifts.update | HR\ShiftController@update | web,auth |<br>| DELETE | <code>hr/shifts/{shift}</code> | hr.shifts.destroy | HR\ShiftController@destroy | web,auth |</p><br><p><h3 id="<strong>HRM Dashboard</strong>"><strong>HRM Dashboard</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>hrm/dashboard</code> | hrm.dashboard | HrmDashboardController@index | web,auth |</p><br><p><hr></p><br><p><h2 id="<strong>6. Attendance & Leave Management</strong>"><strong>6. Attendance & Leave Management</strong></h2></p><br><p><h3 id="<strong>Attendance Web Routes</strong>"><strong>Attendance Web Routes</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>attendance/dashboard</code> | attendance.dashboard | Attendance\AttendanceController@dashboard | web,auth |<br>| POST | <code>attendance/apply-leave/{id}</code> | attendance.apply-leave | Attendance\AttendanceController@applyLeave | web,auth |<br>| POST | <code>attendance/regularize/{id}</code> | attendance.regularize | Attendance\AttendanceController@regularize | web,auth |<br>| POST | <code>attendance/sync-biometric</code> | attendance.biometric-sync | Attendance\AttendanceController@biometricSync | web,auth |<br>| GET/HEAD | <code>attendance/export-payroll</code> | attendance.export-payroll | Attendance\AttendanceController@exportPayroll | web,auth |</p><br><p><hr></p><br><p><h2 id="<strong>7. Portal System</strong>"><strong>7. Portal System</strong></h2></p><br><p><h3 id="<strong>Employee Portal</strong>"><strong>Employee Portal</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>portal/employee/dashboard</code> | portal.employee.dashboard | Portal\EmployeeController@dashboard | web,auth |<br>| POST | <code>portal/employee/clock-in</code> | portal.employee.clock-in | Attendance\AttendanceController@clockIn | web,auth |<br>| POST | <code>portal/employee/clock-out</code> | portal.employee.clock-out | Attendance\AttendanceController@clockOut | web,auth |<br>| GET/HEAD | <code>portal/employee/attendance</code> | portal.employee.attendance | Portal\EmployeeController@attendance | web,auth |<br>| GET/HEAD | <code>portal/employee/leave</code> | portal.employee.leave | Portal\EmployeeController@leave | web,auth |<br>| POST | <code>portal/employee/leave</code> | portal.employee.leave.store | Portal\EmployeeController@storeLeave | web,auth |<br>| GET/HEAD | <code>portal/employee/leave/create</code> | portal.employee.leave.create | Portal\EmployeeController@createLeave | web,auth |<br>| GET/HEAD | <code>portal/employee/payslips</code> | portal.employee.payslips | Portal\EmployeeController@payslips | web,auth |<br>| GET/HEAD | <code>portal/employee/payslips/{payslip}</code> | portal.employee.payslips.show | Portal\EmployeeController@showPayslip | web,auth |<br>| GET/HEAD | <code>portal/employee/payslips/{payslip}/download</code> | portal.employee.payslips.download | Portal\EmployeeController@downloadPayslip | web,auth |<br>| GET/HEAD | <code>portal/employee/setup</code> | portal.employee.setup | Portal\EmployeeController@setup | web,auth |<br>| POST | <code>portal/employee/setup</code> | portal.employee.complete-setup | Portal\EmployeeController@completeSetup | web,auth |</p><br><p><h3 id="<strong>Manager Portal</strong>"><strong>Manager Portal</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>portal/manager/dashboard</code> | portal.manager.dashboard | Portal\ManagerController@dashboard | web,auth |<br>| GET/HEAD | <code>portal/manager/reports</code> | portal.manager.reports | Portal\ManagerController@reports | web,auth |<br>| GET/HEAD | <code>portal/manager/team-attendance</code> | portal.manager.team-attendance | Portal\ManagerController@teamAttendance | web,auth |<br>| POST | <code>portal/manager/leave/{leaveRequest}/approve</code> | portal.manager.leave.approve | Portal\ManagerController@approveLeave | web,auth |<br>| POST | <code>portal/manager/leave/{leaveRequest}/reject</code> | portal.manager.leave.reject | Portal\ManagerController@rejectLeave | web,auth |</p><br><p><hr></p><br><p><h2 id="<strong>8. Payroll Management</strong>"><strong>8. Payroll Management</strong></h2></p><br><p><h3 id="<strong>Payroll Web Routes</strong>"><strong>Payroll Web Routes</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>payroll/processing</code> | payroll.processing | Payroll\PayrollController@processing | web,auth |</p><br><p><hr></p><br><p><h2 id="<strong>9. Setup Wizard</strong>"><strong>9. Setup Wizard</strong></h2></p><br><p><h3 id="<strong>Setup Routes</strong>"><strong>Setup Routes</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>setup</code> | setup.organization | SetupController@organization | web,auth |<br>| POST | <code>setup/organization</code> | setup.organization.store | SetupController@storeOrganization | web,auth |<br>| GET/HEAD | <code>setup/accounts</code> | setup.accounts | SetupController@accounts | web,auth |<br>| POST | <code>setup/accounts</code> | setup.accounts.store | SetupController@storeAccounts | web,auth |<br>| GET/HEAD | <code>setup/stores</code> | setup.stores | SetupController@stores | web,auth |<br>| POST | <code>setup/stores</code> | setup.stores.store | SetupController@storeStores | web,auth |</p><br><p><hr></p><br><p><h2 id="<strong>10. User Management & Profile</strong>"><strong>10. User Management & Profile</strong></h2></p><br><p><h3 id="<strong>User Profile Routes (Laravel Jetstream)</strong>"><strong>User Profile Routes (Laravel Jetstream)</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>user/profile</code> | profile.show | UserProfileController@show | web,auth |<br>| PUT | <code>user/profile-information</code> | user-profile-information.update | UserProfileController@update | web,auth |<br>| PUT | <code>user/password</code> | user-password.update | PasswordController@update | web,auth |<br>| GET/HEAD | <code>user/confirm-password</code> | password.confirm | ConfirmablePasswordController@show | web,auth |<br>| POST | <code>user/confirm-password</code> | password.confirm.store | ConfirmablePasswordController@store | web,auth |<br>| GET/HEAD | <code>user/api-tokens</code> | api-tokens.index | ApiTokenController@index | web,auth |<br>| GET/HEAD | <code>user/two-factor-authentication</code> | two-factor.enable | TwoFactorAuthenticationController@show | web,auth |<br>| POST | <code>user/two-factor-authentication</code> | two-factor.enable | TwoFactorAuthenticationController@store | web,auth |<br>| DELETE | <code>user/two-factor-authentication</code> | two-factor.disable | TwoFactorAuthenticationController@destroy | web,auth |<br>| GET/HEAD | <code>user/two-factor-qr-code</code> | two-factor.qr-code | TwoFactorQrCodeController@show | web,auth |<br>| GET/HEAD | <code>user/two-factor-recovery-codes</code> | two-factor.recovery-codes | TwoFactorRecoveryCodeController@index | web,auth |<br>| POST | <code>user/two-factor-recovery-codes</code> | two-factor.recovery-codes.regenerate | TwoFactorRecoveryCodeController@store | web,auth |</p><br><p><h3 id="<strong>Team Management</strong>"><strong>Team Management</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>teams/create</code> | teams.create | TeamController@create | web,auth |<br>| GET/HEAD | <code>teams/{team}</code> | teams.show | TeamController@show | web,auth |<br>| POST | <code>team-invitations/{invitation}/accept</code> | team-invitations.accept | TeamInvitationController@accept | web,auth |<br>| PUT | <code>current-team</code> | current-team.update | CurrentTeamController@update | web,auth |</p><br><p><hr></p><br><p><h2 id="<strong>11. API Utility Routes</strong>"><strong>11. API Utility Routes</strong></h2></p><br><p><h3 id="<strong>Debug & Development</strong>"><strong>Debug & Development</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>api/debug/test-connection</code> | generated::m7WRBi9XZmdAFWOv | - | api |<br>| GET/HEAD | <code>api/user</code> | generated::P0hG2NL8U5SOO2h1 | - | api,auth:sanctum |<br>| GET/HEAD | <code>api/users/me/organizations</code> | generated::b9OckcIyvJqTK45X | - | api,auth:sanctum |</p><br><p><hr></p><br><p><h2 id="<strong>12. Storage & Assets</strong>"><strong>12. Storage & Assets</strong></h2></p><br><p><h3 id="<strong>File Storage</strong>"><strong>File Storage</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>storage/{path}</code> | storage.local | - | web |</p><br><p><hr></p><br><p><h2 id="<strong>13. System & Debug Routes</strong>"><strong>13. System & Debug Routes</strong></h2></p><br><p><h3 id="<strong>Development Tools</strong>"><strong>Development Tools</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>debug/api-config</code> | generated::xSvIwTB9CmEnr5M1 | - | web |<br>| GET/HEAD | <code>debug/journal-entries</code> | generated::IdPRmoPofrrWePdK | - | web |<br>| GET/HEAD | <code>debug/orgs</code> | generated::oSKCqOdwXQOcifwf | - | web |<br>| GET/HEAD | <code>debug/reports/all</code> | generated::SajLsbBas5kgyiMM | - | web |<br>| GET/HEAD | <code>debug/test-sequence</code> | generated::N833Ea5ecWAFpQzQ | - | web |</p><br><p><h3 id="<strong>Livewire Routes</strong>"><strong>Livewire Routes</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>livewire/livewire.js</code> | generated::C1VXbk52miGIG1YJ | - | web |<br>| GET/HEAD | <code>livewire/livewire.min.js.map</code> | generated::HvCTOuTqRXiHttIO | - | web |<br>| POST | <code>livewire/update</code> | livewire.update | Livewire\Mechanisms\HandleRequests | web |<br>| POST | <code>livewire/upload-file</code> | livewire.upload-file | Livewire\Features\SupportFileUploads | web |<br>| GET/HEAD | <code>livewire/preview-file/{filename}</code> | livewire.preview-file | Livewire\Features\SupportFileUploads | web |</p><br><p><hr></p><br><p><h2 id="<strong>14. Third-Party Package Routes</strong>"><strong>14. Third-Party Package Routes</strong></h2></p><br><p><h3 id="<strong>Laravel Sanctum</strong>"><strong>Laravel Sanctum</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>sanctum/csrf-cookie</code> | sanctum.csrf-cookie | - | web |</p><br><p><h3 id="<strong>Debug Tools</strong>"><strong>Debug Tools</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>_debugbar/assets/javascript</code> | debugbar.assets.js | - | web |<br>| GET/HEAD | <code>_debugbar/assets/stylesheets</code> | debugbar.assets.css | - | web |<br>| DELETE | <code>_debugbar/cache/{key}/{tags?}</code> | debugbar.cache.delete | - | web |<br>| GET/HEAD | <code>_debugbar/clockwork/{id}</code> | debugbar.clockwork | - | web |<br>| GET/HEAD | <code>_debugbar/open</code> | debugbar.openhandler | - | web |<br>| POST | <code>_debugbar/queries/explain</code> | debugbar.queries.explain | - | web |</p><br><p><h3 id="<strong>Clockwork Integration</strong>"><strong>Clockwork Integration</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| GET/HEAD | <code>clockwork</code> | generated::LcCnSl8r9eKzFwCm | - | web |<br>| GET/HEAD | <code>clockwork/app</code> | generated::Kqb9hKwx2M75NvST | - | web |<br>| GET/HEAD | <code>clockwork/{path}</code> | generated::Mmn79H4UhtE7wBkV | - | web |<br>| POST | <code>clockwork/auth</code> | generated::gfCTsyWVtJimvYh0 | - | web |<br>| PUT | <code>clockwork/{id}</code> | generated::1gxSbjQ1e7N1QYLE | - | web |<br>| GET/HEAD | <code>clockwork/{id}/extended</code> | generated::gmEGNYAiFAmConDl | - | web |<br>| GET/HEAD | <code>clockwork/{id}/{direction?}/{count?}</code> | generated::H4fD7puoP | - | web |</p><br><p><h3 id="<strong>Laravel Boost</strong>"><strong>Laravel Boost</strong></h3><br>| Method | URI | Name | Controller | Middleware |<br>|--------|-----|------|------------|-------------|<br>| POST | <code>_boost/browser-logs</code> | boost.browser-logs | - | web |</p><br><p><hr></p><br><p><h2 id="<strong>15. Route Middleware Stack</strong>"><strong>15. Route Middleware Stack</strong></h2></p><br><p><h3 id="<strong>Standard Middleware Groups</strong>"><strong>Standard Middleware Groups</strong></h3></p><br><p><h4 id="<strong>web</strong>"><strong>web</strong></h4><br>- Session management<br>- CSRF protection<br>- Cookie encryption<br>- Route model binding</p><br><p><h4 id="<strong>api</strong>"><strong>api</strong></h4><br>- Stateless API<br>- Rate limiting<br>- CORS handling</p><br><p><h4 id="<strong>auth:sanctum</strong>"><strong>auth:sanctum</strong></h4><br>- API token authentication<br>- Organization scoping<br>- Permission validation</p><br><p><hr></p><br><p><h2 id="<strong>16. Route Patterns & Conventions</strong>"><strong>16. Route Patterns & Conventions</strong></h2></p><br><p><h3 id="<strong>RESTful API Design</strong>"><strong>RESTful API Design</strong></h3><br>- <code>GET /api/resource</code> - List resources<br>- <code>POST /api/resource</code> - Create resource<br>- <code>GET /api/resource/{id}</code> - Show resource<br>- <code>PUT/PATCH /api/resource/{id}</code> - Update resource<br>- <code>DELETE /api/resource/{id}</code> - Delete resource</p><br><p><h3 id="<strong>Nested Resources</strong>"><strong>Nested Resources</strong></h3><br>- <code>GET /api/organizations/{org}/units</code> - Organization units<br>- <code>GET /api/inventory/stores/{store}/items</code> - Store items<br>- <code>POST /api/inventory/transactions/{id}/items</code> - Transaction items</p><br><p><h3 id="<strong>Action Routes</strong>"><strong>Action Routes</strong></h3><br>- <code>POST /api/vouchers/expense</code> - Create expense voucher<br>- <code>POST /api/vouchers/sales</code> - Create sales voucher<br>- <code>PUT /api/journal-entries/{id}/post</code> - Post journal entry<br>- <code>PUT /api/inventory/transactions/{id}/finalize</code> - Finalize transaction</p><br><p><hr></p><br><p><h2 id="<strong>17. Authentication & Authorization</strong>"><strong>17. Authentication & Authorization</strong></h2></p><br><p><h3 id="<strong>Route Protection</strong>"><strong>Route Protection</strong></h3><br>- All web routes require <code>web</code> middleware<br>- All API routes require <code>api</code> middleware<br>- Protected routes require <code>auth</code> or <code>auth:sanctum</code><br>- Organization-based data isolation enforced</p><br><p><h3 id="<strong>Permission-Based Access</strong>"><strong>Permission-Based Access</strong></h3><br>- Role-based permissions checked in controllers<br>- Organization membership validated<br>- Resource-level authorization policies</p><br><p><hr></p><br><p><h2 id="<strong>18. API Versioning & Future-Proofing</strong>"><strong>18. API Versioning & Future-Proofing</strong></h2></p><br><p><h3 id="<strong>Current Version</strong>"><strong>Current Version</strong></h3><br>- API version: v1 (implicit)<br>- Consistent naming patterns<br>- Backward compatibility maintained</p><br><p><h3 id="<strong>Scalability Design</strong>"><strong>Scalability Design</strong></h3><br>- RESTful conventions<br>- Resource-based routing<br>- Plural resource names<br>- HTTP verb compliance</p><br><p><hr></p><br><p><em>This route documentation reflects the current application state as of November 19, 2025. The system provides comprehensive REST API coverage for all ERP modules with proper authentication and authorization.</em></p>
+        </main>
+        
+        <div class="footer" style="font-size: 8pt; text-align: center; line-height: 1.0; border-top: 1px solid #e5e7eb; padding-top: 5px; margin-top: 10px;">
+    Page {page} of {total} | Generated on 2025-11-26 06:46:36
+</div>
+    </div>
+</body>
+</html>
