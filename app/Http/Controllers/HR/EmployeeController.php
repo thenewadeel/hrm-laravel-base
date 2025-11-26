@@ -4,9 +4,9 @@ namespace App\Http\Controllers\HR;
 
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
-use App\Models\User;
 use App\Models\OrganizationUnit;
 use App\Models\OrganizationUser;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -24,9 +24,9 @@ class EmployeeController extends Controller
         // Search
         if ($request->has('search') && $request->search) {
             $query->where(function ($q) use ($request) {
-                $q->where('first_name', 'like', '%' . $request->search . '%')
-                    ->orWhere('last_name', 'like', '%' . $request->search . '%')
-                    ->orWhere('email', 'like', '%' . $request->search . '%');
+                $q->where('first_name', 'like', '%'.$request->search.'%')
+                    ->orWhere('last_name', 'like', '%'.$request->search.'%')
+                    ->orWhere('email', 'like', '%'.$request->search.'%');
             });
         }
 
@@ -40,7 +40,6 @@ class EmployeeController extends Controller
 
         return view('hr.employees.index', compact('employees', 'departments'));
     }
-
 
     public function create()
     {
@@ -66,10 +65,11 @@ class EmployeeController extends Controller
                 Rule::unique('employees', 'email')->where(function ($query) use ($currentOrganizationId) {
                     return $query->where('organization_id', $currentOrganizationId);
                 }),
-                Rule::unique('users', 'email')
+                Rule::unique('users', 'email'),
             ],
             'password' => 'required|confirmed|min:8',
-            'position' => 'required|string|max:255',
+            'position_id' => 'nullable|exists:job_positions,id',
+            'shift_id' => 'nullable|exists:shifts,id',
             'organization_unit_id' => 'nullable|exists:organization_units,id',
             'roles' => 'required|array',
             'date_of_birth' => 'nullable|date',
@@ -84,12 +84,12 @@ class EmployeeController extends Controller
             'required_daily_hours' => 'nullable|numeric|min:0|max:24',
             'salary_per_month' => 'nullable|numeric|min:0',
             'pay_frequency' => 'nullable|in:monthly,biweekly,weekly',
-            'is_admin' => 'nullable|boolean'
+            'is_admin' => 'nullable|boolean',
         ]);
 
         // Create user account for system access
         $user = User::create([
-            'name' => $validated['first_name'] . ' ' . $validated['last_name'],
+            'name' => $validated['first_name'].' '.$validated['last_name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'current_organization_id' => $currentOrganizationId,
@@ -100,6 +100,8 @@ class EmployeeController extends Controller
             'user_id' => $user->id,
             'organization_id' => $currentOrganizationId,
             'organization_unit_id' => $validated['organization_unit_id'] ?? null,
+            'position_id' => $validated['position_id'] ?? null,
+            'shift_id' => $validated['shift_id'] ?? null,
             'first_name' => $validated['first_name'],
             'last_name' => $validated['last_name'],
             'middle_name' => $validated['middle_name'] ?? null,
@@ -123,12 +125,13 @@ class EmployeeController extends Controller
             'organization_id' => $currentOrganizationId,
             'organization_unit_id' => $validated['organization_unit_id'] ?? null,
             'roles' => $validated['roles'],
-            'position' => $validated['position'],
+            'position' => $employee->position?->title ?? 'Employee',
         ]);
 
         return redirect()->route('hr.employees.index')
             ->with('success', 'Employee created successfully!');
     }
+
     public function show(Employee $employee)
     {
         // Authorization check - ensure employee belongs to same organization
@@ -145,7 +148,7 @@ class EmployeeController extends Controller
             },
             'payrollEntries' => function ($q) {
                 $q->latest()->take(3);
-            }
+            },
         ]);
 
         // Load organization user data for roles and permissions
@@ -165,8 +168,8 @@ class EmployeeController extends Controller
                 'required',
                 'string',
                 'max:50',
-                Rule::unique('employees', 'biometric_id')->ignore($employee->id)
-            ]
+                Rule::unique('employees', 'biometric_id')->ignore($employee->id),
+            ],
         ]);
 
         $employee->update($validated);
@@ -193,7 +196,7 @@ class EmployeeController extends Controller
                         return $query->where('organization_id', $currentOrganizationId);
                     })
                     ->ignore($employee->id),
-                Rule::unique('users', 'email')->ignore($employee->user_id)
+                Rule::unique('users', 'email')->ignore($employee->user_id),
             ],
             'position' => 'required|string|max:255',
             'organization_unit_id' => 'nullable|exists:organization_units,id',
@@ -208,7 +211,7 @@ class EmployeeController extends Controller
             'salary_per_month' => 'nullable|numeric|min:0',
             'required_daily_hours' => 'nullable|numeric|min:0|max:24',
             'is_admin' => 'nullable|boolean',
-            'is_active' => 'nullable|boolean'
+            'is_active' => 'nullable|boolean',
         ]);
 
         // Update employee record
@@ -233,7 +236,7 @@ class EmployeeController extends Controller
         // Update user account if exists
         if ($employee->user_id) {
             $employee->user->update([
-                'name' => $validated['first_name'] . ' ' . $validated['last_name'],
+                'name' => $validated['first_name'].' '.$validated['last_name'],
                 'email' => $validated['email'],
             ]);
 
@@ -266,7 +269,7 @@ class EmployeeController extends Controller
                 'email',
                 Rule::unique('employees', 'email')->where(function ($query) use ($currentOrganizationId) {
                     return $query->where('organization_id', $currentOrganizationId);
-                })
+                }),
             ],
             'position' => 'required|string|max:255',
             'organization_unit_id' => 'nullable|exists:organization_units,id',
@@ -282,7 +285,7 @@ class EmployeeController extends Controller
             'required_daily_hours' => 'nullable|numeric|min:0|max:24',
             'salary_per_month' => 'nullable|numeric|min:0',
             'pay_frequency' => 'nullable|in:monthly,biweekly,weekly',
-            'is_admin' => 'nullable|boolean'
+            'is_admin' => 'nullable|boolean',
         ]);
 
         // Create employee record only (no user account)
@@ -331,7 +334,7 @@ class EmployeeController extends Controller
 
         // Create user account
         $user = User::create([
-            'name' => $employee->first_name . ' ' . $employee->last_name,
+            'name' => $employee->first_name.' '.$employee->last_name,
             'email' => $employee->email,
             'password' => Hash::make($validated['password']),
             'current_organization_id' => $employee->organization_id,

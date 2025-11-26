@@ -26,13 +26,13 @@ class PayrollController extends Controller
                 'salary_expense' => [
                     'code' => '5001',
                     'name' => 'Salary Expense',
-                    'type' => 'expense'
+                    'type' => 'expense',
                 ],
                 'payroll_payable' => [
                     'code' => '2001',
                     'name' => 'Payroll Payable',
-                    'type' => 'liability'
-                ]
+                    'type' => 'liability',
+                ],
             ],
             'employees' => [
                 [
@@ -43,15 +43,15 @@ class PayrollController extends Controller
                     'department' => 'Engineering',
                     'attendance' => [
                         'days_present' => 22,
-                        'lop_days' => 0
+                        'lop_days' => 0,
                     ],
                     'gross_pay' => 5000.00,
                     'deductions' => [
                         'tax' => 800.00,
                         'insurance' => 400.00,
-                        'total' => 1200.00
+                        'total' => 1200.00,
                     ],
-                    'net_pay' => 3800.00
+                    'net_pay' => 3800.00,
                 ],
                 [
                     'id' => 2,
@@ -61,15 +61,15 @@ class PayrollController extends Controller
                     'department' => 'Sales',
                     'attendance' => [
                         'days_present' => 20,
-                        'lop_days' => 2
+                        'lop_days' => 2,
                     ],
                     'gross_pay' => 4545.45,
                     'deductions' => [
                         'tax' => 727.27,
                         'insurance' => 363.64,
-                        'total' => 1090.91
+                        'total' => 1090.91,
                     ],
-                    'net_pay' => 3454.54
+                    'net_pay' => 3454.54,
                 ],
                 [
                     'id' => 3,
@@ -79,17 +79,17 @@ class PayrollController extends Controller
                     'department' => 'Marketing',
                     'attendance' => [
                         'days_present' => 21,
-                        'lop_days' => 1
+                        'lop_days' => 1,
                     ],
                     'gross_pay' => 4772.73,
                     'deductions' => [
                         'tax' => 763.64,
                         'insurance' => 381.82,
-                        'total' => 1145.46
+                        'total' => 1145.46,
                     ],
-                    'net_pay' => 3627.27
-                ]
-            ]
+                    'net_pay' => 3627.27,
+                ],
+            ],
         ];
     }
 
@@ -110,26 +110,52 @@ class PayrollController extends Controller
                     'account_code' => '5001',
                     'account_name' => 'Salary Expense',
                     'debit' => 500000.00,
-                    'credit' => 0.00
+                    'credit' => 0.00,
                 ],
                 [
                     'account_code' => '2001',
                     'account_name' => 'Payroll Payable',
                     'debit' => 0.00,
-                    'credit' => 380000.00
-                ]
-            ]
+                    'credit' => 380000.00,
+                ],
+            ],
         ];
     }
 
     /**
      * Display payroll processing dashboard.
      */
-    public function processing()
+    public function processing(Request $request)
     {
-        $payrollData = $this->getMockPayrollData();
+        // Handle period parameter
+        $period = $request->get('period')
+            ? \Carbon\Carbon::createFromFormat('Y-m', $request->get('period'))
+            : \Carbon\Carbon::now();
 
-        return view('payroll.processing', compact('payrollData'));
+        // Get attendance data for the period
+        $employeeId = $request->get('employee_id');
+        $query = \App\Models\AttendanceRecord::whereMonth('record_date', $period->month)
+            ->whereYear('record_date', $period->year);
+
+        if ($employeeId) {
+            $query->where('employee_id', $employeeId);
+        }
+
+        $attendanceData = $query->get();
+
+        // Calculate payroll metrics
+        $totalHours = $attendanceData->sum('total_hours');
+        $overtimeHours = round($attendanceData->sum('overtime_minutes') / 60, 2);
+        $regularHours = max(0, $totalHours - $overtimeHours);
+
+        return view('payroll.processing', [
+            'attendanceData' => $attendanceData,
+            'period' => $period,
+            'totalHours' => $totalHours,
+            'overtimeHours' => $overtimeHours,
+            'regularHours' => $regularHours,
+            'employee' => $employeeId ? \App\Models\Employee::find($employeeId) : null,
+        ]);
     }
 
     /**
@@ -145,8 +171,8 @@ class PayrollController extends Controller
             'calculation_summary' => [
                 'gross_total' => number_format($payrollData['total_gross'], 2),
                 'employee_count' => $payrollData['employee_count'],
-                'period' => $payrollData['period']
-            ]
+                'period' => $payrollData['period'],
+            ],
         ]);
     }
 
@@ -164,8 +190,8 @@ class PayrollController extends Controller
             'data' => [
                 'journal_entry' => $journalEntry,
                 'payroll_period' => 'October 2025',
-                'generated_at' => Carbon::now()->toDateTimeString()
-            ]
+                'generated_at' => Carbon::now()->toDateTimeString(),
+            ],
         ]);
     }
 
@@ -177,7 +203,7 @@ class PayrollController extends Controller
         $payrollData = $this->getMockPayrollData();
         $employee = collect($payrollData['employees'])->firstWhere('id', $employeeId);
 
-        if (!$employee) {
+        if (! $employee) {
             abort(404, 'Employee not found');
         }
 
@@ -185,15 +211,15 @@ class PayrollController extends Controller
             'employee' => $employee,
             'period' => $period,
             'issue_date' => Carbon::now()->format('M d, Y'),
-            'pay_date' => Carbon::parse('last day of ' . $period)->format('M d, Y'),
+            'pay_date' => Carbon::parse('last day of '.$period)->format('M d, Y'),
             'earnings' => [
                 'basic_salary' => $employee['gross_pay'] * 0.6,
                 'housing_allowance' => $employee['gross_pay'] * 0.25,
                 'transport_allowance' => $employee['gross_pay'] * 0.15,
                 'overtime' => 0.00,
-                'bonus' => 0.00
+                'bonus' => 0.00,
             ],
-            'deductions' => $employee['deductions']
+            'deductions' => $employee['deductions'],
         ];
 
         return view('payroll.payslip', compact('payslip'));
@@ -208,7 +234,7 @@ class PayrollController extends Controller
         $validated = $request->validate([
             'gross_pay' => 'required|numeric',
             'tax_amount' => 'required|numeric',
-            'insurance_amount' => 'required|numeric'
+            'insurance_amount' => 'required|numeric',
         ]);
 
         return response()->json([
@@ -218,8 +244,8 @@ class PayrollController extends Controller
                 'employee_id' => $employeeId,
                 'gross_pay' => $validated['gross_pay'],
                 'net_pay' => $validated['gross_pay'] - $validated['tax_amount'] - $validated['insurance_amount'],
-                'updated_at' => Carbon::now()->toDateTimeString()
-            ]
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ],
         ]);
     }
 
@@ -238,7 +264,7 @@ class PayrollController extends Controller
             'message' => 'Payroll export generated successfully',
             'download_url' => '#', // Mock URL
             'file_name' => $filename,
-            'file_size' => '245 KB'
+            'file_size' => '245 KB',
         ]);
     }
 }

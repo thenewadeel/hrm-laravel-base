@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pdf-styling-guide - HRM Laravel Base Documentation</title>
+    <style>
+/* PDF Documentation Theme */
+body {
+    font-family: var(--font-family, "Inter", system-ui, sans-serif);
+    font-size: var(--font-size, 10pt);
+    line-height: var(--line-height, 1.25);
+    color: #151c27;
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+
+/* Ensure no default margins interfere with PDF tool margins */
+@page {
+    margin: var(--page-margin, 12mm 8mm 4mm 10mm) !important;
+    size: var(--page-size, A4);
+    padding: 0 !important;
+}
+
+/* For PDF generation tools */
+@media print {
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    @page {
+        margin: var(--page-margin, 12mm 8mm 4mm 10mm) !important;
+        padding: 0 !important;
+    }
+    
+    .document {
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    * {
+        box-sizing: border-box !important;
+    }
+    
+    /* Force zero margins on all elements */
+    h1, h2, h3, h4, h5, h6, p, ul, ol, li, pre, blockquote, table, hr {
+        page-break-inside: avoid;
+        margin-top: 0.5em !important;
+        margin-bottom: 0.5em !important;
+    }
+}
+
+.document {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #000c27;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+    page-break-after: avoid;
+}
+
+h1 {
+    font-size: 1.5em;
+    border-bottom: 3px solid #3b82f6;
+    padding-bottom: 0.5em;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.25em;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.5em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+p {
+    margin: 0 0 1em 0;
+    text-align: justify;
+    orphans: 3;
+    widows: 3;
+}
+
+/* Links */
+a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Code */
+code {
+    font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
+        monospace;
+    background-color: #f3f4f6;
+    padding: 0.125em 0.25em;
+    border-radius: 0.25em;
+    font-size: 0.875em;
+    border: 1px solid #e5e7eb;
+}
+
+pre {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin: 1em 0;
+    overflow-x: auto;
+    page-break-inside: avoid;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+    border: none;
+    font-size: 0.875em;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid #3b82f6;
+    margin: 1.5em 0;
+    padding: 0.5em 1.5em;
+    background-color: #f9fafb;
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* Lists */
+ul,
+ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5em 0;
+    page-break-inside: avoid;
+}
+
+th,
+td {
+    border: 1px solid #e5e7eb;
+    padding: 0.5em 1em;
+    text-align: left;
+}
+
+th {
+    background-color: #f9fafb;
+    font-weight: 600;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    margin: 1em 0;
+}
+
+/* Horizontal Rule */
+hr {
+    border: none;
+    border-top: 2px solid #e5e7eb;
+    margin: 2em 0;
+}
+
+/* Table of Contents */
+.toc {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin-bottom: 2em;
+}
+
+.toc h3 {
+    margin-top: 0;
+    margin-bottom: 1em;
+    font-size: 14pt;
+    color: #111827;
+}
+
+.toc ul {
+    padding-left: 1.5em;
+    margin: 0;
+}
+
+.toc li {
+    margin-bottom: 0.25em;
+}
+
+.toc a {
+    color: #374151;
+}
+
+.toc a:hover {
+    color: #3b82f6;
+}
+
+/* Page Breaks */
+.page-break {
+    page-break-before: always;
+}
+
+.page-break-after {
+    page-break-after: always;
+}
+
+/* Header and Footer */
+.header {
+    text-align: center;
+    font-size: 1.25em;
+    color: #424c5f;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+}
+
+.footer {
+    text-align: center;
+    font-size: 0.75em;
+    color: #383a3d;
+    border-top: 1px solid #233b6b;
+    padding-top: 0.5em;
+    margin-top: 1em;
+}
+
+/* Watermark */
+.watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 72pt;
+    color: rgba(156, 163, 175, 0.1);
+    font-weight: bold;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Print Optimization */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .document {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        page-break-after: avoid;
+    }
+
+    p,
+    ul,
+    ol {
+        orphans: 3;
+        widows: 3;
+    }
+
+    pre,
+    blockquote,
+    table,
+    img {
+        page-break-inside: avoid;
+    }
+
+    .toc {
+        page-break-after: avoid;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="document">
+        <div class="header" style="font-size: 9pt; text-align: center; line-height: 1.0; border-bottom: 1px solid #e5e7eb; padding-bottom: 5px; margin-bottom: 10px;">
+    pdf-styling-guide - HRM Laravel Base Documentation
+</div>
+        
+        <nav class="toc">
+    <h3>📚 Navigation</h3>
+    <ul>
+        <li><a href="SRS.html">📋 Requirements</a></li><li><a href="big picture.html">📊 Big Picture</a></li><li><a href="ERD.html">🗄️ Database Design</a></li><li><a href="project plan.html">📅 Project Plan</a></li><li><a href="timeline.html">⏰ Timeline</a></li>
+    </ul>
+</nav>
+        
+        <main class="content">
+            <p><h1 id="PDF Styling Customization Guide">PDF Styling Customization Guide</h1></p><br><p><h2 id="🎨 Customizing PDF Output">🎨 Customizing PDF Output</h2></p><br><p>The PDF generator supports multiple ways to customize the appearance and layout of your documentation.</p><br><p><h3 id="📁 Configuration Files">📁 Configuration Files</h3></p><br><p><h4 id="1. Simple Theme Configuration">1. Simple Theme Configuration</h4><br>Edit: <code>config/pdf-theme-simple.json</code></p><br><p><pre class="code-block"><code>{<br>    "brand": {<br>        "name": "Your Project Name",<br>        "tagline": "Your Project Tagline",<br>        "logo": "🏢",<br>        "website": "https://your-project.com",<br>        "company": "Your Company",<br>        "version": "2.0.0"<br>    },<br>    "theme": {<br>        "primary_color": "#2563eb",<br>        "secondary_color": "#64748b",<br>        "background_color": "#ffffff",<br>        "text_color": "#1f2937",<br>        "border_color": "#e5e7eb",<br>        "header_font": "Arial, sans-serif",<br>        "body_font": "Arial, sans-serif",<br>        "code_font": "'Courier New', monospace"<br>    },<br>    "layout": {<br>        "page_size": "A4",<br>        "margin_top": "20mm",<br>        "margin_bottom": "20mm",<br>        "margin_left": "20mm",<br>        "margin_right": "20mm",<br>        "font_size": "12pt",<br>        "line_height": "1.6"<br>    }<br>}</code></pre></p><br><p><h4 id="2. Advanced Theme Configuration">2. Advanced Theme Configuration</h4><br>Edit: <code>config/pdf-theme.json</code> (for complex features)</p><br><p><pre class="code-block"><code>{<br>    "styling": {<br>        "header_style": "modern|classic|minimal",<br>        "footer_style": "modern|classic|minimal",<br>        "toc_style": "numbered|bulleted|minimal",<br>        "table_style": "striped|bordered|minimal",<br>        "link_style": "underline|colored|minimal",<br>        "blockquote_style": "bordered|shaded|minimal"<br>    },<br>    "features": {<br>        "auto_toc": true,<br>        "page_numbers": true,<br>        "section_breaks": true,<br>        "watermark": false,<br>        "bookmarks": true,<br>        "links": true<br>    },<br>    "custom": {<br>        "watermark_text": "DRAFT - CONFIDENTIAL",<br>        "confidential_text": "Company Confidential",<br>        "draft_mode": false,<br>        "print_date": true,<br>        "author_info": true<br>    }<br>}</code></pre></p><br><p><h3 id="🎨 CSS Customization Methods">🎨 CSS Customization Methods</h3></p><br><p><h4 id="Method 1: Override CSS Classes">Method 1: Override CSS Classes</h4></p><br><p>Create a custom CSS file and reference it in your theme:</p><br><p><pre class="code-block"><code>/<em> Custom PDF Styles </em>/<br>body {<br>    font-family: 'Georgia', serif;<br>    font-size: 11pt;<br>    line-height: 1.8;<br>    color: #2c3e50;<br>}</p><br><p>.document-header h1 {<br>    color: #1a5490;<br>    font-size: 28pt;<br>    font-weight: 300;<br>    text-align: center;<br>    border-bottom: 3px solid #1a5490;<br>    padding-bottom: 10px;<br>}</p><br><p>h1, h2, h3, h4, h5, h6 {<br>    color: #1a5490;<br>    font-weight: 700;<br>    border-left: 4px solid #1a5490;<br>    padding-left: 12px;<br>    background: linear-gradient(90deg, #f8f9fa 0%, #e9ecef 100%);<br>}</p><br><p>code {<br>    font-family: 'Fira Code', 'Consolas', monospace;<br>    background: #2d3748;<br>    color: #f8f9fa;<br>    border: 1px solid #44475a;<br>    border-radius: 6px;<br>    padding: 4px 8px;<br>}</p><br><p>pre {<br>    background: #2d3748;<br>    color: #f8f9fa;<br>    border: 1px solid #44475a;<br>    border-radius: 8px;<br>    padding: 16px;<br>    overflow-x: auto;<br>}</p><br><p>blockquote {<br>    border-left: 5px solid #1a5490;<br>    background: #f8f9fa;<br>    color: #6c757d;<br>    font-style: italic;<br>    padding: 16px 20px;<br>    margin: 20px 0;<br>    border-radius: 0 8px 8px 0;<br>}</p><br><p>table {<br>    border-collapse: collapse;<br>    width: 100%;<br>    margin: 20px 0;<br>    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);<br>    border-radius: 8px;<br>    overflow: hidden;<br>}</p><br><p>th, td {<br>    border: 1px solid #dee2e6;<br>    padding: 12px 16px;<br>    text-align: left;<br>}</p><br><p>th {<br>    background: #1a5490;<br>    color: white;<br>    font-weight: 600;<br>}</p><br><p>tr:nth-child(even) {<br>    background: #f8f9fa;<br>}</p><br><p>a {<br>    color: #1a5490;<br>    text-decoration: none;<br>    border-bottom: 2px solid transparent;<br>    transition: all 0.3s ease;<br>}</p><br><p>a:hover {<br>    border-bottom-color: #1a5490;<br>    color: #0d47a1;<br>}</code></pre></p><br><p><h4 id="Method 2: Use CSS Variables">Method 2: Use CSS Variables</h4></p><br><p><pre class="code-block"><code>:root {<br>    --primary-color: #2563eb;<br>    --secondary-color: #64748b;<br>    --accent-color: #3b82f6;<br>    --success-color: #10b981;<br>    --warning-color: #f59e0b;<br>    --error-color: #ef4444;<br>    --background-color: #ffffff;<br>    --text-color: #1f2937;<br>    --border-color: #e5e7eb;<br>    --header-font: 'Arial', sans-serif;<br>    --body-font: 'Georgia', serif;<br>    --code-font: 'Fira Code', monospace;<br>    --heading-font: 'Helvetica', sans-serif;<br>}</p><br><p>body {<br>    font-family: var(--body-font);<br>    color: var(--text-color);<br>    background-color: var(--background-color);<br>}</p><br><p>h1, h2, h3, h4, h5, h6 {<br>    font-family: var(--heading-font);<br>    color: var(--primary-color);<br>}</p><br><p>code, pre {<br>    font-family: var(--code-font);<br>    background: var(--background-color);<br>    border: 1px solid var(--border-color);<br>}</code></pre></p><br><p><h3 id="🎯 Theme Presets">🎯 Theme Presets</h3></p><br><p><h4 id="Professional Corporate Theme">Professional Corporate Theme</h4><br><pre class="code-block"><code>{<br>    "brand": {<br>        "name": "Enterprise Documentation",<br>        "tagline": "Professional Business Solutions",<br>        "logo": "🏢",<br>        "company": "Your Company Name"<br>    },<br>    "theme": {<br>        "primary_color": "#1a365d",<br>        "secondary_color": "#64748b",<br>        "background_color": "#ffffff",<br>        "text_color": "#1f2937",<br>        "border_color": "#e5e7eb",<br>        "header_font": "Helvetica, Arial, sans-serif",<br>        "body_font": "Georgia, serif",<br>        "code_font": "'Courier New', monospace"<br>    }<br>}</code></pre></p><br><p><h4 id="Modern Tech Theme">Modern Tech Theme</h4><br><pre class="code-block"><code>{<br>    "brand": {<br>        "name": "Tech Documentation",<br>        "tagline": "Modern Development Platform",<br>        "logo": "💻",<br>        "company": "Tech Corp"<br>    },<br>    "theme": {<br>        "primary_color": "#6366f1",<br>        "secondary_color": "#9ca3af",<br>        "background_color": "#f8fafc",<br>        "text_color": "#1e293b",<br>        "border_color": "#e2e8f0",<br>        "header_font": "'Inter', sans-serif",<br>        "body_font": "'Inter', sans-serif",<br>        "code_font": "'JetBrains Mono', monospace"<br>    }<br>}</code></pre></p><br><p><h4 id="Minimal Academic Theme">Minimal Academic Theme</h4><br><pre class="code-block"><code>{<br>    "brand": {<br>        "name": "Academic Documentation",<br>        "tagline": "Research & Education",<br>        "logo": "📚",<br>        "company": "University Name"<br>    },<br>    "theme": {<br>        "primary_color": "#2c3e50",<br>        "secondary_color": "#6b7280",<br>        "background_color": "#ffffff",<br>        "text_color": "#374151",<br>        "border_color": "#d1d5db",<br>        "header_font": "Times New Roman, serif",<br>        "body_font": "Times New Roman, serif",<br>        "code_font": "'Courier New', monospace"<br>    }<br>}</code></pre></p><br><p><h3 id="🔧 Advanced Customization">🔧 Advanced Customization</h3></p><br><p><h4 id="Custom Headers and Footers">Custom Headers and Footers</h4></p><br><p><pre class="code-block"><code>// In your custom PDF generator class<br>private function createCustomHeader($title, $chapter, $section): string<br>{<br>    return <<<HTML<br><div class="custom-header"><br>    <div class="header-left"><br>        <div class="document-title">{$title}</div><br>        <div class="chapter-info">Chapter {$chapter}</div><br>    </div><br>    <div class="header-right"><br>        <div class="section-info">{$section}</div><br>        <div class="page-number">Page <span class="page-num"></span></div><br>    </div><br></div><br>HTML;<br>}</p><br><p>private function createCustomFooter($company, $copyright, $contact): string<br>{<br>    return <<<HTML<br><div class="custom-footer"><br>    <div class="footer-left"><br>        <div class="company-name">{$company}</div><br>        <div class="copyright">{$copyright}</div><br>    </div><br>    <div class="footer-right"><br>        <div class="contact-info">{$contact}</div><br>        <div class="page-number">Page <span class="page-num"></span></div><br>    </div><br></div><br>HTML;<br>}</code></pre></p><br><p><h4 id="Watermarks and Backgrounds">Watermarks and Backgrounds</h4></p><br><p><pre class="code-block"><code>/<em> Watermark styles </em>/<br>.watermark {<br>    position: fixed;<br>    top: 50%;<br>    left: 50%;<br>    transform: translate(-50%, -50%) rotate(-45deg);<br>    font-size: 120px;<br>    color: rgba(0, 0, 0, 0.1);<br>    font-weight: bold;<br>    z-index: -1;<br>    pointer-events: none;<br>}</p><br><p>.draft-watermark {<br>    position: fixed;<br>    top: 20px;<br>    right: 20px;<br>    background: #ef4444;<br>    color: white;<br>    padding: 8px 16px;<br>    font-weight: bold;<br>    border-radius: 4px;<br>    font-size: 14px;<br>    z-index: 1000;<br>}</p><br><p>.confidential-watermark {<br>    position: fixed;<br>    top: 20px;<br>    left: 20px;<br>    background: #dc2626;<br>    color: white;<br>    padding: 8px 16px;<br>    font-weight: bold;<br>    border-radius: 4px;<br>    font-size: 14px;<br>    z-index: 1000;<br>}</p><br><p>/<em> Background patterns </em>/<br>.background-pattern {<br>    background-image: <br>        linear-gradient(45deg, #f8fafc 25%, transparent 25%),<br>        linear-gradient(-45deg, #f8fafc 25%, transparent 25%),<br>        linear-gradient(45deg, transparent 75%, #f8fafc 75%),<br>        linear-gradient(-45deg, transparent 75%, #f8fafc 75%);<br>    background-size: 20px 20px;<br>    background-position: 0 0, 10px 10px, 0 20px, 10px 30px;<br>}</code></pre></p><br><p><h3 id="📱 Responsive PDF Considerations">📱 Responsive PDF Considerations</h3></p><br><p><h4 id="Mobile-Friendly Layouts">Mobile-Friendly Layouts</h4><br><pre class="code-block"><code>/<em> Mobile-specific PDF styles </em>/<br>@media screen and (max-width: 768px) {<br>    .document {<br>        margin: 10px;<br>        padding: 15px;<br>    }<br>    <br>    .document-header {<br>        flex-direction: column;<br>        text-align: center;<br>        gap: 10px;<br>    }<br>    <br>    h1 {<br>        font-size: 20pt;<br>    }<br>    <br>    h2 {<br>        font-size: 16pt;<br>    }<br>    <br>    .document-meta {<br>        font-size: 8pt;<br>    }<br>    <br>    table {<br>        font-size: 9pt;<br>        margin: 10px 0;<br>    }<br>    <br>    code, pre {<br>        font-size: 8pt;<br>        padding: 8px;<br>    }<br>}</code></pre></p><br><p><h3 id="🎨 Typography Best Practices">🎨 Typography Best Practices</h3></p><br><p><h4 id="Font Pairing">Font Pairing</h4><br><pre class="code-block"><code>/<em> Professional font combinations </em>/<br>.font-combination-1 {<br>    --header-font: 'Helvetica Neue', Helvetica, Arial, sans-serif;<br>    --body-font: 'Georgia', Times, serif;<br>    --code-font: 'Consolas', 'Courier New', monospace;<br>}</p><br><p>.font-combination-2 {<br>    --header-font: 'Inter', sans-serif;<br>    --body-font: 'Inter', sans-serif;<br>    --code-font: 'JetBrains Mono', 'Fira Code', monospace;<br>}</p><br><p>.font-combination-3 {<br>    --header-font: 'Times New Roman', Times, serif;<br>    --body-font: 'Times New Roman', Times, serif;<br>    --code-font: 'Courier New', monospace;<br>}</code></pre></p><br><p><h4 id="Hierarchy and Spacing">Hierarchy and Spacing</h4><br><pre class="code-block"><code>/<em> Clear visual hierarchy </em>/<br>h1 { font-size: 28pt; font-weight: 300; margin: 0 0 24pt 0; }<br>h2 { font-size: 22pt; font-weight: 400; margin: 24pt 0 16pt 0; }<br>h3 { font-size: 18pt; font-weight: 500; margin: 20pt 0 12pt 0; }<br>h4 { font-size: 16pt; font-weight: 600; margin: 18pt 0 10pt 0; }<br>h5 { font-size: 14pt; font-weight: 600; margin: 16pt 0 8pt 0; }<br>h6 { font-size: 12pt; font-weight: 600; margin: 14pt 0 6pt 0; }</p><br><p>p { margin: 12pt 0; line-height: 1.6; orphans: 3; widows: 3; }</code></pre></p><br><p><h3 id="🔧 Testing Your Styles">🔧 Testing Your Styles</h3></p><br><p><h4 id="Preview Before Generation">Preview Before Generation</h4><br><pre class="code-block"><code># Generate HTML preview first<br>composer run docs-pdf-simple --force-html</p><br><p><h1 id="Open in browser to test">Open in browser to test</h1><br>open docs/pdf/index.html<br><h1 id="or">or</h1><br>xdg-open docs/pdf/index.html</code></pre></p><br><p><h4 id="Print Testing">Print Testing</h4><br><pre class="code-block"><code># Generate test PDF<br>composer run docs-pdf-simple</p><br><p><h1 id="Check PDF properties">Check PDF properties</h1><br>pdfinfo docs/pdf/your-file.pdf</p><br><p><h1 id="Test print layout">Test print layout</h1><br>evince docs/pdf/your-file.pdf<br><h1 id="or">or</h1><br>okular docs/pdf/your-file.pdf</code></pre></p><br><p><h3 id="📋 Quick Reference">📋 Quick Reference</h3></p><br><p><h4 id="Common CSS Properties">Common CSS Properties</h4><br><pre class="code-block"><code>/<em> Page Layout </em>/<br>@page {<br>    size: A4; /<em> A4, Letter, Legal </em>/<br>    margin: 20mm; /<em> Top, Right, Bottom, Left </em>/<br>    orientation: portrait; /<em> portrait, landscape </em>/<br>}</p><br><p>/<em> Typography </em>/<br>font-family: 'Font Name', fallback;<br>font-size: 12pt;<br>font-weight: 400; /<em> 100-900 </em>/<br>line-height: 1.6;<br>letter-spacing: 0.5pt;</p><br><p>/<em> Colors </em>/<br>color: #333333; /<em> Text </em>/<br>background-color: #ffffff; /<em> Background </em>/<br>border-color: #e5e7eb; /<em> Borders </em>/</p><br><p>/<em> Spacing </em>/<br>margin: 20pt 0; /<em> Top/Bottom, Left/Right </em>/<br>padding: 12pt 16pt; /<em> Top/Right/Bottom/Left </em>/</code></pre></p><br><p><h3 id="🚀 Implementation Tips">🚀 Implementation Tips</h3></p><br><p>1. <strong>Start Simple</strong>: Begin with basic colors and fonts<br>2. <strong>Test Early</strong>: Generate test PDFs frequently<br>3. <strong>Iterate</strong>: Make small adjustments and test<br>4. <strong>Document</strong>: Keep notes on what works best<br>5. <strong>Version Control</strong>: Track changes to your theme files</p><br><p><h3 id="📞 Support">📞 Support</h3></p><br><p>For styling issues or questions:<br>1. Check generated HTML first: <code>docs/pdf/<em>.html</code><br>2. Test with different PDF engines<br>3. Use browser developer tools for CSS debugging<br>4. Reference this guide for common patterns</p><br><p><hr></p><br><p></em>This guide provides comprehensive customization options for professional PDF documentation styling.*</p>
+        </main>
+        
+        <div class="footer" style="font-size: 8pt; text-align: center; line-height: 1.0; border-top: 1px solid #e5e7eb; padding-top: 5px; margin-top: 10px;">
+    Page {page} of {total} | Generated on 2025-11-26 06:46:36
+</div>
+    </div>
+</body>
+</html>

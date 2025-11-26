@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>interfaces spec - HRM Laravel Base Documentation</title>
+    <style>
+/* PDF Documentation Theme */
+body {
+    font-family: var(--font-family, "Inter", system-ui, sans-serif);
+    font-size: var(--font-size, 10pt);
+    line-height: var(--line-height, 1.25);
+    color: #151c27;
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+
+/* Ensure no default margins interfere with PDF tool margins */
+@page {
+    margin: var(--page-margin, 12mm 8mm 4mm 10mm) !important;
+    size: var(--page-size, A4);
+    padding: 0 !important;
+}
+
+/* For PDF generation tools */
+@media print {
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    @page {
+        margin: var(--page-margin, 12mm 8mm 4mm 10mm) !important;
+        padding: 0 !important;
+    }
+    
+    .document {
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    * {
+        box-sizing: border-box !important;
+    }
+    
+    /* Force zero margins on all elements */
+    h1, h2, h3, h4, h5, h6, p, ul, ol, li, pre, blockquote, table, hr {
+        page-break-inside: avoid;
+        margin-top: 0.5em !important;
+        margin-bottom: 0.5em !important;
+    }
+}
+
+.document {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #000c27;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+    page-break-after: avoid;
+}
+
+h1 {
+    font-size: 1.5em;
+    border-bottom: 3px solid #3b82f6;
+    padding-bottom: 0.5em;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.25em;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.5em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+p {
+    margin: 0 0 1em 0;
+    text-align: justify;
+    orphans: 3;
+    widows: 3;
+}
+
+/* Links */
+a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Code */
+code {
+    font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
+        monospace;
+    background-color: #f3f4f6;
+    padding: 0.125em 0.25em;
+    border-radius: 0.25em;
+    font-size: 0.875em;
+    border: 1px solid #e5e7eb;
+}
+
+pre {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin: 1em 0;
+    overflow-x: auto;
+    page-break-inside: avoid;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+    border: none;
+    font-size: 0.875em;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid #3b82f6;
+    margin: 1.5em 0;
+    padding: 0.5em 1.5em;
+    background-color: #f9fafb;
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* Lists */
+ul,
+ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5em 0;
+    page-break-inside: avoid;
+}
+
+th,
+td {
+    border: 1px solid #e5e7eb;
+    padding: 0.5em 1em;
+    text-align: left;
+}
+
+th {
+    background-color: #f9fafb;
+    font-weight: 600;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    margin: 1em 0;
+}
+
+/* Horizontal Rule */
+hr {
+    border: none;
+    border-top: 2px solid #e5e7eb;
+    margin: 2em 0;
+}
+
+/* Table of Contents */
+.toc {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin-bottom: 2em;
+}
+
+.toc h3 {
+    margin-top: 0;
+    margin-bottom: 1em;
+    font-size: 14pt;
+    color: #111827;
+}
+
+.toc ul {
+    padding-left: 1.5em;
+    margin: 0;
+}
+
+.toc li {
+    margin-bottom: 0.25em;
+}
+
+.toc a {
+    color: #374151;
+}
+
+.toc a:hover {
+    color: #3b82f6;
+}
+
+/* Page Breaks */
+.page-break {
+    page-break-before: always;
+}
+
+.page-break-after {
+    page-break-after: always;
+}
+
+/* Header and Footer */
+.header {
+    text-align: center;
+    font-size: 1.25em;
+    color: #424c5f;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+}
+
+.footer {
+    text-align: center;
+    font-size: 0.75em;
+    color: #383a3d;
+    border-top: 1px solid #233b6b;
+    padding-top: 0.5em;
+    margin-top: 1em;
+}
+
+/* Watermark */
+.watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 72pt;
+    color: rgba(156, 163, 175, 0.1);
+    font-weight: bold;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Print Optimization */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .document {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        page-break-after: avoid;
+    }
+
+    p,
+    ul,
+    ol {
+        orphans: 3;
+        widows: 3;
+    }
+
+    pre,
+    blockquote,
+    table,
+    img {
+        page-break-inside: avoid;
+    }
+
+    .toc {
+        page-break-after: avoid;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="document">
+        <div class="header" style="font-size: 9pt; text-align: center; line-height: 1.0; border-bottom: 1px solid #e5e7eb; padding-bottom: 5px; margin-bottom: 10px;">
+    interfaces spec - HRM Laravel Base Documentation
+</div>
+        
+        <nav class="toc">
+    <h3>📚 Navigation</h3>
+    <ul>
+        <li><a href="SRS.html">📋 Requirements</a></li><li><a href="big picture.html">📊 Big Picture</a></li><li><a href="ERD.html">🗄️ Database Design</a></li><li><a href="project plan.html">📅 Project Plan</a></li><li><a href="timeline.html">⏰ Timeline</a></li>
+    </ul>
+</nav>
+        
+        <main class="content">
+            <p><h1 id="Interface Specifications">Interface Specifications</h1></p><br><p><em>Generated: November 19, 2025</em>  <br><em>Version: v1.0</em>  <br><em>Architecture: RESTful API + Livewire Components</em></p><br><p><hr></p><br><p><h2 id="<strong>1. API Specifications</strong>"><strong>1. API Specifications</strong></h2></p><br><p><h3 id="<strong>1.1 General API Standards</strong>"><strong>1.1 General API Standards</strong></h3></p><br><p><h4 id="<strong>Base URL</strong>"><strong>Base URL</strong></h4><br><pre class="code-block"><code>Production: https://erp.example.com/api<br>Development: http://localhost:8000/api</code></pre></p><br><p><h4 id="<strong>Authentication</strong>"><strong>Authentication</strong></h4><br><pre class="code-block"><code>Header: Authorization: Bearer {token}<br>Token Type: Laravel Sanctum<br>Expiry: Configurable (default: 1 year)</code></pre></p><br><p><h4 id="<strong>Content Standards</strong>"><strong>Content Standards</strong></h4><br><pre class="code-block"><code>Content-Type: application/json<br>Accept: application/json<br>Character Encoding: UTF-8</code></pre></p><br><p><h4 id="<strong>Response Format</strong>"><strong>Response Format</strong></h4><br><pre class="code-block"><code>{<br>  "success": boolean,<br>  "data": object|array,<br>  "message": string,<br>  "meta": {<br>    "timestamp": "ISO 8601",<br>    "version": "string",<br>    "pagination": object<br>  },<br>  "errors": object // Only on validation errors<br>}</code></pre></p><br><p><hr></p><br><p><h3 id="<strong>1.2 Authentication API Specifications</strong>"><strong>1.2 Authentication API Specifications</strong></h3></p><br><p><h4 id="<strong>POST /api/login</strong>"><strong>POST /api/login</strong></h4><br>Authenticates user and returns access token.</p><br><p><strong>Request Body:</strong><br><pre class="code-block"><code>{<br>  "email": "required|string|email|max:255",<br>  "password": "required|string|min:8",<br>  "remember": "optional|boolean",<br>  "device_name": "optional|string|max:255"<br>}</code></pre></p><br><p><strong>Success Response (200):</strong><br><pre class="code-block"><code>{<br>  "success": true,<br>  "data": {<br>    "user": {<br>      "id": 1,<br>      "name": "John Doe",<br>      "email": "john@example.com",<br>      "current_organization_id": 1,<br>      "organizations": [<br>        {<br>          "id": 1,<br>          "name": "Acme Corp",<br>          "role": "admin"<br>        }<br>      ]<br>    },<br>    "token": "1|abcdefghijklmnopqrstuvwxyz123456",<br>    "abilities": ["<em>"],<br>    "expires_at": "2026-11-19T12:00:00Z"<br>  },<br>  "message": "Login successful"<br>}</code></pre></p><br><p><strong>Error Responses:</strong><br>- <code>401</code>: Invalid credentials<br>- <code>422</code>: Validation errors<br>- <code>429</code>: Too many login attempts</p><br><p><h4 id="<strong>POST /api/logout</strong>"><strong>POST /api/logout</strong></h4><br>Revokes user's authentication token.</p><br><p><strong>Headers:</strong> <code>Authorization: Bearer {token}</code>  <br><strong>Success Response (204):</strong> No Content  <br><strong>Error Response (401):</strong> Invalid token</p><br><p><hr></p><br><p><h3 id="<strong>1.3 Organization API Specifications</strong>"><strong>1.3 Organization API Specifications</strong></h3></p><br><p><h4 id="<strong>GET /api/organizations</strong>"><strong>GET /api/organizations</strong></h4><br>List user's organizations with pagination.</p><br><p><strong>Query Parameters:</strong><br><pre class="code-block"><code>page: integer (default: 1)<br>per_page: integer (default: 15, max: 100)<br>search: string (searches in name, description)<br>status: enum[active,inactive] (default: active)<br>sort: enum[name,created_at] (default: created_at)<br>order: enum[asc,desc] (default: desc)</code></pre></p><br><p><strong>Success Response (200):</strong><br><pre class="code-block"><code>{<br>  "success": true,<br>  "data": [<br>    {<br>      "id": 1,<br>      "name": "Acme Corporation",<br>      "description": "Pharmaceutical distribution company",<br>      "is_active": true,<br>      "created_at": "2025-01-01T00:00:00Z",<br>      "updated_at": "2025-01-01T00:00:00Z",<br>      "members_count": 25,<br>      "stores_count": 3,<br>      "employees_count": 45,<br>      "monthly_revenue": 150000.00<br>    }<br>  ],<br>  "meta": {<br>    "pagination": {<br>      "current_page": 1,<br>      "from": 1,<br>      "last_page": 1,<br>      "per_page": 15,<br>      "to": 1,<br>      "total": 1<br>    }<br>  }<br>}</code></pre></p><br><p><h4 id="<strong>POST /api/organizations</strong>"><strong>POST /api/organizations</strong></h4><br>Create new organization.</p><br><p><strong>Request Body:</strong><br><pre class="code-block"><code>{<br>  "name": "required|string|max:255|unique:organizations",<br>  "description": "nullable|string|max:1000",<br>  "is_active": "optional|boolean"<br>}</code></pre></p><br><p><strong>Success Response (201):</strong><br><pre class="code-block"><code>{<br>  "success": true,<br>  "data": {<br>    "id": 2,<br>    "name": "New Company Ltd",<br>    "description": "Company description",<br>    "is_active": true,<br>    "created_at": "2025-11-19T12:00:00Z",<br>    "updated_at": "2025-11-19T12:00:00Z"<br>  },<br>  "message": "Organization created successfully"<br>}</code></pre></p><br><p><h4 id="<strong>GET /api/organizations/{id}</strong>"><strong>GET /api/organizations/{id}</strong></h4><br>Retrieve organization details with relationships.</p><br><p><strong>Success Response (200):</strong><br><pre class="code-block"><code>{<br>  "success": true,<br>  "data": {<br>    "id": 1,<br>    "name": "Acme Corporation",<br>    "description": "Pharmaceutical distribution company",<br>    "is_active": true,<br>    "created_at": "2025-01-01T00:00:00Z",<br>    "updated_at": "2025-01-01T00:00:00Z",<br>    "members": [<br>      {<br>        "id": 1,<br>        "user": {<br>          "id": 1,<br>          "name": "John Doe",<br>          "email": "john@example.com"<br>        },<br>        "role": "admin",<br>        "position": "System Administrator",<br>        "joined_at": "2025-01-01T00:00:00Z"<br>      }<br>    ],<br>    "units": [<br>      {<br>        "id": 1,<br>        "name": "Head Office",<br>        "type": "department",<br>        "parent_id": null,<br>        "members_count": 15,<br>        "children": [...]<br>      }<br>    ],<br>    "stores": [<br>      {<br>        "id": 1,<br>        "name": "Main Store",<br>        "code": "STORE001",<br>        "location": "Building A, Floor 1",<br>        "manager": {<br>          "id": 1,<br>          "name": "Store Manager"<br>        }<br>      }<br>    ]<br>  }<br>}</code></pre></p><br><p><hr></p><br><p><h3 id="<strong>1.4 Employee API Specifications</strong>"><strong>1.4 Employee API Specifications</strong></h3></p><br><p><h4 id="<strong>GET /api/employees</strong>"><strong>GET /api/employees</strong></h4><br>List employees with advanced filtering.</p><br><p><strong>Query Parameters:</strong><br><pre class="code-block"><code>page: integer<br>per_page: integer<br>search: string (searches first_name, last_name, email, employee_code)<br>department_id: integer<br>position_id: integer<br>shift_id: integer<br>status: enum[active,inactive]<br>gender: enum[male,female,other]<br>date_of_birth_from: date<br>date_of_birth_to: date<br>created_at_from: date<br>created_at_to: date<br>sort: enum[name,email,created_at,position]<br>order: enum[asc,desc]</code></pre></p><br><p><strong>Success Response (200):</strong><br><pre class="code-block"><code>{<br>  "success": true,<br>  "data": [<br>    {<br>      "id": 1,<br>      "user_id": 1,<br>      "employee_code": "EMP001",<br>      "first_name": "John",<br>      "last_name": "Doe",<br>      "middle_name": "William",<br>      "email": "john.doe@company.com",<br>      "phone": "+1234567890",<br>      "date_of_birth": "1990-01-15",<br>      "gender": "male",<br>      "address": "123 Main Street, Apt 4B",<br>      "city": "New York",<br>      "state": "NY",<br>      "country": "USA",<br>      "zip_code": "10001",<br>      "photo": "https://example.com/storage/photos/john.jpg",<br>      "is_active": true,<br>      "is_admin": false,<br>      "biometric_id": "BIO001",<br>      "position": {<br>        "id": 1,<br>        "title": "Software Developer",<br>        "code": "DEV001",<br>        "department": {<br>          "id": 1,<br>          "name": "IT Department"<br>        }<br>      },<br>      "shift": {<br>        "id": 1,<br>        "name": "Regular Shift",<br>        "code": "REG001",<br>        "start_time": "09:00:00",<br>        "end_time": "17:00:00",<br>        "working_hours": 8<br>      },<br>      "organization_unit": {<br>        "id": 1,<br>        "name": "IT Department",<br>        "type": "department"<br>      },<br>      "attendance_today": {<br>        "punch_in": "2025-11-19T09:00:00Z",<br>        "punch_out": null,<br>        "total_hours": null,<br>        "status": "present",<br>        "late_minutes": 0<br>      },<br>      "leave_balances": {<br>        "annual": 15,<br>        "sick": 10,<br>        "personal": 5<br>      },<br>      "created_at": "2025-01-01T00:00:00Z",<br>      "updated_at": "2025-11-19T10:30:00Z"<br>    }<br>  ],<br>  "meta": {<br>    "pagination": {...},<br>    "filters": {<br>      "departments": [...],<br>      "positions": [...],<br>      "shifts": [...]<br>    }<br>  }<br>}</code></pre></p><br><p><h4 id="<strong>POST /api/employees</strong>"><strong>POST /api/employees</strong></h4><br>Create new employee record.</p><br><p><strong>Request Body:</strong><br><pre class="code-block"><code>{<br>  "first_name": "required|string|max:255",<br>  "last_name": "required|string|max:255",<br>  "middle_name": "nullable|string|max:255",<br>  "email": "required|email|max:255|unique:users,email",<br>  "phone": "nullable|string|max:20",<br>  "date_of_birth": "required|date|before:today",<br>  "gender": "required|in:male,female,other",<br>  "address": "nullable|string|max:500",<br>  "city": "nullable|string|max:100",<br>  "state": "nullable|string|max:100",<br>  "country": "nullable|string|max:100",<br>  "zip_code": "nullable|string|max:20",<br>  "position_id": "required|exists:job_positions,id",<br>  "shift_id": "nullable|exists:shifts,id",<br>  "organization_unit_id": "required|exists:organization_units,id",<br>  "biometric_id": "nullable|string|max:50|unique:employees,biometric_id",<br>  "is_active": "optional|boolean",<br>  "is_admin": "optional|boolean",<br>  "create_user_account": "optional|boolean",<br>  "user_permissions": "optional|array"<br>}</code></pre></p><br><p><strong>Success Response (201):</strong><br><pre class="code-block"><code>{<br>  "success": true,<br>  "data": {<br>    "id": 45,<br>    "employee_code": "EMP045",<br>    "first_name": "Jane",<br>    "last_name": "Smith",<br>    "email": "jane.smith@company.com",<br>    "position": {...},<br>    "organization_unit": {...},<br>    "created_at": "2025-11-19T12:00:00Z"<br>  },<br>  "message": "Employee created successfully"<br>}</code></pre></p><br><p><hr></p><br><p><h3 id="<strong>1.5 Financial API Specifications</strong>"><strong>1.5 Financial API Specifications</strong></h3></p><br><p><h4 id="<strong>GET /api/accounts</strong>"><strong>GET /api/accounts</strong></h4><br>List chart of accounts.</p><br><p><strong>Query Parameters:</strong><br><pre class="code-block"><code>page: integer<br>per_page: integer<br>search: string<br>type: enum[asset,liability,equity,revenue,expense]<br>parent_id: integer<br>is_active: boolean</code></pre></p><br><p><strong>Success Response (200):</strong><br><pre class="code-block"><code>{<br>  "success": true,<br>  "data": [<br>    {<br>      "id": 1,<br>      "code": "1001",<br>      "name": "Cash Account",<br>      "type": "asset",<br>      "description": "Primary cash account",<br>      "parent_id": null,<br>      "balance": 50000.00,<br>      "is_active": true,<br>      "created_at": "2025-01-01T00:00:00Z",<br>      "children": [<br>        {<br>          "id": 2,<br>          "code": "1001.01",<br>          "name": "Main Cash",<br>          "type": "asset",<br>          "balance": 30000.00<br>        }<br>      ]<br>    }<br>  ]<br>}</code></pre></p><br><p><h4 id="<strong>POST /api/journal-entries</strong>"><strong>POST /api/journal-entries</strong></h4><br>Create journal entry with double-entry validation.</p><br><p><strong>Request Body:</strong><br><pre class="code-block"><code>{<br>  "reference_number": "required|string|max:50|unique:journal_entries",<br>  "entry_date": "required|date",<br>  "description": "required|string|max:1000",<br>  "voucher_type": "nullable|in:sales,purchase,expense,salary,general",<br>  "customer_id": "nullable|exists:customers,id",<br>  "vendor_id": "nullable|exists:vendors,id",<br>  "entries": "required|array|min:2",<br>  "entries.</em>.chart_of_account_id": "required|exists:chart_of_accounts,id",<br>  "entries.<em>.type": "required|in:debit,credit",<br>  "entries.</em>.amount": "required|numeric|min:0.01",<br>  "entries.<em>.description": "nullable|string|max:500"<br>}</code></pre></p><br><p><strong>Business Rules:</strong><br>- Total debits must equal total credits<br>- At least one debit and one credit entry required<br>- Account types must match debit/credit rules<br>- Cannot debit revenue or equity accounts<br>- Cannot credit asset or expense accounts</p><br><p><strong>Success Response (201):</strong><br><pre class="code-block"><code>{<br>  "success": true,<br>  "data": {<br>    "id": 123,<br>    "reference_number": "JE001",<br>    "entry_date": "2025-11-19",<br>    "description": "Office supplies purchase",<br>    "status": "draft",<br>    "total_debits": 1000.00,<br>    "total_credits": 1000.00,<br>    "is_balanced": true,<br>    "entries": [<br>      {<br>        "id": 1,<br>        "chart_of_account": {<br>          "id": 1,<br>          "code": "5001",<br>          "name": "Office Expenses"<br>        },<br>        "type": "debit",<br>        "amount": 1000.00<br>      },<br>      {<br>        "id": 2,<br>        "chart_of_account": {<br>          "id": 2,<br>          "code": "1001",<br>          "name": "Cash Account"<br>        },<br>        "type": "credit",<br>        "amount": 1000.00<br>      }<br>    ],<br>    "created_at": "2025-11-19T12:00:00Z"<br>  },<br>  "message": "Journal entry created successfully"<br>}</code></pre></p><br><p><hr></p><br><p><h3 id="<strong>1.6 Inventory API Specifications</strong>"><strong>1.6 Inventory API Specifications</strong></h3></p><br><p><h4 id="<strong>GET /api/inventory/items</strong>"><strong>GET /api/inventory/items</strong></h4><br>List inventory items with stock information.</p><br><p><strong>Query Parameters:</strong><br><pre class="code-block"><code>page: integer<br>per_page: integer<br>search: string (searches name, code, description)<br>category: string<br>store_id: integer<br>stock_status: enum[in_stock,low_stock,out_of_stock,overstock]<br>min_price: decimal<br>max_price: decimal<br>has_expiry: boolean<br>sort: enum[name,code,price,stock_level]<br>order: enum[asc,desc]</code></pre></p><br><p><strong>Success Response (200):</strong><br><pre class="code-block"><code>{<br>  "success": true,<br>  "data": [<br>    {<br>      "id": 1,<br>      "name": "Paracetamol 500mg",<br>      "code": "PAR001",<br>      "description": "Paracetamol tablets 500mg",<br>      "category": "Medicines",<br>      "unit": "strips",<br>      "cost_price": 25.50,<br>      "selling_price": 35.00,<br>      "min_stock_level": 50,<br>      "max_stock_level": 500,<br>      "total_stock": 150,<br>      "stock_status": "adequate",<br>      "stock_value": 3825.00,<br>      "stores": [<br>        {<br>          "store_id": 1,<br>          "store_name": "Main Store",<br>          "quantity": 100,<br>          "location": "Aisle 3, Shelf B",<br>          "last_updated": "2025-11-19T10:00:00Z"<br>        },<br>        {<br>          "store_id": 2,<br>          "store_name": "Branch Store",<br>          "quantity": 50,<br>          "location": "Storage Area A",<br>          "last_updated": "2025-11-18T15:30:00Z"<br>        }<br>      ],<br>      "batch_info": {<br>        "total_batches": 3,<br>        "earliest_expiry": "2026-06-30",<br>        "latest_expiry": "2026-12-31"<br>      },<br>      "is_active": true,<br>      "created_at": "2025-01-01T00:00:00Z",<br>      "updated_at": "2025-11-19T10:00:00Z"<br>    }<br>  ],<br>  "meta": {<br>    "pagination": {...},<br>    "filters": {<br>      "categories": ["Medicines", "Equipment", "Supplies"],<br>      "stores": [...],<br>      "stock_statuses": ["in_stock", "low_stock", "out_of_stock"]<br>    }<br>  }<br>}</code></pre></p><br><p><h4 id="<strong>POST /api/inventory/transactions</strong>"><strong>POST /api/inventory/transactions</strong></h4><br>Create inventory transaction.</p><br><p><strong>Request Body:</strong><br><pre class="code-block"><code>{<br>  "store_id": "required|exists:inventory_stores,id",<br>  "transaction_type": "required|in:IN,OUT,TRANSFER,ADJUST",<br>  "reference_number": "required|string|max:50",<br>  "transaction_date": "required|date",<br>  "notes": "nullable|string|max:1000",<br>  "transfer_to_store_id": "required_if:transaction_type,TRANSFER|exists:inventory_stores,id",<br>  "items": "required|array|min:1",<br>  "items.</em>.item_id": "required|exists:inventory_items,id",<br>  "items.<em>.quantity": "required|numeric|min:0.01",<br>  "items.</em>.unit_cost": "nullable|numeric|min:0",<br>  "items.<em>.batch_number": "nullable|string|max:50",<br>  "items.</em>.expiry_date": "nullable|date",<br>  "items.<em>.notes": "nullable|string|max:500"<br>}</code></pre></p><br><p><strong>Business Rules:</strong><br>- OUT transactions require sufficient stock<br>- TRANSFER transactions require source and destination stores<br>- ADJUST transactions can increase or decrease stock<br>- Batch numbers required for pharmaceutical items<br>- Expiry dates required for items with expiry tracking</p><br><p><strong>Success Response (201):</strong><br><pre class="code-block"><code>{<br>  "success": true,<br>  "data": {<br>    "id": 789,<br>    "reference_number": "GRN001",<br>    "transaction_type": "IN",<br>    "status": "draft",<br>    "store": {<br>      "id": 1,<br>      "name": "Main Store"<br>    },<br>    "total_items": 5,<br>    "total_quantity": 500,<br>    "total_value": 12750.00,<br>    "items": [<br>      {<br>        "id": 1,<br>        "item": {<br>          "id": 1,<br>          "name": "Paracetamol 500mg",<br>          "code": "PAR001"<br>        },<br>        "quantity": 100,<br>        "unit_cost": 25.50,<br>        "total_cost": 2550.00,<br>        "batch_number": "BATCH001",<br>        "expiry_date": "2026-12-31"<br>      }<br>    ],<br>    "created_at": "2025-11-19T12:00:00Z"<br>  },<br>  "message": "Transaction created successfully"<br>}</code></pre></p><br><p><hr></p><br><p><h2 id="<strong>2. Livewire Component Specifications</strong>"><strong>2. Livewire Component Specifications</strong></h2></p><br><p><h3 id="<strong>2.1 Component Architecture</strong>"><strong>2.1 Component Architecture</strong></h3></p><br><p><h4 id="<strong>Component Structure</strong>"><strong>Component Structure</strong></h4><br><pre class="code-block"><code>class ExampleComponent extends Component<br>{<br>    // Public properties (available to Blade)<br>    public $property;<br>    <br>    // Protected properties (component internal)<br>    protected $listeners = ['eventName' => 'handleMethod'];<br>    <br>    // Component mount<br>    public function mount($parameter = null)<br>    {<br>        // Initialization logic<br>    }<br>    <br>    // Public methods (callable from Blade)<br>    public function methodName()<br>    {<br>        // Component logic<br>    }<br>    <br>    // Rendering<br>    public function render()<br>    {<br>        return view('components.example');<br>    }<br>}</code></pre></p><br><p><h4 id="<strong>Blade Integration</strong>"><strong>Blade Integration</strong></h4><br><pre class="code-block"><code><livewire:example-component :parameter="$value"><br>    <!-- Component content --><br>    <input wire:model.live="property"><br>    <button wire:click="methodName">Submit</button><br></livewire:example-component></code></pre></p><br><p><hr></p><br><p><h3 id="<strong>2.2 Dashboard Component Specifications</strong>"><strong>2.2 Dashboard Component Specifications</strong></h3></p><br><p><h4 id="<strong>Dashboard Component</strong>"><strong>Dashboard Component</strong></h4><br>Real-time dashboard with KPIs and quick actions.</p><br><p><strong>Public Properties:</strong><br><pre class="code-block"><code>public $stats = [<br>    'total_employees' => 0,<br>    'active_employees' => 0,<br>    'total_stores' => 0,<br>    'low_stock_items' => 0,<br>    'today_transactions' => 0,<br>    'pending_leave_requests' => 0,<br>    'monthly_revenue' => 0.00,<br>    'monthly_expenses' => 0.00<br>];</p><br><p>public $recentActivities = [];<br>public $lowStockItems = [];<br>public $upcomingEvents = [];<br>public $quickActions = [];</code></pre></p><br><p><strong>Methods:</strong><br><pre class="code-block"><code>public function mount()<br>{<br>    $this->loadDashboardData();<br>}</p><br><p>public function loadDashboardData()<br>{<br>    $this->stats = $this->calculateStats();<br>    $this->recentActivities = $this->getRecentActivities();<br>    $this->lowStockItems = $this->getLowStockItems();<br>}</p><br><p>public function refreshStats()<br>{<br>    $this->loadDashboardData();<br>    $this->dispatch('stats-refreshed');<br>}</code></pre></p><br><p><strong>Events:</strong><br>- <code>stats-refreshed</code> - Fired when stats are refreshed<br>- <code>quick-action-triggered</code> - Fired when quick action is clicked</p><br><p><strong>Real-time Features:</strong><br>- Auto-refresh every 30 seconds<br>- Live updates via WebSocket (planned)<br>- Loading states during data fetch</p><br><p><hr></p><br><p><h3 id="<strong>2.3 Employee Management Component Specifications</strong>"><strong>2.3 Employee Management Component Specifications</strong></h3></p><br><p><h4 id="<strong>EmployeeManagement Component</strong>"><strong>EmployeeManagement Component</strong></h4><br>Complete employee CRUD with advanced filtering.</p><br><p><strong>Public Properties:</strong><br><pre class="code-block"><code>public $employees = [];<br>public $search = '';<br>public $filters = [<br>    'department' => '',<br>    'position' => '',<br>    'status' => 'active',<br>    'gender' => ''<br>];<br>public $selectedEmployee = null;<br>public $showCreateModal = false;<br>public $showEditModal = false;<br>public $pagination = 15;</code></pre></p><br><p><strong>Methods:</strong><br><pre class="code-block"><code>public function updatedSearch()<br>{<br>    $this->resetPage();<br>    $this->loadEmployees();<br>}</p><br><p>public function updatedFilters()<br>{<br>    $this->resetPage();<br>    $this->loadEmployees();<br>}</p><br><p>public function createEmployee()<br>{<br>    $this->showCreateModal = true;<br>}</p><br><p>public function editEmployee($employeeId)<br>{<br>    $this->selectedEmployee = Employee::find($employeeId);<br>    $this->showEditModal = true;<br>}</p><br><p>public function deleteEmployee($employeeId)<br>{<br>    Employee::find($employeeId)->delete();<br>    $this->loadEmployees();<br>    $this->dispatch('employee-deleted', $employeeId);<br>}</code></pre></p><br><p><strong>Validation Rules:</strong><br><pre class="code-block"><code>protected $rules = [<br>    'first_name' => 'required|string|max:255',<br>    'last_name' => 'required|string|max:255',<br>    'email' => 'required|email|unique:users,email',<br>    'position_id' => 'required|exists:job_positions,id',<br>    'organization_unit_id' => 'required|exists:organization_units,id'<br>];</code></pre></p><br><p><hr></p><br><p><h3 id="<strong>2.4 Inventory Management Component Specifications</strong>"><strong>2.4 Inventory Management Component Specifications</strong></h3></p><br><p><h4 id="<strong>TransactionWizard Component</strong>"><strong>TransactionWizard Component</strong></h4><br>Multi-step transaction creation wizard.</p><br><p><strong>Public Properties:</strong><br><pre class="code-block"><code>public $currentStep = 1;<br>public $totalSteps = 4;<br>public $transactionData = [<br>    'transaction_type' => '',<br>    'store_id' => '',<br>    'reference_number' => '',<br>    'notes' => '',<br>    'items' => []<br>];<br>public $availableItems = [];<br>public $selectedStore = null;</code></pre></p><br><p><strong>Methods:</strong><br><pre class="code-block"><code>public function nextStep()<br>{<br>    if ($this->validateCurrentStep()) {<br>        $this->currentStep++;<br>        $this->loadStepData();<br>    }<br>}</p><br><p>public function previousStep()<br>{<br>    $this->currentStep--;<br>}</p><br><p>public function finalizeTransaction()<br>{<br>    $this->validate($this->getFinalValidationRules());<br>    <br>    $transaction = InventoryTransaction::create([<br>        'organization_id' => auth()->user()->current_organization_id,<br>        // ... other fields<br>    ]);<br>    <br>    $this->dispatch('transaction-created', $transaction->id);<br>    $this->resetWizard();<br>}</code></pre></p><br><p><strong>Step Validation:</strong><br>- Step 1: Transaction type selection<br>- Step 2: Store and reference details<br>- Step 3: Item selection and quantities<br>- Step 4: Review and confirmation</p><br><p><hr></p><br><p><h2 id="<strong>3. Error Handling Specifications</strong>"><strong>3. Error Handling Specifications</strong></h2></p><br><p><h3 id="<strong>3.1 API Error Responses</strong>"><strong>3.1 API Error Responses</strong></h3></p><br><p><h4 id="<strong>Validation Error (422)</strong>"><strong>Validation Error (422)</strong></h4><br><pre class="code-block"><code>{<br>  "success": false,<br>  "message": "The given data was invalid.",<br>  "errors": {<br>    "email": [<br>      "The email field is required.",<br>      "The email must be a valid email address."<br>    ],<br>    "password": [<br>      "The password field is required.",<br>      "The password must be at least 8 characters."<br>    ]<br>  }<br>}</code></pre></p><br><p><h4 id="<strong>Authorization Error (403)</strong>"><strong>Authorization Error (403)</strong></h4><br><pre class="code-block"><code>{<br>  "success": false,<br>  "message": "You do not have permission to perform this action.",<br>  "error": "INSUFFICIENT_PERMISSIONS",<br>  "required_permission": "employees.create",<br>  "available_permissions": ["employees.view", "attendance.view"]<br>}</code></pre></p><br><p><h4 id="<strong>Not Found Error (404)</strong>"><strong>Not Found Error (404)</strong></h4><br><pre class="code-block"><code>{<br>  "success": false,<br>  "message": "The requested resource was not found.",<br>  "error": "RESOURCE_NOT_FOUND",<br>  "resource_type": "Employee",<br>  "resource_id": 999<br>}</code></pre></p><br><p><h4 id="<strong>Server Error (500)</strong>"><strong>Server Error (500)</strong></h4><br><pre class="code-block"><code>{<br>  "success": false,<br>  "message": "An internal server error occurred.",<br>  "error": "INTERNAL_SERVER_ERROR",<br>  "timestamp": "2025-11-19T12:00:00Z",<br>  "request_id": "req_abc123def456"<br>}</code></pre></p><br><p><h3 id="<strong>3.2 Livewire Error Handling</strong>"><strong>3.2 Livewire Error Handling</strong></h3></p><br><p><h4 id="<strong>Validation Errors</strong>"><strong>Validation Errors</strong></h4><br><pre class="code-block"><code>public function updated($propertyName)<br>{<br>    $this->validateOnly($propertyName);<br>}</p><br><p>public function save()<br>{<br>    try {<br>        $this->validate();<br>        // Save logic<br>    } catch (ValidationException $e) {<br>        $this->dispatch('validation-error', $e->getMessage());<br>    }<br>}</code></pre></p><br><p><h4 id="<strong>Exception Handling</strong>"><strong>Exception Handling</strong></h4><br><pre class="code-block"><code>public function deleteRecord($id)<br>{<br>    try {<br>        $record = Model::findOrFail($id);<br>        $record->delete();<br>        $this->dispatch('record-deleted', $id);<br>    } catch (ModelNotFoundException $e) {<br>        $this->dispatch('error', 'Record not found');<br>    } catch (Exception $e) {<br>        Log::error('Delete failed: ' . $e->getMessage());<br>        $this->dispatch('error', 'Delete operation failed');<br>    }<br>}</code></pre></p><br><p><hr></p><br><p><h2 id="<strong>4. Performance Specifications</strong>"><strong>4. Performance Specifications</strong></h2></p><br><p><h3 id="<strong>4.1 API Performance Requirements</strong>"><strong>4.1 API Performance Requirements</strong></h3></p><br><p><h4 id="<strong>Response Time Targets</strong>"><strong>Response Time Targets</strong></h4><br>- Simple GET requests: <200ms<br>- Complex filtered queries: <500ms<br>- POST/PUT requests: <1000ms<br>- Bulk operations: <3000ms</p><br><p><h4 id="<strong>Pagination Limits</strong>"><strong>Pagination Limits</strong></h4><br>- Default page size: 15 records<br>- Maximum page size: 100 records<br>- Maximum depth for nested includes: 3 levels</p><br><p><h4 id="<strong>Rate Limiting</strong>"><strong>Rate Limiting</strong></h4><br>- Authenticated users: 1000 requests/hour<br>- Unauthenticated users: 100 requests/hour<br>- Bulk operations: 10 requests/hour</p><br><p><h3 id="<strong>4.2 Livewire Performance Requirements</strong>"><strong>4.2 Livewire Performance Requirements</strong></h3></p><br><p><h4 id="<strong>Component Load Time</strong>"><strong>Component Load Time</strong></h4><br>- Simple components: <500ms<br>- Complex components: <1500ms<br>- Data-heavy components: <3000ms</p><br><p><h4 id="<strong>Memory Usage</strong>"><strong>Memory Usage</strong></h4><br>- Simple components: <10MB<br>- Complex components: <50MB<br>- Maximum per request: 128MB</p><br><p><hr></p><br><p><h2 id="<strong>5. Security Specifications</strong>"><strong>5. Security Specifications</strong></h2></p><br><p><h3 id="<strong>5.1 Authentication Security</strong>"><strong>5.1 Authentication Security</strong></h3></p><br><p><h4 id="<strong>Password Requirements</strong>"><strong>Password Requirements</strong></h4><br>- Minimum length: 8 characters<br>- Must contain: uppercase, lowercase, number<br>- Optional: special character<br>- Password history: Last 5 passwords not allowed</p><br><p><h4 id="<strong>Token Security</strong>"><strong>Token Security</strong></h4><br>- Token length: 64 characters minimum<br>- Token expiry: Configurable (default 1 year)<br>- Token rotation: Available on demand<br>- Device tracking: Multiple device support</p><br><p><h3 id="<strong>5.2 Data Security</strong>"><strong>5.2 Data Security</strong></h3></p><br><p><h4 id="<strong>Encryption</strong>"><strong>Encryption</strong></h4><br>- Data at rest: AES-256 encryption<br>- Data in transit: TLS 1.3<br>- Sensitive fields: Additional encryption layer<br>- Key rotation: Automated annually</p><br><p><h4 id="<strong>Access Control</strong>"><strong>Access Control</strong></h4><br>- Role-based permissions: Granular control<br>- Organization isolation: Complete data separation<br>- API key management: Scoped permissions<br>- Audit logging: All access attempts logged</p><br><p><hr></p><br><p><h2 id="<strong>6. Integration Specifications</strong>"><strong>6. Integration Specifications</strong></h2></p><br><p><h3 id="<strong>6.1 Webhook Specifications</strong>"><strong>6.1 Webhook Specifications</strong></h3></p><br><p><h4 id="<strong>Event Webhooks</strong>"><strong>Event Webhooks</strong></h4><br><pre class="code-block"><code>{<br>  "event": "employee.created",<br>  "timestamp": "2025-11-19T12:00:00Z",<br>  "organization_id": 1,<br>  "data": {<br>    "employee_id": 45,<br>    "name": "Jane Smith",<br>    "email": "jane.smith@company.com"<br>  },<br>  "signature": "sha256_hash_of_payload"<br>}</code></pre></p><br><p><h4 id="<strong>Supported Events</strong>"><strong>Supported Events</strong></h4><br>- <code>employee.created</code>, <code>employee.updated</code>, <code>employee.deleted</code><br>- <code>transaction.created</code>, <code>transaction.finalized</code><br>- <code>journal_entry.posted</code>, <code>journal_entry.voided</code><br>- <code>leave.requested</code>, <code>leave.approved</code>, <code>leave.rejected</code></p><br><p><h3 id="<strong>6.2 File Upload Specifications</strong>"><strong>6.2 File Upload Specifications</strong></h3></p><br><p><h4 id="<strong>Upload Endpoints</strong>"><strong>Upload Endpoints</strong></h4><br><pre class="code-block"><code>POST /api/upload/employees/photos<br>POST /api/upload/documents/attachments<br>POST /api/upload/reports/exports</code></pre></p><br><p><h4 id="<strong>File Specifications</strong>"><strong>File Specifications</strong></h4><br>- Maximum file size: 10MB<br>- Allowed formats: JPG, PNG, PDF, DOC, DOCX, XLS, XLSX<br>- Storage: Local or S3 compatible<br>- Retention: Configurable per file type</p><br><p><hr></p><br><p></em>This interface specification document provides detailed technical specifications for all system interfaces as of November 19, 2025.*</p>
+        </main>
+        
+        <div class="footer" style="font-size: 8pt; text-align: center; line-height: 1.0; border-top: 1px solid #e5e7eb; padding-top: 5px; margin-top: 10px;">
+    Page {page} of {total} | Generated on 2025-11-26 06:46:36
+</div>
+    </div>
+</body>
+</html>

@@ -1,4 +1,5 @@
 <?php
+
 // app/Services/AccountingService.php
 
 namespace App\Services;
@@ -6,6 +7,7 @@ namespace App\Services;
 use App\Exceptions\InvalidAccountTypeException;
 use App\Exceptions\UnbalancedTransactionException;
 use App\Models\Accounting\ChartOfAccount;
+use App\Models\Accounting\JournalEntry;
 use App\Models\Accounting\LedgerEntry;
 use Illuminate\Support\Facades\DB;
 
@@ -55,24 +57,37 @@ class AccountingService
     }
 
     /**
-     * Validate that the account type can receive the given entry type
+     * Validate that account type can receive given entry type
      *
      * @throws InvalidAccountTypeException
      */
-
-    // In app/Services/AccountingService.php - validateAccountType method
-
     private function validateAccountType(ChartOfAccount $account, string $entryType): void
     {
-        $validDebitAccounts = ['asset', 'expense'];
-        $validCreditAccounts = ['liability', 'equity', 'revenue'];
+        // In accounting, all account types can receive both debits and credits
+        // The validation should only ensure the entry type is valid
+        // Normal balance rules are:
+        // Assets: Normal debit balance (debit increases, credit decreases)
+        // Liabilities: Normal credit balance (credit increases, debit decreases)
+        // Equity: Normal credit balance (credit increases, debit decreases)
+        // Revenue: Normal credit balance (credit increases, debit decreases)
+        // Expenses: Normal debit balance (debit increases, credit decreases)
 
-        if ($entryType === 'debit' && !in_array($account->type, $validDebitAccounts)) {
-            throw new InvalidAccountTypeException($account, $entryType);
+        // All account types can have both debits and credits in proper accounting
+        // We only need to validate that the entry type is valid
+        if (! in_array($entryType, ['debit', 'credit'])) {
+            throw new InvalidAccountTypeException($account, $entryType, "Entry type must be 'debit' or 'credit'");
         }
+    }
 
-        if ($entryType === 'credit' && !in_array($account->type, $validCreditAccounts)) {
-            throw new InvalidAccountTypeException($account, $entryType);
-        }
+    public function createPayrollJournalEntry($payrollRun)
+    {
+        return JournalEntry::create([
+            'organization_id' => $payrollRun->organization_id,
+            'reference_number' => 'PAY-'.$payrollRun->period,
+            'entry_date' => now(),
+            'description' => 'Payroll for '.$payrollRun->period,
+            'status' => 'posted',
+            // Debit Salary Expense, Credit Payroll Payable
+        ]);
     }
 }

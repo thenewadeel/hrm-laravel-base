@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Employee extends Model
 {
-    use HasFactory, BelongsToOrganization, SoftDeletes;
+    use BelongsToOrganization, HasFactory, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +20,8 @@ class Employee extends Model
         'user_id',
         'organization_id',
         'organization_unit_id',
+        'position_id',
+        'shift_id',
         'first_name',
         'last_name',
         'biometric_id',
@@ -36,6 +38,7 @@ class Employee extends Model
         'photo',
         'is_active',
         'is_admin',
+        'basic_salary',
     ];
 
     /**
@@ -47,6 +50,7 @@ class Employee extends Model
         'date_of_birth' => 'date',
         'is_active' => 'boolean',
         'is_admin' => 'boolean',
+        'basic_salary' => 'decimal:2',
     ];
 
     public function attendanceRecords()
@@ -57,6 +61,16 @@ class Employee extends Model
     public function organizationUnit()
     {
         return $this->belongsTo(OrganizationUnit::class);
+    }
+
+    public function position()
+    {
+        return $this->belongsTo(JobPosition::class, 'position_id');
+    }
+
+    public function shift()
+    {
+        return $this->belongsTo(Shift::class, 'shift_id');
     }
 
     public function leaveRequests()
@@ -73,6 +87,34 @@ class Employee extends Model
     {
         // Assuming OrganizationUser is the pivot model for a many-to-many relationship
         return $this->hasMany(OrganizationUser::class);
+    }
+
+    /**
+     * Payroll enhancement relationships
+     */
+    public function increments()
+    {
+        return $this->hasMany(EmployeeIncrement::class);
+    }
+
+    public function allowances()
+    {
+        return $this->hasMany(EmployeeAllowance::class);
+    }
+
+    public function deductions()
+    {
+        return $this->hasMany(EmployeeDeduction::class);
+    }
+
+    public function loans()
+    {
+        return $this->hasMany(EmployeeLoan::class);
+    }
+
+    public function salaryAdvances()
+    {
+        return $this->hasMany(SalaryAdvance::class);
     }
 
     /**
@@ -99,8 +141,10 @@ class Employee extends Model
     public function isClockedIn()
     {
         $attendance = $this->todayAttendance;
-        return $attendance && $attendance->punch_in && !$attendance->punch_out;
+
+        return $attendance && $attendance->punch_in && ! $attendance->punch_out;
     }
+
     /**
      * Scope for employees with user accounts
      */
@@ -134,6 +178,7 @@ class Employee extends Model
         return $this->hasOne(OrganizationUser::class, 'user_id', 'user_id')
             ->where('organization_id', $this->organization_id);
     }
+
     /**
      * Get the user associated with the employee (for login access)
      */
@@ -141,12 +186,13 @@ class Employee extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     /**
      * Check if employee has login access
      */
     public function hasLoginAccess(): bool
     {
-        return !is_null($this->user_id) && $this->organizationUser()->exists();
+        return ! is_null($this->user_id) && $this->organizationUser()->exists();
     }
 
     /**

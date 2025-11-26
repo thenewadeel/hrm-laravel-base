@@ -1,32 +1,33 @@
 <?php
+
 // app/Http/Controllers/DashboardController.php
 
 namespace App\Http\Controllers;
 
-use App\Models\Organization;
-use App\Models\Inventory\Store;
 use App\Models\Inventory\Item;
+use App\Models\Inventory\Store;
 use App\Models\Inventory\Transaction;
+use App\Models\Organization;
 use App\Models\OrganizationUnit;
 use App\Models\Scopes\StoreOrganizationScope;
-use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function index()
     {
         $user = auth()->user();
-        $organization = Organization::find($user->operating_organization_id);
+        $organization = Organization::find($user->current_organization_id);
 
         // Redirect to setup if no organization
-        if (!$organization) {
+        if (! $organization) {
             return redirect('/setup');
         }
 
         // Get dashboard data
         $stores = Store::forOrganization($organization->id)->withCount('items')->get();
-        $totalItems = Item::count();
-        $lowStockItems = Item::lowInStock()
+        $totalItems = Item::where('organization_id', $organization->id)->count();
+        $lowStockItems = Item::where('organization_id', $organization->id)
+            ->lowInStock()
             ->get();
 
         $recentTransactions = Transaction::whereIn('store_id', Store::forOrganization($organization->id)->pluck('id'))
@@ -36,6 +37,7 @@ class DashboardController extends Controller
             ->get();
 
         $items = Item::pluck('id', 'name');
+
         // dd([
         //     'user' => $user->operating_organization_id,
         //     'role' => $user->getAllRoles(),
@@ -74,13 +76,13 @@ class DashboardController extends Controller
                     return [
                         'store_name' => $store->name,
                         'quantity' => $store->pivot->quantity,
-                        'reorder_level' => $item->reorder_level
+                        'reorder_level' => $item->reorder_level,
                     ];
                 });
 
                 return [
                     'item' => $item,
-                    'low_stock_stores' => $lowStockStores
+                    'low_stock_stores' => $lowStockStores,
                 ];
             })
             ->flatten(1);

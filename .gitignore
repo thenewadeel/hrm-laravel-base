@@ -50,3 +50,6 @@ auth.json
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Printable docs pdfs
+docs/pdf/

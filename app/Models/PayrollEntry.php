@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PayrollEntry extends Model
 {
-    use HasFactory, BelongsToOrganization;
+    use BelongsToOrganization, HasFactory;
 
     protected $fillable = [
         'employee_id',
@@ -25,8 +25,8 @@ class PayrollEntry extends Model
         'other_deductions',
         'total_deductions',
         'net_pay',
-        'status', //, ['draft', 'processed', 'paid', 'cancelled'])->default('draft');
-        'paid_at'
+        'status', // , ['draft', 'processed', 'paid', 'cancelled'])->default('draft');
+        'paid_at',
     ];
 
     protected $casts = [
@@ -41,15 +41,15 @@ class PayrollEntry extends Model
         'other_deductions' => 'decimal:2',
         'total_deductions' => 'decimal:2',
         'net_pay' => 'decimal:2',
-        'paid_at' => 'datetime'
+        'paid_at' => 'datetime',
     ];
 
     /**
      * Relationships
      */
-    public function user()
+    public function employee()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Employee::class);
     }
 
     public function organization()
@@ -100,6 +100,6 @@ class PayrollEntry extends Model
      */
     public function getPayslipFilenameAttribute()
     {
-        return "payslip-{$this->user->name}-{$this->period}.pdf";
+        return "payslip-{$this->employee->user->name}-{$this->period}.pdf";
     }
 }

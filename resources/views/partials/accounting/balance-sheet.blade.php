@@ -1,12 +1,22 @@
-<div class="bg-white shadow overflow-hidden sm:rounded-lg mb-8">
-    <div class="px-4 py-5 sm:px-6">
-        <h3 class="text-lg leading-6 font-medium text-gray-900">
-            Balance Sheet
-        </h3>
-        <p class="mt-1 max-w-2xl text-sm text-gray-500">
-            As of {{ $report['as_of_date'] ?? 'N/A' }}.
-        </p>
-    </div>
+    <div class="bg-white shadow overflow-hidden sm:rounded-lg mb-8">
+        <div class="px-4 py-5 sm:px-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        Balance Sheet
+                    </h3>
+                    <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                        As of {{ $report['as_of_date'] ?? 'N/A' }}.
+                    </p>
+                </div>
+                <div class="flex space-x-2">
+                    <x-button.outline href="{{ route('accounting.download.balance-sheet') }}?as_of_date={{ $report['as_of_date'] ?? now()->format('Y-m-d') }}">
+                        <x-heroicon-s-document-arrow-down class="w-4 h-4 mr-2" />
+                        Download PDF
+                    </x-button.outline>
+                </div>
+            </div>
+        </div>
     <div class="border-t border-gray-200">
         <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt class="text-sm font-medium text-gray-500">Total Assets</dt>

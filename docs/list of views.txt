@@ -1,4 +1,22 @@
 resources/views/
+├── accounting
+│   ├── cash-payments
+│   │   └── index.blade.php
+│   ├── cash-receipts
+│   │   └── index.blade.php
+│   ├── financial-years
+│   │   ├── create.blade.php
+│   │   └── edit.blade.php
+│   ├── fixed-assets
+│   │   └── index.blade.php
+│   └── pdf
+│       ├── asset-register.blade.php
+│       ├── balance-sheet.blade.php
+│       ├── depreciation-schedule.blade.php
+│       ├── income-statement.blade.php
+│       ├── payables-outstanding.blade.php
+│       ├── receivables-outstanding.blade.php
+│       └── trial-balance.blade.php
 ├── accounts
 │   └── index.blade.php
 ├── alerts
@@ -6,6 +24,8 @@ resources/views/
 ├── api
 │   ├── api-token-manager.blade.php
 │   └── index.blade.php
+├── attendance
+│   └── dashboard.blade.php
 ├── auth
 │   ├── confirm-password.blade.php
 │   ├── forgot-password.blade.php
@@ -38,6 +58,8 @@ resources/views/
 │   ├── button.blade.php
 │   ├── confirmation-modal.blade.php
 │   ├── confirms-password.blade.php
+│   ├── dashboard
+│   │   └── stat-card.blade.php
 │   ├── data-table.blade.php
 │   ├── dialog-modal.blade.php
 │   ├── dropdown.blade.php
@@ -74,9 +96,24 @@ resources/views/
 │   └── welcome.blade.php
 ├── dashboard.blade.php
 ├── demo
+│   ├── cash-management.blade.php
 │   └── inventory-components.blade.php
 ├── emails
 │   └── team-invitation.blade.php
+├── hr
+│   ├── employees
+│   │   ├── create.blade.php
+│   │   ├── edit.blade.php
+│   │   ├── index.blade.php
+│   │   └── show.blade.php
+│   ├── positions
+│   │   ├── create.blade.php
+│   │   └── index.blade.php
+│   └── shifts
+│       ├── create.blade.php
+│       └── index.blade.php
+├── hrm
+│   └── dashboard.blade.php
 ├── inventory
 │   ├── index.blade.php
 │   ├── items
@@ -86,6 +123,10 @@ resources/views/
 │   ├── mobile
 │   │   ├── dashboard.blade.php
 │   │   └── stock-count.blade.php
+│   ├── pdf
+│   │   ├── low-stock.blade.php
+│   │   ├── movement.blade.php
+│   │   └── stock-levels.blade.php
 │   ├── reports
 │   │   ├── index.blade.php
 │   │   ├── low-stock.blade.php
@@ -109,19 +150,77 @@ resources/views/
 │   └── guest.blade.php
 ├── livewire
 │   ├── accounting
+│   │   ├── asset-disposal-form.blade.php
+│   │   ├── asset-maintenance-form.blade.php
+│   │   ├── asset-transfer-form.blade.php
+│   │   ├── bank-accounts
+│   │   │   ├── create.blade.php
+│   │   │   └── index.blade.php
+│   │   ├── bank-reconciliation
+│   │   │   └── reconcile.blade.php
+│   │   ├── bank-statements
+│   │   │   ├── import.blade.php
+│   │   │   └── index.blade.php
+│   │   ├── bank-transactions
+│   │   │   └── index.blade.php
+│   │   ├── cash-payments
+│   │   │   └── create.blade.php
+│   │   ├── cash-receipts
+│   │   │   └── create.blade.php
 │   │   ├── chart-of-accounts.blade.php
 │   │   ├── dashboard.blade.php
+│   │   ├── depreciation-posting.blade.php
+│   │   ├── expense-voucher-form.blade.php
+│   │   ├── financial-years
+│   │   │   ├── financial-year-form.blade.php
+│   │   │   ├── financial-year-index.blade.php
+│   │   │   ├── opening-balance-form.blade.php
+│   │   │   └── year-end-closing.blade.php
+│   │   ├── fixed-asset-form.blade.php
+│   │   ├── fixed-asset-index.blade.php
 │   │   ├── journal-entries.blade.php
 │   │   ├── ledger-entries.blade.php
-│   │   └── reports.blade.php
+│   │   ├── payables-outstanding.blade.php
+│   │   ├── purchase-voucher-form.blade.php
+│   │   ├── receivables-outstanding.blade.php
+│   │   ├── reports.blade.php
+│   │   ├── salary-voucher-form.blade.php
+│   │   ├── sales-voucher-form.blade.php
+│   │   ├── tax-exemption-form.blade.php
+│   │   ├── tax-exemption-index.blade.php
+│   │   ├── tax-filing-manager.blade.php
+│   │   ├── tax-rate-form.blade.php
+│   │   ├── tax-rate-index.blade.php
+│   │   ├── tax-reporting-dashboard.blade.php
+│   │   └── vouchers
+│   │       └── create.blade.php
+│   ├── cash-management-demo.blade.php
 │   ├── member-manager.blade.php
 │   ├── organization
 │   │   ├── organization-form.blade.php
 │   │   └── organization-list.blade.php
 │   ├── organization-tree.blade.php
+│   ├── payroll
+│   │   ├── advance-management.blade.php
+│   │   ├── advance-reports.blade.php
+│   │   ├── allowance-management.blade.php
+│   │   ├── deduction-management.blade.php
+│   │   ├── increment-management.blade.php
+│   │   ├── loan-management.blade.php
+│   │   ├── payroll-dashboard.blade.php
+│   │   ├── reports
+│   │   │   ├── advance-vs-salary.blade.php
+│   │   │   ├── aging-analysis.blade.php
+│   │   │   ├── analytics-overview.blade.php
+│   │   │   ├── department-report.blade.php
+│   │   │   ├── employee-statement.blade.php
+│   │   │   ├── monthly-summary.blade.php
+│   │   │   └── outstanding-advances.blade.php
+│   │   └── tax-configuration.blade.php
 │   └── user-placement.blade.php
 ├── navigation-menu.blade.php
 ├── organizations
+│   ├── dashboard.blade.php
 │   └── index.blade.php
 ├── partials
 │   ├── accounting
@@ -131,7 +230,25 @@ resources/views/
 │   ├── accounts-table.blade.php
 │   ├── organization-unit-tree.blade.php
 │   └── user-unit-tree.blade.php
+├── payroll
+│   ├── advance-reports.blade.php
+│   ├── advances.blade.php
+│   └── processing.blade.php
 ├── policy.blade.php
+├── portal
+│   ├── employee
+│   │   ├── attendance.blade.php
+│   │   ├── dashboard.blade.php
+│   │   ├── leave.blade.php
+│   │   ├── leave-create.blade.php
+│   │   ├── payslip-download.blade.php
+│   │   ├── payslips.blade.php
+│   │   ├── payslip-show.blade.php
+│   │   └── setup.blade.php
+│   └── manager
+│       ├── dashboard.blade.php
+│       ├── reports.blade.php
+│       └── team-attendance.blade.php
 ├── profile
 │   ├── delete-user-form.blade.php
 │   ├── logout-other-browser-sessions-form.blade.php
@@ -155,4 +272,4 @@ resources/views/
 ├── terms.blade.php
 └── welcome.blade.php
 
-30 directories, 126 files
+58 directories, 215 files

@@ -5,10 +5,10 @@
                 ⚠️ {{ __('Low Stock Report') }}
             </h2>
             <div class="flex space-x-2">
-                {{-- <x-button.outline href="{{ route('inventory.reports.export', ['type' => 'low_stock', 'format' => 'pdf']) }}?{{ http_build_query(request()->query()) }}"> --}}
+                <x-button.outline href="{{ route('inventory.reports.download.low-stock') }}?{{ http_build_query(request()->query()) }}">
                 <x-heroicon-s-document-arrow-down class="w-4 h-4 mr-2" />
                 Export PDF
-                {{-- </x-button.outline> --}}
+                </x-button.outline>
                 <x-button.primary href="{{ route('inventory.items.create') }}">
                     <x-heroicon-s-plus class="w-4 h-4 mr-2" />
                     Add Item

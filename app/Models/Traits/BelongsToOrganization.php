@@ -24,6 +24,11 @@ trait BelongsToOrganization
         static::addGlobalScope(new OrganizationScope);
 
         static::creating(function ($model) {
+            // Don't override organization_id if it's already set
+            if (! empty($model->organization_id)) {
+                return;
+            }
+
             $user = Auth::user();
 
             if ($user) {
@@ -37,6 +42,7 @@ trait BelongsToOrganization
 
                 if ($orgId) {
                     $model->organization_id = $orgId;
+
                     return; // Stop here if organization_id is set
                 }
             }
@@ -59,6 +65,7 @@ trait BelongsToOrganization
     {
         return $this->belongsTo(Organization::class);
     }
+
     public function scopeOfOrganization($query, string $organization)
     {
         return $query->where('organization_id', $organization);

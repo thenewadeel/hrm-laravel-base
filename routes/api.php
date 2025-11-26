@@ -1,19 +1,20 @@
 <?php
 
 use App\Http\Controllers\Api\Accounting\ChartOfAccountsController;
-use App\Http\Controllers\Api\Accounting\JournalEntriesController;
 use App\Http\Controllers\Api\Accounting\FinancialReportsController;
+use App\Http\Controllers\Api\Accounting\JournalEntriesController;
+use App\Http\Controllers\Api\Inventory\ItemController;
+use App\Http\Controllers\Api\Inventory\StoreController;
+use App\Http\Controllers\Api\Inventory\TransactionController;
 use App\Http\Controllers\Api\OrganizationController;
 use App\Http\Controllers\Api\OrganizationInvitationController;
 use App\Http\Controllers\Api\OrganizationUnitController;
+use App\Http\Controllers\Api\VoucherController;
+use App\Http\Controllers\Api\OutstandingStatementsController;
 use App\Models\Accounting\JournalEntry;
+use App\Permissions\InventoryPermissions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\Inventory\StoreController;
-use App\Http\Controllers\Api\Inventory\ItemController;
-use App\Http\Controllers\Api\Inventory\TransactionController;
-use App\Http\Middleware\CheckInventoryPermission;
-use App\Permissions\InventoryPermissions;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -31,7 +32,6 @@ Route::get('/user', function (Request $request) {
  *     bearerFormat="JWT"
  * )
  */
-
 Route::middleware(['api', 'auth:sanctum'])->group(function () {
     /**
      * @OA\Tag(name="Organizations")
@@ -41,13 +41,14 @@ Route::middleware(['api', 'auth:sanctum'])->group(function () {
      *     path="/api/organizations",
      *     tags={"Organizations"},
      *     security={{"bearerAuth":{}}},
+     *
      *     @OA\Response(response="200", description="List organizations")
      * )
      */
     // User organizations
     Route::get('/users/me/organizations', function (Request $request) {
         return response()->json([
-            'data' => $request->user()->organizations
+            'data' => $request->user()->organizations,
         ]);
     });
 
@@ -96,18 +97,33 @@ Route::middleware(['api', 'auth:sanctum'])->group(function () {
         Route::get('balance-sheet', [FinancialReportsController::class, 'balanceSheet']);
         Route::get('income-statement', [FinancialReportsController::class, 'incomeStatement']);
     });
-});
 
+    // Voucher routes
+    Route::apiResource('vouchers', VoucherController::class);
+    Route::post('vouchers/sales', [VoucherController::class, 'createSales']);
+    Route::post('vouchers/purchase', [VoucherController::class, 'createPurchase']);
+    Route::post('vouchers/salary', [VoucherController::class, 'createSalary']);
+    Route::post('vouchers/expense', [VoucherController::class, 'createExpense']);
+    Route::put('vouchers/{voucher}/post', [VoucherController::class, 'post']);
+    Route::put('vouchers/{voucher}/void', [VoucherController::class, 'void']);
+
+    // Outstanding Statements routes
+    Route::prefix('outstanding')->group(function () {
+        Route::get('receivables/aging', [OutstandingStatementsController::class, 'receivablesAging']);
+        Route::get('payables/aging', [OutstandingStatementsController::class, 'payablesAging']);
+        Route::get('customers/summary', [OutstandingStatementsController::class, 'customerSummary']);
+        Route::get('vendors/summary', [OutstandingStatementsController::class, 'vendorSummary']);
+    });
+});
 
 // Temporary test route
 Route::get('/debug/test-connection', function () {
     return response()->json([
         'message' => 'API is working!',
         'timestamp' => now(),
-        'data' => JournalEntry::count() // if you have this model
+        'data' => JournalEntry::count(), // if you have this model
     ]);
 });
-
 
 Route::prefix('inventory')->middleware(['auth:sanctum'])->group(function () {
 

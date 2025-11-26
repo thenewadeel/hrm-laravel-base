@@ -20,7 +20,7 @@ class OrganizationUnitFactory extends Factory
         return [
             'name' => $this->faker->company(),
             'type' => $this->faker->randomElement(['department', 'division', 'team']),
-            'organization_id' => Organization::first()?->id ?? Organization::factory(),
+            'organization_id' => Organization::factory(),
             'parent_id' => null,
             'custom_fields' => null,
 

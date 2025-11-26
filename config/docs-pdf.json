@@ -1,0 +1,61 @@
+{
+    "conversion": {
+        "engine": "auto",
+        "timeout": 60,
+        "max_age_hours": 0,
+        "force_html": false,
+        "cleanup_html": true
+    },
+    "styling": {
+        "css_file": "docs-pdf-theme.css",
+        "custom_css": "",
+        "font_family": "Inter, system-ui, sans-serif",
+        "font_size": "12pt",
+        "line_height": 1.25,
+        "page_size": "A4",
+        "margins": {
+            "top": "8mm",
+            "right": "8mm",
+            "bottom": "8mm",
+            "left": "8mm"
+        }
+    },
+    "output": {
+        "directory": "docs/pdf",
+        "generate_html": true,
+        "generate_pdf": true,
+        "generate_index": true,
+        "navigation": true
+    },
+    "branding": {
+        "title": "HRM Laravel Base Documentation",
+        "watermark": ""
+    },
+    "headers": {
+        "enabled": true,
+        "content": "{title} - {brand_title}",
+        "font_size": "9pt",
+        "align": "right",
+        "line_height": "1.0",
+        "border_bottom": "1px solid #e5e7eb",
+        "padding_bottom": "5px",
+        "margin_bottom": "10px"
+    },
+    "footers": {
+        "enabled": true,
+        "content": "Page {page} of {total} | Generated on {date}",
+        "font_size": "4pt",
+        "align": "center",
+        "line_height": "1.0",
+        "border_top": "1px solid #e5e7eb",
+        "padding_top": "5px",
+        "margin_top": "10px"
+    },
+    "features": {
+        "table_of_contents": true,
+        "syntax_highlighting": true,
+        "page_breaks": true,
+        "links": true,
+        "images": true
+    }
+}

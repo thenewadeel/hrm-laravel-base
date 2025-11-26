@@ -46,11 +46,14 @@ class LeaveRequest extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function organization()
+    // public function organization()
+    // {
+    //     return $this->belongsTo(Organization::class);
+    // }
+    public function employee()
     {
-        return $this->belongsTo(Organization::class);
+        return $this->belongsTo(Employee::class);
     }
-
     public function approver()
     {
         return $this->belongsTo(User::class, 'approved_by');

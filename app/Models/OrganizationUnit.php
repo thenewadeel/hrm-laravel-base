@@ -42,6 +42,22 @@ class OrganizationUnit extends Model
             ->using(OrganizationUser::class)
             ->withPivot(['position', 'roles', 'permissions']);
     }
+
+
+    public function performanceMetrics()
+    {
+        return $this->hasMany(DepartmentPerformance::class);
+    }
+
+    public function attendanceSummary()
+    {
+        return $this->hasOne(AttendanceSummary::class);
+    }
+
+    public function payrollSummary()
+    {
+        return $this->hasOne(PayrollSummary::class);
+    }
     // ... (rest of the file is omitted for brevity)  // Recursive relationship for all descendants
     public function allDescendants()
     {

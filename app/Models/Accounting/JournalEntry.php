@@ -1,36 +1,45 @@
 <?php
+
 // app/Models/Accounting/JournalEntry.php
 
 namespace App\Models\Accounting;
 
-use App\Exceptions\UnbalancedTransactionException;
+use App\Models\Customer;
 use App\Models\Organization;
 use App\Models\Traits\BelongsToOrganization;
 use App\Models\User;
+use App\Models\Vendor;
 use App\Services\AccountingService;
 use App\Services\SequenceService;
 use Database\Factories\Accounting\JournalEntryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class JournalEntry extends Model
 {
-    use HasFactory, BelongsToOrganization;
+    use BelongsToOrganization, HasFactory;
 
     protected $fillable = [
         'organization_id',
         'reference_number',
         'entry_date',
         'description',
+        'voucher_type',
+        'customer_id',
+        'vendor_id',
+        'total_amount',
+        'tax_amount',
+        'invoice_number',
+        'due_date',
         'status',
         'created_by',
         'approved_by',
-        'posted_at'
+        'posted_at',
     ];
 
     protected $attributes = [
@@ -39,7 +48,10 @@ class JournalEntry extends Model
 
     protected $casts = [
         'entry_date' => 'date',
+        'due_date' => 'date',
         'posted_at' => 'datetime',
+        'total_amount' => 'decimal:2',
+        'tax_amount' => 'decimal:2',
     ];
 
     /**
@@ -47,11 +59,13 @@ class JournalEntry extends Model
      */
     public static function createWithTransaction(array $attributes = [])
     {
-        Log::debug(json_encode($attributes) . " attributes");
+        Log::debug(json_encode($attributes).' attributes');
+
         return DB::transaction(function () use ($attributes) {
             $attributes['created_by'] = Auth::id();
             $journalEntry = self::create($attributes);
-            Log::debug(" journalEntry created");
+            Log::debug(' journalEntry created');
+
             return $journalEntry;
         });
     }
@@ -73,7 +87,7 @@ class JournalEntry extends Model
                         ->first();
 
                     $nextNumber = $latest ? (int) str_replace('JE-', '', $latest->reference_number) + 1 : 1;
-                    $journalEntry->reference_number = 'JE-' . str_pad($nextNumber, 6, '0', STR_PAD_LEFT);
+                    $journalEntry->reference_number = 'JE-'.str_pad($nextNumber, 6, '0', STR_PAD_LEFT);
                 }
             }
         });
@@ -92,6 +106,16 @@ class JournalEntry extends Model
     public function approvedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'approved_by');
+    }
+
+    public function customer(): BelongsTo
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function vendor(): BelongsTo
+    {
+        return $this->belongsTo(Vendor::class);
     }
 
     // public function organization(): BelongsTo
@@ -152,9 +176,9 @@ class JournalEntry extends Model
         })->toArray();
 
         $reversingJournal = JournalEntry::create([
-            'reference_number' => $this->reference_number . '-VOID',
+            'reference_number' => $this->reference_number.'-VOID',
             'entry_date' => now(),
-            'description' => 'Reversal of: ' . $this->description,
+            'description' => 'Reversal of: '.$this->description,
             'status' => 'draft',
             'created_by' => $this->created_by,
         ]);

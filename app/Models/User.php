@@ -110,12 +110,16 @@ class User extends Authenticatable
         // 2. Fallback to the first organization if one exists
         // (Ensure 'organizations' relationship is loaded before calling this if used outside the query)
         if ($this->organizations->isNotEmpty()) {
+            $this->current_organization_id = $this->organizations->first()->id;
+            $this->save();
+
             return (int) $this->organizations->first()->id;
         }
 
         // 3. Return null if no organization ID can be determined
         return null;
     }
+
     // Fixed Tenancy Relationships
     public function currentOrganization()
     {
@@ -133,13 +137,13 @@ class User extends Authenticatable
     public function hasPermission($permission, $organization = null): bool
     {
         $organization = $organization ?: $this->currentOrganization ?: $this->organizations()->first();
-        if (!$organization) {
+        if (! $organization) {
             return false;
         }
 
         $membership = $this->organizations()->where('organizations.id', $organization->id)->first();
 
-        if (!$membership) {
+        if (! $membership) {
             return false;
         }
 
@@ -151,7 +155,7 @@ class User extends Authenticatable
             $roles = json_decode($roles, true) ?? [];
         }
 
-        if (!is_array($roles)) {
+        if (! is_array($roles)) {
             $roles = [$roles];
         }
 
@@ -193,10 +197,11 @@ class User extends Authenticatable
                 // 4. SAVE (Laravel will automatically JSON-encode the array back to the DB)
                 $this->organizations()->updateExistingPivot($orgId, [
                     // The 'permissions' attribute is now an array
-                    'permissions' => $newPermissions
+                    'permissions' => $newPermissions,
                 ]);
             }
         }
+
         return $this;
     }
 
@@ -208,15 +213,17 @@ class User extends Authenticatable
             $membership = $this->organizations()->where('organizations.id', $orgId)->first();
             if ($membership) {
                 $userRoles = $membership->pivot->roles ?? [];
-                return !empty(array_intersect($roles, $userRoles));
+
+                return ! empty(array_intersect($roles, $userRoles));
             }
         }
         foreach ($this->organizations as $org) {
             $userRoles = $org->pivot->roles ?? [];
-            if (!empty(array_intersect($roles, $userRoles))) {
+            if (! empty(array_intersect($roles, $userRoles))) {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -236,7 +243,7 @@ class User extends Authenticatable
                     $currentRoles = json_decode($currentRoles, true) ?? [];
                 }
 
-                if (!is_array($currentRoles)) {
+                if (! is_array($currentRoles)) {
                     $currentRoles = [$currentRoles];
                 }
 
@@ -245,7 +252,7 @@ class User extends Authenticatable
                 $newRoles = array_unique(array_merge($currentRoles, $rolesToAdd));
 
                 $this->organizations()->updateExistingPivot($orgId, [
-                    'roles' => json_encode($newRoles)
+                    'roles' => json_encode($newRoles),
                 ]);
             }
         }
@@ -253,14 +260,23 @@ class User extends Authenticatable
         return $this;
     }
 
-    protected function getPermissionsForRoles(array $roles): array
+    protected function getPermissionsForRoles($roles): array
     {
-        // dd($roles);
+        // Ensure roles is always an array
+        if (is_string($roles)) {
+            $roles = json_decode($roles, true) ?? [];
+        }
+
+        if (! is_array($roles)) {
+            $roles = [];
+        }
+
         $allPermissions = [];
         foreach ($roles as $role) {
             $rolePermissions = InventoryRoles::getPermissionsForRole($role);
             $allPermissions = array_merge($allPermissions, $rolePermissions);
         }
+
         return array_unique($allPermissions);
     }
 
@@ -276,11 +292,26 @@ class User extends Authenticatable
             $allPermissions = array_merge($allPermissions, $rolePermissions);
             // dd([$org->pivot->permissions, $allPermissions, $userRoles, $rolePermissions]);
         }
+
         return array_unique($allPermissions);
     }
 
     public function getAllRoles(): array
     {
+        return $this->organizations
+            ->flatMap(function ($org) {
+                $roles = $org->pivot->roles ?? [];
+
+                // Ensure roles is always an array
+                if (is_string($roles)) {
+                    $roles = json_decode($roles, true) ?? [];
+                }
+
+                return $roles;
+            })
+            ->unique()
+            ->values()
+            ->toArray();
         $allRoles = [];
 
         foreach ($this->organizations as $org) {
@@ -297,6 +328,7 @@ class User extends Authenticatable
 
         return array_unique($allRoles);
     }
+
     /**
      * Get employee record in current organization
      */

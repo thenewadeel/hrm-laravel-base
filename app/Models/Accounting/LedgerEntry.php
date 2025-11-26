@@ -1,9 +1,11 @@
 <?php
+
 // app/Models/Accounting/LedgerEntry.php
 
 namespace App\Models\Accounting;
 
 use App\Models\Dimension;
+use App\Models\Traits\BelongsToOrganization;
 use Database\Factories\Accounting\LedgerEntryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,16 +14,18 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class LedgerEntry extends Model
 {
-    use HasFactory;
+    use BelongsToOrganization, HasFactory;
 
     protected $fillable = [
+        'organization_id',
+        'financial_year_id',
         'entry_date',
         'chart_of_account_id',
         'type',
         'amount',
         'description',
         'transactionable_type',
-        'transactionable_id'
+        'transactionable_id',
     ];
 
     protected $casts = [
@@ -47,6 +51,11 @@ class LedgerEntry extends Model
     public function dimensions(): MorphToMany
     {
         return $this->morphToMany(Dimension::class, 'dimensionable');
+    }
+
+    public function financialYear(): BelongsTo
+    {
+        return $this->belongsTo(FinancialYear::class);
     }
 
     // REMOVE THE booted() METHOD - we're handling this at database level

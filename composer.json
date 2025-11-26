@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.2",
         "blade-ui-kit/blade-heroicons": "^2.6",
+        "dompdf/dompdf": "^3.1",
         "laravel/framework": "^12.0",
         "laravel/jetstream": "^5.3",
         "laravel/sanctum": "^4.0",
@@ -20,6 +21,7 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.15",
         "fakerphp/faker": "^1.23",
+        "laravel/boost": "^1.8",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.41",
@@ -63,7 +65,7 @@
         ],
         "test": [
             "@php artisan config:clear --ansi",
-            "@php artisan test > docs/testResults.txt"
+            "@php -d memory_limit=1G artisan test > docs/testResults.txt"
         ],
         "llm-summarize": [
             "@php scripts/laraCrawler.php"
@@ -72,7 +74,24 @@
             "@php artisan config:clear --ansi",
             "@php scripts/laraCrawler.php",
             "tree resources/views/ > \"docs/list of views.txt\"",
-            "@php artisan test > docs/testResults.txt"
+            "@php -d memory_limit=1G artisan test --no-coverage > docs/testResults.txt || true",
+            "@testSummary"
+        ],
+        "dev-cp-pdf": [
+            "@dev-cp",
+            "@docs-pdf-simple"
+        ],
+        "testSummary": [
+            "@php artisan test:summarize docs/testResults.txt > docs/testSummary.txt"
+        ],
+        "docs-pdf": [
+            "@php scripts/generate-docs-pdf-simple.php --verbose"
+        ],
+        "docs-pdf-simple": [
+            "@php scripts/generate-docs-pdf-simple.php --verbose"
+        ],
+        "docs-theme": [
+            "@php scripts/configure-pdf-theme.php"
         ]
     },
     "extra": {

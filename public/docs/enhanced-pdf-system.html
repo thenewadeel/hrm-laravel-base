@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>enhanced-pdf-system - HRM Laravel Base Documentation</title>
+    <style>
+/* PDF Documentation Theme */
+body {
+    font-family: var(--font-family, "Inter", system-ui, sans-serif);
+    font-size: var(--font-size, 10pt);
+    line-height: var(--line-height, 1.25);
+    color: #151c27;
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+
+/* Ensure no default margins interfere with PDF tool margins */
+@page {
+    margin: var(--page-margin, 12mm 8mm 4mm 10mm) !important;
+    size: var(--page-size, A4);
+    padding: 0 !important;
+}
+
+/* For PDF generation tools */
+@media print {
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    @page {
+        margin: var(--page-margin, 12mm 8mm 4mm 10mm) !important;
+        padding: 0 !important;
+    }
+    
+    .document {
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    * {
+        box-sizing: border-box !important;
+    }
+    
+    /* Force zero margins on all elements */
+    h1, h2, h3, h4, h5, h6, p, ul, ol, li, pre, blockquote, table, hr {
+        page-break-inside: avoid;
+        margin-top: 0.5em !important;
+        margin-bottom: 0.5em !important;
+    }
+}
+
+.document {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #000c27;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+    page-break-after: avoid;
+}
+
+h1 {
+    font-size: 1.5em;
+    border-bottom: 3px solid #3b82f6;
+    padding-bottom: 0.5em;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.25em;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.5em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+p {
+    margin: 0 0 1em 0;
+    text-align: justify;
+    orphans: 3;
+    widows: 3;
+}
+
+/* Links */
+a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Code */
+code {
+    font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
+        monospace;
+    background-color: #f3f4f6;
+    padding: 0.125em 0.25em;
+    border-radius: 0.25em;
+    font-size: 0.875em;
+    border: 1px solid #e5e7eb;
+}
+
+pre {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin: 1em 0;
+    overflow-x: auto;
+    page-break-inside: avoid;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+    border: none;
+    font-size: 0.875em;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid #3b82f6;
+    margin: 1.5em 0;
+    padding: 0.5em 1.5em;
+    background-color: #f9fafb;
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* Lists */
+ul,
+ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5em 0;
+    page-break-inside: avoid;
+}
+
+th,
+td {
+    border: 1px solid #e5e7eb;
+    padding: 0.5em 1em;
+    text-align: left;
+}
+
+th {
+    background-color: #f9fafb;
+    font-weight: 600;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    margin: 1em 0;
+}
+
+/* Horizontal Rule */
+hr {
+    border: none;
+    border-top: 2px solid #e5e7eb;
+    margin: 2em 0;
+}
+
+/* Table of Contents */
+.toc {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin-bottom: 2em;
+}
+
+.toc h3 {
+    margin-top: 0;
+    margin-bottom: 1em;
+    font-size: 14pt;
+    color: #111827;
+}
+
+.toc ul {
+    padding-left: 1.5em;
+    margin: 0;
+}
+
+.toc li {
+    margin-bottom: 0.25em;
+}
+
+.toc a {
+    color: #374151;
+}
+
+.toc a:hover {
+    color: #3b82f6;
+}
+
+/* Page Breaks */
+.page-break {
+    page-break-before: always;
+}
+
+.page-break-after {
+    page-break-after: always;
+}
+
+/* Header and Footer */
+.header {
+    text-align: center;
+    font-size: 1.25em;
+    color: #424c5f;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+}
+
+.footer {
+    text-align: center;
+    font-size: 0.75em;
+    color: #383a3d;
+    border-top: 1px solid #233b6b;
+    padding-top: 0.5em;
+    margin-top: 1em;
+}
+
+/* Watermark */
+.watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 72pt;
+    color: rgba(156, 163, 175, 0.1);
+    font-weight: bold;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Print Optimization */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .document {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        page-break-after: avoid;
+    }
+
+    p,
+    ul,
+    ol {
+        orphans: 3;
+        widows: 3;
+    }
+
+    pre,
+    blockquote,
+    table,
+    img {
+        page-break-inside: avoid;
+    }
+
+    .toc {
+        page-break-after: avoid;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="document">
+        <div class="header" style="font-size: 9pt; text-align: center; line-height: 1.0; border-bottom: 1px solid #e5e7eb; padding-bottom: 5px; margin-bottom: 10px;">
+    enhanced-pdf-system - HRM Laravel Base Documentation
+</div>
+        
+        <nav class="toc">
+    <h3>📚 Navigation</h3>
+    <ul>
+        <li><a href="SRS.html">📋 Requirements</a></li><li><a href="big picture.html">📊 Big Picture</a></li><li><a href="ERD.html">🗄️ Database Design</a></li><li><a href="project plan.html">📅 Project Plan</a></li><li><a href="timeline.html">⏰ Timeline</a></li>
+    </ul>
+</nav>
+        
+        <main class="content">
+            <p><h1 id="Enhanced PDF Documentation System">Enhanced PDF Documentation System</h1></p><br><p><h2 id="🎨 <strong>Professional PDF Generation with Branding</strong>">🎨 <strong>Professional PDF Generation with Branding</strong></h2></p><br><p>The PDF documentation system has been completely overhauled to provide professional, branded PDFs with comprehensive customization options.</p><br><p><hr></p><br><p><h2 id="✨ <strong>New Features</strong>">✨ <strong>New Features</strong></h2></p><br><p><h3 id="<strong>🏢 Professional Branding</strong>"><strong>🏢 Professional Branding</strong></h3><br>- <strong>Company Information</strong>: Name, logo, website, copyright<br>- <strong>Version Control</strong>: Automatic versioning and date stamping<br>- <strong>Visual Identity</strong>: Custom colors and typography<br>- <strong>Professional Headers</strong>: Dynamic headers with document info<br>- <strong>Styled Footers</strong>: Page numbers and company details</p><br><p><h3 id="<strong>🎨 Advanced Theming</strong>"><strong>🎨 Advanced Theming</strong></h3><br>- <strong>Color Schemes</strong>: Primary, secondary, accent colors<br>- <strong>Typography</strong>: Custom fonts for headers, body, code<br>- <strong>Layout Control</strong>: Margins, page sizes, spacing<br>- <strong>Style Variants</strong>: Modern, classic, minimal themes<br>- <strong>Responsive Design</strong>: Optimized for both screen and print</p><br><p><h3 id="<strong>📋 Rich Content Features</strong>"><strong>📋 Rich Content Features</strong></h3><br>- <strong>Auto Table of Contents</strong>: Generated from document headings<br>- <strong>Page Breaks</strong>: Smart section separation<br>- <strong>Cross-References</strong>: Clickable links and bookmarks<br>- <strong>Code Highlighting</strong>: GitHub-style syntax highlighting<br>- <strong>Watermark Support</strong>: Optional text watermarks<br>- <strong>Draft Mode</strong>: Visual draft indicators</p><br><p><h3 id="<strong>⚙️ Configuration System</strong>"><strong>⚙️ Configuration System</strong></h3><br>- <strong>JSON Configuration</strong>: <code>config/pdf-theme.json</code><br>- <strong>CLI Configurator</strong>: Interactive theme setup<br>- <strong>Composer Integration</strong>: Easy command access<br>- <strong>Hot Reloading</strong>: Live configuration updates<br>- <strong>Validation</strong>: Input validation and error handling</p><br><p><hr></p><br><p><h2 id="🚀 <strong>Usage</strong>">🚀 <strong>Usage</strong></h2></p><br><p><h3 id="<strong>Basic PDF Generation</strong>"><strong>Basic PDF Generation</strong></h3><br><pre class="code-block"><code># Generate PDFs with current theme<br>composer run docs-pdf</p><br><p><h1 id="Generate with verbose output">Generate with verbose output</h1><br>composer run docs-pdf --verbose</code></pre></p><br><p><h3 id="<strong>Theme Configuration</strong>"><strong>Theme Configuration</strong></h3><br><pre class="code-block"><code># Interactive theme configurator<br>composer run docs-theme-interactive</p><br><p><h1 id="Quick brand name change">Quick brand name change</h1><br>composer run docs-theme "My Company"</p><br><p><h1 id="View current configuration">View current configuration</h1><br>php scripts/configure-pdf-theme.php<br><h1 id="Choose option 6 (Show Configuration)</code></pre>">Choose option 6 (Show Configuration)</code></pre></h1></p><br><p><h3 id="<strong>Custom Generation Options</strong>"><strong>Custom Generation Options</strong></h3><br><pre class="code-block"><code># Force HTML generation (no PDF tools)<br>php scripts/generate-docs-pdf.php --force-html</p><br><p><h1 id="Custom time window (last 6 hours)">Custom time window (last 6 hours)</h1><br>php scripts/generate-docs-pdf.php --age 6</p><br><p><h1 id="Clean up intermediate files">Clean up intermediate files</h1><br>php scripts/generate-docs-pdf.php --cleanup-html</p><br><p><h1 id="Full verbose output">Full verbose output</h1><br>php scripts/generate-docs-pdf.php --verbose</code></pre></p><br><p><hr></p><br><p><h2 id="📁 <strong>Configuration Structure</strong>">📁 <strong>Configuration Structure</strong></h2></p><br><p><h3 id="<strong>Theme Configuration File</strong> (<code>config/pdf-theme.json</code>)"><strong>Theme Configuration File</strong> (<code>config/pdf-theme.json</code>)</h3></p><br><p><pre class="code-block"><code>{<br>    "brand": {<br>        "name": "HRM Laravel Base",<br>        "tagline": "Enterprise ERP System", <br>        "logo": "🏢",<br>        "website": "https://hrm-laravel-base.example.com",<br>        "company": "HRM Solutions",<br>        "version": "2.0.0",<br>        "copyright": "© 2025 HRM Solutions. All rights reserved."<br>    },<br>    "theme": {<br>        "primary_color": "#2563eb",<br>        "secondary_color": "#64748b",<br>        "accent_color": "#3b82f6",<br>        "success_color": "#10b981",<br>        "warning_color": "#f59e0b",<br>        "error_color": "#ef4444",<br>        "background_color": "#ffffff",<br>        "text_color": "#1f2937",<br>        "border_color": "#e5e7eb",<br>        "header_font": "Arial, sans-serif",<br>        "body_font": "Georgia, serif",<br>        "code_font": "'Courier New', monospace"<br>    },<br>    "layout": {<br>        "page_size": "A4",<br>        "margin_top": "20mm",<br>        "margin_bottom": "20mm",<br>        "margin_left": "20mm", <br>        "margin_right": "20mm",<br>        "font_size": "11pt",<br>        "line_height": "1.6",<br>        "header_height": "15mm",<br>        "footer_height": "15mm"<br>    },<br>    "features": {<br>        "auto_toc": true,<br>        "page_numbers": true,<br>        "section_breaks": true,<br>        "watermark": false,<br>        "bookmarks": true,<br>        "links": true<br>    },<br>    "custom": {<br>        "watermark_text": "",<br>        "confidential_text": "",<br>        "draft_mode": false,<br>        "print_date": true,<br>        "author_info": true<br>    }<br>}</code></pre></p><br><p><hr></p><br><p><h2 id="🎯 <strong>Output Examples</strong>">🎯 <strong>Output Examples</strong></h2></p><br><p><h3 id="<strong>Professional PDF Features</strong>"><strong>Professional PDF Features</strong></h3><br>- <strong>Dynamic Headers</strong>: Document title, version, date, page numbers<br>- <strong>Styled Footers</strong>: Company info, website, copyright<br>- <strong>Table of Contents</strong>: Auto-generated with page numbers<br>- <strong>Consistent Branding</strong>: Logo and colors throughout<br>- <strong>Professional Typography</strong>: Optimized fonts for readability<br>- <strong>Smart Layouts</strong>: Proper margins and spacing<br>- <strong>Visual Hierarchy</strong>: Clear heading structure<br>- <strong>Code Blocks</strong>: Syntax highlighted with proper styling<br>- <strong>Tables</strong>: Professional bordered tables<br>- <strong>Links</strong>: Clickable cross-references</p><br><p><h3 id="<strong>Sample PDF Layout</strong>"><strong>Sample PDF Layout</strong></h3><br><pre class="code-block"><code>┌─────────────────────────────────────────────┐<br>│ 🏢 HRM Laravel Base                    Page 1 │<br>│ Enterprise ERP System    v2.0.0  2025-11-20    │<br>├─────────────────────────────────────────────┤<br>│                                             │<br>│  📋 Table of Contents                        │<br>│                                             │<br>│  1. Introduction ................................ 1 │<br>│  2. Architecture ................................ 3 │<br>│  3. Features .................................... 5 │<br>│                                             │<br>├─────────────────────────────────────────────┤<br>│                                             │<br>│  # Introduction                             │<br>│                                             │<br>│  Welcome to the HRM Laravel Base system...     │<br>│                                             │<br>├─────────────────────────────────────────────┤<br>│ HRM Solutions | https://hrm-laravel-base.example.com │<br>└─────────────────────────────────────────────┘</code></pre></p><br><p><hr></p><br><p><h2 id="🛠️ <strong>Customization Guide</strong>">🛠️ <strong>Customization Guide</strong></h2></p><br><p><h3 id="<strong>Quick Branding</strong>"><strong>Quick Branding</strong></h3><br><pre class="code-block"><code># Change company name<br>composer run docs-theme "My Company Name"</p><br><p><h1 id="This updates config/pdf-theme.json:">This updates config/pdf-theme.json:</h1><br><h1 id=""brand": { "name": "My Company Name", ... }</code></pre>">"brand": { "name": "My Company Name", ... }</code></pre></h1></p><br><p><h3 id="<strong>Color Customization</strong>"><strong>Color Customization</strong></h3><br><pre class="code-block"><code># Launch interactive configurator<br>composer run docs-theme-interactive</p><br><p><h1 id="Choose option 2 (Theme Colors)">Choose option 2 (Theme Colors)</h1><br><h1 id="Follow prompts to customize colors</code></pre>">Follow prompts to customize colors</code></pre></h1></p><br><p><h3 id="<strong>Layout Adjustments</strong>"><strong>Layout Adjustments</strong></h3><br><pre class="code-block"><code># Edit configuration directly<br>nano config/pdf-theme.json</p><br><p><h1 id="Or use interactive configurator">Or use interactive configurator</h1><br>composer run docs-theme-interactive<br><h1 id="Choose option 3 (Layout Settings)</code></pre>">Choose option 3 (Layout Settings)</code></pre></h1></p><br><p><hr></p><br><p><h2 id="📊 <strong>Benefits Over Previous System</strong>">📊 <strong>Benefits Over Previous System</strong></h2></p><br><p><h3 id="<strong>Before (Basic PDFs)</strong>"><strong>Before (Basic PDFs)</strong></h3><br>- ❌ No branding or company information<br>- ❌ Basic black and white styling<br>- ❌ No headers or footers<br>- ❌ No table of contents<br>- ❌ Inconsistent formatting<br>- ❌ No customization options</p><br><p><h3 id="<strong>After (Professional PDFs)</strong>"><strong>After (Professional PDFs)</strong></h3><br>- ✅ Full company branding and identity<br>- ✅ Professional color schemes and typography<br>- ✅ Dynamic headers with document metadata<br>- ✅ Auto-generated table of contents<br>- ✅ Consistent, professional formatting<br>- ✅ Complete customization control<br>- ✅ Interactive configuration system</p><br><p><hr></p><br><p><h2 id="🔧 <strong>Technical Implementation</strong>">🔧 <strong>Technical Implementation</strong></h2></p><br><p><h3 id="<strong>Architecture</strong>"><strong>Architecture</strong></h3><br>- <strong>PdfThemeManager</strong>: Core theme management class<br>- <strong>Configuration System</strong>: JSON-based with validation<br>- <strong>CLI Integration</strong>: Composer scripts for easy access<br>- <strong>Template Engine</strong>: Dynamic HTML generation with themes<br>- <strong>PDF Processing</strong>: Enhanced pandoc/wkhtmltopdf integration</p><br><p><h3 id="<strong>Key Classes</strong>"><strong>Key Classes</strong></h3><br>- <code>PdfThemeManager</code>: Theme configuration and CSS generation<br>- <code>ThemeConfigurator</code>: Interactive CLI configuration<br>- Enhanced <code>DocumentationGenerator</code>: Integrated theme support</p><br><p><h3 id="<strong>File Structure</strong>"><strong>File Structure</strong></h3><br><pre class="code-block"><code>config/<br>├── pdf-theme.json              # Main theme configuration<br>app/Services/<br>├── PdfThemeManager.php         # Theme management class<br>scripts/<br>├── generate-docs-pdf.php       # Enhanced generator<br>├── configure-pdf-theme.php      # Interactive configurator</code></pre></p><br><p><hr></p><br><p><h2 id="🎉 <strong>Summary</strong>">🎉 <strong>Summary</strong></h2></p><br><p>The enhanced PDF documentation system provides:</p><br><p>1. <strong>🏢 Professional Branding</strong> - Complete company identity<br>2. <strong>🎨 Advanced Theming</strong> - Customizable colors and styles<br>3. <strong>📋 Rich Features</strong> - TOC, headers, footers, watermarks<br>4. <strong>⚙️ Easy Configuration</strong> - JSON config + CLI tools<br>5. <strong>🛠️ Developer Friendly</strong> - Extensible and maintainable<br>6. <strong>📱 Professional Output</strong> - Print-ready PDFs with proper formatting</p><br><p><strong>Result</strong>: Documentation that looks like it came from a professional design team, not an auto-generator.</p><br><p><hr></p><br><p><em>Enhanced PDF System Implementation Complete</em> ✅  <br><em>Professional Branding and Theming Active</em> 🎨  <br><em>Ready for Production Documentation</em> 📄</p>
+        </main>
+        
+        <div class="footer" style="font-size: 8pt; text-align: center; line-height: 1.0; border-top: 1px solid #e5e7eb; padding-top: 5px; margin-top: 10px;">
+    Page {page} of {total} | Generated on 2025-11-26 06:46:36
+</div>
+    </div>
+</body>
+</html>

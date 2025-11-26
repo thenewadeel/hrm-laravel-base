@@ -5,14 +5,26 @@ namespace App\Http\Controllers\Portal;
 use App\Http\Controllers\Controller;
 use App\Models\AttendanceRecord;
 use App\Models\LeaveRequest;
+use App\Models\OrganizationUser;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ManagerPortalController extends Controller
 {
+    private function checkManagerRole()
+    {
+        $user = Auth::user();
+        $orgUser = OrganizationUser::where('user_id', $user->id)->first();
+
+        if (! $orgUser || ! $orgUser->hasRole('manager')) {
+            abort(403, 'Access denied. Manager role required.');
+        }
+    }
+
     public function dashboard()
     {
+        $this->checkManagerRole();
         $teamMembers = $this->getTeamMembers();
         $pendingApprovals = $this->getPendingApprovals();
         $teamMetrics = $this->getTeamMetrics();
@@ -73,14 +85,14 @@ class ManagerPortalController extends Controller
     public function approveLeave(LeaveRequest $leaveRequest)
     {
         // Verify the leave request belongs to manager's team
-        if (!$this->isInTeam($leaveRequest->user_id)) {
+        if (! $this->isInTeam($leaveRequest->user_id)) {
             abort(403, 'Not authorized to approve this leave request');
         }
 
         $leaveRequest->update([
             'status' => 'approved',
             'approved_by' => auth()->id(),
-            'approved_at' => now()
+            'approved_at' => now(),
         ]);
 
         return back()->with('success', 'Leave request approved successfully');
@@ -88,7 +100,7 @@ class ManagerPortalController extends Controller
 
     public function rejectLeave(Request $request, LeaveRequest $leaveRequest)
     {
-        if (!$this->isInTeam($leaveRequest->user_id)) {
+        if (! $this->isInTeam($leaveRequest->user_id)) {
             abort(403, 'Not authorized to reject this leave request');
         }
 
@@ -96,7 +108,7 @@ class ManagerPortalController extends Controller
             'status' => 'rejected',
             'rejected_by' => auth()->id(),
             'rejected_at' => now(),
-            'rejection_reason' => $request->input('reason')
+            'rejection_reason' => $request->input('reason'),
         ]);
 
         return back()->with('success', 'Leave request rejected');
@@ -123,7 +135,7 @@ class ManagerPortalController extends Controller
             'attendance_regularizations' => AttendanceRecord::whereIn('user_id', $teamUserIds)
                 ->where('status', 'pending_regularization')
                 ->with('user')
-                ->get()
+                ->get(),
         ];
     }
 
@@ -138,7 +150,7 @@ class ManagerPortalController extends Controller
             'on_leave_today' => $this->getOnLeaveTodayCount($teamUserIds),
             'pending_approvals' => LeaveRequest::whereIn('user_id', $teamUserIds)
                 ->where('status', 'pending')
-                ->count()
+                ->count(),
         ];
     }
 
@@ -151,7 +163,7 @@ class ManagerPortalController extends Controller
             'team_attendance_rate' => $this->calculateTeamAttendanceRate($teamUserIds, $currentMonth),
             'average_daily_hours' => $this->calculateAverageDailyHours($teamUserIds, $currentMonth),
             'overtime_hours' => $this->calculateOvertimeHours($teamUserIds, $currentMonth),
-            'leave_days_taken' => $this->calculateLeaveDaysTaken($teamUserIds, $currentMonth)
+            'leave_days_taken' => $this->calculateLeaveDaysTaken($teamUserIds, $currentMonth),
         ];
     }
 
@@ -221,13 +233,14 @@ class ManagerPortalController extends Controller
     private function getWorkingDaysCount($startDate, $endDate)
     {
         return $startDate->diffInDaysFiltered(function ($date) {
-            return !$date->isWeekend();
+            return ! $date->isWeekend();
         }, $endDate);
     }
 
     private function isInTeam($userId)
     {
         $teamUserIds = $this->getTeamMembers()->pluck('id');
+
         return $teamUserIds->contains($userId);
     }
 }

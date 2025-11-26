@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list of interfaces - HRM Laravel Base Documentation</title>
+    <style>
+/* PDF Documentation Theme */
+body {
+    font-family: var(--font-family, "Inter", system-ui, sans-serif);
+    font-size: var(--font-size, 10pt);
+    line-height: var(--line-height, 1.25);
+    color: #151c27;
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+
+/* Ensure no default margins interfere with PDF tool margins */
+@page {
+    margin: var(--page-margin, 12mm 8mm 4mm 10mm) !important;
+    size: var(--page-size, A4);
+    padding: 0 !important;
+}
+
+/* For PDF generation tools */
+@media print {
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    @page {
+        margin: var(--page-margin, 12mm 8mm 4mm 10mm) !important;
+        padding: 0 !important;
+    }
+    
+    .document {
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    * {
+        box-sizing: border-box !important;
+    }
+    
+    /* Force zero margins on all elements */
+    h1, h2, h3, h4, h5, h6, p, ul, ol, li, pre, blockquote, table, hr {
+        page-break-inside: avoid;
+        margin-top: 0.5em !important;
+        margin-bottom: 0.5em !important;
+    }
+}
+
+.document {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #000c27;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+    page-break-after: avoid;
+}
+
+h1 {
+    font-size: 1.5em;
+    border-bottom: 3px solid #3b82f6;
+    padding-bottom: 0.5em;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.25em;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.5em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+p {
+    margin: 0 0 1em 0;
+    text-align: justify;
+    orphans: 3;
+    widows: 3;
+}
+
+/* Links */
+a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Code */
+code {
+    font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
+        monospace;
+    background-color: #f3f4f6;
+    padding: 0.125em 0.25em;
+    border-radius: 0.25em;
+    font-size: 0.875em;
+    border: 1px solid #e5e7eb;
+}
+
+pre {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin: 1em 0;
+    overflow-x: auto;
+    page-break-inside: avoid;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+    border: none;
+    font-size: 0.875em;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid #3b82f6;
+    margin: 1.5em 0;
+    padding: 0.5em 1.5em;
+    background-color: #f9fafb;
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* Lists */
+ul,
+ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5em 0;
+    page-break-inside: avoid;
+}
+
+th,
+td {
+    border: 1px solid #e5e7eb;
+    padding: 0.5em 1em;
+    text-align: left;
+}
+
+th {
+    background-color: #f9fafb;
+    font-weight: 600;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    margin: 1em 0;
+}
+
+/* Horizontal Rule */
+hr {
+    border: none;
+    border-top: 2px solid #e5e7eb;
+    margin: 2em 0;
+}
+
+/* Table of Contents */
+.toc {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin-bottom: 2em;
+}
+
+.toc h3 {
+    margin-top: 0;
+    margin-bottom: 1em;
+    font-size: 14pt;
+    color: #111827;
+}
+
+.toc ul {
+    padding-left: 1.5em;
+    margin: 0;
+}
+
+.toc li {
+    margin-bottom: 0.25em;
+}
+
+.toc a {
+    color: #374151;
+}
+
+.toc a:hover {
+    color: #3b82f6;
+}
+
+/* Page Breaks */
+.page-break {
+    page-break-before: always;
+}
+
+.page-break-after {
+    page-break-after: always;
+}
+
+/* Header and Footer */
+.header {
+    text-align: center;
+    font-size: 1.25em;
+    color: #424c5f;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+}
+
+.footer {
+    text-align: center;
+    font-size: 0.75em;
+    color: #383a3d;
+    border-top: 1px solid #233b6b;
+    padding-top: 0.5em;
+    margin-top: 1em;
+}
+
+/* Watermark */
+.watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 72pt;
+    color: rgba(156, 163, 175, 0.1);
+    font-weight: bold;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Print Optimization */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .document {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        page-break-after: avoid;
+    }
+
+    p,
+    ul,
+    ol {
+        orphans: 3;
+        widows: 3;
+    }
+
+    pre,
+    blockquote,
+    table,
+    img {
+        page-break-inside: avoid;
+    }
+
+    .toc {
+        page-break-after: avoid;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="document">
+        <div class="header" style="font-size: 9pt; text-align: center; line-height: 1.0; border-bottom: 1px solid #e5e7eb; padding-bottom: 5px; margin-bottom: 10px;">
+    list of interfaces - HRM Laravel Base Documentation
+</div>
+        
+        <nav class="toc">
+    <h3>📚 Navigation</h3>
+    <ul>
+        <li><a href="SRS.html">📋 Requirements</a></li><li><a href="big picture.html">📊 Big Picture</a></li><li><a href="ERD.html">🗄️ Database Design</a></li><li><a href="project plan.html">📅 Project Plan</a></li><li><a href="timeline.html">⏰ Timeline</a></li>
+    </ul>
+</nav>
+        
+        <main class="content">
+            <p><h1 id="System Interfaces Documentation">System Interfaces Documentation</h1></p><br><p><em>Generated: November 19, 2025</em>  <br><em>Total Interfaces: 45+</em>  <br><em>Architecture: RESTful API + Livewire UI Components</em></p><br><p><hr></p><br><p><h2 id="<strong>Interface Overview</strong>"><strong>Interface Overview</strong></h2></p><br><p>The HRM Laravel Base system provides a comprehensive set of interfaces spanning RESTful APIs, web UI components, portal interfaces, and system integrations. The system follows API-first design principles with Livewire-powered reactive interfaces.</p><br><p><hr></p><br><p><h2 id="<strong>1. RESTful API Interfaces</strong>"><strong>1. RESTful API Interfaces</strong></h2></p><br><p><h3 id="<strong>1.1 Authentication & Security APIs</strong>"><strong>1.1 Authentication & Security APIs</strong></h3></p><br><p><h4 id="<strong>POST /api/login</strong>"><strong>POST /api/login</strong></h4><br>Authenticates users and returns access tokens.</p><br><p><strong>Request:</strong><br><pre class="code-block"><code>{<br>  "email": "user@example.com",<br>  "password": "password",<br>  "remember": false<br>}</code></pre></p><br><p><strong>Response:</strong><br><pre class="code-block"><code>{<br>  "user": {<br>    "id": 1,<br>    "name": "John Doe",<br>    "email": "user@example.com",<br>    "current_organization_id": 1<br>  },<br>  "token": "1|abc123token...",<br>  "abilities": ["<em>"]<br>}</code></pre></p><br><p><h4 id="<strong>POST /api/logout</strong>"><strong>POST /api/logout</strong></h4><br>Revokes authentication tokens.</p><br><p><strong>Headers:</strong> <code>Authorization: Bearer {token}</code>  <br><strong>Response:</strong> <code>204 No Content</code></p><br><p><h4 id="<strong>POST /api/register</strong>"><strong>POST /api/register</strong></h4><br>Registers new users (if enabled).</p><br><p><strong>Request:</strong><br><pre class="code-block"><code>{<br>  "name": "John Doe",<br>  "email": "john@example.com",<br>  "password": "password",<br>  "password_confirmation": "password"<br>}</code></pre></p><br><p><hr></p><br><p><h3 id="<strong>1.2 Organization Management APIs</strong>"><strong>1.2 Organization Management APIs</strong></h3></p><br><p><h4 id="<strong>GET /api/organizations</strong>"><strong>GET /api/organizations</strong></h4><br>Lists user's organizations with pagination.</p><br><p><strong>Response:</strong><br><pre class="code-block"><code>{<br>  "data": [<br>    {<br>      "id": 1,<br>      "name": "Acme Corp",<br>      "description": "Pharmaceutical company",<br>      "is_active": true,<br>      "created_at": "2025-01-01T00:00:00Z",<br>      "members_count": 15,<br>      "stores_count": 3<br>    }<br>  ],<br>  "links": {...},<br>  "meta": {...}<br>}</code></pre></p><br><p><h4 id="<strong>POST /api/organizations</strong>"><strong>POST /api/organizations</strong></h4><br>Creates new organization.</p><br><p><strong>Request:</strong><br><pre class="code-block"><code>{<br>  "name": "New Company",<br>  "description": "Company description"<br>}</code></pre></p><br><p><h4 id="<strong>GET /api/organizations/{id}</strong>"><strong>GET /api/organizations/{id}</strong></h4><br>Retrieves organization details with relationships.</p><br><p><strong>Response:</strong><br><pre class="code-block"><code>{<br>  "id": 1,<br>  "name": "Acme Corp",<br>  "description": "Pharmaceutical company",<br>  "is_active": true,<br>  "members": [...],<br>  "units": [...],<br>  "stores": [...],<br>  "created_at": "2025-01-01T00:00:00Z"<br>}</code></pre></p><br><p><hr></p><br><p><h3 id="<strong>1.3 HR Management APIs</strong>"><strong>1.3 HR Management APIs</strong></h3></p><br><p><h4 id="<strong>GET /api/employees</strong>"><strong>GET /api/employees</strong></h4><br>Lists employees with filtering and pagination.</p><br><p><strong>Query Parameters:</strong><br>- <code>search</code> - Search by name, email<br>- <code>department</code> - Filter by department<br>- <code>position</code> - Filter by position<br>- <code>status</code> - Filter by active/inactive</p><br><p><strong>Response:</strong><br><pre class="code-block"><code>{<br>  "data": [<br>    {<br>      "id": 1,<br>      "first_name": "John",<br>      "last_name": "Doe",<br>      "email": "john@example.com",<br>      "position": {<br>        "title": "Software Developer",<br>        "department": "IT"<br>      },<br>      "is_active": true,<br>      "attendance_today": {<br>        "punch_in": "09:00",<br>        "punch_out": null,<br>        "status": "present"<br>      }<br>    }<br>  ]<br>}</code></pre></p><br><p><h4 id="<strong>POST /api/employees</strong>"><strong>POST /api/employees</strong></h4><br>Creates new employee record.</p><br><p><strong>Request:</strong><br><pre class="code-block"><code>{<br>  "first_name": "Jane",<br>  "last_name": "Smith",<br>  "email": "jane@example.com",<br>  "position_id": 1,<br>  "shift_id": 1,<br>  "organization_unit_id": 1,<br>  "biometric_id": "BIO001",<br>  "date_of_birth": "1990-01-01",<br>  "gender": "female",<br>  "phone": "+1234567890",<br>  "address": "123 Main St"<br>}</code></pre></p><br><p><h4 id="<strong>GET /api/positions</strong>"><strong>GET /api/positions</strong></h4><br>Manages job positions and roles.</p><br><p><h4 id="<strong>GET /api/shifts</strong>"><strong>GET /api/shifts</strong></h4><br>Manages work shifts and schedules.</p><br><p><hr></p><br><p><h3 id="<strong>1.4 Financial Management APIs</strong>"><strong>1.4 Financial Management APIs</strong></h3></p><br><p><h4 id="<strong>GET /api/accounts</strong>"><strong>GET /api/accounts</strong></h4><br>Manages chart of accounts.</p><br><p><strong>Response:</strong><br><pre class="code-block"><code>{<br>  "data": [<br>    {<br>      "id": 1,<br>      "code": "1001",<br>      "name": "Cash Account",<br>      "type": "asset",<br>      "balance": 50000.00,<br>      "created_at": "2025-01-01T00:00:00Z"<br>    }<br>  ]<br>}</code></pre></p><br><p><h4 id="<strong>GET /api/journal-entries</strong>"><strong>GET /api/journal-entries</strong></h4><br>Financial transaction management.</p><br><p><strong>Query Parameters:</strong><br>- <code>status</code> - draft, posted, void<br>- <code>date_from</code> - Filter by date range<br>- <code>date_to</code> - Filter by date range</p><br><p><h4 id="<strong>POST /api/journal-entries</strong>"><strong>POST /api/journal-entries</strong></h4><br>Creates journal entries with validation.</p><br><p><strong>Request:</strong><br><pre class="code-block"><code>{<br>  "reference_number": "JE001",<br>  "entry_date": "2025-01-01",<br>  "description": "Office supplies purchase",<br>  "entries": [<br>    {<br>      "chart_of_account_id": 1,<br>      "type": "debit",<br>      "amount": 1000.00<br>    },<br>    {<br>      "chart_of_account_id": 2,<br>      "type": "credit",<br>      "amount": 1000.00<br>    }<br>  ]<br>}</code></pre></p><br><p><h4 id="<strong>GET /api/vouchers</strong>"><strong>GET /api/vouchers</strong></h4><br>Specialized voucher management.</p><br><p><strong>Endpoints:</strong><br>- <code>POST /api/vouchers/sales</code> - Sales vouchers<br>- <code>POST /api/vouchers/purchase</code> - Purchase vouchers<br>- <code>POST /api/vouchers/expense</code> - Expense vouchers<br>- <code>POST /api/vouchers/salary</code> - Salary vouchers</p><br><p><h4 id="<strong>GET /api/reports/</strong>"><strong>GET /api/reports/</strong></h4><br>Financial reporting endpoints.</p><br><p><strong>Endpoints:</strong><br>- <code>GET /api/reports/trial-balance</code> - Trial balance<br>- <code>GET /api/reports/balance-sheet</code> - Balance sheet<br>- <code>GET /api/reports/income-statement</code> - Income statement</p><br><p><strong>Sample Response:</strong><br><pre class="code-block"><code>{<br>  "trial_balance": {<br>    "as_of_date": "2025-01-31",<br>    "accounts": [...],<br>    "total_debits": 150000.00,<br>    "total_credits": 150000.00,<br>    "is_balanced": true<br>  }<br>}</code></pre></p><br><p><hr></p><br><p><h3 id="<strong>1.5 Inventory Management APIs</strong>"><strong>1.5 Inventory Management APIs</strong></h3></p><br><p><h4 id="<strong>GET /api/inventory/items</strong>"><strong>GET /api/inventory/items</strong></h4><br>Item catalog management.</p><br><p><strong>Response:</strong><br><pre class="code-block"><code>{<br>  "data": [<br>    {<br>      "id": 1,<br>      "name": "Paracetamol 500mg",<br>      "code": "PAR001",<br>      "category": "Medicines",<br>      "unit": "strips",<br>      "cost_price": 25.50,<br>      "selling_price": 35.00,<br>      "current_stock": 150,<br>      "min_stock_level": 50,<br>      "stock_status": "adequate",<br>      "stores": [<br>        {<br>          "store_id": 1,<br>          "quantity": 100,<br>          "location": "Main Store"<br>        }<br>      ]<br>    }<br>  ]<br>}</code></pre></p><br><p><h4 id="<strong>GET /api/inventory/stores</strong>"><strong>GET /api/inventory/stores</strong></h4><br>Store management.</p><br><p><h4 id="<strong>GET /api/inventory/transactions</strong>"><strong>GET /api/inventory/transactions</strong></h4><br>Stock movement tracking.</p><br><p><strong>Transaction Types:</strong><br>- <code>IN</code> - Stock receipt<br>- <code>OUT</code> - Stock issue<br>- <code>TRANSFER</code> - Store transfer<br>- <code>ADJUST</code> - Stock adjustment</p><br><p><h4 id="<strong>POST /api/inventory/transactions</strong>"><strong>POST /api/inventory/transactions</strong></h4><br>Creates inventory transactions.</p><br><p><strong>Request:</strong><br><pre class="code-block"><code>{<br>  "store_id": 1,<br>  "transaction_type": "IN",<br>  "reference_number": "GRN001",<br>  "notes": "Purchase from supplier",<br>  "items": [<br>    {<br>      "item_id": 1,<br>      "quantity": 100,<br>      "unit_cost": 25.50,<br>      "batch_number": "BATCH001",<br>      "expiry_date": "2026-12-31"<br>    }<br>  ]<br>}</code></pre></p><br><p><hr></p><br><p><h2 id="<strong>2. Web UI Interfaces (Livewire Components)</strong>"><strong>2. Web UI Interfaces (Livewire Components)</strong></h2></p><br><p><h3 id="<strong>2.1 Dashboard Interfaces</strong>"><strong>2.1 Dashboard Interfaces</strong></h3></p><br><p><h4 id="<strong>Dashboard Component</strong>"><strong>Dashboard Component</strong></h4><br>Real-time dashboard with KPIs and quick actions.</p><br><p><strong>Features:</strong><br>- Organization statistics<br>- Low stock alerts<br>- Recent transactions<br>- Quick action buttons<br>- Interactive charts</p><br><p><strong>Data Binding:</strong><br><pre class="code-block"><code>public $stats = [<br>    'total_employees' => 0,<br>    'active_employees' => 0,<br>    'total_stores' => 0,<br>    'low_stock_items' => 0,<br>    'today_transactions' => 0<br>];</code></pre></p><br><p><hr></p><br><p><h3 id="<strong>2.2 Organization Management UI</strong>"><strong>2.2 Organization Management UI</strong></h3></p><br><p><h4 id="<strong>OrganizationTree Component</strong>"><strong>OrganizationTree Component</strong></h4><br>Drag-and-drop organizational structure.</p><br><p><strong>Features:</strong><br>- Hierarchical tree view<br>- Drag-drop reorganization<br>- Unit creation/editing<br>- Member assignment</p><br><p><strong>Events:</strong><br>- <code>unitMoved</code> - Unit repositioned<br>- <code>memberAssigned</code> - User assigned to unit<br>- <code>unitCreated</code> - New unit created</p><br><p><h4 id="<strong>MemberManager Component</strong>"><strong>MemberManager Component</strong></h4><br>Organization member management.</p><br><p><strong>Features:</strong><br>- Member listing with search<br>- Role assignment<br>- Invitation system<br>- Permission management</p><br><p><hr></p><br><p><h3 id="<strong>2.3 HR Management UI</strong>"><strong>2.3 HR Management UI</strong></h3></p><br><p><h4 id="<strong>EmployeeManagement Component</strong>"><strong>EmployeeManagement Component</strong></h4><br>Complete employee CRUD interface.</p><br><p><strong>Features:</strong><br>- Employee listing with filters<br>- Employee creation wizard<br>- Profile editing<br>- Bulk operations<br>- Export functionality</p><br><p><h4 id="<strong>AttendanceDashboard Component</strong>"><strong>AttendanceDashboard Component</strong></h4><br>Attendance tracking and management.</p><br><p><strong>Features:</strong><br>- Daily attendance view<br>- Exception handling<br>- Biometric sync<br>- Regularization requests</p><br><p><hr></p><br><p><h3 id="<strong>2.4 Financial Management UI</strong>"><strong>2.4 Financial Management UI</strong></h3></p><br><p><h4 id="<strong>ChartOfAccounts Component</strong>"><strong>ChartOfAccounts Component</strong></h4><br>Account management interface.</p><br><p><strong>Features:</strong><br>- Account listing with hierarchy<br>- Account creation/editing<br>- Balance calculations<br>- Import/export</p><br><p><h4 id="<strong>JournalEntry Component</strong>"><strong>JournalEntry Component</strong></h4><br>Double-entry journal interface.</p><br><p><strong>Features:</strong><br>- Dynamic line items<br>- Auto-balance validation<br>- Account search<br>- Posting workflow</p><br><p><h4 id="<strong>VoucherSystem Component</strong>"><strong>VoucherSystem Component</strong></h4><br>Specialized voucher creation.</p><br><p><strong>Voucher Types:</strong><br>- Sales voucher with customer details<br>- Purchase voucher with vendor info<br>- Expense voucher with categories<br>- Salary voucher with payroll integration</p><br><p><hr></p><br><p><h3 id="<strong>2.5 Inventory Management UI</strong>"><strong>2.5 Inventory Management UI</strong></h3></p><br><p><h4 id="<strong>ItemManagement Component</strong>"><strong>ItemManagement Component</strong></h4><br>Item catalog management.</p><br><p><strong>Features:</strong><br>- Item listing with search<br>- Item creation wizard<br>- Stock level indicators<br>- Category management</p><br><p><h4 id="<strong>StoreManagement Component</strong>"><strong>StoreManagement Component</strong></h4><br>Multi-store interface.</p><br><p><strong>Features:</strong><br>- Store listing<br>- Stock transfer between stores<br>- Store-specific inventory<br>- Location management</p><br><p><h4 id="<strong>TransactionWizard Component</strong>"><strong>TransactionWizard Component</strong></h4><br>Multi-step transaction creation.</p><br><p><strong>Steps:</strong><br>1. Select transaction type<br>2. Choose store/items<br>3. Enter quantities<br>4. Review and finalize</p><br><p><hr></p><br><p><h2 id="<strong>3. Portal Interfaces</strong>"><strong>3. Portal Interfaces</strong></h2></p><br><p><h3 id="<strong>3.1 Employee Portal</strong>"><strong>3.1 Employee Portal</strong></h3></p><br><p><h4 id="<strong>EmployeeDashboard Component</strong>"><strong>EmployeeDashboard Component</strong></h4><br>Self-service employee portal.</p><br><p><strong>Features:</strong><br>- Personal information view<br>- Attendance summary<br>- Leave balance<br>- Payslip access<br>- Quick actions</p><br><p><h4 id="<strong>LeaveRequest Component</strong>"><strong>LeaveRequest Component</strong></h4><br>Leave application interface.</p><br><p><strong>Features:</strong><br>- Leave type selection<br>- Date picker with balance check<br>- Reason entry<br>- Status tracking</p><br><p><h4 id="<strong>PayslipViewer Component</strong>"><strong>PayslipViewer Component</strong></h4><br>Payslip viewing and download.</p><br><p><strong>Features:</strong><br>- Payslip listing<br>- Detailed breakdown view<br>- PDF download<br>- Email payslip</p><br><p><hr></p><br><p><h3 id="<strong>3.2 Manager Portal</strong>"><strong>3.2 Manager Portal</strong></h3></p><br><p><h4 id="<strong>ManagerDashboard Component</strong>"><strong>ManagerDashboard Component</strong></h4><br>Team management interface.</p><br><p><strong>Features:</strong><br>- Team overview<br>- Attendance summary<br>- Leave approvals<br>- Team performance</p><br><p><h4 id="<strong>TeamAttendance Component</strong>"><strong>TeamAttendance Component</strong></h4><br>Team attendance management.</p><br><p><strong>Features:</strong><br>- Team attendance view<br>- Exception handling<br>- Bulk regularization<br>- Export reports</p><br><p><hr></p><br><p><h2 id="<strong>4. Mobile & Responsive Interfaces</strong>"><strong>4. Mobile & Responsive Interfaces</strong></h2></p><br><p><h3 id="<strong>4.1 Mobile-Optimized Components</strong>"><strong>4.1 Mobile-Optimized Components</strong></h3></p><br><p><h4 id="<strong>MobileAttendance Component</strong>"><strong>MobileAttendance Component</strong></h4><br>Kiosk-style attendance interface.</p><br><p><strong>Features:</strong><br>- Large touch targets<br>- QR code scanning<br>- Biometric integration<br>- Offline support</p><br><p><h4 id="<strong>MobileStockCount Component</strong>"><strong>MobileStockCount Component</strong></h4><br>Mobile stock counting.</p><br><p><strong>Features:</strong><br>- Barcode scanning<br>- Offline data collection<br>- Sync capabilities<br>- Photo capture</p><br><p><hr></p><br><p><h2 id="<strong>5. Integration Interfaces</strong>"><strong>5. Integration Interfaces</strong></h2></p><br><p><h3 id="<strong>5.1 Biometric Integration</strong>"><strong>5.1 Biometric Integration</strong></h3></p><br><p><h4 id="<strong>BiometricSync Interface</strong>"><strong>BiometricSync Interface</strong></h4><br>Device integration framework.</p><br><p><strong>Endpoints:</strong><br>- <code>POST /api/biometric/sync</code> - Sync attendance data<br>- <code>GET /api/biometric/devices</code> - Device management<br>- <code>POST /api/biometric/register</code> - Register employee</p><br><p><strong>Data Format:</strong><br><pre class="code-block"><code>{<br>  "device_id": "BIO001",<br>  "records": [<br>    {<br>      "employee_id": "EMP001",<br>      "timestamp": "2025-01-01T09:00:00Z",<br>      "type": "punch_in",<br>      "device_serial": "SN123456"<br>    }<br>  ]<br>}</code></pre></p><br><p><hr></p><br><p><h3 id="<strong>5.2 Email Integration</strong>"><strong>5.2 Email Integration</strong></h3></p><br><p><h4 id="<strong>Notification Interface</strong>"><strong>Notification Interface</strong></h4><br>Email notification system.</p><br><p><strong>Events:</strong><br>- Leave approval/rejection<br>- Payslip generation<br>- Low stock alerts<br>- System notifications</p><br><p><hr></p><br><p><h3 id="<strong>5.3 File Storage Integration</strong>"><strong>5.3 File Storage Integration</strong></h3></p><br><p><h4 id="<strong>DocumentManagement Interface</strong>"><strong>DocumentManagement Interface</strong></h4><br>File upload and management.</p><br><p><strong>Features:</strong><br>- Employee documents<br>- Transaction attachments<br>- Report exports<br>- Image uploads</p><br><p><strong>Supported Formats:</strong><br>- PDF, DOC, DOCX<br>- JPG, PNG, GIF<br>- XLS, XLSX, CSV</p><br><p><hr></p><br><p><h2 id="<strong>6. API Response Standards</strong>"><strong>6. API Response Standards</strong></h2></p><br><p><h3 id="<strong>6.1 Success Responses</strong>"><strong>6.1 Success Responses</strong></h3></p><br><p><strong>Standard Format:</strong><br><pre class="code-block"><code>{<br>  "success": true,<br>  "data": {...},<br>  "message": "Operation completed successfully",<br>  "meta": {<br>    "timestamp": "2025-01-01T12:00:00Z",<br>    "version": "v1"<br>  }<br>}</code></pre></p><br><p><strong>Paginated Response:</strong><br><pre class="code-block"><code>{<br>  "data": [...],<br>  "links": {<br>    "first": "...",<br>    "last": "...",<br>    "prev": "...",<br>    "next": "..."<br>  },<br>  "meta": {<br>    "current_page": 1,<br>    "from": 1,<br>    "last_page": 10,<br>    "per_page": 15,<br>    "to": 15,<br>    "total": 150<br>  }<br>}</code></pre></p><br><p><h3 id="<strong>6.2 Error Responses</strong>"><strong>6.2 Error Responses</strong></h3></p><br><p><strong>Validation Error:</strong><br><pre class="code-block"><code>{<br>  "success": false,<br>  "message": "Validation failed",<br>  "errors": {<br>    "email": ["The email field is required."],<br>    "password": ["Password must be at least 8 characters."]<br>  }<br>}</code></pre></p><br><p><strong>Authorization Error:</strong><br><pre class="code-block"><code>{<br>  "success": false,<br>  "message": "Unauthorized",<br>  "error": "INSUFFICIENT_PERMISSIONS"<br>}</code></pre></p><br><p><strong>Not Found Error:</strong><br><pre class="code-block"><code>{<br>  "success": false,<br>  "message": "Resource not found",<br>  "error": "RESOURCE_NOT_FOUND"<br>}</code></pre></p><br><p><hr></p><br><p><h2 id="<strong>7. Real-time Features</strong>"><strong>7. Real-time Features</strong></h2></p><br><p><h3 id="<strong>7.1 Livewire Real-time Updates</strong>"><strong>7.1 Livewire Real-time Updates</strong></h3></p><br><p><h4 id="<strong>Wire:Click Events</strong>"><strong>Wire:Click Events</strong></h4><br>Interactive UI updates without page refresh.</p><br><p><h4 id="<strong>Wire:Model Live Binding</strong>"><strong>Wire:Model Live Binding</strong></h4><br>Real-time form validation and updates.</p><br><p><h4 id="<strong>Wire:Poll</strong>"><strong>Wire:Poll</strong></h4><br>Periodic data refresh for dashboards.</p><br><p><h3 id="<strong>7.2 WebSocket Events (Future)</strong>"><strong>7.2 WebSocket Events (Future)</strong></h3></p><br><p>Planned real-time features:<br>- Live attendance updates<br>- Real-time stock levels<br>- Instant notifications<br>- Collaborative editing</p><br><p><hr></p><br><p><h2 id="<strong>8. Security & Authentication</strong>"><strong>8. Security & Authentication</strong></h2></p><br><p><h3 id="<strong>8.1 API Authentication</strong>"><strong>8.1 API Authentication</strong></h3></p><br><p><h4 id="<strong>Sanctum Token Authentication</strong>"><strong>Sanctum Token Authentication</strong></h4><br>Bearer token-based API access.</p><br><p><h4 id="<strong>Session-based Web Authentication</strong>"><strong>Session-based Web Authentication</strong></h4><br>Laravel session management for web interfaces.</p><br><p><h3 id="<strong>8.2 Authorization</strong>"><strong>8.2 Authorization</strong></h3></p><br><p><h4 id="<strong>Role-based Access Control</strong>"><strong>Role-based Access Control</strong></h4><br>Permission checking at route and model level.</p><br><p><h4 id="<strong>Organization-based Data Isolation</strong>"><strong>Organization-based Data Isolation</strong></h4><br>Multi-tenant data separation.</p><br><p><hr></p><br><p><h2 id="<strong>9. Performance & Optimization</strong>"><strong>9. Performance & Optimization</strong></h2></p><br><p><h3 id="<strong>9.1 API Optimization</strong>"><strong>9.1 API Optimization</strong></h3></p><br><p><h4 id="<strong>Eager Loading</strong>"><strong>Eager Loading</strong></h4><br>Preventing N+1 query problems.</p><br><p><h4 id="<strong>Pagination</strong>"><strong>Pagination</strong></h4><br>Efficient large dataset handling.</p><br><p><h4 id="<strong>Caching</strong>"><strong>Caching</strong></h4><br>Frequently accessed data caching.</p><br><p><h3 id="<strong>9.2 UI Optimization</strong>"><strong>9.2 UI Optimization</strong></h3></p><br><p><h4 id="<strong>Lazy Loading</strong>"><strong>Lazy Loading</strong></h4><br>On-demand component loading.</p><br><p><h4 id="<strong>Computed Properties</strong>"><strong>Computed Properties</strong></h4><br>Efficient reactive calculations.</p><br><p><h4 id="<strong>Wire:Loading States</strong>"><strong>Wire:Loading States</strong></h4><br>User feedback during operations.</p><br><p><hr></p><br><p><h2 id="<strong>10. Future Interface Enhancements</strong>"><strong>10. Future Interface Enhancements</strong></h2></p><br><p><h3 id="<strong>10.1 Planned Features</strong>"><strong>10.1 Planned Features</strong></h3></p><br><p><h4 id="<strong>GraphQL API</strong>"><strong>GraphQL API</strong></h4><br>Alternative query interface for complex data requirements.</p><br><p><h4 id="<strong>Mobile App API</strong>"><strong>Mobile App API</strong></h4><br>Dedicated mobile application endpoints.</p><br><p><h4 id="<strong>Third-party Integrations</strong>"><strong>Third-party Integrations</strong></h4><br>- Accounting software integration<br>- Payment gateway APIs<br>- Cloud storage services</p><br><p><h4 id="<strong>Advanced Analytics</strong>"><strong>Advanced Analytics</strong></h4><br>- Custom report builder API<br>- Data visualization endpoints<br>- Predictive analytics interface</p><br><p><hr></p><br><p></em>This interface documentation reflects the current system capabilities as of November 19, 2025. The system provides comprehensive API coverage with modern reactive UI components.*</p>
+        </main>
+        
+        <div class="footer" style="font-size: 8pt; text-align: center; line-height: 1.0; border-top: 1px solid #e5e7eb; padding-top: 5px; margin-top: 10px;">
+    Page {page} of {total} | Generated on 2025-11-26 06:46:36
+</div>
+    </div>
+</body>
+</html>

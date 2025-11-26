@@ -29,9 +29,9 @@ class OrganizationInvitationController extends Controller
                     if ($user && $organization->users()->where('user_id', $user->id)->exists()) {
                         $fail('This user is already a member of the organization');
                     }
-                }
+                },
             ],
-            'roles' => ['required', Rule::in(['admin', 'manager', 'member'])]
+            'roles' => ['required', 'string', Rule::in(['admin', 'manager', 'member'])],
         ]);
 
         // Find user
@@ -41,18 +41,16 @@ class OrganizationInvitationController extends Controller
         $organization->users()->attach(
             $user->id,
             [
-                'roles' => json_encode([$validated['roles']])
+                'roles' => [$validated['roles']],
             ]
-            // 'roles' => [$validated['roles']] // Array wrapped in json_encode
         );
-
 
         return response()->json([
             'message' => 'User invited successfully',
             'data' => [
                 'user_id' => $user->id,
-                'roles' => $validated['roles']
-            ]
+                'roles' => $validated['roles'],
+            ],
         ], 201);
     }
 }

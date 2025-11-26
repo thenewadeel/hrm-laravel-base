@@ -3,9 +3,11 @@
 namespace Tests\Traits;
 
 use App\Models\Employee;
+use App\Models\JobPosition;
 use App\Models\Organization;
 use App\Models\OrganizationUnit;
 use App\Models\OrganizationUser;
+use App\Models\Shift;
 use App\Models\User;
 
 trait SetupEmployee
@@ -14,11 +16,17 @@ trait SetupEmployee
 
     // protected Organization $organization;
     protected OrganizationUnit $engineeringUnit;
+
     protected OrganizationUnit $marketingUnit;
+
     protected Employee $hrUser;
+
     protected Employee $manager;
+
     protected Employee $employee;
+
     protected $additionalEmployees;
+
     protected $marketingEmployee;
 
     /**
@@ -41,20 +49,20 @@ trait SetupEmployee
         // Use existing organization from SetupOrganization or create new one
         $this->organization = $this->organization ?? Organization::factory()->create([
             'name' => 'Test Organization',
-            'is_active' => true
+            'is_active' => true,
         ]);
 
         // Create organization units if they don't exist
         $this->engineeringUnit = $this->engineeringUnit ?? OrganizationUnit::factory()->create([
             'organization_id' => $this->organization->id,
             'name' => 'Engineering',
-            'type' => 'department'
+            'type' => 'department',
         ]);
 
         $this->marketingUnit = $this->marketingUnit ?? OrganizationUnit::factory()->create([
             'organization_id' => $this->organization->id,
             'name' => 'Marketing',
-            'type' => 'department'
+            'type' => 'department',
         ]);
 
         // Create users with their employee records
@@ -69,7 +77,7 @@ trait SetupEmployee
         $this->manager = $this->createEmployeeWithUser(
             'Engineering Manager',
             'manager@test.com',
-            ['manager'],
+            ['manager', 'employee'],
             'Engineering Manager'
         );
 
@@ -132,7 +140,7 @@ trait SetupEmployee
             'organization_id' => $this->organization->id,
             'organization_unit_id' => $unitId,
             'roles' => $roles,
-            'position' => $position
+            'position' => $position,
         ]);
 
         return $employee;
@@ -162,7 +170,7 @@ trait SetupEmployee
 
         // Create user account
         $user = User::factory()->create([
-            'name' => $employee->first_name . ' ' . $employee->last_name,
+            'name' => $employee->first_name.' '.$employee->last_name,
             'email' => $employee->email,
             'current_organization_id' => $this->organization->id,
         ]);
@@ -176,13 +184,13 @@ trait SetupEmployee
             'organization_id' => $this->organization->id,
             'organization_unit_id' => $employee->organization_unit_id,
             'roles' => $roles,
-            'position' => $position
+            'position' => $position,
         ]);
 
         return [
             'user' => $user,
             'employee' => $employee->fresh(),
-            'org_user' => OrganizationUser::where('user_id', $user->id)->first()
+            'org_user' => OrganizationUser::where('user_id', $user->id)->first(),
         ];
     }
 
@@ -257,5 +265,28 @@ trait SetupEmployee
     {
         $managerUserAccount = $this->getManagerUserAccount();
         $this->actingAs($managerUserAccount);
+    }
+
+    public function createEmployeeWithPositionAndShift(array $overrides = []): Employee
+    {
+        $orgUnit = OrganizationUnit::factory()->create();
+        $position = JobPosition::factory()->create(['organization_unit_id' => $orgUnit->id]);
+        $shift = Shift::factory()->create();
+
+        return Employee::factory()->create(array_merge([
+            'organization_unit_id' => $orgUnit->id,
+            'position_id' => $position->id,
+            'shift_id' => $shift->id,
+        ], $overrides));
+    }
+
+    public function createJobPosition(array $overrides = []): JobPosition
+    {
+        return JobPosition::factory()->create($overrides);
+    }
+
+    public function createShift(array $overrides = []): Shift
+    {
+        return Shift::factory()->create($overrides);
     }
 }

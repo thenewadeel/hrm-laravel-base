@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>production-database-setup - HRM Laravel Base Documentation</title>
+    <style>
+/* PDF Documentation Theme */
+body {
+    font-family: var(--font-family, "Inter", system-ui, sans-serif);
+    font-size: var(--font-size, 10pt);
+    line-height: var(--line-height, 1.25);
+    color: #151c27;
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+
+/* Ensure no default margins interfere with PDF tool margins */
+@page {
+    margin: var(--page-margin, 12mm 8mm 4mm 10mm) !important;
+    size: var(--page-size, A4);
+    padding: 0 !important;
+}
+
+/* For PDF generation tools */
+@media print {
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    @page {
+        margin: var(--page-margin, 12mm 8mm 4mm 10mm) !important;
+        padding: 0 !important;
+    }
+    
+    .document {
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    * {
+        box-sizing: border-box !important;
+    }
+    
+    /* Force zero margins on all elements */
+    h1, h2, h3, h4, h5, h6, p, ul, ol, li, pre, blockquote, table, hr {
+        page-break-inside: avoid;
+        margin-top: 0.5em !important;
+        margin-bottom: 0.5em !important;
+    }
+}
+
+.document {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #000c27;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+    page-break-after: avoid;
+}
+
+h1 {
+    font-size: 1.5em;
+    border-bottom: 3px solid #3b82f6;
+    padding-bottom: 0.5em;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.25em;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.5em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+p {
+    margin: 0 0 1em 0;
+    text-align: justify;
+    orphans: 3;
+    widows: 3;
+}
+
+/* Links */
+a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Code */
+code {
+    font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
+        monospace;
+    background-color: #f3f4f6;
+    padding: 0.125em 0.25em;
+    border-radius: 0.25em;
+    font-size: 0.875em;
+    border: 1px solid #e5e7eb;
+}
+
+pre {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin: 1em 0;
+    overflow-x: auto;
+    page-break-inside: avoid;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+    border: none;
+    font-size: 0.875em;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid #3b82f6;
+    margin: 1.5em 0;
+    padding: 0.5em 1.5em;
+    background-color: #f9fafb;
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* Lists */
+ul,
+ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5em 0;
+    page-break-inside: avoid;
+}
+
+th,
+td {
+    border: 1px solid #e5e7eb;
+    padding: 0.5em 1em;
+    text-align: left;
+}
+
+th {
+    background-color: #f9fafb;
+    font-weight: 600;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    margin: 1em 0;
+}
+
+/* Horizontal Rule */
+hr {
+    border: none;
+    border-top: 2px solid #e5e7eb;
+    margin: 2em 0;
+}
+
+/* Table of Contents */
+.toc {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin-bottom: 2em;
+}
+
+.toc h3 {
+    margin-top: 0;
+    margin-bottom: 1em;
+    font-size: 14pt;
+    color: #111827;
+}
+
+.toc ul {
+    padding-left: 1.5em;
+    margin: 0;
+}
+
+.toc li {
+    margin-bottom: 0.25em;
+}
+
+.toc a {
+    color: #374151;
+}
+
+.toc a:hover {
+    color: #3b82f6;
+}
+
+/* Page Breaks */
+.page-break {
+    page-break-before: always;
+}
+
+.page-break-after {
+    page-break-after: always;
+}
+
+/* Header and Footer */
+.header {
+    text-align: center;
+    font-size: 1.25em;
+    color: #424c5f;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+}
+
+.footer {
+    text-align: center;
+    font-size: 0.75em;
+    color: #383a3d;
+    border-top: 1px solid #233b6b;
+    padding-top: 0.5em;
+    margin-top: 1em;
+}
+
+/* Watermark */
+.watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 72pt;
+    color: rgba(156, 163, 175, 0.1);
+    font-weight: bold;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Print Optimization */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .document {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        page-break-after: avoid;
+    }
+
+    p,
+    ul,
+    ol {
+        orphans: 3;
+        widows: 3;
+    }
+
+    pre,
+    blockquote,
+    table,
+    img {
+        page-break-inside: avoid;
+    }
+
+    .toc {
+        page-break-after: avoid;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="document">
+        <div class="header" style="font-size: 9pt; text-align: center; line-height: 1.0; border-bottom: 1px solid #e5e7eb; padding-bottom: 5px; margin-bottom: 10px;">
+    production-database-setup - HRM Laravel Base Documentation
+</div>
+        
+        <nav class="toc">
+    <h3>📚 Navigation</h3>
+    <ul>
+        <li><a href="SRS.html">📋 Requirements</a></li><li><a href="big picture.html">📊 Big Picture</a></li><li><a href="ERD.html">🗄️ Database Design</a></li><li><a href="project plan.html">📅 Project Plan</a></li><li><a href="timeline.html">⏰ Timeline</a></li>
+    </ul>
+</nav>
+        
+        <main class="content">
+            <p><h1 id="Production Database Setup Guide">Production Database Setup Guide</h1></p><br><p><em>Generated: November 19, 2025</em>  <br><em>Version: v1.0</em>  <br><em>Environment: Production</em></p><br><p><hr></p><br><p><h2 id="<strong>1. Overview</strong>"><strong>1. Overview</strong></h2></p><br><p>This guide provides step-by-step instructions for setting up the HRM Laravel Base application in a production environment using PostgreSQL or MySQL database.</p><br><p><h3 id="<strong>Prerequisites</strong>"><strong>Prerequisites</strong></h3><br>- PostgreSQL 12+ or MySQL 8.0+<br>- PHP 8.4+ with required extensions<br>- Web server (Nginx/Apache) with SSL<br>- Sufficient disk space and memory<br>- Database backup strategy</p><br><p><hr></p><br><p><h2 id="<strong>2. Database Setup</strong>"><strong>2. Database Setup</strong></h2></p><br><p><h3 id="<strong>2.1 PostgreSQL Setup (Recommended)</strong>"><strong>2.1 PostgreSQL Setup (Recommended)</strong></h3></p><br><p><h4 id="<strong>Database Creation</strong>"><strong>Database Creation</strong></h4><br><pre class="code-block"><code>-- Create database<br>CREATE DATABASE hrm_production<br>    WITH ENCODING='UTF8'<br>    LC_COLLATE='en_US.UTF-8'<br>    LC_CTYPE='en_US.UTF-8'<br>    TEMPLATE=template0;</p><br><p>-- Create user<br>CREATE USER hrm_user WITH PASSWORD 'your_secure_password';</p><br><p>-- Grant privileges<br>GRANT ALL PRIVILEGES ON DATABASE hrm_production TO hrm_user;<br>GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO hrm_user;</p><br><p>-- Connect to database<br>\c hrm_production;</p><br><p>-- Enable required extensions<br>CREATE EXTENSION IF NOT EXISTS "uuid-ossp";<br>CREATE EXTENSION IF NOT EXISTS "pg_trgm";</code></pre></p><br><p><h4 id="<strong>Configuration Optimization</strong>"><strong>Configuration Optimization</strong></h4><br><pre class="code-block"><code>-- Memory settings for production<br>ALTER SYSTEM SET shared_buffers = '256MB';<br>ALTER SYSTEM SET effective_cache_size = '1GB';<br>ALTER SYSTEM SET maintenance_work_mem = '64MB';<br>ALTER SYSTEM SET checkpoint_completion_target = 0.9;</p><br><p>-- WAL settings<br>ALTER SYSTEM SET wal_buffers = '16MB';<br>ALTER SYSTEM SET wal_writer_delay = '200ms';<br>ALTER SYSTEM SET commit_delay = '1000ms';</p><br><p>-- Query optimization<br>ALTER SYSTEM SET random_page_cost = 1.1;<br>ALTER SYSTEM SET effective_io_concurrency = 200;</code></pre></p><br><p><h3 id="<strong>2.2 MySQL Alternative Setup</strong>"><strong>2.2 MySQL Alternative Setup</strong></h3></p><br><p><h4 id="<strong>Database Creation</strong>"><strong>Database Creation</strong></h4><br><pre class="code-block"><code>-- Create database<br>CREATE DATABASE hrm_production<br>    CHARACTER SET utf8mb4<br>    COLLATE utf8mb4_unicode_ci;</p><br><p>-- Create user<br>CREATE USER 'hrm_user'@'%' IDENTIFIED BY 'your_secure_password';</p><br><p>-- Grant privileges<br>GRANT ALL PRIVILEGES ON hrm_production.<em> TO 'hrm_user'@'%';<br>FLUSH PRIVILEGES;</code></pre></p><br><p><h4 id="<strong>Configuration Optimization</strong>"><strong>Configuration Optimization</strong></h4><br><pre class="code-block"><code># Memory settings<br>innodb_buffer_pool_size = 1G<br>innodb_log_file_size = 256M<br>innodb_flush_log_at_trx_commit = 2</p><br><p><h1 id="Query cache">Query cache</h1><br>query_cache_size = 64M<br>query_cache_type = 1</p><br><p><h1 id="Connection settings">Connection settings</h1><br>max_connections = 200<br>max_connect_errors = 10000</code></pre></p><br><p><hr></p><br><p><h2 id="<strong>3. Application Configuration</strong>"><strong>3. Application Configuration</strong></h2></p><br><p><h3 id="<strong>3.1 Environment Variables</strong>"><strong>3.1 Environment Variables</strong></h3></p><br><p>Update your <code>.env</code> file for production:</p><br><p><pre class="code-block"><code># Database Configuration<br>DB_CONNECTION=pgsql<br>DB_HOST=127.0.0.1<br>DB_PORT=5432<br>DB_DATABASE=hrm_production<br>DB_USERNAME=hrm_user<br>DB_PASSWORD=your_secure_password</p><br><p><h1 id="For MySQL use:">For MySQL use:</h1><br><h1 id="DB_CONNECTION=mysql">DB_CONNECTION=mysql</h1><br><h1 id="DB_HOST=127.0.0.1">DB_HOST=127.0.0.1</h1><br><h1 id="DB_PORT=3306">DB_PORT=3306</h1></p><br><p><h1 id="Application Configuration">Application Configuration</h1><br>APP_ENV=production<br>APP_DEBUG=false<br>APP_URL=https://your-domain.com<br>APP_KEY=base64:your-32-character-key<br>APP_CIPHER=AES-256-CBC</p><br><p><h1 id="Cache Configuration">Cache Configuration</h1><br>CACHE_DRIVER=redis<br>CACHE_PREFIX=hrm_prod<br>REDIS_HOST=127.0.0.1<br>REDIS_PASSWORD=your-redis-password</p><br><p><h1 id="Session Configuration">Session Configuration</h1><br>SESSION_DRIVER=redis<br>SESSION_LIFETIME=120<br>SESSION_ENCRYPT=true<br>SESSION_PATH=hrm_prod_sessions</p><br><p><h1 id="Queue Configuration">Queue Configuration</h1><br>QUEUE_CONNECTION=redis<br>QUEUE_FAILED_DRIVER=database</p><br><p><h1 id="Mail Configuration">Mail Configuration</h1><br>MAIL_MAILER=smtp<br>MAIL_HOST=your-smtp-host<br>MAIL_PORT=587<br>MAIL_USERNAME=your-email@domain.com<br>MAIL_PASSWORD=your-email-password<br>MAIL_ENCRYPTION=tls<br>MAIL_FROM_ADDRESS=noreply@your-domain.com</p><br><p><h1 id="Filesystem Configuration">Filesystem Configuration</h1><br>FILESYSTEM_DISK=local</p><br><p><h1 id="Logging Configuration">Logging Configuration</h1><br>LOG_CHANNEL=stack<br>LOG_LEVEL=warning<br>LOG_DEPRECATIONS_CHANNEL=null</code></pre></p><br><p><h3 id="<strong>3.2 Composer Dependencies</strong>"><strong>3.2 Composer Dependencies</strong></h3></p><br><p>Ensure production dependencies are installed:</p><br><p><pre class="code-block"><code>{<br>    "require": {<br>        "php": "^8.4",<br>        "laravel/framework": "^12.0",<br>        "ext-pgsql": "</em>",<br>        "ext-pdo": "<em>",<br>        "ext-bcmath": "</em>",<br>        "ext-ctype": "<em>",<br>        "ext-curl": "</em>",<br>        "ext-dom": "<em>",<br>        "ext-fileinfo": "</em>",<br>        "ext-filter": "<em>",<br>        "ext-gd": "</em>",<br>        "ext-hash": "<em>",<br>        "ext-iconv": "</em>",<br>        "ext-json": "<em>",<br>        "ext-libxml": "</em>",<br>        "ext-mbstring": "<em>",<br>        "ext-openssl": "</em>",<br>        "ext-pcre": "<em>",<br>        "ext-pdo": "</em>",<br>        "ext-session": "<em>",<br>        "ext-simplexml": "</em>",<br>        "ext-spl": "<em>",<br>        "ext-tokenizer": "</em>",<br>        "ext-xml": "<em>"<br>    }<br>}</code></pre></p><br><p><hr></p><br><p><h2 id="<strong>4. Web Server Configuration</strong>"><strong>4. Web Server Configuration</strong></h2></p><br><p><h3 id="<strong>4.1 Nginx Configuration</strong>"><strong>4.1 Nginx Configuration</strong></h3></p><br><p><pre class="code-block"><code>server {<br>    listen 443 ssl http2;<br>    server_name your-domain.com;<br>    root /var/www/hrm-laravel-base/public;<br>    index index.php;</p><br><p>    # SSL Configuration<br>    ssl_certificate /etc/ssl/certs/your-domain.com.crt;<br>    ssl_certificate_key /etc/ssl/private/your-domain.com.key;<br>    ssl_protocols TLSv1.2 TLSv1.3;<br>    ssl_ciphers ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256;<br>    ssl_prefer_server_ciphers off;</p><br><p>    # Security Headers<br>    add_header X-Frame-Options "SAMEORIGIN";<br>    add_header X-Content-Type-Options "nosniff";<br>    add_header X-XSS-Protection "1; mode=block";<br>    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains";</p><br><p>    # Laravel Configuration<br>    location / {<br>        try_files $uri $uri/ /index.php?$query_string;<br>    }</p><br><p>    # Static Files<br>    location ~</em> \.(js|css|png|jpg|jpeg|gif|ico|svg)$ {<br>        expires 1y;<br>        add_header Cache-Control "public, immutable";<br>    }</p><br><p>    # PHP Processing<br>    location ~ \.php$ {<br>        fastcgi_pass unix:/var/run/php/php8.4-fpm.sock;<br>        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;<br>        fastcgi_param PATH_INFO $fastcgi_path_info;<br>        include fastcgi_params;<br>    }</p><br><p>    # Gzip Compression<br>    gzip on;<br>    gzip_vary on;<br>    gzip_proxied any;<br>    gzip_comp_level 6;<br>    gzip_types text/plain text/css application/json application/javascript text/xml application/xml text/xml application/xml+rss text/javascript;<br>}</code></pre></p><br><p><h3 id="<strong>4.2 Apache Alternative</strong>"><strong>4.2 Apache Alternative</strong></h3></p><br><p><pre class="code-block"><code><VirtualHost <em>:443><br>    ServerName your-domain.com<br>    DocumentRoot /var/www/hrm-laravel-base/public<br>    DirectoryIndex index.php</p><br><p>    # SSL Configuration<br>    SSLEngine on<br>    SSLCertificateFile /etc/ssl/certs/your-domain.com.crt<br>    SSLCertificateKeyFile /etc/ssl/private/your-domain.com.key</p><br><p>    # Security Headers<br>    Header always set X-Frame-Options "SAMEORIGIN"<br>    Header always set X-Content-Type-Options "nosniff"<br>    Header always set X-XSS-Protection "1; mode=block"<br>    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"</p><br><p>    # Laravel Configuration<br>    <Directory /var/www/hrm-laravel-base><br>        AllowOverride All<br>        Require all granted<br>        RewriteEngine On<br>        RewriteCond %{REQUEST_FILENAME} !-f<br>        RewriteCond %{REQUEST_FILENAME} !-d<br>        RewriteRule ^(.</em>)$ index.php [QSA,L]<br>    </Directory><br></VirtualHost></code></pre></p><br><p><hr></p><br><p><h2 id="<strong>5. Deployment Steps</strong>"><strong>5. Deployment Steps</strong></h2></p><br><p><h3 id="<strong>5.1 Code Deployment</strong>"><strong>5.1 Code Deployment</strong></h3></p><br><p><pre class="code-block"><code># 1. Pull latest code<br>git pull origin main</p><br><p><h1 id="2. Install dependencies">2. Install dependencies</h1><br>composer install --no-dev --optimize-autoloader</p><br><p><h1 id="3. Clear caches">3. Clear caches</h1><br>php artisan cache:clear<br>php artisan config:clear<br>php artisan route:clear<br>php artisan view:clear</p><br><p><h1 id="4. Optimize for production">4. Optimize for production</h1><br>php artisan config:cache<br>php artisan route:cache<br>php artisan view:cache</p><br><p><h1 id="5. Set permissions">5. Set permissions</h1><br>chown -R www-data:www-data /var/www/hrm-laravel-base<br>chmod -R 755 /var/www/hrm-laravel-base/storage<br>chmod -R 755 /var/www/hrm-laravel-base/bootstrap/cache</code></pre></p><br><p><h3 id="<strong>5.2 Database Migration</strong>"><strong>5.2 Database Migration</strong></h3></p><br><p><pre class="code-block"><code># 1. Test database connection<br>php artisan tinker<br>>>> DB::connection()->getPdo();</p><br><p><h1 id="2. Run migrations">2. Run migrations</h1><br>php artisan migrate --force</p><br><p><h1 id="3. Check migration status">3. Check migration status</h1><br>php artisan migrate:status</p><br><p><h1 id="4. Seed essential data">4. Seed essential data</h1><br>php artisan db:seed --class=ChartOfAccountsSeeder --force<br>php artisan db:seed --class=OrganizationSeeder --force</code></pre></p><br><p><h3 id="<strong>5.3 Queue Setup</strong>"><strong>5.3 Queue Setup</strong></h3></p><br><p><pre class="code-block"><code># 1. Install Redis<br>sudo apt-get install redis-server</p><br><p><h1 id="2. Configure Redis">2. Configure Redis</h1><br>sudo systemctl enable redis-server<br>sudo systemctl start redis-server</p><br><p><h1 id="3. Test queue connection">3. Test queue connection</h1><br>php artisan queue:failed<br>php artisan queue:monitor</code></pre></p><br><p><hr></p><br><p><h2 id="<strong>6. Performance Optimization</strong>"><strong>6. Performance Optimization</strong></h2></p><br><p><h3 id="<strong>6.1 PHP Configuration</strong>"><strong>6.1 PHP Configuration</strong></h3></p><br><p><pre class="code-block"><code># Production php.ini settings<br>memory_limit = 256M<br>max_execution_time = 300<br>max_input_vars = 3000<br>upload_max_filesize = 20M<br>post_max_size = 20M<br>max_file_uploads = 20</p><br><p><h1 id="OPcache settings">OPcache settings</h1><br>opcache.enable=1<br>opcache.memory_consumption=128<br>opcache.interned_strings_buffer=8<br>opcache.max_accelerated_files=4000<br>opcache.revalidate_freq=60<br>opcache.validate_timestamps=1<br>opcache.save_comments=1<br>opcache.enable_file_override=1</code></pre></p><br><p><h3 id="<strong>6.2 Laravel Optimization</strong>"><strong>6.2 Laravel Optimization</strong></h3></p><br><p><pre class="code-block"><code># Optimize autoloader<br>composer dump-autoload --optimize</p><br><p><h1 id="Cache configuration for production">Cache configuration for production</h1><br>php artisan optimize</p><br><p><h1 id="Precompile views">Precompile views</h1><br>php artisan view:cache</code></pre></p><br><p><hr></p><br><p><h2 id="<strong>7. Security Configuration</strong>"><strong>7. Security Configuration</strong></h2></p><br><p><h3 id="<strong>7.1 File Permissions</strong>"><strong>7.1 File Permissions</strong></h3></p><br><p><pre class="code-block"><code># Secure sensitive files<br>chmod 600 .env<br>chmod 600 config/app.php</p><br><p><h1 id="Secure storage and cache">Secure storage and cache</h1><br>chmod -R 755 storage/<br>chmod -R 755 bootstrap/cache/</p><br><p><h1 id="Set proper ownership">Set proper ownership</h1><br>chown -R www-data:www-data storage/<br>chown -R www-data:www-data bootstrap/cache/</code></pre></p><br><p><h3 id="<strong>7.2 Firewall Configuration</strong>"><strong>7.2 Firewall Configuration</strong></h3></p><br><p><pre class="code-block"><code># Allow only necessary ports<br>sudo ufw allow 22/tcp    # SSH<br>sudo ufw allow 80/tcp    # HTTP<br>sudo ufw allow 443/tcp   # HTTPS<br>sudo ufw deny 3306/tcp  # MySQL (if not needed externally)<br>sudo ufw deny 5432/tcp  # PostgreSQL (if not needed externally)<br>sudo ufw enable</code></pre></p><br><p><h3 id="<strong>7.3 SSL Certificate</strong>"><strong>7.3 SSL Certificate</strong></h3></p><br><p><pre class="code-block"><code># Let's Encrypt certificate<br>sudo certbot --nginx -d your-domain.com</p><br><p><h1 id="Auto-renewal">Auto-renewal</h1><br>sudo crontab -e<br>"0 12 <em> </em> /usr/bin/certbot renew --quiet && systemctl reload nginx"</code></pre></p><br><p><hr></p><br><p><h2 id="<strong>8. Monitoring & Logging</strong>"><strong>8. Monitoring & Logging</strong></h2></p><br><p><h3 id="<strong>8.1 Application Monitoring</strong>"><strong>8.1 Application Monitoring</strong></h3></p><br><p><pre class="code-block"><code># Enable Laravel Telescope (optional)<br>composer require laravel/telescope<br>php artisan vendor:publish --provider="Laravel\Telescope\TelescopeServiceProvider"</p><br><p><h1 id="Configure logging">Configure logging</h1><br>LOG_CHANNEL=daily<br>LOG_LEVEL=warning</code></pre></p><br><p><h3 id="<strong>8.2 Database Monitoring</strong>"><strong>8.2 Database Monitoring</strong></h3></p><br><p><pre class="code-block"><code># PostgreSQL monitoring<br>sudo -u postgres psql -c "ALTER SYSTEM SET log_min_duration_statement = 1000;"<br>sudo -u postgres psql -c "ALTER SYSTEM SET log_statement = 'all';"</p><br><p><h1 id="MySQL slow query log">MySQL slow query log</h1><br><h1 id="Add to my.cnf:">Add to my.cnf:</h1><br>slow_query_log = /var/log/mysql/slow.log<br>long_query_time = 2</code></pre></p><br><p><h3 id="<strong>8.3 Server Monitoring</strong>"><strong>8.3 Server Monitoring</strong></h3></p><br><p><pre class="code-block"><code># Install monitoring tools<br>sudo apt-get install htop iotop nethogs</p><br><p><h1 id="Monitor system resources">Monitor system resources</h1><br>htop<br>iotop<br>nethogs</code></pre></p><br><p><hr></p><br><p><h2 id="<strong>9. Backup Strategy</strong>"><strong>9. Backup Strategy</strong></h2></p><br><p><h3 id="<strong>9.1 Database Backups</strong>"><strong>9.1 Database Backups</strong></h3></p><br><p><pre class="code-block"><code>#!/bin/bash<br><h1 id="PostgreSQL backup script">PostgreSQL backup script</h1><br>BACKUP_DIR="/var/backups/hrm"<br>DATE=$(date +%Y%m%d_%H%M%S)</p><br><p><h1 id="Create backup directory">Create backup directory</h1><br>mkdir -p $BACKUP_DIR</p><br><p><h1 id="Full backup">Full backup</h1><br>pg_dump -h localhost -U hrm_user -d hrm_production \<br>    --format=custom \<br>    --file=$BACKUP_DIR/hrm_full_$DATE.sql</p><br><p><h1 id="Compressed backup">Compressed backup</h1><br>pg_dump -h localhost -U hrm_user -d hrm_production \<br>    --format=custom \<br>    --compress=9 \<br>    --file=$BACKUP_DIR/hrm_compressed_$DATE.sqlc</p><br><p><h1 id="Clean old backups (keep 7 days)">Clean old backups (keep 7 days)</h1><br>find $BACKUP_DIR -name "<em>.sql</em>" -mtime +7 -delete</code></pre></p><br><p><h3 id="<strong>9.2 Application Backups</strong>"><strong>9.2 Application Backups</strong></h3></p><br><p><pre class="code-block"><code>#!/bin/bash<br><h1 id="Application backup script">Application backup script</h1><br>APP_DIR="/var/www/hrm-laravel-base"<br>BACKUP_DIR="/var/backups/hrm/app"<br>DATE=$(date +%Y%m%d_%H%M%S)</p><br><p><h1 id="Create backup">Create backup</h1><br>tar -czf $BACKUP_DIR/hrm_app_$DATE.tar.gz \<br>    --exclude='node_modules' \<br>    --exclude='.git' \<br>    --exclude='storage/logs' \<br>    --exclude='storage/framework/cache' \<br>    $APP_DIR</code></pre></p><br><p><h3 id="<strong>9.3 Automated Backups</strong>"><strong>9.3 Automated Backups</strong></h3></p><br><p><pre class="code-block"><code># Add to crontab<br>crontab -e</p><br><p><h1 id="Database backup at 2 AM daily">Database backup at 2 AM daily</h1><br>0 2 <em> </em> /path/to/backup_script.sh</p><br><p><h1 id="Application backup at 3 AM daily">Application backup at 3 AM daily</h1><br>0 3 <em> </em> /path/to/app_backup_script.sh</p><br><p><h1 id="Weekly full backup on Sunday at 1 AM">Weekly full backup on Sunday at 1 AM</h1><br>0 1 <em> </em> 0 /path/to/full_backup_script.sh</code></pre></p><br><p><hr></p><br><p><h2 id="<strong>10. Testing & Validation</strong>"><strong>10. Testing & Validation</strong></h2></p><br><p><h3 id="<strong>10.1 Pre-Deployment Checklist</strong>"><strong>10.1 Pre-Deployment Checklist</strong></h3></p><br><p><pre class="code-block"><code># Database connection test<br>php artisan db:show</p><br><p><h1 id="Environment check">Environment check</h1><br>php artisan env:current</p><br><p><h1 id="Route cache test">Route cache test</h1><br>php artisan route:list</p><br><p><h1 id="Configuration check">Configuration check</h1><br>php artisan config:show</code></pre></p><br><p><h3 id="<strong>10.2 Post-Deployment Validation</strong>"><strong>10.2 Post-Deployment Validation</strong></h3></p><br><p><pre class="code-block"><code># Test critical functionality<br>curl -k https://your-domain.com/login<br>curl -k https://your-domain.com/api/health</p><br><p><h1 id="Check application logs">Check application logs</h1><br>tail -f storage/logs/laravel.log</p><br><p><h1 id="Monitor error rates">Monitor error rates</h1><br>grep -i "error\|exception" storage/logs/laravel.log | wc -l</code></pre></p><br><p><hr></p><br><p><h2 id="<strong>11. Troubleshooting</strong>"><strong>11. Troubleshooting</strong></h2></p><br><p><h3 id="<strong>11.1 Common Issues</strong>"><strong>11.1 Common Issues</strong></h3></p><br><p><h4 id="<strong>Database Connection Issues</strong>"><strong>Database Connection Issues</strong></h4><br>- Check database server status<br>- Verify credentials in <code>.env</code><br>- Test network connectivity<br>- Check firewall rules</p><br><p><h4 id="<strong>Permission Issues</strong>"><strong>Permission Issues</strong></h4><br>- Verify file ownership<br>- Check directory permissions<br>- Ensure SELinux context</p><br><p><h4 id="<strong>Performance Issues</strong>"><strong>Performance Issues</strong></h4><br>- Monitor memory usage<br>- Check slow queries<br>- Verify cache configuration</p><br><p><h3 id="<strong>11.2 Debug Commands</strong>"><strong>11.2 Debug Commands</strong></h3></p><br><p><pre class="code-block"><code># Clear all caches<br>php artisan cache:clear && php artisan config:clear && php artisan route:clear && php artisan view:clear</p><br><p><h1 id="Check migration status">Check migration status</h1><br>php artisan migrate:status</p><br><p><h1 id="Test database connection">Test database connection</h1><br>php artisan tinker<br>>>> DB::connection()->getDatabaseName()</code></pre></p><br><p><hr></p><br><p><h2 id="<strong>12. Maintenance Procedures</strong>"><strong>12. Maintenance Procedures</strong></h2></p><br><p><h3 id="<strong>12.1 Zero-Downtime Deployment</strong>"><strong>12.1 Zero-Downtime Deployment</strong></h3></p><br><p><pre class="code-block"><code># 1. Deploy to new directory<br>cp -r /var/www/hrm-laravel-base /var/www/hrm-laravel-base.new</p><br><p><h1 id="2. Update symlinks">2. Update symlinks</h1><br>ln -sfn /var/www/hrm-laravel-base.new /var/www/hrm-laravel-base</p><br><p><h1 id="3. Run migrations">3. Run migrations</h1><br>php artisan migrate --force</p><br><p><h1 id="4. Clear caches">4. Clear caches</h1><br>php artisan cache:clear</p><br><p><h1 id="5. Test application">5. Test application</h1><br>curl -k https://your-domain.com/health</p><br><p><h1 id="6. Update symlink to new version">6. Update symlink to new version</h1><br>rm /var/www/hrm-laravel-base<br>ln -s /var/www/hrm-laravel-base.new /var/www/hrm-laravel-base</code></pre></p><br><p><h3 id="<strong>12.2 Maintenance Mode</strong>"><strong>12.2 Maintenance Mode</strong></h3></p><br><p><pre class="code-block"><code># Enable maintenance mode<br>php artisan down --message="System maintenance in progress"</p><br><p><h1 id="Deploy updates">Deploy updates</h1><br><h1 id="... deployment steps ...">... deployment steps ...</h1></p><br><p><h1 id="Disable maintenance mode">Disable maintenance mode</h1><br>php artisan up</code></pre></p><br><p><hr></p><br><p><h2 id="<strong>13. Production Checklist</strong>"><strong>13. Production Checklist</strong></h2></p><br><p><h3 id="<strong>13.1 Pre-Launch Checklist</strong>"><strong>13.1 Pre-Launch Checklist</strong></h3></p><br><p>- [ ] Database server configured and optimized<br>- [ ] Application dependencies installed<br>- [ ] Environment variables configured<br>- [ ] SSL certificate installed and valid<br>- [ ] Web server configured and optimized<br>- [ ] File permissions set correctly<br>- [ ] Firewall rules configured<br>- [ ] Backup strategy implemented<br>- [ ] Monitoring tools configured<br>- [ ] Application tested thoroughly<br>- [ ] Performance benchmarks completed<br>- [ ] Security audit completed</p><br><p><h3 id="<strong>13.2 Post-Launch Checklist</strong>"><strong>13.2 Post-Launch Checklist</strong></h3></p><br><p>- [ ] Application responding to HTTPS requests<br>- [ ] Database connections working properly<br>- [ ] Caches functioning correctly<br>- [ ] Queues processing jobs<br>- [ ] Scheduled tasks running<br>- [ ] Backups executing successfully<br>- [ ] Monitoring tools collecting data<br>- [ ] Error rates within acceptable limits<br>- [ ] Performance metrics meeting targets</p><br><p><hr></p><br><p><h2 id="<strong>14. Support & Recovery</strong>"><strong>14. Support & Recovery</strong></h2></p><br><p><h3 id="<strong>14.1 Emergency Procedures</strong>"><strong>14.1 Emergency Procedures</strong></h3></p><br><p><pre class="code-block"><code># Quick rollback to previous version<br>git checkout previous-stable-tag<br>composer install --no-dev<br>php artisan migrate --force<br>php artisan cache:clear</p><br><p><h1 id="Emergency database restore">Emergency database restore</h1><br>pg_restore -h localhost -U hrm_user -d hrm_production \<br>    --clean --if-exists \<br>    /var/backups/hrm/hrm_emergency.sql</code></pre></p><br><p><h3 id="<strong>14.2 Contact Information</strong>"><strong>14.2 Contact Information</strong></h3></p><br><p>- <strong>Primary Support</strong>: support@your-domain.com<br>- <strong>Emergency Contact</strong>: +1-555-XXX-XXXX<br>- <strong>Documentation</strong>: https://docs.your-domain.com<br>- <strong>Status Page</strong>: https://status.your-domain.com</p><br><p><hr></p><br><p><em>This production setup guide provides comprehensive instructions for deploying the HRM Laravel Base application in a production environment with proper security, performance, and monitoring considerations.</em></p>
+        </main>
+        
+        <div class="footer" style="font-size: 8pt; text-align: center; line-height: 1.0; border-top: 1px solid #e5e7eb; padding-top: 5px; margin-top: 10px;">
+    Page {page} of {total} | Generated on 2025-11-26 06:46:36
+</div>
+    </div>
+</body>
+</html>

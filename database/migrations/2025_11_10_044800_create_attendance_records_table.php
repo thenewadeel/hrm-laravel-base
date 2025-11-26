@@ -24,11 +24,12 @@ return new class extends Migration
             $table->text('notes')->nullable();
             $table->timestamps();
 
-            $table->unique(['user_id', 'record_date']);
+            $table->unique(['employee_id', 'record_date']);
             $table->index(['organization_id', 'record_date']);
             $table->index('status');
         });
     }
+
     public function down()
     {
         Schema::dropIfExists('attendance_records');

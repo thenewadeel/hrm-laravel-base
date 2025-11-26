@@ -1,4 +1,5 @@
 <?php
+
 // tests/Feature/Api/Accounting/JournalEntriesApiTest.php
 
 namespace Tests\Feature\Api\Accounting;
@@ -7,8 +8,8 @@ use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\JournalEntry;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
 
 class JournalEntriesApiTest extends TestCase
@@ -31,12 +32,13 @@ class JournalEntriesApiTest extends TestCase
         $revenueAccount = ChartOfAccount::factory()->create(['type' => 'revenue']);
 
         $entryData = [
+            'organization_id' => $this->organization->id,
             'entry_date' => now()->format('Y-m-d'),
             'description' => 'Test sale',
             'entries' => [
                 ['account_id' => $cashAccount->id, 'type' => 'debit', 'amount' => 100.00],
                 ['account_id' => $revenueAccount->id, 'type' => 'credit', 'amount' => 100.00],
-            ]
+            ],
         ];
         $this->actingAs($this->user);
         $response = $this->postJson('/api/journal-entries', $entryData);
@@ -55,18 +57,18 @@ class JournalEntriesApiTest extends TestCase
                     'created_at',
                     'updated_at',
                     // Remove 'ledger_entries' if you simplified further
-                ]
+                ],
             ])
             ->assertJson([
                 'data' => [
                     'description' => 'Test sale',
-                    'status' => 'draft' // Check for draft status
-                ]
+                    'status' => 'draft', // Check for draft status
+                ],
             ]);
 
         $this->assertDatabaseHas('journal_entries', [
             'description' => 'Test sale',
-            'status' => 'draft'
+            'status' => 'draft',
         ]);
     }
 
@@ -81,7 +83,7 @@ class JournalEntriesApiTest extends TestCase
             'entries' => [
                 ['account_id' => $account->id, 'type' => 'debit', 'amount' => 100.00],
                 // Missing credit entry
-            ]
+            ],
         ];
 
         $this->actingAs($this->user);
@@ -95,7 +97,7 @@ class JournalEntriesApiTest extends TestCase
     public function it_can_post_a_journal_entry()
     {
         $journalEntry = JournalEntry::factory()->draft()->create([
-            'created_by' => $this->user->id
+            'created_by' => $this->user->id,
         ]);
 
         $this->actingAs($this->user);
@@ -107,7 +109,7 @@ class JournalEntriesApiTest extends TestCase
         $this->assertDatabaseHas('journal_entries', [
             'id' => $journalEntry->id,
             'status' => 'posted',
-            'posted_at' => now()
+            'posted_at' => now(),
         ]);
     }
 }

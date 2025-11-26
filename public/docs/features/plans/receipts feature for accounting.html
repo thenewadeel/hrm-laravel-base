@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>receipts feature for accounting - HRM Laravel Base Documentation</title>
+    <style>
+/* PDF Documentation Theme */
+body {
+    font-family: var(--font-family, "Inter", system-ui, sans-serif);
+    font-size: var(--font-size, 10pt);
+    line-height: var(--line-height, 1.25);
+    color: #151c27;
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+
+/* Ensure no default margins interfere with PDF tool margins */
+@page {
+    margin: var(--page-margin, 12mm 8mm 4mm 10mm) !important;
+    size: var(--page-size, A4);
+    padding: 0 !important;
+}
+
+/* For PDF generation tools */
+@media print {
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    @page {
+        margin: var(--page-margin, 12mm 8mm 4mm 10mm) !important;
+        padding: 0 !important;
+    }
+    
+    .document {
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    * {
+        box-sizing: border-box !important;
+    }
+    
+    /* Force zero margins on all elements */
+    h1, h2, h3, h4, h5, h6, p, ul, ol, li, pre, blockquote, table, hr {
+        page-break-inside: avoid;
+        margin-top: 0.5em !important;
+        margin-bottom: 0.5em !important;
+    }
+}
+
+.document {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #000c27;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+    page-break-after: avoid;
+}
+
+h1 {
+    font-size: 1.5em;
+    border-bottom: 3px solid #3b82f6;
+    padding-bottom: 0.5em;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.25em;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.5em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+p {
+    margin: 0 0 1em 0;
+    text-align: justify;
+    orphans: 3;
+    widows: 3;
+}
+
+/* Links */
+a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Code */
+code {
+    font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
+        monospace;
+    background-color: #f3f4f6;
+    padding: 0.125em 0.25em;
+    border-radius: 0.25em;
+    font-size: 0.875em;
+    border: 1px solid #e5e7eb;
+}
+
+pre {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin: 1em 0;
+    overflow-x: auto;
+    page-break-inside: avoid;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+    border: none;
+    font-size: 0.875em;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid #3b82f6;
+    margin: 1.5em 0;
+    padding: 0.5em 1.5em;
+    background-color: #f9fafb;
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* Lists */
+ul,
+ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5em 0;
+    page-break-inside: avoid;
+}
+
+th,
+td {
+    border: 1px solid #e5e7eb;
+    padding: 0.5em 1em;
+    text-align: left;
+}
+
+th {
+    background-color: #f9fafb;
+    font-weight: 600;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    margin: 1em 0;
+}
+
+/* Horizontal Rule */
+hr {
+    border: none;
+    border-top: 2px solid #e5e7eb;
+    margin: 2em 0;
+}
+
+/* Table of Contents */
+.toc {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin-bottom: 2em;
+}
+
+.toc h3 {
+    margin-top: 0;
+    margin-bottom: 1em;
+    font-size: 14pt;
+    color: #111827;
+}
+
+.toc ul {
+    padding-left: 1.5em;
+    margin: 0;
+}
+
+.toc li {
+    margin-bottom: 0.25em;
+}
+
+.toc a {
+    color: #374151;
+}
+
+.toc a:hover {
+    color: #3b82f6;
+}
+
+/* Page Breaks */
+.page-break {
+    page-break-before: always;
+}
+
+.page-break-after {
+    page-break-after: always;
+}
+
+/* Header and Footer */
+.header {
+    text-align: center;
+    font-size: 1.25em;
+    color: #424c5f;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+}
+
+.footer {
+    text-align: center;
+    font-size: 0.75em;
+    color: #383a3d;
+    border-top: 1px solid #233b6b;
+    padding-top: 0.5em;
+    margin-top: 1em;
+}
+
+/* Watermark */
+.watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 72pt;
+    color: rgba(156, 163, 175, 0.1);
+    font-weight: bold;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Print Optimization */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .document {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        page-break-after: avoid;
+    }
+
+    p,
+    ul,
+    ol {
+        orphans: 3;
+        widows: 3;
+    }
+
+    pre,
+    blockquote,
+    table,
+    img {
+        page-break-inside: avoid;
+    }
+
+    .toc {
+        page-break-after: avoid;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="document">
+        <div class="header" style="font-size: 9pt; text-align: center; line-height: 1.0; border-bottom: 1px solid #e5e7eb; padding-bottom: 5px; margin-bottom: 10px;">
+    receipts feature for accounting - HRM Laravel Base Documentation
+</div>
+        
+        <nav class="toc">
+    <h3>📚 Navigation</h3>
+    <ul>
+        <li><a href="SRS.html">📋 Requirements</a></li><li><a href="big picture.html">📊 Big Picture</a></li><li><a href="ERD.html">🗄️ Database Design</a></li><li><a href="project plan.html">📅 Project Plan</a></li><li><a href="timeline.html">⏰ Timeline</a></li>
+    </ul>
+</nav>
+        
+        <main class="content">
+            <p><h1 id="Cash Receipts & Payments Module - Implementation Plan">Cash Receipts & Payments Module - Implementation Plan</h1></p><br><p><h2 id="Feature Overview">Feature Overview</h2></p><br><p>Implement comprehensive cash management system with receipt printing for deposits and voucher printing for payments, fully integrated with existing double-entry accounting system.</p><br><p><h2 id="Phase 1: Database & Models">Phase 1: Database & Models</h2></p><br><p><h3 id="1.1 Database Migrations">1.1 Database Migrations</h3></p><br><p>-   Create <code>cash_receipts</code> table with fields: receipt_number, date, received_from, amount, cash_account_id, credit_account_id, description, notes<br>-   Create <code>cash_payments</code> table with fields: voucher_number, date, paid_to, amount, cash_account_id, debit_account_id, purpose, notes<br>-   Add organization_id, soft deletes, timestamps to both tables<br>-   Create indexes for receipt_number, voucher_number, date ranges</p><br><p><h3 id="1.2 Eloquent Models">1.2 Eloquent Models</h3></p><br><p>-   Create <code>CashReceipt</code> model in <code>App\Models\Accounting\</code><br>-   Create <code>CashPayment</code> model in <code>App\Models\Accounting\</code><br>-   Implement <code>BelongsToOrganization</code> trait<br>-   Define relationships: belongsTo CashAccount, CreditAccount, DebitAccount<br>-   Add automatic journal entry creation in model events</p><br><p><h3 id="1.3 Model Factories & Seeders">1.3 Model Factories & Seeders</h3></p><br><p>-   Create factories for both models with realistic test data<br>-   Update <code>DemoDataSeeder</code> to include sample cash transactions</p><br><p><h2 id="Phase 2: Core Business Logic">Phase 2: Core Business Logic</h2></p><br><p><h3 id="2.1 Services">2.1 Services</h3></p><br><p>-   Create <code>CashReceiptService</code> with methods: createReceipt, validateAmount, generateReceiptNumber<br>-   Create <code>CashPaymentService</code> with methods: createPayment, validatePayment, generateVoucherNumber<br>-   Implement automatic journal entry creation in services<br>-   Add validation for sufficient cash balance before payments</p><br><p><h3 id="2.2 Integration with Double-Entry">2.2 Integration with Double-Entry</h3></p><br><p>-   Automatic JournalEntry creation on cash transaction save<br>-   Debit cash account for receipts, credit cash account for payments<br>-   Maintain balanced entries according to accounting principles<br>-   Link journal entries to cash transactions via polymorphic relationship</p><br><p><h2 id="Phase 3: Livewire Components">Phase 3: Livewire Components</h2></p><br><p><h3 id="3.1 Cash Receipts">3.1 Cash Receipts</h3></p><br><p>-   <code>CashReceipts/Index</code> - List with filters (date range, search)<br>-   <code>CashReceipts/Create</code> - Form with account selection, validation<br>-   <code>CashReceipts/Edit</code> - Edit existing receipts (with restrictions)<br>-   <code>CashReceipts/PrintReceipt</code> - Printable receipt format</p><br><p><h3 id="3.2 Cash Payments">3.2 Cash Payments</h3></p><br><p>-   <code>CashPayments/Index</code> - List with filters and status<br>-   <code>CashPayments/Create</code> - Payment form with vendor/expense account selection<br>-   <code>CashPayments/Edit</code> - Edit payments (with audit trail)<br>-   <code>CashPayments/PrintVoucher</code> - Printable voucher format</p><br><p><h3 id="3.3 Reporting Components">3.3 Reporting Components</h3></p><br><p>-   <code>CashTransactions/DailySummary</code> - Today's cash flow summary<br>-   <code>CashTransactions/MonthlySummary</code> - Monthly reports with charts<br>-   <code>CashTransactions/CashPosition</code> - Current cash balance across accounts</p><br><p><h2 id="Phase 4: Reporting & Analytics">Phase 4: Reporting & Analytics</h2></p><br><p><h3 id="4.1 Daily Summary">4.1 Daily Summary</h3></p><br><p>-   Total receipts and payments for the day<br>-   Opening and closing cash balance<br>-   Breakdown by cash account<br>-   List of all transactions for the day</p><br><p><h3 id="4.2 Monthly Summary">4.2 Monthly Summary</h3></p><br><p>-   Monthly cash flow statement<br>-   Comparison with previous month<br>-   Expense categorization<br>-   Revenue source analysis</p><br><p><h3 id="4.3 Export Features">4.3 Export Features</h3></p><br><p>-   Export to PDF for daily/monthly reports<br>-   CSV export for accounting software integration<br>-   Print-friendly formats for all summaries</p><br><p><h2 id="Phase 5: Printing & Documentation">Phase 5: Printing & Documentation</h2></p><br><p><h3 id="5.1 Receipt Printing">5.1 Receipt Printing</h3></p><br><p>-   Professional receipt layout with company header<br>-   Sequential receipt numbering<br>-   Digital signature/approval fields<br>-   Duplicate copy support</p><br><p><h3 id="5.2 Voucher Printing">5.2 Voucher Printing</h3></p><br><p>-   Voucher format with approval signatures<br>-   Purpose and description details<br>-   Payment method and reference<br>-   Supporting document references</p><br><p><h2 id="Phase 6: Testing & Quality Assurance">Phase 6: Testing & Quality Assurance</h2></p><br><p><h3 id="6.1 Feature Tests">6.1 Feature Tests</h3></p><br><p>-   Test cash receipt creation and journal entry generation<br>-   Test cash payment validation and sufficient funds<br>-   Test receipt/voucher number sequencing<br>-   Test daily/monthly summary calculations</p><br><p><h3 id="6.2 Unit Tests">6.2 Unit Tests</h3></p><br><p>-   Test CashReceiptService business logic<br>-   Test CashPaymentService validation rules<br>-   Test automatic journal entry balancing<br>-   Test reporting calculations</p><br><p><h3 id="6.3 Integration Tests">6.3 Integration Tests</h3></p><br><p>-   Test with existing chart of accounts<br>-   Test multi-organization data isolation<br>-   Test with demo data seeder<br>-   Test printing functionality</p><br><p><h2 id="Technical Specifications">Technical Specifications</h2></p><br><p><h3 id="Database Relations">Database Relations</h3></p><br><p><pre class="code-block"><code>cash_receipts<br>- organization_id → organizations.id<br>- cash_account_id → chart_of_accounts.id<br>- credit_account_id → chart_of_accounts.id</p><br><p>cash_payments<br>- organization_id → organizations.id<br>- cash_account_id → chart_of_accounts.id<br>- debit_account_id → chart_of_accounts.id</code></pre></p><br><p><h3 id="Key Business Rules">Key Business Rules</h3></p><br><p>-   Receipt numbers: Auto-increment prefixed with "RCPT-"<br>-   Voucher numbers: Auto-increment prefixed with "VCH-"<br>-   Amounts must be positive and validated against account balances<br>-   Transactions cannot be deleted, only voided with reversal entries<br>-   All operations must maintain double-entry integrity</p><br><p><h3 id="Security & Permissions">Security & Permissions</h3></p><br><p>-   New permissions: <code>cash_receipts.create</code>, <code>cash_payments.create</code>, <code>cash_reports.view</code><br>-   Integration with existing role-based access control<br>-   Audit trail for all cash transactions<br>-   Organization-level data isolation maintained</p><br><p><h2 id="Dependencies & Integration Points">Dependencies & Integration Points</h2></p><br><p><h3 id="Existing Modules Used">Existing Modules Used</h3></p><br><p>-   Chart of Accounts module (account selection)<br>-   Journal Entries system (automatic posting)<br>-   Organization management (multi-tenancy)<br>-   User authentication & permissions</p><br><p><h3 id="New Routes Required">New Routes Required</h3></p><br><p><pre class="code-block"><code>/cash/receipts<br>/cash/receipts/create<br>/cash/receipts/{id}/print<br>/cash/payments<br>/cash/payments/create<br>/cash/payments/{id}/print<br>/cash/reports/daily<br>/cash/reports/monthly</code></pre></p><br><p><h2 id="Success Criteria">Success Criteria</h2></p><br><p>-   All cash transactions automatically create balanced journal entries<br>-   Receipts and vouchers print in professional format<br>-   Daily and monthly summaries accurately reflect cash position<br>-   Integration with existing chart of accounts works seamlessly<br>-   Multi-tenant data isolation maintained<br>-   85%+ test coverage achieved</p><br><p><h2 id="Risk Mitigation">Risk Mitigation</h2></p><br><p>-   Backup existing data before migrations<br>-   Test thoroughly with demo data first<br>-   Implement transaction rollback for failed operations<br>-   Validate all accounting rules before deployment</p><br><p>This plan provides a comprehensive roadmap for implementing the cash receipts and payments system while fully leveraging your existing double-entry accounting infrastructure.<br></p>
+        </main>
+        
+        <div class="footer" style="font-size: 8pt; text-align: center; line-height: 1.0; border-top: 1px solid #e5e7eb; padding-top: 5px; margin-top: 10px;">
+    Page {page} of {total} | Generated on 2025-11-26 06:46:36
+</div>
+    </div>
+</body>
+</html>

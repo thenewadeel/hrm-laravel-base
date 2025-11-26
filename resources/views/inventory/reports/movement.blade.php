@@ -5,10 +5,10 @@
                 📈 {{ __('Movement Report') }}
             </h2>
             <div class="flex space-x-2">
-                {{-- <x-button.outline href="{{ route('inventory.reports.export', ['type' => 'movement', 'format' => 'pdf']) }}?{{ http_build_query(request()->query()) }}"> --}}
+                <x-button.outline href="{{ route('inventory.reports.download.movement') }}?{{ http_build_query(request()->query()) }}">
                 <x-heroicon-s-document-arrow-down class="w-4 h-4 mr-2" />
                 Export PDF
-                {{-- </x-button.outline> --}}
+                </x-button.outline>
                 {{-- <x-button.primary
                     href="{{ route('inventory.reports.export', ['type' => 'movement', 'format' => 'csv']) }}?{{ http_build_query(request()->query()) }}"> --}}
                 <x-heroicon-s-document-arrow-down class="w-4 h-4 mr-2" />
