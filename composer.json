@@ -79,18 +79,18 @@
         ],
         "dev-cp-pdf": [
             "@dev-cp",
-            "@docs-pdf"
+            "@docs-pdf-simple"
         ],
         "testSummary": [
             "@php artisan test:summarize docs/testResults.txt > docs/testSummary.txt"
         ],
         "docs-pdf": [
-            "@php scripts/generate-docs-pdf.php --cleanup-html --verbose"
+            "@php scripts/generate-docs-pdf-simple.php --verbose"
+        ],
+        "docs-pdf-simple": [
+            "@php scripts/generate-docs-pdf-simple.php --verbose"
         ],
         "docs-theme": [
-            "@php -r \"require_once 'app/Services/PdfThemeManager.php'; \\$theme = new App\\\\Services\\\\PdfThemeManager(); \\$config = \\$theme->getConfig(); \\$config['brand']['name'] = \\$argv[0] ?? \\$config['brand']['name']; \\$theme->saveConfig(); \\echo 'Theme updated: ' . \\$config['brand']['name'];\""
-        ],
-        "docs-theme-interactive": [
             "@php scripts/configure-pdf-theme.php"
         ]
     },

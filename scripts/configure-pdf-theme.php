@@ -7,219 +7,224 @@
  * Interactive command to configure PDF theme settings
  */
 
-require_once __DIR__ . '/../app/Services/PdfThemeManager.php';
-
 class ThemeConfigurator
 {
-    private PdfThemeManager $theme;
+    private string $configPath;
     private array $config;
 
     public function __construct()
     {
-        $this->theme = new PdfThemeManager();
-        $this->config = $this->theme->getConfig();
+        $this->configPath = __DIR__ . '/../config/docs-pdf.json';
+        $this->loadConfig();
     }
 
     public function run(): void
     {
         echo "🎨 PDF Theme Configuration\n\n";
-        echo "Current theme: " . $this->config['brand']['name'] . "\n\n";
+        echo "Current title: " . $this->config['branding']['title'] . "\n\n";
         
         while (true) {
             $this->showMenu();
             $choice = $this->getChoice();
             
-            if ($choice === 'exit') {
-                break;
+            switch ($choice) {
+                case 1:
+                    $this->configureBranding();
+                    break;
+                case 2:
+                    $this->configureHeaders();
+                    break;
+                case 3:
+                    $this->configureFooters();
+                    break;
+                case 4:
+                    $this->configureStyling();
+                    break;
+                case 5:
+                    $this->showCurrentConfig();
+                    break;
+                case 0:
+                    echo "👋 Goodbye!\n";
+                    exit(0);
+                default:
+                    echo "❌ Invalid choice. Please try again.\n\n";
             }
-            
-            $this->handleChoice($choice);
         }
-        
-        echo "\n✅ Theme configuration saved!\n";
     }
 
     private function showMenu(): void
     {
-        echo "📋 Configuration Options:\n\n";
-        echo "1. 🏢 Brand Information (name, company, logo)\n";
-        echo "2. 🎨 Theme Colors (primary, secondary, accent)\n";
-        echo "3. 📐 Layout Settings (margins, fonts, sizes)\n";
-        echo "4. ⚙️ Features (TOC, page numbers, watermarks)\n";
-        echo "5. 🎯 Custom Options (draft mode, confidential text)\n";
-        echo "6. 📋 Show Current Configuration\n";
-        echo "7. 🔄 Reset to Defaults\n";
-        echo "8. 💾 Save and Exit\n";
-        echo "0. ❌ Exit without Saving\n\n";
-        echo "Choose option (0-8): ";
+        echo "What would you like to configure?\n\n";
+        echo "1. 🏷️  Branding (title, watermark)\n";
+        echo "2. 📄 Headers (content, styling)\n";
+        echo "3. 📋 Footers (content, page numbers)\n";
+        echo "4. 🎨 Styling (fonts, margins, colors)\n";
+        echo "5. 📖 Show current configuration\n";
+        echo "0. 🚪 Exit\n\n";
+        echo "Choice: ";
     }
 
-    private function getChoice(): string
+    private function getChoice(): int
     {
         $handle = fopen('php://stdin', 'r');
         $choice = trim(fgets($handle));
         fclose($handle);
-        
-        return $choice;
+        return (int)$choice;
     }
 
-    private function handleChoice(string $choice): void
+    private function configureBranding(): void
     {
-        switch ($choice) {
-            case '1':
-                $this->configureBrand();
-                break;
-            case '2':
-                $this->configureColors();
-                break;
-            case '3':
-                $this->configureLayout();
-                break;
-            case '4':
-                $this->configureFeatures();
-                break;
-            case '5':
-                $this->configureCustom();
-                break;
-            case '6':
-                $this->showConfiguration();
-                break;
-            case '7':
-                $this->resetToDefaults();
-                break;
-            case '8':
-                $this->saveAndExit();
-                break;
-            case '0':
-                echo "\n👋 Exiting without saving...\n";
-                exit(0);
-            default:
-                echo "\n❌ Invalid choice. Please try again.\n\n";
-                break;
+        echo "\n🏷️  Branding Configuration\n";
+        echo "Current title: " . $this->config['branding']['title'] . "\n";
+        echo "Enter new title (or press Enter to keep current): ";
+        
+        $title = $this->getInput();
+        if (!empty($title)) {
+            $this->config['branding']['title'] = $title;
         }
+
+        echo "Current watermark: '" . $this->config['branding']['watermark'] . "'\n";
+        echo "Enter new watermark (or press Enter to keep current): ";
+        
+        $watermark = $this->getInput();
+        if (!empty($watermark)) {
+            $this->config['branding']['watermark'] = $watermark;
+        }
+
+        $this->saveConfig();
+        echo "✅ Branding updated!\n\n";
     }
 
-    private function configureBrand(): void
+    private function configureHeaders(): void
     {
-        echo "\n🏢 Brand Configuration\n\n";
+        echo "\n📄 Header Configuration\n";
+        echo "Current enabled: " . ($this->config['headers']['enabled'] ? 'Yes' : 'No') . "\n";
+        echo "Enable headers? (y/n, or press Enter to keep current): ";
         
-        $this->config['brand']['name'] = $this->prompt('Brand Name', $this->config['brand']['name']);
-        $this->config['brand']['tagline'] = $this->prompt('Tagline', $this->config['brand']['tagline']);
-        $this->config['brand']['company'] = $this->prompt('Company Name', $this->config['brand']['company']);
-        $this->config['brand']['website'] = $this->prompt('Website', $this->config['brand']['website']);
-        $this->config['brand']['logo'] = $this->prompt('Logo (emoji/text)', $this->config['brand']['logo']);
-        $this->config['brand']['version'] = $this->prompt('Version', $this->config['brand']['version']);
-        $this->config['brand']['copyright'] = $this->prompt('Copyright', $this->config['brand']['copyright']);
+        $input = strtolower($this->getInput());
+        if ($input === 'y' || $input === 'yes') {
+            $this->config['headers']['enabled'] = true;
+        } elseif ($input === 'n' || $input === 'no') {
+            $this->config['headers']['enabled'] = false;
+        }
+
+        echo "Current content: " . $this->config['headers']['content'] . "\n";
+        echo "Enter new header content (or press Enter to keep current): ";
+        
+        $content = $this->getInput();
+        if (!empty($content)) {
+            $this->config['headers']['content'] = $content;
+        }
+
+        $this->saveConfig();
+        echo "✅ Headers updated!\n\n";
     }
 
-    private function configureColors(): void
+    private function configureFooters(): void
     {
-        echo "\n🎨 Theme Colors\n\n";
+        echo "\n📋 Footer Configuration\n";
+        echo "Current enabled: " . ($this->config['footers']['enabled'] ? 'Yes' : 'No') . "\n";
+        echo "Enable footers? (y/n, or press Enter to keep current): ";
         
-        $this->config['theme']['primary_color'] = $this->prompt('Primary Color', $this->config['theme']['primary_color']);
-        $this->config['theme']['secondary_color'] = $this->prompt('Secondary Color', $this->config['theme']['secondary_color']);
-        $this->config['theme']['accent_color'] = $this->prompt('Accent Color', $this->config['theme']['accent_color']);
-        $this->config['theme']['success_color'] = $this->prompt('Success Color', $this->config['theme']['success_color']);
-        $this->config['theme']['warning_color'] = $this->prompt('Warning Color', $this->config['theme']['warning_color']);
-        $this->config['theme']['error_color'] = $this->prompt('Error Color', $this->config['theme']['error_color']);
-        $this->config['theme']['background_color'] = $this->prompt('Background Color', $this->config['theme']['background_color']);
-        $this->config['theme']['text_color'] = $this->prompt('Text Color', $this->config['theme']['text_color']);
-        $this->config['theme']['border_color'] = $this->prompt('Border Color', $this->config['theme']['border_color']);
+        $input = strtolower($this->getInput());
+        if ($input === 'y' || $input === 'yes') {
+            $this->config['footers']['enabled'] = true;
+        } elseif ($input === 'n' || $input === 'no') {
+            $this->config['footers']['enabled'] = false;
+        }
+
+        echo "Current content: " . $this->config['footers']['content'] . "\n";
+        echo "Enter new footer content (or press Enter to keep current): ";
+        
+        $content = $this->getInput();
+        if (!empty($content)) {
+            $this->config['footers']['content'] = $content;
+        }
+
+        $this->saveConfig();
+        echo "✅ Footers updated!\n\n";
     }
 
-    private function configureLayout(): void
+    private function configureStyling(): void
     {
-        echo "\n📐 Layout Settings\n\n";
+        echo "\n🎨 Styling Configuration\n";
+        echo "Current font size: " . $this->config['styling']['font_size'] . "\n";
+        echo "Enter new font size (or press Enter to keep current): ";
         
-        $this->config['layout']['page_size'] = $this->prompt('Page Size', $this->config['layout']['page_size']);
-        $this->config['layout']['margin_top'] = $this->prompt('Top Margin (mm)', $this->config['layout']['margin_top']);
-        $this->config['layout']['margin_bottom'] = $this->prompt('Bottom Margin (mm)', $this->config['layout']['margin_bottom']);
-        $this->config['layout']['margin_left'] = $this->prompt('Left Margin (mm)', $this->config['layout']['margin_left']);
-        $this->config['layout']['margin_right'] = $this->prompt('Right Margin (mm)', $this->config['layout']['margin_right']);
-        $this->config['layout']['font_size'] = $this->prompt('Font Size (pt)', $this->config['layout']['font_size']);
-        $this->config['layout']['line_height'] = $this->prompt('Line Height', $this->config['layout']['line_height']);
-        $this->config['layout']['header_font'] = $this->prompt('Header Font', $this->config['layout']['header_font']);
-        $this->config['layout']['body_font'] = $this->prompt('Body Font', $this->config['layout']['body_font']);
-        $this->config['layout']['code_font'] = $this->prompt('Code Font', $this->config['layout']['code_font']);
+        $fontSize = $this->getInput();
+        if (!empty($fontSize)) {
+            $this->config['styling']['font_size'] = $fontSize;
+        }
+
+        echo "Current font family: " . $this->config['styling']['font_family'] . "\n";
+        echo "Enter new font family (or press Enter to keep current): ";
+        
+        $fontFamily = $this->getInput();
+        if (!empty($fontFamily)) {
+            $this->config['styling']['font_family'] = $fontFamily;
+        }
+
+        $this->saveConfig();
+        echo "✅ Styling updated!\n\n";
     }
 
-    private function configureFeatures(): void
+    private function showCurrentConfig(): void
     {
-        echo "\n⚙️ Features Configuration\n\n";
+        echo "\n📖 Current Configuration\n";
+        echo "==================\n\n";
         
-        $this->config['features']['auto_toc'] = $this->confirm('Auto Table of Contents', $this->config['features']['auto_toc']);
-        $this->config['features']['page_numbers'] = $this->confirm('Page Numbers', $this->config['features']['page_numbers']);
-        $this->config['features']['section_breaks'] = $this->confirm('Section Breaks', $this->config['features']['section_breaks']);
-        $this->config['features']['watermark'] = $this->confirm('Watermark', $this->config['features']['watermark']);
-        $this->config['features']['bookmarks'] = $this->confirm('Bookmarks', $this->config['features']['bookmarks']);
-        $this->config['features']['links'] = $this->confirm('Clickable Links', $this->config['features']['links']);
+        echo "🏷️  Branding:\n";
+        echo "  Title: " . $this->config['branding']['title'] . "\n";
+        echo "  Watermark: '" . $this->config['branding']['watermark'] . "'\n\n";
+        
+        echo "📄 Headers:\n";
+        echo "  Enabled: " . ($this->config['headers']['enabled'] ? 'Yes' : 'No') . "\n";
+        echo "  Content: " . $this->config['headers']['content'] . "\n";
+        echo "  Font Size: " . $this->config['headers']['font_size'] . "\n\n";
+        
+        echo "📋 Footers:\n";
+        echo "  Enabled: " . ($this->config['footers']['enabled'] ? 'Yes' : 'No') . "\n";
+        echo "  Content: " . $this->config['footers']['content'] . "\n";
+        echo "  Font Size: " . $this->config['footers']['font_size'] . "\n\n";
+        
+        echo "🎨 Styling:\n";
+        echo "  Font Family: " . $this->config['styling']['font_family'] . "\n";
+        echo "  Font Size: " . $this->config['styling']['font_size'] . "\n";
+        echo "  Page Size: " . $this->config['styling']['page_size'] . "\n\n";
     }
 
-    private function configureCustom(): void
+    private function getInput(): string
     {
-        echo "\n🎯 Custom Options\n\n";
-        
-        $this->config['custom']['watermark_text'] = $this->prompt('Watermark Text', $this->config['custom']['watermark_text']);
-        $this->config['custom']['confidential_text'] = $this->prompt('Confidential Text', $this->config['custom']['confidential_text']);
-        $this->config['custom']['draft_mode'] = $this->confirm('Draft Mode', $this->config['custom']['draft_mode']);
-        $this->config['custom']['print_date'] = $this->confirm('Print Date', $this->config['custom']['print_date']);
-        $this->config['custom']['author_info'] = $this->confirm('Author Info', $this->config['custom']['author_info']);
-    }
-
-    private function showConfiguration(): void
-    {
-        echo "\n📋 Current Configuration:\n\n";
-        echo json_encode($this->config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n\n";
-    }
-
-    private function resetToDefaults(): void
-    {
-        echo "\n🔄 Resetting to defaults...\n";
-        
-        // Create new theme manager with defaults
-        $defaultTheme = new PdfThemeManager();
-        $this->config = $defaultTheme->getConfig();
-        
-        echo "✅ Reset to default configuration.\n\n";
-    }
-
-    private function saveAndExit(): void
-    {
-        echo "\n💾 Saving configuration...\n";
-        
-        // Save using reflection to access private properties
-        $reflection = new ReflectionClass($this->theme);
-        $configProperty = $reflection->getProperty('config');
-        $configProperty->setAccessible(true);
-        $configProperty->setValue($this->theme, $this->config);
-        
-        echo "✅ Configuration saved successfully!\n";
-        exit(0);
-    }
-
-    private function prompt(string $prompt, string $default): string
-    {
-        echo "{$prompt} [{$default}]: ";
         $handle = fopen('php://stdin', 'r');
         $input = trim(fgets($handle));
         fclose($handle);
-        
-        return $input ?: $default;
+        return $input;
     }
 
-    private function confirm(string $prompt, bool $default): bool
+    private function loadConfig(): void
     {
-        $defaultStr = $default ? 'Y/n' : 'y/N';
-        echo "{$prompt} [{$defaultStr}]: ";
-        $handle = fopen('php://stdin', 'r');
-        $input = strtolower(trim(fgets($handle)));
-        fclose($handle);
-        
-        if (empty($input)) {
-            return $default;
+        if (!file_exists($this->configPath)) {
+            echo "❌ Configuration file not found: {$this->configPath}\n";
+            exit(1);
         }
+
+        $json = file_get_contents($this->configPath);
+        $this->config = json_decode($json, true);
         
-        return in_array($input[0], ['y', 'yes', 'true', '1']);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            echo "❌ Invalid JSON in configuration file: " . json_last_error_msg() . "\n";
+            exit(1);
+        }
+    }
+
+    private function saveConfig(): void
+    {
+        $json = json_encode($this->config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        
+        if (file_put_contents($this->configPath, $json) === false) {
+            echo "❌ Failed to save configuration file\n";
+            return;
+        }
     }
 }
 

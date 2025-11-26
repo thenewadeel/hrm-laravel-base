@@ -1,0 +1,1 @@
+<div class="watermark">{watermark_text}</div>
