@@ -21,7 +21,7 @@ class TaxExemptionPolicy
     public function view(User $user, TaxExemption $taxExemption): bool
     {
         return $user->can('manage accounting') &&
-               $taxExemption->organization_id === $user->current_organization_id;
+            $taxExemption->organization_id === $user->current_organization_id;
     }
 
     /**
@@ -38,7 +38,7 @@ class TaxExemptionPolicy
     public function update(User $user, TaxExemption $taxExemption): bool
     {
         return $user->can('manage accounting') &&
-               $taxExemption->organization_id === $user->current_organization_id;
+            $taxExemption->organization_id === $user->current_organization_id;
     }
 
     /**
@@ -47,7 +47,7 @@ class TaxExemptionPolicy
     public function delete(User $user, TaxExemption $taxExemption): bool
     {
         return $user->can('manage accounting') &&
-               $taxExemption->organization_id === $user->current_organization_id;
+            $taxExemption->organization_id === $user->current_organization_id;
     }
 
     /**
@@ -56,7 +56,7 @@ class TaxExemptionPolicy
     public function restore(User $user, TaxExemption $taxExemption): bool
     {
         return $user->can('manage accounting') &&
-               $taxExemption->organization_id === $user->current_organization_id;
+            $taxExemption->organization_id === $user->current_organization_id;
     }
 
     /**
@@ -65,54 +65,6 @@ class TaxExemptionPolicy
     public function forceDelete(User $user, TaxExemption $taxExemption): bool
     {
         return $user->can('manage accounting') &&
-               $taxExemption->organization_id === $user->current_organization_id;
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, TaxExemption $taxExemption): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can create models.
-     */
-    public function create(User $user): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can update the model.
-     */
-    public function update(User $user, TaxExemption $taxExemption): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, TaxExemption $taxExemption): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, TaxExemption $taxExemption): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, TaxExemption $taxExemption): bool
-    {
-        return false;
+            $taxExemption->organization_id === $user->current_organization_id;
     }
 }

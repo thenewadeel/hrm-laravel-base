@@ -39,8 +39,8 @@ class DatabaseSeeder extends Seeder
             ]);
         } elseif (app()->environment('demo')) {
             $this->call([
-                // Organizational structure
-                DemoOrganizationSeeder::class,
+                // Comprehensive full system demo
+                FullSystemDemoSeeder::class,
             ]);
         }
     }
