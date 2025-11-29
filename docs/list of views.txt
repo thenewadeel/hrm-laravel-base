@@ -81,6 +81,31 @@ resources/views/
 │   ├── layout.blade.php
 │   ├── loading-spinner.blade.php
 │   ├── modal.blade.php
+│   ├── navigation
+│   │   ├── breadcrumb.blade.php
+│   │   ├── desktop-menu.blade.php
+│   │   ├── dropdown.blade.php
+│   │   ├── dropdown-link.blade.php
+│   │   ├── examples.blade.php
+│   │   ├── language-switcher.blade.php
+│   │   ├── link.blade.php
+│   │   ├── main.blade.php
+│   │   ├── mobile-link.blade.php
+│   │   ├── mobile-menu.blade.php
+│   │   ├── notification-bell.blade.php
+│   │   ├── portal-desktop-menu.blade.php
+│   │   ├── portal-menu.blade.php
+│   │   ├── portal-quick-links.blade.php
+│   │   ├── quick-actions.blade.php
+│   │   ├── README.md
+│   │   ├── scripts.blade.php
+│   │   ├── search.blade.php
+│   │   ├── section.blade.php
+│   │   ├── sidebar-layout.blade.php
+│   │   ├── sidebar-list.blade.php
+│   │   ├── sidebar-widget.blade.php
+│   │   ├── theme-toggle.blade.php
+│   │   └── user-profile.blade.php
 │   ├── nav-link.blade.php
 │   ├── notification-system.blade.php
 │   ├── organization
@@ -196,6 +221,7 @@ resources/views/
 │   │       └── create.blade.php
 │   ├── cash-management-demo.blade.php
 │   ├── member-manager.blade.php
+│   ├── navigation-main.blade.php
 │   ├── organization
 │   │   ├── organization-form.blade.php
 │   │   └── organization-list.blade.php
@@ -270,6 +296,7 @@ resources/views/
 │   ├── team-member-manager.blade.php
 │   └── update-team-name-form.blade.php
 ├── terms.blade.php
+├── test-navigation.blade.php
 └── welcome.blade.php
 
-58 directories, 215 files
+59 directories, 242 files

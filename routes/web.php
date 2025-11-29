@@ -6,6 +6,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test-navigation', function () {
+    return view('test-navigation');
+})->name('test-navigation');
+
 // Static documentation routes
 Route::get('/docs', function () {
     return view('docs');
