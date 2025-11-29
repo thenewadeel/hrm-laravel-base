@@ -4,7 +4,7 @@
         <x-slot name="trigger">
             <x-navigation.link href="#" icon="👤" :active="request()->routeIs('portal.employee.*')">
                 Employee Portal
-                <svg class="ml-1 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                <svg class="ml-1 -mr-0.5 h-4 w-4 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                     fill="currentColor">
                     <path fill-rule="evenodd"
                         d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
@@ -13,8 +13,7 @@
             </x-navigation.link>
         </x-slot>
 
-        <x-slot name="content">
-            <x-navigation.dropdown-link href="{{ route('portal.employee.dashboard') }}" icon="🏠">
+        <x-navigation.dropdown-link href="{{ route('portal.employee.dashboard') }}" icon="🏠">
                 Dashboard
             </x-navigation.dropdown-link>
 
@@ -33,7 +32,6 @@
             <x-navigation.dropdown-link href="{{ route('portal.employee.setup') }}" icon="⚙️">
                 Account Setup
             </x-navigation.dropdown-link>
-        </x-slot>
     </x-navigation.dropdown>
 @endif
 
@@ -43,7 +41,7 @@
         <x-slot name="trigger">
             <x-navigation.link href="#" icon="👨‍💼" :active="request()->routeIs('portal.manager.*')">
                 Manager Portal
-                <svg class="ml-1 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                <svg class="ml-1 -mr-0.5 h-4 w-4 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                     fill="currentColor">
                     <path fill-rule="evenodd"
                         d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
@@ -52,8 +50,7 @@
             </x-navigation.link>
         </x-slot>
 
-        <x-slot name="content">
-            <x-navigation.dropdown-link href="{{ route('portal.manager.dashboard') }}" icon="📊">
+        <x-navigation.dropdown-link href="{{ route('portal.manager.dashboard') }}" icon="📊">
                 Dashboard
             </x-navigation.dropdown-link>
 
@@ -64,6 +61,5 @@
             <x-navigation.dropdown-link href="{{ route('portal.manager.reports') }}" icon="📈">
                 Reports
             </x-navigation.dropdown-link>
-        </x-slot>
     </x-navigation.dropdown>
 @endif

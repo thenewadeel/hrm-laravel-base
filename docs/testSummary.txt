@@ -6,10 +6,10 @@
 +------------------+------------------+
 | Metric           | Count/Percentage |
 +------------------+------------------+
-| Total Tests      | 623              |
-| Passed           | 541 (86.8%)      |
-| Failed           | 70 (11.2%)       |
-| Warnings/Skipped | 12 (1.9%)        |
+| Total Tests      | 821              |
+| Passed           | 739 (90%)        |
+| Failed           | 70 (8.5%)        |
+| Warnings/Skipped | 12 (1.5%)        |
 +------------------+------------------+
 
 --- ❌ Detailed Failures (70 Total) ---
@@ -189,6 +189,28 @@
 | Store                           | 1/1          |
 | JobPosition                     | 5/5          |
 | Shift                           | 6/6          |
+| Breadcrumb                      | 9/9          |
+| DesktopMenu                     | 3/3          |
+| DropdownLink                    | 3/3          |
+| Dropdown                        | 10/10        |
+| LanguageSwitcher                | 3/3          |
+| Main                            | 4/4          |
+| MobileLink                      | 3/3          |
+| MobileMenu                      | 3/3          |
+| NavigationEdgeCases             | 20/20        |
+| NavigationLink                  | 10/10        |
+| NotificationBell                | 3/3          |
+| PortalDesktopMenu               | 3/3          |
+| PortalMenu                      | 3/3          |
+| PortalQuickLinks                | 3/3          |
+| QuickActions                    | 3/3          |
+| Search                          | 13/13        |
+| Section                         | 3/3          |
+| SidebarLayout                   | 3/3          |
+| SidebarList                     | 3/3          |
+| SidebarWidget                   | 3/3          |
+| ThemeToggle                     | 7/7          |
+| UserProfile                     | 15/15        |
 | AccountingReportService         | 2/2          |
 | AccountingService               | 3/3          |
 | InventoryService                | 13/13        |
@@ -243,6 +265,12 @@
 | Customer                        | 8/8          |
 | Invoice                         | 7/7          |
 | MultiStepSetupWizard            | 5/5          |
+| NavigationAccessibility         | 10/10        |
+| NavigationFeature               | 14/14        |
+| NavigationLivewireIntegration   | 16/16        |
+| NavigationResponsive            | 13/13        |
+| NavigationRoleBased             | 11/11        |
+| NavigationHover                 | 4/4          |
 | OutstandingStatementsBasic      | 1/1          |
 | EmployeeIncrement               | 6/6          |
 | PayrollCalculation              | 7/7          |

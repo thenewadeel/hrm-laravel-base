@@ -87,7 +87,18 @@ class User extends Authenticatable
      */
     public function getCurrentRolesAttribute()
     {
-        return $this->currentOrganizationUser->roles ?? [];
+        $roles = $this->currentOrganizationUser->roles ?? [];
+
+        // Handle case where roles might be stored as JSON string
+        if (is_string($roles)) {
+            $roles = json_decode($roles, true) ?? [];
+        }
+
+        if (! is_array($roles)) {
+            $roles = [$roles];
+        }
+
+        return $roles;
     }
 
     /**
@@ -219,6 +230,16 @@ class User extends Authenticatable
         }
         foreach ($this->organizations as $org) {
             $userRoles = $org->pivot->roles ?? [];
+
+            // Handle case where roles might be stored as JSON string
+            if (is_string($userRoles)) {
+                $userRoles = json_decode($userRoles, true) ?? [];
+            }
+
+            if (! is_array($userRoles)) {
+                $userRoles = [$userRoles];
+            }
+
             if (! empty(array_intersect($roles, $userRoles))) {
                 return true;
             }

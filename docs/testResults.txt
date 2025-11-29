@@ -1,39 +1,39 @@
 
    FAIL  Tests\Unit\Accounting\AccountTypeValidationTest
-  ✓ it allows debit to asset accounts                                    0.61s  
-  ✓ it allows debit to expense accounts                                  0.06s  
-  ⨯ it throws exception when debiting liability account                  0.06s  
-  ✓ it allows credit to liability accounts                               0.04s  
-  ✓ it allows credit to revenue accounts                                 0.05s  
-  ⨯ it throws exception when crediting asset account                     0.04s  
-  ⨯ it validates account types during transaction posting                0.04s  
+  ✓ it allows debit to asset accounts                                    0.33s  
+  ✓ it allows debit to expense accounts                                  0.02s  
+  ⨯ it throws exception when debiting liability account                  0.02s  
+  ✓ it allows credit to liability accounts                               0.02s  
+  ✓ it allows credit to revenue accounts                                 0.02s  
+  ⨯ it throws exception when crediting asset account                     0.02s  
+  ⨯ it validates account types during transaction posting                0.02s  
 
    PASS  Tests\Unit\Accounting\BalanceSheetTest
-  ✓ it generates balance sheet with no transactions                      0.07s  
-  ✓ it generates balanced balance sheet                                  0.04s  
-  ✓ it includes retained earnings from income statement                  0.05s  
+  ✓ it generates balance sheet with no transactions                      0.03s  
+  ✓ it generates balanced balance sheet                                  0.02s  
+  ✓ it includes retained earnings from income statement                  0.03s  
 
    PASS  Tests\Unit\Accounting\CashPaymentServiceTest
   ✓ cash payment service creates payment with journal entry              0.03s  
-  ✓ cash payment service validates amount is positive                    0.02s  
-  ✓ cash payment service generates sequential voucher numbers            0.03s  
+  ✓ cash payment service validates amount is positive                    0.01s  
+  ✓ cash payment service generates sequential voucher numbers            0.02s  
   ✓ cash payment service validates account ownership                     0.02s  
-  ✓ cash payment service validates sufficient cash balance               0.02s  
+  ✓ cash payment service validates sufficient cash balance               0.01s  
 
    PASS  Tests\Unit\Accounting\CashReceiptServiceTest
   ✓ cash receipt service creates receipt with journal entry              0.03s  
-  ✓ cash receipt service validates amount is positive                    0.02s  
-  ✓ cash receipt service generates sequential receipt numbers            0.03s  
+  ✓ cash receipt service validates amount is positive                    0.01s  
+  ✓ cash receipt service generates sequential receipt numbers            0.02s  
   ✓ cash receipt service validates account ownership                     0.02s  
 
    PASS  Tests\Unit\Accounting\ChartOfAccountTest
-  ✓ it has a code name and type                                          0.03s  
+  ✓ it has a code name and type                                          0.02s  
   ✓ it can scope accounts by type                                        0.02s  
-  ✓ account code must be unique                                          0.03s  
+  ✓ account code must be unique                                          0.02s  
   ✓ it can calculate its current balance                                 0.02s  
 
    PASS  Tests\Unit\Accounting\DimensionReportTest
-  ✓ example                                                              0.06s  
+  ✓ example                                                              0.05s  
 
    PASS  Tests\Unit\Accounting\FinancialReportsTest
   ✓ example                                                              0.03s  
@@ -41,40 +41,40 @@
    PASS  Tests\Unit\Accounting\IncomeStatementTest
   ✓ it generates income statement with no transactions                   0.02s  
   ✓ it generates income statement with revenue and expenses              0.03s  
-  ✓ it excludes transactions outside date range                          0.03s  
+  ✓ it excludes transactions outside date range                          0.02s  
 
    PASS  Tests\Unit\Accounting\InvalidAccountTypeExceptionTest
   ✓ it provides detailed error message                                   0.02s  
-  ✓ it provides contextual information                                   0.03s  
+  ✓ it provides contextual information                                   0.02s  
   ✓ it allows custom message                                             0.02s  
 
    PASS  Tests\Unit\Accounting\JournalEntryFactoryTest
-  ✓ it can create a journal entry                                        0.03s  
+  ✓ it can create a journal entry                                        0.02s  
   ✓ it can create a draft journal entry                                  0.02s  
   ✓ it can create a posted journal entry                                 0.02s  
   ✓ it can create journal entry with specific approver                   0.02s  
 
    PASS  Tests\Unit\Accounting\JournalEntryTest
-  ✓ it can create a journal entry                                        0.03s  
-  ✓ it can post a balanced journal entry                                 0.03s  
+  ✓ it can create a journal entry                                        0.02s  
+  ✓ it can post a balanced journal entry                                 0.02s  
   ✓ it prevents posting unbalanced journal entries                       0.02s  
 
    PASS  Tests\Unit\Accounting\LedgerEntryTest
   ✓ it belongs to a chart of account                                     0.02s  
   ✓ it has a debit or credit type                                        0.02s  
   ✓ it can be linked to a transaction via polymorphic relation           0.02s  
-  ✓ it can be tagged with dimensions                                     0.03s  
+  ✓ it can be tagged with dimensions                                     0.02s  
   ✓ it must have a positive amount                                       0.02s  
 
    PASS  Tests\Unit\Accounting\TrialBalanceTest
-  ✓ it generates trial balance with zero entries                         0.03s  
+  ✓ it generates trial balance with zero entries                         0.02s  
   ✓ it generates trial balance with balanced entries                     0.02s  
   ✓ it shows account balances in trial balance                           0.02s  
 
    PASS  Tests\Unit\Accounting\VoucherServiceTest
   ✓ voucher service creates voucher with required data                   0.02s  
   ✓ voucher service generates sequential voucher numbers                 0.02s  
-  ✓ voucher service validates amount is positive                         0.02s  
+  ✓ voucher service validates amount is positive                         0.01s  
   ✓ voucher service validates voucher type                               0.02s  
   ✓ voucher service can post voucher                                     0.02s  
   ✓ voucher service updates voucher                                      0.02s  
@@ -83,17 +83,17 @@
    PASS  Tests\Unit\Database\HRMSchemaTest
   ✓ it has job_positions table with correct columns                      0.02s  
   ✓ it has shifts table with correct columns                             0.02s  
-  ✓ it has employees table with position and shift foreign keys          0.02s  
+  ✓ it has employees table with position and shift foreign keys          0.01s  
   ✓ it has foreign key constraints                                       0.01s  
 
    PASS  Tests\Unit\Models\Inventory\InventoryTransactionTest
   ✓ example                                                              0.02s  
 
    PASS  Tests\Unit\Models\Inventory\ItemTest
-  ✓ example                                                              0.02s  
+  ✓ example                                                              0.01s  
 
    PASS  Tests\Unit\Models\Inventory\StoreTest
-  ✓ example                                                              0.02s  
+  ✓ example                                                              0.01s  
 
    PASS  Tests\Unit\Models\JobPositionTest
   ✓ it can create a job position                                         0.02s  
@@ -103,34 +103,208 @@
   ✓ it has search scope                                                  0.02s  
 
    PASS  Tests\Unit\Models\ShiftTest
-  ✓ it can create a shift                                                0.03s  
+  ✓ it can create a shift                                                0.02s  
   ✓ it calculates working hours correctly                                0.02s  
   ✓ it handles overnight shifts                                          0.02s  
   ✓ it has many employees                                                0.02s  
   ✓ it has active scope                                                  0.02s  
   ✓ it validates days of week format                                     0.02s  
 
+   PASS  BreadcrumbTest
+  ✓ it can be instantiated                                               0.02s  
+  ✓ it has default empty pages array                                     0.01s  
+  ✓ it accepts pages array in constructor                                0.01s  
+  ✓ it renders breadcrumb view                                           0.01s  
+  ✓ it handles empty pages gracefully                                    0.01s  
+  ✓ it handles single page breadcrumb                                    0.01s  
+  ✓ it handles multiple pages breadcrumb                                 0.02s  
+  ✓ it handles pages with missing url                                    0.01s  
+  ✓ it handles pages with additional attributes                          0.01s  
+
+   PASS  DesktopMenuTest
+  ✓ it can be instantiated                                               0.02s  
+  ✓ it renders desktop menu view                                         0.02s  
+  ✓ it implements component contract                                     0.02s  
+
+   PASS  DropdownLinkTest
+  ✓ it can be instantiated                                               0.02s  
+  ✓ it renders dropdown link view                                        0.02s  
+  ✓ it implements component contract                                     0.02s  
+
+   PASS  DropdownTest
+  ✓ it can be instantiated                                               0.02s  
+  ✓ it has default alignment left                                        0.01s  
+  ✓ it has default width 48                                              0.01s  
+  ✓ it accepts custom alignment                                          0.01s  
+  ✓ it accepts custom width                                              0.01s  
+  ✓ it accepts both custom alignment and width                           0.01s  
+  ✓ it renders dropdown view                                             0.01s  
+  ✓ it handles valid alignments                                          0.01s  
+  ✓ it handles various widths                                            0.02s  
+  ✓ it implements component contract                                     0.01s  
+
+   PASS  LanguageSwitcherTest
+  ✓ it can be instantiated                                               0.02s  
+  ✓ it renders language switcher view                                    0.01s  
+  ✓ it implements component contract                                     0.01s  
+
+   PASS  MainTest
+  ✓ it can be instantiated                                               0.02s  
+  ✓ it renders main navigation view                                      0.01s  
+  ✓ it has no required properties                                        0.01s  
+  ✓ it implements component contract                                     0.02s  
+
+   PASS  MobileLinkTest
+  ✓ it can be instantiated                                               0.02s  
+  ✓ it renders mobile link view                                          0.01s  
+  ✓ it implements component contract                                     0.01s  
+
+   PASS  MobileMenuTest
+  ✓ it can be instantiated                                               0.02s  
+  ✓ it renders mobile menu view                                          0.01s  
+  ✓ it implements component contract                                     0.01s  
+
+   PASS  NavigationEdgeCasesTest
+  ✓ navigation link handles empty href                                   0.02s  
+  ✓ navigation link handles null values                                  0.02s  
+  ✓ navigation link handles special characters in href                   0.01s  
+  ✓ breadcrumb handles malformed pages array                             0.01s  
+  ✓ user profile handles user without name                               0.01s  
+  ✓ user profile handles invalid size                                    0.01s  
+  ✓ dropdown handles invalid alignment                                   0.01s  
+  ✓ dropdown handles invalid width                                       0.01s  
+  ✓ theme toggle handles boolean conversion                              0.01s  
+  ✓ search handles empty method                                          0.01s  
+  ✓ search handles special characters in placeholder                     0.01s  
+  ✓ navigation components handle large data                              0.02s  
+  ✓ navigation components handle unicode characters                      0.01s  
+  ✓ navigation components handle extremely long strings                  0.01s  
+  ✓ navigation components handle json injection attempts                 0.01s  
+  ✓ navigation components handle html injection attempts                 0.01s  
+  ✓ navigation components handle javascript injection attempts           0.01s  
+  ✓ navigation components handle sql injection attempts                  0.01s  
+  ✓ navigation components handle null bytes                              0.01s  
+  ✓ navigation components handle control characters                      0.01s  
+
+   PASS  Tests\Unit\Navigation\NavigationLinkTest
+  ✓ it renders navigation link with href                                 0.04s  
+  ✓ it renders navigation link with active state                         0.01s  
+  ✓ it renders navigation link with icon                                 0.01s  
+  ✓ it renders navigation link with badge                                0.01s  
+  ✓ it renders navigation link with custom target                        0.01s  
+  ✓ it renders navigation link with slot content                         0.01s  
+  ✓ it uses correct css classes for inactive state                       0.01s  
+  ✓ it uses correct css classes for active state                         0.01s  
+  ✓ it has correct default properties                                    0.01s  
+  ✓ it accepts all constructor parameters                                0.02s  
+
+   PASS  NotificationBellTest
+  ✓ it can be instantiated                                               0.02s  
+  ✓ it renders notification bell view                                    0.01s  
+  ✓ it implements component contract                                     0.01s  
+
+   PASS  PortalDesktopMenuTest
+  ✓ it can be instantiated                                               0.02s  
+  ✓ it renders portal desktop menu view                                  0.01s  
+  ✓ it implements component contract                                     0.01s  
+
+   PASS  PortalMenuTest
+  ✓ it can be instantiated                                               0.02s  
+  ✓ it renders portal menu view                                          0.02s  
+  ✓ it implements component contract                                     0.01s  
+
+   PASS  PortalQuickLinksTest
+  ✓ it can be instantiated                                               0.02s  
+  ✓ it renders portal quick links view                                   0.01s  
+  ✓ it implements component contract                                     0.01s  
+
+   PASS  QuickActionsTest
+  ✓ it can be instantiated                                               0.02s  
+  ✓ it renders quick actions view                                        0.02s  
+  ✓ it implements component contract                                     0.01s  
+
+   PASS  SearchTest
+  ✓ it can be instantiated                                               0.02s  
+  ✓ it has default placeholder                                           0.01s  
+  ✓ it has default null action                                           0.01s  
+  ✓ it has default method get                                            0.01s  
+  ✓ it accepts custom placeholder                                        0.01s  
+  ✓ it accepts custom action                                             0.01s  
+  ✓ it accepts custom method                                             0.01s  
+  ✓ it accepts all parameters                                            0.01s  
+  ✓ it handles different http methods                                    0.01s  
+  ✓ it handles empty placeholder                                         0.01s  
+  ✓ it handles empty action                                              0.02s  
+  ✓ it renders search view                                               0.01s  
+  ✓ it implements component contract                                     0.01s  
+
+   PASS  SectionTest
+  ✓ it can be instantiated                                               0.03s  
+  ✓ it renders section view                                              0.01s  
+  ✓ it implements component contract                                     0.01s  
+
+   PASS  SidebarLayoutTest
+  ✓ it can be instantiated                                               0.02s  
+  ✓ it renders sidebar layout view                                       0.01s  
+  ✓ it implements component contract                                     0.02s  
+
+   PASS  SidebarListTest
+  ✓ it can be instantiated                                               0.02s  
+  ✓ it renders sidebar list view                                         0.01s  
+  ✓ it implements component contract                                     0.01s  
+
+   PASS  SidebarWidgetTest
+  ✓ it can be instantiated                                               0.02s  
+  ✓ it renders sidebar widget view                                       0.01s  
+  ✓ it implements component contract                                     0.01s  
+
+   PASS  ThemeToggleTest
+  ✓ it can be instantiated                                               0.02s  
+  ✓ it has default dark mode false                                       0.02s  
+  ✓ it accepts dark mode parameter                                       0.01s  
+  ✓ it accepts dark mode false explicitly                                0.01s  
+  ✓ it renders theme toggle view                                         0.01s  
+  ✓ it renders with dark mode enabled                                    0.01s  
+  ✓ it implements component contract                                     0.01s  
+
+   PASS  UserProfileTest
+  ✓ it can be instantiated                                               0.02s  
+  ✓ it has default null user                                             0.01s  
+  ✓ it has default show role true                                        0.02s  
+  ✓ it has default show status true                                      0.01s  
+  ✓ it has default show avatar true                                      0.01s  
+  ✓ it has default size md                                               0.01s  
+  ✓ it accepts user in constructor                                       0.01s  
+  ✓ it accepts show role parameter                                       0.01s  
+  ✓ it accepts show status parameter                                     0.01s  
+  ✓ it accepts show avatar parameter                                     0.01s  
+  ✓ it accepts size parameter                                            0.01s  
+  ✓ it accepts all parameters                                            0.02s  
+  ✓ it handles valid sizes                                               0.01s  
+  ✓ it renders user profile view                                         0.01s  
+  ✓ it implements component contract                                     0.01s  
+
    PASS  Tests\Unit\AccountingReportServiceTest
-  ✓ it generates a correct trial balance                                 0.03s  
-  ✓ it generates a correct balance sheet                                 0.03s  
+  ✓ it generates a correct trial balance                                 0.04s  
+  ✓ it generates a correct balance sheet                                 0.02s  
 
    PASS  Tests\Unit\Accounting\AccountingServiceTest
   ✓ it throws an exception for unbalanced transactions                   0.02s  
-  ✓ it successfully posts a balanced transaction and creates ledger ent… 0.02s  
+  ✓ it successfully posts a balanced transaction and creates ledger ent… 0.03s  
   ✓ it can handle complex but balanced transactions                      0.02s  
 
    PASS  Tests\Unit\Services\InventoryServiceTest
-  ✓ it can create a store                                                0.04s  
+  ✓ it can create a store                                                0.03s  
   ✓ it can update store inventory                                        0.03s  
   ✓ it can update store inventory with min max stock                     0.03s  
   ✓ it can adjust store inventory                                        0.03s  
-  ✓ it can create and finalize transaction                               0.03s  
+  ✓ it can create and finalize transaction                               0.04s  
   ✓ it can cancel transaction                                            0.03s  
   ✓ it can get store stock levels                                        0.03s  
   ✓ it can get item availability                                         0.03s  
   ✓ it prevents modifying finalized transaction                          0.03s  
-  ✓ it prevents finalizing transaction with no items                     0.04s  
-  ✓ it prevents cancelling finalized transaction                         0.03s  
+  ✓ it prevents finalizing transaction with no items                     0.03s  
+  ✓ it prevents cancelling finalized transaction                         0.02s  
   ✓ it calculates low stock correctly                                    0.03s  
   ✓ it calculates overstock correctly                                    0.03s  
 
@@ -139,33 +313,33 @@
   ✓ it handles concurrent requests safely                                0.01s  
 
    PASS  Tests\Unit\Teams\CreateTeamTest
-  ✓ teams can be created                                                 0.04s  
+  ✓ teams can be created                                                 0.03s  
 
    PASS  Tests\Unit\Teams\DeleteTeamTest
   ✓ teams can be deleted                                                 0.03s  
-  ✓ personal teams cant be deleted                                       0.03s  
+  ✓ personal teams cant be deleted                                       0.02s  
 
    PASS  Tests\Unit\Teams\InviteTeamMemberTest
-  ✓ team members can be invited to team                                  0.06s  
+  ✓ team members can be invited to team                                  0.05s  
   ✓ team member invitations can be cancelled                             0.05s  
 
    PASS  Tests\Unit\Teams\LeaveTeamTest
-  ✓ users can leave teams                                                0.04s  
+  ✓ users can leave teams                                                0.03s  
   ✓ team owners cant leave their own team                                0.04s  
 
    PASS  Tests\Unit\Teams\RemoveTeamMemberTest
-  ✓ team members can be removed from teams                               0.05s  
-  ✓ only team owner can remove team members                              0.04s  
+  ✓ team members can be removed from teams                               0.04s  
+  ✓ only team owner can remove team members                              0.03s  
 
    PASS  Tests\Unit\Teams\UpdateTeamMemberRoleTest
-  ✓ team member roles can be updated                                     0.06s  
-  ✓ only team owner can update team member roles                         0.05s  
+  ✓ team member roles can be updated                                     0.05s  
+  ✓ only team owner can update team member roles                         0.04s  
 
    PASS  Tests\Unit\Teams\UpdateTeamNameTest
-  ✓ team names can be updated                                            0.03s  
+  ✓ team names can be updated                                            0.04s  
 
    PASS  Tests\Unit\base\ApiTokenPermissionsTest
-  ✓ api token permissions can be updated                                 0.06s  
+  ✓ api token permissions can be updated                                 0.05s  
 
    PASS  Tests\Unit\base\AuthenticationTest
   ✓ login screen can be rendered                                         0.02s  
@@ -173,22 +347,22 @@
   ✓ users cannot authenticate with invalid password                      0.02s  
 
    PASS  Tests\Unit\base\BrowserSessionsTest
-  ✓ other browser sessions can be logged out                             0.04s  
+  ✓ other browser sessions can be logged out                             0.03s  
 
    PASS  Tests\Unit\base\CreateApiTokenTest
-  ✓ api tokens can be created                                            0.04s  
+  ✓ api tokens can be created                                            0.05s  
 
    PASS  Tests\Unit\base\DeleteAccountTest
   ✓ user accounts can be deleted                                         0.03s  
   ✓ correct password must be provided before account can be deleted      0.03s  
 
    PASS  Tests\Unit\base\DeleteApiTokenTest
-  ✓ api tokens can be deleted                                            0.05s  
+  ✓ api tokens can be deleted                                            0.04s  
 
    WARN  Tests\Unit\base\EmailVerificationTest
-  - email verification screen can be rendered → Email verification not…  0.02s  
-  - email can be verified → Email verification not enabled.              0.02s  
-  - email can not verified with invalid hash → Email verification not e… 0.01s  
+  - email verification screen can be rendered → Email verification not…  0.01s  
+  - email can be verified → Email verification not enabled.              0.01s  
+  - email can not verified with invalid hash → Email verification not e… 0.02s  
 
    PASS  Tests\Unit\base\PasswordConfirmationTest
   ✓ confirm password screen can be rendered                              0.02s  
@@ -197,12 +371,12 @@
 
    PASS  Tests\Unit\base\PasswordResetTest
   ✓ reset password link screen can be rendered                           0.03s  
-  ✓ reset password link can be requested                                 0.23s  
+  ✓ reset password link can be requested                                 0.22s  
   ✓ reset password screen can be rendered                                0.24s  
-  ✓ password can be reset with valid token                               0.24s  
+  ✓ password can be reset with valid token                               0.25s  
 
    PASS  Tests\Unit\base\ProfileInformationTest
-  ✓ current profile information is available                             0.04s  
+  ✓ current profile information is available                             0.02s  
   ✓ profile information can be updated                                   0.03s  
 
    WARN  Tests\Unit\base\RegistrationTest
@@ -211,9 +385,9 @@
   ✓ new users can register                                               0.02s  
 
    PASS  Tests\Unit\base\TwoFactorAuthenticationSettingsTest
-  ✓ two factor authentication can be enabled                             0.05s  
+  ✓ two factor authentication can be enabled                             0.06s  
   ✓ recovery codes can be regenerated                                    0.10s  
-  ✓ two factor authentication can be disabled                            0.06s  
+  ✓ two factor authentication can be disabled                            0.05s  
 
    PASS  Tests\Unit\base\UpdatePasswordTest
   ✓ password can be updated                                              0.03s  
@@ -222,12 +396,12 @@
 
    PASS  Tests\Feature\Accounting\CashPaymentTest
   ✓ cash payment can be created with required fields                     0.02s  
-  ✓ cash payment belongs to organization                                 0.02s  
+  ✓ cash payment belongs to organization                                 0.01s  
   ✓ cash payment belongs to cash account                                 0.02s  
   ✓ cash payment belongs to debit account                                0.02s  
   ✓ cash payment uses soft deletes                                       0.02s  
-  ✓ cash payment casts amount as decimal                                 0.02s  
-  ✓ cash payment casts date properly                                     0.02s  
+  ✓ cash payment casts amount as decimal                                 0.01s  
+  ✓ cash payment casts date properly                                     0.01s  
 
    PASS  Tests\Feature\Accounting\CashReceiptTest
   ✓ cash receipt can be created with required fields                     0.02s  
@@ -236,20 +410,20 @@
   ✓ cash receipt belongs to credit account                               0.02s  
   ✓ cash receipt uses soft deletes                                       0.02s  
   ✓ cash receipt casts amount as decimal                                 0.02s  
-  ✓ cash receipt casts date properly                                     0.02s  
+  ✓ cash receipt casts date properly                                     0.01s  
 
    PASS  Tests\Feature\Accounting\FinancialYearTest
-  ✓ user can view financial years index                                  0.04s  
+  ✓ user can view financial years index                                  0.05s  
   ✓ user can create financial year                                       0.02s  
   ✓ user can store financial year                                        0.02s  
   ✓ user can edit financial year                                         0.04s  
   ✓ user can update financial year                                       0.02s  
-  ✓ user can set opening balances                                        0.03s  
+  ✓ user can set opening balances                                        0.04s  
   ✓ user can save opening balances                                       0.02s  
   ✓ financial year can be activated                                      0.02s  
   ✓ financial year can be locked                                         0.02s  
   ✓ financial year can be unlocked                                       0.03s  
-  ✓ financial year service can close financial year                      0.03s  
+  ✓ financial year service can close financial year                      0.02s  
   ✓ financial year service can carry forward balances                    0.02s  
   ✓ financial year validation works correctly                            0.02s  
   ✓ user cannot delete active financial year                             0.02s  
@@ -278,32 +452,32 @@
   ✓ voucher can have different types                                     0.03s  
   ✓ voucher can be drafted                                               0.02s  
   ✓ voucher can be posted                                                0.02s  
-  ✓ voucher generates sequential numbers                                 0.02s  
+  ✓ voucher generates sequential numbers                                 0.01s  
 
    PASS  Tests\Feature\AdvanceReportServiceTest
   ✓ can generate employee statement for all employees                    0.03s  
   ✓ can generate employee statement for specific employee                0.03s  
-  ✓ can generate aging analysis                                          0.03s  
+  ✓ can generate aging analysis                                          0.02s  
   ✓ can generate monthly summary                                         0.02s  
-  ✓ can generate department report                                       0.02s  
+  ✓ can generate department report                                       0.01s  
   ✓ can generate advance vs salary analysis                              0.02s  
-  ✓ can generate outstanding advances report                             0.03s  
-  ✓ can get comprehensive advance analytics                              0.03s  
+  ✓ can generate outstanding advances report                             0.02s  
+  ✓ can get comprehensive advance analytics                              0.02s  
   ✓ employee statement respects date filters                             0.02s  
-  ✓ monthly summary returns correct number of months                     0.06s  
-  ✓ department report handles employees without departments              0.03s  
+  ✓ monthly summary returns correct number of months                     0.03s  
+  ✓ department report handles employees without departments              0.01s  
 
    PASS  Tests\Feature\AdvanceReportsLivewireTest
-  ✓ advance reports page renders successfully                            0.05s  
-  ✓ livewire component loads with default values                         0.03s  
+  ✓ advance reports page renders successfully                            0.04s  
+  ✓ livewire component loads with default values                         0.02s  
   ✓ can switch between report types                                      0.04s  
-  ✓ can filter by employee                                               0.04s  
-  ✓ can filter by date range                                             0.04s  
+  ✓ can filter by employee                                               0.03s  
+  ✓ can filter by date range                                             0.05s  
   ✓ report data is computed correctly                                    0.03s  
   ✓ employees list is available for filtering                            0.02s  
   ✓ departments list is available for filtering                          0.02s  
-  ✓ reset filters works correctly                                        0.05s  
-  ✓ report types list is available                                       0.03s  
+  ✓ reset filters works correctly                                        0.04s  
+  ✓ report types list is available                                       0.02s  
   ✓ component respects organization scoping                              0.02s  
   ✓ date filters are properly initialized                                0.03s  
 
@@ -317,49 +491,49 @@
    PASS  Tests\Feature\Api\Accounting\FinancialReportsApiTest
   ✓ it can generate trial balance                                        0.03s  
   ✓ it can generate balance sheet                                        0.03s  
-  ✓ it can generate income statement                                     0.04s  
-  ✓ it validates income statement date range                             0.05s  
-  ✓ it rejects end date before start date                                0.03s  
+  ✓ it can generate income statement                                     0.03s  
+  ✓ it validates income statement date range                             0.02s  
+  ✓ it rejects end date before start date                                0.02s  
 
    PASS  Tests\Feature\Api\Accounting\JournalEntriesApiTest
   ✓ it can create a journal entry                                        0.04s  
-  ✓ it validates journal entry balances                                  0.03s  
-  ✓ it can post a journal entry                                          0.03s  
+  ✓ it validates journal entry balances                                  0.02s  
+  ✓ it can post a journal entry                                          0.02s  
 
    PASS  Tests\Feature\OrganizationApiTest
-  ✓ can create organization                                              0.03s  
+  ✓ can create organization                                              0.02s  
   ✓ debug factory output                                                 0.02s  
   ✓ verify organization factory works                                    0.03s  
-  ✓ can list organizations                                               0.03s  
+  ✓ can list organizations                                               0.02s  
   ✓ can show organization                                                0.03s  
   ✓ can update organization                                              0.02s  
-  ✓ can delete organization                                              0.03s  
+  ✓ can delete organization                                              0.02s  
   ✓ guests cannot access organizations                                   0.02s  
   ✓ name is required for creation                                        0.02s  
   ✓ name must be unique                                                  0.02s  
   ✓ user can view their organizations                                    0.02s  
   ✓ organization admin can list members                                  0.03s  
-  ✓ admin can invite new members                                         0.03s  
-  ✓ cannot invite existing member                                        0.03s  
+  ✓ admin can invite new members                                         0.02s  
+  ✓ cannot invite existing member                                        0.02s  
   ✓ non admin cannot invite members                                      0.02s  
 
    PASS  Tests\Feature\OrganizationUnitApiTest
   ✓ can create organization unit                                         0.03s  
-  ✓ can create nested unit                                               0.03s  
+  ✓ can create nested unit                                               0.02s  
   ✓ can get unit hierarchy                                               0.03s  
-  ✓ can assign user to unit                                              0.03s  
-  ✓ can list users by organization unit                                  0.03s  
-  ✓ cannot create organization unit as non admin                         0.03s  
-  ✓ cannot assign user as non admin                                      0.03s  
+  ✓ can assign user to unit                                              0.02s  
+  ✓ can list users by organization unit                                  0.02s  
+  ✓ cannot create organization unit as non admin                         0.02s  
+  ✓ cannot assign user as non admin                                      0.02s  
   ✓ cannot create unit with invalid data                                 0.02s  
-  ✓ cannot assign non existent user to unit                              0.03s  
+  ✓ cannot assign non existent user to unit                              0.02s  
   ✓ cannot assign user not in organization                               0.03s  
   ✓ cannot get hierarchy for non existent unit                           0.02s  
   ✓ can get hierarchy for unit with no children                          0.02s  
 
    PASS  Tests\Feature\Portal\AttendanceSyncTest
-  ✓ can view attendance dashboard                                        0.05s  
-  ✓ can filter attendance by date range                                  0.04s  
+  ✓ can view attendance dashboard                                        0.06s  
+  ✓ can filter attendance by date range                                  0.05s  
   ✓ can identify attendance exceptions                                   0.05s  
   ✓ can regularize missed punch                                          0.03s  
   ✓ attendance data integrates with payroll                              0.06s  
@@ -371,347 +545,427 @@
   ✓ it redirects to setup for users without organization                 0.04s  
   ⨯ it shows dashboard for users with organization                       0.03s  
   ⨯ it shows dashboard sections                                          0.03s  
-  ✓ it shows store inventory summary                                     0.04s  
+  ✓ it shows store inventory summary                                     0.05s  
   ⨯ it shows low stock alerts                                            0.03s  
-  ✓ it shows recent transactions                                         0.10s  
-  ⨯ it shows quick action buttons                                        0.04s  
+  ✓ it shows recent transactions                                         0.13s  
+  ⨯ it shows quick action buttons                                        0.05s  
   ✓ it shows stats cards                                                 0.05s  
   ✓ it shows empty state for no stores                                   0.04s  
-  ✓ it shows all stocked message when no low stock                       0.04s  
-  ✓ it shows store with item counts                                      0.04s  
+  ✓ it shows all stocked message when no low stock                       0.05s  
+  ✓ it shows store with item counts                                      0.05s  
 
    PASS  Tests\Feature\ExampleTest
-  ✓ it returns a successful response                                     0.03s  
+  ✓ it returns a successful response                                     0.04s  
 
    FAIL  Tests\Feature\Feature\Accounting\BankAccountTest
   ✓ user can view bank accounts index                                    0.04s  
   ✓ user can create bank account                                         0.02s  
   ✓ bank account belongs to organization                                 0.02s  
-  ⨯ bank account has chart of account relationship                       0.02s  
+  ⨯ bank account has chart of account relationship                       0.03s  
   ✓ bank account can have bank transactions                              0.02s  
   ✓ bank account scope active works correctly                            0.02s  
   ✓ bank account formatted balance returns correct format                0.02s  
-  ✓ bank account type label returns correct label                        0.03s  
+  ✓ bank account type label returns correct label                        0.02s  
   ✓ bank account status label returns correct label                      0.02s  
 
    FAIL  Tests\Feature\Feature\Accounting\FixedAssetTest
-  ✓ user can view fixed assets index                                     0.04s  
+  ✓ user can view fixed assets index                                     0.05s  
   ⨯ user can register a new fixed asset                                  0.03s  
   ✓ fixed asset calculates straight line depreciation correctly          0.02s  
   ✓ fixed asset calculates declining balance depreciation correctly      0.02s  
-  ⨯ fixed asset calculates sum of years depreciation correctly           0.03s  
+  ⨯ fixed asset calculates sum of years depreciation correctly           0.02s  
   ⨯ can post depreciation for asset                                      0.02s  
   ⨯ can dispose asset with gain                                          0.02s  
   ✓ can transfer asset between locations                                 0.02s  
   ⨯ can record asset maintenance                                         0.02s  
-  ✓ asset knows when it is fully depreciated                             0.02s  
+  ✓ asset knows when it is fully depreciated                             0.03s  
   ✓ asset knows when it can be depreciated                               0.02s  
 
    FAIL  Tests\Feature\Portal\EmployeeManagementTest
   ✓ can view employee list                                               0.06s  
   ✓ can view employee details                                            0.05s  
-  ✓ can create employee                                                  0.04s  
+  ✓ can create employee                                                  0.03s  
   ✓ can update employee details                                          0.03s  
-  ✓ can update biometric id                                              0.03s  
-  ✓ employee belongs to organization unit                                0.04s  
-  ✓ employee creation requires authentication                            0.04s  
-  ✓ non hr users cannot create employees                                 0.04s  
-  ✓ can search employees                                                 0.04s  
-  ✓ can filter employees by department                                   0.04s  
-  ⨯ employee attendance integration                                      0.05s  
+  ✓ can update biometric id                                              0.04s  
+  ✓ employee belongs to organization unit                                0.05s  
+  ✓ employee creation requires authentication                            0.03s  
+  ✓ non hr users cannot create employees                                 0.03s  
+  ✓ can search employees                                                 0.05s  
+  ✓ can filter employees by department                                   0.06s  
+  ⨯ employee attendance integration                                      0.06s  
   ⨯ employee leave balance calculation                                   0.05s  
-  ✓ can create employee without user account                             0.04s  
-  ✓ can grant system access to employee                                  0.04s  
+  ✓ can create employee without user account                             0.03s  
+  ✓ can grant system access to employee                                  0.03s  
 
    FAIL  Tests\Feature\HR\EmployeePositionShiftIntegrationTest
-  ⨯ it assigns position and shift to employee during creation            0.03s  
+  ⨯ it assigns position and shift to employee during creation            0.04s  
   ✓ it loads employee with position and shift relationships              0.02s  
   ⨯ it prevents assigning inactive position to employee                  0.02s  
   ✓ it filters employees by position                                     0.02s  
-  ✓ it filters employees by shift                                        0.03s  
+  ✓ it filters employees by shift                                        0.02s  
 
    FAIL  Tests\Feature\HR\JobPositionControllerTest
-  ✓ it displays job positions index                                      0.04s  
-  ✓ it creates a job position                                            0.02s  
+  ✓ it displays job positions index                                      0.05s  
+  ✓ it creates a job position                                            0.03s  
   ✓ it validates required fields on create                               0.02s  
   ✓ it updates a job position                                            0.02s  
-  ⨯ it deletes a job position                                            0.03s  
-  ✓ it searches job positions                                            0.03s  
+  ⨯ it deletes a job position                                            0.02s  
+  ✓ it searches job positions                                            0.04s  
 
    FAIL  Tests\Feature\HR\ShiftControllerTest
-  ✓ it displays shifts index                                             0.04s  
+  ✓ it displays shifts index                                             0.05s  
   ✓ it creates a shift                                                   0.02s  
   ✓ it validates required fields on create                               0.02s  
   ⨯ it updates a shift                                                   0.02s  
-  ⨯ it deletes a shift                                                   0.03s  
+  ⨯ it deletes a shift                                                   0.02s  
 
    FAIL  Tests\Feature\HrmDashboardControllerTest
-  ✓ it displays hrm dashboard to authenticated users                     0.03s  
-  ✓ it redirects guests to login page                                    0.02s  
-  ✓ it passes hrm dashboard data to view                                 0.03s  
-  ✓ it includes employee summary data                                    0.03s  
-  ✓ it includes attendance overview data                                 0.04s  
+  ✓ it displays hrm dashboard to authenticated users                     0.04s  
+  ✓ it redirects guests to login page                                    0.03s  
+  ✓ it passes hrm dashboard data to view                                 0.04s  
+  ✓ it includes employee summary data                                    0.04s  
+  ✓ it includes attendance overview data                                 0.03s  
   ✓ it includes leave management data                                    0.03s  
-  ✓ it includes performance kpis data                                    0.03s  
+  ✓ it includes performance kpis data                                    0.04s  
   ✓ it includes recent activities data                                   0.03s  
   ✓ it includes upcoming events data                                     0.03s  
   ✓ it includes organization unit stats data                             0.03s  
   ✓ it includes training development data                                0.04s  
-  ⨯ dashboard view contains expected hrm elements                        0.03s  
-  ✓ it provides realistic hrm data values                                0.03s  
-  ✓ recent activities are sorted by timestamp                            0.03s  
+  ⨯ dashboard view contains expected hrm elements                        0.04s  
+  ✓ it provides realistic hrm data values                                0.04s  
+  ✓ recent activities are sorted by timestamp                            0.04s  
   ✓ upcoming events are sorted by date                                   0.03s  
   ✓ organization unit stats have consistent structure                    0.03s  
-  ✓ it handles users with hrm permissions                                0.04s  
+  ✓ it handles users with hrm permissions                                0.03s  
   ✓ it shows organization specific data                                  0.03s  
 
    PASS  Tests\Feature\Inventory\InventoryControllerTest
-  ✓ it displays inventory dashboard                                      0.06s  
+  ✓ it displays inventory dashboard                                      0.07s  
   ✓ it shows correct statistics on dashboard                             0.05s  
-  ✓ it requires authentication for inventory dashboard                   0.04s  
-  ✓ it includes todays transactions in stats                             0.05s  
+  ✓ it requires authentication for inventory dashboard                   0.03s  
+  ✓ it includes todays transactions in stats                             0.06s  
   ✓ it handles empty inventory gracefully                                0.05s  
 
    PASS  Tests\Feature\Inventory\InventoryItemControllerTest
-  ✓ it displays items index                                              0.05s  
-  ✓ it filters items by search term                                      0.06s  
-  ✓ it shows item creation form                                          0.05s  
+  ✓ it displays items index                                              0.06s  
+  ✓ it filters items by search term                                      0.05s  
+  ✓ it shows item creation form                                          0.06s  
   ✓ it stores new item with valid data                                   0.03s  
   ✓ it validates required fields when storing item                       0.03s  
 
    PASS  Tests\Feature\Inventory\InventoryReportControllerTest
-  ✓ it displays reports dashboard                                        0.06s  
-  ✓ it displays low stock report                                         0.05s  
+  ✓ it displays reports dashboard                                        0.05s  
+  ✓ it displays low stock report                                         0.06s  
   ✓ it filters low stock by store                                        0.07s  
   ✓ it displays stock movement report                                    0.05s  
   ✓ it filters movement report by date range                             0.06s  
-  ✓ it displays stock levels report                                      0.06s  
+  ✓ it displays stock levels report                                      0.07s  
   ✓ it filters stock levels by category                                  0.05s  
-  ✓ it handles empty reports gracefully                                  0.08s  
+  ✓ it handles empty reports gracefully                                  0.09s  
 
    PASS  Tests\Feature\InventoryScopeTest
-  ✓ it finds low stock items using scope                                 0.04s  
+  ✓ it finds low stock items using scope                                 0.05s  
   ✓ it finds low stock items in specific store                           0.03s  
   ✓ it finds out of stock items using scope                              0.03s  
   ✓ store can retrieve its low stock items                               0.03s  
   ✓ store can retrieve its out of stock items                            0.03s  
   ✓ it calculates stock statistics for store                             0.03s  
-  ✓ it properly categorizes stock levels                                 0.04s  
+  ✓ it properly categorizes stock levels                                 0.03s  
 
    PASS  Tests\Feature\Inventory\InventoryStockControllerTest
-  ✓ it shows stock adjustment form                                       0.04s  
+  ✓ it shows stock adjustment form                                       0.05s  
   ✓ it processes stock adjustment                                        0.04s  
   ✓ it shows stock count form                                            0.03s  
-  ✓ it processes stock count                                             0.05s  
-  ✓ it shows stock transfer form                                         0.03s  
+  ✓ it processes stock count                                             0.04s  
+  ✓ it shows stock transfer form                                         0.04s  
   ✓ it processes stock transfer                                          0.05s  
 
    PASS  Tests\Feature\Inventory\InventoryStoreControllerTest
   ✓ it displays stores index                                             0.05s  
   ✓ it filters stores by search term                                     0.05s  
-  ✓ it shows store creation form                                         0.04s  
+  ✓ it shows store creation form                                         0.06s  
   ✓ it stores new store with valid data                                  0.03s  
-  ✓ it shows store detail page                                           0.05s  
+  ✓ it shows store detail page                                           0.06s  
   ✓ it updates store with valid data                                     0.03s  
-  ✓ it deletes store without transactions or items                       0.04s  
+  ✓ it deletes store without transactions or items                       0.03s  
   ✓ it prevents deletion of store with transactions                      0.04s  
 
    PASS  Tests\Feature\Inventory\InventoryTenancyTest
   ✓ it scopes items by organization                                      0.04s  
   ✓ it scopes stores by organization                                     0.04s  
-  ✓ user cannot access other organizations inventory data                0.08s  
-  ✓ it enforces organization isolation in controllers                    0.07s  
+  ✓ user cannot access other organizations inventory data                0.07s  
+  ✓ it enforces organization isolation in controllers                    0.09s  
 
    PASS  Tests\Feature\Inventory\InventoryTransactionControllerTest
   ✓ it displays transactions index                                       0.06s  
   ✓ it shows transaction creation form                                   0.04s  
-  ✓ it stores new transaction with items                                 0.05s  
+  ✓ it stores new transaction with items                                 0.03s  
 
    FAIL  Tests\Feature\Inventory\ItemTest
-  ✓ it can create an item                                                0.03s  
+  ✓ it can create an item                                                0.04s  
   ✓ it can search items by name or sku                                   0.04s  
   ✓ it can filter items by category                                      0.04s  
   ✓ it can sort items                                                    0.04s  
-  ✓ it returns only items from users organization                        0.05s  
+  ✓ it returns only items from users organization                        0.04s  
   ✓ it can get item availability across stores                           0.04s  
   ✓ it shows low stock status correctly                                  0.04s  
   ⨯ it returns 403 for unauthorized access                               0.04s  
   ✓ it handles item with no stores                                       0.04s  
 
    FAIL  Tests\Feature\Inventory\PermissionTest
-  ✓ inventory admin has all permissions                                  0.06s  
-  ✓ store manager cannot delete stores                                   0.04s  
-  ✓ inventory clerk cannot finalize transactions                         0.04s  
-  ✓ auditor can only view inventory                                      0.04s  
-  ⨯ user cannot access other organization inventory                      0.04s  
+  ✓ inventory admin has all permissions                                  0.05s  
+  ✓ store manager cannot delete stores                                   0.05s  
+  ✓ inventory clerk cannot finalize transactions                         0.05s  
+  ✓ auditor can only view inventory                                      0.05s  
+  ⨯ user cannot access other organization inventory                      0.05s  
 
    PASS  Tests\Feature\Inventory\StoreTest
   ✓ it can create a store                                                0.05s  
-  ✓ it can add items to store                                            0.04s  
-  ✓ it can retrieve store with items                                     0.04s  
-  ✓ it can update item quantity in store                                 0.04s  
-  ✓ it can list all stores for organization                              0.04s  
-  ✓ it can use organization scope                                        0.05s  
+  ✓ it can add items to store                                            0.10s  
+  ✓ it can retrieve store with items                                     0.08s  
+  ✓ it can update item quantity in store                                 0.07s  
+  ✓ it can list all stores for organization                              0.06s  
+  ✓ it can use organization scope                                        0.04s  
   ✓ it can use search scope                                              0.03s  
-  ✓ it can use active scope                                              0.03s  
+  ✓ it can use active scope                                              0.04s  
 
    PASS  Tests\Feature\Inventory\TransactionTest
-  ✓ it can create draft transaction without items                        0.04s  
+  ✓ it can create draft transaction without items                        0.05s  
   ✓ it can create draft transaction with items                           0.04s  
-  ✓ it can add items to empty draft transaction                          0.05s  
+  ✓ it can add items to empty draft transaction                          0.04s  
   ✓ it can add items to transaction with existing items                  0.05s  
-  ✓ it can finalize transaction created without items after adding item… 0.05s  
+  ✓ it can finalize transaction created without items after adding item… 0.06s  
   ✓ it can finalize transaction created with items                       0.05s  
   ✓ it cannot finalize empty transaction                                 0.04s  
-  ✓ it cannot add items to finalized transaction                         0.06s  
-  ✓ it can list transactions by status                                   0.07s  
+  ✓ it cannot add items to finalized transaction                         0.05s  
+  ✓ it can list transactions by status                                   0.06s  
   ✓ it can calculate transaction totals                                  0.05s  
   ✓ it cannot modify finalized transaction                               0.05s  
   ✓ it can calculate totals for empty transaction                        0.04s  
 
    PASS  Tests\Feature\Livewire\Accounting\CashPayments\CreateTest
-  ✓ cash payment create component renders successfully                   0.03s  
+  ✓ cash payment create component renders successfully                   0.04s  
   ✓ cash payment create component has required fields                    0.03s  
   ✓ cash payment create component loads cash and expense accounts        0.03s  
-  ✓ cash payment create component validates required fields              0.06s  
+  ✓ cash payment create component validates required fields              0.10s  
   ✓ cash payment create component validates amount is positive           0.06s  
-  ✓ cash payment create component creates payment successfully           0.09s  
+  ✓ cash payment create component creates payment successfully           0.08s  
   ✓ cash payment create component handles creation errors                0.06s  
 
    PASS  Tests\Feature\Livewire\Accounting\CashReceipts\CreateTest
-  ✓ cash receipt create component renders successfully                   0.03s  
+  ✓ cash receipt create component renders successfully                   0.04s  
   ✓ cash receipt create component has required fields                    0.03s  
   ✓ cash receipt create component loads cash accounts                    0.03s  
-  ✓ cash receipt create component validates required fields              0.07s  
-  ✓ cash receipt create component validates amount is positive           0.07s  
+  ✓ cash receipt create component validates required fields              0.06s  
+  ✓ cash receipt create component validates amount is positive           0.06s  
   ✓ cash receipt create component creates receipt successfully           0.08s  
-  ✓ cash receipt create component handles creation errors                0.06s  
+  ✓ cash receipt create component handles creation errors                0.07s  
 
    PASS  Tests\Feature\Livewire\Accounting\ChartOfAccountsTest
   ✓ chart of accounts page renders                                       0.03s  
   ✓ it displays a list of accounts                                       0.03s  
-  ✓ it displays a list of chart of accounts                              0.04s  
+  ✓ it displays a list of chart of accounts                              0.03s  
   ✓ it can create a new chart of account record                          0.04s  
   ✓ it can update an existing chart of account record                    0.04s  
 
    FAIL  Tests\Feature\Livewire\Accounting\JournalEntriesTest
-  ✓ it renders successfully                                              0.03s  
+  ✓ it renders successfully                                              0.04s  
   ⨯ it creates a journal entry                                           0.06s  
-  ✓ a journal entry requires balanced debits and credits                 0.07s  
+  ✓ a journal entry requires balanced debits and credits                 0.05s  
 
    FAIL  Tests\Feature\Livewire\Accounting\Vouchers\CreateTest
-  ✓ voucher create component renders successfully                        0.03s  
-  ✓ voucher create component has required fields                         0.02s  
-  ⨯ voucher create component loads chart of accounts                     0.02s  
-  ✓ voucher create component validates required fields                   0.04s  
+  ✓ voucher create component renders successfully                        0.02s  
+  ✓ voucher create component has required fields                         0.03s  
+  ⨯ voucher create component loads chart of accounts                     0.03s  
+  ✓ voucher create component validates required fields                   0.03s  
   ✓ voucher create component validates amount is positive                0.04s  
-  ✓ voucher create component creates voucher successfully                0.05s  
-  ✓ voucher create component handles creation errors                     0.04s  
+  ✓ voucher create component creates voucher successfully                0.04s  
+  ✓ voucher create component handles creation errors                     0.03s  
 
    FAIL  Tests\Feature\Livewire\CashManagementDemoTest
-  ✓ it renders the cash management demo component                        0.03s  
+  ✓ it renders the cash management demo component                        0.04s  
   ✓ it displays cash receipt and payment forms                           0.02s  
   ✓ it loads cash accounts for the organization                          0.02s  
-  ✓ it can switch between receipt and payment modes                      0.03s  
+  ✓ it can switch between receipt and payment modes                      0.02s  
   ✓ it validates receipt form data                                       0.03s  
   ✓ it validates payment form data                                       0.03s  
-  ✓ it creates a cash receipt successfully                               0.05s  
-  ⨯ it creates a cash payment successfully                               0.05s  
-  ✓ it displays recent cash receipts and payments                        0.03s  
-  ✓ it resets form after successful receipt creation                     0.06s  
-  ⨯ it resets form after successful payment creation                     0.05s  
+  ✓ it creates a cash receipt successfully                               0.06s  
+  ⨯ it creates a cash payment successfully                               0.04s  
+  ✓ it displays recent cash receipts and payments                        0.02s  
+  ✓ it resets form after successful receipt creation                     0.04s  
+  ⨯ it resets form after successful payment creation                     0.04s  
 
    PASS  Tests\Feature\Livewire\Organization\MemberManagerTest
-  ✓ it can display a list of organization members                        0.03s  
+  ✓ it can display a list of organization members                        0.04s  
   ✓ it can search for members by name or email                           0.04s  
 
    PASS  Tests\Feature\Livewire\Organization\OrganizationFormTest
   ✓ it shows create form                                                 0.03s  
-  ✓ it shows edit form                                                   0.03s  
-  ✓ it creates new organization                                          0.04s  
+  ✓ it shows edit form                                                   0.02s  
+  ✓ it creates new organization                                          0.03s  
   ✓ it updates existing organization                                     0.04s  
   ✓ it validates required fields                                         0.03s  
-  ✓ it validates unique name                                             0.03s  
+  ✓ it validates unique name                                             0.04s  
   ✓ it closes modal                                                      0.03s  
 
    FAIL  Tests\Feature\Livewire\Organization\OrganizationListTest
   ✓ it shows organizations list                                          0.03s  
-  ✓ it searches organizations by name                                    0.04s  
-  ✓ it sorts organizations by name ascending                             0.04s  
-  ✓ it sorts organizations by name descending                            0.05s  
+  ✓ it searches organizations by name                                    0.03s  
+  ✓ it sorts organizations by name ascending                             0.03s  
+  ✓ it sorts organizations by name descending                            0.04s  
   ✓ it sorts organizations by status                                     0.04s  
-  ✓ it paginates organizations                                           0.05s  
-  ⨯ it shows empty state when no organizations                           0.03s  
+  ✓ it paginates organizations                                           0.04s  
+  ⨯ it shows empty state when no organizations                           0.02s  
 
    FAIL  Tests\Feature\Livewire\Organization\OrganizationTreeTest
-  ⨯ it can display the organization tree                                 0.04s  
+  ⨯ it can display the organization tree                                 0.03s  
   ⨯ an organization unit can be dragged and dropped to another parent    0.03s  
   ✓ an organizational unit cannot be dropped onto itself                 0.03s  
-  ⨯ an organizational unit can be dropped as a root node                 0.03s  
+  ⨯ an organizational unit can be dropped as a root node                 0.04s  
   ✓ a parent cannot be dropped onto one of its descendants               0.03s  
   ⨯ a sibling can be dropped under another sibling                       0.03s  
   ⨯ an empty tree renders correctly                                      0.02s  
-  ✓ it can handle a large number of units without crashing               0.10s  
+  ✓ it can handle a large number of units without crashing               0.08s  
   ✓ a dropped unit that does not exist does not cause an error           0.03s  
 
    FAIL  UserPlacementTest
-  ✓ it can assign a user to a unit                                       0.04s  
+  ✓ it can assign a user to a unit                                       0.05s  
   ⨯ it can unassign a user by dropping them onto the root                0.03s  
 
    PASS  Tests\Feature\Models\CustomerTest
   ✓ customer can be created with financial fields                        0.02s  
   ✓ customer belongs to organization                                     0.02s  
-  ✓ customer uses soft deletes                                           0.03s  
+  ✓ customer uses soft deletes                                           0.02s  
   ✓ customer casts financial fields correctly                            0.02s  
   ✓ customer scope active works correctly                                0.02s  
-  ✓ customer scope with balance works correctly                          0.02s  
-  ✓ customer full address concatenates correctly                         0.02s  
+  ✓ customer scope with balance works correctly                          0.03s  
+  ✓ customer full address concatenates correctly                         0.01s  
   ✓ customer display name includes balance                               0.02s  
 
    FAIL  Tests\Feature\Models\FinancialManagementTest
-  ✓ customer financial fields work correctly                             0.02s  
+  ✓ customer financial fields work correctly                             0.03s  
   ✓ customer relationships work correctly                                0.02s  
-  ✓ customer soft deletes work                                           0.03s  
+  ✓ customer soft deletes work                                           0.02s  
   ✓ customer scopes work correctly                                       0.02s  
-  ✓ customer full address concatenates correctly                         0.02s  
+  ✓ customer full address concatenates correctly                         0.03s  
   ✓ invoice can be created with all relationships                        0.02s  
-  ✓ invoice status scopes work correctly                                 0.03s  
+  ✓ invoice status scopes work correctly                                 0.02s  
   ⨯ invoice amount due calculation works                                 0.03s  
   ✓ invoice overdue detection works                                      0.02s  
   ✓ payment can be created with relationships                            0.02s  
-  ✓ payment status scopes work correctly                                 0.04s  
-  ✓ payment fully applied calculation works                              0.03s  
+  ✓ payment status scopes work correctly                                 0.03s  
+  ✓ payment fully applied calculation works                              0.02s  
 
    PASS  Tests\Feature\Models\InvoiceTest
-  ✓ invoice can be created with required fields                          0.03s  
+  ✓ invoice can be created with required fields                          0.04s  
   ✓ invoice belongs to customer                                          0.02s  
   ✓ invoice belongs to vendor                                            0.02s  
   ✓ invoice uses soft deletes                                            0.02s  
-  ✓ invoice casts amounts correctly                                      0.03s  
+  ✓ invoice casts amounts correctly                                      0.02s  
   ✓ invoice casts dates correctly                                        0.02s  
-  ✓ invoice status scope works                                           0.03s  
+  ✓ invoice status scope works                                           0.02s  
 
    PASS  Tests\Feature\MultiStepSetupWizardTest
-  ✓ it shows organization step for new users                             0.04s  
+  ✓ it shows organization step for new users                             0.06s  
   ✓ it can store organization and proceed to store step                  0.03s  
-  ✓ it shows store setup step after organization                         0.04s  
-  ✓ it can create first store and proceed to accounting                  0.05s  
-  ✓ it shows accounting setup step after store                           0.04s  
+  ✓ it shows store setup step after organization                         0.05s  
+  ✓ it can create first store and proceed to accounting                  0.04s  
+  ✓ it shows accounting setup step after store                           0.05s  
+
+   PASS  Tests\Feature\Navigation\NavigationAccessibilityTest
+  ✓ navigation has proper aria labels                                    0.08s  
+  ✓ navigation links have proper semantic structure                      0.06s  
+  ✓ navigation supports keyboard navigation                              0.06s  
+  ✓ navigation has proper heading structure                              0.07s  
+  ✓ navigation links are descriptive                                     0.06s  
+  ✓ navigation has skip links                                            0.06s  
+  ✓ dropdowns are accessible                                             0.07s  
+  ✓ search input is accessible                                           0.06s  
+  ✓ theme toggle is accessible                                           0.06s  
+  ✓ mobile navigation is accessible                                      0.07s  
+
+   PASS  Tests\Feature\Navigation\NavigationFeatureTest
+  ✓ main navigation renders on authenticated pages                       0.06s  
+  ✓ navigation links are accessible                                      0.07s  
+  ✓ user profile displays correct user information                       0.06s  
+  ✓ navigation respects organization context                             0.06s  
+  ✓ dropdown menus function correctly                                    0.07s  
+  ✓ search functionality is available                                    0.06s  
+  ✓ theme toggle works correctly                                         0.06s  
+  ✓ mobile navigation is responsive                                      0.07s  
+  ✓ breadcrumb navigation displays correctly                             0.06s  
+  ✓ quick actions are accessible                                         0.06s  
+  ✓ notifications display correctly                                      0.07s  
+  ✓ language switcher functions correctly                                0.06s  
+  ✓ navigation handles unauthenticated users correctly                   0.05s  
+  ✓ navigation handles different user roles                              0.07s  
+
+   PASS  Tests\Feature\Navigation\NavigationLivewireIntegrationTest
+  ✓ navigation components work with livewire                             0.07s  
+  ✓ theme toggle works with livewire                                     0.07s  
+  ✓ search works with livewire                                           0.06s  
+  ✓ notifications work with livewire                                     0.07s  
+  ✓ user profile works with livewire                                     0.09s  
+  ✓ mobile menu toggle works with livewire                               0.06s  
+  ✓ dropdowns work with livewire                                         0.06s  
+  ✓ language switcher works with livewire                                0.07s  
+  ✓ quick actions work with livewire                                     0.06s  
+  ✓ breadcrumb works with livewire                                       0.06s  
+  ✓ navigation state persists with livewire                              0.07s  
+  ✓ navigation loading states work with livewire                         0.06s  
+  ✓ navigation error handling works with livewire                        0.06s  
+  ✓ navigation polling works with livewire                               0.07s  
+  ✓ navigation navigation works with livewire                            0.06s  
+  ✓ navigation init works with livewire                                  0.06s  
+
+   PASS  Tests\Feature\Navigation\NavigationResponsiveTest
+  ✓ navigation has mobile breakpoints                                    0.08s  
+  ✓ desktop menu hides on mobile                                         0.06s  
+  ✓ mobile menu is available                                             0.06s  
+  ✓ navigation adapts to tablet viewport                                 0.07s  
+  ✓ sidebar is responsive                                                0.06s  
+  ✓ user profile is responsive                                           0.06s  
+  ✓ search bar is responsive                                             0.07s  
+  ✓ notifications are responsive                                         0.06s  
+  ✓ breadcrumb is responsive                                             0.06s  
+  ✓ quick actions are responsive                                         0.07s  
+  ✓ dropdowns are responsive                                             0.06s  
+  ✓ navigation uses flexbox for responsiveness                           0.06s  
+  ✓ navigation has proper spacing on different screens                   0.07s  
+
+   PASS  Tests\Feature\Navigation\NavigationRoleBasedTest
+  ✓ admin sees admin navigation items                                    0.07s  
+  ✓ manager sees manager navigation items                                0.07s  
+  ✓ employee sees employee navigation items                              0.06s  
+  ✓ admin can access protected routes                                    0.02s  
+  ✓ manager can access protected routes                                  0.02s  
+  ✓ employee can access protected routes                                 0.02s  
+  ✓ all roles can access dashboard                                       0.14s  
+  ✓ navigation shows correct user name                                   0.13s  
+  ✓ role based navigation access                                         0.13s  
+  ✓ role based sidebar navigation                                        0.14s  
+  ✓ navigation respects organization scoping                             0.06s  
+
+   PASS  Tests\Feature\NavigationHoverTest
+  ✓ it dropdown opens on hover and closes on mouse leave                 0.04s  
+  ✓ it dropdown content renders correctly                                0.04s  
+  ✓ it dropdown triggers have proper hover attributes                    0.04s  
+  ✓ it navigation icons are properly aligned                             0.05s  
 
    FAIL  Tests\Feature\Organization\OrganizationDashboardTest
   ⨯ authenticated user can access organization dashboard                 0.03s  
-  ⨯ dashboard displays correct organization metrics                      0.03s  
-  ⨯ user can view organization structure                                 0.03s  
-  ⨯ dashboard includes department distribution data                      0.04s  
-  ⨯ analytics page displays trend data                                   0.02s  
+  ⨯ dashboard displays correct organization metrics                      0.02s  
+  ⨯ user can view organization structure                                 0.02s  
+  ⨯ dashboard includes department distribution data                      0.03s  
+  ⨯ analytics page displays trend data                                   0.03s  
 
    FAIL  Tests\Feature\Portal\OrganizationUserIntegrationTest
   ✓ organization user roles are properly cast                            0.03s  
   ✓ employee can access employee portal with employee role               0.05s  
   ⨯ manager can access both employee and manager portals                 0.05s  
-  ✓ user without organization access denied                              0.04s  
+  ✓ user without organization access denied                              0.03s  
   ✓ employee cannot access manager portal                                0.03s  
-  ⨯ has role method works correctly                                      0.03s  
+  ⨯ has role method works correctly                                      0.04s  
   ⨯ has any role method works correctly                                  0.03s  
 
    WARN  OrganizationUserPivotTest
@@ -721,74 +975,74 @@
   ✓ outstanding statements service basic functionality                   0.02s  
 
    FAIL  Tests\Feature\OutstandingStatementsTest
-  ✓ can generate receivables aging report                                0.03s  
+  ✓ can generate receivables aging report                                0.02s  
   ⨯ can generate payables aging report                                   0.02s  
-  ✓ can get customer outstanding summary                                 0.02s  
+  ✓ can get customer outstanding summary                                 0.04s  
   ✓ can get vendor outstanding summary                                   0.02s  
   ⨯ can generate comprehensive receivables statement with aging          0.03s  
   ⨯ can generate comprehensive payables statement with aging             0.02s  
   ⨯ can filter receivables statement by customer                         0.02s  
-  ⨯ can filter payables statement by vendor                              0.03s  
-  ⨯ can filter statements by date range                                  0.03s  
-  ⨯ can export statement data                                            0.02s  
+  ⨯ can filter payables statement by vendor                              0.02s  
+  ⨯ can filter statements by date range                                  0.02s  
+  ⨯ can export statement data                                            0.03s  
   ⨯ can get aging summary for dashboard                                  0.02s  
   ✓ respects organization isolation                                      0.02s  
 
    PASS  Tests\Feature\Payroll\EmployeeIncrementTest
-  ✓ employee increment can be created                                    0.03s  
+  ✓ employee increment can be created                                    0.02s  
   ✓ employee increment can be approved                                   0.02s  
   ✓ employee increment can be implemented                                0.02s  
-  ✓ increment calculation works correctly for percentage                 0.03s  
-  ✓ increment calculation works correctly for fixed amount               0.02s  
+  ✓ increment calculation works correctly for percentage                 0.02s  
+  ✓ increment calculation works correctly for fixed amount               0.03s  
   ✓ only approved increments can be implemented                          0.02s  
 
    PASS  Tests\Feature\Payroll\PayrollCalculationTest
-  ✓ payroll calculation service calculates basic payroll correctly       0.03s  
+  ✓ payroll calculation service calculates basic payroll correctly       0.02s  
   ✓ payroll calculation includes allowances correctly                    0.02s  
   ✓ payroll calculation includes deductions correctly                    0.02s  
   ✓ tax calculation works correctly                                      0.02s  
-  ✓ effective basic salary considers increments                          0.03s  
-  ✓ batch payroll processing works correctly                             0.03s  
-  ✓ payroll summary generation works correctly                           0.03s  
+  ✓ effective basic salary considers increments                          0.02s  
+  ✓ batch payroll processing works correctly                             0.04s  
+  ✓ payroll summary generation works correctly                           0.02s  
 
    WARN  Tests\Feature\Portal\PayrollProcessingTest
   ! can calculate payroll with attendance → This test did not perform a… 0.02s  
   ! payroll includes correct deductions → This test did not perform any… 0.01s  
-  ! can generate accounting journal entry → This test did not perform a… 0.02s  
+  ! can generate accounting journal entry → This test did not perform a… 0.01s  
   ! payslip generation → This test did not perform any assertions        0.01s  
-  ! payroll uses correct chart of accounts → This test did not perform…  0.02s  
+  ! payroll uses correct chart of accounts → This test did not perform…  0.01s  
 
    FAIL  Tests\Feature\PdfGenerationTest
   ✓ payslip download should work correctly                               0.11s  
-  ✓ payslip download should return pdf response                          0.07s  
-  ✓ payslip pdf should have correct filename                             0.07s  
+  ✓ payslip download should return pdf response                          0.06s  
+  ✓ payslip pdf should have correct filename                             0.06s  
   ✓ trial balance download should return pdf response                    0.06s  
   ✓ trial balance pdf should have correct filename                       0.04s  
-  ✓ income statement download should return pdf response                 0.05s  
+  ✓ income statement download should return pdf response                 0.04s  
   ✓ balance sheet download should return pdf response                    0.05s  
   ✓ low stock pdf download should return pdf response                    0.05s  
   ✓ stock levels pdf download should return pdf response                 0.05s  
   ⨯ movement pdf download should return pdf response                     0.02s  
   ✓ pdf generation should handle missing data gracefully                 0.02s  
-  ✓ pdf generation should not exceed memory limits                       0.05s  
+  ✓ pdf generation should not exceed memory limits                       0.04s  
 
    FAIL  Tests\Feature\Portal\CompletePortalTest
-  ✓ employee can access all portal features                              0.08s  
+  ✓ employee can access all portal features                              0.12s  
   ⨯ employee can clock in and out                                        0.03s  
   ✓ employee can apply for leave                                         0.05s  
   ⨯ manager can access manager portal                                    0.03s  
-  ⨯ employee can view payslip details                                    0.04s  
-  ⨯ employee cannot view other employee payslips                         0.03s  
+  ⨯ employee can view payslip details                                    0.03s  
+  ⨯ employee cannot view other employee payslips                         0.04s  
   ✓ attendance records show correct summary                              0.05s  
 
    FAIL  Tests\Feature\Portal\EmployeePortalTest
-  ✓ employee can access their portal dashboard                           0.05s  
-  ✓ employee can view attendance page                                    0.04s  
-  ✓ employee can filter attendance by month                              0.05s  
-  ✓ employee can apply for leave                                         0.04s  
-  ✓ employee can view leave page                                         0.04s  
-  ✓ employee can view payslips page                                      0.04s  
-  ✓ employee can view leave application form                             0.04s  
+  ✓ employee can access their portal dashboard                           0.06s  
+  ✓ employee can view attendance page                                    0.05s  
+  ✓ employee can filter attendance by month                              0.06s  
+  ✓ employee can apply for leave                                         0.05s  
+  ✓ employee can view leave page                                         0.05s  
+  ✓ employee can view payslips page                                      0.05s  
+  ✓ employee can view leave application form                             0.05s  
   ⨯ employee can clock in and out                                        0.03s  
 
    FAIL  Tests\Feature\Portal\ManagerPortalTest
@@ -799,17 +1053,17 @@
   ⨯ manager can generate team reports                                    0.03s  
 
    PASS  Tests\Feature\SetupChartOfAccountsTest
-  ✓ it creates default chart of accounts                                 0.04s  
+  ✓ it creates default chart of accounts                                 0.05s  
   ✓ it skips account creation if not requested                           0.03s  
   ✓ it creates organization unit for accounting department               0.03s  
 
    PASS  Tests\Feature\SetupStoreTest
   ✓ it creates first store for organization                              0.04s  
   ✓ it validates store creation                                          0.03s  
-  ✓ it auto generates store code if not provided                         0.05s  
+  ✓ it auto generates store code if not provided                         0.04s  
 
    FAIL  Tests\Feature\SetupWizardTest
-  ✓ it shows setup wizard for new users                                  0.04s  
+  ✓ it shows setup wizard for new users                                  0.05s  
   ✓ it redirects to dashboard if organization exists                     0.03s  
   ✓ it can create organization through wizard                            0.03s  
   ✓ it validates organization creation                                   0.03s  
@@ -832,14 +1086,14 @@
   ⨯ tax calculations are properly scoped to organization                 0.02s  
 
    PASS  Tests\Feature\TenancyFeatureTest
-  ✓ queries are automatically scoped to the authenticated users organiz… 0.05s  
-  ✓ organization id is automatically set on creation                     0.04s  
-  ✓ global scope can be bypassed for admin queries                       0.04s  
+  ✓ queries are automatically scoped to the authenticated users organiz… 0.06s  
+  ✓ organization id is automatically set on creation                     0.03s  
+  ✓ global scope can be bypassed for admin queries                       0.03s  
 
    PASS  Tests\Feature\VoucherSystemTest
   ✓ can create sales voucher                                             0.03s  
-  ✓ can create purchase voucher                                          0.03s  
-  ✓ can create salary voucher                                            0.03s  
+  ✓ can create purchase voucher                                          0.02s  
+  ✓ can create salary voucher                                            0.02s  
   ✓ can create expense voucher                                           0.03s  
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Unit\Accounting\AccountTypeValidationTest > it throws excep…   
@@ -906,7 +1160,7 @@ Failed asserting that 302 is identical to 200.
   Expected: <!DOCTYPE html>\n
   <html lang="en">\n
   \n
-  ... (556 more lines)
+  ... (1134 more lines)
 
   To contain: Add Store
 
@@ -923,7 +1177,7 @@ Failed asserting that 302 is identical to 200.
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\Feature\Accounting\BankAccountTest…   QueryException   
-  SQLSTATE[23000]: Integrity constraint violation: 19 FOREIGN KEY constraint failed (Connection: sqlite, SQL: insert into "chart_of_accounts" ("code", "name", "type", "description", "organization_id", "updated_at", "created_at") values (5085, rerum, equity, Ipsum labore nihil quo ut sint voluptates deleniti vero., 1, 2025-11-25 06:34:32, 2025-11-25 06:34:32))
+  SQLSTATE[23000]: Integrity constraint violation: 19 FOREIGN KEY constraint failed (Connection: sqlite, SQL: insert into "chart_of_accounts" ("code", "name", "type", "description", "organization_id", "updated_at", "created_at") values (6228, est, liability, Ea qui aut sint est quasi sequi., 1, 2025-11-29 19:14:30, 2025-11-29 19:14:30))
 
   at vendor/laravel/framework/src/Illuminate/Database/Connection.php:570
     566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
@@ -957,7 +1211,7 @@ Failed asserting that 500 is identical to 200.
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\Feature\Accounting\FixedAssetTest > fixed asset cal…   
-  Failed asserting that 1200.0 is identical to 2400.
+  Failed asserting that 2400.0 is identical to 2400.
 
   at tests/Feature/Feature/Accounting/FixedAssetTest.php:112
     108▕     // Sum of years: 1+2+3+4+5 = 15
@@ -1170,7 +1424,7 @@ Found similar results: [
   Expected: <!-- resources/views/hrm/dashboard.blade.php -->\n
   <!DOCTYPE html>\n
   <html lang="en">\n
-  ... (433 more lines)
+  ... (1011 more lines)
 
   To contain: Attendance Overview
 
@@ -1245,7 +1499,7 @@ Found: [
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\Livewire\Accounting\Vouchers\CreateTest > voucher c…   
-  Failed asserting that Failed asserting that '<div wire:snapshot="{&quot;data&quot;:{&quot;date&quot;:&quot;2025-11-25&quot;,&quot;type&quot;:&quot;&quot;,&quot;amount&quot;:&quot;&quot;,&quot;description&quot;:&quot;&quot;,&quot;notes&quot;:&quot;&quot;},&quot;memo&quot;:{&quot;id&quot;:&quot;24yIdkU03ulhnT5MklT8&quot;,&quot;name&quot;:&quot;accounting.vouchers.create&quot;,&quot;path&quot;:&quot;livewire-unit-test-endpoint\/McUDNzux60CNgYX0V4ZX&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;26a90e3323a78ad2db271ce21fa5bc5bbed2106ee7eb8e1964fe3c57dd1262ba&quot;}" wire:effects="[]" wire:id="24yIdkU03ulhnT5MklT8">
+  Failed asserting that Failed asserting that '<div wire:snapshot="{&quot;data&quot;:{&quot;date&quot;:&quot;2025-11-29&quot;,&quot;type&quot;:&quot;&quot;,&quot;amount&quot;:&quot;&quot;,&quot;description&quot;:&quot;&quot;,&quot;notes&quot;:&quot;&quot;},&quot;memo&quot;:{&quot;id&quot;:&quot;VK2AolHvSrTZWhvLUO32&quot;,&quot;name&quot;:&quot;accounting.vouchers.create&quot;,&quot;path&quot;:&quot;livewire-unit-test-endpoint\/uBQMq4XI4UuVEkTg7COO&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;0031cdd655abacf86e6426ce2060fd7b52026a0c601d36c22b0813d5959dc18e&quot;}" wire:effects="[]" wire:id="VK2AolHvSrTZWhvLUO32">
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">
@@ -1376,7 +1630,7 @@ Found: [
             });
         });
     </script>
-</div>' contains "nihil" in specified order..
+</div>' contains "aliquam" in specified order..
 
   at vendor/livewire/livewire/src/Features/SupportTesting/Testable.php:398
     394▕         if (static::hasMacro($method)) {
@@ -1429,7 +1683,7 @@ Found: [
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\Livewire\Organization\OrganizationListTest > it sho…   
-  Expected: <div wire:snapshot="" wire:effects="" wire:id="7E5Xc3YJfBRxvArB19NZ">\n
+  Expected: <div wire:snapshot="" wire:effects="" wire:id="sQLQYdIu0vqiiyWkd7cY">\n
       <!-- Header with Search and Actions -->\n
       <div class="flex flex-col sm:flex-row justify-between items-center mb-6 space-y-4 sm:space-y-0">\n
   ... (103 more lines)
@@ -1452,7 +1706,7 @@ Found: [
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\Livewire\Organization\OrganizationTreeTest > it can…   
-  Expected: <div wire:snapshot="" wire:effects="" wire:id="B7nmX3RZzO0ShilXPIjq" class="p-6 bg-white rounded shadow">\n
+  Expected: <div wire:snapshot="" wire:effects="" wire:id="ZSCqhxy3ShQ5dZ5UJxEd" class="p-6 bg-white rounded shadow">\n
       <h2 class="text-2xl font-semibold mb-4">Organizational Tree </h2>\n
       <div class="mb-4">\n
   ... (90 more lines)
@@ -2150,37 +2404,37 @@ Failed asserting that '["manager","employee"]' is of type array.
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\OutstandingStatementsTest > can generate comprehens…   
-  Failed asserting that 0 is identical to 1.
+  Failed asserting that 3500.0 is identical to 5000.
 
-  at tests/Feature/OutstandingStatementsTest.php:174
-    170▕ 
+  at tests/Feature/OutstandingStatementsTest.php:175
     171▕     $statement = app(OutstandingStatementsService::class)->generateReceivablesStatement();
     172▕ 
     173▕     expect($statement['type'])->toBe('receivables');
-  ➜ 174▕     expect($statement['summary']['total_customers'])->toBe(1);
-    175▕     expect($statement['summary']['total_outstanding'])->toBe(5000);
+    174▕     expect($statement['summary']['total_customers'])->toBe(1);
+  ➜ 175▕     expect($statement['summary']['total_outstanding'])->toBe(5000);
     176▕     expect($statement['summary']['aging']['current'])->toBe(3000); // 1000 + 2000
     177▕     expect($statement['summary']['aging']['30_days'])->toBe(1500); // 45 days = 30 days bucket
     178▕     expect($statement['summary']['aging']['60_days'])->toBe(0); // No entries in 60 days bucket
+    179▕     expect($statement['summary']['aging']['90_days'])->toBe(500);
 
-  1   tests/Feature/OutstandingStatementsTest.php:174
+  1   tests/Feature/OutstandingStatementsTest.php:175
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\OutstandingStatementsTest > can generate comprehens…   
-  Failed asserting that 0 is identical to 1.
+  Failed asserting that 1500.0 is identical to 4500.
 
-  at tests/Feature/OutstandingStatementsTest.php:226
-    222▕ 
+  at tests/Feature/OutstandingStatementsTest.php:227
     223▕     $statement = app(OutstandingStatementsService::class)->generatePayablesStatement();
     224▕ 
     225▕     expect($statement['type'])->toBe('payables');
-  ➜ 226▕     expect($statement['summary']['total_vendors'])->toBe(1);
-    227▕     expect($statement['summary']['total_outstanding'])->toBe(4500);
+    226▕     expect($statement['summary']['total_vendors'])->toBe(1);
+  ➜ 227▕     expect($statement['summary']['total_outstanding'])->toBe(4500);
     228▕     expect($statement['summary']['aging']['current'])->toBe(1000);
     229▕     expect($statement['summary']['aging']['30_days'])->toBe(2000);
     230▕     expect($statement['summary']['aging']['60_days'])->toBe(1500);
+    231▕ });
 
-  1   tests/Feature/OutstandingStatementsTest.php:226
+  1   tests/Feature/OutstandingStatementsTest.php:227
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\OutstandingStatementsTest > can filter receivables…    
@@ -2705,7 +2959,7 @@ Failed asserting that 404 is identical to 200.
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\TaxManagementTest > user can update…  QueryException   
-  SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: tax_rates.organization_id (Connection: sqlite, SQL: insert into "tax_rates" ("name", "code", "type", "rate", "tax_jurisdiction_id", "is_compound", "is_active", "effective_date", "end_date", "description", "applicable_accounts", "gl_account_code", "updated_at", "created_at") values (et vel omnis, YSY, income, 20.1691, ?, 0, 1, 2025-04-07 00:00:00, ?, Quisquam corrupti excepturi illo neque harum tempore., ?, ?, 2025-11-25 06:34:44, 2025-11-25 06:34:44))
+  SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: tax_rates.organization_id (Connection: sqlite, SQL: insert into "tax_rates" ("name", "code", "type", "rate", "tax_jurisdiction_id", "is_compound", "is_active", "effective_date", "end_date", "description", "applicable_accounts", "gl_account_code", "updated_at", "created_at") values (non voluptatem sed, JVW, other, 0.1819, ?, 0, 1, 2025-02-05 00:00:00, ?, Natus ex et doloremque quia rerum itaque ab., ?, ?, 2025-11-29 19:14:47, 2025-11-29 19:14:47))
 
   at vendor/laravel/framework/src/Illuminate/Database/Connection.php:570
     566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
@@ -2791,7 +3045,7 @@ Failed asserting that 404 is identical to 200.
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\TaxManagementTest > tax reporting s…  QueryException   
-  SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: tax_calculations.calculable_type (Connection: sqlite, SQL: insert into "tax_calculations" ("calculable_type", "calculable_id", "tax_rate_id", "tax_exemption_id", "base_amount", "taxable_amount", "tax_rate", "tax_amount", "calculation_date", "calculation_method", "calculation_details", "notes", "organization_id", "updated_at", "created_at") values (?, ?, 1, ?, 1000, 110.15, 12.7664, 100, 2025-11-25 06:34:45, percentage, {"exemption_percentage":0,"is_compound":false}, ?, 1, 2025-11-25 06:34:45, 2025-11-25 06:34:45))
+  SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: tax_calculations.calculable_type (Connection: sqlite, SQL: insert into "tax_calculations" ("calculable_type", "calculable_id", "tax_rate_id", "tax_exemption_id", "base_amount", "taxable_amount", "tax_rate", "tax_amount", "calculation_date", "calculation_method", "calculation_details", "notes", "organization_id", "updated_at", "created_at") values (?, ?, 1, ?, 1000, 1822.77, 12.9353, 100, 2025-11-29 19:14:47, percentage, {"exemption_percentage":0,"is_compound":false}, Qui cumque reprehenderit fugit accusamus magnam molestiae pariatur., 1, 2025-11-29 19:14:47, 2025-11-29 19:14:47))
 
   at vendor/laravel/framework/src/Illuminate/Database/Connection.php:570
     566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
@@ -2809,7 +3063,7 @@ Failed asserting that 404 is identical to 200.
 
   ────────────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\TaxManagementTest > tax compliance…   QueryException   
-  SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: tax_calculations.calculable_type (Connection: sqlite, SQL: insert into "tax_calculations" ("calculable_type", "calculable_id", "tax_rate_id", "tax_exemption_id", "base_amount", "taxable_amount", "tax_rate", "tax_amount", "calculation_date", "calculation_method", "calculation_details", "notes", "organization_id", "updated_at", "created_at") values (?, ?, 1, ?, 5689.14, 3667.68, 1.4218, 100, 2025-11-25 06:34:45, percentage, {"exemption_percentage":0,"is_compound":false}, Soluta in sit ab enim., 1, 2025-11-25 06:34:45, 2025-11-25 06:34:45))
+  SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: tax_calculations.calculable_type (Connection: sqlite, SQL: insert into "tax_calculations" ("calculable_type", "calculable_id", "tax_rate_id", "tax_exemption_id", "base_amount", "taxable_amount", "tax_rate", "tax_amount", "calculation_date", "calculation_method", "calculation_details", "notes", "organization_id", "updated_at", "created_at") values (?, ?, 1, ?, 761.66, 7678.57, 20.3282, 100, 2025-11-29 19:14:47, percentage, {"exemption_percentage":0,"is_compound":false}, ?, 1, 2025-11-29 19:14:47, 2025-11-29 19:14:47))
 
   at vendor/laravel/framework/src/Illuminate/Database/Connection.php:570
     566▕             $this->bindValues($statement, $this->prepareBindings($bindings));
@@ -2843,6 +3097,6 @@ Failed asserting that 404 is identical to 200.
   1   tests/Feature/TaxManagementTest.php:391
 
 
-  Tests:    70 failed, 6 risky, 4 skipped, 541 passed (2000 assertions)
-  Duration: 22.49s
+  Tests:    70 failed, 6 risky, 4 skipped, 739 passed (2348 assertions)
+  Duration: 27.72s
 

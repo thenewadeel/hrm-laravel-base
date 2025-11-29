@@ -40,6 +40,16 @@ class OrganizationUser extends Pivot
         return $this->belongsTo(User::class);
     }
 
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo(OrganizationUnit::class, 'organization_unit_id');
+    }
+
     /**
      * Check if user has any of the given roles
      */

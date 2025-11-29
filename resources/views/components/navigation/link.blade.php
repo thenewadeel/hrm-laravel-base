@@ -20,7 +20,7 @@ $classes = $active
    {{ $attributes->merge(['class' => $classes]) }}>
     
     @if($icon)
-        <span class="mr-3 h-5 w-5 flex-shrink-0">
+        <span class="mr-3 flex items-center justify-center h-5 w-5 flex-shrink-0">
             {!! $icon !!}
         </span>
     @endif

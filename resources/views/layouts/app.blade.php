@@ -23,7 +23,7 @@
     <x-banner />
 
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-        @livewire('navigation-menu')
+        @livewire('navigation-main')
         <!-- Page Heading -->
         @if (isset($header))
             <header class="bg-white dark:bg-gray-800 shadow">
@@ -41,6 +41,7 @@
     {{-- TODO : Add Footer --}}
     <x-flash-message duration="9000" />
     @stack('modals')
+    <x-navigation.scripts />
 
     @livewireScripts
 </body>

@@ -123,6 +123,7 @@ resources/views/
 ├── demo
 │   ├── cash-management.blade.php
 │   └── inventory-components.blade.php
+├── docs.blade.php
 ├── emails
 │   └── team-invitation.blade.php
 ├── hr

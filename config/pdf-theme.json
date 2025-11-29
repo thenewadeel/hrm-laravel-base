@@ -1,0 +1,31 @@
+{
+    "brand": {
+        "name": "HRM Laravel Base",
+        "tagline": "Enterprise ERP System",
+        "logo": "\ud83c\udfe2",
+        "website": "https://hrm-laravel-base.example.com",
+        "company": "HRM Solutions",
+        "version": "2.0.0"
+    },
+    "theme": {
+        "primary_color": "#2563eb",
+        "secondary_color": "#64748b",
+        "accent_color": "#3b82f6",
+        "success_color": "#10b981",
+        "warning_color": "#f59e0b",
+        "error_color": "#ef4444",
+        "background_color": "#ffffff",
+        "text_color": "#1f2937",
+        "border_color": "#e5e7eb",
+        "header_font": "Arial, sans-serif",
+        "body_font": "Georgia, serif",
+        "code_font": "'Courier New', monospace"
+    },
+    "custom": {
+        "watermark_text": "",
+        "confidential_text": "",
+        "draft_mode": false,
+        "print_date": true,
+        "author_info": true
+    }
+}
