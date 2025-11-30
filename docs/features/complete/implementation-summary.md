@@ -64,7 +64,26 @@ The HRM Laravel Base ERP system has successfully evolved from a simple HRM conce
 - **Requirements**: Core accounting functionality
 - **Features**: Double-entry integration, sequential numbering, TDD implementation
 
+### 📦 Inventory Management Module
+
+#### 🏪 Complete Inventory System
+- **[Inventory Management System](inventory-management.md)** - Multi-store inventory tracking and management
+- **Requirements**: Complete inventory control
+- **Features**: Multi-store support, real-time tracking, transaction management, reporting and analytics
+
+### 🏢 Organization Management Module
+
+#### 🏛️ Multi-Tenant Architecture
+- **[Organization Management System](organization-management.md)** - Complete multi-tenant organization management
+- **Requirements**: Multi-tenant architecture and data isolation
+- **Features**: Organization management, member invitations, role-based access control, data isolation
+
 ### 👥 Human Resources Module
+
+#### 🎯 Complete HR Management System
+- **[Human Resources Management](human-resources-management.md)** - Complete employee lifecycle management
+- **Requirements**: REQ-HR-001 through REQ-HR-010
+- **Features**: Employee management, attendance tracking, payroll processing, leave management, employee portals
 
 #### 💰 Enhanced Payroll System
 - **[Enhanced Payroll Management](payroll.md)** - Complete payroll with advanced features
@@ -128,12 +147,16 @@ The HRM Laravel Base ERP system has successfully evolved from a simple HRM conce
 - **Real-Time Tracking**: Live stock updates and valuation
 - **Cost Management**: FIFO and weighted average costing
 - **Reorder Intelligence**: Automated stock level alerts
+- **Transaction Management**: Complete stock movement tracking
+- **Reporting Analytics**: Comprehensive inventory insights
 
 ### 🏢 Organizational Efficiency
 - **Multi-Tenancy**: Scalable multi-organization support
 - **Role-Based Access**: Granular permission system
 - **Data Security**: Complete organization-based data isolation
 - **Audit Compliance**: Comprehensive audit trails and reporting
+- **Member Management**: Invitation-based member onboarding
+- **Organization Analytics**: Usage tracking and insights
 
 ---
 
