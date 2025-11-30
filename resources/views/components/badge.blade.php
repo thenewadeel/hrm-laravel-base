@@ -1,5 +1,5 @@
-{{-- resources/views/components/badge.blade.php --}}
 @props([
+    'variant' => 'solid',
     'color' => 'gray',
     'size' => 'md',
 ])

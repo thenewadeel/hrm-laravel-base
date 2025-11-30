@@ -176,7 +176,7 @@ class Employee extends Model
     public function organizationUser()
     {
         return $this->hasOne(OrganizationUser::class, 'user_id', 'user_id')
-            ->where('organization_id', $this->organization_id);
+            ->where('organization_user.organization_id', $this->organization_id);
     }
 
     /**

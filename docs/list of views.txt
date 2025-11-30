@@ -19,6 +19,9 @@ resources/views/
 │       └── trial-balance.blade.php
 ├── accounts
 │   └── index.blade.php
+├── admin
+│   ├── attach-user.blade.php
+│   └── dashboard.blade.php
 ├── alerts
 │   └── index.blade.php
 ├── api
@@ -34,6 +37,9 @@ resources/views/
 │   ├── reset-password.blade.php
 │   ├── two-factor-challenge.blade.php
 │   └── verify-email.blade.php
+├── badge-showcase.blade.php
+├── badge-standalone.blade.php
+├── badge-test.blade.php
 ├── categories
 │   └── index.blade.php
 ├── components
@@ -56,8 +62,10 @@ resources/views/
 │   │   ├── primary.blade.php
 │   │   └── secondary.blade.php
 │   ├── button.blade.php
+│   ├── category-badge.blade.php
 │   ├── confirmation-modal.blade.php
 │   ├── confirms-password.blade.php
+│   ├── count-badge.blade.php
 │   ├── dashboard
 │   │   └── stat-card.blade.php
 │   ├── data-table.blade.php
@@ -78,9 +86,11 @@ resources/views/
 │   │   ├── low-stock-alert.blade.php
 │   │   ├── quantity-indicator.blade.php
 │   │   └── stock-card.blade.php
+│   ├── key-value-badge.blade.php
 │   ├── layout.blade.php
 │   ├── loading-spinner.blade.php
 │   ├── modal.blade.php
+│   ├── model-select-dropdown.blade.php
 │   ├── navigation
 │   │   ├── breadcrumb.blade.php
 │   │   ├── desktop-menu.blade.php
@@ -107,16 +117,32 @@ resources/views/
 │   │   ├── theme-toggle.blade.php
 │   │   └── user-profile.blade.php
 │   ├── nav-link.blade.php
+│   ├── new-badge.blade.php
 │   ├── notification-system.blade.php
 │   ├── organization
 │   │   └── card.blade.php
+│   ├── priority-badge.blade.php
+│   ├── progress-badge.blade.php
 │   ├── quick-adjustment.blade.php
 │   ├── responsive-nav-link.blade.php
+│   ├── role-badge.blade.php
 │   ├── section-border.blade.php
 │   ├── section-title.blade.php
 │   ├── sort-indicator.blade.php
 │   ├── status-badge.blade.php
 │   ├── switchable-team.blade.php
+│   ├── tag-badges.blade.php
+│   ├── type-badge.blade.php
+│   ├── ui-badge.blade.php
+│   ├── ui-category-badge.blade.php
+│   ├── ui-count-badge.blade.php
+│   ├── ui-key-value-badge.blade.php
+│   ├── ui-priority-badge.blade.php
+│   ├── ui-progress-badge.blade.php
+│   ├── ui-role-badge.blade.php
+│   ├── ui-status-badge.blade.php
+│   ├── ui-tag-badges.blade.php
+│   ├── ui-type-badge.blade.php
 │   ├── validation-errors.blade.php
 │   └── welcome.blade.php
 ├── dashboard.blade.php
@@ -126,6 +152,8 @@ resources/views/
 ├── docs.blade.php
 ├── emails
 │   └── team-invitation.blade.php
+├── examples
+│   └── model-select-usage.blade.php
 ├── hr
 │   ├── employees
 │   │   ├── create.blade.php
@@ -137,7 +165,8 @@ resources/views/
 │   │   └── index.blade.php
 │   └── shifts
 │       ├── create.blade.php
-│       └── index.blade.php
+│       ├── index.blade.php
+│       └── show.blade.php
 ├── hrm
 │   └── dashboard.blade.php
 ├── inventory
@@ -221,6 +250,8 @@ resources/views/
 │   │   └── vouchers
 │   │       └── create.blade.php
 │   ├── cash-management-demo.blade.php
+│   ├── demo
+│   │   └── model-select-demo.blade.php
 │   ├── member-manager.blade.php
 │   ├── navigation-main.blade.php
 │   ├── organization
@@ -262,6 +293,7 @@ resources/views/
 ├── payroll
 │   ├── advance-reports.blade.php
 │   ├── advances.blade.php
+│   ├── dashboard.blade.php
 │   └── processing.blade.php
 ├── policy.blade.php
 ├── portal
@@ -291,6 +323,7 @@ resources/views/
 │   ├── organization.blade.php
 │   ├── stores.blade.php
 │   └── welcome.blade.php
+├── simple-badge-test.blade.php
 ├── teams
 │   ├── create.blade.php
 │   ├── create-team-form.blade.php
@@ -302,4 +335,4 @@ resources/views/
 ├── test-navigation.blade.php
 └── welcome.blade.php
 
-59 directories, 244 files
+62 directories, 274 files

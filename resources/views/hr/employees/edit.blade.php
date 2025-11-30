@@ -1,71 +1,247 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            🏠 {{ __('Employee Management') }}
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            👤 Edit Employee: {{ $employee->first_name }} {{ $employee->last_name }}
         </h2>
     </x-slot>
 
-
     <div class="py-6">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header -->
-            <div class="md:flex md:items-center md:justify-between mb-6">
-                <div class="flex-1 min-w-0">
-                    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
-                        Employee Management
-                    </h2>
-                </div>
-                <div class="mt-4 flex md:mt-0 md:ml-4">
-                    <a {{-- href="{{ route('hr.employees.create') }}" --}}
-                        class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                        Add Employee
-                    </a>
-                </div>
+            <div class="mb-6">
+                <nav class="flex" aria-label="Breadcrumb">
+                    <ol class="flex items-center space-x-4">
+                        <li>
+                            <a href="{{ route('hr.employees.index') }}" class="text-gray-500 hover:text-gray-700">
+                                Employees
+                            </a>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                </svg>
+                                <a href="{{ route('hr.employees.show', $employee) }}" class="ml-4 text-gray-500 hover:text-gray-700">
+                                    {{ $employee->first_name }} {{ $employee->last_name }}
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="ml-4 text-gray-900 font-medium">Edit</span>
+                            </div>
+                        </li>
+                    </ol>
+                </nav>
             </div>
 
-            <!-- Employee List -->
-            <div class="bg-white shadow overflow-hidden sm:rounded-md">
-                <ul class="divide-y divide-gray-200">
-                    <!-- Employee Row -->
-                    <li>
-                        <a {{-- href="{{ route('hr.employees.show', 1) }}"  --}} class="block hover:bg-gray-50">
-                            <div class="px-4 py-4 sm:px-6">
-                                <div class="flex items-center justify-between">
+            <!-- Form -->
+            <form action="{{ route('hr.employees.update', $employee) }}" method="POST">
+                @csrf
+                @method('PUT')
+                
+                <div class="space-y-6">
+                    <!-- Personal Information -->
+                    <div class="bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                        <div class="px-4 py-5 sm:p-6">
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Personal Information</h3>
+                            
+                            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                                <div>
+                                    <label for="first_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        First Name
+                                    </label>
+                                    <input type="text" id="first_name" name="first_name" value="{{ old('first_name', $employee->first_name) }}" required
+                                        class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                                </div>
+
+                                <div>
+                                    <label for="last_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Last Name
+                                    </label>
+                                    <input type="text" id="last_name" name="last_name" value="{{ old('last_name', $employee->last_name) }}" required
+                                        class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                                </div>
+
+                                <div>
+                                    <label for="middle_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Middle Name
+                                    </label>
+                                    <input type="text" id="middle_name" name="middle_name" value="{{ old('middle_name', $employee->middle_name) }}"
+                                        class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                                </div>
+
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Email
+                                    </label>
+                                    <input type="email" id="email" name="email" value="{{ old('email', $employee->email) }}" required
+                                        class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                                </div>
+
+                                <div>
+                                    <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Phone
+                                    </label>
+                                    <input type="tel" id="phone" name="phone" value="{{ old('phone', $employee->phone) }}"
+                                        class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                                </div>
+
+                                <div>
+                                    <label for="date_of_birth" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Date of Birth
+                                    </label>
+                                    <input type="date" id="date_of_birth" name="date_of_birth" value="{{ old('date_of_birth', $employee->date_of_birth?->format('Y-m-d')) }}"
+                                        class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                                </div>
+
+                                <div>
+                                    <label for="gender" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Gender
+                                    </label>
+                                    <select id="gender" name="gender" 
+                                        class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                                        <option value="">Select Gender</option>
+                                        <option value="male" {{ old('gender', $employee->gender) == 'male' ? 'selected' : '' }}>Male</option>
+                                        <option value="female" {{ old('gender', $employee->gender) == 'female' ? 'selected' : '' }}>Female</option>
+                                        <option value="other" {{ old('gender', $employee->gender) == 'other' ? 'selected' : '' }}>Other</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="organization_unit_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Department
+                                    </label>
+                                    <select id="organization_unit_id" name="organization_unit_id"
+                                        class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                                        <option value="">Select Department</option>
+                                        @foreach($organizationUnits as $unit)
+                                            <option value="{{ $unit->id }}" {{ old('organization_unit_id', $employee->organization_unit_id) == $unit->id ? 'selected' : '' }}>
+                                                {{ $unit->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Address Information -->
+                    <div class="bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                        <div class="px-4 py-5 sm:p-6">
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Address Information</h3>
+                            
+                            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                                <div class="sm:col-span-2">
+                                    <label for="address" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Street Address
+                                    </label>
+                                    <textarea id="address" name="address" rows="3"
+                                        class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white sm:text-sm">{{ old('address', $employee->address) }}</textarea>
+                                </div>
+
+                                <div>
+                                    <label for="city" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        City
+                                    </label>
+                                    <input type="text" id="city" name="city" value="{{ old('city', $employee->city) }}"
+                                        class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                                </div>
+
+                                <div>
+                                    <label for="state" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        State
+                                    </label>
+                                    <input type="text" id="state" name="state" value="{{ old('state', $employee->state) }}"
+                                        class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                                </div>
+
+                                <div>
+                                    <label for="zip_code" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        ZIP Code
+                                    </label>
+                                    <input type="text" id="zip_code" name="zip_code" value="{{ old('zip_code', $employee->zip_code) }}"
+                                        class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                                </div>
+
+                                <div>
+                                    <label for="country" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Country
+                                    </label>
+                                    <input type="text" id="country" name="country" value="{{ old('country', $employee->country) }}"
+                                        class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job & Payroll Information -->
+                    <div class="bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                        <div class="px-4 py-5 sm:p-6">
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Job & Payroll Information</h3>
+                            
+                            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                                <div>
+                                    <label for="position" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Position
+                                    </label>
+                                    <input type="text" id="position" name="position" value="{{ old('position', $employee->organizationUser?->position) }}" required
+                                        class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                                </div>
+
+                                <div>
+                                    <label for="salary_per_month" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Monthly Salary
+                                    </label>
+                                    <input type="number" id="salary_per_month" name="salary_per_month" value="{{ old('salary_per_month', $employee->salary_per_month) }}" step="0.01" min="0"
+                                        class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                                </div>
+
+                                <div>
+                                    <label for="required_daily_hours" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Required Daily Hours
+                                    </label>
+                                    <input type="number" id="required_daily_hours" name="required_daily_hours" value="{{ old('required_daily_hours', $employee->required_daily_hours) }}" step="0.1" min="0" max="24"
+                                        class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                                </div>
+
+                                <div class="flex items-center space-x-4 pt-6">
                                     <div class="flex items-center">
-                                        <div class="flex-shrink-0">
-                                            <div
-                                                class="h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center">
-                                                <span class="text-gray-600 font-medium">JS</span>
-                                            </div>
-                                        </div>
-                                        <div class="ml-4">
-                                            <div class="text-sm font-medium text-gray-900">John Smith</div>
-                                            <div class="text-sm text-gray-500">john.smith@company.com</div>
-                                        </div>
+                                        <input type="checkbox" id="is_admin" name="is_admin" value="1" {{ old('is_admin', $employee->is_admin) ? 'checked' : '' }}
+                                            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                        <label for="is_admin" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+                                            System Administrator
+                                        </label>
                                     </div>
-                                    <div class="flex items-center space-x-4">
-                                        <div class="text-sm text-gray-900">Senior Developer</div>
-                                        <div class="flex items-center text-sm text-gray-500">
-                                            <span
-                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                                Active
-                                            </span>
-                                        </div>
-                                        <div class="flex-shrink-0">
-                                            <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd"
-                                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                        </div>
+
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="is_active" name="is_active" value="1" {{ old('is_active', $employee->is_active) ? 'checked' : '' }}
+                                            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                        <label for="is_active" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+                                            Active Employee
+                                        </label>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="flex justify-end space-x-3">
+                        <a href="{{ route('hr.employees.show', $employee) }}" 
+                            class="bg-gray-300 dark:bg-gray-600 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-400 dark:hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                            Cancel
                         </a>
-                    </li>
-                    <!-- More employees... -->
-                </ul>
-            </div>
+                        <button type="submit" 
+                            class="bg-blue-600 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            Update Employee
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </x-app-layout>

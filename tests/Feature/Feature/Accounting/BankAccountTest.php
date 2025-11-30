@@ -69,8 +69,12 @@ test('bank account belongs to organization', function () {
 });
 
 test('bank account has chart of account relationship', function () {
-    $chartOfAccount = ChartOfAccount::factory()->create();
-    $bankAccount = BankAccount::factory()->create(['chart_of_account_id' => $chartOfAccount->id]);
+    $organization = Organization::factory()->create();
+    $chartOfAccount = ChartOfAccount::factory()->create(['organization_id' => $organization->id]);
+    $bankAccount = BankAccount::factory()->create([
+        'chart_of_account_id' => $chartOfAccount->id,
+        'organization_id' => $organization->id
+    ]);
 
     expect($bankAccount->chartOfAccount)->toBeInstanceOf(ChartOfAccount::class);
     expect($bankAccount->chartOfAccount->id)->toBe($chartOfAccount->id);

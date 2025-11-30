@@ -10,6 +10,18 @@ Route::get('/test-navigation', function () {
     return view('test-navigation');
 })->name('test-navigation');
 
+Route::get('/badge-showcase', function () {
+    return view('simple-badge-test');
+})->name('badge-showcase');
+
+Route::get('/simple-badge-test', function () {
+    return view('simple-badge-test');
+})->name('simple-badge-test');
+
+Route::get('/badge-standalone', function () {
+    return view('badge-standalone');
+})->name('badge-standalone');
+
 // Static documentation routes
 Route::get('/docs', function () {
     return view('docs');
@@ -17,18 +29,18 @@ Route::get('/docs', function () {
 
 Route::get('/docs/{path?}', function ($path = null) {
     $docsPath = public_path('docs');
-    $filePath = $docsPath . '/' . $path;
-    
+    $filePath = $docsPath.'/'.$path;
+
     // Security: prevent directory traversal
-    if (str_contains($path, '..') || !file_exists($filePath)) {
+    if (str_contains($path, '..') || ! file_exists($filePath)) {
         abort(404);
     }
-    
+
     // If directory requested, serve index.html
-    if (is_dir($filePath) && file_exists($filePath . '/index.html')) {
-        $filePath = $filePath . '/index.html';
+    if (is_dir($filePath) && file_exists($filePath.'/index.html')) {
+        $filePath = $filePath.'/index.html';
     }
-    
+
     return response()->file($filePath);
 })->where('path', '.*');
 
@@ -50,6 +62,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Setup Wizard Routes
     // -------------------
     require __DIR__.'/setup.php';
+
+    // -------------------
+    // Admin routes
+    // -------------------
+    require __DIR__.'/admin.php';
 
     // -------------------
     // Organization routes

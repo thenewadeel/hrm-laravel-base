@@ -6,20 +6,25 @@
 +------------------+------------------+
 | Metric           | Count/Percentage |
 +------------------+------------------+
-| Total Tests      | 814              |
-| Passed           | 789 (96.9%)      |
-| Failed           | 20 (2.5%)        |
-| Warnings/Skipped | 5 (0.6%)         |
+| Total Tests      | 866              |
+| Passed           | 838 (96.8%)      |
+| Failed           | 19 (2.2%)        |
+| Warnings/Skipped | 9 (1%)           |
 +------------------+------------------+
 
---- ❌ Detailed Failures (20 Total) ---
+--- ❌ Detailed Failures (19 Total) ---
 
- BankAccount (1/9 failures):
-   ⨯ bank account has chart of account relationship
+ DimensionReport (1/2 failures):
+   ⨯ example
 
- EmployeeManagement (2/14 failures):
-   ⨯ employee attendance integration
-   ⨯ employee leave balance calculation
+ FinancialReports (1/2 failures):
+   ⨯ example
+
+ BadgeStandalone (1/2 failures):
+   ⨯ it renders badge standalone page
+
+ Example (1/2 failures):
+   ⨯ it returns a successful response
 
  EmployeePositionShiftIntegration (2/5 failures):
    ⨯ it assigns position and shift to employee during creation
@@ -27,10 +32,6 @@
 
  JobPositionController (1/6 failures):
    ⨯ it deletes a job position
-
- ShiftController (2/5 failures):
-   ⨯ it updates a shift
-   ⨯ it deletes a shift
 
  HrmDashboardController (1/18 failures):
    ⨯ dashboard view contains expected hrm elements
@@ -57,17 +58,23 @@
  FinancialManagement (1/12 failures):
    ⨯ invoice amount due calculation works
 
+ NewBadge (1/2 failures):
+   ⨯ it renders new-status-badge component
+
  PdfGeneration (1/13 failures):
    ⨯ movement pdf download should return pdf response
-
- SetupWizard (1/5 failures):
-   ⨯ it assigns admin role to creator
 
  TaxManagement (1/14 failures):
    ⨯ tax reporting service generates correct reports
 
 
---- ⚠️ Warnings/Skipped Tests (5 Total) ---
+--- ⚠️ Warnings/Skipped Tests (9 Total) ---
+
+ DimensionReport (1/2 warnings):
+   - ---------------------------------------------------------------------------------
+
+ FinancialReports (1/2 warnings):
+   - ---------------------------------------------------------------------------------
 
  EmailVerification (3/3 warnings):
    - email verification screen can be rendered → Email verification not…
@@ -76,6 +83,12 @@
 
  Registration (1/3 warnings):
    - registration screen cannot be rendered if support is disabled → Reg…
+
+ BadgeStandalone (1/2 warnings):
+   - ---------------------------------------------------------------------------------
+
+ Example (1/2 warnings):
+   - ---------------------------------------------------------------------------------
 
  PdfGeneration (1/13 warnings):
    - ---------------------------------------------------------------------------------
@@ -90,8 +103,6 @@
 | CashPaymentService              | 5/5          |
 | CashReceiptService              | 4/4          |
 | ChartOfAccount                  | 4/4          |
-| DimensionReport                 | 1/1          |
-| FinancialReports                | 1/1          |
 | IncomeStatement                 | 3/3          |
 | InvalidAccountTypeException     | 3/3          |
 | JournalEntryFactory             | 4/4          |
@@ -154,6 +165,7 @@
 | FinancialYear                   | 15/15        |
 | SpecializedVoucher              | 10/10        |
 | Voucher                         | 11/11        |
+| AdminPortal                     | 3/3          |
 | AdvanceReportService            | 11/11        |
 | AdvanceReportsLivewire          | 12/12        |
 | ChartOfAccountsApi              | 5/5          |
@@ -161,10 +173,17 @@
 | JournalEntriesApi               | 3/3          |
 | OrganizationApi                 | 15/15        |
 | OrganizationUnitApi             | 12/12        |
+| AttendanceDashboardEnhancements | 6/6          |
 | AttendanceSync                  | 8/8          |
+| BadgeShowcase                   | 4/4          |
+| BadgeSystem                     | 20/20        |
 | Dashboard                       | 11/11        |
-| Example                         | 1/1          |
+| EmployeeIndexEnhancement        | 5/5          |
+| BankAccount                     | 9/9          |
 | FixedAsset                      | 11/11        |
+| ModelSelectDropdown             | 4/4          |
+| EmployeeManagement              | 14/14        |
+| ShiftController                 | 5/5          |
 | InventoryController             | 5/5          |
 | InventoryItemController         | 5/5          |
 | InventoryReportController       | 8/8          |
@@ -202,6 +221,9 @@
 | ManagerPortal                   | 5/5          |
 | SetupChartOfAccounts            | 3/3          |
 | SetupStore                      | 3/3          |
+| SetupWizard                     | 5/5          |
+| SimpleBadgePage                 | 1/1          |
+| SimpleBadge                     | 2/2          |
 | TenancyFeature                  | 3/3          |
 | VoucherSystem                   | 4/4          |
 +---------------------------------+--------------+

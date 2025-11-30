@@ -24,6 +24,8 @@ class AttendanceController extends Controller
         $endDate = $request->get('end_date', $today->format('Y-m-d'));
         $employeeId = $request->get('employee_id');
         $showExceptions = $request->get('show_exceptions', false);
+        $search = $request->get('search');
+        $status = $request->get('status');
 
         // Base query for organization
         $baseQuery = AttendanceRecord::with(['employee', 'employee.user'])
@@ -102,9 +104,23 @@ class AttendanceController extends Controller
                 ->sum('total_hours');
         }
 
-        // Apply employee filter to base query
+        // Apply filters to base query
         if ($employeeId) {
             $baseQuery->where('employee_id', $employeeId);
+        }
+
+        if ($status) {
+            $baseQuery->where('status', $status);
+        }
+
+        if ($search) {
+            $baseQuery->whereHas('employee.user', function ($query) use ($search) {
+                $query->where('name', 'like', '%'.$search.'%');
+            });
+        }
+
+        if ($showExceptions) {
+            $baseQuery->whereIn('status', ['late', 'absent', 'missed_punch']);
         }
 
         // Get attendance records with employee data
@@ -164,6 +180,8 @@ class AttendanceController extends Controller
                 'end_date' => $endDate,
                 'employee_id' => $employeeId,
                 'show_exceptions' => $showExceptions,
+                'search' => $search,
+                'status' => $status,
             ],
             // Add date objects for display
             'startDateObj' => Carbon::parse($startDate),
@@ -286,7 +304,7 @@ class AttendanceController extends Controller
         ]);
 
         $attendanceRecord = AttendanceRecord::where('id', $id)
-            ->where('organization_id', auth()->user()->current_organization_id)
+            ->where('organization_id', auth()->user()->operatingOrganizationId)
             ->firstOrFail();
 
         // Update punch times - use explicit timezone handling

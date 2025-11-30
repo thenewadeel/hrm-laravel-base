@@ -16,14 +16,29 @@
                         processing</p>
                 </div>
                 <div class="mt-4 flex md:mt-0 md:ml-4 space-x-3">
-                    <button type="button"
-                        class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                        Sync Biometric Data
-                    </button>
-                    <button type="button"
-                        class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                        Export for Payroll
-                    </button>
+                    <form method="POST" action="{{ route('attendance.biometric-sync') }}" class="inline">
+                        @csrf
+                        <button type="submit"
+                            class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                            </svg>
+                            Sync Biometric Data
+                        </button>
+                    </form>
+                    <form method="GET" action="{{ route('attendance.export-payroll') }}" class="inline">
+                        <input type="hidden" name="period" value="{{ isset($startDateObj) ? $startDateObj->format('Y-m') : now()->format('Y-m') }}">
+                        @if(request('employee_id'))
+                            <input type="hidden" name="employee_id" value="{{ request('employee_id') }}">
+                        @endif
+                        <button type="submit"
+                            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            Export for Payroll
+                        </button>
+                    </form>
                 </div>
             </div>
 
@@ -189,22 +204,23 @@
                     <form method="GET" action="{{ route('attendance.dashboard') }}">
                         <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                             <!-- Date Range -->
-
-                            <!-- In the filters section, add display of selected date range -->
                             @if (isset($startDateObj) && isset($endDateObj))
-                                <div class="mb-4 p-4 bg-blue-50 rounded-lg">
+                                <div class="sm:col-span-6 mb-4 p-4 bg-blue-50 rounded-lg">
                                     <p class="text-sm text-blue-700">
                                         Showing records from <strong>{{ $startDateObj->format('M j, Y') }}</strong> to
                                         <strong>{{ $endDateObj->format('M j, Y') }}</strong>
+                                        @if(request('employee_id'))
+                                            for <strong>{{ $employees->where('id', request('employee_id'))->first()['name'] ?? 'Selected Employee' }}</strong>
+                                        @endif
                                     </p>
                                 </div>
                             @endif
+                            
                             <div class="sm:col-span-2">
-                                <label for="start_date" class="block text-sm font-medium text-gray-700">Start
-                                    Date</label>
+                                <label for="start_date" class="block text-sm font-medium text-gray-700">Start Date</label>
                                 <div class="mt-1">
                                     <input type="date" id="start_date" name="start_date"
-                                        value="{{ request('start_date') }}"
+                                        value="{{ request('start_date') ?? $filters['start_date'] ?? '' }}"
                                         class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                 </div>
                             </div>
@@ -212,31 +228,93 @@
                                 <label for="end_date" class="block text-sm font-medium text-gray-700">End Date</label>
                                 <div class="mt-1">
                                     <input type="date" id="end_date" name="end_date"
-                                        value="{{ request('end_date') }}"
+                                        value="{{ request('end_date') ?? $filters['end_date'] ?? '' }}"
                                         class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                 </div>
                             </div>
 
                             <!-- Employee Filter -->
                             <div class="sm:col-span-2">
-                                <label for="employee_id"
-                                    class="block text-sm font-medium text-gray-700">Employee</label>
+                                <label for="employee_id" class="block text-sm font-medium text-gray-700">Employee</label>
                                 <select id="employee_id" name="employee_id"
                                     class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
                                     <option value="">All Employees</option>
-                                    <!-- Employee options would be populated dynamically -->
+                                    @foreach($employees ?? [] as $employee)
+                                        <option value="{{ $employee['id'] }}" {{ request('employee_id') == $employee['id'] ? 'selected' : '' }}>
+                                            {{ $employee['name'] }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
+
+                            <!-- Search Filter -->
+                            <div class="sm:col-span-3">
+                                <label for="search" class="block text-sm font-medium text-gray-700">Search Employee</label>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <input type="text" id="search" name="search" 
+                                        value="{{ request('search') }}"
+                                        placeholder="Search by employee name..."
+                                        class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md">
+                                </div>
+                            </div>
+
+                            <!-- Status Filter -->
+                            <div class="sm:col-span-2">
+                                <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+                                <select id="status" name="status"
+                                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                                    <option value="">All Status</option>
+                                    <option value="present" {{ request('status') == 'present' ? 'selected' : '' }}>Present</option>
+                                    <option value="absent" {{ request('status') == 'absent' ? 'selected' : '' }}>Absent</option>
+                                    <option value="late" {{ request('status') == 'late' ? 'selected' : '' }}>Late</option>
+                                    <option value="missed_punch" {{ request('status') == 'missed_punch' ? 'selected' : '' }}>Missed Punch</option>
+                                    <option value="leave" {{ request('status') == 'leave' ? 'selected' : '' }}>On Leave</option>
+                                </select>
+                            </div>
+
+                            <!-- Show Exceptions Checkbox -->
+                            <div class="sm:col-span-1">
+                                <label class="block text-sm font-medium text-gray-700">&nbsp;</label>
+                                <div class="mt-1">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="show_exceptions" value="1" 
+                                            {{ request('show_exceptions') ? 'checked' : '' }}
+                                            class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded">
+                                        <span class="ml-2 text-sm text-gray-700">Show Exceptions Only</span>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mt-4 flex justify-end space-x-3">
-                            <a href="{{ route('attendance.dashboard') }}"
-                                class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                Clear
-                            </a>
-                            <button type="submit"
-                                class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                Apply Filters
-                            </button>
+                        <div class="mt-4 flex justify-between">
+                            <div class="space-x-3">
+                                <button type="button" onclick="setQuickDateRange('today')"
+                                    class="inline-flex items-center px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs font-medium text-gray-700 bg-white hover:bg-gray-50">
+                                    Today
+                                </button>
+                                <button type="button" onclick="setQuickDateRange('week')"
+                                    class="inline-flex items-center px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs font-medium text-gray-700 bg-white hover:bg-gray-50">
+                                    This Week
+                                </button>
+                                <button type="button" onclick="setQuickDateRange('month')"
+                                    class="inline-flex items-center px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs font-medium text-gray-700 bg-white hover:bg-gray-50">
+                                    This Month
+                                </button>
+                            </div>
+                            <div class="space-x-3">
+                                <a href="{{ route('attendance.dashboard') }}"
+                                    class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                    Clear All
+                                </a>
+                                <button type="submit"
+                                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                    Apply Filters
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -344,9 +422,9 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         @if ($record['status'] === 'missed_punch' || $record['status'] === 'late')
-                                            <button class="text-blue-600 hover:text-blue-900">Regularize Time</button>
+                                            <button onclick="openRegularizeModal({{ $record['id'] }})" class="text-blue-600 hover:text-blue-900">Regularize Time</button>
                                         @elseif($record['status'] === 'absent')
-                                            <button class="text-blue-600 hover:text-blue-900 mr-3">Apply Leave</button>
+                                            <button onclick="openApplyLeaveModal({{ $record['id'] }})" class="text-blue-600 hover:text-blue-900 mr-3">Apply Leave</button>
                                         @else
                                             <span class="text-gray-500">—</span>
                                         @endif
@@ -365,4 +443,179 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Quick date range functionality
+        function setQuickDateRange(range) {
+            const today = new Date();
+            const startDateInput = document.getElementById('start_date');
+            const endDateInput = document.getElementById('end_date');
+            
+            let startDate, endDate;
+            
+            switch(range) {
+                case 'today':
+                    startDate = endDate = today;
+                    break;
+                case 'week':
+                    const startOfWeek = new Date(today);
+                    startOfWeek.setDate(today.getDate() - today.getDay());
+                    startDate = startOfWeek;
+                    endDate = today;
+                    break;
+                case 'month':
+                    startDate = new Date(today.getFullYear(), today.getMonth(), 1);
+                    endDate = today;
+                    break;
+            }
+            
+            startDateInput.value = formatDate(startDate);
+            endDateInput.value = formatDate(endDate);
+            
+            // Auto-submit form
+            startDateInput.form.submit();
+        }
+        
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        // Search functionality for employee dropdown
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search');
+            const employeeSelect = document.getElementById('employee_id');
+            
+            if (searchInput && employeeSelect) {
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    const options = employeeSelect.options;
+                    
+                    for (let i = 1; i < options.length; i++) {
+                        const option = options[i];
+                        const text = option.text.toLowerCase();
+                        
+                        if (text.includes(searchTerm)) {
+                            option.style.display = '';
+                        } else {
+                            option.style.display = 'none';
+                        }
+                    }
+                    
+                    // If search term matches an employee exactly, select them
+                    for (let i = 1; i < options.length; i++) {
+                        const option = options[i];
+                        if (option.text.toLowerCase() === searchTerm) {
+                            employeeSelect.value = option.value;
+                            break;
+                        }
+                    }
+                });
+            }
+        });
+
+        // Handle regularize time modal
+        function openRegularizeModal(recordId) {
+            // Create modal dynamically
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50';
+            modal.innerHTML = `
+                <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+                    <div class="mt-3">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">Regularize Attendance Time</h3>
+                        <form method="POST" action="{{ route('attendance.regularize', ':id') }}" class="mt-4">
+                            @csrf
+                            <input type="hidden" name="record_id" value="${recordId}">
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">Punch In Time</label>
+                                <input type="datetime-local" name="punch_in" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">Punch Out Time</label>
+                                <input type="datetime-local" name="punch_out" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">Reason</label>
+                                <textarea name="reason" rows="3" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Enter reason for regularization..."></textarea>
+                            </div>
+                            <div class="flex justify-end space-x-3">
+                                <button type="button" onclick="closeModal()" class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">
+                                    Regularize
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+            
+            // Replace :id with actual record ID
+            modal.querySelector('form').action = modal.querySelector('form').action.replace(':id', recordId);
+            
+            document.body.appendChild(modal);
+        }
+
+        // Handle apply leave modal
+        function openApplyLeaveModal(recordId) {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50';
+            modal.innerHTML = `
+                <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+                    <div class="mt-3">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">Apply Leave</h3>
+                        <form method="POST" action="{{ route('attendance.apply-leave', ':id') }}" class="mt-4">
+                            @csrf
+                            <input type="hidden" name="record_id" value="${recordId}">
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">Leave Type</label>
+                                <select name="leave_type" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                    <option value="">Select Leave Type</option>
+                                    <option value="sick">Sick Leave</option>
+                                    <option value="casual">Casual Leave</option>
+                                    <option value="earned">Earned Leave</option>
+                                    <option value="unpaid">Unpaid Leave</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">From Date</label>
+                                <input type="date" name="from_date" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">To Date</label>
+                                <input type="date" name="to_date" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">Reason</label>
+                                <textarea name="reason" rows="3" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Enter reason for leave..."></textarea>
+                            </div>
+                            <div class="flex justify-end space-x-3">
+                                <button type="button" onclick="closeModal()" class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">
+                                    Apply Leave
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+            
+            // Replace :id with actual record ID
+            modal.querySelector('form').action = modal.querySelector('form').action.replace(':id', recordId);
+            
+            document.body.appendChild(modal);
+        }
+
+        function closeModal() {
+            const modal = document.querySelector('.fixed.inset-0');
+            if (modal) {
+                modal.remove();
+            }
+        }
+    </script>
 </x-app-layout>

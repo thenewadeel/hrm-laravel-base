@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Demo\ModelSelectDemo;
 use Illuminate\Support\Facades\Route;
 
 // Demo Components
@@ -15,3 +16,5 @@ Route::get('/demo/cash-management', function () {
 
     return view('demo.cash-management', ['organization' => $organization]);
 })->name('demo.cash-management');
+
+Route::get('/demo/model-select', ModelSelectDemo::class)->name('demo.model-select');

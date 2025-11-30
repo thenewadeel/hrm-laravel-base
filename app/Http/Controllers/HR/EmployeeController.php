@@ -18,8 +18,7 @@ class EmployeeController extends Controller
         $currentOrganizationId = auth()->user()->current_organization_id;
 
         $query = Employee::with(['user', 'organizationUnit'])
-            ->where('organization_id', $currentOrganizationId)
-            ->where('is_active', true);
+            ->where('organization_id', $currentOrganizationId);
 
         // Search
         if ($request->has('search') && $request->search) {
@@ -35,7 +34,20 @@ class EmployeeController extends Controller
             $query->where('organization_unit_id', $request->department);
         }
 
-        $employees = $query->paginate(20);
+        $employees = $query->orderBy('is_active', 'desc')
+            ->orderBy('last_name', 'asc')
+            ->paginate(20);
+
+        // Load organization user data manually
+        $employeeIds = $employees->getCollection()->pluck('id');
+        $organizationUsers = \App\Models\OrganizationUser::whereIn('user_id',
+            \App\Models\Employee::whereIn('id', $employeeIds)->pluck('user_id')
+        )->where('organization_id', $currentOrganizationId)->get()->keyBy('user_id');
+
+        $employees->getCollection()->each(function ($employee) use ($organizationUsers) {
+            $employee->organizationUser = $organizationUsers->get($employee->user_id);
+        });
+
         $departments = OrganizationUnit::where('organization_id', $currentOrganizationId)->get();
 
         return view('hr.employees.index', compact('employees', 'departments'));
@@ -149,6 +161,15 @@ class EmployeeController extends Controller
             'payrollEntries' => function ($q) {
                 $q->latest()->take(3);
             },
+            'increments' => function ($q) {
+                $q->latest()->take(3);
+            },
+            'loans' => function ($q) {
+                $q->where('status', 'active')->latest();
+            },
+            'salaryAdvances' => function ($q) {
+                $q->where('status', 'active')->latest();
+            },
         ]);
 
         // Load organization user data for roles and permissions
@@ -157,6 +178,19 @@ class EmployeeController extends Controller
         }
 
         return view('hr.employees.show', compact('employee'));
+    }
+
+    public function edit(Employee $employee)
+    {
+        // Authorization check - ensure employee belongs to same organization
+        // $this->authorize('update', $employee);
+
+        $organizationUnits = OrganizationUnit::where(
+            'organization_id',
+            auth()->user()->current_organization_id
+        )->get();
+
+        return view('hr.employees.edit', compact('employee', 'organizationUnits'));
     }
 
     public function updateBiometric(Request $request, Employee $employee)
