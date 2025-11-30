@@ -33,7 +33,7 @@ class TaxRate extends Model
     protected function casts(): array
     {
         return [
-            'rate' => 'decimal:4',
+            'rate' => 'float',
             'is_compound' => 'boolean',
             'is_active' => 'boolean',
             'effective_date' => 'date',
@@ -79,6 +79,7 @@ class TaxRate extends Model
     public function scopeActive($query)
     {
         return $query->where('is_active', true)
+            ->where('effective_date', '<=', now())
             ->where(function ($q) {
                 $q->whereNull('end_date')
                     ->orWhere('end_date', '>=', now());
@@ -107,6 +108,6 @@ class TaxRate extends Model
     {
         $taxableAmount = $baseAmount * (1 - ($exemptionPercentage / 100));
 
-        return round($taxableAmount * ($this->rate / 100), 2);
+        return (float) round($taxableAmount * ($this->rate / 100), 2);
     }
 }

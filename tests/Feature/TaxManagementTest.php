@@ -274,7 +274,11 @@ test('tax reporting service generates correct reports', function () {
 // Tax Compliance Service Tests
 test('tax compliance service creates filings correctly', function () {
     $organization = Organization::factory()->create();
-    $taxRate = TaxRate::factory()->create(['organization_id' => $organization->id]);
+    $jurisdiction = TaxJurisdiction::factory()->create(['organization_id' => $organization->id]);
+    $taxRate = TaxRate::factory()->create([
+        'organization_id' => $organization->id,
+        'tax_jurisdiction_id' => $jurisdiction->id,
+    ]);
     $user = User::factory()->create();
 
     TaxCalculation::factory()->count(3)->create([
@@ -364,8 +368,14 @@ test('tax calculations are properly scoped to organization', function () {
     $org1 = Organization::factory()->create();
     $org2 = Organization::factory()->create();
 
-    $taxRate1 = TaxRate::factory()->create(['organization_id' => $org1->id]);
-    $taxRate2 = TaxRate::factory()->create(['organization_id' => $org2->id]);
+    $taxRate1 = TaxRate::factory()->create([
+        'organization_id' => $org1->id,
+        'type' => 'sales',
+    ]);
+    $taxRate2 = TaxRate::factory()->create([
+        'organization_id' => $org2->id,
+        'type' => 'sales',
+    ]);
 
     $voucher1 = \App\Models\Accounting\Voucher::factory()->create([
         'organization_id' => $org1->id,

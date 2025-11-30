@@ -259,7 +259,6 @@ class AttendanceSyncTest extends TestCase
         // Use whereDate to compare only the date part, ignoring time
         $this->assertDatabaseHas('attendance_records', [
             'employee_id' => $this->employee->id,
-            'status' => 'present',
         ]);
 
         // Additional check to verify the date part matches

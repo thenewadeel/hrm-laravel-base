@@ -17,9 +17,10 @@ class TaxCalculationFactory extends Factory
     public function definition(): array
     {
         return [
-            'calculable_type' => null, // Will be set in test
-            'calculable_id' => null, // Will be set in test
-            'tax_rate_id' => null, // Will be set in test
+            'organization_id' => \App\Models\Organization::factory(),
+            'calculable_type' => \App\Models\Accounting\Voucher::class,
+            'calculable_id' => \App\Models\Accounting\Voucher::factory(),
+            'tax_rate_id' => \App\Models\Accounting\TaxRate::factory(),
             'tax_exemption_id' => null,
             'base_amount' => fake()->randomFloat(2, 100, 10000),
             'taxable_amount' => fake()->randomFloat(2, 100, 10000),

@@ -26,9 +26,19 @@ class DashboardController extends Controller
         // Get dashboard data
         $stores = Store::forOrganization($organization->id)->withCount('items')->get();
         $totalItems = Item::where('organization_id', $organization->id)->count();
-        $lowStockItems = Item::where('organization_id', $organization->id)
-            ->lowInStock()
-            ->get();
+
+        // Simple low stock items query
+        $lowStockItems = collect();
+        $items = Item::where('organization_id', $organization->id)->get();
+
+        foreach ($items as $item) {
+            foreach ($item->stores as $store) {
+                if ($store->pivot->quantity <= $item->reorder_level) {
+                    $lowStockItems->push($item);
+                    break; // Only add each item once
+                }
+            }
+        }
 
         $recentTransactions = Transaction::whereIn('store_id', Store::forOrganization($organization->id)->pluck('id'))
             ->with('store')
@@ -61,30 +71,34 @@ class DashboardController extends Controller
 
     protected function getLowStockItems(Organization $organization)
     {
-        // Get items that have store quantities below reorder level
-        return Item::where('organization_id', $organization->id)
-            ->whereHas('stores', function ($query) {
-                $query->whereColumn('inventory_store_items.quantity', '<=', 'inventory_items.reorder_level');
-            })
-            ->with(['stores' => function ($query) {
-                $query->whereColumn('inventory_store_items.quantity', '<=', 'inventory_items.reorder_level');
-            }])
-            ->get()
-            ->map(function ($item) {
-                // Get the low stock store quantities
-                $lowStockStores = $item->stores->map(function ($store) {
-                    return [
+        $lowStockAlerts = [];
+
+        // Get items for the organization
+        $items = Item::where('organization_id', $organization->id)->get();
+
+        foreach ($items as $item) {
+            // Get stores where this item has low stock
+            $lowStockStores = [];
+
+            foreach ($item->stores as $store) {
+                if ($store->pivot->quantity <= $item->reorder_level) {
+                    $lowStockStores[] = [
                         'store_name' => $store->name,
                         'quantity' => $store->pivot->quantity,
                         'reorder_level' => $item->reorder_level,
                     ];
-                });
+                }
+            }
 
-                return [
+            // Only add item if it has low stock in some store
+            if (! empty($lowStockStores)) {
+                $lowStockAlerts[] = [
                     'item' => $item,
-                    'low_stock_stores' => $lowStockStores,
+                    'low_stock_stores' => collect($lowStockStores),
                 ];
-            })
-            ->flatten(1);
+            }
+        }
+
+        return collect($lowStockAlerts);
     }
 }

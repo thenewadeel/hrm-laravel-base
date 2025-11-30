@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('portal/employee')->name('portal.employee.')->group(function () {
     Route::get('/dashboard', [EmployeePortalController::class, 'dashboard'])->name('dashboard');
     Route::get('/attendance', [EmployeePortalController::class, 'attendance'])->name('attendance');
-    Route::post('/clock-in', [AttendanceController::class, 'clockIn'])->name('clock-in');
-    Route::post('/clock-out', [AttendanceController::class, 'clockOut'])->name('clock-out');
+    Route::post('/clock-in', [EmployeePortalController::class, 'clockIn'])->name('clock-in');
+    Route::post('/clock-out', [EmployeePortalController::class, 'clockOut'])->name('clock-out');
 
     // Setup Routes
     Route::get('/setup', [EmployeePortalController::class, 'setup'])->name('setup');

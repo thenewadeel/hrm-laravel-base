@@ -34,7 +34,7 @@ class TaxExemption extends Model
     protected function casts(): array
     {
         return [
-            'exemption_percentage' => 'decimal:2',
+            'exemption_percentage' => 'float',
             'issue_date' => 'date',
             'expiry_date' => 'date',
             'is_active' => 'boolean',

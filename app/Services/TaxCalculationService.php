@@ -27,15 +27,19 @@ class TaxCalculationService
             ->get();
 
         $runningAmount = $baseAmount;
+        $previousTaxes = 0;
 
         foreach ($taxRates as $taxRate) {
             // Check for exemptions
             $exemption = $this->findApplicableExemption($taxRate, $entity, $organizationId);
             $exemptionPercentage = $exemption ? $exemption->exemption_percentage : 0;
 
+            // Calculate compound base amount
+            $compoundBaseAmount = $taxRate->is_compound ? $baseAmount + $previousTaxes : $baseAmount;
+
             // Calculate tax
-            $taxableAmount = $runningAmount * (1 - ($exemptionPercentage / 100));
-            $taxAmount = $taxRate->calculateTax($taxableAmount, $exemptionPercentage);
+            $taxableAmount = $compoundBaseAmount * (1 - ($exemptionPercentage / 100));
+            $taxAmount = round($taxableAmount * ($taxRate->rate / 100), 2);
 
             if ($taxAmount > 0) {
                 $taxCalculation = TaxCalculation::create([
@@ -44,25 +48,24 @@ class TaxCalculationService
                     'calculable_id' => $calculable->id,
                     'tax_rate_id' => $taxRate->id,
                     'tax_exemption_id' => $exemption?->id,
-                    'base_amount' => $baseAmount,
-                    'taxable_amount' => $taxableAmount,
-                    'tax_rate' => $taxRate->rate,
-                    'tax_amount' => $taxAmount,
+                    'base_amount' => (float) $baseAmount,
+                    'taxable_amount' => (float) $taxableAmount,
+                    'tax_rate' => (float) $taxRate->rate,
+                    'tax_amount' => (float) $taxAmount,
                     'calculation_date' => now(),
                     'calculation_method' => 'percentage',
                     'calculation_details' => [
                         'exemption_percentage' => $exemptionPercentage,
                         'exemption_reason' => $exemption?->exemption_type,
                         'is_compound' => $taxRate->is_compound,
+                        'compound_base_amount' => $compoundBaseAmount,
                     ],
                 ]);
 
                 $taxCalculations->push($taxCalculation);
 
-                // Update running amount for compound taxes
-                if ($taxRate->is_compound) {
-                    $runningAmount += $taxAmount;
-                }
+                // Track previous taxes for compound calculations
+                $previousTaxes += $taxAmount;
             }
         }
 

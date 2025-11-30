@@ -12,6 +12,36 @@
                 Inventory Overview
             </h3>
 
+            <!-- Quick Actions -->
+            <div class="mb-6">
+                <div class="bg-white overflow-hidden shadow rounded-lg p-6">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Quick Actions</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="{{ route('inventory.stores.create') }}" 
+                           class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            Add Store
+                        </a>
+                        <a href="{{ route('inventory.transactions.create') }}" 
+                           class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                            </svg>
+                            New Transaction
+                        </a>
+                        <a href="{{ route('inventory.items.create') }}" 
+                           class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+                            </svg>
+                            Add Item
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <!-- Stats Overview -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
                 <!-- Stores Card -->
@@ -148,18 +178,13 @@
                     <div class="p-6">
                         @if ($lowStockItems->count() > 0)
                             <div class="space-y-3">
-                                @foreach ($lowStockItems as $alert)
+                                @foreach ($lowStockItems as $item)
                                     <div
                                         class="flex items-center justify-between p-3 bg-red-50 border border-red-200 rounded-lg">
                                         <div>
-                                            <h4 class="font-medium text-red-900">{{ $alert['item']?->name }}</h4>
+                                            <h4 class="font-medium text-red-900">{{ $item->name }}</h4>
                                             <p class="text-sm text-red-700">
-                                                @foreach ($alert['low_stock_stores'] as $storeAlert)
-                                                    {{ $storeAlert['store_name'] }}: {{ $storeAlert['quantity'] }}
-                                                    left
-                                                    (reorder at
-                                                    {{ $storeAlert['reorder_level'] }})
-                                                @endforeach
+                                                Low stock in multiple stores
                                             </p>
                                         </div>
                                         <span

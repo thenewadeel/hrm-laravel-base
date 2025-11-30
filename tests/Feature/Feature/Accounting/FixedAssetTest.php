@@ -1,8 +1,8 @@
 <?php
 
+use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\FixedAsset;
 use App\Models\Accounting\FixedAssetCategory;
-use App\Models\Accounting\ChartOfAccount;
 use App\Models\Organization;
 use App\Models\User;
 use App\Services\FixedAssetService;
@@ -34,10 +34,11 @@ test('user can register a new fixed asset', function () {
     $assetAccount = ChartOfAccount::factory()->create(['organization_id' => $organization->id, 'type' => 'asset']);
     $cashAccount = ChartOfAccount::factory()->create(['organization_id' => $organization->id, 'type' => 'asset', 'name' => 'Cash Account', 'code' => 'CASH']);
 
+    $assetTag = 'AST-TEST-'.uniqid();
     $assetData = [
         'fixed_asset_category_id' => $category->id,
         'chart_of_account_id' => $assetAccount->id,
-        'asset_tag' => 'AST-TEST-' . uniqid(),
+        'asset_tag' => $assetTag,
         'name' => 'Test Computer',
         'description' => 'Test computer description',
         'serial_number' => 'SN123456',
@@ -63,7 +64,7 @@ test('user can register a new fixed asset', function () {
 
     $this->assertDatabaseHas('fixed_assets', [
         'organization_id' => $organization->id,
-        'asset_tag' => 'AST-TEST-' . uniqid(),
+        'asset_tag' => $assetTag,
         'name' => 'Test Computer',
     ]);
 });
@@ -98,18 +99,19 @@ test('fixed asset calculates declining balance depreciation correctly', function
 
 test('fixed asset calculates sum of years depreciation correctly', function () {
     $asset = FixedAsset::factory()->create([
+        'purchase_date' => now()->subYear(), // Purchased 1 year ago
         'purchase_cost' => 10000,
         'salvage_value' => 1000,
         'useful_life_years' => 5,
         'depreciation_method' => 'sum_of_years',
-        'last_depreciation_date' => now()->subYear(), // Second year
+        'last_depreciation_date' => now()->subYear(), // Last depreciation right after purchase (first year done)
     ]);
 
     // Sum of years: 1+2+3+4+5 = 15
     // Second year: 4/15 * (10000-1000) = 2400
     $expectedDepreciation = 2400;
 
-    expect($asset->calculateSumOfYearsDepreciation())->toBe($expectedDepreciation);
+    expect($asset->calculateSumOfYearsDepreciation())->toBe((float) $expectedDepreciation);
 });
 
 test('can post depreciation for asset', function () {
@@ -118,6 +120,14 @@ test('can post depreciation for asset', function () {
     $user->organizations()->attach($organization, ['roles' => 'admin']);
     $user->current_organization_id = $organization->id;
     $user->save();
+
+    // Create expense account for depreciation
+    $expenseAccount = ChartOfAccount::factory()->create([
+        'organization_id' => $organization->id,
+        'type' => 'expense',
+        'name' => 'Depreciation Expense',
+        'code' => 'DEPR',
+    ]);
 
     $asset = FixedAsset::factory()->create([
         'organization_id' => $organization->id,
@@ -162,7 +172,7 @@ test('can dispose asset with gain', function () {
     $fixedAssetService = app(FixedAssetService::class);
     $disposal = $fixedAssetService->disposeAsset($asset, $disposalData);
 
-    expect($disposal->gain_loss)->toBe(1000); // 8000 - 7000 = 1000 gain
+    expect($disposal->gain_loss)->toBeFloat()->toBe(1000.0); // 8000 - 7000 = 1000 gain
 
     $asset->refresh();
     expect($asset->status)->toBe('disposed');

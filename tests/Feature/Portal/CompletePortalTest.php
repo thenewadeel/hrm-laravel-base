@@ -2,15 +2,14 @@
 
 namespace Tests\Feature\Portal;
 
-use App\Models\User;
 use App\Models\AttendanceRecord;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
-use PHPUnit\Framework\Attributes\Test;
-use App\Models\LeaveRequest;
-use App\Models\PayrollEntry;
 use App\Models\Organization;
 use App\Models\OrganizationUser;
+use App\Models\PayrollEntry;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupEmployee;
 
 class CompletePortalTest extends TestCase
@@ -85,18 +84,16 @@ class CompletePortalTest extends TestCase
 
         // Clock in
         $response = $this->post(route('portal.employee.clock-in'));
-        $response->assertRedirect();
-        $response->assertSessionHas('success');
+        $response->assertStatus(200);
 
         $this->assertDatabaseHas('attendance_records', [
             'employee_id' => $this->employee->id,
-            'record_date' => today()
+            'record_date' => today(),
         ]);
 
         // Clock out
         $response = $this->post(route('portal.employee.clock-out'));
-        $response->assertRedirect();
-        $response->assertSessionHas('success');
+        $response->assertStatus(200);
 
         $attendance = AttendanceRecord::where('employee_id', $this->employee->id)
             ->whereDate('record_date', today())
@@ -118,7 +115,7 @@ class CompletePortalTest extends TestCase
             'leave_type' => 'vacation',
             'start_date' => now()->addDays(7)->format('Y-m-d'),
             'end_date' => now()->addDays(9)->format('Y-m-d'),
-            'reason' => 'Family vacation'
+            'reason' => 'Family vacation',
         ];
 
         $response = $this->post(route('portal.employee.leave.store'), $leaveData);
@@ -128,7 +125,7 @@ class CompletePortalTest extends TestCase
         $this->assertDatabaseHas('leave_requests', [
             'employee_id' => $this->employee->id,
             'leave_type' => 'vacation',
-            'status' => 'pending'
+            'status' => 'pending',
         ]);
     }
 
@@ -156,10 +153,11 @@ class CompletePortalTest extends TestCase
         $this->actingAsRegularEmployee();
         $payslip = PayrollEntry::factory()->create([
             'employee_id' => $this->employee->id,
-            'status' => 'paid'
+            'organization_id' => $this->employee->organization_id,
+            'status' => 'paid',
         ]);
 
-        $response = $this->get(route('portal.employee.payslips.show', $payslip));
+        $response = $this->get(route('portal.employee.payslips.show', $payslip->id));
         $response->assertStatus(200);
         $response->assertSee('Payslip Details');
     }
@@ -169,13 +167,13 @@ class CompletePortalTest extends TestCase
     {
         $otherEmployee = User::factory()->create();
         $payslip = PayrollEntry::factory()->create([
-            'employee_id' => $otherEmployee->id
+            'employee_id' => $otherEmployee->id,
+            'organization_id' => $this->employee->organization_id,
         ]);
 
         $this->actingAsRegularEmployee();
 
-        $response = $this->get(route('portal.employee.payslips.show', $payslip));
-        // dd(['cp' => $response]);
+        $response = $this->get(route('portal.employee.payslips.show', $payslip->id));
         $response->assertStatus(403);
     }
 
@@ -189,14 +187,14 @@ class CompletePortalTest extends TestCase
             'employee_id' => $this->employee->id,
             'record_date' => now()->subDays(1),
             'status' => 'present',
-            'total_hours' => 8
+            'total_hours' => 8,
         ]);
 
         AttendanceRecord::factory()->create([
             'employee_id' => $this->employee->id,
             'record_date' => now()->subDays(2),
             'status' => 'late',
-            'total_hours' => 7.5
+            'total_hours' => 7.5,
         ]);
 
         $response = $this->get(route('portal.employee.attendance'));

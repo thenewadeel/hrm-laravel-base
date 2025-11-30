@@ -6,34 +6,16 @@
 +------------------+------------------+
 | Metric           | Count/Percentage |
 +------------------+------------------+
-| Total Tests      | 821              |
-| Passed           | 739 (90%)        |
-| Failed           | 70 (8.5%)        |
-| Warnings/Skipped | 12 (1.5%)        |
+| Total Tests      | 814              |
+| Passed           | 789 (96.9%)      |
+| Failed           | 20 (2.5%)        |
+| Warnings/Skipped | 5 (0.6%)         |
 +------------------+------------------+
 
---- ❌ Detailed Failures (70 Total) ---
-
- AccountTypeValidation (3/7 failures):
-   ⨯ it throws exception when debiting liability account
-   ⨯ it throws exception when crediting asset account
-   ⨯ it validates account types during transaction posting
-
- Dashboard (4/11 failures):
-   ⨯ it shows dashboard for users with organization
-   ⨯ it shows dashboard sections
-   ⨯ it shows low stock alerts
-   ⨯ it shows quick action buttons
+--- ❌ Detailed Failures (20 Total) ---
 
  BankAccount (1/9 failures):
    ⨯ bank account has chart of account relationship
-
- FixedAsset (5/11 failures):
-   ⨯ user can register a new fixed asset
-   ⨯ fixed asset calculates sum of years depreciation correctly
-   ⨯ can post depreciation for asset
-   ⨯ can dispose asset with gain
-   ⨯ can record asset maintenance
 
  EmployeeManagement (2/14 failures):
    ⨯ employee attendance integration
@@ -72,74 +54,20 @@
  OrganizationList (1/7 failures):
    ⨯ it shows empty state when no organizations
 
- OrganizationTree (5/9 failures):
-   ⨯ it can display the organization tree
-   ⨯ an organization unit can be dragged and dropped to another parent
-   ⨯ an organizational unit can be dropped as a root node
-   ⨯ a sibling can be dropped under another sibling
-   ⨯ an empty tree renders correctly
-
- UserPlacement (1/2 failures):
-   ⨯ it can unassign a user by dropping them onto the root
-
  FinancialManagement (1/12 failures):
    ⨯ invoice amount due calculation works
-
- OrganizationDashboard (5/10 failures):
-   ⨯ authenticated user can access organization dashboard
-   ⨯ dashboard displays correct organization metrics
-   ⨯ user can view organization structure
-   ⨯ dashboard includes department distribution data
-   ⨯ analytics page displays trend data
-
- OrganizationUserIntegration (3/7 failures):
-   ⨯ manager can access both employee and manager portals
-   ⨯ has role method works correctly
-   ⨯ has any role method works correctly
-
- OutstandingStatements (8/12 failures):
-   ⨯ can generate payables aging report
-   ⨯ can generate comprehensive receivables statement with aging
-   ⨯ can generate comprehensive payables statement with aging
-   ⨯ can filter receivables statement by customer
-   ⨯ can filter payables statement by vendor
-   ⨯ can filter statements by date range
-   ⨯ can export statement data
-   ⨯ can get aging summary for dashboard
 
  PdfGeneration (1/13 failures):
    ⨯ movement pdf download should return pdf response
 
- CompletePortal (4/8 failures):
-   ⨯ employee can clock in and out
-   ⨯ manager can access manager portal
-   ⨯ employee can view payslip details
-   ⨯ employee cannot view other employee payslips
-
- EmployeePortal (1/8 failures):
-   ⨯ employee can clock in and out
-
- ManagerPortal (3/6 failures):
-   ⨯ manager can access their portal dashboard
-   ⨯ manager can approve leave requests
-   ⨯ manager can generate team reports
-
  SetupWizard (1/5 failures):
    ⨯ it assigns admin role to creator
 
- TaxManagement (9/14 failures):
-   ⨯ user can create tax rate
-   ⨯ user can update tax rate
-   ⨯ tax rate scope active works correctly
-   ⨯ tax calculation service calculates taxes correctly
-   ⨯ tax calculation service applies exemptions correctly
-   ⨯ tax calculation service handles compound taxes
+ TaxManagement (1/14 failures):
    ⨯ tax reporting service generates correct reports
-   ⨯ tax compliance service creates filings correctly
-   ⨯ tax calculations are properly scoped to organization
 
 
---- ⚠️ Warnings/Skipped Tests (12 Total) ---
+--- ⚠️ Warnings/Skipped Tests (5 Total) ---
 
  EmailVerification (3/3 warnings):
    - email verification screen can be rendered → Email verification not…
@@ -149,20 +77,7 @@
  Registration (1/3 warnings):
    - registration screen cannot be rendered if support is disabled → Reg…
 
- OrganizationDashboard (5/10 warnings):
-   - ---------------------------------------------------------------------------------
-   - ---------------------------------------------------------------------------------
-   - ---------------------------------------------------------------------------------
-   - ---------------------------------------------------------------------------------
-   - ---------------------------------------------------------------------------------
-
  PdfGeneration (1/13 warnings):
-   - ---------------------------------------------------------------------------------
-
- CompletePortal (1/8 warnings):
-   - ---------------------------------------------------------------------------------
-
- ManagerPortal (1/6 warnings):
    - ---------------------------------------------------------------------------------
 
 
@@ -170,6 +85,7 @@
 +---------------------------------+--------------+
 | Module                          | Tests Passed |
 +---------------------------------+--------------+
+| AccountTypeValidation           | 7/7          |
 | BalanceSheet                    | 3/3          |
 | CashPaymentService              | 5/5          |
 | CashReceiptService              | 4/4          |
@@ -246,7 +162,9 @@
 | OrganizationApi                 | 15/15        |
 | OrganizationUnitApi             | 12/12        |
 | AttendanceSync                  | 8/8          |
+| Dashboard                       | 11/11        |
 | Example                         | 1/1          |
+| FixedAsset                      | 11/11        |
 | InventoryController             | 5/5          |
 | InventoryItemController         | 5/5          |
 | InventoryReportController       | 8/8          |
@@ -262,6 +180,8 @@
 | ChartOfAccounts                 | 5/5          |
 | MemberManager                   | 2/2          |
 | OrganizationForm                | 7/7          |
+| OrganizationTree                | 9/9          |
+| UserPlacement                   | 2/2          |
 | Customer                        | 8/8          |
 | Invoice                         | 7/7          |
 | MultiStepSetupWizard            | 5/5          |
@@ -271,9 +191,15 @@
 | NavigationResponsive            | 13/13        |
 | NavigationRoleBased             | 11/11        |
 | NavigationHover                 | 4/4          |
+| OrganizationDashboard           | 5/5          |
+| OrganizationUserIntegration     | 7/7          |
 | OutstandingStatementsBasic      | 1/1          |
+| OutstandingStatements           | 12/12        |
 | EmployeeIncrement               | 6/6          |
 | PayrollCalculation              | 7/7          |
+| CompletePortal                  | 7/7          |
+| EmployeePortal                  | 8/8          |
+| ManagerPortal                   | 5/5          |
 | SetupChartOfAccounts            | 3/3          |
 | SetupStore                      | 3/3          |
 | TenancyFeature                  | 3/3          |

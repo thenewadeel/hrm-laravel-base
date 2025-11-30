@@ -57,6 +57,14 @@ class UserPlacementTest extends TestCase
             'organization_id' => $organization->id,
             'organization_unit_id' => $unit->id
         ]);
+        
+        // Verify initial state
+        $this->assertDatabaseHas('organization_user', [
+            'user_id' => $user->id,
+            'organization_id' => $organization->id,
+            'organization_unit_id' => $unit->id
+        ]);
+        
         // Act
         Livewire::test(UserPlacement::class, ['organizationId' => $organization->id])
             ->call('assignUserToUnit', $user->id, null);
@@ -66,6 +74,13 @@ class UserPlacementTest extends TestCase
             'user_id' => $user->id,
             'organization_id' => $organization->id,
             'organization_unit_id' => null
+        ]);
+        
+        // Also verify the old state is gone
+        $this->assertDatabaseMissing('organization_user', [
+            'user_id' => $user->id,
+            'organization_id' => $organization->id,
+            'organization_unit_id' => $unit->id
         ]);
     }
 }

@@ -79,4 +79,19 @@ class AssetDisposal extends Model
             $disposal->gain_loss = $disposal->proceeds - $disposal->book_value_at_disposal;
         });
     }
+
+    public function getGainLossAttribute($value): float
+    {
+        return (float) $value;
+    }
+
+    public function getProceedsAttribute($value): float
+    {
+        return (float) $value;
+    }
+
+    public function getBookValueAtDisposalAttribute($value): float
+    {
+        return (float) $value;
+    }
 }

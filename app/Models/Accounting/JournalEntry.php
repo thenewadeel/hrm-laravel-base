@@ -150,7 +150,7 @@ class JournalEntry extends Model
     public function post(array $entries): void
     {
         $accountingService = app(AccountingService::class);
-        $accountingService->postTransaction($entries, $this->description, $this);
+        $accountingService->postVoucherTransaction($entries, $this->description, $this);
 
         $this->update([
             'status' => 'posted',

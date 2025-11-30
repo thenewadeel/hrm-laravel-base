@@ -5,10 +5,10 @@ namespace App\Services;
 use App\Models\Accounting\AssetDisposal;
 use App\Models\Accounting\AssetMaintenance;
 use App\Models\Accounting\AssetTransfer;
+use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\Depreciation;
 use App\Models\Accounting\FixedAsset;
 use App\Models\Accounting\JournalEntry;
-use App\Models\Accounting\ChartOfAccount;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -33,8 +33,8 @@ class FixedAssetService
             $asset->load(['assetAccount', 'accumulatedDepreciationAccount']);
 
             // Create acquisition journal entry if accounts are specified
-            if (isset($data['chart_of_account_id']) && $data['created_by']) {
-                $this->createAcquisitionEntry($asset, $data['created_by']);
+            if (isset($data['chart_of_account_id'])) {
+                $this->createAcquisitionEntry($asset, Auth::id() ?? 1);
             }
 
             return $asset;
@@ -89,7 +89,7 @@ class FixedAssetService
             ]);
 
             // Create journal entry
-            $journalEntry = $this->createDepreciationJournalEntry($asset, $depreciationAmount, $date);
+            $journalEntry = $this->createDepreciationJournalEntry($asset, $depreciationAmount, $date, Auth::id() ?? 1);
             $depreciation->journal_entry_id = $journalEntry->id;
             $depreciation->save();
 
@@ -232,7 +232,7 @@ class FixedAssetService
             ],
         ];
 
-        $this->accountingService->postTransaction(
+        $this->accountingService->postVoucherTransaction(
             $entries,
             $description,
             $asset
@@ -241,7 +241,7 @@ class FixedAssetService
         // Create journal entry record for tracking
         return JournalEntry::create([
             'organization_id' => $asset->organization_id,
-            'voucher_type' => 'asset_acquisition',
+            'voucher_type' => 'PURCHASE',
             'entry_date' => $asset->purchase_date,
             'description' => $description,
             'total_amount' => $asset->purchase_cost,
@@ -254,9 +254,17 @@ class FixedAssetService
     {
         $description = "Depreciation for {$asset->name} ({$asset->asset_tag}) - {$date->format('F Y')}";
 
+        $expenseAccount = ChartOfAccount::where('type', 'expense')
+            ->where('organization_id', $asset->organization_id)
+            ->first();
+
+        if (! $expenseAccount) {
+            throw new \Exception('No expense account found for depreciation posting');
+        }
+
         $entries = [
             [
-                'account' => ChartOfAccount::where('type', 'expense')->first(), // Depreciation expense
+                'account' => $expenseAccount, // Depreciation expense
                 'type' => 'debit',
                 'amount' => $amount,
             ],
@@ -267,7 +275,7 @@ class FixedAssetService
             ],
         ];
 
-        $this->accountingService->postTransaction(
+        $this->accountingService->postVoucherTransaction(
             $entries,
             $description,
             $asset
@@ -276,7 +284,7 @@ class FixedAssetService
         // Create journal entry record for tracking
         return JournalEntry::create([
             'organization_id' => $asset->organization_id,
-            'voucher_type' => 'depreciation',
+            'voucher_type' => 'EXPENSE',
             'entry_date' => $date,
             'description' => $description,
             'total_amount' => $amount,

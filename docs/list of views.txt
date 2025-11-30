@@ -247,8 +247,10 @@ resources/views/
 │   └── user-placement.blade.php
 ├── navigation-menu.blade.php
 ├── organizations
+│   ├── analytics.blade.php
 │   ├── dashboard.blade.php
-│   └── index.blade.php
+│   ├── index.blade.php
+│   └── structure.blade.php
 ├── partials
 │   ├── accounting
 │   │   ├── balance-sheet.blade.php
@@ -300,4 +302,4 @@ resources/views/
 ├── test-navigation.blade.php
 └── welcome.blade.php
 
-59 directories, 242 files
+59 directories, 244 files

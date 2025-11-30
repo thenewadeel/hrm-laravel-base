@@ -192,7 +192,7 @@ class EmployeePortalController extends Controller
             ->first();
 
         if ($existingRecord) {
-            return back()->with('error', 'Already clocked in today');
+            return response()->json(['message' => 'Already clocked in today'], 422);
         }
 
         $punchInTime = now();
@@ -207,7 +207,7 @@ class EmployeePortalController extends Controller
             'status' => $status,
         ]);
 
-        return back()->with('success', 'Successfully clocked in at '.$punchInTime->format('h:i A'));
+        return response()->json(['message' => 'Successfully clocked in at '.$punchInTime->format('h:i A')]);
     }
 
     public function clockOut()
@@ -215,7 +215,7 @@ class EmployeePortalController extends Controller
         $employee = $this->getCurrentEmployee();
 
         if (! $employee) {
-            return redirect()->route('portal.employee.setup')->with('error', 'No employee profile found for your account.');
+            return response()->json(['message' => 'No employee profile found for your account.'], 400);
         }
 
         $attendance = AttendanceRecord::where('employee_id', $employee->id)
@@ -223,11 +223,11 @@ class EmployeePortalController extends Controller
             ->first();
 
         if (! $attendance) {
-            return back()->with('error', 'No clock-in record found for today');
+            return response()->json(['message' => 'No clock-in record found for today'], 422);
         }
 
         if ($attendance->punch_out) {
-            return back()->with('error', 'Already clocked out today');
+            return response()->json(['message' => 'Already clocked out today'], 422);
         }
 
         $punchOutTime = now();
@@ -238,7 +238,7 @@ class EmployeePortalController extends Controller
             'total_hours' => $totalHours,
         ]);
 
-        return back()->with('success', 'Successfully clocked out at '.$punchOutTime->format('h:i A'));
+        return response()->json(['message' => 'Successfully clocked out at '.$punchOutTime->format('h:i A')]);
     }
 
     /**

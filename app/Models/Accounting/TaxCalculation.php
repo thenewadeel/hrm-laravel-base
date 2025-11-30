@@ -32,10 +32,10 @@ class TaxCalculation extends Model
     protected function casts(): array
     {
         return [
-            'base_amount' => 'decimal:2',
-            'taxable_amount' => 'decimal:2',
-            'tax_rate' => 'decimal:4',
-            'tax_amount' => 'decimal:2',
+            'base_amount' => 'float',
+            'taxable_amount' => 'float',
+            'tax_rate' => 'float',
+            'tax_amount' => 'float',
             'calculation_date' => 'date',
             'calculation_details' => 'array',
         ];
