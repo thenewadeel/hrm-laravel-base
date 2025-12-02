@@ -5,7 +5,7 @@
 ])
 
 <div class="relative">
-    <button class="p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+    <button class="p-1 rounded-full text-muted hover:text-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
         <span class="sr-only">View notifications</span>
         
         <!-- Bell Icon -->
@@ -15,7 +15,7 @@
         
         <!-- Notification Count Badge -->
         @if($showCount && $count > 0)
-            <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-400 ring-2 ring-white"></span>
+            <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-400 ring-2 ring-surface"></span>
         @endif
     </button>
 </div>

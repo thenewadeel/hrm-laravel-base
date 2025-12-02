@@ -1,0 +1,274 @@
+/* Modern Minimal Theme for ERP System */
+
+/* Light Mode: Clean & Crisp */
+:root {
+    /* Primary Colors - Refined palette */
+    --color-primary: #0066cc;
+    --color-primary-dark: #0052a3;
+    --color-primary-light: #4d94ff;
+
+    /* Background Colors - High contrast for readability */
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #f8f9fa;
+    --color-bg-tertiary: #f1f3f4;
+
+    /* Surface Colors */
+    --color-surface: #ffffff;
+    --color-surface-elevated: #ffffff;
+    --surface-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --surface-shadow-elevated: 0 4px 16px rgba(0, 0, 0, 0.08);
+
+    /* Text Colors - Optimized contrast ratios */
+    --color-text-primary: #1a1a1a;
+    --color-text-secondary: #5f6368;
+    --color-text-muted: #80868b;
+    --color-text-inverse: #ffffff;
+
+    /* Border Colors */
+    --color-border-primary: #dadce0;
+    --color-border-secondary: #e8eaed;
+    --color-border-focus: #0066cc;
+
+    /* Status Colors - Consistent saturation */
+    --color-success: #00a86b;
+    --color-warning: #ff9900;
+    --color-error: #dc3545;
+    --color-info: #17a2b8;
+
+    /* Typography */
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+    --line-height: 1.6;
+    --letter-spacing: -0.01em;
+}
+
+/* Dark Mode: High Contrast Comfort */
+.dark {
+    /* Primary Colors */
+    --color-primary: #4d94ff;
+    --color-primary-dark: #8bb4ff;
+    --color-primary-light: #b3d1ff;
+
+    /* Background Colors - Reduced brightness */
+    --color-bg-primary: #0f0f0f;
+    --color-bg-secondary: #1a1a1a;
+    --color-bg-tertiary: #262626;
+
+    /* Surface Colors */
+    --color-surface: #1a1a1a;
+    --color-surface-elevated: #262626;
+    --surface-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --surface-shadow-elevated: 0 4px 16px rgba(0, 0, 0, 0.4);
+
+    /* Text Colors - Maintained contrast */
+    --color-text-primary: #f8f9fa;
+    --color-text-secondary: #ced4da;
+    --color-text-muted: #adb5bd;
+    --color-text-inverse: #0f0f0f;
+
+    /* Border Colors */
+    --color-border-primary: #404040;
+    --color-border-secondary: #333333;
+    --color-border-focus: #4d94ff;
+
+    /* Status Colors */
+    --color-success: #20c997;
+    --color-warning: #ffc107;
+    --color-error: #ff6b6b;
+    --color-info: #6ecbff;
+}
+
+/* Base Styles for Crisp Reading */
+body {
+    font-family: var(--font-family);
+    line-height: var(--line-height);
+    letter-spacing: var(--letter-spacing);
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Typography Enhancements */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-text-primary);
+    margin-top: 0;
+}
+
+p,
+li,
+td,
+th,
+span,
+div {
+    color: var(--color-text-primary);
+    font-size: 0.9375rem; /* 15px */
+}
+
+/* Semantic utility classes */
+.bg-primary {
+    background-color: var(--color-bg-primary);
+}
+.bg-secondary {
+    background-color: var(--color-bg-secondary);
+}
+.bg-tertiary {
+    background-color: var(--color-bg-tertiary);
+}
+
+.surface {
+    background-color: var(--color-surface);
+    box-shadow: var(--surface-shadow);
+    border-radius: 8px;
+    border: 1px solid var(--color-border-primary);
+}
+
+.surface-elevated {
+    background-color: var(--color-surface-elevated);
+    box-shadow: var(--surface-shadow-elevated);
+    border-radius: 8px;
+    border: 1px solid var(--color-border-secondary);
+}
+
+.text-primary {
+    color: var(--color-text-primary);
+}
+.text-secondary {
+    color: var(--color-text-secondary);
+}
+.text-muted {
+    color: var(--color-text-muted);
+}
+.text-inverse {
+    color: var(--color-text-inverse);
+}
+
+.border-primary {
+    border-color: var(--color-border-primary);
+}
+.border-secondary {
+    border-color: var(--color-border-secondary);
+}
+.border-focus {
+    border-color: var(--color-border-focus);
+}
+
+/* Minimal Transitions */
+* {
+    transition: background-color 150ms ease-out, border-color 150ms ease-out,
+        color 150ms ease-out, box-shadow 150ms ease-out;
+}
+
+/* Enhanced Focus States */
+:focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+.focus-ring:focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+}
+
+/* Modern Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-border-primary);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-muted);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: var(--color-border-primary);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-muted);
+}
+
+/* Selection Colors */
+::selection {
+    background-color: var(--color-primary-light);
+    color: var(--color-text-inverse);
+}
+
+.dark ::selection {
+    background-color: var(--color-primary);
+    color: var(--color-text-inverse);
+}
+
+/* Link Styling */
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 150ms ease-out;
+}
+
+a:hover {
+    border-bottom-color: var(--color-primary);
+}
+
+/* Table Readability */
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+}
+
+th {
+    background-color: var(--color-bg-tertiary);
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--color-border-primary);
+}
+
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-border-secondary);
+}
+
+tr:hover td {
+    background-color: var(--color-bg-tertiary);
+}
+
+/* Form Elements */
+input,
+textarea,
+select {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border-primary);
+    border-radius: 6px;
+    padding: 10px 12px;
+    color: var(--color-text-primary);
+    font-family: var(--font-family);
+    transition: border-color 150ms ease-out;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--color-border-focus);
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb, 77, 148, 255), 0.1);
+}

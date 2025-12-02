@@ -1,4 +1,4 @@
-@props(['align' => 'right', 'width' => '48', 'contentClasses' => 'py-1 bg-white dark:bg-gray-700'])
+@props(['align' => 'right', 'width' => '48', 'contentClasses' => 'py-1 surface'])
 
 @php
 $alignmentClasses = match ($align) {
@@ -35,7 +35,7 @@ $width = match ($width) {
             @mouseenter="open = true"
             @mouseleave="open = false"
             @click="open = false">
-        <div class="rounded-md ring-1 ring-black ring-opacity-5 {{ $contentClasses }}">
+        <div class="rounded-md ring-1 ring-black ring-opacity-5 surface {{ $contentClasses }}">
             {{ $slot }}
         </div>
     </div>

@@ -1,117 +1,117 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-primary leading-tight">
             Documentation Portal </h2>
     </x-slot>
-    <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div class="min-h-screen bg-primary">
         <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="surface overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-4 py-6 sm:p-6 lg:p-8">
                     <header class="mb-8">
-                        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
+                        <h1 class="text-3xl font-bold text-primary">
                             📚 HRM Laravel Base Documentation
                         </h1>
-                        <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                        <p class="mt-2 text-sm text-secondary">
                             Complete documentation for the HRM Laravel Base ERP system
                         </p>
                     </header>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <!-- Core Documentation -->
-                        <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
-                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                        <div class="bg-tertiary p-6 rounded-lg">
+                            <h2 class="text-lg font-semibold text-primary mb-4">
                                 📋 Core Documentation
                             </h2>
                             <div class="space-y-3">
                                 <a href="/docs/SRS.html"
-                                    class="block p-3 bg-white dark:bg-gray-600 rounded hover:bg-gray-100 dark:hover:bg-gray-500 transition">
-                                    <div class="font-medium text-gray-900 dark:text-white">📋 Software Requirements
+                                    class="block p-3 surface rounded hover:bg-tertiary transition">
+                                    <div class="font-medium text-primary">📋 Software Requirements
                                     </div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">Complete SRS documentation
+                                    <div class="text-sm text-secondary">Complete SRS documentation
                                     </div>
                                 </a>
                                 <a href="/docs/big picture.html"
-                                    class="block p-3 bg-white dark:bg-gray-600 rounded hover:bg-gray-100 dark:hover:bg-gray-500 transition">
-                                    <div class="font-medium text-gray-900 dark:text-white">📊 Big Picture</div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">System overview</div>
+                                    class="block p-3 surface rounded hover:bg-tertiary transition">
+                                    <div class="font-medium text-primary">📊 Big Picture</div>
+                                    <div class="text-sm text-secondary">System overview</div>
                                 </a>
                                 <a href="/docs/ERD.html"
-                                    class="block p-3 bg-white dark:bg-gray-600 rounded hover:bg-gray-100 dark:hover:bg-gray-500 transition">
-                                    <div class="font-medium text-gray-900 dark:text-white">🗄️ Database Design</div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">ERD and schema</div>
+                                    class="block p-3 surface rounded hover:bg-tertiary transition">
+                                    <div class="font-medium text-primary">🗄️ Database Design</div>
+                                    <div class="text-sm text-secondary">ERD and schema</div>
                                 </a>
                                 <a href="/docs/project plan.html"
-                                    class="block p-3 bg-white dark:bg-gray-600 rounded hover:bg-gray-100 dark:hover:bg-gray-500 transition">
-                                    <div class="font-medium text-gray-900 dark:text-white">📅 Project Plan</div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">Implementation timeline</div>
+                                    class="block p-3 surface rounded hover:bg-tertiary transition">
+                                    <div class="font-medium text-primary">📅 Project Plan</div>
+                                    <div class="text-sm text-secondary">Implementation timeline</div>
                                 </a>
                             </div>
                         </div>
 
                         <!-- Technical Documentation -->
-                        <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
-                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                        <div class="bg-tertiary p-6 rounded-lg">
+                            <h2 class="text-lg font-semibold text-primary mb-4">
                                 🛠️ Technical Documentation
                             </h2>
                             <div class="space-y-3">
                                 <a href="/docs/interfaces spec.html"
-                                    class="block p-3 bg-white dark:bg-gray-600 rounded hover:bg-gray-100 dark:hover:bg-gray-500 transition">
-                                    <div class="font-medium text-gray-900 dark:text-white">🔌 Interface Specifications
+                                    class="block p-3 surface rounded hover:bg-tertiary transition">
+                                    <div class="font-medium text-primary">🔌 Interface Specifications
                                     </div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">API and interfaces</div>
+                                    <div class="text-sm text-secondary">API and interfaces</div>
                                 </a>
                                 <a href="/docs/list of modules.html"
-                                    class="block p-3 bg-white dark:bg-gray-600 rounded hover:bg-gray-100 dark:hover:bg-gray-500 transition">
-                                    <div class="font-medium text-gray-900 dark:text-white">🧩 Module List</div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">All modules</div>
+                                    class="block p-3 surface rounded hover:bg-tertiary transition">
+                                    <div class="font-medium text-primary">🧩 Module List</div>
+                                    <div class="text-sm text-secondary">All modules</div>
                                 </a>
                                 <a href="/docs/list of routes.html"
-                                    class="block p-3 bg-white dark:bg-gray-600 rounded hover:bg-gray-100 dark:hover:bg-gray-500 transition">
-                                    <div class="font-medium text-gray-900 dark:text-white">🛣️ Route List</div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">All routes</div>
+                                    class="block p-3 surface rounded hover:bg-tertiary transition">
+                                    <div class="font-medium text-primary">🛣️ Route List</div>
+                                    <div class="text-sm text-secondary">All routes</div>
                                 </a>
                                 <a href="/docs/workflows.html"
-                                    class="block p-3 bg-white dark:bg-gray-600 rounded hover:bg-gray-100 dark:hover:bg-gray-500 transition">
-                                    <div class="font-medium text-gray-900 dark:text-white">⚙️ Workflows</div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">Business workflows</div>
+                                    class="block p-3 surface rounded hover:bg-tertiary transition">
+                                    <div class="font-medium text-primary">⚙️ Workflows</div>
+                                    <div class="text-sm text-secondary">Business workflows</div>
                                 </a>
                             </div>
                         </div>
 
                         <!-- Management -->
-                        <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
-                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                        <div class="bg-tertiary p-6 rounded-lg">
+                            <h2 class="text-lg font-semibold text-primary mb-4">
                                 📊 Management
                             </h2>
                             <div class="space-y-3">
                                 <a href="/docs/timeline.html"
-                                    class="block p-3 bg-white dark:bg-gray-600 rounded hover:bg-gray-100 dark:hover:bg-gray-500 transition">
-                                    <div class="font-medium text-gray-900 dark:text-white">⏰ Timeline</div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">Project timeline</div>
+                                    class="block p-3 surface rounded hover:bg-tertiary transition">
+                                    <div class="font-medium text-primary">⏰ Timeline</div>
+                                    <div class="text-sm text-secondary">Project timeline</div>
                                 </a>
                                 <a href="/docs/project log.html"
-                                    class="block p-3 bg-white dark:bg-gray-600 rounded hover:bg-gray-100 dark:hover:bg-gray-500 transition">
-                                    <div class="font-medium text-gray-900 dark:text-white">📝 Project Log</div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">Development log</div>
+                                    class="block p-3 surface rounded hover:bg-tertiary transition">
+                                    <div class="font-medium text-primary">📝 Project Log</div>
+                                    <div class="text-sm text-secondary">Development log</div>
                                 </a>
                             </div>
                         </div>
 
                         <!-- Reports -->
-                        <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
-                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                        <div class="bg-tertiary p-6 rounded-lg">
+                            <h2 class="text-lg font-semibold text-primary mb-4">
                                 📈 Reports & Progress
                             </h2>
                             <div class="space-y-3">
                                 <a href="/docs/report-executive-progress.html"
-                                    class="block p-3 bg-white dark:bg-gray-600 rounded hover:bg-gray-100 dark:hover:bg-gray-500 transition">
-                                    <div class="font-medium text-gray-900 dark:text-white">📊 Executive Progress</div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">Management reports</div>
+                                    class="block p-3 surface rounded hover:bg-tertiary transition">
+                                    <div class="font-medium text-primary">📊 Executive Progress</div>
+                                    <div class="text-sm text-secondary">Management reports</div>
                                 </a>
                                 <a href="/docs/report-technical-progress.html"
-                                    class="block p-3 bg-white dark:bg-gray-600 rounded hover:bg-gray-100 dark:hover:bg-gray-500 transition">
-                                    <div class="font-medium text-gray-900 dark:text-white">🔧 Technical Progress</div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">Technical reports</div>
+                                    class="block p-3 surface rounded hover:bg-tertiary transition">
+                                    <div class="font-medium text-primary">🔧 Technical Progress</div>
+                                    <div class="text-sm text-secondary">Technical reports</div>
                                 </a>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
 
                     <!-- Features Section -->
                     <div class="mt-8">
-                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                        <h2 class="text-2xl font-bold text-primary mb-6">
                             🚀 Key Features
                         </h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -160,26 +160,26 @@
                     </div>
 
                     <!-- Quick Actions -->
-                    <div class="mt-8 bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                    <div class="mt-8 bg-tertiary p-6 rounded-lg">
+                        <h2 class="text-xl font-bold text-primary mb-4">
                             ⚡ Quick Actions
                         </h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <a href="/docs/pdf/index.html"
-                                class="flex items-center p-4 bg-white dark:bg-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition">
+                                class="flex items-center p-4 surface rounded-lg hover:bg-tertiary transition">
                                 <div class="text-center">
                                     <div class="text-2xl mb-2">📄</div>
-                                    <div class="font-medium text-gray-900 dark:text-white">Browse All Documentation
+                                    <div class="font-medium text-primary">Browse All Documentation
                                     </div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">Complete index</div>
+                                    <div class="text-sm text-secondary">Complete index</div>
                                 </div>
                             </a>
                             <button onclick="window.print()"
-                                class="flex items-center p-4 bg-white dark:bg-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition">
+                                class="flex items-center p-4 surface rounded-lg hover:bg-tertiary transition">
                                 <div class="text-center">
                                     <div class="text-2xl mb-2">🖨️</div>
-                                    <div class="font-medium text-gray-900 dark:text-white">Print Page</div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">Print this overview</div>
+                                    <div class="font-medium text-primary">Print Page</div>
+                                    <div class="text-sm text-secondary">Print this overview</div>
                                 </div>
                             </button>
                         </div>

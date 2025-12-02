@@ -31,24 +31,24 @@ $classes = $sizeClasses[$size] ?? $sizeClasses['md'];
                  alt="{{ $user->name }}">
             
             @if($showStatus && isset($user->status))
-                <span class="absolute bottom-0 right-0 block h-2 w-2 rounded-full {{ $statusColors[$user->status] ?? $statusColors['online'] }} ring-2 ring-white"></span>
+                <span class="absolute bottom-0 right-0 block h-2 w-2 rounded-full {{ $statusColors[$user->status] ?? $statusColors['online'] }} ring-2 ring-surface"></span>
             @endif
         </div>
     @endif
     
     <div class="flex-1 min-w-0">
         @if($user)
-            <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
+            <p class="text-sm font-medium text-primary truncate">
                 {{ $user->name }}
             </p>
             
             @if($showRole && isset($user->current_role))
-                <p class="text-xs text-gray-500 dark:text-gray-400 truncate">
+                <p class="text-xs text-muted truncate">
                     {{ $user->current_role }}
                 </p>
             @endif
         @else
-            <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+            <p class="text-sm font-medium text-muted">
                 Guest User
             </p>
         @endif

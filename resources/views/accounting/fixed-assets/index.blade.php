@@ -33,7 +33,7 @@
          style="display: none;">
         
         <div class="flex min-h-screen items-center justify-center p-4">
-            <div class="relative bg-white dark:bg-gray-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+            <div class="relative surface rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto"
                  x-transition:enter="transition ease-out duration-300"
                  x-transition:enter-start="opacity-0 transform scale-95"
                  x-transition:enter-end="opacity-100 transform scale-100"
@@ -62,7 +62,7 @@
          style="display: none;">
         
         <div class="flex min-h-screen items-center justify-center p-4">
-            <div class="relative bg-white dark:bg-gray-800 rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto"
+            <div class="relative surface rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto"
                  x-transition:enter="transition ease-out duration-300"
                  x-transition:enter-start="opacity-0 transform scale-95"
                  x-transition:enter-end="opacity-100 transform scale-100"

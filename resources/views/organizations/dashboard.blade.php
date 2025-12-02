@@ -2,10 +2,10 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <div>
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                <h2 class="font-semibold text-xl text-primary leading-tight">
                     🏢 {{ $organization->name }} Dashboard
                 </h2>
-                <p class="text-sm text-gray-600 mt-1">
+                <p class="text-sm text-secondary mt-1">
                     Overview of your organization's performance and activities
                 </p>
             </div>
@@ -15,17 +15,17 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <!-- Organization Management Header -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
+            <div class="surface overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 surface border-b border-secondary">
                     <div class="flex items-center">
                         <div class="flex-shrink-0">
-                            <svg class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg class="h-8 w-8 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                             </svg>
                         </div>
                         <div class="ml-4">
-                            <h3 class="text-lg font-medium text-gray-900">Organization Management</h3>
-                            <p class="mt-1 text-sm text-gray-500">
+                            <h3 class="text-lg font-medium text-primary">Organization Management</h3>
+                            <p class="mt-1 text-sm text-secondary">
                                 Manage your organization structure, departments, and teams
                             </p>
                         </div>
@@ -35,7 +35,7 @@
 
             <!-- Metrics Overview -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="surface overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0 bg-blue-100 rounded-md p-3">
@@ -44,14 +44,14 @@
                                 </svg>
                             </div>
                             <div class="ml-4">
-                                <dt class="text-sm font-medium text-gray-500 truncate">Total Employees</dt>
-                                <dd class="text-2xl font-semibold text-gray-900">{{ $metrics['total_employees'] }}</dd>
+                                <dt class="text-sm font-medium text-muted truncate">Total Employees</dt>
+                                <dd class="text-2xl font-semibold text-primary">{{ $metrics['total_employees'] }}</dd>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="surface overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0 bg-green-100 rounded-md p-3">
@@ -60,14 +60,14 @@
                                 </svg>
                             </div>
                             <div class="ml-4">
-                                <dt class="text-sm font-medium text-gray-500 truncate">Departments</dt>
-                                <dd class="text-2xl font-semibold text-gray-900">{{ $metrics['total_departments'] }}</dd>
+                                <dt class="text-sm font-medium text-muted truncate">Departments</dt>
+                                <dd class="text-2xl font-semibold text-primary">{{ $metrics['total_departments'] }}</dd>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="surface overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0 bg-yellow-100 rounded-md p-3">
@@ -76,14 +76,14 @@
                                 </svg>
                             </div>
                             <div class="ml-4">
-                                <dt class="text-sm font-medium text-gray-500 truncate">Attendance Rate</dt>
-                                <dd class="text-2xl font-semibold text-gray-900">{{ $metrics['attendance_rate'] }}%</dd>
+                                <dt class="text-sm font-medium text-muted truncate">Attendance Rate</dt>
+                                <dd class="text-2xl font-semibold text-primary">{{ $metrics['attendance_rate'] }}%</dd>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="surface overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0 bg-purple-100 rounded-md p-3">
@@ -92,8 +92,8 @@
                                 </svg>
                             </div>
                             <div class="ml-4">
-                                <dt class="text-sm font-medium text-gray-500 truncate">Monthly Payroll</dt>
-                                <dd class="text-2xl font-semibold text-gray-900">${{ number_format($metrics['monthly_payroll']) }}</dd>
+                                <dt class="text-sm font-medium text-muted truncate">Monthly Payroll</dt>
+                                <dd class="text-2xl font-semibold text-primary">${{ number_format($metrics['monthly_payroll']) }}</dd>
                             </div>
                         </div>
                     </div>
@@ -102,12 +102,12 @@
 
             <!-- Department Distribution -->
             @if(!empty($departmentStats))
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="surface overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="px-4 py-5 sm:p-6">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">Department Distribution</h3>
+                    <h3 class="text-lg leading-6 font-medium text-primary">Department Distribution</h3>
                     <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                         @foreach($departmentStats as $dept)
-                        <div class="bg-gray-50 overflow-hidden rounded-lg">
+                        <div class="bg-tertiary overflow-hidden rounded-lg">
                             <div class="p-5">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
@@ -117,14 +117,14 @@
                                     </div>
                                     <div class="ml-4 w-0 flex-1">
                                         <dl>
-                                            <dt class="text-sm font-medium text-gray-500 truncate">{{ $dept['name'] }}</dt>
-                                            <dd class="text-lg font-medium text-gray-900">{{ $dept['count'] }} employees</dd>
+                                            <dt class="text-sm font-medium text-muted truncate">{{ $dept['name'] }}</dt>
+                                            <dd class="text-lg font-medium text-primary">{{ $dept['count'] }} employees</dd>
                                         </dl>
                                     </div>
                                 </div>
                             </div>
-                            <div class="bg-gray-200 px-5 py-2">
-                                <div class="text-sm text-gray-600">{{ $dept['percentage'] }}% of workforce</div>
+                            <div class="bg-secondary px-5 py-2">
+                                <div class="text-sm text-muted">{{ $dept['percentage'] }}% of workforce</div>
                             </div>
                         </div>
                         @endforeach

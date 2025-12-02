@@ -1,4 +1,4 @@
-<nav x-data="{ mobileMenuOpen: false }" class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+<nav x-data="{ mobileMenuOpen: false }" class="surface border-b border-secondary">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <!-- Left side - Logo and Navigation -->
@@ -19,15 +19,18 @@
                 </div>
             </div>
 
-            <!-- Right side - User menu -->
-            <div class="hidden md:flex md:items-center md:ml-6">
+            <!-- Right side - Theme toggle and User menu -->
+            <div class="hidden md:flex md:items-center md:ml-6 md:space-x-3">
+                <!-- Theme Toggle -->
+                <x-navigation.theme-toggle />
+                
                 @auth
                     <!-- Teams Dropdown -->
                     @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                         <x-navigation.dropdown align="right" width="60">
                             <x-slot name="trigger">
                                 <button
-                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700 transition ease-in-out duration-150">
+                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-secondary surface hover:text-primary focus:outline-none focus:bg-surface active:bg-surface transition ease-in-out duration-150">
                                     {{ Auth::user()->currentTeam->name ?? Auth::user()->name }}
 
                                     <svg class="ml-2 -mr-0.5 h-4 w-4 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -39,7 +42,7 @@
                             </x-slot>
                             <div class="w-60">
                                 <!-- Team Management -->
-                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                <div class="block px-4 py-2 text-xs text-muted">
                                     {{ __('Manage Team') }}
                                 </div>
 
@@ -57,9 +60,9 @@
 
                                 <!-- Team Switcher -->
                                 @if (Auth::user()->allTeams()->count() > 1)
-                                    <div class="border-t border-gray-200 dark:border-gray-600"></div>
+                                    <div class="border-t border-secondary"></div>
 
-                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                    <div class="block px-4 py-2 text-xs text-muted">
                                         {{ __('Switch Teams') }}
                                     </div>
 
@@ -76,13 +79,13 @@
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                                 <button
-                                    class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                    class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-primary transition">
                                     <img class="h-8 w-8 rounded-full object-cover"
                                         src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                 </button>
                             @elseif(1)
                                 <button
-                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700 transition ease-in-out duration-150">
+                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-secondary surface hover:text-primary focus:outline-none focus:bg-surface active:bg-surface transition ease-in-out duration-150">
                                     {{ Auth::user()->name }}
 
                                     <svg class="ml-2 -mr-0.5 h-4 w-4 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -94,7 +97,7 @@
                             @endif
                         </x-slot>
                         <!-- Account Management -->
-                        <div class="block px-4 py-2 text-xs text-gray-400">
+                        <div class="block px-4 py-2 text-xs text-muted">
                             {{ __('Manage Account') }}
                         </div>
 
@@ -108,7 +111,7 @@
                             </x-navigation.dropdown-link>
                         @endif
 
-                        <div class="border-t border-gray-200 dark:border-gray-600"></div>
+                        <div class="border-t border-secondary"></div>
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}" x-data>
@@ -122,7 +125,7 @@
                 @else
                     <!-- Guest User Links -->
                     <a href="{{ route('login') }}"
-                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 transition duration-150 ease-in-out">
+                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-secondary surface hover:text-primary focus:outline-none focus:bg-surface transition duration-150 ease-in-out">
                         {{ __('Log in') }}
                     </a>
 
@@ -137,7 +140,7 @@
             <!-- Mobile menu button -->
             <div class="flex items-center md:hidden">
                 <button @click="mobileMenuOpen = !mobileMenuOpen"
-                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                    class="inline-flex items-center justify-center p-2 rounded-md text-muted hover:text-secondary hover:bg-surface-elevated focus:outline-none focus:bg-surface-elevated focus:text-secondary transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{ 'hidden': mobileMenuOpen, 'inline-flex': !mobileMenuOpen }" class="inline-flex"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -156,7 +159,7 @@
         x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100"
         x-transition:leave-end="opacity-0 transform scale-95" class="md:hidden">
 
-        <div class="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="px-2 pt-2 pb-3 space-y-1 surface border-t border-secondary">
             <x-navigation.mobile-menu />
             <x-navigation.portal-menu />
         </div>

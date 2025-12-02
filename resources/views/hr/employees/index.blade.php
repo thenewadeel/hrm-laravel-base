@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-primary leading-tight">
             🏠 {{ __('Employee Management') }}
         </h2>
     </x-slot>
@@ -10,20 +10,20 @@
             <!-- Header with Stats -->
             <div class="md:flex md:items-center md:justify-between mb-6">
                 <div class="flex-1 min-w-0">
-                    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+                    <h2 class="text-2xl font-bold leading-7 text-primary sm:text-3xl sm:truncate">
                         Employee Management
                     </h2>
                     <div class="mt-2 flex items-center space-x-4">
-                        <div class="flex items-center text-sm text-gray-500">
-                            <span class="font-medium text-gray-900">{{ $employees->total() }}</span>
+                        <div class="flex items-center text-sm text-muted">
+                            <span class="font-medium text-primary">{{ $employees->total() }}</span>
                             <span class="ml-1">total employees</span>
                         </div>
-                        <div class="flex items-center text-sm text-gray-500">
+                        <div class="flex items-center text-sm text-muted">
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                 {{ $employees->where('is_active', true)->count() }} Active
                             </span>
                         </div>
-                        <div class="flex items-center text-sm text-gray-500">
+                        <div class="flex items-center text-sm text-muted">
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
                                 {{ $employees->where('is_active', false)->count() }} Inactive
                             </span>
@@ -42,22 +42,22 @@
             </div>
 
             <!-- Filters and Search -->
-            <div class="bg-white shadow rounded-lg mb-6 p-4">
+            <div class="surface shadow rounded-lg mb-6 p-4">
                 <form method="GET" action="{{ route('hr.employees.index') }}" class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                        <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Search</label>
+                        <label for="search" class="block text-sm font-medium text-primary mb-1">Search</label>
                         <input type="text" 
                                id="search" 
                                name="search" 
                                value="{{ request('search') }}"
                                placeholder="Search by name or email..."
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                               class="w-full px-3 py-2 border border-secondary rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div>
-                        <label for="department" class="block text-sm font-medium text-gray-700 mb-1">Department</label>
+                        <label for="department" class="block text-sm font-medium text-primary mb-1">Department</label>
                         <select id="department" 
                                 name="department" 
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                class="w-full px-3 py-2 border border-secondary rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                             <option value="">All Departments</option>
                             @foreach($departments as $department)
                                 <option value="{{ $department->id }}" {{ request('department') == $department->id ? 'selected' : '' }}>
@@ -82,14 +82,14 @@
             </div>
 
             <!-- Employee List -->
-            <div class="bg-white shadow overflow-hidden sm:rounded-md">
+            <div class="surface shadow overflow-hidden sm:rounded-md">
                 @if($employees->count() > 0)
-                    <ul class="divide-y divide-gray-200">
+                    <ul class="divide-y divide-secondary">
                         @foreach ($employees as $employee)
                             <!-- Employee Row - Clickable -->
                             <li>
                                 <a href="{{ route('hr.employees.show', $employee) }}" 
-                                   class="block hover:bg-gray-50 transition-colors duration-150">
+                                   class="block hover:bg-tertiary transition-colors duration-150">
                                     <div class="px-4 py-4 sm:px-6">
                                         <div class="flex items-center justify-between">
                                             <div class="flex items-center flex-1">
@@ -111,7 +111,7 @@
                                                 <!-- Employee Info -->
                                                 <div class="ml-4 flex-1">
                                                     <div class="flex items-center space-x-3">
-                                                        <div class="text-sm font-medium text-gray-900">
+                                                        <div class="text-sm font-medium text-primary">
                                                             {{ $employee->first_name }} {{ $employee->last_name }}
                                                         </div>
                                                         <!-- Status Badge -->
@@ -150,7 +150,7 @@
                                                             </span>
                                                         @endif
                                                     </div>
-                                                    <div class="mt-1 flex items-center space-x-4 text-sm text-gray-500">
+                                                    <div class="mt-1 flex items-center space-x-4 text-sm text-secondary">
                                                         <span>{{ $employee->email }}</span>
                                                         @if($employee->phone)
                                                             <span>• {{ $employee->phone }}</span>
@@ -159,7 +159,7 @@
                                                             <span>• {{ $employee->organizationUnit->name }}</span>
                                                         @endif
                                                     </div>
-                                                    <div class="mt-1 flex items-center space-x-4 text-sm text-gray-500">
+                                                    <div class="mt-1 flex items-center space-x-4 text-sm text-secondary">
                                                         <span>Employee ID: EMP-{{ str_pad($employee->id, 4, '0', STR_PAD_LEFT) }}</span>
                                                         @if($employee->organizationUser && $employee->organizationUser->position)
                                                             <span>• {{ $employee->organizationUser->position }}</span>
@@ -175,20 +175,20 @@
                                             <div class="flex items-center space-x-4">
                                                 <!-- Quick Stats -->
                                                 <div class="text-right">
-                                                    <div class="text-sm text-gray-900">
+                                                    <div class="text-sm text-primary">
                                                         @if($employee->salary_per_month)
                                                             ${{ number_format($employee->salary_per_month, 0) }}/mo
                                                         @else
                                                             Salary not set
                                                         @endif
                                                     </div>
-                                                    <div class="text-xs text-gray-500">
+                                                    <div class="text-xs text-muted">
                                                         {{ $employee->created_at ? $employee->created_at->diffInYears(now()) : 0 }} years
                                                     </div>
                                                 </div>
                                                 <!-- Arrow -->
                                                 <div class="flex-shrink-0">
-                                                    <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                                    <svg class="h-5 w-5 text-muted" fill="currentColor" viewBox="0 0 20 20">
                                                         <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                                                     </svg>
                                                 </div>
@@ -202,11 +202,11 @@
                 @else
                     <!-- Empty State -->
                     <div class="text-center py-12">
-                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg class="mx-auto h-12 w-12 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
-                        <h3 class="mt-2 text-sm font-medium text-gray-900">No employees found</h3>
-                        <p class="mt-1 text-sm text-gray-500">
+                        <h3 class="mt-2 text-sm font-medium text-primary">No employees found</h3>
+                        <p class="mt-1 text-sm text-muted">
                             @if(request()->hasAny(['search', 'department']))
                                 Try adjusting your search criteria or 
                                 <a href="{{ route('hr.employees.index') }}" class="text-blue-600 hover:text-blue-500">clear all filters</a>.

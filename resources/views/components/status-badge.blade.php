@@ -1,5 +1,5 @@
 @props([
-    'status',
+    'status' => 'active',
     'size' => 'md',
     'showIcon' => true,
     'customLabel' => null,
@@ -32,7 +32,7 @@
             'icon' => 'document-text',
             'label' => 'Draft',
         ],
-        
+
         // Financial Status
         'posted' => [
             'color' => 'blue',
@@ -64,7 +64,7 @@
             'icon' => 'exclamation-triangle',
             'label' => 'Unreconciled',
         ],
-        
+
         // HR Status
         'present' => [
             'color' => 'green',
@@ -90,7 +90,7 @@
             'icon' => 'gift',
             'label' => 'Holiday',
         ],
-        
+
         // Inventory Status
         'in_stock' => [
             'color' => 'green',
@@ -116,7 +116,7 @@
             'icon' => 'archive-box',
             'label' => 'Discontinued',
         ],
-        
+
         // System Status
         'online' => [
             'color' => 'green',
@@ -154,7 +154,7 @@
             'icon' => 'information-circle',
             'label' => 'Info',
         ],
-        
+
         // Financial Year Status
         'closing' => [
             'color' => 'yellow',
@@ -190,11 +190,6 @@
     ];
 @endphp
 
-<x-badge 
-    :color="$config['color']"
-    :variant="$config['variant']"
-    :size="$size"
-    {{ $attributes }}
->
+<x-badge :color="$config['color']" :variant="$config['variant']" :size="$size" {{ $attributes }}>
     {{ $customLabel ?? $config['label'] }}
-</x-new-badge>
+    </x-new-badge>

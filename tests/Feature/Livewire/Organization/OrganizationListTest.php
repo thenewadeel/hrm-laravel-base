@@ -1,4 +1,5 @@
 <?php
+
 // tests/Feature/Livewire/Organization/OrganizationListTest.php
 
 namespace Tests\Feature\Livewire\Organization;
@@ -7,18 +8,20 @@ use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
-use Tests\TestCase;
-use Tests\Traits\SetupOrganization; // Updated namespace
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase; // Updated namespace
+use Tests\Traits\SetupOrganization;
 
 class OrganizationListTest extends TestCase
 {
     use RefreshDatabase, SetupOrganization;
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->setupOrganization();
     }
+
     #[Test]
     public function it_shows_organizations_list()
     {
@@ -116,8 +119,6 @@ class OrganizationListTest extends TestCase
         [$organization, $user] = [$this->organization, $this->user];
         Organization::factory()->count(20)->create();
 
-
-
         $test = Livewire::actingAs($user)
             ->test('organization.organization-list');
 
@@ -140,11 +141,12 @@ class OrganizationListTest extends TestCase
     #[Test]
     public function it_shows_empty_state_when_no_organizations()
     {
-        // [$organization, $user] = $this->createOrganizationWithUser();
+        // OrganizationList shows all organizations in the system, not just user's organizations
+        // So we need to delete all organizations to test empty state
+        Organization::query()->delete();
 
-        Livewire::
-            //actingAs($user)
-            test('organization.organization-list')
+        Livewire::actingAs($this->user)
+            ->test('organization.organization-list')
             ->assertSee('No organizations found');
     }
 }

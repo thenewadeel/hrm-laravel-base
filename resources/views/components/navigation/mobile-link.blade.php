@@ -7,8 +7,8 @@
 
 @php
 $baseClasses = 'flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-200 ease-in-out w-full text-left';
-$inactiveClasses = 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800';
-$activeClasses = 'text-gray-900 dark:text-gray-100 bg-gray-100 dark:bg-gray-700';
+$inactiveClasses = 'text-secondary hover:text-primary hover:bg-surface';
+$activeClasses = 'text-primary bg-surface';
 $classes = $active 
     ? $baseClasses . ' ' . $activeClasses 
     : $baseClasses . ' ' . $inactiveClasses;

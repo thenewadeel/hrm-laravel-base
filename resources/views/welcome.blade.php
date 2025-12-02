@@ -24,7 +24,7 @@ $users = [
 <x-app-layout>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="surface overflow-hidden shadow-xl sm:rounded-lg">
                 <x-welcome />
                 <x-data-table :headers="[
                     'id' => 'ID',
@@ -114,7 +114,7 @@ $users = [
                         <x-authentication-card-logo />
                     </x-slot>
 
-                    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+                    <div class="mb-4 text-sm text-secondary">
                         {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
                     </div>
 

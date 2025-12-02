@@ -1,5 +1,5 @@
-<div class="max-w-4xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
-    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Model Select Dropdown Demo</h2>
+<div class="max-w-4xl mx-auto p-6 surface rounded-lg shadow-lg">
+    <h2 class="text-2xl font-bold text-primary mb-6">Model Select Dropdown Demo</h2>
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Single Employee Selection -->
@@ -64,13 +64,13 @@
     </div>
 
     <!-- Usage Examples -->
-    <div class="mt-8 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Usage Examples</h3>
+    <div class="mt-8 p-4 bg-primary rounded-lg">
+        <h3 class="text-lg font-semibold text-primary mb-4">Usage Examples</h3>
         
         <div class="space-y-4">
             <div>
-                <h4 class="font-medium text-gray-700 dark:text-gray-300">Basic Usage:</h4>
-                <pre class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-sm overflow-x-auto"><code>&lt;x-model-select-dropdown
+                <h4 class="font-medium text-primary">Basic Usage:</h4>
+                <pre class="bg-surface p-3 rounded text-sm overflow-x-auto"><code>&lt;x-model-select-dropdown
     name="employee_id"
     label="Employee"
     :options="$employees"
@@ -79,8 +79,8 @@
             </div>
 
             <div>
-                <h4 class="font-medium text-gray-700 dark:text-gray-300">With Search and Multiple Selection:</h4>
-                <pre class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-sm overflow-x-auto"><code>&lt;x-model-select-dropdown
+                <h4 class="font-medium text-primary">With Search and Multiple Selection:</h4>
+                <pre class="bg-surface p-3 rounded text-sm overflow-x-auto"><code>&lt;x-model-select-dropdown
     name="employees"
     label="Employees"
     :options="$employees"
@@ -92,8 +92,8 @@
             </div>
 
             <div>
-                <h4 class="font-medium text-gray-700 dark:text-gray-300">Options Format:</h4>
-                <pre class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-sm overflow-x-auto"><code>$options = [
+                <h4 class="font-medium text-primary">Options Format:</h4>
+                <pre class="bg-surface p-3 rounded text-sm overflow-x-auto"><code>$options = [
     [
         'value' => 'emp_001',
         'label' => 'John Doe',
@@ -106,9 +106,9 @@
     </div>
 
     <!-- Current Selections Display -->
-    <div class="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-        <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-300 mb-2">Current Selections</h3>
-        <div class="text-sm text-blue-800 dark:text-blue-200 space-y-1">
+    <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+        <h3 class="text-lg font-semibold text-blue-900 mb-2">Current Selections</h3>
+        <div class="text-sm text-blue-800 space-y-1">
             <p><strong>Single Employee:</strong> {{ $selectedEmployee ?: 'None selected' }}</p>
             <p><strong>Multiple Employees:</strong> {{ implode(', ', $selectedEmployees) ?: 'None selected' }}</p>
             <p><strong>Account:</strong> {{ $selectedAccount ?: 'None selected' }}</p>

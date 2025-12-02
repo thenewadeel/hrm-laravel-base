@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                📦 {{ __('Items') }} <span class="text-gray-500 text-lg">({{ $items->total() }} items)</span>
+            <h2 class="font-semibold text-xl text-primary leading-tight">
+                📦 {{ __('Items') }} <span class="text-muted text-lg">({{ $items->total() }} items)</span>
             </h2>
             <x-button.primary href="{{ route('inventory.items.create') }}">
                 <x-heroicon-s-plus class="w-4 h-4 mr-2" />
@@ -25,8 +25,8 @@
             </div>
 
             <!-- Items Table -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200" title="{{ json_encode($items) }} ">
+            <div class="surface overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 surface border-b border-secondary" title="{{ json_encode($items) }} ">
                     {{ json_encode($items) }}
                     @if ($items->count() > 0)
                         <x-data-table :headers="[
@@ -135,9 +135,9 @@
                         @endif
                     @else
                         <div class="text-center py-12">
-                            <x-heroicon-s-cube class="mx-auto h-12 w-12 text-gray-400" />
-                            <h3 class="mt-2 text-sm font-medium text-gray-900">No items</h3>
-                            <p class="mt-1 text-sm text-gray-500">Get started by creating your first item.</p>
+                            <x-heroicon-s-cube class="mx-auto h-12 w-12 text-muted" />
+                            <h3 class="mt-2 text-sm font-medium text-primary">No items</h3>
+                            <p class="mt-1 text-sm text-muted">Get started by creating your first item.</p>
                             <div class="mt-6">
                                 <x-button.primary href="{{ route('inventory.items.create') }}">
                                     <x-heroicon-s-plus class="w-4 h-4 mr-2" />

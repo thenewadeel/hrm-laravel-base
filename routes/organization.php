@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\OrganizationController;
+use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\OrganizationDashboardController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('org')->name('organization.')->group(function () {
+Route::prefix('organization')->name('organization.')->group(function () {
     Route::get('/', [OrganizationController::class, 'index'])->name('index');
     Route::get('/dashboard', [OrganizationDashboardController::class, 'index'])
         ->name('dashboard');

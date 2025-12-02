@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+<nav x-data="{ open: false }" class="surface border-b border-secondary">
     {{-- In resources/views/layouts/app.blade.php or navigation --}}
     {{-- @auth
         @if (auth()->user()->organizations()->count() === 0 && !request()->is('setup*'))
@@ -41,7 +41,7 @@
                         </x-nav-link>
 
                         <div x-show="open" @click.away="open = false"
-                            class="absolute mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                            class="absolute mt-2 w-48 rounded-md shadow-lg surface ring-1 ring-black ring-opacity-5 z-50">
                             <div class="py-1">
                                 <x-dropdown-link href="{{ route('inventory.items.index') }}">
                                     📦 Items
@@ -52,7 +52,7 @@
                                 <x-dropdown-link href="{{ route('inventory.transactions.index') }}">
                                     📋 Transactions
                                 </x-dropdown-link>
-                                <div class="border-t border-gray-100"></div>
+                                <div class="border-t border-secondary"></div>
                                 <x-dropdown-link href="{{ route('inventory.reports.stock-levels') }}">
                                     📊 Reports
                                 </x-dropdown-link>
@@ -77,7 +77,7 @@
                                 <x-slot name="trigger">
                                     <span class="inline-flex rounded-md">
                                         <button type="button"
-                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700 transition ease-in-out duration-150">
+                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-muted surface hover:text-primary focus:outline-none focus:bg-tertiary active:bg-tertiary transition ease-in-out duration-150">
                                             {{ Auth::user()->currentTeam->name ?? Auth::user()->name }}
 
                                             <svg class="ms-2 -me-0.5 size-4" xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +92,7 @@
                                 <x-slot name="content">
                                     <div class="w-60">
                                         <!-- Team Management -->
-                                        <div class="block px-4 py-2 text-xs text-gray-400">
+                                            <div class="block px-4 py-2 text-xs text-muted">
                                             {{ __('Manage Team') }}
                                         </div>
 
@@ -110,9 +110,9 @@
 
                                         <!-- Team Switcher -->
                                         @if (Auth::user()->allTeams()->count() > 1)
-                                            <div class="border-t border-gray-200 dark:border-gray-600"></div>
+                                            <div class="border-t border-secondary"></div>
 
-                                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                <div class="block px-4 py-2 text-xs text-muted">
                                                 {{ __('Switch Teams') }}
                                             </div>
 
@@ -138,7 +138,7 @@
                                 @else
                                     <span class="inline-flex rounded-md">
                                         <button type="button"
-                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700 transition ease-in-out duration-150">
+                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-muted surface hover:text-primary focus:outline-none focus:bg-tertiary active:bg-tertiary transition ease-in-out duration-150">
                                             {{ Auth::user()->name }}
 
                                             <svg class="ms-2 -me-0.5 size-4" xmlns="http://www.w3.org/2000/svg"
@@ -152,7 +152,7 @@
                             </x-slot>
                             <x-slot name="content">
                                 <!-- Account Management -->
-                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                <div class="block px-4 py-2 text-xs text-muted">
                                     {{ __('Manage Account') }}
                                 </div>
 
@@ -166,7 +166,7 @@
                                     </x-dropdown-link>
                                 @endif
 
-                                <div class="border-t border-gray-200 dark:border-gray-600"></div>
+                                <div class="border-t border-secondary"></div>
 
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}" x-data>
@@ -197,7 +197,7 @@
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open"
-                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                    class="inline-flex items-center justify-center p-2 rounded-md text-muted hover:text-secondary hover:bg-tertiary focus:outline-none focus:bg-tertiary focus:text-secondary transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -242,7 +242,7 @@
         </div>
 
         <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
+        <div class="pt-4 pb-1 border-t border-secondary">
             @auth
                 <div class="flex items-center px-4">
                     @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -253,8 +253,8 @@
                     @endif
 
                     <div>
-                        <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
-                        <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                        <div class="font-medium text-base text-primary">{{ Auth::user()->name }}</div>
+                        <div class="font-medium text-sm text-muted">{{ Auth::user()->email }}</div>
                     </div>
                 </div>
 
@@ -281,9 +281,9 @@
 
                     <!-- Team Management -->
                     @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
-                        <div class="border-t border-gray-200 dark:border-gray-600"></div>
+                            <div class="border-t border-secondary"></div>
 
-                        <div class="block px-4 py-2 text-xs text-gray-400">
+                            <div class="block px-4 py-2 text-xs text-muted">
                             {{ __('Manage Team') }}
                         </div>
 
@@ -301,9 +301,9 @@
 
                         <!-- Team Switcher -->
                         @if (Auth::user()->allTeams()->count() > 1)
-                            <div class="border-t border-gray-200 dark:border-gray-600"></div>
+                        <div class="border-t border-secondary"></div>
 
-                            <div class="block px-4 py-2 text-xs text-gray-400">
+                            <div class="block px-4 py-2 text-xs text-muted">
                                 {{ __('Switch Teams') }}
                             </div>
 

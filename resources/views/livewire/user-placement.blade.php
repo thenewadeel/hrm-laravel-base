@@ -1,10 +1,10 @@
-<div class="flex h-screen bg-gray-100 p-8 font-sans">
+<div class="flex h-screen bg-primary p-8 font-sans">
 
-    <div class="w-1/4 bg-white rounded-lg shadow-xl p-6 mr-6 flex flex-col">
-        <h2 class="text-2xl font-bold mb-4">Unassigned Users</h2>
+    <div class="w-1/4 surface rounded-lg shadow-xl p-6 mr-6 flex flex-col">
+        <h2 class="text-2xl font-bold mb-4 text-primary">Unassigned Users</h2>
         <div class="mb-4">
             <input wire:model.live="search" type="search" placeholder="Search users..."
-                class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                class="w-full p-2 border border-primary rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
         </div>
 
         <div class="flex-grow overflow-y-auto pr-2">
@@ -18,15 +18,15 @@
                     {{ $user->name }} ({{ $user->email }})
                 </div>
             @empty
-                <div class="text-gray-500 text-center py-4 text-sm">
+                <div class="text-muted text-center py-4 text-sm">
                     All users are assigned or no users match your search.
                 </div>
             @endforelse
         </div>
     </div>
 
-    <div class="w-3/4 bg-white rounded-lg shadow-xl p-6 flex flex-col">
-        <h2 class="text-2xl font-bold mb-4">Organizational Structure</h2>
+    <div class="w-3/4 surface rounded-lg shadow-xl p-6 flex flex-col">
+        <h2 class="text-2xl font-bold mb-4 text-primary">Organizational Structure</h2>
         <div class="flex-grow overflow-y-auto pr-2" x-data="{ dropTarget: false }" @dragover.prevent.stop="dropTarget = true"
             @dragleave.prevent.stop="dropTarget = false"
             @drop.prevent.stop="
@@ -36,7 +36,7 @@
                     $wire.assignUserToUnit(userId, null); // Drop onto null unit
                 }
             "
-            :class="{ 'border-2 border-dashed border-gray-400': dropTarget }">
+            :class="{ 'border-2 border-dashed border-secondary': dropTarget }">
             <div class="min-h-[400px]">
                 @include('partials.user-unit-tree', ['units' => $treeRoots])
             </div>

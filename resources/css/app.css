@@ -1,3 +1,6 @@
+/* Import custom theme properties */
+@import './themes.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
