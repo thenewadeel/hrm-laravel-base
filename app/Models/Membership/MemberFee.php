@@ -19,6 +19,7 @@ class MemberFee extends Model
         'fee_type',
         'description',
         'amount',
+        'paid_amount',
         'due_date',
         'paid_date',
         'status',
@@ -30,6 +31,7 @@ class MemberFee extends Model
     {
         return [
             'amount' => 'decimal:2',
+            'paid_amount' => 'decimal:2',
             'due_date' => 'date',
             'paid_date' => 'date',
             'status' => 'string',

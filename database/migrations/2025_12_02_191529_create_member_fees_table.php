@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('fee_type', ['subscription', 'late_fee', 'penalty', 'additional_service']);
             $table->string('description', 255)->nullable();
             $table->decimal('amount', 10, 2);
+            $table->decimal('paid_amount', 10, 2)->default(0.00);
             $table->date('due_date');
             $table->date('paid_date')->nullable();
             $table->enum('status', ['pending', 'paid', 'waived', 'overdue'])->default('pending');

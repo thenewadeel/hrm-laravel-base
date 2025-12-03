@@ -7,11 +7,16 @@ use App\Models\Accounting\TaxFiling;
 use App\Models\Accounting\TaxRate;
 use App\Models\Inventory\Store;
 use App\Models\JobPosition;
+use App\Models\Membership\Member;
+use App\Models\Membership\MemberFee;
+use App\Models\Membership\MemberSubscription;
 use App\Models\Shift;
 use App\Models\User;
 use App\Permissions\AccountingPermissions;
 use App\Permissions\InventoryPermissions;
+use App\Permissions\MembershipPermissions;
 use App\Roles\InventoryRoles;
+use App\Roles\MembershipRoles;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -23,6 +28,9 @@ class AuthServiceProvider extends ServiceProvider
         TaxRate::class => \App\Policies\TaxRatePolicy::class,
         TaxExemption::class => \App\Policies\TaxExemptionPolicy::class,
         TaxFiling::class => \App\Policies\TaxFilingPolicy::class,
+        Member::class => \App\Policies\Membership\MemberPolicy::class,
+        MemberFee::class => \App\Policies\Membership\FeePolicy::class,
+        MemberSubscription::class => \App\Policies\Membership\SubscriptionPolicy::class,
     ];
 
     public function boot(): void
@@ -126,6 +134,98 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('tax.file', function (User $user) {
             return $user->hasPermission('tax.file');
+        });
+
+        // Membership Permission Gates
+        Gate::define(MembershipPermissions::VIEW_MEMBERS, function (User $user) {
+            return $user->hasPermission(MembershipPermissions::VIEW_MEMBERS);
+        });
+
+        Gate::define(MembershipPermissions::CREATE_MEMBERS, function (User $user) {
+            return $user->hasPermission(MembershipPermissions::CREATE_MEMBERS);
+        });
+
+        Gate::define(MembershipPermissions::EDIT_MEMBERS, function (User $user) {
+            return $user->hasPermission(MembershipPermissions::EDIT_MEMBERS);
+        });
+
+        Gate::define(MembershipPermissions::DELETE_MEMBERS, function (User $user) {
+            return $user->hasPermission(MembershipPermissions::DELETE_MEMBERS);
+        });
+
+        Gate::define(MembershipPermissions::MANAGE_MEMBERS, function (User $user) {
+            return $user->hasPermission(MembershipPermissions::MANAGE_MEMBERS);
+        });
+
+        Gate::define(MembershipPermissions::VIEW_FEES, function (User $user) {
+            return $user->hasPermission(MembershipPermissions::VIEW_FEES);
+        });
+
+        Gate::define(MembershipPermissions::MANAGE_FEES, function (User $user) {
+            return $user->hasPermission(MembershipPermissions::MANAGE_FEES);
+        });
+
+        Gate::define(MembershipPermissions::PROCESS_PAYMENTS, function (User $user) {
+            return $user->hasPermission(MembershipPermissions::PROCESS_PAYMENTS);
+        });
+
+        Gate::define(MembershipPermissions::WAIVE_FEES, function (User $user) {
+            return $user->hasPermission(MembershipPermissions::WAIVE_FEES);
+        });
+
+        Gate::define(MembershipPermissions::VIEW_SUBSCRIPTIONS, function (User $user) {
+            return $user->hasPermission(MembershipPermissions::VIEW_SUBSCRIPTIONS);
+        });
+
+        Gate::define(MembershipPermissions::MANAGE_SUBSCRIPTIONS, function (User $user) {
+            return $user->hasPermission(MembershipPermissions::MANAGE_SUBSCRIPTIONS);
+        });
+
+        Gate::define(MembershipPermissions::RENEW_SUBSCRIPTIONS, function (User $user) {
+            return $user->hasPermission(MembershipPermissions::RENEW_SUBSCRIPTIONS);
+        });
+
+        Gate::define(MembershipPermissions::CANCEL_SUBSCRIPTIONS, function (User $user) {
+            return $user->hasPermission(MembershipPermissions::CANCEL_SUBSCRIPTIONS);
+        });
+
+        Gate::define(MembershipPermissions::PRINT_CARDS, function (User $user) {
+            return $user->hasPermission(MembershipPermissions::PRINT_CARDS);
+        });
+
+        Gate::define(MembershipPermissions::DESIGN_CARDS, function (User $user) {
+            return $user->hasPermission(MembershipPermissions::DESIGN_CARDS);
+        });
+
+        Gate::define(MembershipPermissions::VIEW_REPORTS, function (User $user) {
+            return $user->hasPermission(MembershipPermissions::VIEW_REPORTS);
+        });
+
+        Gate::define(MembershipPermissions::VIEW_DASHBOARD, function (User $user) {
+            return $user->hasPermission(MembershipPermissions::VIEW_DASHBOARD);
+        });
+
+        // Membership Role Gates
+        Gate::define(MembershipRoles::MEMBERSHIP_ADMIN, function (User $user, $organization = null) {
+            return $user->hasRole(MembershipRoles::MEMBERSHIP_ADMIN, $organization);
+        });
+
+        Gate::define(MembershipRoles::MEMBERSHIP_MANAGER, function (User $user, $organization = null) {
+            return $user->hasRole(MembershipRoles::MEMBERSHIP_MANAGER, $organization) ||
+                   $user->hasRole(MembershipRoles::MEMBERSHIP_ADMIN, $organization);
+        });
+
+        Gate::define(MembershipRoles::MEMBERSHIP_CLERK, function (User $user, $organization = null) {
+            return $user->hasRole(MembershipRoles::MEMBERSHIP_CLERK, $organization) ||
+                   $user->hasRole(MembershipRoles::MEMBERSHIP_MANAGER, $organization) ||
+                   $user->hasRole(MembershipRoles::MEMBERSHIP_ADMIN, $organization);
+        });
+
+        Gate::define(MembershipRoles::MEMBERSHIP_VIEWER, function (User $user, $organization = null) {
+            return $user->hasRole(MembershipRoles::MEMBERSHIP_VIEWER, $organization) ||
+                   $user->hasRole(MembershipRoles::MEMBERSHIP_CLERK, $organization) ||
+                   $user->hasRole(MembershipRoles::MEMBERSHIP_MANAGER, $organization) ||
+                   $user->hasRole(MembershipRoles::MEMBERSHIP_ADMIN, $organization);
         });
     }
 }

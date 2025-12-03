@@ -87,6 +87,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Inventory routes
     // -------------------
     require __DIR__ . '/inventory.php';
+
+    // -------------------
+    // Membership routes
+    // -------------------
+    require __DIR__ . '/membership.php';
 });
 // -----------------------
 // -----------------------

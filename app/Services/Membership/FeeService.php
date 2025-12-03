@@ -130,10 +130,83 @@ class FeeService
     }
 
     /**
+     * Get fees for an organization with filters and pagination
+     */
+    public function getFees(?int $organizationId, ?int $memberId = null, array $filters = []): \Illuminate\Contracts\Pagination\LengthAwarePaginator
+    {
+        if (!$organizationId) {
+            return new \Illuminate\Pagination\LengthAwarePaginator([], 0, 15);
+        }
+        
+        $query = MemberFee::where('organization_id', $organizationId)
+            ->with('member');
+        
+        if ($memberId) {
+            $query->where('member_id', $memberId);
+        }
+        
+        // Apply filters
+        if (!empty($filters['search'])) {
+            $query->whereHas('member', function ($q) use ($filters) {
+                $q->where('first_name', 'like', '%' . $filters['search'] . '%')
+                  ->orWhere('last_name', 'like', '%' . $filters['search'] . '%')
+                  ->orWhere('membership_number', 'like', '%' . $filters['search'] . '%');
+            });
+        }
+        
+        if (!empty($filters['status'])) {
+            $query->where('status', $filters['status']);
+        }
+        
+        if (!empty($filters['fee_type'])) {
+            $query->where('fee_type', $filters['fee_type']);
+        }
+        
+        // Apply sorting
+        $sortBy = $filters['sort_by'] ?? 'created_at';
+        $sortDirection = $filters['sort_direction'] ?? 'desc';
+        $query->orderBy($sortBy, $sortDirection);
+        
+        // Apply pagination
+        $perPage = $filters['per_page'] ?? 15;
+        return $query->paginate($perPage);
+    }
+
+    /**
+     * Get overdue fees for an organization
+     */
+    public function getOverdueFees(?int $organizationId): \Illuminate\Support\Collection
+    {
+        if (!$organizationId) {
+            return collect();
+        }
+        
+        return MemberFee::where('organization_id', $organizationId)
+            ->overdue()
+            ->with('member')
+            ->orderBy('due_date', 'asc')
+            ->get();
+    }
+
+    /**
      * Get fee statistics for an organization
      */
-    public function getFeeStatistics(int $organizationId, array $filters = []): array
+    public function getFeeStatistics(?int $organizationId, array $filters = []): array
     {
+        if (!$organizationId) {
+            return [
+                'total' => 0,
+                'pending' => 0,
+                'paid' => 0,
+                'waived' => 0,
+                'overdue' => 0,
+                'total_amount' => 0,
+                'paid_amount' => 0,
+                'outstanding_amount' => 0,
+                'fees_by_type' => [],
+            ];
+        }
+        
         $query = MemberFee::where('organization_id', $organizationId);
         
         // Apply date filters
@@ -305,7 +378,7 @@ class FeeService
         $journalEntry = JournalEntry::create([
             'organization_id' => $fee->organization_id,
             'date' => now(),
-            'description' => "Fee waiver - {$fee->member->full_name} - {$reason ?? 'No reason'}",
+            'description' => "Fee waiver - {$fee->member->full_name} - " . ($reason ?? 'No reason'),
             'reference' => "WAIVE-{$fee->id}",
             'total_debit' => $fee->amount,
             'total_credit' => $fee->amount,
