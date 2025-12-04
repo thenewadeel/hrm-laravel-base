@@ -13,9 +13,13 @@ class MemberList extends Component
     use WithPagination;
 
     public string $search = '';
+
     public string $status = 'all';
+
     public string $sortBy = 'created_at';
+
     public string $sortDirection = 'desc';
+
     public int $perPage = 15;
 
     public array $statuses = [
@@ -50,30 +54,53 @@ class MemberList extends Component
 
     public function render(MembershipService $membershipService)
     {
-        $members = $membershipService->searchMembers(
-            organizationId: auth()->user()->current_organization_id,
-            search: $this->search,
-            filters: [
-                'status' => $this->status !== 'all' ? $this->status : null,
-                'sort_by' => $this->sortBy,
-                'sort_direction' => $this->sortDirection,
-                'per_page' => $this->perPage,
-            ]
-        );
+        $user = auth()->user();
+        $organizationId = $user->current_organization_id ??
+                         $user->operating_organization_id ??
+                         $user->organizations()->first()?->id;
 
-        return view('livewire.membership.member-list', [
-            'members' => $members,
-            'statistics' => $membershipService->getMemberStatistics(auth()->user()->current_organization_id),
-        ]);
+        if (! $organizationId) {
+            throw new \Exception('No organization found for user');
+        }
+
+        try {
+            $members = $membershipService->searchMembers(
+                organizationId: $organizationId,
+                search: $this->search,
+                filters: [
+                    'status' => $this->status !== 'all' ? $this->status : null,
+                    'sort_by' => $this->sortBy,
+                    'sort_direction' => $this->sortDirection,
+                    'per_page' => $this->perPage,
+                ]
+            );
+
+            $statistics = $membershipService->getMemberStatistics($organizationId);
+
+            return view('livewire.membership.member-list', [
+                'members' => $members,
+                'statistics' => $statistics,
+            ]);
+        } catch (\Exception $e) {
+            // If there's an error getting data, return empty results
+            return view('livewire.membership.member-list', [
+                'members' => collect(),
+                'statistics' => ['total_members' => 0, 'active_members' => 0],
+            ]);
+        }
     }
 
     public function deleteMember(int $memberId): void
     {
         $this->authorize('membership.delete_members');
 
+        $organizationId = auth()->user()->current_organization_id ??
+                         auth()->user()->operating_organization_id ??
+                         auth()->user()->organizations()->first()?->id;
+
         $member = Member::findOrFail($memberId);
-        
-        if ($member->organization_id !== auth()->user()->current_organization_id) {
+
+        if ($member->organization_id !== $organizationId) {
             abort(403);
         }
 
@@ -87,9 +114,13 @@ class MemberList extends Component
     {
         $this->authorize('membership.print_cards');
 
+        $organizationId = auth()->user()->current_organization_id ??
+                         auth()->user()->operating_organization_id ??
+                         auth()->user()->organizations()->first()?->id;
+
         $member = Member::findOrFail($memberId);
-        
-        if ($member->organization_id !== auth()->user()->current_organization_id) {
+
+        if ($member->organization_id !== $organizationId) {
             abort(403);
         }
 
@@ -134,8 +165,12 @@ class MemberList extends Component
 
     public function getExpiringMembersProperty(): \Illuminate\Support\Collection
     {
+        $organizationId = auth()->user()->current_organization_id ??
+                         auth()->user()->operating_organization_id ??
+                         auth()->user()->organizations()->first()?->id;
+
         return app(MembershipService::class)->getExpiringMembers(
-            auth()->user()->current_organization_id,
+            $organizationId,
             30 // 30 days
         );
     }

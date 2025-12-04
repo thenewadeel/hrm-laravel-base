@@ -22,7 +22,7 @@ class SubscriptionPlanFactory extends Factory
     {
         $planTypes = ['individual', 'family', 'corporate'];
         $billingFrequencies = ['monthly', 'quarterly', 'semi_annually', 'annually'];
-        
+
         return [
             'organization_id' => Organization::factory(),
             'name' => $this->faker->words(3, true),
@@ -87,6 +87,15 @@ class SubscriptionPlanFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'is_active' => false,
+        ]);
+    }
+
+    public function familyPlan(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'amount' => 50.00,
+            'family_members_included' => 1,
+            'additional_family_member_fee' => 15.00,
         ]);
     }
 }

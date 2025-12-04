@@ -43,7 +43,7 @@
                 <div class="ml-5 w-0 flex-1">
                     <dl>
                         <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Expiring Soon</dt>
-                        <dd class="text-lg font-semibold text-gray-900 dark:text-white">{{ $this->expiringMembers->count() }}</dd>
+                        <dd class="text-lg font-semibold text-gray-900 dark:text-white">{{ $this->expiringMembers?->count() ?? 0 }}</dd>
                     </dl>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                 <div class="ml-5 w-0 flex-1">
                     <dl>
                         <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Family Members</dt>
-                        <dd class="text-lg font-semibold text-gray-900 dark:text-white">{{ $statistics['total_family_members'] ?? 0 }}</dd>
+                        <dd class="text-lg font-semibold text-gray-900 dark:text-white">{{ $statistics['members_with_family'] ?? 0 }}</dd>
                     </dl>
                 </div>
             </div>
@@ -191,7 +191,7 @@
                                             {{ $member->full_name }}
                                         </div>
                                         <div class="text-sm text-gray-500 dark:text-gray-400">
-                                            {{ $member->family_members->count() }} family member(s)
+                                            {{ $member->familyMembers?->count() ?? 0 }} family member(s)
                                         </div>
                                     </div>
                                 </div>
@@ -259,29 +259,33 @@
             </table>
         </div>
 
-        <!-- Pagination -->
-        @if($members->hasPages())
-            <div class="bg-white dark:bg-gray-800 px-4 py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 sm:px-6">
-                <div class="flex-1 flex justify-between sm:hidden">
-                    {{ $members->links() }}
-                </div>
-                <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                    <div>
-                        <p class="text-sm text-gray-700 dark:text-gray-300">
-                            Showing
-                            <span class="font-medium">{{ $members->firstItem() }}</span>
-                            to
-                            <span class="font-medium">{{ $members->lastItem() }}</span>
-                            of
+        <!-- Results Summary -->
+        <div class="bg-white dark:bg-gray-800 px-4 py-3 border-t border-gray-200 dark:border-gray-700 sm:px-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-700 dark:text-gray-300">
+                        @if($members->hasPages())
+                            @if($members->total() > 0)
+                                Showing
+                                <span class="font-medium">{{ $members->firstItem() }}</span>
+                                to
+                                <span class="font-medium">{{ $members->lastItem() }}</span>
+                                of
+                            @endif
                             <span class="font-medium">{{ $members->total() }}</span>
-                            results
-                        </p>
-                    </div>
+                            result{{ $members->total() != 1 ? 's' : '' }}
+                        @else
+                            <span class="font-medium">{{ $members->total() }}</span>
+                            result{{ $members->total() != 1 ? 's' : '' }}
+                        @endif
+                    </p>
+                </div>
+                @if($members->hasPages())
                     <div>
                         {{ $members->links() }}
                     </div>
-                </div>
+                @endif
             </div>
-        @endif
+        </div>
     </div>
 </div>

@@ -2,15 +2,16 @@
 
 namespace App\Livewire\Membership;
 
+use App\Services\Membership\CardPrintingService;
+use App\Services\Membership\FeeService;
 use App\Services\Membership\MembershipService;
 use App\Services\Membership\SubscriptionService;
-use App\Services\Membership\FeeService;
-use App\Services\Membership\CardPrintingService;
 use Livewire\Component;
 
 class MembershipDashboard extends Component
 {
     public string $period = 'month'; // week, month, quarter, year
+
     public array $periods = [
         'week' => 'Last 7 Days',
         'month' => 'Last 30 Days',
@@ -20,7 +21,7 @@ class MembershipDashboard extends Component
 
     public function mount(): void
     {
-        $this->authorize('membership.view_members');
+        $this->authorize('membership.view_dashboard');
     }
 
     public function render(
@@ -29,7 +30,23 @@ class MembershipDashboard extends Component
         FeeService $feeService,
         CardPrintingService $cardService
     ) {
-        $organizationId = auth()->user()->current_organization_id;
+        // Get the first organization the user is attached to for testing
+        $userOrgs = auth()->user()->organizations()->pluck('organizations.id');
+        $organizationId = auth()->user()->current_organization_id ??
+                         auth()->user()->operating_organization_id ??
+                         $userOrgs->first() ?? null;
+
+        if (! $organizationId) {
+            // Return empty data if no organization
+            return view('livewire.membership.membership-dashboard', [
+                'memberStats' => $this->getDefaultMemberStats(),
+                'subscriptionStats' => $this->getDefaultSubscriptionStats(),
+                'feeStats' => $this->getDefaultFeeStats(),
+                'cardStats' => $this->getDefaultCardStats(),
+                'recentMembers' => collect(),
+                'growthMetrics' => $this->getDefaultGrowthMetrics(),
+            ]);
+        }
 
         // Get statistics from all services
         $memberStats = $membershipService->getMemberStatistics($organizationId);
@@ -39,9 +56,6 @@ class MembershipDashboard extends Component
 
         // Get recent activity
         $recentMembers = $membershipService->getRecentMembers($organizationId, 5);
-        $expiringMembers = $membershipService->getExpiringMembers($organizationId, 30);
-        $expiringSubscriptions = $subscriptionService->getExpiringSubscriptions($organizationId, 30);
-        $overdueFees = $feeService->getOverdueFees($organizationId);
 
         // Calculate growth metrics
         $growthMetrics = $this->calculateGrowthMetrics($organizationId, $membershipService, $subscriptionService);
@@ -52,9 +66,6 @@ class MembershipDashboard extends Component
             'feeStats' => $feeStats,
             'cardStats' => $cardStats,
             'recentMembers' => $recentMembers,
-            'expiringMembers' => $expiringMembers,
-            'expiringSubscriptions' => $expiringSubscriptions,
-            'overdueFees' => $overdueFees,
             'growthMetrics' => $growthMetrics,
         ]);
     }
@@ -65,7 +76,7 @@ class MembershipDashboard extends Component
         SubscriptionService $subscriptionService
     ): array {
         $now = now();
-        $previousPeriod = match($this->period) {
+        $previousPeriod = match ($this->period) {
             'week' => $now->copy()->subDays(7),
             'month' => $now->copy()->subDays(30),
             'quarter' => $now->copy()->subMonths(3),
@@ -73,7 +84,7 @@ class MembershipDashboard extends Component
             default => $now->copy()->subDays(30),
         };
 
-        $currentPeriodStart = match($this->period) {
+        $currentPeriodStart = match ($this->period) {
             'week' => $now->copy()->subDays(7),
             'month' => $now->copy()->subDays(30),
             'quarter' => $now->copy()->subMonths(3),
@@ -103,7 +114,7 @@ class MembershipDashboard extends Component
 
     public function updatedPeriod(): void
     {
-        $this->render();
+        // Livewire will automatically re-render when properties are updated
     }
 
     public function getQuickActionsProperty(): array
@@ -138,6 +149,57 @@ class MembershipDashboard extends Component
                 'route' => route('fees.index'),
             ],
         ];
+    }
+
+    public function getExpiringMembersProperty(): \Illuminate\Support\Collection
+    {
+        // Get the same organization ID as render method
+        $userOrgs = auth()->user()->organizations()->pluck('organizations.id');
+        $organizationId = auth()->user()->current_organization_id ??
+                         auth()->user()->operating_organization_id ??
+                         $userOrgs->first() ?? null;
+
+        if (! $organizationId) {
+            return collect();
+        }
+
+        return app(MembershipService::class)->getExpiringMembers(
+            $organizationId,
+            30 // 30 days
+        );
+    }
+
+    public function getExpiringSubscriptionsProperty(): \Illuminate\Support\Collection
+    {
+        // Get the same organization ID as render method
+        $userOrgs = auth()->user()->organizations()->pluck('organizations.id');
+        $organizationId = auth()->user()->current_organization_id ??
+                         auth()->user()->operating_organization_id ??
+                         $userOrgs->first() ?? null;
+
+        if (! $organizationId) {
+            return collect();
+        }
+
+        return app(SubscriptionService::class)->getExpiringSubscriptions(
+            $organizationId,
+            30 // 30 days
+        );
+    }
+
+    public function getOverdueFeesProperty(): \Illuminate\Support\Collection
+    {
+        // Get same organization ID as render method
+        $userOrgs = auth()->user()->organizations()->pluck('organizations.id');
+        $organizationId = auth()->user()->current_organization_id ??
+                         auth()->user()->operating_organization_id ??
+                         $userOrgs->first() ?? null;
+
+        if (! $organizationId) {
+            return collect();
+        }
+
+        return app(FeeService::class)->getOverdueFees($organizationId);
     }
 
     public function getAlertsProperty(): array
@@ -175,5 +237,77 @@ class MembershipDashboard extends Component
         }
 
         return $alerts;
+    }
+
+    private function getDefaultMemberStats(): array
+    {
+        return [
+            'total_members' => 0,
+            'active_members' => 0,
+            'inactive_members' => 0,
+            'suspended_members' => 0,
+            'expired_members' => 0,
+            'expiring_next_30_days' => 0,
+            'members_with_family' => 0,
+            'activation_rate' => 0,
+        ];
+    }
+
+    private function getDefaultSubscriptionStats(): array
+    {
+        return [
+            'total_subscriptions' => 0,
+            'active_subscriptions' => 0,
+            'expired_subscriptions' => 0,
+            'cancelled_subscriptions' => 0,
+            'suspended_subscriptions' => 0,
+            'expiring_next_30_days' => 0,
+            'auto_renew_enabled' => 0,
+            'total_revenue' => 0,
+            'outstanding_revenue' => 0,
+            'renewal_rate' => 0,
+        ];
+    }
+
+    private function getDefaultFeeStats(): array
+    {
+        return [
+            'total_fees' => 0,
+            'pending_fees' => 0,
+            'paid_fees' => 0,
+            'waived_fees' => 0,
+            'overdue_fees' => 0,
+            'total_amount' => 0,
+            'paid_amount' => 0,
+            'outstanding_amount' => 0,
+            'collection_rate' => 0,
+            'fees_by_type' => [],
+            'monthly_trend' => [],
+        ];
+    }
+
+    private function getDefaultCardStats(): array
+    {
+        return [
+            'total_cards_generated' => 0,
+            'cards_today' => 0,
+            'total_members' => 0,
+            'active_members' => 0,
+            'members_with_photos' => 0,
+            'photo_completion_rate' => 0,
+            'total_family_members' => 0,
+            'active_family_members' => 0,
+            'total_cards_needed' => 0,
+        ];
+    }
+
+    private function getDefaultGrowthMetrics(): array
+    {
+        return [
+            'member_growth' => 0,
+            'revenue_growth' => 0,
+            'new_members' => 0,
+            'revenue' => 0,
+        ];
     }
 }

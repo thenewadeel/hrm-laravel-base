@@ -4,7 +4,6 @@ namespace App\Policies\Membership;
 
 use App\Models\Membership\Member;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class MemberPolicy
 {
@@ -13,7 +12,7 @@ class MemberPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasPermissionTo('membership.view_members');
+        return $user->hasPermission('membership.view_members');
     }
 
     /**
@@ -21,16 +20,16 @@ class MemberPolicy
      */
     public function view(User $user, Member $member): bool
     {
-        return $user->hasPermissionTo('membership.view_members') 
+        return $user->hasPermission('membership.view_members')
             && $member->organization_id === $user->current_organization_id;
     }
 
     /**
-     * Determine whether the user can create models.
+     * Determine whether user can create models.
      */
     public function create(User $user): bool
     {
-        return $user->hasPermissionTo('membership.create_members');
+        return $user->hasPermission('membership.create_members');
     }
 
     /**
@@ -38,7 +37,7 @@ class MemberPolicy
      */
     public function update(User $user, Member $member): bool
     {
-        return $user->hasPermissionTo('membership.update_members') 
+        return $user->hasPermission('membership.edit_members')
             && $member->organization_id === $user->current_organization_id;
     }
 
@@ -47,7 +46,7 @@ class MemberPolicy
      */
     public function delete(User $user, Member $member): bool
     {
-        return $user->hasPermissionTo('membership.delete_members') 
+        return $user->hasPermission('membership.delete_members')
             && $member->organization_id === $user->current_organization_id;
     }
 
@@ -56,7 +55,7 @@ class MemberPolicy
      */
     public function restore(User $user, Member $member): bool
     {
-        return $user->hasPermissionTo('membership.update_members') 
+        return $user->hasPermission('membership.edit_members')
             && $member->organization_id === $user->current_organization_id;
     }
 
@@ -65,7 +64,7 @@ class MemberPolicy
      */
     public function forceDelete(User $user, Member $member): bool
     {
-        return $user->hasPermissionTo('membership.delete_members') 
+        return $user->hasPermission('membership.delete_members')
             && $member->organization_id === $user->current_organization_id;
     }
 }

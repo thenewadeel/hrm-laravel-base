@@ -444,7 +444,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                                 {{ $fee->due_date->format('M j, Y') }}
-                                @if($fee->isOverdue())
+                                @if($fee->is_overdue)
                                     <div class="text-xs text-red-600">Overdue</div>
                                 @endif
                             </td>

@@ -27,7 +27,7 @@ class UpdateMemberRequest extends FormRequest
             'last_name' => 'sometimes|string|max:100',
             'date_of_birth' => 'sometimes|date|before:today',
             'gender' => 'sometimes|in:male,female,other',
-            'email' => 'sometimes|email|unique:members,email,' . $this->route('member'),
+            'email' => 'sometimes|email|unique:members,email,'.($this->route('member')?->id ?? $this->route('member')).',id,organization_id,'.auth()->user()->current_organization_id,
             'phone' => 'sometimes|string|max:50',
             'address' => 'sometimes|string|max:500',
             'city' => 'sometimes|string|max:100',
@@ -35,7 +35,8 @@ class UpdateMemberRequest extends FormRequest
             'postal_code' => 'sometimes|string|max:20',
             'country' => 'sometimes|string|max:100',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // 2MB max
-            'expiry_date' => 'sometimes|date',
+            'join_date' => 'sometimes|date',
+            'expiry_date' => 'sometimes|date|after_or_equal:join_date',
             'notes' => 'sometimes|string|max:1000',
         ];
     }

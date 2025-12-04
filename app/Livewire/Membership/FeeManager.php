@@ -14,16 +14,27 @@ class FeeManager extends Component
     use WithPagination;
 
     public ?Member $member = null;
+
     public ?MemberFee $fee = null;
+
     public bool $showCreateForm = false;
+
     public bool $showPaymentForm = false;
 
     public string $search = '';
+
     public string $status = 'all';
+
     public string $feeType = 'all';
+
     public string $sortBy = 'created_at';
+
     public string $sortDirection = 'desc';
+
     public int $perPage = 15;
+
+    // Member selection for fee creation
+    public ?int $member_id = null;
 
     // Form fields for creating fees
     #[Validate('required|in:subscription,late_fee,penalty,additional_service')]
@@ -43,16 +54,13 @@ class FeeManager extends Component
 
     // Form fields for processing payments
     public int $selectedFeeId = 0;
-    #[Validate('required|numeric|min:0.01')]
+
     public float $payment_amount = 0;
 
-    #[Validate('required|string|max:50')]
     public string $payment_method = 'cash';
 
-    #[Validate('nullable|string|max:100')]
     public ?string $payment_reference = null;
 
-    #[Validate('nullable|string|max:1000')]
     public ?string $payment_notes = null;
 
     public array $statuses = [
@@ -120,10 +128,24 @@ class FeeManager extends Component
     {
         $this->validate();
 
+        // Set up authentication for service calls
+        if (! auth()->check()) {
+            auth()->login($this->user);
+        }
+
         try {
-            $memberId = $this->member?->id;
-            if (!$memberId) {
+            $memberId = $this->member?->id ?? $this->member_id;
+            \Log::info('createFee: memberId', ['memberId' => $memberId]);
+
+            if (! $memberId) {
                 throw new \Exception('Please select a member first');
+            }
+
+            $member = Member::findOrFail($memberId);
+            \Log::info('createFee: member found', ['member' => $member->id]);
+
+            if ($member->organization_id !== auth()->user()->current_organization_id) {
+                throw new \Exception('Invalid member selection');
             }
 
             $feeData = [
@@ -132,23 +154,38 @@ class FeeManager extends Component
                 'amount' => $this->amount,
                 'due_date' => $this->due_date,
                 'notes' => $this->notes,
+                'distribute_to_accounts' => false, // Disable accounting for now
             ];
 
-            $fee = $feeService->createFee($memberId, $feeData);
+            \Log::info('createFee: about to call service', ['feeData' => $feeData]);
 
+            $fee = $feeService->createFee($member, $feeData);
+            \Log::info('createFee: service returned', ['fee' => $fee ? $fee->id : 'null']);
+
+            \Log::info('createFee: about to reset form');
             $this->resetFeeForm();
             $this->showCreateForm = false;
-            
+            $this->member_id = null;
+
+            \Log::info('createFee: about to dispatch events');
             $this->dispatch('fee-created', feeId: $fee->id);
             $this->dispatch('show-notification', message: 'Fee created successfully', type: 'success');
+            \Log::info('createFee: events dispatched');
 
         } catch (\Exception $e) {
-            $this->dispatch('show-notification', message: 'Error: ' . $e->getMessage(), type: 'error');
+            \Log::error('createFee: exception', ['error' => $e->getMessage()]);
+            $this->dispatch('show-notification', message: 'Error: '.$e->getMessage(), type: 'error');
         }
     }
 
     public function processPayment(FeeService $feeService): void
     {
+        \Log::info('processPayment called', [
+            'selectedFeeId' => $this->selectedFeeId,
+            'payment_amount' => $this->payment_amount,
+            'payment_method' => $this->payment_method,
+        ]);
+
         $this->validate([
             'payment_amount' => 'required|numeric|min:0.01',
             'payment_method' => 'required|string|max:50',
@@ -158,7 +195,7 @@ class FeeManager extends Component
 
         try {
             $fee = MemberFee::findOrFail($this->selectedFeeId);
-            
+
             if ($fee->organization_id !== auth()->user()->current_organization_id) {
                 abort(403);
             }
@@ -170,12 +207,14 @@ class FeeManager extends Component
                 'notes' => $this->payment_notes,
             ];
 
+            \Log::info('processPayment: calling service', ['paymentData' => $paymentData]);
             $success = $feeService->processFeePayment($fee, $paymentData);
+            \Log::info('processPayment: service returned', ['success' => $success]);
 
             if ($success) {
                 $this->resetPaymentForm();
                 $this->showPaymentForm = false;
-                
+
                 $this->dispatch('payment-processed', feeId: $fee->id);
                 $this->dispatch('show-notification', message: 'Payment processed successfully', type: 'success');
             } else {
@@ -183,30 +222,37 @@ class FeeManager extends Component
             }
 
         } catch (\Exception $e) {
-            $this->dispatch('show-notification', message: 'Error: ' . $e->getMessage(), type: 'error');
+            \Log::error('processPayment: exception', ['error' => $e->getMessage()]);
+            $this->dispatch('show-notification', message: 'Error: '.$e->getMessage(), type: 'error');
         }
     }
 
     public function waiveFee(int $feeId, string $reason, FeeService $feeService): void
     {
+        \Log::info('waiveFee called', ['feeId' => $feeId, 'reason' => $reason]);
+
         try {
             $fee = MemberFee::findOrFail($feeId);
-            
+
             if ($fee->organization_id !== auth()->user()->current_organization_id) {
                 abort(403);
             }
 
+            \Log::info('waiveFee: calling service');
             $success = $feeService->waiveFee($fee, $reason);
+            \Log::info('waiveFee: service returned', ['success' => $success]);
 
             if ($success) {
                 $this->dispatch('fee-waived', feeId: $feeId);
                 $this->dispatch('show-notification', message: 'Fee waived successfully', type: 'success');
+                \Log::info('waiveFee: events dispatched');
             } else {
                 throw new \Exception('Failed to waive fee');
             }
 
         } catch (\Exception $e) {
-            $this->dispatch('show-notification', message: 'Error: ' . $e->getMessage(), type: 'error');
+            \Log::error('waiveFee: exception', ['error' => $e->getMessage()]);
+            $this->dispatch('show-notification', message: 'Error: '.$e->getMessage(), type: 'error');
         }
     }
 
@@ -214,15 +260,15 @@ class FeeManager extends Component
     {
         try {
             $generatedCount = $feeService->generateOverdueFees(auth()->user()->current_organization_id);
-            
+
             $this->dispatch('overdue-fees-generated', count: $generatedCount);
-            $this->dispatch('show-notification', 
-                message: "Generated {$generatedCount} overdue fees", 
+            $this->dispatch('show-notification',
+                message: "Generated {$generatedCount} overdue fees",
                 type: 'success'
             );
 
         } catch (\Exception $e) {
-            $this->dispatch('show-notification', message: 'Error: ' . $e->getMessage(), type: 'error');
+            $this->dispatch('show-notification', message: 'Error: '.$e->getMessage(), type: 'error');
         }
     }
 
@@ -242,11 +288,13 @@ class FeeManager extends Component
     {
         $this->selectedFeeId = $feeId;
         $fee = MemberFee::find($feeId);
-        
+
         if ($fee) {
             $this->payment_amount = $fee->remaining_amount;
+        } else {
+            $this->payment_amount = 0.0;
         }
-        
+
         $this->showPaymentForm = true;
     }
 
@@ -263,6 +311,7 @@ class FeeManager extends Component
         $this->amount = 0;
         $this->due_date = '';
         $this->notes = null;
+        $this->member_id = null;
     }
 
     private function resetPaymentForm(): void

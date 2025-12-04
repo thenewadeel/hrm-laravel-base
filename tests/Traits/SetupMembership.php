@@ -9,7 +9,8 @@ use App\Models\Membership\MemberSubscription;
 use App\Models\Membership\SubscriptionPlan;
 use App\Models\Organization;
 use App\Models\User;
-use App\Roles\OrganizationRoles;
+use App\Permissions\MembershipPermissions;
+use App\Roles\MembershipRoles;
 
 trait SetupMembership
 {
@@ -64,7 +65,7 @@ trait SetupMembership
     protected function setupMembershipOrganization(): void
     {
         $this->membershipOrganization = Organization::factory()->create([
-            'name' => 'Test Membership Organization',
+            'name' => 'Test Membership Organization '.uniqid(),
             'is_active' => true,
         ]);
     }
@@ -77,23 +78,23 @@ trait SetupMembership
         // Membership Admin
         $this->membershipAdmin = User::factory()->create([
             'name' => 'Membership Admin',
-            'email' => 'membership@admin.com',
+            'email' => 'membership'.uniqid().'@admin.com',
             'current_organization_id' => $this->membershipOrganization->id,
         ]);
 
         $this->membershipAdmin->organizations()->attach($this->membershipOrganization, [
-            'roles' => json_encode([OrganizationRoles::ORGANIZATION_ADMIN]),
+            'roles' => json_encode([MembershipRoles::MEMBERSHIP_ADMIN]),
         ]);
 
         $this->membershipAdmin->givePermissionTo(
-            OrganizationRoles::getPermissionsForRole(OrganizationRoles::ORGANIZATION_ADMIN),
+            MembershipPermissions::all(),
             $this->membershipOrganization
         );
 
         // Membership Staff
         $this->membershipStaff = User::factory()->create([
             'name' => 'Membership Staff',
-            'email' => 'membership@staff.com',
+            'email' => 'membership'.uniqid().'@staff.com',
             'current_organization_id' => $this->membershipOrganization->id,
         ]);
 
@@ -122,7 +123,7 @@ trait SetupMembership
             'organization_id' => $this->membershipOrganization->id,
             'name' => 'Premium Plan',
             'plan_type' => 'individual',
-            'billing_frequency' => 'yearly',
+            'billing_frequency' => 'annually',
             'amount' => 299.99,
             'family_members_included' => 2,
             'additional_family_member_fee' => 15.00,
@@ -239,7 +240,7 @@ trait SetupMembership
         $this->pendingFee = MemberFee::factory()->create([
             'organization_id' => $this->membershipOrganization->id,
             'member_id' => $this->testMember->id,
-            'fee_type' => 'annual_fee',
+            'fee_type' => 'subscription',
             'description' => 'Annual Membership Fee',
             'amount' => 50.00,
             'paid_amount' => 0,
@@ -251,7 +252,7 @@ trait SetupMembership
         $this->paidFee = MemberFee::factory()->create([
             'organization_id' => $this->membershipOrganization->id,
             'member_id' => $this->testMember->id,
-            'fee_type' => 'registration_fee',
+            'fee_type' => 'additional_service',
             'description' => 'Registration Fee',
             'amount' => 25.00,
             'paid_amount' => 25.00,
@@ -336,6 +337,10 @@ trait SetupMembership
      */
     protected function getMembershipAdmin(): User
     {
+        if (! $this->membershipAdmin) {
+            $this->setupMembershipManagement();
+        }
+
         return $this->membershipAdmin;
     }
 
@@ -350,9 +355,11 @@ trait SetupMembership
     /**
      * Authenticate as membership admin
      */
-    protected function actingAsMembershipAdmin(): void
+    protected function actingAsMembershipAdmin(): self
     {
         $this->actingAs($this->getMembershipAdmin());
+
+        return $this;
     }
 
     /**

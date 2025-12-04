@@ -369,7 +369,7 @@
             <div class="p-6">
                 <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Expiring Soon</h3>
                 <div class="space-y-3">
-                    @forelse($expiringMembers->take(5) as $member)
+                    @forelse($this->expiringMembers->take(5) as $member)
                         <div class="flex items-center justify-between">
                             <div class="flex items-center">
                                 @if($member->photo_path)

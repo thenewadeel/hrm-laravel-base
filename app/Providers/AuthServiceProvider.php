@@ -30,7 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         TaxFiling::class => \App\Policies\TaxFilingPolicy::class,
         Member::class => \App\Policies\Membership\MemberPolicy::class,
         MemberFee::class => \App\Policies\Membership\FeePolicy::class,
-        MemberSubscription::class => \App\Policies\Membership\SubscriptionPolicy::class,
+        MemberSubscription::class => \App\Policies\Membership\MemberSubscriptionPolicy::class,
     ];
 
     public function boot(): void

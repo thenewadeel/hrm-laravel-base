@@ -27,7 +27,7 @@ class StoreMemberRequest extends FormRequest
             'last_name' => 'required|string|max:100',
             'date_of_birth' => 'nullable|date|before:today',
             'gender' => 'nullable|in:male,female,other',
-            'email' => 'nullable|email|unique:members,email',
+            'email' => 'nullable|email|unique:members,email,NULL,id,organization_id,'.auth()->user()->current_organization_id,
             'phone' => 'nullable|string|max:50',
             'address' => 'nullable|string|max:500',
             'city' => 'nullable|string|max:100',

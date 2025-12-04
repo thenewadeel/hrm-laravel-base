@@ -371,12 +371,18 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900 dark:text-white">
-                                    {{ $subscription->subscription_plan->name }}
-                                </div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">
-                                    {{ $subscription->subscription_plan->plan_type }}
-                                </div>
+                                @if($subscription->subscriptionPlan)
+                                    <div class="text-sm text-gray-900 dark:text-white">
+                                        {{ $subscription->subscriptionPlan->name }}
+                                    </div>
+                                    <div class="text-sm text-gray-500 dark:text-gray-400">
+                                        {{ $subscription->subscriptionPlan->plan_type }}
+                                    </div>
+                                @else
+                                    <div class="text-sm text-red-600">
+                                        Plan not found (ID: {{ $subscription->subscription_plan_id }})
+                                    </div>
+                                @endif
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                                 <div>{{ $subscription->start_date->format('M j, Y') }}</div>

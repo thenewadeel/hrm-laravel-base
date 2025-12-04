@@ -2,17 +2,15 @@
 
 namespace App\Models\Membership;
 
-use App\Models\Organization;
 use App\Models\Traits\BelongsToOrganization;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MemberSubscription extends Model
 {
-    use HasFactory, BelongsToOrganization, SoftDeletes;
+    use BelongsToOrganization, HasFactory, SoftDeletes;
 
     protected $fillable = [
         'organization_id',
@@ -27,7 +25,7 @@ class MemberSubscription extends Model
         'notes',
     ];
 
-protected function casts(): array
+    protected function casts(): array
     {
         return [
             'start_date' => 'date',
@@ -42,8 +40,8 @@ protected function casts(): array
     public function scopeActive($query)
     {
         return $query->where('status', 'active')
-                    ->where('start_date', '<=', now())
-                    ->where('end_date', '>=', now());
+            ->where('start_date', '<=', now())
+            ->where('end_date', '>=', now());
     }
 
     public function scopeExpired($query)
@@ -54,8 +52,8 @@ protected function casts(): array
     public function scopeExpiringSoon($query, int $days = 30)
     {
         return $query->where('status', 'active')
-                    ->where('end_date', '<=', now()->addDays($days))
-                    ->where('end_date', '>', now());
+            ->where('end_date', '<=', now()->addDays($days))
+            ->where('end_date', '>', now());
     }
 
     public function scopeByMember($query, int $memberId)
@@ -66,5 +64,15 @@ protected function casts(): array
     public function scopeByPlan($query, int $planId)
     {
         return $query->where('subscription_plan_id', $planId);
+    }
+
+    public function member(): BelongsTo
+    {
+        return $this->belongsTo(Member::class);
+    }
+
+    public function subscriptionPlan(): BelongsTo
+    {
+        return $this->belongsTo(SubscriptionPlan::class);
     }
 }

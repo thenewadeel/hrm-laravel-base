@@ -2,10 +2,9 @@
 
 namespace App\Services\Membership;
 
-use App\Models\Membership\Member;
 use App\Models\Membership\FamilyMember;
+use App\Models\Membership\Member;
 use App\Models\Organization;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
 class MembershipService
@@ -18,7 +17,7 @@ class MembershipService
         return DB::transaction(function () use ($data) {
             $data['membership_number'] = $this->generateMembershipNumber($data['organization_id']);
             $data['barcode_number'] = $this->generateBarcodeNumber($data['organization_id']);
-            
+
             return Member::create($data);
         });
     }
@@ -30,6 +29,7 @@ class MembershipService
     {
         return DB::transaction(function () use ($member, $data) {
             $member->update($data);
+
             return $member->fresh();
         });
     }
@@ -43,7 +43,7 @@ class MembershipService
             $familyData['organization_id'] = $member->organization_id;
             $familyData['primary_member_id'] = $member->id;
             $familyData['barcode_number'] = $this->generateFamilyBarcodeNumber($member->organization_id);
-            
+
             return FamilyMember::create($familyData);
         });
     }
@@ -56,10 +56,10 @@ class MembershipService
         return DB::transaction(function () use ($member) {
             // Deactivate family members first
             $member->familyMembers()->update(['status' => 'inactive']);
-            
+
             // Deactivate the primary member
             $member->update(['status' => 'inactive']);
-            
+
             return true;
         });
     }
@@ -67,18 +67,18 @@ class MembershipService
     /**
      * Suspend a member (temporary deactivation)
      */
-    public function suspendMember(Member $member, string $reason = null): bool
+    public function suspendMember(Member $member, ?string $reason = null): bool
     {
         return DB::transaction(function () use ($member, $reason) {
             // Suspend family members first
             $member->familyMembers()->update(['status' => 'suspended']);
-            
+
             // Suspend the primary member
             $member->update([
                 'status' => 'suspended',
-                'notes' => $member->notes . "\n\nSuspended: " . ($reason ?? 'No reason provided') . " - " . now()->toDateTimeString()
+                'notes' => $member->notes."\n\nSuspended: ".($reason ?? 'No reason provided').' - '.now()->toDateTimeString(),
             ]);
-            
+
             return true;
         });
     }
@@ -93,15 +93,15 @@ class MembershipService
             if ($member->expiry_date && $member->expiry_date->isPast()) {
                 throw new \InvalidArgumentException('Cannot reactivate expired member. Please renew subscription first.');
             }
-            
+
             // Reactivate family members if they were suspended
             $member->familyMembers()
                 ->where('status', 'suspended')
                 ->update(['status' => 'active']);
-            
+
             // Reactivate the primary member
             $member->update(['status' => 'active']);
-            
+
             return true;
         });
     }
@@ -113,14 +113,14 @@ class MembershipService
     {
         $prefix = 'MEM';
         $year = now()->format('Y');
-        
+
         do {
             $sequence = str_pad(random_int(1, 99999), 5, '0', STR_PAD_LEFT);
             $membershipNumber = "{$prefix}-{$year}-{$sequence}";
         } while (Member::where('organization_id', $organizationId)
             ->where('membership_number', $membershipNumber)
             ->exists());
-        
+
         return $membershipNumber;
     }
 
@@ -130,14 +130,14 @@ class MembershipService
     public function generateBarcodeNumber(int $organizationId): string
     {
         $prefix = 'MBR';
-        
+
         do {
             $sequence = str_pad(random_int(1, 999999), 6, '0', STR_PAD_LEFT);
             $barcodeNumber = "{$prefix}-{$organizationId}-{$sequence}";
         } while (Member::where('organization_id', $organizationId)
             ->where('barcode_number', $barcodeNumber)
             ->exists());
-        
+
         return $barcodeNumber;
     }
 
@@ -147,27 +147,31 @@ class MembershipService
     public function generateFamilyBarcodeNumber(int $organizationId): string
     {
         $prefix = 'FAM';
-        
+
         do {
             $sequence = str_pad(random_int(1, 999999), 6, '0', STR_PAD_LEFT);
             $barcodeNumber = "{$prefix}-{$organizationId}-{$sequence}";
         } while (FamilyMember::where('organization_id', $organizationId)
             ->where('barcode_number', $barcodeNumber)
             ->exists());
-        
+
         return $barcodeNumber;
     }
 
     /**
-     * Search members across multiple fields
+     * Search members across multiple fields with pagination
      */
-    public function searchMembers(int $organizationId, string $search, array $filters = [])
+    public function searchMembers(int $organizationId, string $search = '', array $filters = [])
     {
-        $query = Member::where('organization_id', $organizationId)
-            ->search($search);
+        $query = Member::where('organization_id', $organizationId);
+
+        // Apply search if provided
+        if (! empty($search)) {
+            $query->search($search);
+        }
 
         // Apply filters
-        if (isset($filters['status'])) {
+        if (isset($filters['status']) && $filters['status'] !== null) {
             $query->byStatus($filters['status']);
         }
 
@@ -185,7 +189,16 @@ class MembershipService
             });
         }
 
-        return $query->with(['familyMembers', 'activeSubscription'])->get();
+        // Apply sorting
+        $sortBy = $filters['sort_by'] ?? 'created_at';
+        $sortDirection = $filters['sort_direction'] ?? 'desc';
+        $query->orderBy($sortBy, $sortDirection);
+
+        // Apply pagination
+        $perPage = $filters['per_page'] ?? 15;
+
+        return $query->with(['familyMembers', 'activeSubscription'])
+            ->paginate($perPage);
     }
 
     /**
@@ -227,6 +240,28 @@ class MembershipService
     }
 
     /**
+     * Get recent members for an organization
+     */
+    public function getRecentMembers(int $organizationId, int $limit = 5)
+    {
+        return Member::where('organization_id', $organizationId)
+            ->with(['familyMembers', 'activeSubscription'])
+            ->orderBy('created_at', 'desc')
+            ->limit($limit)
+            ->get();
+    }
+
+    /**
+     * Get members by date range
+     */
+    public function getMembersByDateRange(int $organizationId, \Carbon\Carbon $startDate, \Carbon\Carbon $endDate): int
+    {
+        return Member::where('organization_id', $organizationId)
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->count();
+    }
+
+    /**
      * Get member statistics for an organization
      */
     public function getMemberStatistics(int $organizationId): array
@@ -236,7 +271,7 @@ class MembershipService
         $inactive = Member::where('organization_id', $organizationId)->byStatus('inactive')->count();
         $suspended = Member::where('organization_id', $organizationId)->byStatus('suspended')->count();
         $expired = Member::where('organization_id', $organizationId)->expired()->count();
-        
+
         $expiringNext30Days = Member::where('organization_id', $organizationId)
             ->where('expiry_date', '<=', now()->addDays(30))
             ->where('expiry_date', '>', now())

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MemberFee extends Model
 {
-    use HasFactory, BelongsToOrganization, SoftDeletes;
+    use BelongsToOrganization, HasFactory, SoftDeletes;
 
     protected $fillable = [
         'organization_id',
@@ -25,6 +25,7 @@ class MemberFee extends Model
         'status',
         'payment_method',
         'payment_reference',
+        'notes',
     ];
 
     protected function casts(): array
@@ -66,27 +67,33 @@ class MemberFee extends Model
 
     public function getDaysOverdueAttribute(): int
     {
-        if (!$this->is_overdue) {
+        if (! $this->is_overdue) {
             return 0;
         }
-        
+
         return now()->diffInDays($this->due_date);
+    }
+
+    public function getRemainingAmountAttribute(): float
+    {
+        return max(0, $this->amount - $this->paid_amount);
     }
 
     public function markAsPaid(array $paymentData): bool
     {
         $this->status = 'paid';
         $this->paid_date = now();
+        $this->paid_amount = $paymentData['amount'] ?? $this->amount;
         $this->payment_method = $paymentData['payment_method'] ?? null;
         $this->payment_reference = $paymentData['payment_reference'] ?? null;
-        
+
         return $this->save();
     }
 
     public function markAsWaived(): bool
     {
         $this->status = 'waived';
-        
+
         return $this->save();
     }
 
@@ -94,9 +101,10 @@ class MemberFee extends Model
     {
         if ($this->status === 'pending' && $this->due_date->isPast()) {
             $this->status = 'overdue';
+
             return $this->save();
         }
-        
+
         return false;
     }
 
@@ -113,10 +121,10 @@ class MemberFee extends Model
     public function scopeOverdue($query)
     {
         return $query->where('status', 'overdue')
-                    ->orWhere(function ($q) {
-                        $q->where('status', 'pending')
-                          ->where('due_date', '<', now());
-                    });
+            ->orWhere(function ($q) {
+                $q->where('status', 'pending')
+                    ->where('due_date', '<', now());
+            });
     }
 
     public function scopeByType($query, string $type)

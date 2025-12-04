@@ -7,12 +7,11 @@ use App\Models\Traits\BelongsToOrganization;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Member extends Model
 {
-    use HasFactory, BelongsToOrganization, SoftDeletes;
+    use BelongsToOrganization, HasFactory, SoftDeletes;
 
     protected $fillable = [
         'organization_id',
@@ -90,8 +89,8 @@ class Member extends Model
 
     public function isActive(): bool
     {
-        return $this->status === 'active' && 
-               (!$this->expiry_date || $this->expiry_date->isFuture());
+        return $this->status === 'active' &&
+               (! $this->expiry_date || $this->expiry_date->isFuture());
     }
 
     public function isExpired(): bool
@@ -99,13 +98,20 @@ class Member extends Model
         return $this->expiry_date && $this->expiry_date->isPast();
     }
 
+    public function isExpiringSoon(): bool
+    {
+        return $this->expiry_date &&
+               $this->expiry_date->greaterThan(now()) &&
+               $this->expiry_date->lessThanOrEqualTo(now()->addDays(30));
+    }
+
     public function scopeActive($query)
     {
         return $query->where('status', 'active')
-                    ->where(function ($q) {
-                        $q->whereNull('expiry_date')
-                          ->orWhere('expiry_date', '>=', now());
-                    });
+            ->where(function ($q) {
+                $q->whereNull('expiry_date')
+                    ->orWhere('expiry_date', '>=', now());
+            });
     }
 
     public function scopeExpired($query)
@@ -122,10 +128,10 @@ class Member extends Model
     {
         return $query->where(function ($q) use ($search) {
             $q->where('first_name', 'like', "%{$search}%")
-              ->orWhere('last_name', 'like', "%{$search}%")
-              ->orWhere('email', 'like', "%{$search}%")
-              ->orWhere('phone', 'like', "%{$search}%")
-              ->orWhere('membership_number', 'like', "%{$search}%");
+                ->orWhere('last_name', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%")
+                ->orWhere('phone', 'like', "%{$search}%")
+                ->orWhere('membership_number', 'like', "%{$search}%");
         });
     }
 }

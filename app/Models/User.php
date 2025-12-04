@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Roles\InventoryRoles;
+use App\Roles\OrganizationRoles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -294,8 +295,17 @@ class User extends Authenticatable
 
         $allPermissions = [];
         foreach ($roles as $role) {
+            // Check inventory roles
             $rolePermissions = InventoryRoles::getPermissionsForRole($role);
-            $allPermissions = array_merge($allPermissions, $rolePermissions);
+            if (! empty($rolePermissions)) {
+                $allPermissions = array_merge($allPermissions, $rolePermissions);
+            }
+
+            // Check organization roles
+            $orgRolePermissions = OrganizationRoles::getPermissionsForRole($role);
+            if (! empty($orgRolePermissions)) {
+                $allPermissions = array_merge($allPermissions, $orgRolePermissions);
+            }
         }
 
         return array_unique($allPermissions);
