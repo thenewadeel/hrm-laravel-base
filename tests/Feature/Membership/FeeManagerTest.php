@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\User;
-use App\Models\Organization;
 use App\Models\Membership\Member;
 use App\Models\Membership\MemberFee;
+use App\Models\Organization;
+use App\Models\User;
 use App\Permissions\MembershipPermissions;
 use Livewire\Livewire;
 
@@ -13,7 +13,7 @@ test('fee manager renders successfully', function () {
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::MANAGE_FEES, $organization);
     $user->givePermissionTo(MembershipPermissions::VIEW_FEES, $organization);
-    
+
     $this->actingAs($user)
         ->get('/fees')
         ->assertStatus(200);
@@ -24,19 +24,19 @@ test('fee manager displays fees correctly', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::MANAGE_FEES, $organization);
-    
+
     $member = Member::factory()->create(['organization_id' => $organization->id]);
-    
+
     $fees = MemberFee::factory()->count(3)->create([
         'organization_id' => $organization->id,
-        'member_id' => $member->id
+        'member_id' => $member->id,
     ]);
 
     Livewire::actingAs($user)
         ->test(\App\Livewire\Membership\FeeManager::class)
         ->assertSee($fees->first()->description)
         ->assertSee($fees->first()->member->full_name)
-        ->assertSee($fees->count() . ' results');
+        ->assertSee($fees->count().' results');
 });
 
 test('fee manager can create fee', function () {
@@ -44,7 +44,7 @@ test('fee manager can create fee', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::MANAGE_FEES, $organization);
-    
+
     $member = Member::factory()->create(['organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
@@ -71,15 +71,15 @@ test('fee manager can process payment', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::MANAGE_FEES, $organization);
-    
+
     $member = Member::factory()->create(['organization_id' => $organization->id]);
-    
+
     $fee = MemberFee::factory()->create([
         'organization_id' => $organization->id,
         'member_id' => $member->id,
         'amount' => 100.00,
         'paid_amount' => 0.00,
-        'status' => 'pending'
+        'status' => 'pending',
     ]);
 
     Livewire::actingAs($user)
@@ -105,13 +105,13 @@ test('fee manager can waive fee', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::MANAGE_FEES, $organization);
-    
+
     $member = Member::factory()->create(['organization_id' => $organization->id]);
-    
+
     $fee = MemberFee::factory()->create([
         'organization_id' => $organization->id,
         'member_id' => $member->id,
-        'status' => 'pending'
+        'status' => 'pending',
     ]);
 
     Livewire::actingAs($user)
@@ -131,29 +131,29 @@ test('fee manager search functionality works', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::MANAGE_FEES, $organization);
-    
+
     $member1 = Member::factory()->create([
         'organization_id' => $organization->id,
         'first_name' => 'John',
-        'last_name' => 'Doe'
+        'last_name' => 'Doe',
     ]);
-    
+
     $member2 = Member::factory()->create([
         'organization_id' => $organization->id,
         'first_name' => 'Jane',
-        'last_name' => 'Smith'
+        'last_name' => 'Smith',
     ]);
-    
+
     MemberFee::factory()->create([
         'organization_id' => $organization->id,
         'member_id' => $member1->id,
-        'description' => 'John\'s Fee'
+        'description' => 'John\'s Fee',
     ]);
-    
+
     MemberFee::factory()->create([
         'organization_id' => $organization->id,
         'member_id' => $member2->id,
-        'description' => 'Jane\'s Fee'
+        'description' => 'Jane\'s Fee',
     ]);
 
     Livewire::actingAs($user)
@@ -168,19 +168,19 @@ test('fee manager status filter works', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::MANAGE_FEES, $organization);
-    
+
     $member = Member::factory()->create(['organization_id' => $organization->id]);
-    
+
     $pendingFee = MemberFee::factory()->create([
         'organization_id' => $organization->id,
         'member_id' => $member->id,
-        'status' => 'pending'
+        'status' => 'pending',
     ]);
-    
+
     $paidFee = MemberFee::factory()->create([
         'organization_id' => $organization->id,
         'member_id' => $member->id,
-        'status' => 'paid'
+        'status' => 'paid',
     ]);
 
     Livewire::actingAs($user)
@@ -196,20 +196,20 @@ test('fee manager respects organization isolation', function () {
     $organization2 = Organization::factory()->create();
     $user->organizations()->attach($organization1->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::MANAGE_FEES, $organization1);
-    
+
     $member1 = Member::factory()->create(['organization_id' => $organization1->id]);
     $member2 = Member::factory()->create(['organization_id' => $organization2->id]);
-    
+
     MemberFee::factory()->create([
         'organization_id' => $organization1->id,
         'member_id' => $member1->id,
-        'description' => 'Organization 1 Fee'
+        'description' => 'Organization 1 Fee',
     ]);
-    
+
     MemberFee::factory()->create([
         'organization_id' => $organization2->id,
         'member_id' => $member2->id,
-        'description' => 'Organization 2 Fee'
+        'description' => 'Organization 2 Fee',
     ]);
 
     Livewire::actingAs($user)

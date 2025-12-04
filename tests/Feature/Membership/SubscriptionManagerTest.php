@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\User;
-use App\Models\Organization;
 use App\Models\Membership\Member;
 use App\Models\Membership\MemberSubscription;
+use App\Models\Organization;
+use App\Models\User;
 use App\Permissions\MembershipPermissions;
 use Livewire\Livewire;
 
@@ -12,7 +12,7 @@ test('subscription manager renders successfully', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::MANAGE_SUBSCRIPTIONS, $organization);
-    
+
     $this->actingAs($user)
         ->get('/subscriptions')
         ->assertStatus(200);
@@ -23,21 +23,21 @@ test('subscription manager displays subscriptions correctly', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::MANAGE_SUBSCRIPTIONS, $organization);
-    
+
     $member = Member::factory()->create(['organization_id' => $organization->id]);
     $plan = SubscriptionPlan::factory()->create(['organization_id' => $organization->id]);
-    
+
     $subscriptions = MemberSubscription::factory()->count(3)->create([
         'organization_id' => $organization->id,
         'member_id' => $member->id,
-        'subscription_plan_id' => $plan->id
+        'subscription_plan_id' => $plan->id,
     ]);
 
     Livewire::actingAs($user)
         ->test(\App\Livewire\Membership\SubscriptionManager::class)
         ->assertSee($subscriptions->first()->member->full_name)
         ->assertSee($subscriptions->first()->subscription_plan->name)
-        ->assertSee($subscriptions->count() . ' results');
+        ->assertSee($subscriptions->count().' results');
 });
 
 test('subscription manager can create subscription', function () {
@@ -45,7 +45,7 @@ test('subscription manager can create subscription', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::MANAGE_SUBSCRIPTIONS, $organization);
-    
+
     $member = Member::factory()->create(['organization_id' => $organization->id]);
     $plan = SubscriptionPlan::factory()->create(['organization_id' => $organization->id]);
 
@@ -71,15 +71,15 @@ test('subscription manager can renew subscription', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::MANAGE_SUBSCRIPTIONS, $organization);
-    
+
     $member = Member::factory()->create(['organization_id' => $organization->id]);
     $plan = SubscriptionPlan::factory()->create(['organization_id' => $organization->id]);
-    
+
     $subscription = MemberSubscription::factory()->create([
         'organization_id' => $organization->id,
         'member_id' => $member->id,
         'subscription_plan_id' => $plan->id,
-        'status' => 'active'
+        'status' => 'active',
     ]);
 
     Livewire::actingAs($user)
@@ -94,15 +94,15 @@ test('subscription manager can cancel subscription', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::MANAGE_SUBSCRIPTIONS, $organization);
-    
+
     $member = Member::factory()->create(['organization_id' => $organization->id]);
     $plan = SubscriptionPlan::factory()->create(['organization_id' => $organization->id]);
-    
+
     $subscription = MemberSubscription::factory()->create([
         'organization_id' => $organization->id,
         'member_id' => $member->id,
         'subscription_plan_id' => $plan->id,
-        'status' => 'active'
+        'status' => 'active',
     ]);
 
     Livewire::actingAs($user)
@@ -122,31 +122,31 @@ test('subscription manager search functionality works', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::MANAGE_SUBSCRIPTIONS, $organization);
-    
+
     $member1 = Member::factory()->create([
         'organization_id' => $organization->id,
         'first_name' => 'John',
-        'last_name' => 'Doe'
+        'last_name' => 'Doe',
     ]);
-    
+
     $member2 = Member::factory()->create([
         'organization_id' => $organization->id,
         'first_name' => 'Jane',
-        'last_name' => 'Smith'
+        'last_name' => 'Smith',
     ]);
-    
+
     $plan = SubscriptionPlan::factory()->create(['organization_id' => $organization->id]);
-    
+
     MemberSubscription::factory()->create([
         'organization_id' => $organization->id,
         'member_id' => $member1->id,
-        'subscription_plan_id' => $plan->id
+        'subscription_plan_id' => $plan->id,
     ]);
-    
+
     MemberSubscription::factory()->create([
         'organization_id' => $organization->id,
         'member_id' => $member2->id,
-        'subscription_plan_id' => $plan->id
+        'subscription_plan_id' => $plan->id,
     ]);
 
     Livewire::actingAs($user)
@@ -162,23 +162,23 @@ test('subscription manager respects organization isolation', function () {
     $organization2 = Organization::factory()->create();
     $user->organizations()->attach($organization1->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::MANAGE_SUBSCRIPTIONS, $organization1);
-    
+
     $member1 = Member::factory()->create(['organization_id' => $organization1->id]);
     $member2 = Member::factory()->create(['organization_id' => $organization2->id]);
-    
+
     $plan1 = SubscriptionPlan::factory()->create(['organization_id' => $organization1->id]);
     $plan2 = SubscriptionPlan::factory()->create(['organization_id' => $organization2->id]);
-    
+
     MemberSubscription::factory()->create([
         'organization_id' => $organization1->id,
         'member_id' => $member1->id,
-        'subscription_plan_id' => $plan1->id
+        'subscription_plan_id' => $plan1->id,
     ]);
-    
+
     MemberSubscription::factory()->create([
         'organization_id' => $organization2->id,
         'member_id' => $member2->id,
-        'subscription_plan_id' => $plan2->id
+        'subscription_plan_id' => $plan2->id,
     ]);
 
     Livewire::actingAs($user)

@@ -1,10 +1,9 @@
 <?php
 
-use App\Models\User;
-use App\Models\Organization;
 use App\Models\Membership\Member;
 use App\Models\Membership\MemberFee;
-use App\Models\Membership\MemberSubscription;
+use App\Models\Organization;
+use App\Models\User;
 use App\Permissions\MembershipPermissions;
 use Livewire\Livewire;
 
@@ -13,7 +12,7 @@ test('membership dashboard renders successfully', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::VIEW_DASHBOARD, $organization);
-    
+
     $this->actingAs($user)
         ->get('/membership')
         ->assertStatus(200);
@@ -24,9 +23,9 @@ test('membership dashboard displays statistics correctly', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::VIEW_DASHBOARD, $organization);
-    
+
     Member::factory()->count(10)->create(['organization_id' => $organization->id]);
-    
+
     Livewire::actingAs($user)
         ->test(\App\Livewire\Membership\MembershipDashboard::class)
         ->assertSee('Total Members')
@@ -38,11 +37,11 @@ test('membership dashboard shows recent members', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::VIEW_DASHBOARD, $organization);
-    
+
     $recentMember = Member::factory()->create([
         'organization_id' => $organization->id,
         'first_name' => 'John',
-        'last_name' => 'Doe'
+        'last_name' => 'Doe',
     ]);
 
     Livewire::actingAs($user)
@@ -56,12 +55,12 @@ test('membership dashboard shows expiring members', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::VIEW_DASHBOARD, $organization);
-    
+
     $expiringMember = Member::factory()->create([
         'organization_id' => $organization->id,
         'expiry_date' => now()->addDays(15),
         'first_name' => 'Jane',
-        'last_name' => 'Smith'
+        'last_name' => 'Smith',
     ]);
 
     Livewire::actingAs($user)
@@ -75,13 +74,13 @@ test('membership dashboard shows alerts for overdue fees', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::VIEW_DASHBOARD, $organization);
-    
+
     $member = Member::factory()->create(['organization_id' => $organization->id]);
-    
+
     MemberFee::factory()->count(3)->create([
         'organization_id' => $organization->id,
         'member_id' => $member->id,
-        'status' => 'overdue'
+        'status' => 'overdue',
     ]);
 
     Livewire::actingAs($user)
@@ -95,7 +94,7 @@ test('membership dashboard period selector works', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::VIEW_DASHBOARD, $organization);
-    
+
     Livewire::actingAs($user)
         ->test(\App\Livewire\Membership\MembershipDashboard::class)
         ->set('period', 'week')
@@ -113,7 +112,7 @@ test('membership dashboard shows quick actions', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::VIEW_DASHBOARD, $organization);
-    
+
     Livewire::actingAs($user)
         ->test(\App\Livewire\Membership\MembershipDashboard::class)
         ->assertSee('Add New Member')
@@ -128,7 +127,7 @@ test('membership dashboard respects organization isolation', function () {
     $organization2 = Organization::factory()->create();
     $user->organizations()->attach($organization1->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::VIEW_DASHBOARD, $organization1);
-    
+
     Member::factory()->count(5)->create(['organization_id' => $organization1->id]);
     Member::factory()->count(10)->create(['organization_id' => $organization2->id]);
 
@@ -143,7 +142,7 @@ test('membership dashboard shows growth metrics', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::VIEW_DASHBOARD, $organization);
-    
+
     Livewire::actingAs($user)
         ->test(\App\Livewire\Membership\MembershipDashboard::class)
         ->assertSee('Revenue (Last 30 Days)')

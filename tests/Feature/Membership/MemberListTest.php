@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\User;
-use App\Models\Organization;
 use App\Models\Membership\Member;
+use App\Models\Organization;
+use App\Models\User;
 use App\Permissions\MembershipPermissions;
 use Livewire\Livewire;
 
@@ -11,7 +11,7 @@ test('membership member list renders successfully', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::VIEW_MEMBERS, $organization);
-    
+
     $this->actingAs($user)
         ->get('/membership')
         ->assertStatus(200);
@@ -22,16 +22,16 @@ test('member list displays members correctly', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::VIEW_MEMBERS, $organization);
-    
+
     $members = Member::factory()->count(3)->create([
-        'organization_id' => $organization->id
+        'organization_id' => $organization->id,
     ]);
 
     Livewire::actingAs($user)
         ->test(\App\Livewire\Membership\MemberList::class)
         ->assertSee($members->first()->first_name)
         ->assertSee($members->first()->membership_number)
-        ->assertSee($members->count() . ' results');
+        ->assertSee($members->count().' results');
 });
 
 test('member list search functionality works', function () {
@@ -39,17 +39,17 @@ test('member list search functionality works', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::VIEW_MEMBERS, $organization);
-    
+
     $member1 = Member::factory()->create([
         'organization_id' => $organization->id,
         'first_name' => 'John',
-        'last_name' => 'Doe'
+        'last_name' => 'Doe',
     ]);
-    
+
     $member2 = Member::factory()->create([
         'organization_id' => $organization->id,
         'first_name' => 'Jane',
-        'last_name' => 'Smith'
+        'last_name' => 'Smith',
     ]);
 
     Livewire::actingAs($user)
@@ -64,15 +64,15 @@ test('member list status filter works', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::VIEW_MEMBERS, $organization);
-    
+
     $activeMember = Member::factory()->create([
         'organization_id' => $organization->id,
-        'status' => 'active'
+        'status' => 'active',
     ]);
-    
+
     $inactiveMember = Member::factory()->create([
         'organization_id' => $organization->id,
-        'status' => 'inactive'
+        'status' => 'inactive',
     ]);
 
     Livewire::actingAs($user)
@@ -87,9 +87,9 @@ test('member list can delete member', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::VIEW_MEMBERS, $organization);
-    
+
     $member = Member::factory()->create([
-        'organization_id' => $organization->id
+        'organization_id' => $organization->id,
     ]);
 
     Livewire::actingAs($user)
@@ -107,13 +107,13 @@ test('member list respects organization isolation', function () {
     $organization2 = Organization::factory()->create();
     $user->organizations()->attach($organization1->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::VIEW_MEMBERS, $organization1);
-    
+
     $member1 = Member::factory()->create([
-        'organization_id' => $organization1->id
+        'organization_id' => $organization1->id,
     ]);
-    
+
     $member2 = Member::factory()->create([
-        'organization_id' => $organization2->id
+        'organization_id' => $organization2->id,
     ]);
 
     Livewire::actingAs($user)
@@ -127,9 +127,9 @@ test('member list pagination works', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::VIEW_MEMBERS, $organization);
-    
+
     Member::factory()->count(25)->create([
-        'organization_id' => $organization->id
+        'organization_id' => $organization->id,
     ]);
 
     Livewire::actingAs($user)

@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\User;
-use App\Models\Organization;
 use App\Models\Membership\Member;
+use App\Models\Organization;
+use App\Models\User;
 use App\Permissions\MembershipPermissions;
 use Livewire\Livewire;
 
@@ -11,7 +11,7 @@ test('membership member form renders successfully', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::MANAGE_MEMBERS, $organization);
-    
+
     $this->actingAs($user)
         ->get('/members/create')
         ->assertStatus(200);
@@ -91,11 +91,11 @@ test('member form can update existing member', function () {
     $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => 'admin']);
     $user->givePermissionTo(MembershipPermissions::MANAGE_MEMBERS, $organization);
-    
+
     $member = Member::factory()->create([
         'organization_id' => $organization->id,
         'first_name' => 'John',
-        'last_name' => 'Doe'
+        'last_name' => 'Doe',
     ]);
 
     Livewire::actingAs($user)

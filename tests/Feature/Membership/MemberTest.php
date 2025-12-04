@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Membership\Member;
 use App\Models\Membership\FamilyMember;
-use App\Models\Membership\MemberSubscription;
+use App\Models\Membership\Member;
 use App\Models\Membership\MemberFee;
+use App\Models\Membership\MemberSubscription;
 use App\Models\Organization;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
