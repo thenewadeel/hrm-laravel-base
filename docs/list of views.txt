@@ -253,6 +253,14 @@ resources/views/
 │   ├── demo
 │   │   └── model-select-demo.blade.php
 │   ├── member-manager.blade.php
+│   ├── membership
+│   │   ├── batch-card-printing.blade.php
+│   │   ├── card-designer.blade.php
+│   │   ├── fee-manager.blade.php
+│   │   ├── member-form.blade.php
+│   │   ├── member-list.blade.php
+│   │   ├── membership-dashboard.blade.php
+│   │   └── subscription-manager.blade.php
 │   ├── navigation-main.blade.php
 │   ├── organization
 │   │   ├── organization-form.blade.php
@@ -275,7 +283,23 @@ resources/views/
 │   │   │   ├── monthly-summary.blade.php
 │   │   │   └── outstanding-advances.blade.php
 │   │   └── tax-configuration.blade.php
+│   ├── test-component.blade.php
 │   └── user-placement.blade.php
+├── membership
+│   ├── cards
+│   │   ├── batch.blade.php
+│   │   └── index.blade.php
+│   ├── dashboard.blade.php
+│   ├── fees
+│   │   └── index.blade.php
+│   ├── layouts
+│   │   └── app.blade.php
+│   ├── members
+│   │   ├── create.blade.php
+│   │   ├── edit.blade.php
+│   │   └── index.blade.php
+│   └── subscriptions
+│       └── index.blade.php
 ├── navigation-menu.blade.php
 ├── organizations
 │   ├── analytics.blade.php
@@ -335,4 +359,4 @@ resources/views/
 ├── test-navigation.blade.php
 └── welcome.blade.php
 
-62 directories, 274 files
+69 directories, 291 files
