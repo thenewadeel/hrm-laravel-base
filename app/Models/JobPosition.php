@@ -23,13 +23,6 @@ class JobPosition extends Model
         'is_active',
     ];
 
-    protected $casts = [
-        'requirements' => 'array',
-        'min_salary' => 'decimal:2',
-        'max_salary' => 'decimal:2',
-        'is_active' => 'boolean',
-    ];
-
     public function organizationUnit()
     {
         return $this->belongsTo(OrganizationUnit::class);
@@ -50,5 +43,22 @@ class JobPosition extends Model
         return $query->where('title', 'LIKE', "%{$term}%")
             ->orWhere('code', 'LIKE', "%{$term}%")
             ->orWhere('description', 'LIKE', "%{$term}%");
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'requirements' => 'array',
+            'min_salary' => 'decimal:2',
+            'max_salary' => 'decimal:2',
+            'is_active' => 'boolean',
+
+        ];
     }
 }

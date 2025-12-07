@@ -8,34 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class LeaveRequest extends Model
 {
-    use HasFactory, BelongsToOrganization;
+    use BelongsToOrganization, HasFactory;
 
     protected $fillable = [
         'employee_id',
         'organization_id',
         'leave_type',
-        //, ['sick', 'vacation', 'personal', 'emergency', 'maternity', 'paternity']);
+        // , ['sick', 'vacation', 'personal', 'emergency', 'maternity', 'paternity']);
         'start_date',
         'end_date',
         'total_days',
         'reason',
         'status',
-        //, ['pending', 'approved', 'rejected', 'cancelled'])->default('pending');
+        // , ['pending', 'approved', 'rejected', 'cancelled'])->default('pending');
         'approved_by',
         'rejected_by',
         'approved_at',
         'rejected_at',
         'rejection_reason',
-        'applied_at'
-    ];
-
-    protected $casts = [
-        'start_date' => 'date',
-        'end_date' => 'date',
-        'applied_at' => 'datetime',
-        'approved_at' => 'datetime',
-        'rejected_at' => 'datetime',
-        'total_days' => 'integer'
+        'applied_at',
     ];
 
     /**
@@ -54,6 +45,7 @@ class LeaveRequest extends Model
     {
         return $this->belongsTo(Employee::class);
     }
+
     public function approver()
     {
         return $this->belongsTo(User::class, 'approved_by');
@@ -112,5 +104,24 @@ class LeaveRequest extends Model
     public function scopeApproved($query)
     {
         return $query->where('status', 'approved');
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'start_date' => 'date',
+            'end_date' => 'date',
+            'applied_at' => 'datetime',
+            'approved_at' => 'datetime',
+            'rejected_at' => 'datetime',
+            'total_days' => 'integer',
+
+        ];
     }
 }

@@ -76,7 +76,7 @@
                                         <p class="text-sm text-muted font-mono">{{ $store->code }}</p>
                                     </div>
                                 </div>
-                                <x-status-badge :status="$store->is_active ? 'active' : 'inactive'" />
+                                <x-badge :status="$store->is_active ? 'active' : 'inactive'" />
                             </div>
 
                             <!-- Store Details -->

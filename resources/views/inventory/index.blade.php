@@ -92,7 +92,7 @@
                                             </p>
                                         </div>
                                         <div class="text-right">
-                                            <x-status-badge :status="$transaction->status" />
+                                            <x-badge :status="$transaction->status" />
                                             <p class="text-sm text-gray-500">
                                                 {{ $transaction->created_at->diffForHumans() }}</p>
                                         </div>

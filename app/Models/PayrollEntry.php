@@ -29,21 +29,6 @@ class PayrollEntry extends Model
         'paid_at',
     ];
 
-    protected $casts = [
-        'basic_salary' => 'decimal:2',
-        'housing_allowance' => 'decimal:2',
-        'transport_allowance' => 'decimal:2',
-        'overtime_pay' => 'decimal:2',
-        'bonus' => 'decimal:2',
-        'gross_pay' => 'decimal:2',
-        'tax_deduction' => 'decimal:2',
-        'insurance_deduction' => 'decimal:2',
-        'other_deductions' => 'decimal:2',
-        'total_deductions' => 'decimal:2',
-        'net_pay' => 'decimal:2',
-        'paid_at' => 'datetime',
-    ];
-
     /**
      * Relationships
      */
@@ -101,5 +86,30 @@ class PayrollEntry extends Model
     public function getPayslipFilenameAttribute()
     {
         return "payslip-{$this->employee->user->name}-{$this->period}.pdf";
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'basic_salary' => 'decimal:2',
+            'housing_allowance' => 'decimal:2',
+            'transport_allowance' => 'decimal:2',
+            'overtime_pay' => 'decimal:2',
+            'bonus' => 'decimal:2',
+            'gross_pay' => 'decimal:2',
+            'tax_deduction' => 'decimal:2',
+            'insurance_deduction' => 'decimal:2',
+            'other_deductions' => 'decimal:2',
+            'total_deductions' => 'decimal:2',
+            'net_pay' => 'decimal:2',
+            'paid_at' => 'datetime',
+
+        ];
     }
 }

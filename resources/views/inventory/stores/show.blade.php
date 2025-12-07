@@ -65,7 +65,7 @@
                                     <div>
                                         <label class="text-sm font-medium text-gray-500">Status</label>
                                         <div class="mt-1">
-                                            <x-status-badge :status="$store->is_active ? 'active' : 'inactive'" />
+                                            <x-badge :status="$store->is_active ? 'active' : 'inactive'" />
                                         </div>
                                     </div>
                                 </div>
@@ -192,7 +192,7 @@
                                         </p>
                                     </div>
                                     <div class="text-right">
-                                        <x-status-badge :status="$transaction->status ?? 'nil'" />
+                                        <x-badge :status="$transaction->status ?? 'nil'" />
                                         <p class="text-sm text-gray-500">
                                             {{ $transaction->created_at->diffForHumans() ?? 'unknown time' }}</p>
                                     </div>

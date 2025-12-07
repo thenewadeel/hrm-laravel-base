@@ -23,11 +23,6 @@ class OpeningBalance extends Model
         'created_by',
     ];
 
-    protected $casts = [
-        'debit_amount' => 'decimal:2',
-        'credit_amount' => 'decimal:2',
-    ];
-
     protected static function newFactory(): OpeningBalanceFactory
     {
         return OpeningBalanceFactory::new();
@@ -62,5 +57,20 @@ class OpeningBalance extends Model
     public function getBalanceTypeAttribute(): string
     {
         return $this->debit_amount > $this->credit_amount ? 'debit' : 'credit';
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'debit_amount' => 'decimal:2',
+            'credit_amount' => 'decimal:2',
+
+        ];
     }
 }

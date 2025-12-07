@@ -130,13 +130,13 @@
                             <h4 class="text-lg font-semibold text-gray-900 mb-4">Status Badges</h4>
                             <div class="space-y-4">
                                 <div class="flex flex-wrap gap-4 p-4 bg-gray-50 rounded-lg">
-                                    <x-status-badge status="active" />
-                                    <x-status-badge status="inactive" />
-                                    <x-status-badge status="draft" />
-                                    <x-status-badge status="finalized" />
-                                    <x-status-badge status="cancelled" />
-                                    <x-status-badge status="posted" />
-                                    <x-status-badge status="void" />
+                                    <x-badge status="active" />
+                                    <x-badge status="inactive" />
+                                    <x-badge status="draft" />
+                                    <x-badge status="finalized" />
+                                    <x-badge status="cancelled" />
+                                    <x-badge status="posted" />
+                                    <x-badge status="void" />
                                 </div>
                                 
                                 <div class="p-4 bg-gray-50 rounded-lg">
@@ -144,11 +144,11 @@
                                     <div class="space-y-2">
                                         <div class="flex justify-between items-center">
                                             <span>Steel Bolts</span>
-                                            <x-status-badge status="active" />
+                                            <x-badge status="active" />
                                         </div>
                                         <div class="flex justify-between items-center">
                                             <span>LED Bulbs</span>
-                                            <x-status-badge status="inactive" />
+                                            <x-badge status="inactive" />
                                         </div>
                                     </div>
                                 </div>
@@ -289,7 +289,7 @@
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">$2.50</td>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <x-status-badge status="active" />
+                                                <x-badge status="active" />
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                                 <div class="flex space-x-2">
@@ -320,7 +320,7 @@
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">$8.99</td>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <x-status-badge status="active" />
+                                                <x-badge status="active" />
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                                 <div class="flex space-x-2">
@@ -351,7 +351,7 @@
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">$15.99</td>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <x-status-badge status="inactive" />
+                                                <x-badge status="inactive" />
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                                 <div class="flex space-x-2">
@@ -393,7 +393,7 @@
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Main Store</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">5 items</td>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <x-status-badge status="finalized" />
+                                                <x-badge status="finalized" />
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2 hours ago</td>
                                         </tr>
@@ -408,7 +408,7 @@
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Workshop</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">3 items</td>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <x-status-badge status="draft" />
+                                                <x-badge status="draft" />
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">4 hours ago</td>
                                         </tr>

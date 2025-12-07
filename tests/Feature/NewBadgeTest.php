@@ -4,16 +4,16 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
-it('renders new-badge component', function () {
-    $view = $this->blade('<x-new-badge>Test Badge</x-new-badge>');
+it('renders consolidated badge component', function () {
+    $view = $this->blade('<x-badge>Test Badge</x-badge>');
 
     $view->assertSee('Test Badge');
     $view->assertSee('inline-flex');
     $view->assertSee('font-medium');
 });
 
-it('renders new-status-badge component', function () {
-    $view = $this->blade('<x-new-status-badge status="active" />');
+it('renders badge with status', function () {
+    $view = $this->blade('<x-badge status="active">Active</x-badge>');
 
     $view->assertSee('Active');
     $view->assertSee('bg-green-100');

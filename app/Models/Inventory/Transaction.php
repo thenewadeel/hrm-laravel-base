@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Transaction extends Model
 {
     use HasFactory, SoftDeletes;
+
     /**
      * The table associated with the model.
      *
@@ -21,12 +22,16 @@ class Transaction extends Model
 
     // Transaction Types
     const TYPE_INCOMING = 'incoming';
+
     const TYPE_OUTGOING = 'outgoing';
+
     const TYPE_ADJUSTMENT = 'adjustment';
 
     // Transaction Statuses
     const STATUS_DRAFT = 'draft';
+
     const STATUS_FINALIZED = 'finalized';
+
     const STATUS_CANCELLED = 'cancelled';
 
     protected $fillable = [
@@ -38,14 +43,11 @@ class Transaction extends Model
         'reference',
         'notes',
         'transaction_date',
-        'finalized_at'
+        'finalized_at',
     ];
 
-    protected $casts = [
-        'transaction_date' => 'datetime',
-        'finalized_at' => 'datetime'
-    ];
     protected $appends = ['total_quantity', 'total_value'];
+
     // Get available types
     public static function getTypes(): array
     {
@@ -70,8 +72,8 @@ class Transaction extends Model
     public static function getValidationRules(): array
     {
         return [
-            'type' => 'required|string|in:' . implode(',', self::getTypes()),
-            'status' => 'sometimes|string|in:' . implode(',', self::getStatuses()),
+            'type' => 'required|string|in:'.implode(',', self::getTypes()),
+            'status' => 'sometimes|string|in:'.implode(',', self::getStatuses()),
         ];
     }
 
@@ -123,6 +125,7 @@ class Transaction extends Model
     {
         return $query->where('type', self::TYPE_ADJUSTMENT);
     }
+
     // Business logic methods
     public function isDraft(): bool
     {
@@ -166,6 +169,7 @@ class Transaction extends Model
             'status' => self::STATUS_CANCELLED,
         ]);
     }
+
     public function store(): BelongsTo
     {
         return $this->belongsTo(Store::class);
@@ -185,6 +189,7 @@ class Transaction extends Model
     {
         return $this->hasMany(TransactionItem::class);
     }
+
     /**
      * Accessor for total quantity
      */
@@ -218,8 +223,9 @@ class Transaction extends Model
      */
     public function getTotalPriceAttribute(): float
     {
-        return ($this->attributes['quantity'] * $this->attributes['unit_price']);
+        return $this->attributes['quantity'] * $this->attributes['unit_price'];
     }
+
     /**
      * Accessor for unit_price - convert from cents to dollars
      */
@@ -228,17 +234,31 @@ class Transaction extends Model
         return $value;
     }
 
-
     /**
      * Mutator for unit_price - convert dollars to cents for storage
      */
     public function setUnitPriceAttribute($value): void
     {
-        $this->attributes['unit_price'] = (int)($value);
+        $this->attributes['unit_price'] = (int) ($value);
     }
 
     protected static function newFactory()
     {
         return \Database\Factories\Inventory\TransactionFactory::new();
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'transaction_date' => 'datetime',
+            'finalized_at' => 'datetime',
+
+        ];
     }
 }

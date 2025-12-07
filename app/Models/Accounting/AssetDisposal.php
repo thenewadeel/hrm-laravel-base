@@ -32,15 +32,6 @@ class AssetDisposal extends Model
         'created_by',
     ];
 
-    protected $casts = [
-        'disposal_date' => 'date',
-        'disposal_value' => 'decimal:2',
-        'proceeds' => 'decimal:2',
-        'gain_loss' => 'decimal:2',
-        'book_value_at_disposal' => 'decimal:2',
-        'accumulated_depreciation_at_disposal' => 'decimal:2',
-    ];
-
     protected $attributes = [
         'disposal_value' => 0,
         'proceeds' => 0,
@@ -93,5 +84,24 @@ class AssetDisposal extends Model
     public function getBookValueAtDisposalAttribute($value): float
     {
         return (float) $value;
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'disposal_date' => 'date',
+            'disposal_value' => 'decimal:2',
+            'proceeds' => 'decimal:2',
+            'gain_loss' => 'decimal:2',
+            'book_value_at_disposal' => 'decimal:2',
+            'accumulated_depreciation_at_disposal' => 'decimal:2',
+
+        ];
     }
 }

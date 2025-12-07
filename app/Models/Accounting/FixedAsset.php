@@ -41,15 +41,6 @@ class FixedAsset extends Model
         'updated_by',
     ];
 
-    protected $casts = [
-        'purchase_date' => 'date',
-        'last_depreciation_date' => 'date',
-        'purchase_cost' => 'decimal:2',
-        'salvage_value' => 'decimal:2',
-        'current_book_value' => 'decimal:2',
-        'accumulated_depreciation' => 'decimal:2',
-    ];
-
     protected $attributes = [
         'status' => 'active',
         'depreciation_method' => 'straight_line',
@@ -201,5 +192,24 @@ class FixedAsset extends Model
         return $this->status === 'active'
             && ! $this->isFullyDepreciated()
             && $this->purchase_cost > 0;
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'purchase_date' => 'date',
+            'last_depreciation_date' => 'date',
+            'purchase_cost' => 'decimal:2',
+            'salvage_value' => 'decimal:2',
+            'current_book_value' => 'decimal:2',
+            'accumulated_depreciation' => 'decimal:2',
+
+        ];
     }
 }

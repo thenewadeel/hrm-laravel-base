@@ -29,14 +29,6 @@ class FinancialYear extends Model
         'closed_by',
     ];
 
-    protected $casts = [
-        'start_date' => 'date',
-        'end_date' => 'date',
-        'locked_at' => 'datetime',
-        'closed_at' => 'datetime',
-        'is_locked' => 'boolean',
-    ];
-
     protected static function newFactory(): FinancialYearFactory
     {
         return FinancialYearFactory::new();
@@ -142,5 +134,23 @@ class FinancialYear extends Model
         }
 
         return max(0, $this->end_date->diffInDays(now()));
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'start_date' => 'date',
+            'end_date' => 'date',
+            'locked_at' => 'datetime',
+            'closed_at' => 'datetime',
+            'is_locked' => 'boolean',
+
+        ];
     }
 }

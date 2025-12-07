@@ -34,21 +34,6 @@ class EmployeeLoan extends Model
         'disbursed_at',
     ];
 
-    protected $casts = [
-        'principal_amount' => 'decimal:2',
-        'interest_rate' => 'decimal:2',
-        'monthly_installment' => 'decimal:2',
-        'total_interest' => 'decimal:2',
-        'total_repayment' => 'decimal:2',
-        'balance_amount' => 'decimal:2',
-        'installments_paid' => 'integer',
-        'disbursement_date' => 'date',
-        'first_payment_date' => 'date',
-        'maturity_date' => 'date',
-        'approved_at' => 'datetime',
-        'disbursed_at' => 'datetime',
-    ];
-
     /**
      * Relationships
      */
@@ -179,5 +164,30 @@ class EmployeeLoan extends Model
         return $this->status === 'active' &&
                $this->maturity_date < now() &&
                $this->balance_amount > 0;
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'principal_amount' => 'decimal:2',
+            'interest_rate' => 'decimal:2',
+            'monthly_installment' => 'decimal:2',
+            'total_interest' => 'decimal:2',
+            'total_repayment' => 'decimal:2',
+            'balance_amount' => 'decimal:2',
+            'installments_paid' => 'integer',
+            'disbursement_date' => 'date',
+            'first_payment_date' => 'date',
+            'maturity_date' => 'date',
+            'approved_at' => 'datetime',
+            'disbursed_at' => 'datetime',
+
+        ];
     }
 }

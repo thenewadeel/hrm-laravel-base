@@ -18,10 +18,10 @@
                         <x-new-badge color="yellow" variant="subtle">Yellow Subtle</x-new-badge>
 
                         <h2 class="text-xl font-semibold mb-4 mt-8">Status Badges</h2>
-                        <x-new-status-badge status="active" />
-                        <x-new-status-badge status="inactive" />
-                        <x-new-status-badge status="pending" />
-                        <x-new-status-badge status="error" />
+                        <x-badge status="active" />
+                        <x-badge status="inactive" />
+                        <x-badge status="pending" />
+                        <x-badge status="error" />
 
                         <h2 class="text-xl font-semibold mb-4 mt-8">Category Badges</h2>
                         <x-new-category-badge category="sales" />

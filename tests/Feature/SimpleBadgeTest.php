@@ -13,7 +13,7 @@ it('renders basic badge component', function () {
 });
 
 it('renders status badge component', function () {
-    $view = $this->blade('<x-status-badge status="active" />');
+    $view = $this->blade('<x-badge status="active">Active</x-badge>');
 
     $view->assertSee('Active');
     $view->assertSee('bg-green-100');

@@ -23,10 +23,6 @@ class ClosingEntry extends Model
         'created_by',
     ];
 
-    protected $casts = [
-        'amount' => 'decimal:2',
-    ];
-
     protected static function newFactory(): ClosingEntryFactory
     {
         return ClosingEntryFactory::new();
@@ -60,5 +56,19 @@ class ClosingEntry extends Model
     public function scopeProfitTransfer($query)
     {
         return $query->where('type', 'profit_transfer');
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'amount' => 'decimal:2',
+
+        ];
     }
 }

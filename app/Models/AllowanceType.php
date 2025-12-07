@@ -23,13 +23,6 @@ class AllowanceType extends Model
         'account_code',
     ];
 
-    protected $casts = [
-        'default_value' => 'decimal:2',
-        'is_taxable' => 'boolean',
-        'is_recurring' => 'boolean',
-        'is_active' => 'boolean',
-    ];
-
     /**
      * Relationships
      */
@@ -69,5 +62,22 @@ class AllowanceType extends Model
             'percentage_of_gross' => ($this->default_value / 100) * ($basicSalary * 1.3), // Rough gross estimate
             default => 0,
         };
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'default_value' => 'decimal:2',
+            'is_taxable' => 'boolean',
+            'is_recurring' => 'boolean',
+            'is_active' => 'boolean',
+
+        ];
     }
 }

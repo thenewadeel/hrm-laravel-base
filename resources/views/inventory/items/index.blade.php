@@ -97,7 +97,7 @@
                                             @endif
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <x-status-badge :status="$item->is_active ? 'active' : 'inactive'" />
+                                            <x-badge :status="$item->is_active ? 'active' : 'inactive'" />
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             <div class="flex space-x-2">

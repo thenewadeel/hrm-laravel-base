@@ -56,10 +56,10 @@
                                 <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">General Status
                                 </h3>
                                 <div class="flex flex-wrap gap-2">
-                                    <x-ui-status-badge status="active" />
-                                    <x-ui-status-badge status="inactive" />
-                                    <x-ui-status-badge status="pending" />
-                                    <x-ui-status-badge status="draft" />
+                                    <x-badge status="active" />
+                                    <x-badge status="inactive" />
+                                    <x-badge status="pending" />
+                                    <x-badge status="draft" />
                                 </div>
                             </div>
 
@@ -67,20 +67,20 @@
                                 <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">Financial Status
                                 </h3>
                                 <div class="flex flex-wrap gap-2">
-                                    <x-ui-status-badge status="posted" />
-                                    <x-ui-status-badge status="unposted" />
-                                    <x-ui-status-badge status="void" />
-                                    <x-ui-status-badge status="reconciled" />
+                                    <x-badge status="posted" />
+                                    <x-badge status="unposted" />
+                                    <x-badge status="void" />
+                                    <x-badge status="reconciled" />
                                 </div>
                             </div>
 
                             <div>
                                 <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">HR Status</h3>
                                 <div class="flex flex-wrap gap-2">
-                                    <x-ui-status-badge status="present" />
-                                    <x-ui-status-badge status="absent" />
-                                    <x-ui-status-badge status="leave" />
-                                    <x-ui-status-badge status="holiday" />
+                                    <x-badge status="present" />
+                                    <x-badge status="absent" />
+                                    <x-badge status="leave" />
+                                    <x-badge status="holiday" />
                                 </div>
                             </div>
                         </div>
@@ -264,7 +264,7 @@
                                 <div class="flex flex-wrap gap-2">
                                     <x-ui-badge color="green">Light Mode</x-ui-badge>
                                     <x-ui-badge color="blue">Dark Mode</x-ui-badge>
-                                    <x-ui-status-badge status="active" />
+                                    <x-badge status="active" />
                                     <x-ui-category-badge category="high" />
                                     <x-ui-role-badge role="admin" />
                                 </div>

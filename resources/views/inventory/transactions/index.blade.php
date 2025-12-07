@@ -193,7 +193,7 @@
                                             {{ $transaction->total_quantity ?? $transaction->items->sum('quantity') }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <x-status-badge :status="$transaction->status" />
+                                            <x-badge :status="$transaction->status" />
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             {{ $transaction->created_at->format('M j, Y') }}

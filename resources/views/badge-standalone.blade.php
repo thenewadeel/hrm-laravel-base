@@ -10,34 +10,34 @@
         <div class="space-y-4">
             <h2 class="text-xl font-semibold mb-4">Basic Badges</h2>
             <div class="flex gap-2">
-                <x-new-badge>Default Badge</x-new-badge>
-                <x-new-badge color="green">Green Badge</x-new-badge>
-                <x-new-badge color="red">Red Badge</x-new-badge>
-                <x-new-badge color="blue" variant="outline">Blue Outline</x-new-badge>
-                <x-new-badge color="yellow" variant="subtle">Yellow Subtle</x-new-badge>
+                <x-badge>Default Badge</x-badge>
+                <x-badge color="green">Green Badge</x-badge>
+                <x-badge color="red">Red Badge</x-badge>
+                <x-badge color="blue" variant="outline">Blue Outline</x-badge>
+                <x-badge color="yellow" variant="subtle">Yellow Subtle</x-badge>
             </div>
             
             <h2 class="text-xl font-semibold mb-4">Status Badges</h2>
             <div class="flex gap-2">
-                <x-new-status-badge status="active" />
-                <x-new-status-badge status="inactive" />
-                <x-new-status-badge status="pending" />
-                <x-new-status-badge status="error" />
+                <x-badge status="active">Active</x-badge>
+                <x-badge status="inactive">Inactive</x-badge>
+                <x-badge status="pending">Pending</x-badge>
+                <x-badge status="error">Error</x-badge>
             </div>
             
             <h2 class="text-xl font-semibold mb-4">Category Badges</h2>
             <div class="flex gap-2">
-                <x-new-category-badge category="sales" />
-                <x-new-category-badge category="purchase" />
-                <x-new-category-badge category="high" />
+                <x-badge color="blue">Sales</x-badge>
+                <x-badge color="green">Purchase</x-badge>
+                <x-badge color="orange">High</x-badge>
             </div>
             
             <h2 class="text-xl font-semibold mb-4">Priority Badges</h2>
             <div class="flex gap-2">
-                <x-new-priority-badge priority="low" />
-                <x-new-priority-badge priority="medium" />
-                <x-new-priority-badge priority="high" />
-                <x-new-priority-badge priority="critical" />
+                <x-badge color="blue">Low</x-badge>
+                <x-badge color="yellow">Medium</x-badge>
+                <x-badge color="orange">High</x-badge>
+                <x-badge color="red">Critical</x-badge>
             </div>
         </div>
     </div>

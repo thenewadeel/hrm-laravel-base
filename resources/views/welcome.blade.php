@@ -33,7 +33,7 @@ $users = [
                     'joined' => 'Joined Date',
                 ]" :data="$users" sort-by="name" sort-direction="asc" />
                 <x-button.secondary>OMG</x-button.secondary>
-                <x-status-badge />
+                <x-badge status="active" />
                 <x-loading-spinner />
                 <x-empty-state />
                 <x-form-section submit="nill">
