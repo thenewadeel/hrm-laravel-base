@@ -6,16 +6,13 @@
 +------------------+------------------+
 | Metric           | Count/Percentage |
 +------------------+------------------+
-| Total Tests      | 1091             |
-| Passed           | 1069 (98%)       |
-| Failed           | 16 (1.5%)        |
-| Warnings/Skipped | 6 (0.5%)         |
+| Total Tests      | 1107             |
+| Passed           | 1086 (98.1%)     |
+| Failed           | 16 (1.4%)        |
+| Warnings/Skipped | 5 (0.5%)         |
 +------------------+------------------+
 
 --- ❌ Detailed Failures (16 Total) ---
-
- BadgeStandalone (1/2 failures):
-   ⨯ it renders badge standalone page
 
  EmployeePositionShiftIntegration (2/5 failures):
    ⨯ it assigns position and shift to employee during creation
@@ -46,8 +43,9 @@
  FinancialManagement (1/12 failures):
    ⨯ invoice amount due calculation works
 
- NewBadge (1/2 failures):
-   ⨯ it renders new-status-badge component
+ PortalHrDashboardRoute (2/2 failures):
+   ⨯ it portal hr dashboard route should not exist
+   ⨯ it portal hr dashboard route should exist
 
  PayrollCalculation (2/7 failures):
    ⨯ payroll calculation includes allowances correctly
@@ -57,7 +55,7 @@
    ⨯ movement pdf download should return pdf response
 
 
---- ⚠️ Warnings/Skipped Tests (6 Total) ---
+--- ⚠️ Warnings/Skipped Tests (5 Total) ---
 
  EmailVerification (3/3 warnings):
    - email verification screen can be rendered → Email verification not…
@@ -66,9 +64,6 @@
 
  Registration (1/3 warnings):
    - registration screen cannot be rendered if support is disabled → Reg…
-
- BadgeStandalone (1/2 warnings):
-   - ---------------------------------------------------------------------------------
 
  PdfGeneration (1/13 warnings):
    - ---------------------------------------------------------------------------------
@@ -164,6 +159,7 @@
 | AttendanceDashboardEnhancements | 6/6          |
 | AttendanceSync                  | 8/8          |
 | BadgeShowcase                   | 4/4          |
+| BadgeStandalone                 | 1/1          |
 | BadgeSystem                     | 20/20        |
 | Dashboard                       | 11/11        |
 | EmployeeIndexEnhancement        | 5/5          |
@@ -206,9 +202,13 @@
 | NavigationAccessibility         | 10/10        |
 | NavigationFeature               | 14/14        |
 | NavigationLivewireIntegration   | 16/16        |
+| NavigationMissingRoutes         | 2/2          |
 | NavigationResponsive            | 13/13        |
 | NavigationRoleBased             | 11/11        |
+| NavigationRouteValidation       | 3/3          |
+| NavigationRoutesValidation      | 10/10        |
 | NavigationHover                 | 4/4          |
+| NewBadge                        | 2/2          |
 | OrganizationDashboard           | 5/5          |
 | OrganizationUserIntegration     | 7/7          |
 | OutstandingStatementsBasic      | 1/1          |

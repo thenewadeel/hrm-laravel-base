@@ -62,10 +62,8 @@ resources/views/
 │   │   ├── primary.blade.php
 │   │   └── secondary.blade.php
 │   ├── button.blade.php
-│   ├── category-badge.blade.php
 │   ├── confirmation-modal.blade.php
 │   ├── confirms-password.blade.php
-│   ├── count-badge.blade.php
 │   ├── dashboard
 │   │   └── stat-card.blade.php
 │   ├── data-table.blade.php
@@ -86,7 +84,6 @@ resources/views/
 │   │   ├── low-stock-alert.blade.php
 │   │   ├── quantity-indicator.blade.php
 │   │   └── stock-card.blade.php
-│   ├── key-value-badge.blade.php
 │   ├── layout.blade.php
 │   ├── loading-spinner.blade.php
 │   ├── modal.blade.php
@@ -117,32 +114,16 @@ resources/views/
 │   │   ├── theme-toggle.blade.php
 │   │   └── user-profile.blade.php
 │   ├── nav-link.blade.php
-│   ├── new-badge.blade.php
 │   ├── notification-system.blade.php
 │   ├── organization
 │   │   └── card.blade.php
-│   ├── priority-badge.blade.php
-│   ├── progress-badge.blade.php
 │   ├── quick-adjustment.blade.php
 │   ├── responsive-nav-link.blade.php
-│   ├── role-badge.blade.php
 │   ├── section-border.blade.php
 │   ├── section-title.blade.php
 │   ├── sort-indicator.blade.php
-│   ├── status-badge.blade.php
 │   ├── switchable-team.blade.php
 │   ├── tag-badges.blade.php
-│   ├── type-badge.blade.php
-│   ├── ui-badge.blade.php
-│   ├── ui-category-badge.blade.php
-│   ├── ui-count-badge.blade.php
-│   ├── ui-key-value-badge.blade.php
-│   ├── ui-priority-badge.blade.php
-│   ├── ui-progress-badge.blade.php
-│   ├── ui-role-badge.blade.php
-│   ├── ui-status-badge.blade.php
-│   ├── ui-tag-badges.blade.php
-│   ├── ui-type-badge.blade.php
 │   ├── validation-errors.blade.php
 │   └── welcome.blade.php
 ├── dashboard.blade.php
@@ -283,7 +264,6 @@ resources/views/
 │   │   │   ├── monthly-summary.blade.php
 │   │   │   └── outstanding-advances.blade.php
 │   │   └── tax-configuration.blade.php
-│   ├── test-component.blade.php
 │   └── user-placement.blade.php
 ├── membership
 │   ├── cards
@@ -359,4 +339,4 @@ resources/views/
 ├── test-navigation.blade.php
 └── welcome.blade.php
 
-69 directories, 291 files
+69 directories, 271 files
