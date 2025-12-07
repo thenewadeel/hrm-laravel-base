@@ -46,6 +46,7 @@ resources/views/
 │   ├── action-message.blade.php
 │   ├── action-section.blade.php
 │   ├── advanced-search.blade.php
+│   ├── app-layout.blade.php
 │   ├── application-logo.blade.php
 │   ├── application-mark.blade.php
 │   ├── authentication-card.blade.php
@@ -272,8 +273,6 @@ resources/views/
 │   ├── dashboard.blade.php
 │   ├── fees
 │   │   └── index.blade.php
-│   ├── layouts
-│   │   └── app.blade.php
 │   ├── members
 │   │   ├── create.blade.php
 │   │   ├── edit.blade.php
@@ -301,6 +300,7 @@ resources/views/
 │   └── processing.blade.php
 ├── policy.blade.php
 ├── portal
+│   ├── components
 │   ├── employee
 │   │   ├── attendance.blade.php
 │   │   ├── dashboard.blade.php
@@ -310,6 +310,7 @@ resources/views/
 │   │   ├── payslips.blade.php
 │   │   ├── payslip-show.blade.php
 │   │   └── setup.blade.php
+│   ├── layouts
 │   └── manager
 │       ├── dashboard.blade.php
 │       ├── reports.blade.php
@@ -339,4 +340,4 @@ resources/views/
 ├── test-navigation.blade.php
 └── welcome.blade.php
 
-69 directories, 271 files
+70 directories, 271 files

@@ -75,8 +75,8 @@ class ThemeManager {
             document.head.appendChild(metaThemeColor);
         }
 
-        // Set theme-color based on current theme
-        metaThemeColor.content = isDark ? "red" : "crimson";
+        // Set theme-color based on current theme's primary background color (Bureaucratic White / Military Green)
+        metaThemeColor.content = isDark ? "#1f271f" : "#ffffff";
     }
 
     // Utility method to get current theme

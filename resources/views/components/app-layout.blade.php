@@ -8,25 +8,24 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#1f271f" media="(prefers-color-scheme: dark)">
-
+    <!-- Fonts -->
     {{-- <link rel="preconnect" href="https://fonts.bunny.net"> --}}
     {{-- <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
 
+    <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    <!-- Styles -->
     @livewireStyles
 </head>
 
-{{-- FIX: Removed bg-primary to avoid conflicts. Use bg-white or bg-gray-50 as a light mode base. --}}
-
-<body class="font-sans antialiased bg-white text-primary">
+<body class="font-sans antialiased bg-primary text-primary">
     <x-banner />
 
-    {{-- FIX: Removed bg-primary on the main container div as well. --}}
-    <div class="min-h-screen bg-white">
+    <div class="min-h-screen">
         @livewire('navigation-main')
+        <x-notification-system />
+        <!-- Page Heading -->
         @if (isset($header))
             <header class="surface shadow-sm border-b border-secondary">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -35,11 +34,11 @@
             </header>
         @endif
 
+        <!-- Page Content -->
         <main>
             {{ $slot }}
         </main>
     </div>
-    {{-- TODO : Add Footer --}}
     <x-flash-message duration="9000" />
     @stack('modals')
     <x-navigation.scripts />

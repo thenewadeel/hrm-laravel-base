@@ -112,9 +112,9 @@
                                 <x-button.secondary href="{{ route('inventory.stores.index') }}">
                                     Cancel
                                 </x-button.secondary>
-                                <x-button.primary type="submit">
+                                <x-button type="submit">
                                     {{ isset($store) ? 'Update Store' : 'Create Store' }}
-                                </x-button.primary>
+                                </x-button>
                             </div>
                     </form>
                     <!-- Danger Zone (for edit only) -->

@@ -1,36 +1,41 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            🏠 {{ __('Employee Management > Employee Profile') }}
-        </h2>
+        <div class="flex justify-between items-center">
+            <div>
+                <h2 class="font-semibold text-xl text-primary leading-tight">
+                    🏠 {{ __('Employee Management > Employee Profile') }}
+                </h2>
+                <p class="text-sm text-secondary mt-1">
+                    View and manage employee information and records
+                </p>
+            </div>
+        </div>
     </x-slot>
     <div class="py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header -->
             <div class="md:flex md:items-center md:justify-between mb-6">
                 <div class="flex-1 min-w-0">
-                    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+                    <h2 class="text-2xl font-bold leading-7 text-primary sm:text-3xl sm:truncate">
                         Employee Profile: {{ $employee->first_name }} {{ $employee->last_name }}
                     </h2>
                     <div class="mt-1 flex flex-col sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6">
-                        <div class="mt-2 flex items-center text-sm text-gray-500">
+                        <div class="mt-2 flex items-center text-sm text-secondary">
                             @if ($employee->is_active)
-                                <span
-                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                     Active Employee
                                 </span>
                             @else
-                                <span
-                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
                                     Inactive Employee
                                 </span>
                             @endif
                         </div>
-                        <div class="mt-2 flex items-center text-sm text-gray-500">
+                        <div class="mt-2 flex items-center text-sm text-secondary">
                             Employee ID: EMP-{{ str_pad($employee->id, 4, '0', STR_PAD_LEFT) }}
                         </div>
                         @if ($employee->created_at)
-                            <div class="mt-2 flex items-center text-sm text-gray-500">
+                            <div class="mt-2 flex items-center text-sm text-secondary">
                                 Created: {{ $employee->created_at->format('F j, Y') }}
                             </div>
                         @endif
@@ -38,21 +43,20 @@
                 </div>
                 <div class="mt-4 flex md:mt-0 md:ml-4 space-x-3">
                     <a href="{{ route('hr.employees.edit', $employee) }}"
-                        class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        class="inline-flex items-center px-4 py-2 border border-secondary rounded-md shadow-sm text-sm font-medium text-primary bg-surface hover:bg-tertiary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                         Edit Employee Details
                     </a>
                     @if ($employee->biometric_id)
-                        {{-- <form action="{{ route('hr.employees.update-biometric', $employee) }}" method="POST"
-                            class="inline"> --}}
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" name="biometric_id" value="">
-                        <button type="submit"
-                            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                            onclick="return confirm('Are you sure you want to reset the biometric ID?')">
-                            Reset Biometric ID
-                        </button>
-                        {{-- </form> --}}
+                        <form action="{{ route('hr.employees.update-biometric', $employee) }}" method="POST" class="inline">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="biometric_id" value="">
+                            <button type="submit"
+                                class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                                onclick="return confirm('Are you sure you want to reset the biometric ID?')">
+                                Reset Biometric ID
+                            </button>
+                        </form>
                     @endif
                 </div>
             </div>

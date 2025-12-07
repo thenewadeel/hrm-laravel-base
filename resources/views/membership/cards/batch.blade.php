@@ -1,20 +1,27 @@
-@extends('membership.layouts.app')
-
-@section('title', 'Batch Card Printing')
-
-@section('content')
-    <div class="mb-6">
-        <div class="flex items-center justify-between">
+<x-app-layout>
+    <x-slot name="header">
+        <div class="flex justify-between items-center">
             <div>
-                <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Batch Card Printing</h1>
-                <p class="text-gray-600 dark:text-gray-400">Generate multiple cards at once</p>
+                <h2 class="font-semibold text-xl text-primary leading-tight">
+                    🖨️ Batch Card Printing
+                </h2>
+                <p class="text-sm text-secondary mt-1">
+                    Generate multiple cards at once
+                </p>
             </div>
             <a href="{{ route('cards.index') }}" 
-               class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700">
+               class="inline-flex items-center px-4 py-2 border border-secondary rounded-md shadow-sm text-sm font-medium text-primary bg-surface hover:bg-tertiary focus:outline-none focus:ring-2 focus:ring-primary/50">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
                 Back to Cards
             </a>
         </div>
-    </div>
+    </x-slot>
 
-    <livewire:membership.batch-card-printing />
-@endsection
+    <div class="py-6">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <livewire:membership.batch-card-printing />
+        </div>
+    </div>
+</x-app-layout>

@@ -1,16 +1,16 @@
-/* Modern Minimal Theme for ERP System - Metallic Edition */
+/* Modified Modern Minimal Theme for ERP System - Military Edition */
 
-/* Light Mode: Clean & Crisp */
+/* Light Mode: Bureaucratic White */
 :root {
-    /* Primary Colors - Refined palette */
-    --color-primary: #016d2e;
-    --color-primary-dark: #00ff4c;
-    --color-primary-light: #006d0f;
+    /* Primary Colors - Formal, deep green */
+    --color-primary: #1e3f20; /* Very deep, almost black green */
+    --color-primary-dark: #0f1f10;
+    --color-primary-light: #4c784e;
 
-    /* Background Colors - High contrast for readability */
+    /* Background Colors - Pure white for 'bureaucratic' feel */
     --color-bg-primary: #ffffff;
-    --color-bg-secondary: #f8f9fa;
-    --color-bg-tertiary: #f1f3f4;
+    --color-bg-secondary: #f4f4f4; /* Slightly off-white */
+    --color-bg-tertiary: #ebebeb; /* Light grey for headers/tables */
 
     /* Surface Colors */
     --color-surface: #ffffff;
@@ -27,7 +27,7 @@
     /* Border Colors */
     --color-border-primary: #dadce0;
     --color-border-secondary: #e8eaed;
-    --color-border-focus: #0066cc;
+    --color-border-focus: #1e3f20; /* Using Primary Color for focus */
 
     /* Status Colors - Consistent saturation */
     --color-success: #00a86b;
@@ -40,50 +40,57 @@
         "Helvetica Neue", Arial, sans-serif;
     --line-height: 1.6;
     --letter-spacing: -0.01em;
+
+    /* RGB for transparent backgrounds (Light Mode: Primary Deep Green) */
+    --color-primary-rgb: 30, 63, 32;
 }
 
-/* Dark Mode: Metallic Gunmetal Grey */
+/* Dark Mode: Military Green & Matte Metallic (with Rivets) */
 .dark {
-    /* Primary Colors */
-    --color-primary: #00cc55;
-    --color-primary-dark: #017223;
-    --color-primary-light: #4dff65;
+    /* Primary Colors - Muted, military olive green accent */
+    --color-primary: #a3b899; /* Muted olive/sage green for highlights */
+    --color-primary-dark: #7e9177;
+    --color-primary-light: #c1d4ba;
 
-    /* Background Colors - Metallic gradient */
-    --color-bg-primary: #1a1d21; /* Deep gunmetal */
-    --color-bg-secondary: #22262b; /* Medium gunmetal */
-    --color-bg-tertiary: #2a2f35; /* Light gunmetal */
+    /* Background Colors - Deep, muted military green tones */
+    --color-bg-primary: #1f271f; /* Deepest forest/olive green / Gunmetal base */
+    --color-bg-secondary: #263126;
+    --color-bg-tertiary: #2d3b2d;
+    --rivet-color: #1a221a; /* Darker shade for the rivet pattern */
 
-    /* Surface Colors - Metallic sheen */
-    --color-surface: #2c3238; /* Metallic grey base */
-    --color-surface-elevated: #363d45; /* Lifted metallic */
+    /* Surface Colors - Slightly lighter for contrast, metallic sheen */
+    --color-surface: #344234; /* Muted forest green base */
+    --color-surface-elevated: #3d4c3d;
     --surface-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
     --surface-shadow-elevated: 0 4px 24px rgba(0, 0, 0, 0.35);
 
-    /* Text Colors - Metallic contrast */
+    /* Text Colors - Bright silver/white for metallic contrast */
     --color-text-primary: #f0f3f8; /* Bright silver */
     --color-text-secondary: #c8d0db; /* Soft metallic */
     --color-text-muted: #94a3b8; /* Weathered metallic */
-    --color-text-inverse: #2c3238;
+    --color-text-inverse: #1f271f;
 
-    /* Border Colors - Metallic edges */
-    --color-border-primary: #404854; /* Dark metallic edge */
-    --color-border-secondary: #4a5568; /* Medium metallic edge */
-    --color-border-focus: #5e9eff; /* Blue metallic highlight */
+    /* Border Colors - To match the deep green base */
+    --color-border-primary: #455245; /* Dark metallic edge */
+    --color-border-secondary: #506150; /* Medium metallic edge */
+    --color-border-focus: #a3b899; /* Olive metallic highlight */
 
     /* Status Colors - Metallic accents */
-    --color-success: #38b2ac; /* Teal metallic */
-    --color-warning: #ed8936; /* Bronze metallic */
-    --color-error: #fc8181; /* Rose metallic */
-    --color-info: #76e4f7; /* Cyan metallic */
+    --color-success: #76c79a; /* Softer success green */
+    --color-warning: #ed8936;
+    --color-error: #fc8181;
+    --color-info: #76e4f7;
 
-    /* Metallic effects */
+    /* Metallic effects (Crucial for matte look) */
     --metallic-gradient: linear-gradient(
         145deg,
         rgba(255, 255, 255, 0.05) 0%,
         rgba(255, 255, 255, 0.02) 50%,
         rgba(0, 0, 0, 0.05) 100%
     );
+
+    /* RGB for transparent backgrounds (Dark Mode: Primary Olive Green) */
+    --color-primary-rgb: 163, 184, 153;
 }
 
 /* Base Styles for Crisp Reading */
@@ -91,11 +98,29 @@ body {
     font-family: var(--font-family);
     line-height: var(--line-height);
     letter-spacing: var(--letter-spacing);
-    background-color: var(--color-bg-primary);
+    background-color: var(
+        --color-bg-primary
+    ); /* Uses Bureaucratic White in light mode */
     color: var(--color-text-primary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+}
+
+/* * CRUCIAL: Dark Mode Body Rivet Pattern
+ * This overrides the background-color with a repeating pattern
+ * to create the "gunmetal circular dents like rivets" effect.
+ */
+.dark body {
+    background-color: var(--color-bg-primary); /* Deep Military Green */
+    background-image: radial-gradient(
+        circle at 50% 50%,
+        var(--rivet-color) 0.5px,
+        /* Darkest point of the "dent" */ var(--color-bg-primary) 1.5px
+            /* Background color spread */
+    );
+    background-size: 15px 15px; /* Spacing between the "rivets" */
+    background-repeat: repeat;
 }
 
 /* Typography Enhancements */
@@ -122,15 +147,13 @@ div {
 }
 
 /* Semantic utility classes */
-.bg-primary {
-    background-color: var(--color-bg-primary);
-}
 .bg-secondary {
     background-color: var(--color-bg-secondary);
 }
 .bg-tertiary {
     background-color: var(--color-bg-tertiary);
 }
+/* NOTE: The .bg-primary utility class has been intentionally removed to resolve conflicts. */
 
 .surface {
     background-color: var(--color-surface);
@@ -256,12 +279,14 @@ div {
 
 /* Selection Colors */
 ::selection {
-    background-color: rgba(var(--color-primary-rgb, 77, 148, 255), 0.3);
+    /* Fixed to use the correct light mode RGB variable */
+    background-color: rgba(var(--color-primary-rgb, 30, 63, 32), 0.3);
     color: var(--color-text-primary);
 }
 
 .dark ::selection {
-    background-color: rgba(94, 158, 255, 0.3);
+    /* Fixed to use the correct dark mode RGB variable */
+    background-color: rgba(var(--color-primary-rgb, 163, 184, 153), 0.3);
     color: var(--color-text-primary);
 }
 
@@ -308,12 +333,13 @@ td {
     border-bottom: 1px solid var(--color-border-secondary);
 }
 
+/* Updated hover colors to use RGB variable */
 tr:hover td {
-    background-color: rgba(var(--color-primary-rgb, 77, 148, 255), 0.05);
+    background-color: rgba(var(--color-primary-rgb, 30, 63, 32), 0.05);
 }
 
 .dark tr:hover td {
-    background-color: rgba(94, 158, 255, 0.08);
+    background-color: rgba(var(--color-primary-rgb, 163, 184, 153), 0.08);
 }
 
 /* Form Elements */
@@ -341,13 +367,15 @@ input:focus,
 textarea:focus,
 select:focus {
     border-color: var(--color-border-focus);
-    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb, 77, 148, 255), 0.1);
+    /* Updated shadow color to use RGB variable */
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb, 30, 63, 32), 0.1);
 }
 
 .dark input:focus,
 .dark textarea:focus,
 .dark select:focus {
-    box-shadow: 0 0 0 3px rgba(94, 158, 255, 0.15);
+    /* Updated shadow color to use RGB variable */
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb, 163, 184, 153), 0.15);
 }
 
 /* Button Styling */

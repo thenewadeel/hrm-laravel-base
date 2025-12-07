@@ -1,19 +1,25 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            🏠 {{ __('Attendance & Time Tracking') }}
-        </h2>
+        <div class="flex justify-between items-center">
+            <div>
+                <h2 class="font-semibold text-xl text-primary leading-tight">
+                    🏠 {{ __('Attendance & Time Tracking') }}
+                </h2>
+                <p class="text-sm text-secondary mt-1">
+                    Monitor attendance, track time, and manage exceptions
+                </p>
+            </div>
+        </div>
     </x-slot>
     <div class="py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header -->
             <div class="md:flex md:items-center md:justify-between mb-6">
                 <div class="flex-1 min-w-0">
-                    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+                    <h2 class="text-2xl font-bold leading-7 text-primary sm:text-3xl sm:truncate">
                         Attendance Dashboard
                     </h2>
-                    <p class="mt-1 text-sm text-gray-500">Manage attendance sync and resolve exceptions before payroll
-                        processing</p>
+                    <p class="mt-1 text-sm text-secondary">Manage attendance sync and resolve exceptions before payroll processing</p>
                 </div>
                 <div class="mt-4 flex md:mt-0 md:ml-4 space-x-3">
                     <form method="POST" action="{{ route('attendance.biometric-sync') }}" class="inline">
@@ -45,7 +51,7 @@
             <!-- Summary Cards -->
             <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-6">
                 <!-- Present Today -->
-                <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="surface overflow-hidden shadow rounded-lg">
                     <div class="px-4 py-5 sm:p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0 bg-green-100 rounded-md p-3">
@@ -57,8 +63,8 @@
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
-                                    <dt class="text-sm font-medium text-gray-500 truncate">Present Today</dt>
-                                    <dd class="text-lg font-semibold text-gray-900">{{ $presentToday ?? '0' }}</dd>
+                                    <dt class="text-sm font-medium text-secondary truncate">Present Today</dt>
+                                    <dd class="text-lg font-semibold text-primary">{{ $presentToday ?? '0' }}</dd>
                                 </dl>
                             </div>
                         </div>
@@ -66,7 +72,7 @@
                 </div>
 
                 <!-- Absent Today -->
-                <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="surface overflow-hidden shadow rounded-lg">
                     <div class="px-4 py-5 sm:p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0 bg-red-100 rounded-md p-3">
@@ -78,8 +84,8 @@
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
-                                    <dt class="text-sm font-medium text-gray-500 truncate">Absent Today</dt>
-                                    <dd class="text-lg font-semibold text-gray-900">{{ $absentToday ?? '0' }}</dd>
+                                    <dt class="text-sm font-medium text-secondary truncate">Absent Today</dt>
+                                    <dd class="text-lg font-semibold text-primary">{{ $absentToday ?? '0' }}</dd>
                                 </dl>
                             </div>
                         </div>
@@ -87,7 +93,7 @@
                 </div>
 
                 <!-- Late Arrivals -->
-                <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="surface overflow-hidden shadow rounded-lg">
                     <div class="px-4 py-5 sm:p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0 bg-yellow-100 rounded-md p-3">
@@ -99,8 +105,8 @@
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
-                                    <dt class="text-sm font-medium text-gray-500 truncate">Late Arrivals</dt>
-                                    <dd class="text-lg font-semibold text-gray-900">{{ $lateToday ?? '0' }}</dd>
+                                    <dt class="text-sm font-medium text-secondary truncate">Late Arrivals</dt>
+                                    <dd class="text-lg font-semibold text-primary">{{ $lateToday ?? '0' }}</dd>
                                 </dl>
                             </div>
                         </div>
@@ -108,7 +114,7 @@
                 </div>
 
                 <!-- Total Hours -->
-                <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="surface overflow-hidden shadow rounded-lg">
                     <div class="px-4 py-5 sm:p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0 bg-blue-100 rounded-md p-3">
@@ -120,8 +126,8 @@
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
-                                    <dt class="text-sm font-medium text-gray-500 truncate">Total Hours</dt>
-                                    <dd class="text-lg font-semibold text-gray-900">{{ $totalHours ?? '0' }} hrs</dd>
+                                    <dt class="text-sm font-medium text-secondary truncate">Total Hours</dt>
+                                    <dd class="text-lg font-semibold text-primary">{{ $totalHours ?? '0' }} hrs</dd>
                                 </dl>
                             </div>
                         </div>
@@ -199,7 +205,7 @@
             @endif
 
             <!-- Filters -->
-            <div class="bg-white shadow sm:rounded-lg mb-6">
+            <div class="surface shadow sm:rounded-lg mb-6">
                 <div class="px-4 py-5 sm:p-6">
                     <form method="GET" action="{{ route('attendance.dashboard') }}">
                         <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -217,27 +223,27 @@
                             @endif
                             
                             <div class="sm:col-span-2">
-                                <label for="start_date" class="block text-sm font-medium text-gray-700">Start Date</label>
+                                <label for="start_date" class="block text-sm font-medium text-primary">Start Date</label>
                                 <div class="mt-1">
                                     <input type="date" id="start_date" name="start_date"
                                         value="{{ request('start_date') ?? $filters['start_date'] ?? '' }}"
-                                        class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                        class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-secondary rounded-md">
                                 </div>
                             </div>
                             <div class="sm:col-span-2">
-                                <label for="end_date" class="block text-sm font-medium text-gray-700">End Date</label>
+                                <label for="end_date" class="block text-sm font-medium text-primary">End Date</label>
                                 <div class="mt-1">
                                     <input type="date" id="end_date" name="end_date"
                                         value="{{ request('end_date') ?? $filters['end_date'] ?? '' }}"
-                                        class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                        class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-secondary rounded-md">
                                 </div>
                             </div>
 
                             <!-- Employee Filter -->
                             <div class="sm:col-span-2">
-                                <label for="employee_id" class="block text-sm font-medium text-gray-700">Employee</label>
+                                <label for="employee_id" class="block text-sm font-medium text-primary">Employee</label>
                                 <select id="employee_id" name="employee_id"
-                                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-secondary focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
                                     <option value="">All Employees</option>
                                     @foreach($employees ?? [] as $employee)
                                         <option value="{{ $employee['id'] }}" {{ request('employee_id') == $employee['id'] ? 'selected' : '' }}>
@@ -249,25 +255,25 @@
 
                             <!-- Search Filter -->
                             <div class="sm:col-span-3">
-                                <label for="search" class="block text-sm font-medium text-gray-700">Search Employee</label>
+                                <label for="search" class="block text-sm font-medium text-primary">Search Employee</label>
                                 <div class="mt-1 relative rounded-md shadow-sm">
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg class="h-5 w-5 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                         </svg>
                                     </div>
                                     <input type="text" id="search" name="search" 
                                         value="{{ request('search') }}"
                                         placeholder="Search by employee name..."
-                                        class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md">
+                                        class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-secondary rounded-md">
                                 </div>
                             </div>
 
                             <!-- Status Filter -->
                             <div class="sm:col-span-2">
-                                <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+                                <label for="status" class="block text-sm font-medium text-primary">Status</label>
                                 <select id="status" name="status"
-                                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-secondary focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
                                     <option value="">All Status</option>
                                     <option value="present" {{ request('status') == 'present' ? 'selected' : '' }}>Present</option>
                                     <option value="absent" {{ request('status') == 'absent' ? 'selected' : '' }}>Absent</option>
@@ -279,13 +285,13 @@
 
                             <!-- Show Exceptions Checkbox -->
                             <div class="sm:col-span-1">
-                                <label class="block text-sm font-medium text-gray-700">&nbsp;</label>
+                                <label class="block text-sm font-medium text-primary">&nbsp;</label>
                                 <div class="mt-1">
                                     <label class="flex items-center">
                                         <input type="checkbox" name="show_exceptions" value="1" 
                                             {{ request('show_exceptions') ? 'checked' : '' }}
-                                            class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded">
-                                        <span class="ml-2 text-sm text-gray-700">Show Exceptions Only</span>
+                                            class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-secondary rounded">
+                                        <span class="ml-2 text-sm text-primary">Show Exceptions Only</span>
                                     </label>
                                 </div>
                             </div>
@@ -293,21 +299,21 @@
                         <div class="mt-4 flex justify-between">
                             <div class="space-x-3">
                                 <button type="button" onclick="setQuickDateRange('today')"
-                                    class="inline-flex items-center px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs font-medium text-gray-700 bg-white hover:bg-gray-50">
+                                    class="inline-flex items-center px-3 py-2 border border-secondary rounded-md shadow-sm text-xs font-medium text-primary bg-surface hover:bg-tertiary">
                                     Today
                                 </button>
                                 <button type="button" onclick="setQuickDateRange('week')"
-                                    class="inline-flex items-center px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs font-medium text-gray-700 bg-white hover:bg-gray-50">
+                                    class="inline-flex items-center px-3 py-2 border border-secondary rounded-md shadow-sm text-xs font-medium text-primary bg-surface hover:bg-tertiary">
                                     This Week
                                 </button>
                                 <button type="button" onclick="setQuickDateRange('month')"
-                                    class="inline-flex items-center px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs font-medium text-gray-700 bg-white hover:bg-gray-50">
+                                    class="inline-flex items-center px-3 py-2 border border-secondary rounded-md shadow-sm text-xs font-medium text-primary bg-surface hover:bg-tertiary">
                                     This Month
                                 </button>
                             </div>
                             <div class="space-x-3">
                                 <a href="{{ route('attendance.dashboard') }}"
-                                    class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                    class="inline-flex items-center px-4 py-2 border border-secondary rounded-md shadow-sm text-sm font-medium text-primary bg-surface hover:bg-tertiary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                     Clear All
                                 </a>
                                 <button type="submit"
@@ -321,73 +327,71 @@
             </div>
 
             <!-- Attendance Grid -->
-            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+            <div class="surface shadow overflow-hidden sm:rounded-lg">
+                <div class="px-4 py-5 sm:px-6 border-b border-secondary">
+                    <h3 class="text-lg leading-6 font-medium text-primary">
                         Attendance Records
                     </h3>
-                    <p class="mt-1 text-sm text-gray-500">Review and manage attendance exceptions before payroll lock
-                    </p>
+                    <p class="mt-1 text-sm text-secondary">Review and manage attendance exceptions before payroll lock</p>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
+                        <thead class="bg-tertiary">
                             <tr>
                                 <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider">
                                     Employee</th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider">
                                     Date</th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider">
                                     Punch In</th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider">
                                     Punch Out</th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider">
                                     Total Hours</th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider">
                                     Status</th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider">
                                     Actions</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
+                        <tbody class="surface divide-y divide-secondary">
                             @forelse($attendanceRecords ?? [] as $record)
                                 <tr
                                     class="@if ($record['status'] === 'late') bg-yellow-50 @elseif($record['status'] === 'absent') bg-red-50 @elseif($record['status'] === 'missed_punch') bg-orange-50 @endif">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                             <div class="flex-shrink-0 h-10 w-10">
-                                                <div
-                                                    class="h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center">
+                                                <div class="h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center">
                                                     <span class="text-gray-600 font-medium text-sm">
                                                         {{ substr($record['employee_name'] ?? 'Unknown', 0, 2) }}
                                                     </span>
                                                 </div>
                                             </div>
                                             <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">
+                                                <div class="text-sm font-medium text-primary">
                                                     {{ $record['employee_name'] ?? 'Unknown Employee' }}</div>
-                                                <div class="text-sm text-gray-500">
+                                                <div class="text-sm text-secondary">
                                                     {{ $record['department'] ?? 'N/A' }}</div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
                                         {{ \Carbon\Carbon::parse($record['record_date'])->format('M j, Y') }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
                                         {{ $record['punch_in'] ? \Carbon\Carbon::parse($record['punch_in'])->format('h:i A') : '—' }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
                                         {{ $record['punch_out'] ? \Carbon\Carbon::parse($record['punch_out'])->format('h:i A') : '—' }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
                                         {{ $record['total_hours'] ? $record['total_hours'] . ' hrs' : '0.0 hrs' }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
@@ -432,8 +436,8 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="px-6 py-4 text-center text-sm text-gray-500">
-                                        No attendance records found for the selected criteria.
+                                    <td colspan="7" class="px-6 py-4 text-center text-sm text-secondary">
+                                        No attendance records found for selected criteria.
                                     </td>
                                 </tr>
                             @endforelse

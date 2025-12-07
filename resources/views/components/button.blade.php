@@ -1,6 +1,7 @@
 @props([
     'variant' => 'primary',
     'size' => 'md',
+    // Change: This prop will now control the 'type' HTML *attribute* (button, submit, reset)
     'type' => 'button',
 ])
 
@@ -14,8 +15,10 @@
         'danger' => 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 dark:bg-red-700 dark:hover:bg-red-800',
         'outline' => 'border border-secondary text-primary hover:bg-secondary focus:ring-secondary',
         'ghost' => 'text-primary hover:bg-secondary focus:ring-secondary',
-        'success' => 'bg-green-600 text-white hover:bg-green-700 focus:ring-green-500 dark:bg-green-700 dark:hover:bg-green-800',
-        'warning' => 'bg-yellow-600 text-white hover:bg-yellow-700 focus:ring-yellow-500 dark:bg-yellow-700 dark:hover:bg-yellow-800',
+        'success' =>
+            'bg-green-600 text-white hover:bg-green-700 focus:ring-green-500 dark:bg-green-700 dark:hover:bg-green-800',
+        'warning' =>
+            'bg-yellow-600 text-white hover:bg-yellow-700 focus:ring-yellow-500 dark:bg-yellow-700 dark:hover:bg-yellow-800',
     ];
 
     $sizes = [
@@ -28,6 +31,7 @@
     $classes = $baseClasses . ' ' . $variants[$variant] . ' ' . $sizes[$size];
 @endphp
 
-<{{ $type }} {{ $attributes->merge(['class' => $classes]) }}>
+{{-- 🔑 Key Change: Always use the <button> element, and set the 'type' attribute using the $type prop --}}
+<button {{ $attributes->merge(['class' => $classes]) }} **type="{{ $type }}"**>
     {{ $slot }}
-</{{ $type }}>
+</button>
