@@ -29,15 +29,6 @@ class Depreciation extends Model
         'created_by',
     ];
 
-    protected $casts = [
-        'depreciation_date' => 'date',
-        'depreciation_amount' => 'decimal:2',
-        'accumulated_depreciation_before' => 'decimal:2',
-        'accumulated_depreciation_after' => 'decimal:2',
-        'book_value_before' => 'decimal:2',
-        'book_value_after' => 'decimal:2',
-    ];
-
     protected static function newFactory(): DepreciationFactory
     {
         return DepreciationFactory::new();
@@ -56,5 +47,24 @@ class Depreciation extends Model
     public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'depreciation_date' => 'date',
+            'depreciation_amount' => 'decimal:2',
+            'accumulated_depreciation_before' => 'decimal:2',
+            'accumulated_depreciation_after' => 'decimal:2',
+            'book_value_before' => 'decimal:2',
+            'book_value_after' => 'decimal:2',
+
+        ];
     }
 }

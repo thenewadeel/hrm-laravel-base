@@ -1,21 +1,21 @@
 {{-- resources/views/setup/welcome.blade.php --}}
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-primary leading-tight">
             Welcome to Your New System
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="surface overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6">
                     <div class="text-center mb-8">
-                        <h1 class="text-2xl font-bold text-gray-900 mb-2">
+                        <h1 class="text-2xl font-bold text-primary mb-2">
                             Let's Get Started
                         </h1>
-                        <p class="text-gray-600">
-                            Set up your organization to begin using the system
+                        <p class="text-secondary">
+                            Set up your organization to begin using system
                         </p>
                     </div>
 
@@ -24,12 +24,12 @@
 
                         <div class="space-y-4">
                             <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700">
+                                <label for="name" class="block text-sm font-medium text-primary">
                                     Organization Name
                                 </label>
                                 <input type="text" name="name" id="name" required autofocus
                                     value="{{ old('name') }}"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    class="mt-1 block w-full border-secondary rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 @error('name')
                                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                                 @enderror

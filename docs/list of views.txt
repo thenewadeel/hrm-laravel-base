@@ -19,6 +19,9 @@ resources/views/
 │       └── trial-balance.blade.php
 ├── accounts
 │   └── index.blade.php
+├── admin
+│   ├── attach-user.blade.php
+│   └── dashboard.blade.php
 ├── alerts
 │   └── index.blade.php
 ├── api
@@ -34,6 +37,9 @@ resources/views/
 │   ├── reset-password.blade.php
 │   ├── two-factor-challenge.blade.php
 │   └── verify-email.blade.php
+├── badge-showcase.blade.php
+├── badge-standalone.blade.php
+├── badge-test.blade.php
 ├── categories
 │   └── index.blade.php
 ├── components
@@ -81,6 +87,32 @@ resources/views/
 │   ├── layout.blade.php
 │   ├── loading-spinner.blade.php
 │   ├── modal.blade.php
+│   ├── model-select-dropdown.blade.php
+│   ├── navigation
+│   │   ├── breadcrumb.blade.php
+│   │   ├── desktop-menu.blade.php
+│   │   ├── dropdown.blade.php
+│   │   ├── dropdown-link.blade.php
+│   │   ├── examples.blade.php
+│   │   ├── language-switcher.blade.php
+│   │   ├── link.blade.php
+│   │   ├── main.blade.php
+│   │   ├── mobile-link.blade.php
+│   │   ├── mobile-menu.blade.php
+│   │   ├── notification-bell.blade.php
+│   │   ├── portal-desktop-menu.blade.php
+│   │   ├── portal-menu.blade.php
+│   │   ├── portal-quick-links.blade.php
+│   │   ├── quick-actions.blade.php
+│   │   ├── README.md
+│   │   ├── scripts.blade.php
+│   │   ├── search.blade.php
+│   │   ├── section.blade.php
+│   │   ├── sidebar-layout.blade.php
+│   │   ├── sidebar-list.blade.php
+│   │   ├── sidebar-widget.blade.php
+│   │   ├── theme-toggle.blade.php
+│   │   └── user-profile.blade.php
 │   ├── nav-link.blade.php
 │   ├── notification-system.blade.php
 │   ├── organization
@@ -90,16 +122,19 @@ resources/views/
 │   ├── section-border.blade.php
 │   ├── section-title.blade.php
 │   ├── sort-indicator.blade.php
-│   ├── status-badge.blade.php
 │   ├── switchable-team.blade.php
+│   ├── tag-badges.blade.php
 │   ├── validation-errors.blade.php
 │   └── welcome.blade.php
 ├── dashboard.blade.php
 ├── demo
 │   ├── cash-management.blade.php
 │   └── inventory-components.blade.php
+├── docs.blade.php
 ├── emails
 │   └── team-invitation.blade.php
+├── examples
+│   └── model-select-usage.blade.php
 ├── hr
 │   ├── employees
 │   │   ├── create.blade.php
@@ -111,7 +146,8 @@ resources/views/
 │   │   └── index.blade.php
 │   └── shifts
 │       ├── create.blade.php
-│       └── index.blade.php
+│       ├── index.blade.php
+│       └── show.blade.php
 ├── hrm
 │   └── dashboard.blade.php
 ├── inventory
@@ -195,7 +231,18 @@ resources/views/
 │   │   └── vouchers
 │   │       └── create.blade.php
 │   ├── cash-management-demo.blade.php
+│   ├── demo
+│   │   └── model-select-demo.blade.php
 │   ├── member-manager.blade.php
+│   ├── membership
+│   │   ├── batch-card-printing.blade.php
+│   │   ├── card-designer.blade.php
+│   │   ├── fee-manager.blade.php
+│   │   ├── member-form.blade.php
+│   │   ├── member-list.blade.php
+│   │   ├── membership-dashboard.blade.php
+│   │   └── subscription-manager.blade.php
+│   ├── navigation-main.blade.php
 │   ├── organization
 │   │   ├── organization-form.blade.php
 │   │   └── organization-list.blade.php
@@ -218,10 +265,27 @@ resources/views/
 │   │   │   └── outstanding-advances.blade.php
 │   │   └── tax-configuration.blade.php
 │   └── user-placement.blade.php
+├── membership
+│   ├── cards
+│   │   ├── batch.blade.php
+│   │   └── index.blade.php
+│   ├── dashboard.blade.php
+│   ├── fees
+│   │   └── index.blade.php
+│   ├── layouts
+│   │   └── app.blade.php
+│   ├── members
+│   │   ├── create.blade.php
+│   │   ├── edit.blade.php
+│   │   └── index.blade.php
+│   └── subscriptions
+│       └── index.blade.php
 ├── navigation-menu.blade.php
 ├── organizations
+│   ├── analytics.blade.php
 │   ├── dashboard.blade.php
-│   └── index.blade.php
+│   ├── index.blade.php
+│   └── structure.blade.php
 ├── partials
 │   ├── accounting
 │   │   ├── balance-sheet.blade.php
@@ -233,6 +297,7 @@ resources/views/
 ├── payroll
 │   ├── advance-reports.blade.php
 │   ├── advances.blade.php
+│   ├── dashboard.blade.php
 │   └── processing.blade.php
 ├── policy.blade.php
 ├── portal
@@ -262,6 +327,7 @@ resources/views/
 │   ├── organization.blade.php
 │   ├── stores.blade.php
 │   └── welcome.blade.php
+├── simple-badge-test.blade.php
 ├── teams
 │   ├── create.blade.php
 │   ├── create-team-form.blade.php
@@ -270,6 +336,7 @@ resources/views/
 │   ├── team-member-manager.blade.php
 │   └── update-team-name-form.blade.php
 ├── terms.blade.php
+├── test-navigation.blade.php
 └── welcome.blade.php
 
-58 directories, 215 files
+69 directories, 271 files

@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-primary leading-tight">
             🕒 {{ __('Shifts') }}
         </h2>
     </x-slot>
@@ -10,7 +10,7 @@
             <!-- Header -->
             <div class="md:flex md:items-center md:justify-between mb-6">
                 <div class="flex-1 min-w-0">
-                    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+                    <h2 class="text-2xl font-bold leading-7 text-primary sm:text-3xl sm:truncate">
                         Shifts
                     </h2>
                 </div>
@@ -23,11 +23,11 @@
             </div>
 
             <!-- Shifts List -->
-            <div class="bg-white shadow overflow-hidden sm:rounded-md">
-                <ul class="divide-y divide-gray-200">
+            <div class="surface shadow overflow-hidden sm:rounded-md">
+                <ul class="divide-y divide-secondary">
                     @foreach ($shifts as $shift)
                         <li>
-                            <a href="{{ route('hr.shifts.show', $shift) }}" class="block hover:bg-gray-50">
+                            <a href="{{ route('hr.shifts.show', $shift) }}" class="block hover:bg-tertiary">
                                 <div class="px-4 py-4 sm:px-6">
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center">
@@ -37,20 +37,20 @@
                                                 </div>
                                             </div>
                                             <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">
+                                                <div class="text-sm font-medium text-primary">
                                                     {{ $shift->name }}
                                                 </div>
-                                                <div class="text-sm text-gray-500">{{ $shift->code }}</div>
+                                                <div class="text-sm text-secondary">{{ $shift->code }}</div>
                                             </div>
                                         </div>
                                         <div class="flex items-center space-x-4">
-                                            <div class="text-sm text-gray-900">
+                                            <div class="text-sm text-primary">
                                                 {{ $shift->start_time }} - {{ $shift->end_time }}
                                             </div>
-                                            <div class="text-sm text-gray-500">
+                                            <div class="text-sm text-secondary">
                                                 {{ $shift->working_hours }} hours
                                             </div>
-                                            <div class="text-sm text-gray-500">
+                                            <div class="text-sm text-secondary">
                                                 {{ implode(', ', array_map('ucfirst', $shift->days_of_week)) }}
                                             </div>
                                             <div>

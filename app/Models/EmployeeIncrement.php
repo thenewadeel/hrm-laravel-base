@@ -25,14 +25,6 @@ class EmployeeIncrement extends Model
         'approved_at',
     ];
 
-    protected $casts = [
-        'increment_value' => 'decimal:2',
-        'previous_salary' => 'decimal:2',
-        'new_salary' => 'decimal:2',
-        'effective_date' => 'date',
-        'approved_at' => 'datetime',
-    ];
-
     /**
      * Relationships
      */
@@ -118,5 +110,23 @@ class EmployeeIncrement extends Model
         $this->update(['status' => 'implemented']);
 
         return true;
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'increment_value' => 'decimal:2',
+            'previous_salary' => 'decimal:2',
+            'new_salary' => 'decimal:2',
+            'effective_date' => 'date',
+            'approved_at' => 'datetime',
+
+        ];
     }
 }

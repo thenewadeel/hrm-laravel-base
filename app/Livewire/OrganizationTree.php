@@ -13,9 +13,10 @@ class OrganizationTree extends Component
 
     public function mount($organizationId = null)
     {
-        // $this->organizationId = $organizationId;
+        $this->organizationId = $organizationId;
         $this->loadTree();
     }
+
     /**
      * This method is explicitly called when the filter changes.
      */
@@ -24,18 +25,16 @@ class OrganizationTree extends Component
         $this->organizationId = $id;
         $this->loadTree();
     }
+
     public function loadTree()
     {
         // Start with the base query for root units
         $query = OrganizationUnit::whereNull('parent_id')->with('children');
 
-        // // Apply the filter if an organizationId is set
-        // if ($this->organizationId) {
-        //     $query->where('organization_id', $this->organizationId);
-        // }
-        if (is_array($this->organizationId) && !empty($this->organizationId)) {
+        // Apply the filter if an organizationId is set
+        if (is_array($this->organizationId) && ! empty($this->organizationId)) {
             $query->whereIn('organization_id', $this->organizationId);
-        } else if (!is_array($this->organizationId) && $this->organizationId) {
+        } elseif (! is_array($this->organizationId) && $this->organizationId) {
             $query->where('organization_id', $this->organizationId);
         }
 
@@ -51,12 +50,12 @@ class OrganizationTree extends Component
         $unitToMove = OrganizationUnit::find($unitId);
 
         // If the unit doesn't exist, do nothing
-        if (!$unitToMove) {
+        if (! $unitToMove) {
             return;
         }
 
         // 1. Prevent a unit from being dropped onto itself.
-        if ((int)$unitId === (int)$newParentId) {
+        if ((int) $unitId === (int) $newParentId) {
             return;
         }
 
@@ -64,11 +63,15 @@ class OrganizationTree extends Component
         if ($newParentId) {
             $potentialParent = OrganizationUnit::find($newParentId);
 
+            if (! $potentialParent) {
+                return;
+            }
+
             // Traverse up the hierarchy from the potential new parent.
             // If we ever find the unit being moved, it means the drop target is a descendant.
             $currentNode = $potentialParent;
             while ($currentNode) {
-                if ((int)$currentNode->id === (int)$unitToMove->id) {
+                if ((int) $currentNode->id === (int) $unitToMove->id) {
                     return; // Abort the operation.
                 }
                 $currentNode = $currentNode->parent;
@@ -82,7 +85,6 @@ class OrganizationTree extends Component
         // Reload the entire tree to reflect the changes.
         $this->loadTree();
     }
-
 
     public function render()
     {

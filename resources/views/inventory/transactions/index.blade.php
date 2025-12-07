@@ -7,8 +7,8 @@
 
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                📋 {{ __('Transactions') }} <span class="text-gray-500 text-lg">({{ $transactions->total() }}
+            <h2 class="font-semibold text-xl text-primary leading-tight">
+                📋 {{ __('Transactions') }} <span class="text-muted text-lg">({{ $transactions->total() }}
                     transactions)</span>
             </h2>
             <x-button.primary href="{{ route('inventory.transactions.create') }}">
@@ -23,7 +23,7 @@
             <!-- Search and Filters -->
             <div class="mb-6">
                 <form method="GET" action="{{ route('inventory.transactions.index') }}">
-                    <div class="bg-white p-4 rounded-lg border border-gray-200">
+                    <div class="surface p-4 rounded-lg border border-secondary">
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                             <!-- Search -->
                             <div>
@@ -102,48 +102,48 @@
             </div>
 
             <!-- Transactions Table -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
+            <div class="surface overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 surface border-b border-secondary">
                     @if ($transactions->count() > 0)
                         <x-data-table>
                             <x-slot name="header">
                                 <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
                                     Reference</th>
                                 <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
                                     Type</th>
                                 <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
                                     Store</th>
                                 <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
                                     Items</th>
                                 <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
                                     Total Qty</th>
                                 <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
                                     Status</th>
                                 <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
                                     Date</th>
                                 <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
                                     Actions</th>
                             </x-slot>
 
                             <x-slot name="body">
                                 @foreach ($transactions as $transaction)
-                                    <tr class="hover:bg-gray-50">
+                                    <tr class="hover:bg-tertiary">
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm font-medium text-gray-900 font-mono">
+                                            <div class="text-sm font-medium text-primary font-mono">
                                                 <a href="{{ route('inventory.transactions.show', $transaction) }}"
                                                     class="hover:text-blue-600">
                                                     {{ $transaction->reference }}
                                                 </a>
                                             </div>
-                                            <div class="text-sm text-gray-500">
+                                            <div class="text-sm text-muted">
                                                 by {{ $transaction->createdBy->name ?? 'System' }}
                                             </div>
                                         </td>
@@ -166,8 +166,22 @@
                                                 <span
                                                     class="text-lg mr-2">{{ $typeIcons[$transaction->type] ?? '📄' }}</span>
                                                 <span
-                                                    class="text-sm text-gray-900">{{ $typeLabels[$transaction->type] ?? ucfirst($transaction->type) }}</span>
+                                                    class="text-sm text-primary">{{ $typeLabels[$transaction->type] ?? ucfirst($transaction->type) }}</span>
                                             </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
+                                            {{ $transaction->store->name }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
+                                            {{ $transaction->items_count ?? $transaction->items->count() }} items
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
+                                            {{ $transaction->total_quantity ?? $transaction->items->sum('quantity') }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-muted">
+                                            {{ $transaction->created_at->format('M j, Y') }}
+                                            <div class="text-xs text-muted">
+                                                {{ $transaction->created_at->format('g:i A') }}</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                             {{ $transaction->store->name }}
@@ -179,7 +193,7 @@
                                             {{ $transaction->total_quantity ?? $transaction->items->sum('quantity') }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <x-status-badge :status="$transaction->status" />
+                                            <x-badge :status="$transaction->status" />
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             {{ $transaction->created_at->format('M j, Y') }}
@@ -216,9 +230,9 @@
                         @endif
                     @else
                         <div class="text-center py-12">
-                            <x-heroicon-s-document-text class="mx-auto h-12 w-12 text-gray-400" />
-                            <h3 class="mt-2 text-sm font-medium text-gray-900">No transactions found</h3>
-                            <p class="mt-1 text-sm text-gray-500">Get started by creating your first transaction.</p>
+                            <x-heroicon-s-document-text class="mx-auto h-12 w-12 text-muted" />
+                            <h3 class="mt-2 text-sm font-medium text-primary">No transactions found</h3>
+                            <p class="mt-1 text-sm text-muted">Get started by creating your first transaction.</p>
                             <div class="mt-6">
                                 <x-button.primary href="{{ route('inventory.transactions.create') }}">
                                     <x-heroicon-s-plus class="w-4 h-4 mr-2" />

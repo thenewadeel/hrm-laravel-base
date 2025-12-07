@@ -73,7 +73,7 @@
                                     <div>
                                         <label class="text-sm font-medium text-gray-500">Status</label>
                                         <div class="mt-1">
-                                            <x-status-badge :status="$transaction->status" />
+                                            <x-badge :status="$transaction->status" />
                                         </div>
                                     </div>
                                     <div>

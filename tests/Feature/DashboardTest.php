@@ -1,25 +1,27 @@
 <?php
+
 // tests/Feature/SetupWizardTest.php
 
 namespace Tests\Feature;
 
-use Tests\Traits\SetupInventory;
-use PHPUnit\Framework\Attributes\Test;
-use App\Models\User;
+use App\Models\Inventory\Item;
+use App\Models\Inventory\Store;
+use App\Models\Inventory\Transaction;
 use App\Models\Organization;
 use App\Models\OrganizationUnit;
-use App\Models\Inventory\Store;
-use App\Models\Inventory\Item;
-use App\Models\Inventory\Transaction;
+use App\Models\User;
 use App\Roles\InventoryRoles;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
+use Tests\Traits\SetupInventory;
 use Tests\Traits\SetupOrganization;
 
 class DashboardTest extends TestCase
 {
-    use RefreshDatabase, SetupOrganization, SetupInventory;
+    use RefreshDatabase, SetupInventory, SetupOrganization;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -27,6 +29,7 @@ class DashboardTest extends TestCase
         $this->setupInventory();
         // $this->actingAs($this->inventoryAdminUser);
     }
+
     #[Test]
     public function it_redirects_to_setup_for_users_without_organization()
     {
@@ -46,9 +49,13 @@ class DashboardTest extends TestCase
         $user->organizations()->attach($organization->id, [
             'roles' => json_encode(['admin']),
             'organization_unit_id' => OrganizationUnit::factory()->create([
-                'organization_id' => $organization->id
-            ])->id
+                'organization_id' => $organization->id,
+            ])->id,
         ]);
+
+        // Set current organization for the user
+        $user->current_organization_id = $organization->id;
+        $user->save();
 
         $response = $this->actingAs($user)
             ->get('/dashboard');
@@ -66,9 +73,13 @@ class DashboardTest extends TestCase
         $user->organizations()->attach($organization->id, [
             'roles' => json_encode(['admin']),
             'organization_unit_id' => OrganizationUnit::factory()->create([
-                'organization_id' => $organization->id
-            ])->id
+                'organization_id' => $organization->id,
+            ])->id,
         ]);
+
+        // Set current organization for the user
+        $user->current_organization_id = $organization->id;
+        $user->save();
 
         $response = $this->actingAs($user)
             ->get('/dashboard');
@@ -122,12 +133,17 @@ class DashboardTest extends TestCase
         $user = User::factory()->create();
         $organization = Organization::factory()->create();
         $unit = OrganizationUnit::factory()->create([
-            'organization_id' => $organization->id
+            'organization_id' => $organization->id,
         ]);
         $user->organizations()->attach($organization->id, [
             'roles' => json_encode(['admin']),
-            'organization_unit_id' => $unit->id
+            'organization_unit_id' => $unit->id,
         ]);
+
+        // Set current organization for the user
+        $user->current_organization_id = $organization->id;
+        $user->save();
+
         $store = Store::factory()->create([
             'organization_unit_id' => $organization->id,
         ]);
@@ -182,7 +198,6 @@ class DashboardTest extends TestCase
         $store = $this->store;
         $items = Item::factory()->count(3)->create(['organization_id' => $organization->id]);
 
-
         $response = $this->actingAs($user)
             ->get('/dashboard');
 
@@ -202,7 +217,6 @@ class DashboardTest extends TestCase
         $store = $this->store;
         $items = Item::factory()->count(2)->create(['organization_id' => $organization->id]);
 
-
         $response = $this->actingAs($user)
             ->get('/dashboard');
 
@@ -220,7 +234,7 @@ class DashboardTest extends TestCase
         $organization = $this->organization;
         $orgUnit = $this->organizationUnit;
 
-        $orgUnit->stores()->each(fn($store) => $store->delete());
+        $orgUnit->stores()->each(fn ($store) => $store->delete());
         // No stores created
 
         $response = $this->actingAs($user)
@@ -230,7 +244,6 @@ class DashboardTest extends TestCase
             ->assertSee('No stores yet')
             ->assertSee('Add your first store'); // Fixed: removed extra space
     }
-
 
     #[Test]
     public function it_shows_all_stocked_message_when_no_low_stock()

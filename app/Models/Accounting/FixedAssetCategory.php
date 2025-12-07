@@ -24,12 +24,6 @@ class FixedAssetCategory extends Model
         'is_active',
     ];
 
-    protected $casts = [
-        'default_useful_life_years' => 'integer',
-        'default_depreciation_rate' => 'decimal:2',
-        'is_active' => 'boolean',
-    ];
-
     protected $attributes = [
         'default_useful_life_years' => 5,
         'default_depreciation_method' => 'straight_line',
@@ -54,5 +48,21 @@ class FixedAssetCategory extends Model
     public function scopeInactive($query)
     {
         return $query->where('is_active', false);
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'default_useful_life_years' => 'integer',
+            'default_depreciation_rate' => 'decimal:2',
+            'is_active' => 'boolean',
+
+        ];
     }
 }

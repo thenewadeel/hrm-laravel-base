@@ -1,25 +1,55 @@
 {{-- resources/views/dashboard.blade.php --}}
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-primary leading-tight">
             Dashboard - {{ $organization?->name }}
         </h2>
     </x-slot>
 
     <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:p-4 rounded-lg shadow-md shadow-slate-700 border border-gray-600">
-            <h3 class="text-2xl font-semibold leading-tight mb-4 text-slate-300">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:p-4 rounded-lg shadow-md shadow-slate-700 border border-secondary">
+            <h3 class="text-2xl font-semibold leading-tight mb-4 text-primary">
                 Inventory Overview
             </h3>
+
+            <!-- Quick Actions -->
+            <div class="mb-6">
+                <div class="surface overflow-hidden shadow rounded-lg p-6">
+                    <h3 class="text-lg leading-6 font-medium text-primary mb-4">Quick Actions</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="{{ route('inventory.stores.create') }}" 
+                           class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            Add Store
+                        </a>
+                        <a href="{{ route('inventory.transactions.create') }}" 
+                           class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                            </svg>
+                            New Transaction
+                        </a>
+                        <a href="{{ route('inventory.items.create') }}" 
+                           class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+                            </svg>
+                            Add Item
+                        </a>
+                    </div>
+                </div>
+            </div>
 
             <!-- Stats Overview -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
                 <!-- Stores Card -->
-                <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="surface overflow-hidden shadow rounded-lg">
                     <div class="p-5">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
-                                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor"
+                                <svg class="w-6 h-6 text-muted" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
@@ -28,8 +58,8 @@
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
-                                    <dt class="text-sm font-medium text-gray-500 truncate">Stores</dt>
-                                    <dd class="text-lg font-medium text-gray-900">{{ $stores->count() }}</dd>
+                                    <dt class="text-sm font-medium text-muted truncate">Stores</dt>
+                                    <dd class="text-lg font-medium text-primary">{{ $stores->count() }}</dd>
                                 </dl>
                             </div>
                         </div>
@@ -37,11 +67,11 @@
                 </div>
 
                 <!-- Total Items Card -->
-                <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="surface overflow-hidden shadow rounded-lg">
                     <div class="p-5">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
-                                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor"
+                                <svg class="w-6 h-6 text-muted" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4">
@@ -50,8 +80,8 @@
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
-                                    <dt class="text-sm font-medium text-gray-500 truncate">Total Items</dt>
-                                    <dd class="text-lg font-medium text-gray-900">{{ $totalItems }}</dd>
+                                    <dt class="text-sm font-medium text-muted truncate">Total Items</dt>
+                                    <dd class="text-lg font-medium text-primary">{{ $totalItems }}</dd>
                                 </dl>
                             </div>
                         </div>
@@ -59,7 +89,7 @@
                 </div>
 
                 <!-- Low Stock Alerts Card -->
-                <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="surface overflow-hidden shadow rounded-lg">
                     <div class="p-5">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
@@ -72,8 +102,8 @@
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
-                                    <dt class="text-sm font-medium text-gray-500 truncate">Low Stock Items</dt>
-                                    <dd class="text-lg font-medium text-gray-900">{{ $lowStockItems->count() }}</dd>
+                                    <dt class="text-sm font-medium text-muted truncate">Low Stock Items</dt>
+                                    <dd class="text-lg font-medium text-primary">{{ $lowStockItems->count() }}</dd>
                                     @foreach ($lowStockItems as $lowStockItem)
                                         {{ $lowStockItem?->name }}
                                     @endforeach
@@ -84,11 +114,11 @@
                 </div>
 
                 <!-- Recent Transactions Card -->
-                <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="surface overflow-hidden shadow rounded-lg">
                     <div class="p-5">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
-                                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor"
+                                <svg class="w-6 h-6 text-muted" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
@@ -97,8 +127,8 @@
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
-                                    <dt class="text-sm font-medium text-gray-500 truncate">Recent Transactions</dt>
-                                    <dd class="text-lg font-medium text-gray-900">{{ $recentTransactions->count() }}
+                                    <dt class="text-sm font-medium text-muted truncate">Recent Transactions</dt>
+                                    <dd class="text-lg font-medium text-primary">{{ $recentTransactions->count() }}
                                     </dd>
                                 </dl>
                             </div>
@@ -111,18 +141,18 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
                 <!-- Stores List -->
-                <div class="bg-white overflow-hidden shadow rounded-lg">
-                    <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Stores Overview</h3>
+                <div class="surface overflow-hidden shadow rounded-lg">
+                    <div class="px-4 py-5 sm:px-6 border-b border-secondary">
+                        <h3 class="text-lg leading-6 font-medium text-primary">Stores Overview</h3>
                     </div>
                     <div class="p-6">
                         @if ($stores->count() > 0)
                             <div class="space-y-4">
                                 @foreach ($stores as $store)
-                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <div class="flex items-center justify-between p-3 bg-tertiary rounded-lg">
                                         <div>
-                                            <h4 class="font-medium text-gray-900">{{ $store?->name }}</h4>
-                                            <p class="text-sm text-gray-500">{{ $store->location }}</p>
+                                            <h4 class="font-medium text-primary">{{ $store?->name }}</h4>
+                                            <p class="text-sm text-secondary">{{ $store->location }}</p>
                                         </div>
                                         <div class="text-right">
                                             <span
@@ -134,32 +164,27 @@
                                 @endforeach
                             </div>
                         @else
-                            <p class="text-gray-500 text-center py-4">No stores yet. <a {{-- href="{{ route('stores.create') }}"  --}}
+                            <p class="text-muted text-center py-4">No stores yet. <a {{-- href="{{ route('stores.create') }}"  --}}
                                     class="text-blue-600 hover:text-blue-800">Add your first store</a></p>
                         @endif
                     </div>
                 </div>
 
                 <!-- Low Stock Alerts -->
-                <div class="bg-white overflow-hidden shadow rounded-lg">
-                    <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Low Stock Alerts</h3>
+                <div class="surface overflow-hidden shadow rounded-lg">
+                    <div class="px-4 py-5 sm:px-6 border-b border-secondary">
+                        <h3 class="text-lg leading-6 font-medium text-primary">Low Stock Alerts</h3>
                     </div>
                     <div class="p-6">
                         @if ($lowStockItems->count() > 0)
                             <div class="space-y-3">
-                                @foreach ($lowStockItems as $alert)
+                                @foreach ($lowStockItems as $item)
                                     <div
                                         class="flex items-center justify-between p-3 bg-red-50 border border-red-200 rounded-lg">
                                         <div>
-                                            <h4 class="font-medium text-red-900">{{ $alert['item']?->name }}</h4>
+                                            <h4 class="font-medium text-red-900">{{ $item->name }}</h4>
                                             <p class="text-sm text-red-700">
-                                                @foreach ($alert['low_stock_stores'] as $storeAlert)
-                                                    {{ $storeAlert['store_name'] }}: {{ $storeAlert['quantity'] }}
-                                                    left
-                                                    (reorder at
-                                                    {{ $storeAlert['reorder_level'] }})
-                                                @endforeach
+                                                Low stock in multiple stores
                                             </p>
                                         </div>
                                         <span
@@ -179,17 +204,17 @@
 
             <!-- Recent Transactions -->
             @if ($recentTransactions->count() > 0)
-                <div class="mt-6 bg-white overflow-hidden shadow rounded-lg">
-                    <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Recent Transactions</h3>
+                <div class="mt-6 surface overflow-hidden shadow rounded-lg">
+                    <div class="px-4 py-5 sm:px-6 border-b border-secondary">
+                        <h3 class="text-lg leading-6 font-medium text-primary">Recent Transactions</h3>
                     </div>
                     <div class="p-6">
                         <div class="space-y-3">
                             @foreach ($recentTransactions as $transaction)
-                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div class="flex items-center justify-between p-3 bg-tertiary rounded-lg">
                                     <div>
-                                        <h4 class="font-medium text-gray-900">{{ $transaction->reference }}</h4>
-                                        <p class="text-sm text-gray-500">{{ $transaction->store?->name }} •
+                                        <h4 class="font-medium text-primary">{{ $transaction->reference }}</h4>
+                                        <p class="text-sm text-secondary">{{ $transaction->store?->name }} •
                                             {{ $transaction->created_at->diffForHumans() }}</p>
                                     </div>
                                     <span

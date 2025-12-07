@@ -41,6 +41,8 @@ class SetupController extends Controller
                 'organization_unit_id' => $rootUnit->id,
                 'position' => 'Administrator'
             ]);
+            auth()->user()->current_organization_id = $organization->id;
+            auth()->user()->save();
         });
 
         return redirect('/setup/stores');

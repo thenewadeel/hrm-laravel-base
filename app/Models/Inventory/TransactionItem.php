@@ -10,6 +10,7 @@ use Illuminate\Database\Query\Builder;
 class TransactionItem extends Model
 {
     use HasFactory;
+
     /**
      * The table associated with the model.
      *
@@ -22,11 +23,7 @@ class TransactionItem extends Model
         'item_id',
         'quantity',
         'unit_price',
-        'notes'
-    ];
-
-    protected $casts = [
-        'unit_price' => 'decimal:2'
+        'notes',
     ];
 
     protected $appends = ['total_price'];
@@ -58,6 +55,7 @@ class TransactionItem extends Model
     {
         return number_format($this->total_price, 2);
     }
+
     // ----------------------
     // Scopes
     // ----------------------
@@ -96,5 +94,19 @@ class TransactionItem extends Model
     protected static function newFactory()
     {
         return \Database\Factories\Inventory\TransactionItemFactory::new();
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'unit_price' => 'decimal:2',
+
+        ];
     }
 }

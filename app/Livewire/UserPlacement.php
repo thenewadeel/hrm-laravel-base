@@ -4,21 +4,28 @@
 
 namespace App\Livewire;
 
+use App\Livewire\Traits\ManagesOrganizationFilter;
 use App\Models\Organization;
 use App\Models\User;
 use Livewire\Component;
-use App\Livewire\Traits\ManagesOrganizationFilter;
 
 class UserPlacement extends Component
 {
     use ManagesOrganizationFilter;
+
     public $organizations; // All organizations for the filter
+
     public $organizationId;
+
     public $unassignedUsers;
+
     public $search = '';
 
-    public function mount()
+    public function mount($organizationId = null)
     {
+        if ($organizationId) {
+            $this->organizationId = $organizationId;
+        }
         $this->mountManagesOrganizationFilter();
         $this->loadUnassignedUsers();
     }
@@ -34,11 +41,11 @@ class UserPlacement extends Component
     {
         $this->organizationId = $id;
     }
+
     public function updatedSearch($value)
     {
         $this->loadUnassignedUsers();
     }
-
 
     // app/Livewire/UserPlacement.php
 
@@ -56,8 +63,8 @@ class UserPlacement extends Component
                 });
         })
             ->when($this->search, function ($query) {
-                $query->where('name', 'like', '%' . $this->search . '%')
-                    ->orWhere('email', 'like', '%' . $this->search . '%');
+                $query->where('name', 'like', '%'.$this->search.'%')
+                    ->orWhere('email', 'like', '%'.$this->search.'%');
             })
             ->get();
     }
@@ -72,17 +79,37 @@ class UserPlacement extends Component
     {
         $user = \App\Models\User::find($userId);
 
-        if (!$user) {
+        if (! $user) {
             return;
         }
 
-        $data = ['organization_unit_id' => $unitId];
+        // Check if user is already attached to this organization
+        $existingPivot = $user->organizations()
+            ->where('organization_id', $this->organizationId)
+            ->first();
 
-        // Use syncWithoutDetaching to ensure the user is attached to the organization
-        // and correctly update the pivot data without detaching from other units.
-        $user->organizations()->syncWithoutDetaching([
-            $this->organizationId => $data
-        ]);
+        if ($existingPivot) {
+            // Update existing pivot record directly using DB
+            $affected = \Illuminate\Support\Facades\DB::table('organization_user')
+                ->where('user_id', $userId)
+                ->where('organization_id', $this->organizationId)
+                ->update(['organization_unit_id' => $unitId]);
+
+            // If no rows were affected, it might be because the user isn't attached to this org
+            if ($affected === 0) {
+                // Try to attach the user to this organization first
+                $user->organizations()->attach($this->organizationId, [
+                    'organization_unit_id' => $unitId,
+                    'roles' => json_encode([]),
+                ]);
+            }
+        } else {
+            // Attach user to organization with unit
+            $user->organizations()->attach($this->organizationId, [
+                'organization_unit_id' => $unitId,
+                'roles' => json_encode([]),
+            ]);
+        }
 
         // Re-fetch data to update the UI
         $this->loadUnassignedUsers();
@@ -95,7 +122,7 @@ class UserPlacement extends Component
 
         return view('livewire.user-placement', [
             'treeRoots' => $treeRoots,
-            'organizationName' => $organization ? $organization->name : 'No Organization Selected'
+            'organizationName' => $organization ? $organization->name : 'No Organization Selected',
         ]);
     }
 }

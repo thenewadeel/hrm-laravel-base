@@ -37,51 +37,29 @@
     },
     format(value, key) {
         const type = this.columnTypes[key] || 'string';
-
-        if (value === null || typeof value === 'undefined') {
-            return '';
-        }
-
+        
         switch (type) {
             case 'currency':
-                return this.currencySymbol + new Intl.NumberFormat('id-ID', {
-                    style: 'decimal',
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                }).format(value);
+                return this.currencySymbol + parseFloat(value).toFixed(2);
             case 'number':
-                // Check if the value is a valid number before formatting
-                if (typeof value === 'number' || (typeof value === 'string' && !isNaN(value))) {
-                    return new Intl.NumberFormat('en-US', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2
-                    }).format(value);
-                }
-                return value; // Return as is if not a number
+                return parseFloat(value).toLocaleString();
             case 'date':
-                // Attempt to parse the date and format it
-                const date = new Date(value);
-                if (!isNaN(date)) {
-                    return date.toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                        year: 'numeric'
-                    });
-                }
-                return value;
+                return new Date(value).toLocaleDateString();
+            case 'boolean':
+                return value ? '✓' : '✗';
             case 'string':
             default:
                 // Default to string, no special formatting needed
                 return value;
         }
     }
-}" class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+}" class="surface rounded-xl overflow-hidden">
     @if ($loading)
         <div class="p-6 space-y-4 animate-pulse">
-            <div class="h-6 bg-gray-200 rounded w-1/4"></div>
+            <div class="h-6 bg-secondary rounded w-1/4"></div>
             <div class="space-y-3">
                 @foreach (range(1, 5) as $i)
-                    <div class="h-4 bg-gray-200 rounded {{ $i % 2 ? 'w-5/6' : 'w-4/6' }}"></div>
+                    <div class="h-4 bg-secondary rounded {{ $i % 2 ? 'w-5/6' : 'w-4/6' }}"></div>
                 @endforeach
             </div>
         </div>
@@ -89,46 +67,45 @@
         <x-empty-state title="No data available" :description="$emptyMessage" icon="document" />
     @else
         <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+            <table class="min-w-full divide-y divide-secondary">
+                <thead class="bg-tertiary">
                     <tr>
                         @foreach ($headers as $key => $header)
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer select-none"
+                            <th class="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider cursor-pointer select-none"
                                 @click="sort('{{ $key }}')">
                                 <div class="flex items-center space-x-1">
                                     <span>{{ $header }}</span>
                                     <template x-if="sortBy === '{{ $key }}'">
                                         <template x-if="sortDirection === 'asc'">
-                                            <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24"
+                                            <svg class="h-4 w-4 text-muted" fill="none" viewBox="0 0 24 24"
                                                 stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M5 15l7-7 7 7" />
+                                                    d="M5 15l7-7 7" />
                                             </svg>
                                         </template>
                                         <template x-if="sortDirection === 'desc'">
-                                            <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24"
+                                            <svg class="h-4 w-4 text-muted" fill="none" viewBox="0 0 24 24"
                                                 stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M19 9l-7 7-7-7" />
+                                                    d="M19 9l-7 7-7" />
                                             </svg>
                                         </template>
                                     </template>
                                 </div>
                             </th>
                         @endforeach
-                        {{ $customHeader ?? '' }}
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    <template x-for="item in data" :key="item.id">
-                        <tr x-bind:title="JSON.stringify(item, null, 2)" class="cursor-pointer">
-                            @foreach (array_keys($headers) as $key)
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
-                                    x-text="format(item['{{ $key }}'], '{{ $key }}')"></td>
+                <tbody class="bg-primary divide-y divide-secondary">
+                    @foreach ($data as $row)
+                        <tr class="hover:bg-secondary transition-colors">
+                            @foreach ($headers as $key => $header)
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
+                                    <span x-text="format(@js($row[$key]), @js($key))"></span>
+                                </td>
                             @endforeach
-                            {{ $customColumns ?? '' }}
                         </tr>
-                    </template>
+                    @endforeach
                 </tbody>
             </table>
         </div>

@@ -17,6 +17,7 @@ use Illuminate\Database\Query\Builder;
 class Store extends Model
 {
     use HasFactory, SoftDeletes;
+
     /**
      * The table associated with the model.
      *
@@ -30,24 +31,21 @@ class Store extends Model
         'code',
         'location',
         'description',
-        'is_active'
+        'is_active',
     ];
-
-    protected $casts = [
-        'is_active' => 'boolean'
-    ];
-
     // protected $appends = ['total_quantity', 'total_value'];
 
     protected static function booted()
     {
         static::addGlobalScope(new StoreOrganizationScope);
     }
+
     // Relationships
     public function organization_unit(): BelongsTo
     {
         return $this->belongsTo(OrganizationUnit::class);
     }
+
     public function organization(): HasOneThrough
     {
         return $this->hasOneThrough(Organization::class, OrganizationUnit::class, 'id', 'id', 'organization_unit_id', 'organization_id');
@@ -82,13 +80,14 @@ class Store extends Model
     public function getItemQuantity(Item $item): int
     {
         $storeItem = $this->items()->where('item_id', $item->id)->first();
+
         return $storeItem ? $storeItem->pivot->quantity : 0;
     }
 
     public function updateItemQuantity(Item $item, int $quantity): bool
     {
         return $this->items()->syncWithoutDetaching([
-            $item->id => ['quantity' => max(0, $quantity)]
+            $item->id => ['quantity' => max(0, $quantity)],
         ]);
     }
 
@@ -151,8 +150,6 @@ class Store extends Model
             ->withPivot(['quantity', 'min_stock', 'max_stock']);
     }
 
-
-
     /**
      * Get current stock level statistics - FIXED VERSION
      */
@@ -174,11 +171,13 @@ class Store extends Model
             'calculated_total' => $calculatedTotal, // For debugging
         ];
     }
+
     // Scopes
     public function scopeActive($query, bool $active = true)
     {
         return $query->where('is_active', $active);
     }
+
     /**
      * Scope to filter stores by organization ID
      */
@@ -188,6 +187,7 @@ class Store extends Model
             $q->where('organization_id', $organizationId);
         });
     }
+
     /**
      * Scope to filter stores by organization unit ID
      */
@@ -199,7 +199,7 @@ class Store extends Model
     /**
      * Scope to filter stores by user's organizations
      */
-    public function scopeForUser($query,  $user)
+    public function scopeForUser($query, $user)
     {
         $organizationIds = $user->organizations->pluck('id');
 
@@ -223,6 +223,7 @@ class Store extends Model
                 ->orWhere('location', 'like', "%{$search}%");
         });
     }
+
     /**
      * Scope for stores that have low stock items
      */
@@ -238,6 +239,7 @@ class Store extends Model
     {
         return \Database\Factories\Inventory\StoreFactory::new();
     }
+
     /**
      * Alternative: More reliable statistics using database queries
      */
@@ -266,6 +268,20 @@ class Store extends Model
             'out_of_stock_items' => $outOfStockCount,
             'adequate_stock_items' => $adequateStockCount,
             'verification_total' => $lowStockCount + $outOfStockCount + $adequateStockCount,
+        ];
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'is_active' => 'boolean',
+
         ];
     }
 }

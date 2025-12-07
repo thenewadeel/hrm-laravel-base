@@ -29,17 +29,6 @@ class SalaryAdvance extends Model
         'approved_at',
     ];
 
-    protected $casts = [
-        'amount' => 'decimal:2',
-        'balance_amount' => 'decimal:2',
-        'monthly_deduction' => 'decimal:2',
-        'months_repaid' => 'integer',
-        'request_date' => 'date',
-        'approval_date' => 'date',
-        'first_deduction_month' => 'date',
-        'approved_at' => 'datetime',
-    ];
-
     /**
      * Relationships
      */
@@ -152,5 +141,26 @@ class SalaryAdvance extends Model
 
         return $currentPeriod >= $firstDeduction &&
                $this->months_repaid < $this->repayment_months;
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'amount' => 'decimal:2',
+            'balance_amount' => 'decimal:2',
+            'monthly_deduction' => 'decimal:2',
+            'months_repaid' => 'integer',
+            'request_date' => 'date',
+            'approval_date' => 'date',
+            'first_deduction_month' => 'date',
+            'approved_at' => 'datetime',
+
+        ];
     }
 }

@@ -3,19 +3,14 @@
 namespace App\Models;
 
 use App\Models\Inventory\Store;
-use App\Models\Organization;
 use App\Models\Traits\BelongsToOrganization;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OrganizationUnit extends Model
 {
-    use HasFactory, SoftDeletes, BelongsToOrganization;
-    protected $casts = [
-        'custom_fields' => 'array',
-    ];
+    use BelongsToOrganization, HasFactory, SoftDeletes;
 
     protected $fillable = [
         'name',
@@ -35,6 +30,7 @@ class OrganizationUnit extends Model
         return $this->hasMany(OrganizationUnit::class, 'parent_id')
             ->withTrashed();
     }
+
     public function users()
     {
         // CRITICAL FIX: Link to the custom pivot model
@@ -42,7 +38,6 @@ class OrganizationUnit extends Model
             ->using(OrganizationUser::class)
             ->withPivot(['position', 'roles', 'permissions']);
     }
-
 
     public function performanceMetrics()
     {
@@ -58,6 +53,7 @@ class OrganizationUnit extends Model
     {
         return $this->hasOne(PayrollSummary::class);
     }
+
     // ... (rest of the file is omitted for brevity)  // Recursive relationship for all descendants
     public function allDescendants()
     {
@@ -102,5 +98,19 @@ class OrganizationUnit extends Model
     public function stores()
     {
         return $this->hasMany(Store::class);
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'custom_fields' => 'array',
+
+        ];
     }
 }

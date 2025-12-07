@@ -19,14 +19,14 @@
     @livewireStyles
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased bg-primary text-primary">
     <x-banner />
 
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-        @livewire('navigation-menu')
+    <div class="min-h-screen bg-primary">
+        @livewire('navigation-main')
         <!-- Page Heading -->
         @if (isset($header))
-            <header class="bg-white dark:bg-gray-800 shadow">
+            <header class="surface shadow-sm border-b border-secondary">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
@@ -41,6 +41,7 @@
     {{-- TODO : Add Footer --}}
     <x-flash-message duration="9000" />
     @stack('modals')
+    <x-navigation.scripts />
 
     @livewireScripts
 </body>

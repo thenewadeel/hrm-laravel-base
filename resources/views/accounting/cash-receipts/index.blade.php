@@ -6,8 +6,8 @@
 <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
     <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
-            <h1 class="text-2xl font-semibold leading-6 text-gray-900 dark:text-white">Cash Receipts</h1>
-            <p class="mt-2 text-sm text-gray-700 dark:text-gray-300">
+            <h1 class="text-2xl font-semibold leading-6 text-primary">Cash Receipts</h1>
+            <p class="mt-2 text-sm text-secondary">
                 A list of all cash receipts including their reference numbers, amounts, and dates.
             </p>
         </div>
@@ -25,22 +25,22 @@
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                 <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-                    <table class="min-w-full divide-y divide-gray-300 dark:divide-gray-700">
-                        <thead class="bg-gray-50 dark:bg-gray-800">
+                    <table class="min-w-full divide-y divide-secondary">
+                        <thead class="bg-tertiary">
                             <tr>
-                                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 dark:text-white sm:pl-6">
+                                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-primary sm:pl-6">
                                     Reference
                                 </th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-primary">
                                     Date
                                 </th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-primary">
                                     Account
                                 </th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-primary">
                                     Amount
                                 </th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-primary">
                                     Description
                                 </th>
                                 <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
@@ -48,11 +48,11 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-900">
+                        <tbody class="divide-y divide-secondary surface">
                             <!-- TODO: Implement cash receipts listing component -->
                             <tr>
-                                <td colspan="6" class="px-6 py-12 text-center text-sm text-gray-500 dark:text-gray-400">
-                                    Cash receipts listing will be implemented in the next phase.
+                                <td colspan="6" class="px-6 py-12 text-center text-sm text-muted">
+                                    Cash receipts listing will be implemented in next phase.
                                 </td>
                             </tr>
                         </tbody>

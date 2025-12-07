@@ -4,12 +4,12 @@
 
 ### Voucher Management:
 
-[ ] Creation, updating, and posting of vouchers for:
-[ ] Sales & Sales Return
-[ ] Purchase & Purchase Return
-[ ] Salary
-[ ] Fixed Assets/Depreciation
-[ ] Accounts receivable/payables and adjustments
+[x] Creation, updating, and posting of vouchers for:
+[x] Sales & Sales Return
+[x] Purchase & Purchase Return
+[x] Salary
+[x] Fixed Assets/Depreciation
+[x] Accounts receivable/payables and adjustments
 
 ### Ledger Management:
 
@@ -21,25 +21,25 @@
 
 ### Bank/Cash Management:
 
-[ ] Handling transactions and reconciliations.
+[x] Handling transactions and reconciliations.
 
 ### Reports:
 
-[ ] Advance Reports
+[x] Advance Reports
 [/] Financial Statements: Trial Balance, Balance Sheet, Profit and Loss, Income Statement
-[ ] Outstanding Statements
-[ ] Bank Statements
+[x] Outstanding Statements
+[x] Bank Statements
 
 ### Financial System:
 
 [/] Chart of Accounts Management
-[ ] Assets Depreciation and Registration
-[ ] Financial Year Opening/Closing
+[x] Assets Depreciation and Registration
+[x] Financial Year Opening/Closing
 
 ### Other Functions:
 
-[ ] Inventory Cost Management
-[ ] Tax Management
+[x] Inventory Cost Management
+[x] Tax Management
 
 # Human Resource Department
 
@@ -51,16 +51,16 @@
 
 ### Payroll & Compensation:
 
-[ ] Payroll processing, Leave system, Time tracking
-[ ] Increments, Allowances, Deductions
-[ ] Pay Slip generation
+[x] Payroll processing, Leave system, Time tracking
+[x] Increments, Allowances, Deductions
+[x] Pay Slip generation
 
 ### Employee Records:
 
 [/] Employees List
-[ ] Withholding Tax management
+[x] Withholding Tax management
 
 ### Loans & Advances:
 
-[ ] Loan processing
-[ ] Advance Salary system
+[x] Loan processing
+[x] Advance Salary system

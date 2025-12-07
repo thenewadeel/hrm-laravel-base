@@ -23,13 +23,6 @@ class Shift extends Model
         'is_active',
     ];
 
-    protected $casts = [
-        'days_of_week' => 'array',
-        'start_time' => 'datetime:H:i',
-        'end_time' => 'datetime:H:i',
-        'is_active' => 'boolean',
-    ];
-
     public function employees()
     {
         return $this->hasMany(Employee::class, 'shift_id');
@@ -51,5 +44,22 @@ class Shift extends Model
         }
 
         return ($end - $start) / 3600.0; // Return hours as float
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'days_of_week' => 'array',
+            'start_time' => 'datetime:H:i',
+            'end_time' => 'datetime:H:i',
+            'is_active' => 'boolean',
+
+        ];
     }
 }

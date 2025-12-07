@@ -22,14 +22,6 @@ class EmployeeDeduction extends Model
         'notes',
     ];
 
-    protected $casts = [
-        'amount' => 'decimal:2',
-        'percentage' => 'decimal:2',
-        'effective_date' => 'date',
-        'end_date' => 'date',
-        'is_active' => 'boolean',
-    ];
-
     /**
      * Relationships
      */
@@ -86,5 +78,23 @@ class EmployeeDeduction extends Model
         }
 
         return 0;
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'amount' => 'decimal:2',
+            'percentage' => 'decimal:2',
+            'effective_date' => 'date',
+            'end_date' => 'date',
+            'is_active' => 'boolean',
+
+        ];
     }
 }

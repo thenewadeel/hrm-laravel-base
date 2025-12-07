@@ -1,11 +1,11 @@
 <?php
+
 // tests/Traits/SetupOrganization.php
 
 namespace Tests\Traits;
 
 use App\Models\Organization;
 use App\Models\OrganizationUnit;
-use App\Models\OrganizationUser;
 use App\Models\User;
 use App\Roles\InventoryRoles;
 use App\Roles\OrganizationRoles;
@@ -14,8 +14,11 @@ use Illuminate\Support\Facades\Auth;
 trait SetupOrganization
 {
     public User $user;
+
     public Organization $organization;
+
     public OrganizationUnit $organizationUnit;
+
     protected function setupOrganization()
     {
         // parent::setUp();
@@ -27,13 +30,14 @@ trait SetupOrganization
 
         return $this->user;
     }
+
     protected function createOrganizationWithUser($user = null, array $roles = [OrganizationRoles::ORGANIZATION_ADMIN])
     {
         Auth::logout();
         $user = User::factory()->create();
         $organization = Organization::factory()->create();
         $organizationUnit = OrganizationUnit::factory()->create([
-            'organization_id' => $organization->id
+            'organization_id' => $organization->id,
         ]);
 
         // $organization->users()->attach($user, [
@@ -51,13 +55,18 @@ trait SetupOrganization
         // Assign permissions to user for the specific organization
         $user->givePermissionTo($permissions, $organization);
 
+        // Set current organization for the user
+        $user->current_organization_id = $organization->id;
+        $user->save();
+
         // dd($user->organizations);
         // dd("asduser");
         // dd([$permissions, $organization, $user->organizations]);
 
-        $this->$user = $user;
+        $this->user = $user;
         $this->organization = $organization;
         $this->organizationUnit = $organizationUnit;
+
         // dd([
         //     'organization' => $organization,
         //     'organization_unit' => $unit,
@@ -69,9 +78,10 @@ trait SetupOrganization
         return [
             'organization' => $organization,
             'organization_unit' => $organizationUnit,
-            'user' => $user
+            'user' => $user,
         ];
     }
+
     protected function createOrganizationsForSorting()
     {
         $user = User::factory()->create();
@@ -85,12 +95,14 @@ trait SetupOrganization
         foreach ($organizations as $organization) {
             $organization->users()->attach($user, [
                 'roles' => json_encode([InventoryRoles::INVENTORY_ADMIN]),
-                'organization_id' => $organization->id
+                'organization_id' => $organization->id,
             ]);
         }
         $this->actingAs($user);
+
         return [$organizations, $user];
     }
+
     protected function attachUserToOrganization(User $user, Organization $org, array $roles = []): void
     {
         $user->organizations()->attach($org, [

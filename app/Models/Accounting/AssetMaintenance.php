@@ -27,12 +27,6 @@ class AssetMaintenance extends Model
         'created_by',
     ];
 
-    protected $casts = [
-        'maintenance_date' => 'date',
-        'next_maintenance_date' => 'date',
-        'cost' => 'decimal:2',
-    ];
-
     protected $attributes = [
         'cost' => 0,
     ];
@@ -50,5 +44,26 @@ class AssetMaintenance extends Model
     public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function getCostAttribute($value): float
+    {
+        return (float) $value;
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'maintenance_date' => 'date',
+            'next_maintenance_date' => 'date',
+            'cost' => 'decimal:2',
+
+        ];
     }
 }

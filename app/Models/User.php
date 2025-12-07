@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Roles\InventoryRoles;
+use App\Roles\OrganizationRoles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -87,7 +88,18 @@ class User extends Authenticatable
      */
     public function getCurrentRolesAttribute()
     {
-        return $this->currentOrganizationUser->roles ?? [];
+        $roles = $this->currentOrganizationUser->roles ?? [];
+
+        // Handle case where roles might be stored as JSON string
+        if (is_string($roles)) {
+            $roles = json_decode($roles, true) ?? [];
+        }
+
+        if (! is_array($roles)) {
+            $roles = [$roles];
+        }
+
+        return $roles;
     }
 
     /**
@@ -219,6 +231,16 @@ class User extends Authenticatable
         }
         foreach ($this->organizations as $org) {
             $userRoles = $org->pivot->roles ?? [];
+
+            // Handle case where roles might be stored as JSON string
+            if (is_string($userRoles)) {
+                $userRoles = json_decode($userRoles, true) ?? [];
+            }
+
+            if (! is_array($userRoles)) {
+                $userRoles = [$userRoles];
+            }
+
             if (! empty(array_intersect($roles, $userRoles))) {
                 return true;
             }
@@ -273,8 +295,17 @@ class User extends Authenticatable
 
         $allPermissions = [];
         foreach ($roles as $role) {
+            // Check inventory roles
             $rolePermissions = InventoryRoles::getPermissionsForRole($role);
-            $allPermissions = array_merge($allPermissions, $rolePermissions);
+            if (! empty($rolePermissions)) {
+                $allPermissions = array_merge($allPermissions, $rolePermissions);
+            }
+
+            // Check organization roles
+            $orgRolePermissions = OrganizationRoles::getPermissionsForRole($role);
+            if (! empty($orgRolePermissions)) {
+                $allPermissions = array_merge($allPermissions, $orgRolePermissions);
+            }
         }
 
         return array_unique($allPermissions);

@@ -1,10 +1,11 @@
 <?php
+
 // tests/Feature/SetupWizardTest.php
 
 namespace Tests\Feature;
 
-use App\Models\User;
 use App\Models\Organization;
+use App\Models\User;
 use App\Roles\InventoryRoles;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
@@ -14,7 +15,7 @@ use Tests\Traits\SetupOrganization;
 
 class SetupWizardTest extends TestCase
 {
-    use RefreshDatabase, SetupOrganization, SetupInventory;
+    use RefreshDatabase, SetupInventory, SetupOrganization;
 
     protected function setUp(): void
     {
@@ -43,7 +44,7 @@ class SetupWizardTest extends TestCase
 
         $user->organizations()->attach($organization->id, [
             'roles' => json_encode(['admin']),
-            'organization_unit_id' => null
+            'organization_unit_id' => null,
         ]);
 
         $response = $this->actingAs($user)
@@ -96,7 +97,11 @@ class SetupWizardTest extends TestCase
 
         // Check the pivot data
         $pivot = $user->organizations()->first()->pivot;
-        $this->assertEquals([InventoryRoles::INVENTORY_ADMIN], $pivot->roles);
+        $roles = $pivot->roles;
+        if (is_string($roles)) {
+            $roles = json_decode($roles, true);
+        }
+        $this->assertEquals([InventoryRoles::INVENTORY_ADMIN], $roles);
 
         // Check that organization unit was created with correct organization_id
         $this->assertDatabaseHas('organization_units', [

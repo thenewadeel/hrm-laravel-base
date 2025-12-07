@@ -3,20 +3,20 @@
 namespace App\Models\Inventory;
 
 use App\Models\Organization;
-use App\Models\OrganizationUnit;
+use App\Models\Traits\BelongsToOrganization;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+// Assuming Store model location
+// Assuming Head model location
+// Assuming TransactionItem model location
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Builder;
-use App\Models\Inventory\Store; // Assuming Store model location
-use App\Models\Inventory\Head;   // Assuming Head model location
-use App\Models\Inventory\TransactionItem; // Assuming TransactionItem model location
-use App\Models\Traits\BelongsToOrganization;
 
 class Item extends Model
 {
-    use HasFactory, BelongsToOrganization;
+    use BelongsToOrganization, HasFactory;
+
     /**
      * The table associated with the model.
      *
@@ -35,15 +35,8 @@ class Item extends Model
         'reorder_level',
         'is_active',
         'head_id',
-        'organization_id'
+        'organization_id',
     ];
-
-    protected $casts = [
-        'cost_price' => 'decimal:2',
-        'selling_price' => 'decimal:2',
-        'is_active' => 'boolean'
-    ];
-
     // ------------------------------------------------------------------------------------------------
     // APPENDED ATTRIBUTES
     // ------------------------------------------------------------------------------------------------
@@ -65,10 +58,12 @@ class Item extends Model
             ->withPivot('quantity', 'min_stock', 'max_stock')
             ->withTimestamps();
     }
+
     public function head(): BelongsTo
     {
         return $this->belongsTo(Head::class);
     }
+
     public function transactionItems()
     {
         return $this->hasMany(TransactionItem::class);
@@ -81,8 +76,6 @@ class Item extends Model
     /**
      * Accessor for the total quantity across all stores.
      * (Existing one, kept for context, note the modern naming convention: get{Attribute}Attribute)
-     *
-     * @return int
      */
     public function getTotalQuantityAttribute(): int
     {
@@ -94,24 +87,23 @@ class Item extends Model
 
     /**
      * Accessor to get the selling price formatted as currency.
-     *
-     * @return string
      */
     public function getFormattedSellingPriceAttribute(): string
     {
         // Assuming US dollar formatting, adjust as needed (e.g., using a localization package)
-        return number_format($this->selling_price, 2) . ' PKR';
+        return number_format($this->selling_price, 2).' PKR';
     }
+
     public function getFormattedCostPriceAttribute(): string
     {
         // Assuming US dollar formatting, adjust as needed (e.g., using a localization package)
-        return number_format($this->cost_price, 2) . ' PKR';
+        return number_format($this->cost_price, 2).' PKR';
     }
 
     public function getOverallCostAttribute(): string
     {
         // Assuming US dollar formatting, adjust as needed (e.g., using a localization package)
-        return number_format($this->cost_price * $this->total_quantity, 2) . ' PKR';
+        return number_format($this->cost_price * $this->total_quantity, 2).' PKR';
     }
 
     // ------------------------------------------------------------------------------------------------
@@ -120,9 +112,6 @@ class Item extends Model
 
     /**
      * Mutator to ensure the SKU is always stored in uppercase.
-     *
-     * @param string $value
-     * @return void
      */
     public function setSkuAttribute(string $value): void
     {
@@ -135,14 +124,12 @@ class Item extends Model
 
     /**
      * Scope a query to only include active items.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('is_active', true);
     }
+
     public function scopeInActive(Builder $query): Builder
     {
         return $query->where('is_active', false);
@@ -154,8 +141,6 @@ class Item extends Model
      * A simpler version scopes based on the item's `reorder_level` column.
      *
      * For a simple check based on the model's reorder_level being set:
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeNeedsAttention(Builder $query): Builder
     {
@@ -173,10 +158,6 @@ class Item extends Model
 
     /**
      * Scope a query to filter by a specific category.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string $category
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeOfCategory(Builder $query, string $category): Builder
     {
@@ -236,7 +217,6 @@ class Item extends Model
         });
     }
 
-
     /**
      * Alternative approach using join for low stock items
      */
@@ -253,5 +233,21 @@ class Item extends Model
     protected static function newFactory()
     {
         return \Database\Factories\Inventory\ItemFactory::new();
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'cost_price' => 'decimal:2',
+            'selling_price' => 'decimal:2',
+            'is_active' => 'boolean',
+
+        ];
     }
 }

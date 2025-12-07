@@ -2,7 +2,6 @@
 
 namespace App\Models\Accounting;
 
-use App\Models\Accounting\ChartOfAccount;
 use App\Models\Traits\BelongsToOrganization;
 use App\Models\User;
 use Database\Factories\Accounting\FixedAssetFactory;
@@ -40,15 +39,6 @@ class FixedAsset extends Model
         'notes',
         'created_by',
         'updated_by',
-    ];
-
-    protected $casts = [
-        'purchase_date' => 'date',
-        'last_depreciation_date' => 'date',
-        'purchase_cost' => 'decimal:2',
-        'salvage_value' => 'decimal:2',
-        'current_book_value' => 'decimal:2',
-        'accumulated_depreciation' => 'decimal:2',
     ];
 
     protected $attributes = [
@@ -174,9 +164,16 @@ class FixedAsset extends Model
             return 1;
         }
 
-        $years = $this->purchase_date->diffInYears($this->last_depreciation_date) + 1;
+        // Calculate years since purchase date
+        $yearsSincePurchase = $this->purchase_date->diffInYears(now()) + 1;
 
-        return min($years, $this->useful_life_years);
+        // Calculate years already depreciated
+        $yearsDepreciated = $this->purchase_date->diffInYears($this->last_depreciation_date) + 1;
+
+        // Current year is yearsDepreciated + 1
+        $currentYear = $yearsDepreciated + 1;
+
+        return min($currentYear, $this->useful_life_years);
     }
 
     public function isFullyDepreciated(): bool
@@ -195,5 +192,24 @@ class FixedAsset extends Model
         return $this->status === 'active'
             && ! $this->isFullyDepreciated()
             && $this->purchase_cost > 0;
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'purchase_date' => 'date',
+            'last_depreciation_date' => 'date',
+            'purchase_cost' => 'decimal:2',
+            'salvage_value' => 'decimal:2',
+            'current_book_value' => 'decimal:2',
+            'accumulated_depreciation' => 'decimal:2',
+
+        ];
     }
 }

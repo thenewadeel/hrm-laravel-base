@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ]);
+
         if (app()->environment('debug')) {
             $this->call([
                 // Organizational structure
@@ -39,8 +40,8 @@ class DatabaseSeeder extends Seeder
             ]);
         } elseif (app()->environment('demo')) {
             $this->call([
-                // Organizational structure
-                DemoOrganizationSeeder::class,
+                // Consolidated comprehensive demo (replaces both FullSystemDemoSeeder and DemoOrganizationSeeder)
+                ConsolidatedDemoSeeder::class,
             ]);
         }
     }

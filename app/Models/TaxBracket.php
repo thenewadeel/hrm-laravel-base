@@ -23,17 +23,6 @@ class TaxBracket extends Model
         'end_date',
     ];
 
-    protected $casts = [
-        'min_income' => 'decimal:2',
-        'max_income' => 'decimal:2',
-        'rate' => 'decimal:2',
-        'base_tax' => 'decimal:2',
-        'exemption_amount' => 'decimal:2',
-        'is_active' => 'boolean',
-        'effective_date' => 'date',
-        'end_date' => 'date',
-    ];
-
     /**
      * Scopes
      */
@@ -80,5 +69,26 @@ class TaxBracket extends Model
     {
         return $income >= $this->min_income
                && ($this->max_income === null || $income <= $this->max_income);
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'min_income' => 'decimal:2',
+            'max_income' => 'decimal:2',
+            'rate' => 'decimal:2',
+            'base_tax' => 'decimal:2',
+            'exemption_amount' => 'decimal:2',
+            'is_active' => 'boolean',
+            'effective_date' => 'date',
+            'end_date' => 'date',
+
+        ];
     }
 }

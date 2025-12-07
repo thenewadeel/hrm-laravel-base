@@ -28,11 +28,6 @@ class LedgerEntry extends Model
         'transactionable_id',
     ];
 
-    protected $casts = [
-        'entry_date' => 'date',
-        'amount' => 'decimal:2',
-    ];
-
     protected static function newFactory(): LedgerEntryFactory
     {
         return LedgerEntryFactory::new();
@@ -59,4 +54,19 @@ class LedgerEntry extends Model
     }
 
     // REMOVE THE booted() METHOD - we're handling this at database level
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'entry_date' => 'date',
+            'amount' => 'decimal:2',
+
+        ];
+    }
 }

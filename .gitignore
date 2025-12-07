@@ -53,3 +53,9 @@ Thumbs.db
 
 # Printable docs pdfs
 docs/pdf/
+
+laravel_components_llm.json
+
+.opencode*
+
+subagents/

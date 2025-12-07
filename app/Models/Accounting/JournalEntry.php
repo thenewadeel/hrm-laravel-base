@@ -46,14 +46,6 @@ class JournalEntry extends Model
         'status' => 'draft',
     ];
 
-    protected $casts = [
-        'entry_date' => 'date',
-        'due_date' => 'date',
-        'posted_at' => 'datetime',
-        'total_amount' => 'decimal:2',
-        'tax_amount' => 'decimal:2',
-    ];
-
     /**
      * Create a new journal entry within a database transaction.
      */
@@ -150,7 +142,7 @@ class JournalEntry extends Model
     public function post(array $entries): void
     {
         $accountingService = app(AccountingService::class);
-        $accountingService->postTransaction($entries, $this->description, $this);
+        $accountingService->postVoucherTransaction($entries, $this->description, $this);
 
         $this->update([
             'status' => 'posted',
@@ -186,5 +178,23 @@ class JournalEntry extends Model
         $reversingJournal->post($reversingEntries);
 
         $this->update(['status' => 'void']);
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'entry_date' => 'date',
+            'due_date' => 'date',
+            'posted_at' => 'datetime',
+            'total_amount' => 'decimal:2',
+            'tax_amount' => 'decimal:2',
+
+        ];
     }
 }

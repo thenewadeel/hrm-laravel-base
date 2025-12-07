@@ -29,10 +29,6 @@ class AssetTransfer extends Model
         'created_by',
     ];
 
-    protected $casts = [
-        'transfer_date' => 'date',
-    ];
-
     protected static function newFactory(): AssetTransferFactory
     {
         return AssetTransferFactory::new();
@@ -64,5 +60,19 @@ class AssetTransfer extends Model
                 'assigned_to' => $transfer->to_assigned_to,
             ]);
         });
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'transfer_date' => 'date',
+
+        ];
     }
 }

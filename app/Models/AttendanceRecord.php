@@ -27,13 +27,6 @@ class AttendanceRecord extends Model
         'notes',
     ];
 
-    protected $casts = [
-        'record_date' => 'date',
-        'punch_in' => 'datetime',
-        'punch_out' => 'datetime',
-        'total_hours' => 'decimal:2',
-    ];
-
     public function employee(): BelongsTo
     {
         return $this->belongsTo(Employee::class);
@@ -94,5 +87,22 @@ class AttendanceRecord extends Model
         }
 
         return 0;
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'record_date' => 'date',
+            'punch_in' => 'datetime',
+            'punch_out' => 'datetime',
+            'total_hours' => 'decimal:2',
+
+        ];
     }
 }

@@ -46,13 +46,6 @@ class Employee extends Model
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'date_of_birth' => 'date',
-        'is_active' => 'boolean',
-        'is_admin' => 'boolean',
-        'basic_salary' => 'decimal:2',
-    ];
-
     public function attendanceRecords()
     {
         return $this->hasMany(AttendanceRecord::class);
@@ -176,7 +169,7 @@ class Employee extends Model
     public function organizationUser()
     {
         return $this->hasOne(OrganizationUser::class, 'user_id', 'user_id')
-            ->where('organization_id', $this->organization_id);
+            ->where('organization_user.organization_id', $this->organization_id);
     }
 
     /**
@@ -201,5 +194,22 @@ class Employee extends Model
     public function getLoginRoles(): array
     {
         return $this->organizationUser->roles ?? [];
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+
+            'date_of_birth' => 'date',
+            'is_active' => 'boolean',
+            'is_admin' => 'boolean',
+            'basic_salary' => 'decimal:2',
+
+        ];
     }
 }
