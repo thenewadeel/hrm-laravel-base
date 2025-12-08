@@ -78,11 +78,17 @@ class MemberForm extends Component
         $this->member = $member;
         $this->editMode = $member !== null;
 
-        if ($this->editMode) {
-            $this->authorize('update', $member);
-            $this->loadMemberData();
+        // Only check authorization if user is authenticated
+        if (auth()->check()) {
+            if ($this->editMode) {
+                $this->authorize('update', $member);
+                $this->loadMemberData();
+            } else {
+                $this->authorize('create', Member::class);
+                $this->join_date = now()->format('Y-m-d');
+            }
         } else {
-            $this->authorize('create', Member::class);
+            // Set default join date for unauthenticated users (will be checked on save)
             $this->join_date = now()->format('Y-m-d');
         }
     }
@@ -142,6 +148,13 @@ class MemberForm extends Component
 
     public function save(MembershipService $membershipService): void
     {
+        // Check authorization first
+        if ($this->editMode) {
+            $this->authorize('update', $this->member);
+        } else {
+            $this->authorize('create', Member::class);
+        }
+
         $this->validate();
 
         $memberData = [

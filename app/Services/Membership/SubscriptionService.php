@@ -309,12 +309,12 @@ class SubscriptionService
                     '5000' => 'expense',
                     default => 'asset',
                 },
-                'category' => match ($defaultCode) {
-                    '1000' => 'cash_and_bank',
-                    '1200' => 'accounts_receivable',
-                    '4000' => 'membership_income',
-                    '5000' => 'operating_expenses',
-                    default => 'other',
+                'description' => match ($defaultCode) {
+                    '1000' => 'Cash and bank accounts',
+                    '1200' => 'Accounts receivable',
+                    '4000' => 'Membership revenue',
+                    '5000' => 'Operating expenses',
+                    default => 'General account',
                 },
             ]
         );

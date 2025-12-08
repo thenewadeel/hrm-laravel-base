@@ -25,17 +25,18 @@
     <x-banner />
 
     {{-- FIX: Removed bg-primary on the main container div as well. --}}
-    <div class="min-h-screen bg-white">
+    <div class="min-h-screen bg-stone-100 dark:bg-neutral-800">
         @livewire('navigation-main')
         @if (isset($header))
             <header class="surface shadow-sm border-b border-secondary">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <div class="Wmax-w-77xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
             </header>
         @endif
 
-        <main>
+        <main
+            class="surface shadow-inner shadow-lime-200 metallic max-w-7xl flex-1 mx-auto py-2 px-4 sm:px-6 lg:px-8 m-4">
             {{ $slot }}
         </main>
     </div>

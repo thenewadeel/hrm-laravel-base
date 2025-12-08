@@ -62,6 +62,16 @@ class Member extends Model
         return $this->subscriptions()->where('status', 'active');
     }
 
+    public function currentSubscription()
+    {
+        return $this->subscriptions()
+            ->where('status', 'active')
+            ->where('start_date', '<=', now())
+            ->where('end_date', '>=', now())
+            ->latest('end_date')
+            ->first();
+    }
+
     public function fees(): HasMany
     {
         return $this->hasMany(MemberFee::class);

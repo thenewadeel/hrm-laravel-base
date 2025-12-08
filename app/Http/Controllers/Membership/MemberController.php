@@ -225,4 +225,25 @@ class MemberController extends Controller
 
         return response()->json($members);
     }
+
+    /**
+     * Show bulk upload form.
+     */
+    public function bulkUpload(): View
+    {
+        $this->authorize('create', Member::class);
+
+        return view('membership.members.bulk-upload');
+    }
+
+    /**
+     * Process bulk upload (handled by Livewire component).
+     */
+    public function processBulkUpload(Request $request): JsonResponse
+    {
+        $this->authorize('create', Member::class);
+
+        // This is handled by Livewire component
+        return response()->json(['message' => 'Bulk upload handled by Livewire component']);
+    }
 }
