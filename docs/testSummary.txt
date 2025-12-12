@@ -6,29 +6,35 @@
 +------------------+------------------+
 | Metric           | Count/Percentage |
 +------------------+------------------+
-| Total Tests      | 1107             |
-| Passed           | 1086 (98.1%)     |
-| Failed           | 16 (1.4%)        |
-| Warnings/Skipped | 5 (0.5%)         |
+| Total Tests      | 1377             |
+| Passed           | 1339 (97.2%)     |
+| Failed           | 33 (2.4%)        |
+| Warnings/Skipped | 5 (0.4%)         |
 +------------------+------------------+
 
---- ❌ Detailed Failures (16 Total) ---
-
- EmployeePositionShiftIntegration (2/5 failures):
-   ⨯ it assigns position and shift to employee during creation
-   ⨯ it prevents assigning inactive position to employee
-
- JobPositionController (1/6 failures):
-   ⨯ it deletes a job position
-
- HrmDashboardController (1/18 failures):
-   ⨯ dashboard view contains expected hrm elements
+--- ❌ Detailed Failures (33 Total) ---
 
  Item (1/9 failures):
    ⨯ it returns 403 for unauthorized access
 
  Permission (1/5 failures):
    ⨯ user cannot access other organization inventory
+
+ FeeDistributionLogViewer (9/18 failures):
+   ⨯ fee distribution log viewer loads logs for organization
+   ⨯ fee distribution log viewer searches by description
+   ⨯ fee distribution log viewer searches by member name
+   ⨯ fee distribution log viewer filters by status
+   ⨯ fee distribution log viewer filters by fee type
+   ⨯ fee distribution log viewer filters by date range
+   ⨯ fee distribution log viewer calculates summary correctly
+   ⨯ fee distribution log viewer respects organization isolation
+   ⨯ fee distribution log viewer loads logs with relationships
+
+ FeeDistributionRuleManager (3/18 failures):
+   ⨯ fee distribution rule manager loads chart of accounts
+   ⨯ fee distribution rule manager can edit rule
+   ⨯ fee distribution rule manager requires authentication
 
  JournalEntries (1/3 failures):
    ⨯ it creates a journal entry
@@ -40,12 +46,27 @@
    ⨯ it creates a cash payment successfully
    ⨯ it resets form after successful payment creation
 
+ AccountingIntegration (3/10 failures):
+   ⨯ Membership Accounting Integration → Member Fee Payment Integration…
+   ⨯ Membership Accounting Integration → Member Fee Payment Integration…
+   ⨯ Membership Accounting Integration → Accounting Reports Integration…
+
+ AdvancedMemberList (5/14 failures):
+   ⨯ it shows family members count correctly
+   ⨯ it exports members to CSV correctly
+   ⨯ it handles pagination correctly
+   ⨯ it validates user permissions correctly
+   ⨯ it saves and loads filter presets correctly
+
+ EnhancedFeeService (2/16 failures):
+   ⨯ generates overdue fees with proper business rules
+   ⨯ calculates late fee amount correctly
+
+ SimpleSubscriptions (1/14 failures):
+   ⨯ simple subscriptions can create subscription with validation
+
  FinancialManagement (1/12 failures):
    ⨯ invoice amount due calculation works
-
- PortalHrDashboardRoute (2/2 failures):
-   ⨯ it portal hr dashboard route should not exist
-   ⨯ it portal hr dashboard route should exist
 
  PayrollCalculation (2/7 failures):
    ⨯ payroll calculation includes allowances correctly
@@ -70,160 +91,177 @@
 
 
 --- ✅ Fully Passed Modules ---
-+---------------------------------+--------------+
-| Module                          | Tests Passed |
-+---------------------------------+--------------+
-| AccountTypeValidation           | 7/7          |
-| BalanceSheet                    | 3/3          |
-| CashPaymentService              | 5/5          |
-| CashReceiptService              | 4/4          |
-| ChartOfAccount                  | 4/4          |
-| DimensionReport                 | 1/1          |
-| FinancialReports                | 1/1          |
-| IncomeStatement                 | 3/3          |
-| InvalidAccountTypeException     | 3/3          |
-| JournalEntryFactory             | 4/4          |
-| JournalEntry                    | 3/3          |
-| LedgerEntry                     | 5/5          |
-| TrialBalance                    | 3/3          |
-| VoucherService                  | 7/7          |
-| HRMSchema                       | 4/4          |
-| FamilyMember                    | 23/23        |
-| MemberFee                       | 25/25        |
-| MemberSubscription              | 14/14        |
-| Member                          | 18/18        |
-| MembershipService               | 33/33        |
-| SubscriptionPlan                | 19/19        |
-| InventoryTransaction            | 1/1          |
-| Item                            | 1/1          |
-| Store                           | 1/1          |
-| JobPosition                     | 5/5          |
-| Shift                           | 6/6          |
-| Breadcrumb                      | 9/9          |
-| DesktopMenu                     | 3/3          |
-| DropdownLink                    | 3/3          |
-| Dropdown                        | 10/10        |
-| LanguageSwitcher                | 3/3          |
-| Main                            | 4/4          |
-| MobileLink                      | 3/3          |
-| MobileMenu                      | 3/3          |
-| NavigationEdgeCases             | 20/20        |
-| NavigationLink                  | 10/10        |
-| NotificationBell                | 3/3          |
-| PortalDesktopMenu               | 3/3          |
-| PortalMenu                      | 3/3          |
-| PortalQuickLinks                | 3/3          |
-| QuickActions                    | 3/3          |
-| Search                          | 13/13        |
-| Section                         | 3/3          |
-| SidebarLayout                   | 3/3          |
-| SidebarList                     | 3/3          |
-| SidebarWidget                   | 3/3          |
-| ThemeToggle                     | 7/7          |
-| UserProfile                     | 15/15        |
-| AccountingReportService         | 2/2          |
-| AccountingService               | 3/3          |
-| InventoryService                | 13/13        |
-| SequenceService                 | 2/2          |
-| CreateTeam                      | 1/1          |
-| DeleteTeam                      | 2/2          |
-| InviteTeamMember                | 2/2          |
-| LeaveTeam                       | 2/2          |
-| RemoveTeamMember                | 2/2          |
-| UpdateTeamMemberRole            | 2/2          |
-| UpdateTeamName                  | 1/1          |
-| ApiTokenPermissions             | 1/1          |
-| Authentication                  | 3/3          |
-| BrowserSessions                 | 1/1          |
-| CreateApiToken                  | 1/1          |
-| DeleteAccount                   | 2/2          |
-| DeleteApiToken                  | 1/1          |
-| PasswordConfirmation            | 3/3          |
-| PasswordReset                   | 4/4          |
-| ProfileInformation              | 2/2          |
-| TwoFactorAuthenticationSettings | 3/3          |
-| UpdatePassword                  | 3/3          |
-| CashPayment                     | 7/7          |
-| CashReceipt                     | 7/7          |
-| FinancialYear                   | 15/15        |
-| SpecializedVoucher              | 10/10        |
-| Voucher                         | 11/11        |
-| AdminPortal                     | 3/3          |
-| AdvanceReportService            | 11/11        |
-| AdvanceReportsLivewire          | 12/12        |
-| ChartOfAccountsApi              | 5/5          |
-| FinancialReportsApi             | 5/5          |
-| JournalEntriesApi               | 3/3          |
-| OrganizationApi                 | 15/15        |
-| OrganizationUnitApi             | 12/12        |
-| AttendanceDashboardEnhancements | 6/6          |
-| AttendanceSync                  | 8/8          |
-| BadgeShowcase                   | 4/4          |
-| BadgeStandalone                 | 1/1          |
-| BadgeSystem                     | 20/20        |
-| Dashboard                       | 11/11        |
-| EmployeeIndexEnhancement        | 5/5          |
-| Example                         | 1/1          |
-| BankAccount                     | 9/9          |
-| FixedAsset                      | 11/11        |
-| ModelSelectDropdown             | 4/4          |
-| EmployeeManagement              | 14/14        |
-| ShiftController                 | 5/5          |
-| InventoryController             | 5/5          |
-| InventoryItemController         | 5/5          |
-| InventoryReportController       | 8/8          |
-| InventoryScope                  | 7/7          |
-| InventoryStockController        | 6/6          |
-| InventoryStoreController        | 8/8          |
-| InventoryTenancy                | 4/4          |
-| InventoryTransactionController  | 3/3          |
-| Store                           | 8/8          |
-| Transaction                     | 12/12        |
-| Create                          | 7/7          |
-| Create                          | 7/7          |
-| ChartOfAccounts                 | 5/5          |
-| MemberManager                   | 2/2          |
-| OrganizationForm                | 7/7          |
-| OrganizationList                | 7/7          |
-| OrganizationTree                | 9/9          |
-| UserPlacement                   | 2/2          |
-| AccountingIntegration           | 10/10        |
-| FeeManager                      | 8/8          |
-| MemberForm                      | 6/6          |
-| MemberList                      | 7/7          |
-| Member                          | 10/10        |
-| MembershipDashboard             | 9/9          |
-| MultiTenantIsolation            | 18/18        |
-| ServiceIntegration              | 9/9          |
-| SubscriptionManager             | 7/7          |
-| Customer                        | 8/8          |
-| Invoice                         | 7/7          |
-| MultiStepSetupWizard            | 5/5          |
-| NavigationAccessibility         | 10/10        |
-| NavigationFeature               | 14/14        |
-| NavigationLivewireIntegration   | 16/16        |
-| NavigationMissingRoutes         | 2/2          |
-| NavigationResponsive            | 13/13        |
-| NavigationRoleBased             | 11/11        |
-| NavigationRouteValidation       | 3/3          |
-| NavigationRoutesValidation      | 10/10        |
-| NavigationHover                 | 4/4          |
-| NewBadge                        | 2/2          |
-| OrganizationDashboard           | 5/5          |
-| OrganizationUserIntegration     | 7/7          |
-| OutstandingStatementsBasic      | 1/1          |
-| OutstandingStatements           | 12/12        |
-| EmployeeIncrement               | 6/6          |
-| CompletePortal                  | 7/7          |
-| EmployeePortal                  | 8/8          |
-| ManagerPortal                   | 5/5          |
-| MembershipService               | 12/12        |
-| SetupChartOfAccounts            | 3/3          |
-| SetupStore                      | 3/3          |
-| SetupWizard                     | 5/5          |
-| SimpleBadgePage                 | 1/1          |
-| SimpleBadge                     | 2/2          |
-| TaxManagement                   | 14/14        |
-| TenancyFeature                  | 3/3          |
-| VoucherSystem                   | 4/4          |
-+---------------------------------+--------------+
++----------------------------------+--------------+
+| Module                           | Tests Passed |
++----------------------------------+--------------+
+| ProductionOptimization           | 10/10        |
+| AccountTypeValidation            | 7/7          |
+| BalanceSheet                     | 3/3          |
+| CashPaymentService               | 5/5          |
+| CashReceiptService               | 4/4          |
+| ChartOfAccount                   | 4/4          |
+| DimensionReport                  | 1/1          |
+| FeeDistributionLog               | 19/19        |
+| FeeDistributionRuleItem          | 18/18        |
+| FeeDistributionRule              | 20/20        |
+| FinancialReports                 | 1/1          |
+| IncomeStatement                  | 3/3          |
+| InvalidAccountTypeException      | 3/3          |
+| JournalEntryFactory              | 4/4          |
+| JournalEntry                     | 3/3          |
+| LedgerEntry                      | 5/5          |
+| TrialBalance                     | 3/3          |
+| VoucherService                   | 7/7          |
+| HRMSchema                        | 4/4          |
+| FamilyMember                     | 23/23        |
+| MemberFee                        | 25/25        |
+| MemberSubscription               | 14/14        |
+| Member                           | 18/18        |
+| MembershipService                | 33/33        |
+| SubscriptionPlan                 | 19/19        |
+| InventoryTransaction             | 1/1          |
+| Item                             | 1/1          |
+| Store                            | 1/1          |
+| JobPosition                      | 5/5          |
+| Shift                            | 6/6          |
+| Breadcrumb                       | 9/9          |
+| DesktopMenu                      | 3/3          |
+| DropdownLink                     | 3/3          |
+| Dropdown                         | 10/10        |
+| LanguageSwitcher                 | 3/3          |
+| Main                             | 4/4          |
+| MobileLink                       | 3/3          |
+| MobileMenu                       | 3/3          |
+| NavigationEdgeCases              | 20/20        |
+| NavigationLink                   | 10/10        |
+| NotificationBell                 | 3/3          |
+| PortalDesktopMenu                | 3/3          |
+| PortalMenu                       | 3/3          |
+| PortalQuickLinks                 | 3/3          |
+| QuickActions                     | 3/3          |
+| Search                           | 13/13        |
+| Section                          | 3/3          |
+| SidebarLayout                    | 3/3          |
+| SidebarList                      | 3/3          |
+| SidebarWidget                    | 3/3          |
+| ThemeToggle                      | 7/7          |
+| UserProfile                      | 15/15        |
+| AccountingReportService          | 2/2          |
+| AccountingService                | 3/3          |
+| InventoryService                 | 13/13        |
+| SequenceService                  | 2/2          |
+| CreateTeam                       | 1/1          |
+| DeleteTeam                       | 2/2          |
+| InviteTeamMember                 | 2/2          |
+| LeaveTeam                        | 2/2          |
+| RemoveTeamMember                 | 2/2          |
+| UpdateTeamMemberRole             | 2/2          |
+| UpdateTeamName                   | 1/1          |
+| ApiTokenPermissions              | 1/1          |
+| Authentication                   | 3/3          |
+| BrowserSessions                  | 1/1          |
+| CreateApiToken                   | 1/1          |
+| DeleteAccount                    | 2/2          |
+| DeleteApiToken                   | 1/1          |
+| PasswordConfirmation             | 3/3          |
+| PasswordReset                    | 4/4          |
+| ProfileInformation               | 2/2          |
+| TwoFactorAuthenticationSettings  | 3/3          |
+| UpdatePassword                   | 3/3          |
+| CashPayment                      | 7/7          |
+| CashReceipt                      | 7/7          |
+| FeeDistributionIntegration       | 7/7          |
+| FeeDistributionService           | 15/15        |
+| FinancialYear                    | 15/15        |
+| SpecializedVoucher               | 10/10        |
+| Voucher                          | 11/11        |
+| AdminPortal                      | 3/3          |
+| AdvanceReportService             | 11/11        |
+| AdvanceReportsLivewire           | 12/12        |
+| ChartOfAccountsApi               | 5/5          |
+| FinancialReportsApi              | 5/5          |
+| JournalEntriesApi                | 3/3          |
+| OrganizationApi                  | 15/15        |
+| OrganizationUnitApi              | 12/12        |
+| AttendanceDashboardEnhancements  | 6/6          |
+| AttendanceSync                   | 8/8          |
+| BadgeShowcase                    | 4/4          |
+| BadgeStandalone                  | 1/1          |
+| BadgeSystem                      | 20/20        |
+| Dashboard                        | 11/11        |
+| EmployeeIndexEnhancement         | 5/5          |
+| Example                          | 1/1          |
+| BankAccount                      | 9/9          |
+| FixedAsset                       | 11/11        |
+| ModelSelectDropdown              | 4/4          |
+| EmployeeManagement               | 14/14        |
+| EmployeePositionShiftIntegration | 5/5          |
+| JobPositionController            | 6/6          |
+| ShiftController                  | 5/5          |
+| HrmDashboardController           | 18/18        |
+| InventoryController              | 5/5          |
+| InventoryItemController          | 5/5          |
+| InventoryReportController        | 8/8          |
+| InventoryScope                   | 7/7          |
+| InventoryStockController         | 6/6          |
+| InventoryStoreController         | 8/8          |
+| InventoryTenancy                 | 4/4          |
+| InventoryTransactionController   | 3/3          |
+| Store                            | 8/8          |
+| Transaction                      | 12/12        |
+| Create                           | 7/7          |
+| Create                           | 7/7          |
+| ChartOfAccounts                  | 5/5          |
+| CardDesigner                     | 6/6          |
+| SimpleScanner                    | 18/18        |
+| MemberManager                    | 2/2          |
+| OrganizationForm                 | 7/7          |
+| OrganizationList                 | 7/7          |
+| OrganizationTree                 | 9/9          |
+| UserPlacement                    | 2/2          |
+| BulkMemberUpload                 | 18/18        |
+| EnhancedFeeManager               | 7/7          |
+| FamilyMemberManager              | 14/14        |
+| FeeManager                       | 8/8          |
+| MemberDetails                    | 15/15        |
+| MemberForm                       | 6/6          |
+| MemberList                       | 7/7          |
+| MemberListing                    | 15/15        |
+| Member                           | 10/10        |
+| MembershipDashboard              | 9/9          |
+| MultiTenantIsolation             | 18/18        |
+| ServiceIntegration               | 9/9          |
+| SimpleFees                       | 8/8          |
+| SubscriptionManager              | 7/7          |
+| Customer                         | 8/8          |
+| Invoice                          | 7/7          |
+| MultiStepSetupWizard             | 5/5          |
+| NavigationAccessibility          | 10/10        |
+| NavigationFeature                | 14/14        |
+| NavigationLivewireIntegration    | 16/16        |
+| NavigationMissingRoutes          | 2/2          |
+| NavigationResponsive             | 13/13        |
+| NavigationRoleBased              | 11/11        |
+| NavigationRouteValidation        | 3/3          |
+| NavigationRoutesValidation       | 10/10        |
+| PortalHrDashboardRoute           | 2/2          |
+| NavigationHover                  | 4/4          |
+| NewBadge                         | 2/2          |
+| OrganizationDashboard            | 5/5          |
+| OrganizationUserIntegration      | 7/7          |
+| OutstandingStatementsBasic       | 1/1          |
+| OutstandingStatements            | 12/12        |
+| EmployeeIncrement                | 6/6          |
+| CompletePortal                   | 7/7          |
+| EmployeePortal                   | 8/8          |
+| ManagerPortal                    | 5/5          |
+| MembershipService                | 12/12        |
+| SetupChartOfAccounts             | 3/3          |
+| SetupStore                       | 3/3          |
+| SetupWizard                      | 5/5          |
+| SimpleBadgePage                  | 1/1          |
+| SimpleBadge                      | 2/2          |
+| TaxManagement                    | 14/14        |
+| TenancyFeature                   | 3/3          |
+| VoucherSystem                    | 4/4          |
++----------------------------------+--------------+

@@ -15,7 +15,7 @@ class ChartOfAccountFactory extends Factory
             'name' => $this->faker->word(),
             'type' => $this->faker->randomElement(['asset', 'liability', 'equity', 'revenue', 'expense']),
             'description' => $this->faker->sentence(),
-            'organization_id' => 1,
+            'organization_id' => 1, // Default, can be overridden in factory calls
         ];
     }
 }

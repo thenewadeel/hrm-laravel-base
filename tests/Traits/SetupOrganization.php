@@ -34,8 +34,8 @@ trait SetupOrganization
     protected function createOrganizationWithUser($user = null, array $roles = [OrganizationRoles::ORGANIZATION_ADMIN])
     {
         Auth::logout();
-        $user = User::factory()->create();
         $organization = Organization::factory()->create();
+        $user = User::factory()->create(['current_organization_id' => $organization->id]);
         $organizationUnit = OrganizationUnit::factory()->create([
             'organization_id' => $organization->id,
         ]);

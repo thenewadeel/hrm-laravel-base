@@ -28,6 +28,11 @@ class Index extends Component
         'perPage' => ['except' => 10],
     ];
 
+    public function mount()
+    {
+        // Initialize component if needed
+    }
+
     public function render()
     {
         $query = BankAccount::query()

@@ -11,6 +11,8 @@ class FeeDistributionLogViewer extends Component
 {
     use WithPagination;
 
+    protected $listeners = ['refreshLogs' => '$refresh'];
+
     public $search = '';
 
     public $statusFilter = '';
@@ -129,6 +131,17 @@ class FeeDistributionLogViewer extends Component
 
     public function render()
     {
-        return view('livewire.accounting.fee-distribution-log-viewer');
+        if (! Auth::check()) {
+            abort(401);
+        }
+
+        return view('livewire.accounting.fee-distribution-log-viewer', [
+            'logs' => $this->logs,
+            'summary' => $this->summary,
+            'feeTypes' => $this->feeTypes,
+            'statusOptions' => $this->statusOptions,
+            'showDetailsModal' => $this->showDetailsModal,
+            'selectedLog' => $this->selectedLog,
+        ]);
     }
 }

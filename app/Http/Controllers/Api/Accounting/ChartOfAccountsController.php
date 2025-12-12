@@ -1,19 +1,22 @@
 <?php
+
 // app/Http/Controllers/Api/Accounting/ChartOfAccountsController.php
 
 namespace App\Http\Controllers\Api\Accounting;
 
 use App\Http\Controllers\Controller;
-use App\Models\Accounting\ChartOfAccount;
 use App\Http\Requests\StoreChartOfAccountRequest;
 use App\Http\Requests\UpdateChartOfAccountRequest;
 use App\Http\Resources\ChartOfAccountResource;
+use App\Models\Accounting\ChartOfAccount;
 
 class ChartOfAccountsController extends Controller
 {
     public function index()
     {
-        $accounts = ChartOfAccount::orderBy('code')->get();
+        $accounts = ChartOfAccount::where('organization_id', auth()->user()->current_organization_id)
+            ->orderBy('code')
+            ->paginate(15);
 
         return ChartOfAccountResource::collection($accounts);
     }
@@ -25,8 +28,12 @@ class ChartOfAccountsController extends Controller
         return new ChartOfAccountResource($account);
     }
 
-    public function show(ChartOfAccount $account)
+    public function show($id)
     {
+        $account = ChartOfAccount::where('id', $id)
+            ->where('organization_id', auth()->user()->current_organization_id)
+            ->firstOrFail();
+
         return new ChartOfAccountResource($account);
     }
 
@@ -42,7 +49,7 @@ class ChartOfAccountsController extends Controller
         // Prevent deletion if has ledger entries
         if ($account->ledgerEntries()->exists()) {
             return response()->json([
-                'message' => 'Cannot delete account with transaction history'
+                'message' => 'Cannot delete account with transaction history',
             ], 422);
         }
 

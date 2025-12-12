@@ -1,4 +1,5 @@
 <?php
+
 // database/factories/Accounting/JournalEntryFactory.php
 
 namespace Database\Factories\Accounting;
@@ -11,21 +12,21 @@ class JournalEntryFactory extends Factory
     public function definition(): array
     {
         return [
-            'reference_number' => 'JE-' . $this->faker->unique()->numberBetween(1000, 9999),
+            'reference_number' => 'JE-'.$this->faker->unique()->numberBetween(1000, 9999),
             'entry_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'description' => $this->faker->sentence(),
             'status' => $this->faker->randomElement(['draft', 'posted', 'void']),
-            'created_by' => User::factory(),
-            'approved_by' => $this->faker->optional()->passthrough(User::factory()),
+            'created_by' => 1, // Use fixed ID for testing
+            'approved_by' => null, // Don't create random users
             'posted_at' => $this->faker->optional(0.3)->dateTime(), // 30% chance of having posted_at
-            'organization_id' => auth()->user()->current_organization_id ?? 1,
+            'organization_id' => 1,
 
         ];
     }
 
     public function draft(): static
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'status' => 'draft',
             'posted_at' => null,
         ]);
@@ -33,7 +34,7 @@ class JournalEntryFactory extends Factory
 
     public function posted(): static
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'status' => 'posted',
             'posted_at' => now(),
         ]);
@@ -41,14 +42,14 @@ class JournalEntryFactory extends Factory
 
     public function void(): static
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'status' => 'void',
         ]);
     }
 
     public function approvedBy(User $user): static
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'approved_by' => $user->id,
         ]);
     }

@@ -55,6 +55,20 @@ class JournalEntry extends Model
 
         return DB::transaction(function () use ($attributes) {
             $attributes['created_by'] = Auth::id();
+            if (! isset($attributes['created_by'])) {
+                $userId = Auth::id();
+                if (! $userId) {
+                    // Create or get system user for automated entries
+                    $systemUser = \App\Models\User::firstOrCreate([
+                        'email' => 'system@hrm.local',
+                    ], [
+                        'name' => 'System',
+                        'password' => bcrypt('password'),
+                    ]);
+                    $userId = $systemUser->id;
+                }
+                $attributes['created_by'] = $userId;
+            }
             $journalEntry = self::create($attributes);
             Log::debug(' journalEntry created');
 

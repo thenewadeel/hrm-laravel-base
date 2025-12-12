@@ -87,7 +87,23 @@ class FeeDistributionLog extends Model
             return 0;
         }
 
-        return array_sum(array_column($this->distribution_breakdown, 'amount'));
+        // Handle both array and JSON string cases
+        $breakdown = is_string($this->distribution_breakdown)
+            ? json_decode($this->distribution_breakdown, true)
+            : $this->distribution_breakdown;
+
+        if (! is_array($breakdown)) {
+            return 0;
+        }
+
+        $total = 0;
+        foreach ($breakdown as $item) {
+            if (is_array($item) && isset($item['amount'])) {
+                $total += (float) $item['amount'];
+            }
+        }
+
+        return $total;
     }
 
     /**

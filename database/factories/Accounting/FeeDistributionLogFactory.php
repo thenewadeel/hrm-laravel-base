@@ -27,20 +27,20 @@ class FeeDistributionLogFactory extends Factory
             'fee_distribution_rule_id' => FeeDistributionRule::factory(),
             'journal_entry_id' => $status === 'success' ? null : null, // Will be set in successful() method
             'total_amount' => $this->faker->randomFloat(2, 100, 5000),
-            'distribution_breakdown' => $hasBreakdown ? json_encode([
-                'account_'.$this->faker->numberBetween(1, 10) => [
+            'distribution_breakdown' => $hasBreakdown ? [
+                [
                     'account_id' => $this->faker->numberBetween(1, 100),
                     'type' => 'percentage',
                     'value' => $this->faker->randomFloat(2, 1, 100),
                     'amount' => $this->faker->randomFloat(2, 50, 1000),
                 ],
-                'account_'.$this->faker->numberBetween(1, 10) => [
+                [
                     'account_id' => $this->faker->numberBetween(1, 100),
                     'type' => 'fixed',
                     'value' => $this->faker->randomFloat(2, 10, 500),
                     'amount' => $this->faker->randomFloat(2, 50, 1000),
                 ],
-            ]) : json_encode([]), // Empty array for failed/partial distributions
+            ] : [], // Empty array for failed/partial distributions
             'status' => $status,
             'error_message' => $status === 'failed' ? $this->faker->sentence() : null,
             'distributed_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
@@ -80,7 +80,7 @@ class FeeDistributionLogFactory extends Factory
             'status' => 'failed',
             'error_message' => $this->faker->sentence(),
             'journal_entry_id' => null,
-            'distribution_breakdown' => json_encode([]),
+            'distribution_breakdown' => [],
         ]);
     }
 

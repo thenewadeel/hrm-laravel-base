@@ -15,6 +15,7 @@ uses(RefreshDatabase::class);
 test('fee distribution log viewer component renders', function () {
     $user = User::factory()->create();
     $organization = Organization::factory()->create();
+    $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
@@ -26,6 +27,7 @@ test('fee distribution log viewer component renders', function () {
 test('fee distribution log viewer loads logs for organization', function () {
     $user = User::factory()->create();
     $organization = Organization::factory()->create();
+    $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
     $memberFee = MemberFee::factory()->create(['organization_id' => $organization->id]);
@@ -33,6 +35,7 @@ test('fee distribution log viewer loads logs for organization', function () {
         'organization_id' => $organization->id,
         'member_fee_id' => $memberFee->id,
         'total_amount' => 1000,
+        'distributed_at' => now(),
     ]);
 
     // Create log for different organization
@@ -40,18 +43,20 @@ test('fee distribution log viewer loads logs for organization', function () {
     FeeDistributionLog::factory()->successful()->create([
         'organization_id' => $otherOrg->id,
         'total_amount' => 500,
+        'distributed_at' => now(),
     ]);
 
     Livewire::actingAs($user)
         ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
-        ->assertSee(1000)
-        ->assertDontSee(500);
+        ->assertSee('1,000')
+        ->assertDontSee('500');
 });
 
 // RED: Test search functionality
 test('fee distribution log viewer searches by description', function () {
     $user = User::factory()->create();
     $organization = Organization::factory()->create();
+    $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
     $memberFee1 = MemberFee::factory()->create([
@@ -85,6 +90,7 @@ test('fee distribution log viewer searches by description', function () {
 test('fee distribution log viewer searches by member name', function () {
     $user = User::factory()->create();
     $organization = Organization::factory()->create();
+    $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
     $member = \App\Models\Membership\Member::factory()->create([
@@ -113,6 +119,7 @@ test('fee distribution log viewer searches by member name', function () {
 test('fee distribution log viewer filters by status', function () {
     $user = User::factory()->create();
     $organization = Organization::factory()->create();
+    $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
     $memberFee = MemberFee::factory()->create(['organization_id' => $organization->id]);
@@ -138,6 +145,7 @@ test('fee distribution log viewer filters by status', function () {
 test('fee distribution log viewer filters by fee type', function () {
     $user = User::factory()->create();
     $organization = Organization::factory()->create();
+    $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
     $subscriptionFee = MemberFee::factory()->create([
@@ -171,6 +179,7 @@ test('fee distribution log viewer filters by fee type', function () {
 test('fee distribution log viewer filters by date range', function () {
     $user = User::factory()->create();
     $organization = Organization::factory()->create();
+    $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
     $memberFee = MemberFee::factory()->create(['organization_id' => $organization->id]);
@@ -199,6 +208,7 @@ test('fee distribution log viewer filters by date range', function () {
 test('fee distribution log viewer shows log details', function () {
     $user = User::factory()->create();
     $organization = Organization::factory()->create();
+    $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
     $memberFee = MemberFee::factory()->create(['organization_id' => $organization->id]);
@@ -229,6 +239,7 @@ test('fee distribution log viewer shows log details', function () {
 test('fee distribution log viewer calculates summary correctly', function () {
     $user = User::factory()->create();
     $organization = Organization::factory()->create();
+    $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
     $memberFee = MemberFee::factory()->create(['organization_id' => $organization->id]);
@@ -280,6 +291,7 @@ test('fee distribution log viewer calculates summary correctly', function () {
 test('fee distribution log viewer provides fee types', function () {
     $user = User::factory()->create();
     $organization = Organization::factory()->create();
+    $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
     $component = Livewire::actingAs($user)
@@ -297,6 +309,7 @@ test('fee distribution log viewer provides fee types', function () {
 test('fee distribution log viewer provides status options', function () {
     $user = User::factory()->create();
     $organization = Organization::factory()->create();
+    $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
     $component = Livewire::actingAs($user)
@@ -315,6 +328,7 @@ test('fee distribution log viewer provides status options', function () {
 test('fee distribution log viewer resets filters', function () {
     $user = User::factory()->create();
     $organization = Organization::factory()->create();
+    $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
@@ -332,6 +346,7 @@ test('fee distribution log viewer resets filters', function () {
 test('fee distribution log viewer sets default date range', function () {
     $user = User::factory()->create();
     $organization = Organization::factory()->create();
+    $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
     $component = Livewire::actingAs($user)
@@ -345,6 +360,7 @@ test('fee distribution log viewer sets default date range', function () {
 test('fee distribution log viewer maintains query string parameters', function () {
     $user = User::factory()->create();
     $organization = Organization::factory()->create();
+    $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
@@ -362,6 +378,7 @@ test('fee distribution log viewer maintains query string parameters', function (
 test('fee distribution log viewer paginates results', function () {
     $user = User::factory()->create();
     $organization = Organization::factory()->create();
+    $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
     $memberFee = MemberFee::factory()->create(['organization_id' => $organization->id]);
@@ -400,8 +417,8 @@ test('fee distribution log viewer respects organization isolation', function () 
 
     Livewire::actingAs($user)
         ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
-        ->assertSee(1000)
-        ->assertDontSee(500);
+        ->assertSee('1,000')
+        ->assertDontSee('500');
 });
 
 // RED: Test authorization
@@ -414,6 +431,7 @@ test('fee distribution log viewer requires authentication', function () {
 test('fee distribution log viewer loads logs with relationships', function () {
     $user = User::factory()->create();
     $organization = Organization::factory()->create();
+    $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
     $memberFee = MemberFee::factory()->create(['organization_id' => $organization->id]);
