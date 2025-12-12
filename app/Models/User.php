@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Roles\InventoryRoles;
+use App\Roles\MembershipRoles;
 use App\Roles\OrganizationRoles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -305,6 +306,12 @@ class User extends Authenticatable
             $orgRolePermissions = OrganizationRoles::getPermissionsForRole($role);
             if (! empty($orgRolePermissions)) {
                 $allPermissions = array_merge($allPermissions, $orgRolePermissions);
+            }
+
+            // Check membership roles
+            $membershipRolePermissions = MembershipRoles::getPermissionsForRole($role);
+            if (! empty($membershipRolePermissions)) {
+                $allPermissions = array_merge($allPermissions, $membershipRolePermissions);
             }
         }
 

@@ -208,6 +208,8 @@ resources/views/
 │   │   ├── dashboard.blade.php
 │   │   ├── depreciation-posting.blade.php
 │   │   ├── expense-voucher-form.blade.php
+│   │   ├── fee-distribution-log-viewer.blade.php
+│   │   ├── fee-distribution-rule-manager.blade.php
 │   │   ├── financial-years
 │   │   │   ├── financial-year-form.blade.php
 │   │   │   ├── financial-year-index.blade.php
@@ -236,13 +238,30 @@ resources/views/
 │   │   └── model-select-demo.blade.php
 │   ├── member-manager.blade.php
 │   ├── membership
+│   │   ├── advanced-member-list.blade.php
 │   │   ├── batch-card-printing.blade.php
+│   │   ├── bulk-member-upload.blade.php
 │   │   ├── card-designer.blade.php
+│   │   ├── card-management-page.blade.php
+│   │   ├── card-scanner.blade.php
+│   │   ├── enhanced-fee-manager.blade.php
+│   │   ├── family-member-manager.blade.php
+│   │   ├── family-profile-view.blade.php
+│   │   ├── fee-collection-dashboard.blade.php
 │   │   ├── fee-manager.blade.php
+│   │   ├── fee-structure-settings.blade.php
+│   │   ├── member-details.blade.php
 │   │   ├── member-form.blade.php
 │   │   ├── member-list.blade.php
+│   │   ├── member-listing.blade.php
 │   │   ├── membership-dashboard.blade.php
-│   │   └── subscription-manager.blade.php
+│   │   ├── membership-demo.blade.php
+│   │   ├── simple-fees.blade.php
+│   │   ├── simple-registration.blade.php
+│   │   ├── simple-scanner.blade.php
+│   │   ├── simple-subscriptions.blade.php
+│   │   ├── subscription-manager.blade.php
+│   │   └── user-registration-system.blade.php
 │   ├── navigation-main.blade.php
 │   ├── organization
 │   │   ├── organization-form.blade.php
@@ -266,17 +285,30 @@ resources/views/
 │   │   │   └── outstanding-advances.blade.php
 │   │   └── tax-configuration.blade.php
 │   └── user-placement.blade.php
+├── mail
+│   └── fee-payment-reminder.blade.php
 ├── membership
 │   ├── cards
 │   │   ├── batch.blade.php
-│   │   └── index.blade.php
+│   │   ├── index.blade.php
+│   │   └── templates
+│   │       ├── classic.blade.php
+│   │       ├── corporate.blade.php
+│   │       ├── family.blade.php
+│   │       ├── minimal.blade.php
+│   │       ├── modern.blade.php
+│   │       └── premium.blade.php
 │   ├── dashboard.blade.php
+│   ├── demo-simple.blade.php
+│   ├── enhanced-fees.blade.php
 │   ├── fees
 │   │   └── index.blade.php
 │   ├── members
+│   │   ├── bulk-upload.blade.php
 │   │   ├── create.blade.php
 │   │   ├── edit.blade.php
 │   │   └── index.blade.php
+│   ├── scanner.blade.php
 │   └── subscriptions
 │       └── index.blade.php
 ├── navigation-menu.blade.php
@@ -340,4 +372,4 @@ resources/views/
 ├── test-navigation.blade.php
 └── welcome.blade.php
 
-70 directories, 271 files
+72 directories, 301 files

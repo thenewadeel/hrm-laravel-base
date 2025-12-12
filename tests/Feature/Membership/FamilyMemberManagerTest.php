@@ -10,7 +10,7 @@ use Livewire\Livewire;
 it('renders family member manager component correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['role' => 'admin']);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $member = Member::factory()->create(['organization_id' => $organization->id]);
 
@@ -18,7 +18,7 @@ it('renders family member manager component correctly', function () {
 
     Livewire::test(FamilyMemberManager::class, ['memberId' => $member->id])
         ->assertStatus(200)
-        ->assertSee('Family Member Management')
+        ->assertSee('Family Members')
         ->assertSee('Add Family Member')
         ->assertSee('Family Members');
 });
@@ -26,7 +26,7 @@ it('renders family member manager component correctly', function () {
 it('displays existing family members correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['role' => 'admin']);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $member = Member::factory()->create(['organization_id' => $organization->id]);
 
@@ -58,7 +58,7 @@ it('displays existing family members correctly', function () {
 it('adds new family member correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['role' => 'admin']);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $member = Member::factory()->create(['organization_id' => $organization->id]);
 
@@ -94,7 +94,7 @@ it('adds new family member correctly', function () {
 it('updates existing family member correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['role' => 'admin']);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $member = Member::factory()->create(['organization_id' => $organization->id]);
     $familyMember = FamilyMember::factory()->create([
@@ -121,7 +121,7 @@ it('updates existing family member correctly', function () {
         ->set('editingFamilyMember', $familyMember->id)
         ->set('form', $updateData)
         ->call('save')
-        ->assertDispatched('family-member-saved')
+        ->assertDispatched('family-member-updated')
         ->assertSet('editingFamilyMember', null);
 
     // Verify family member was updated
@@ -134,7 +134,7 @@ it('updates existing family member correctly', function () {
 it('deletes family member correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['role' => 'admin']);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $member = Member::factory()->create(['organization_id' => $organization->id]);
     $familyMember = FamilyMember::factory()->create([
@@ -157,7 +157,7 @@ it('deletes family member correctly', function () {
 it('validates family member form correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['role' => 'admin']);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $member = Member::factory()->create(['organization_id' => $organization->id]);
 
@@ -186,7 +186,7 @@ it('validates family member form correctly', function () {
 it('validates date of birth format correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['role' => 'admin']);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $member = Member::factory()->create(['organization_id' => $organization->id]);
 
@@ -208,7 +208,7 @@ it('validates date of birth format correctly', function () {
 it('validates gender field correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['role' => 'admin']);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $member = Member::factory()->create(['organization_id' => $organization->id]);
 
@@ -230,7 +230,7 @@ it('validates gender field correctly', function () {
 it('cancels form correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['role' => 'admin']);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $member = Member::factory()->create(['organization_id' => $organization->id]);
 
@@ -256,7 +256,7 @@ it('cancels form correctly', function () {
 it('searches family members correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['role' => 'admin']);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $member = Member::factory()->create(['organization_id' => $organization->id]);
 
@@ -285,7 +285,7 @@ it('searches family members correctly', function () {
 it('filters family members by relationship correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['role' => 'admin']);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $member = Member::factory()->create(['organization_id' => $organization->id]);
 
@@ -312,7 +312,7 @@ it('filters family members by relationship correctly', function () {
 it('generates barcode for family member correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['role' => 'admin']);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $member = Member::factory()->create(['organization_id' => $organization->id]);
     $familyMember = FamilyMember::factory()->create([
@@ -330,7 +330,7 @@ it('generates barcode for family member correctly', function () {
 it('uploads photo for family member correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['role' => 'admin']);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $member = Member::factory()->create(['organization_id' => $organization->id]);
     $familyMember = FamilyMember::factory()->create([
@@ -355,7 +355,7 @@ it('uploads photo for family member correctly', function () {
 it('validates user permissions for family member management', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['role' => 'member']); // Limited role
+    $user->organizations()->attach($organization->id, ['roles' => json_encode(['member'])]); // Limited role
 
     $member = Member::factory()->create(['organization_id' => $organization->id]);
 

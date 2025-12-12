@@ -2,6 +2,9 @@
 
 namespace App\Services\Membership;
 
+use App\Events\Membership\FeeCreated;
+use App\Events\Membership\FeePaymentProcessed;
+use App\Events\Membership\FeeWaived;
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\JournalEntry;
 use App\Models\Accounting\LedgerEntry;
@@ -16,6 +19,14 @@ class FeeService
      */
     public function createFee(Member $member, array $feeData): MemberFee
     {
+        // Business rule validation
+        $this->validateFeeData($feeData);
+
+        // Validate member status
+        if ($member->status !== 'active') {
+            throw new \Exception('Cannot create fees for inactive members');
+        }
+
         return DB::transaction(function () use ($member, $feeData) {
             $fee = MemberFee::create([
                 'organization_id' => $member->organization_id,
@@ -31,6 +42,9 @@ class FeeService
             if (($feeData['distribute_to_accounts'] ?? true) && auth()->check()) {
                 $this->distributeFeeToAccounts($fee);
             }
+
+            // Dispatch fee created event
+            event(new FeeCreated($fee));
 
             return $fee;
         });
@@ -53,6 +67,9 @@ class FeeService
             // Create accounting entry for payment
             $this->createPaymentAccountingEntry($fee, $paymentData);
 
+            // Dispatch payment processed event
+            event(new FeePaymentProcessed($fee, $paymentData));
+
             return true;
         });
     }
@@ -70,6 +87,9 @@ class FeeService
 
             // Create accounting entry for waiver
             $this->createWaiverAccountingEntry($fee, $reason);
+
+            // Dispatch fee waived event
+            event(new FeeWaived($fee, $reason));
 
             return true;
         });
@@ -748,5 +768,53 @@ class FeeService
             'collection_rate' => $totalAmount > 0 ? round(($paidAmount / $totalAmount) * 100, 2) : 0,
             'avg_collection_time' => round($avgCollectionTime, 1),
         ];
+    }
+
+    /**
+     * Validate fee data according to business rules
+     */
+    private function validateFeeData(array $feeData): void
+    {
+        // Validate amount
+        if (! isset($feeData['amount']) || ! is_numeric($feeData['amount'])) {
+            throw new \InvalidArgumentException('Fee amount is required and must be numeric');
+        }
+
+        $amount = (float) $feeData['amount'];
+        if ($amount <= 0) {
+            throw new \InvalidArgumentException('Fee amount must be greater than 0');
+        }
+
+        if ($amount > 100000) {
+            throw new \InvalidArgumentException('Fee amount cannot exceed 100,000');
+        }
+
+        // Validate due date
+        if (! isset($feeData['due_date'])) {
+            throw new \InvalidArgumentException('Due date is required');
+        }
+
+        $dueDate = $feeData['due_date'];
+        if (is_string($dueDate)) {
+            $dueDate = new \DateTime($dueDate);
+        }
+
+        if ($dueDate < now()->startOfDay()) {
+            throw new \InvalidArgumentException('Due date cannot be in the past');
+        }
+
+        if ($dueDate > now()->addYears(2)) {
+            throw new \InvalidArgumentException('Due date cannot be more than 2 years in the future');
+        }
+
+        // Validate fee type
+        if (! isset($feeData['fee_type']) || empty($feeData['fee_type'])) {
+            throw new \InvalidArgumentException('Fee type is required');
+        }
+
+        $validTypes = ['subscription', 'registration', 'late_fee', 'penalty', 'other'];
+        if (! in_array($feeData['fee_type'], $validTypes)) {
+            throw new \InvalidArgumentException('Invalid fee type');
+        }
     }
 }

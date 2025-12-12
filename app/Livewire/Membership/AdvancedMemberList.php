@@ -194,7 +194,7 @@ class AdvancedMemberList extends Component
         if ($this->dateRange !== 'all') {
             $dateFilter = $this->getDateFilter($this->dateRange);
             if ($dateFilter) {
-                $query->whereBetween('created_at', $dateFilter);
+                $query->whereBetween('join_date', $dateFilter);
             }
         }
 
@@ -525,5 +525,43 @@ class AdvancedMemberList extends Component
                          $user->organizations()->first()?->id;
 
         return app(MembershipService::class)->getExpiringMembers($organizationId, 30);
+    }
+
+    public function viewMember(int $memberId): void
+    {
+        $this->dispatch('open-member-details', memberId: $memberId);
+    }
+
+    public function editMember(int $memberId): void
+    {
+        $this->dispatch('open-member-form', memberId: $memberId);
+    }
+
+    public function deleteMember(int $memberId): void
+    {
+        $this->authorize('membership.delete_members');
+
+        $user = auth()->user();
+        $organizationId = $user->current_organization_id ??
+                         $user->operating_organization_id ??
+                         $user->organizations()->first()?->id;
+
+        $member = Member::where('organization_id', $organizationId)
+            ->findOrFail($memberId);
+
+        $member->delete();
+
+        $this->dispatch('member-deleted', memberId: $memberId);
+        $this->resetPage();
+    }
+
+    public function previousPage(): void
+    {
+        $this->setPage(max($this->getPage() - 1, 1));
+    }
+
+    public function nextPage(): void
+    {
+        $this->setPage($this->getPage() + 1);
     }
 }

@@ -117,6 +117,8 @@ class SimpleFees extends Component
             'feeStats' => $this->feeStats,
             'canManageFees' => $this->canManageFees,
             'feeTypes' => $this->feeTypes,
+            'feeRules' => $this->feeRules,
+            'specialRules' => $this->specialRules,
             'members' => Member::where('organization_id', $organizationId)
                 ->orderBy('first_name')
                 ->orderBy('last_name')
@@ -362,5 +364,55 @@ class SimpleFees extends Component
                 'this_month' => 0,
             ];
         }
+    }
+
+    public function getFeeRulesProperty(): array
+    {
+        return [
+            'annual_subscription' => [
+                'name' => 'Annual Subscription',
+                'amount' => 500000,
+                'description' => 'Yearly membership fee for all members',
+                'billing_cycle' => 'yearly',
+                'due_date' => 'April 1st',
+                'editable' => true,
+            ],
+            'monthly_subscription' => [
+                'name' => 'Monthly Subscription',
+                'amount' => 50000,
+                'description' => 'Monthly membership fee',
+                'billing_cycle' => 'monthly',
+                'due_date' => '1st of each month',
+                'editable' => true,
+            ],
+            'sports_facilities' => [
+                'name' => 'Sports Facilities',
+                'amount' => 25000,
+                'description' => 'Access to sports facilities and equipment',
+                'billing_cycle' => 'monthly',
+                'due_date' => '1st of each month',
+                'editable' => true,
+            ],
+        ];
+    }
+
+    public function getSpecialRulesProperty(): array
+    {
+        return [
+            'late_fee' => [
+                'name' => 'Late Fee Fine',
+                'condition' => 'Implements after April',
+                'percentage' => 10,
+                'description' => '10% additional charge on overdue payments after April 1st',
+                'type' => 'penalty',
+            ],
+            'senior_discount' => [
+                'name' => 'Senior Citizen Discount',
+                'condition' => 'Members over 70 years',
+                'percentage' => 25,
+                'description' => '25% discount on all fees for members aged 70 and above',
+                'type' => 'discount',
+            ],
+        ];
     }
 }

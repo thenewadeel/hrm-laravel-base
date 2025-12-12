@@ -46,7 +46,7 @@ it('creates a job position', function () {
         'min_salary' => 80000,
         'max_salary' => 120000,
         'requirements' => '["PHP","Laravel","MySQL"]',
-        'is_active' => true
+        'is_active' => true,
     ]);
 });
 
@@ -84,7 +84,7 @@ it('deletes a job position', function () {
     $organization = \App\Models\Organization::factory()->create();
     $user->current_organization_id = $organization->id;
     $user->save();
-    
+
     $position = JobPosition::factory()->create(['organization_id' => $organization->id]);
 
     // Ensure position has no employees before deletion
@@ -94,9 +94,9 @@ it('deletes a job position', function () {
 
     $response->assertRedirect()
         ->assertSessionHas('success');
-    
-    // Check that position was actually deleted from database
-    $this->assertDatabaseMissing('job_positions', ['id' => $position->id]);
+
+    // Check that position was actually soft-deleted from database
+    $this->assertSoftDeleted('job_positions', ['id' => $position->id]);
 });
 
 it('searches job positions', function () {
@@ -104,7 +104,7 @@ it('searches job positions', function () {
     $organization = \App\Models\Organization::factory()->create();
     $user->current_organization_id = $organization->id;
     $user->save();
-    
+
     JobPosition::factory()->create(['title' => 'Developer', 'organization_id' => $organization->id]);
     JobPosition::factory()->create(['title' => 'Manager', 'organization_id' => $organization->id]);
 

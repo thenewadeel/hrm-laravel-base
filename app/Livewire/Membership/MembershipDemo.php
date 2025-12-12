@@ -29,6 +29,31 @@ class MembershipDemo extends Component
             'icon' => 'user-plus',
             'description' => 'Register new members',
         ],
+        'family-profile' => [
+            'name' => 'Family Profile',
+            'icon' => 'users',
+            'description' => 'View complete family profiles',
+        ],
+        'card-management' => [
+            'name' => 'Card Management',
+            'icon' => 'id-card',
+            'description' => 'Manage member cards and access',
+        ],
+        'user-registration' => [
+            'name' => 'User Registration',
+            'icon' => 'user-group',
+            'description' => 'Individual and bulk registration',
+        ],
+        'fee-settings' => [
+            'name' => 'Fee Settings',
+            'icon' => 'cog',
+            'description' => 'Configure fee rules and pricing',
+        ],
+        'collection-dashboard' => [
+            'name' => 'Collection Dashboard',
+            'icon' => 'chart-bar',
+            'description' => 'Track payments and defaulters',
+        ],
     ];
 
     public function switchTab(string $tab): void

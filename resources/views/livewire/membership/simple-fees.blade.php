@@ -64,6 +64,66 @@
         </div>
     </div>
 
+    <!-- Fee Structure Rules -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <!-- Fee Rules -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Fee Structure Rules</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Country club membership fees</p>
+            </div>
+            <div class="p-6 space-y-4">
+                @foreach($feeRules as $key => $rule)
+                    <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <div class="flex-1">
+                            <h4 class="font-medium text-gray-900 dark:text-white">{{ $rule['name'] }}</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ $rule['description'] }}</p>
+                            <div class="flex items-center mt-2 space-x-4 text-xs text-gray-500 dark:text-gray-400">
+                                <span>{{ $rule['billing_cycle'] }}</span>
+                                <span>•</span>
+                                <span>Due: {{ $rule['due_date'] }}</span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
+                                ${{ number_format($rule['amount'], 0) }}
+                            </p>
+                            @if($rule['editable'])
+                                <button class="mt-1 text-xs text-indigo-600 dark:text-indigo-400 hover:underline">
+                                    Edit
+                                </button>
+                            @endif
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <!-- Special Rules -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Special Rules & Discounts</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Automated fee adjustments</p>
+            </div>
+            <div class="p-6 space-y-4">
+                @foreach($specialRules as $key => $rule)
+                    <div class="flex items-center justify-between p-4 {{ $rule['type'] === 'penalty' ? 'bg-red-50 dark:bg-red-900/20' : 'bg-green-50 dark:bg-green-900/20' }} rounded-lg">
+                        <div class="flex-1">
+                            <h4 class="font-medium text-gray-900 dark:text-white">{{ $rule['name'] }}</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ $rule['description'] }}</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Condition: {{ $rule['condition'] }}</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium {{ $rule['type'] === 'penalty' ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' : 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' }}">
+                                {{ $rule['percentage'] }}% {{ $rule['type'] === 'penalty' ? 'Penalty' : 'Discount' }}
+                            </span>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
     <!-- Recent Fees Table -->
     <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
         <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">

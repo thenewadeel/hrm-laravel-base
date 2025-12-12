@@ -82,6 +82,11 @@ class Member extends Model
         return $this->fees()->where('status', 'pending');
     }
 
+    public function cards(): HasMany
+    {
+        return $this->hasMany(MemberCard::class);
+    }
+
     public function organization(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Organization::class);

@@ -204,7 +204,10 @@ test('simple fees filtering by fee type works correctly', function () {
         ->test(\App\Livewire\Membership\SimpleFees::class)
         ->set('feeType', 'subscription')
         ->assertSee('Subscription')
-        ->assertDontSee('Late');
+        ->assertViewHas('fees', function ($fees) use ($subscriptionFee, $lateFee) {
+            return $fees->contains('id', $subscriptionFee->id) &&
+                   ! $fees->contains('id', $lateFee->id);
+        });
 });
 
 test('simple fees pagination works correctly', function () {
