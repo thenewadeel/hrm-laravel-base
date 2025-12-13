@@ -63,7 +63,10 @@ test('simple subscriptions can create subscription with validation', function ()
         ->set('member_id', $member->id)
         ->set('subscription_plan_id', 'individual') // Use demo plan ID
         ->set('start_date', now()->format('Y-m-d'))
-        ->set('auto_renew', false);
+        ->set('auto_renew', false)
+        ->set('payment_amount', 300000) // Individual plan amount
+        ->set('payment_method', 'cash')
+        ->set('payment_reference', 'TEST-001');
 
     $component->assertHasNoErrors();
 

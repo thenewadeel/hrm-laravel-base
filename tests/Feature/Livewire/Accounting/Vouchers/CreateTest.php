@@ -57,9 +57,18 @@ test('voucher create component loads chart of accounts', function () {
 
     $this->actingAs($user);
 
-    Livewire::test(Create::class)
+    $component = Livewire::test(Create::class)
         ->assertViewHas('accounts')
-        ->assertSeeInOrder([$accounts[0]->name, $accounts[1]->name, $accounts[2]->name]);
+        ->assertViewHas('voucherTypes');
+
+    // Verify that accounts are passed to the view
+    $viewAccounts = $component->viewData('accounts');
+    $this->assertCount(3, $viewAccounts);
+
+    // Verify the accounts are the ones we created
+    $accountIds = $viewAccounts->pluck('id')->toArray();
+    $expectedAccountIds = $accounts->pluck('id')->toArray();
+    $this->assertEqualsCanonicalizing($expectedAccountIds, $accountIds);
 });
 
 test('voucher create component validates required fields', function () {

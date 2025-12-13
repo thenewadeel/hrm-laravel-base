@@ -75,11 +75,14 @@ resources/views/
 │   ├── flash-message.blade.php
 │   ├── form
 │   │   ├── checkbox.blade.php
+│   │   ├── date.blade.php
+│   │   ├── help.blade.php
 │   │   ├── input.blade.php
 │   │   ├── input-error.blade.php
 │   │   ├── label.blade.php
 │   │   ├── select.blade.php
 │   │   └── textarea.blade.php
+│   ├── form-group.blade.php
 │   ├── form-section.blade.php
 │   ├── inventory
 │   │   ├── low-stock-alert.blade.php
@@ -172,6 +175,7 @@ resources/views/
 │   ├── stock
 │   │   ├── adjustment.blade.php
 │   │   ├── count.blade.php
+│   │   ├── index.blade.php
 │   │   └── transfer.blade.php
 │   ├── stores
 │   │   ├── form.blade.php
@@ -179,9 +183,13 @@ resources/views/
 │   │   └── show.blade.php
 │   └── transactions
 │       ├── create.blade.php
+│       ├── create-new.blade.php
+│       ├── edit.blade.php
+│       ├── edit-new.blade.php
 │       ├── index.blade.php
 │       ├── show.blade.php
-│       └── wizard.blade.php
+│       ├── wizard.blade.php
+│       └── wizard-step2.blade.php
 ├── layouts
 │   ├── app.blade.php
 │   └── guest.blade.php
@@ -372,4 +380,4 @@ resources/views/
 ├── test-navigation.blade.php
 └── welcome.blade.php
 
-72 directories, 301 files
+72 directories, 309 files

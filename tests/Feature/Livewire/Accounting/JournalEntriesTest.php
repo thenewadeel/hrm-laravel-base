@@ -4,8 +4,6 @@ namespace Tests\Feature\Livewire\Accounting;
 
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\JournalEntry;
-use App\Models\Accounting\Transaction;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -14,11 +12,13 @@ use Tests\Traits\SetupOrganization;
 class JournalEntriesTest extends TestCase
 {
     use RefreshDatabase, SetupOrganization;
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->setupOrganization();
     }
+
     public function test_it_renders_successfully()
     {
         Livewire::test('accounting.journal-entries')
@@ -29,10 +29,10 @@ class JournalEntriesTest extends TestCase
     {
         $this->actingAs($this->user);
         $account1 = ChartOfAccount::factory()->create([
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
         $account2 = ChartOfAccount::factory()->create([
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
 
         $component = Livewire::test('accounting.journal-entries')
@@ -47,43 +47,45 @@ class JournalEntriesTest extends TestCase
 
         $component->call('createEntry');
 
-        $this->assertDatabaseHas('journal_entries', [
-            'entry_date' => '2025-01-01',
-            'description' => 'Test entry',
-            'status' => 'posted',
-        ]);
+        $entry = JournalEntry::where('description', 'Test entry')->first();
+        $this->assertNotNull($entry);
+        $this->assertEquals('2025-01-01', $entry->entry_date->format('Y-m-d'));
+        $this->assertEquals('posted', $entry->status);
 
         $entry = JournalEntry::where('description', 'Test entry')->first();
 
         $this->assertCount(2, $entry->ledgerEntries);
 
-        $this->assertDatabaseHas('transactions', [
+        $this->assertDatabaseHas('ledger_entries', [
             'transactionable_type' => JournalEntry::class,
             'transactionable_id' => $entry->id,
-            'account_id' => $account1->id,
+            'chart_of_account_id' => $account1->id,
             'type' => 'debit',
-            'amount' => 500
+            'amount' => 500.00,
         ]);
 
-        $this->assertDatabaseHas('transactions', [
+        $this->assertDatabaseHas('ledger_entries', [
             'transactionable_type' => JournalEntry::class,
             'transactionable_id' => $entry->id,
-            'account_id' => $account2->id,
+            'chart_of_account_id' => $account2->id,
             'type' => 'credit',
-            'amount' => 500
+            'amount' => 500.00,
         ]);
 
-        $component->assertSessionHas('message', 'Journal Entry created and posted successfully.');
+        $component->assertDispatched('notify', [
+            'type' => 'success',
+            'message' => 'Journal Entry created and posted successfully.',
+        ]);
     }
 
     public function test_a_journal_entry_requires_balanced_debits_and_credits()
     {
         $this->actingAs($this->user);
         $account1 = ChartOfAccount::factory()->create([
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
         $account2 = ChartOfAccount::factory()->create([
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
 
         $component = Livewire::test('accounting.journal-entries')

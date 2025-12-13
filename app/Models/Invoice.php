@@ -136,7 +136,7 @@ class Invoice extends Model
     public function getAmountDueAttribute(): float
     {
         $paidAmount = $this->payments()
-            ->where('status', 'paid')
+            ->whereIn('status', ['paid', 'received'])
             ->sum('amount');
 
         return $this->total_amount - $paidAmount;

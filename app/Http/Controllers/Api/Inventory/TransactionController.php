@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\Inventory;
 
 use App\Http\Controllers\Controller;
-use App\Models\Inventory\Transaction;
 use App\Http\Resources\TransactionResource;
+use App\Models\Inventory\Transaction;
 use App\Services\InventoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -25,26 +25,26 @@ class TransactionController extends Controller
             });
 
         // Filter by status
-        if ($request->has('status') && !empty($request->status)) {
+        if ($request->has('status') && ! empty($request->status)) {
             $query->where('status', $request->status);
         }
 
         // Filter by type
-        if ($request->has('type') && !empty($request->type)) {
+        if ($request->has('type') && ! empty($request->type)) {
             $query->where('type', $request->type);
         }
 
         // Search by reference
-        if ($request->has('search') && !empty($request->search)) {
+        if ($request->has('search') && ! empty($request->search)) {
             $query->where('reference', 'like', "%{$request->search}%");
         }
 
         // Date range filter
-        if ($request->has('from_date') && !empty($request->from_date)) {
+        if ($request->has('from_date') && ! empty($request->from_date)) {
             $query->where('transaction_date', '>=', $request->from_date);
         }
 
-        if ($request->has('to_date') && !empty($request->to_date)) {
+        if ($request->has('to_date') && ! empty($request->to_date)) {
             $query->where('transaction_date', '<=', $request->to_date);
         }
 
@@ -67,7 +67,7 @@ class TransactionController extends Controller
 
         $validated = $request->validate([
             'store_id' => 'required|exists:inventory_stores,id',
-            'type' => 'required|string|in:incoming,outgoing,adjustment',
+            'type' => 'required|string|in:receipt,issue,transfer,adjustment',
             'reference' => 'required|string|unique:inventory_transactions,reference',
             'notes' => 'nullable|string',
             'transaction_date' => 'required|date',
@@ -75,13 +75,13 @@ class TransactionController extends Controller
             'items.*.item_id' => 'required_with:items|exists:inventory_items,id',
             'items.*.quantity' => 'required_with:items|integer|min:1',
             'items.*.unit_price' => 'required_with:items|numeric|min:0',
-            'items.*.notes' => 'nullable|string'
+            'items.*.notes' => 'nullable|string',
         ]);
 
         $transaction = $this->inventoryService->createTransaction($validated, $request->user());
 
         return response()->json([
-            'data' => new TransactionResource($transaction->load(['store', 'items.item', 'createdBy']))
+            'data' => new TransactionResource($transaction->load(['store', 'items.item', 'createdBy'])),
         ], 201);
     }
 
@@ -104,7 +104,7 @@ class TransactionController extends Controller
             'items.*.item_id' => 'required|exists:inventory_items,id',
             'items.*.quantity' => 'required|integer|min:1',
             'items.*.unit_price' => 'required|numeric|min:0',
-            'items.*.notes' => 'nullable|string'
+            'items.*.notes' => 'nullable|string',
         ]);
 
         $transaction = $this->inventoryService->updateTransaction($transaction, $validated, $request->user());
@@ -119,6 +119,7 @@ class TransactionController extends Controller
                 ]);
             }
         }
+
         return new TransactionResource($transaction->load(['store', 'items.item', 'createdBy']));
     }
 
@@ -144,14 +145,14 @@ class TransactionController extends Controller
             'items.*.item_id' => 'required|exists:inventory_items,id',
             'items.*.quantity' => 'required|integer|min:1',
             'items.*.unit_price' => 'required|numeric|min:0',
-            'items.*.notes' => 'nullable|string'
+            'items.*.notes' => 'nullable|string',
         ]);
 
         $transaction = $this->inventoryService->addItemsToTransaction($transaction, $validated['items'], $request->user());
 
         return response()->json([
             'message' => 'Items added to transaction successfully',
-            'data' => new TransactionResource($transaction->load(['store', 'items.item', 'createdBy']))
+            'data' => new TransactionResource($transaction->load(['store', 'items.item', 'createdBy'])),
         ]);
     }
 
@@ -159,12 +160,19 @@ class TransactionController extends Controller
     {
         Gate::authorize('finalize', $transaction);
 
-        $transaction = $this->inventoryService->finalizeTransaction($transaction, request()->user());
+        try {
+            $transaction = $this->inventoryService->finalizeTransaction($transaction, request()->user());
 
-        return response()->json([
-            'message' => 'Transaction finalized successfully',
-            'data' => new TransactionResource($transaction->load(['store', 'items.item', 'createdBy', 'approvedBy']))
-        ]);
+            return response()->json([
+                'message' => 'Transaction finalized successfully',
+                'data' => new TransactionResource($transaction->load(['store', 'items.item', 'createdBy', 'approvedBy'])),
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+                'errors' => ['general' => [$e->getMessage()]],
+            ], 422);
+        }
     }
 
     public function cancel(Transaction $transaction)
@@ -175,7 +183,7 @@ class TransactionController extends Controller
 
         return response()->json([
             'message' => 'Transaction cancelled successfully',
-            'data' => new TransactionResource($transaction->load(['store', 'items.item', 'createdBy']))
+            'data' => new TransactionResource($transaction->load(['store', 'items.item', 'createdBy'])),
         ]);
     }
 }

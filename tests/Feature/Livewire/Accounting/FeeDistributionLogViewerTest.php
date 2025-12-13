@@ -30,6 +30,9 @@ test('fee distribution log viewer loads logs for organization', function () {
     $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
+    // Verify the user has the correct organization set
+    expect($user->fresh()->current_organization_id)->toBe($organization->id);
+
     $memberFee = MemberFee::factory()->create(['organization_id' => $organization->id]);
     $log = FeeDistributionLog::factory()->successful()->create([
         'organization_id' => $organization->id,
@@ -48,8 +51,8 @@ test('fee distribution log viewer loads logs for organization', function () {
 
     Livewire::actingAs($user)
         ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
-        ->assertSee('1,000')
-        ->assertDontSee('500');
+        ->assertSee('1,000.00')
+        ->assertDontSee('500.00');
 });
 
 // RED: Test search functionality
@@ -200,8 +203,8 @@ test('fee distribution log viewer filters by date range', function () {
         ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
         ->set('dateFrom', now()->subDays(5)->format('Y-m-d'))
         ->set('dateTo', now()->addDays(5)->format('Y-m-d'))
-        ->assertSee($recentLog->total_amount)
-        ->assertDontSee($oldLog->total_amount);
+        ->assertSee(number_format($recentLog->total_amount, 2))
+        ->assertDontSee(number_format($oldLog->total_amount, 2));
 });
 
 // RED: Test showing log details
@@ -401,6 +404,7 @@ test('fee distribution log viewer respects organization isolation', function () 
     $user = User::factory()->create();
     $organization1 = Organization::factory()->create();
     $organization2 = Organization::factory()->create();
+    $user->organizations()->attach($organization1->id);
     $user->update(['current_organization_id' => $organization1->id]);
 
     // Create log for user's organization
@@ -417,8 +421,8 @@ test('fee distribution log viewer respects organization isolation', function () 
 
     Livewire::actingAs($user)
         ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
-        ->assertSee('1,000')
-        ->assertDontSee('500');
+        ->assertSee('1,000.00')
+        ->assertDontSee('500.00');
 });
 
 // RED: Test authorization
@@ -449,7 +453,12 @@ test('fee distribution log viewer loads logs with relationships', function () {
         ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class);
 
     $logs = $component->logs;
+
+    // Verify we have logs
+    expect($logs->count())->toBeGreaterThan(0);
+
     $loadedLog = $logs->first();
+    expect($loadedLog)->not->toBeNull();
 
     expect($loadedLog->relationLoaded('rule'))->toBeTrue();
     expect($loadedLog->relationLoaded('memberFee'))->toBeTrue();

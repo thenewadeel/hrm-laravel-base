@@ -37,42 +37,68 @@ class FeeDistributionLogViewer extends Component
 
     public function mount()
     {
+        if (! Auth::check()) {
+            abort(401);
+        }
+
         $this->dateFrom = now()->startOfMonth()->format('Y-m-d');
         $this->dateTo = now()->endOfMonth()->format('Y-m-d');
     }
 
     public function getLogsProperty()
     {
-        return FeeDistributionLog::where('organization_id', Auth::user()->current_organization_id)
-            ->with(['rule', 'memberFee.member', 'journalEntry'])
-            ->when($this->search, function ($query) {
-                $query->whereHas('memberFee', function ($q) {
-                    $q->where('description', 'like', '%'.$this->search.'%')
-                        ->orWhereHas('member', function ($mq) {
-                            $mq->where('name', 'like', '%'.$this->search.'%');
-                        });
-                });
-            })
-            ->when($this->statusFilter, function ($query) {
-                $query->where('status', $this->statusFilter);
-            })
-            ->when($this->feeTypeFilter, function ($query) {
-                $query->whereHas('memberFee', function ($q) {
-                    $q->where('fee_type', $this->feeTypeFilter);
-                });
-            })
-            ->when($this->dateFrom, function ($query) {
-                $query->whereDate('distributed_at', '>=', $this->dateFrom);
-            })
-            ->when($this->dateTo, function ($query) {
-                $query->whereDate('distributed_at', '<=', $this->dateTo);
-            })
-            ->orderBy('distributed_at', 'desc')
-            ->paginate(15);
+        if (! Auth::check()) {
+            return new \Illuminate\Pagination\LengthAwarePaginator([], 0, 15);
+        }
+
+        $organizationId = Auth::user()->current_organization_id;
+        if (! $organizationId) {
+            return new \Illuminate\Pagination\LengthAwarePaginator([], 0, 15);
+        }
+
+        $query = FeeDistributionLog::where('organization_id', $organizationId)
+            ->with(['rule', 'memberFee.member', 'journalEntry']);
+
+        // Apply search filter
+        if ($this->search) {
+            $query->whereHas('memberFee', function ($q) {
+                $q->where('description', 'like', '%'.$this->search.'%')
+                    ->orWhereHas('member', function ($mq) {
+                        $mq->where('first_name', 'like', '%'.$this->search.'%')
+                            ->orWhere('last_name', 'like', '%'.$this->search.'%');
+                    });
+            });
+        }
+
+        // Apply other filters
+        if ($this->statusFilter) {
+            $query->where('status', $this->statusFilter);
+        }
+
+        if ($this->feeTypeFilter) {
+            $query->whereHas('memberFee', function ($q) {
+                $q->where('fee_type', $this->feeTypeFilter);
+            });
+        }
+
+        if ($this->dateFrom) {
+            $query->whereDate('distributed_at', '>=', $this->dateFrom);
+        }
+
+        if ($this->dateTo) {
+            $query->whereDate('distributed_at', '<=', $this->dateTo);
+        }
+
+        return $query->orderBy('distributed_at', 'desc')->paginate(15);
     }
 
     public function showDetails(FeeDistributionLog $log)
     {
+        // Verify the log belongs to the user's organization
+        if ($log->organization_id !== Auth::user()->current_organization_id) {
+            abort(403);
+        }
+
         $this->selectedLog = $log->load(['rule.items.chartOfAccount', 'memberFee.member', 'journalEntry.ledgerEntries.chartOfAccount']);
         $this->showDetailsModal = true;
     }
@@ -100,25 +126,34 @@ class FeeDistributionLogViewer extends Component
 
     public function getSummaryProperty()
     {
-        $baseFilters = function ($query) {
-            $query->where('organization_id', Auth::user()->current_organization_id)
-                ->when($this->dateFrom, function ($query) {
-                    $query->whereDate('distributed_at', '>=', $this->dateFrom);
-                })
-                ->when($this->dateTo, function ($query) {
-                    $query->whereDate('distributed_at', '<=', $this->dateTo);
-                });
-        };
+        if (! Auth::check()) {
+            return [
+                'total_amount' => 0.0,
+                'total_distributed' => 0.0,
+                'success_count' => 0,
+                'failed_count' => 0,
+                'partial_count' => 0,
+                'total_count' => 0,
+            ];
+        }
+
+        $baseQuery = FeeDistributionLog::where('organization_id', Auth::user()->current_organization_id)
+            ->when($this->dateFrom, function ($query) {
+                $query->whereDate('distributed_at', '>=', $this->dateFrom);
+            })
+            ->when($this->dateTo, function ($query) {
+                $query->whereDate('distributed_at', '<=', $this->dateTo);
+            });
 
         return [
-            'total_amount' => FeeDistributionLog::where($baseFilters)->sum('total_amount'),
-            'total_distributed' => FeeDistributionLog::where($baseFilters)->get()->sum(function ($log) {
+            'total_amount' => (float) $baseQuery->where('status', 'success')->sum('total_amount'),
+            'total_distributed' => (float) $baseQuery->get()->sum(function ($log) {
                 return $log->actual_distributed_amount;
             }),
-            'success_count' => FeeDistributionLog::where($baseFilters)->where('status', 'success')->count(),
-            'failed_count' => FeeDistributionLog::where($baseFilters)->where('status', 'failed')->count(),
-            'partial_count' => FeeDistributionLog::where($baseFilters)->where('status', 'partial')->count(),
-            'total_count' => FeeDistributionLog::where($baseFilters)->count(),
+            'success_count' => $baseQuery->where('status', 'success')->count(),
+            'failed_count' => $baseQuery->where('status', 'failed')->count(),
+            'partial_count' => $baseQuery->where('status', 'partial')->count(),
+            'total_count' => $baseQuery->count(),
         ];
     }
 
@@ -133,6 +168,11 @@ class FeeDistributionLogViewer extends Component
     {
         if (! Auth::check()) {
             abort(401);
+        }
+
+        // Ensure the user has a current organization
+        if (! Auth::user()->current_organization_id) {
+            abort(403, 'No organization selected');
         }
 
         return view('livewire.accounting.fee-distribution-log-viewer', [

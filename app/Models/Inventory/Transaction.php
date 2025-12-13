@@ -21,9 +21,11 @@ class Transaction extends Model
     protected $table = 'inventory_transactions';
 
     // Transaction Types
-    const TYPE_INCOMING = 'incoming';
+    const TYPE_RECEIPT = 'receipt';
 
-    const TYPE_OUTGOING = 'outgoing';
+    const TYPE_ISSUE = 'issue';
+
+    const TYPE_TRANSFER = 'transfer';
 
     const TYPE_ADJUSTMENT = 'adjustment';
 
@@ -36,11 +38,15 @@ class Transaction extends Model
 
     protected $fillable = [
         'store_id',
+        'to_store_id',
         'created_by',
         'approved_by',
         'type',
         'status',
         'reference',
+        'supplier',
+        'recipient',
+        'adjustment_reason',
         'notes',
         'transaction_date',
         'finalized_at',
@@ -52,8 +58,9 @@ class Transaction extends Model
     public static function getTypes(): array
     {
         return [
-            self::TYPE_INCOMING,
-            self::TYPE_OUTGOING,
+            self::TYPE_RECEIPT,
+            self::TYPE_ISSUE,
+            self::TYPE_TRANSFER,
             self::TYPE_ADJUSTMENT,
         ];
     }
@@ -103,19 +110,27 @@ class Transaction extends Model
     }
 
     /**
-     * Scope for incoming transactions
+     * Scope for receipt transactions
      */
-    public function scopeIncoming($query)
+    public function scopeReceipt($query)
     {
-        return $query->where('type', self::TYPE_INCOMING);
+        return $query->where('type', self::TYPE_RECEIPT);
     }
 
     /**
-     * Scope for outgoing transactions
+     * Scope for issue transactions
      */
-    public function scopeOutgoing($query)
+    public function scopeIssue($query)
     {
-        return $query->where('type', self::TYPE_OUTGOING);
+        return $query->where('type', self::TYPE_ISSUE);
+    }
+
+    /**
+     * Scope for transfer transactions
+     */
+    public function scopeTransfer($query)
+    {
+        return $query->where('type', self::TYPE_TRANSFER);
     }
 
     /**
@@ -173,6 +188,11 @@ class Transaction extends Model
     public function store(): BelongsTo
     {
         return $this->belongsTo(Store::class);
+    }
+
+    public function toStore(): BelongsTo
+    {
+        return $this->belongsTo(Store::class, 'to_store_id');
     }
 
     public function createdBy(): BelongsTo

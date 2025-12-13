@@ -26,7 +26,7 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Receipt Transaction -->
-                        <a href="{{ route('inventory.transactions.wizard') }}?type=receipt{{ request('store_id') ? '&store_id=' . request('store_id') : '' }}"
+                        <a href="{{ route('inventory.transactions.create') }}?type=receipt{{ request('store_id') ? '&store_id=' . request('store_id') : '' }}"
                             class="block p-6 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:shadow-md transition-all duration-200 group">
                             <div class="text-center">
                                 <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">📥</div>
@@ -42,7 +42,7 @@
                         </a>
 
                         <!-- Issue Transaction -->
-                        <a href="{{ route('inventory.transactions.wizard') }}?type=issue{{ request('store_id') ? '&store_id=' . request('store_id') : '' }}"
+                        <a href="{{ route('inventory.transactions.create') }}?type=issue{{ request('store_id') ? '&store_id=' . request('store_id') : '' }}"
                             class="block p-6 border-2 border-gray-200 rounded-lg hover:border-green-500 hover:shadow-md transition-all duration-200 group">
                             <div class="text-center">
                                 <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">📤</div>
@@ -58,7 +58,7 @@
                         </a>
 
                         <!-- Transfer Transaction -->
-                        <a href="{{ route('inventory.transactions.wizard') }}?type=transfer{{ request('store_id') ? '&from_store_id=' . request('store_id') : '' }}"
+                        <a href="{{ route('inventory.transactions.create') }}?type=transfer{{ request('store_id') ? '&from_store_id=' . request('store_id') : '' }}"
                             class="block p-6 border-2 border-gray-200 rounded-lg hover:border-purple-500 hover:shadow-md transition-all duration-200 group">
                             <div class="text-center">
                                 <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">🔄</div>
@@ -73,7 +73,7 @@
                         </a>
 
                         <!-- Adjustment Transaction -->
-                        <a href="{{ route('inventory.transactions.wizard') }}?type=adjustment{{ request('store_id') ? '&store_id=' . request('store_id') : '' }}"
+                        <a href="{{ route('inventory.transactions.create') }}?type=adjustment{{ request('store_id') ? '&store_id=' . request('store_id') : '' }}"
                             class="block p-6 border-2 border-gray-200 rounded-lg hover:border-orange-500 hover:shadow-md transition-all duration-200 group">
                             <div class="text-center">
                                 <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">📊</div>
@@ -96,7 +96,7 @@
                                 <div class="text-center">
                                     <p class="text-sm text-gray-600 mb-2">Quick receipt for</p>
                                     <x-button.outline
-                                        href="{{ route('inventory.transactions.wizard') }}?type=receipt&store_id={{ $store->id }}"
+                                        href="{{ route('inventory.transactions.create') }}?type=receipt&store_id={{ $store->id }}"
                                         class="w-full">
                                         🏪 {{ $store->name }}
                                     </x-button.outline>

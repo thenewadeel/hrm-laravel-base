@@ -2,16 +2,15 @@
 
 namespace Tests\Feature\Inventory;
 
-use Tests\TestCase;
-use App\Models\Inventory\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupInventory;
 use Tests\Traits\SetupOrganization;
 
 class InventoryTransactionControllerTest extends TestCase
 {
-    use RefreshDatabase, SetupOrganization, SetupInventory;
+    use RefreshDatabase, SetupInventory, SetupOrganization;
 
     protected function setUp(): void
     {
@@ -42,7 +41,7 @@ class InventoryTransactionControllerTest extends TestCase
         $response = $this->get(route('inventory.transactions.create'));
 
         $response->assertStatus(200);
-        $response->assertViewIs('inventory.transactions.create');
+        $response->assertViewIs('inventory.transactions.create-new');
         $response->assertViewHas('stores');
         $response->assertViewHas('items');
     }
@@ -55,7 +54,7 @@ class InventoryTransactionControllerTest extends TestCase
 
         $transactionData = [
             'store_id' => $store->id,
-            'type' => 'in',
+            'type' => 'receipt',
             'reference' => 'TEST-001',
             'transaction_date' => now()->format('Y-m-d'),
             'notes' => 'Test transaction',
@@ -64,15 +63,15 @@ class InventoryTransactionControllerTest extends TestCase
                     'item_id' => $items[0]->id,
                     'quantity' => 10,
                     'unit_price' => 1000,
-                    'notes' => 'First item'
+                    'notes' => 'First item',
                 ],
                 [
                     'item_id' => $items[1]->id,
                     'quantity' => 5,
                     'unit_price' => 2000,
-                    'notes' => 'Second item'
-                ]
-            ]
+                    'notes' => 'Second item',
+                ],
+            ],
         ];
 
         $response = $this->post(route('inventory.transactions.store'), $transactionData);
@@ -82,7 +81,7 @@ class InventoryTransactionControllerTest extends TestCase
 
         $this->assertDatabaseHas('inventory_transactions', [
             'reference' => 'TEST-001',
-            'type' => 'in'
+            'type' => 'receipt',
         ]);
     }
 }

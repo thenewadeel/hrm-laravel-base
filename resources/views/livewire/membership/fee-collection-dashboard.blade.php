@@ -108,7 +108,7 @@
                     @foreach($recentPayments as $payment)
                         <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                             <div class="flex items-center space-x-3">
-                                <div class="text-2xl">{{ $getPaymentMethodIcon($payment['payment_method']) }}</div>
+                                <div class="text-2xl">{{ $this->getPaymentMethodIcon($payment['payment_method']) }}</div>
                                 <div>
                                     <p class="font-medium text-gray-900 dark:text-white">{{ $payment['member_name'] }}</p>
                                     <p class="text-sm text-gray-500 dark:text-gray-400">{{ $payment['member_id'] }} • {{ $payment['fee_type'] }}</p>

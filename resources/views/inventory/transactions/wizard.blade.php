@@ -50,7 +50,7 @@
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form action="{{ route('inventory.transactions.store') }}" method="POST" id="transaction-form">
+                    <form action="{{ route('inventory.transactions.wizard.step1') }}" method="POST" id="transaction-form">
                         @csrf
                         <input type="hidden" name="type" value="{{ $type }}">
                         <input type="hidden" name="step" value="1">
@@ -207,7 +207,9 @@
             <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <div class="flex">
                     <div class="flex-shrink-0">
-                        <x-heroicon-s-information-circle class="h-5 w-5 text-blue-400" />
+                        <svg class="h-5 w-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
                     </div>
                     <div class="ml-3">
                         <h3 class="text-sm font-medium text-blue-800">About

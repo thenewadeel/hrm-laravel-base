@@ -78,12 +78,22 @@ class FeeDistributionRuleManager extends Component
 
     public function mount()
     {
+        if (! Auth::check()) {
+            abort(401);
+        }
+
         $this->loadChartOfAccounts();
         $this->loadRules();
     }
 
     public function loadChartOfAccounts()
     {
+        if (! Auth::check()) {
+            $this->chartOfAccounts = [];
+
+            return;
+        }
+
         $this->chartOfAccounts = ChartOfAccount::where('organization_id', Auth::user()->current_organization_id)
             ->orderBy('code')
             ->get()
@@ -95,6 +105,12 @@ class FeeDistributionRuleManager extends Component
 
     public function loadRules()
     {
+        if (! Auth::check()) {
+            $this->rules = [];
+
+            return;
+        }
+
         $this->rules = FeeDistributionRule::where('organization_id', Auth::user()->current_organization_id)
             ->with(['items.chartOfAccount'])
             ->orderBy('priority')
@@ -104,6 +120,10 @@ class FeeDistributionRuleManager extends Component
 
     public function createRule()
     {
+        if (! Auth::check()) {
+            abort(401);
+        }
+
         $this->validate($this->validationRules);
 
         $rule = FeeDistributionRule::create([
@@ -257,6 +277,10 @@ class FeeDistributionRuleManager extends Component
 
     public function render()
     {
+        if (! Auth::check()) {
+            abort(401);
+        }
+
         return view('livewire.accounting.fee-distribution-rule-manager');
     }
 }

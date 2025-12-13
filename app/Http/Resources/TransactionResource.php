@@ -81,7 +81,7 @@ class TransactionResource extends JsonResource
                                 'category' => $item->item->category,
                                 'unit' => $item->item->unit,
                             ] : null;
-                        })
+                        }),
                     ];
                 });
             }),
@@ -95,8 +95,9 @@ class TransactionResource extends JsonResource
             'is_cancelled' => $this->status === 'cancelled',
 
             // Type flags
-            'is_incoming' => $this->type === 'incoming',
-            'is_outgoing' => $this->type === 'outgoing',
+            'is_incoming' => $this->type === 'receipt',
+            'is_outgoing' => $this->type === 'issue',
+            'is_transfer' => $this->type === 'transfer',
             'is_adjustment' => $this->type === 'adjustment',
         ];
     }

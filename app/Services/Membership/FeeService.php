@@ -105,7 +105,7 @@ class FeeService
         // Get unpaid fees that are past due date
         $overdueFees = MemberFee::where('organization_id', $organizationId)
             ->where('status', 'pending')
-            ->where('due_date', '<', now())
+            ->where('due_date', '<', now()->startOfDay()) // Use start of today to be precise
             ->with('member')
             ->get();
 
@@ -812,7 +812,7 @@ class FeeService
             throw new \InvalidArgumentException('Fee type is required');
         }
 
-        $validTypes = ['subscription', 'registration', 'late_fee', 'penalty', 'other'];
+        $validTypes = ['subscription', 'registration', 'late_fee', 'penalty', 'other', 'additional_service', 'locker', 'event_fee', 'donation'];
         if (! in_array($feeData['fee_type'], $validTypes)) {
             throw new \InvalidArgumentException('Invalid fee type');
         }

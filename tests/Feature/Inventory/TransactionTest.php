@@ -3,15 +3,16 @@
 namespace Tests\Feature\Inventory;
 
 use App\Models\Inventory\TransactionItem;
-use Tests\Traits\SetupInventory;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
+use Tests\Traits\SetupInventory;
 use Tests\Traits\SetupOrganization;
 
 class TransactionTest extends TestCase
 {
-    use RefreshDatabase, SetupOrganization, SetupInventory;
+    use RefreshDatabase, SetupInventory, SetupOrganization;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -26,10 +27,10 @@ class TransactionTest extends TestCase
 
         $transactionData = [
             'store_id' => $setup['store']->id,
-            'type' => 'incoming',
+            'type' => 'receipt',
             'reference' => 'TRX001',
             'transaction_date' => now()->format('Y-m-d H:i:s'),
-            'notes' => 'Empty draft transaction'
+            'notes' => 'Empty draft transaction',
             // ✅ No items field - testing without items
         ];
 
@@ -40,12 +41,12 @@ class TransactionTest extends TestCase
             ->assertJson([
                 'data' => [
                     'status' => 'draft',
-                    'type' => 'incoming',
+                    'type' => 'receipt',
                     'reference' => 'TRX001',
                     'notes' => 'Empty draft transaction',
                     'is_draft' => true,
                     'is_incoming' => true,
-                ]
+                ],
             ]);
 
         $transaction = $response->json('data');
@@ -55,7 +56,7 @@ class TransactionTest extends TestCase
             'id' => $transaction['id'],
             'reference' => 'TRX001',
             'status' => 'draft',
-            'notes' => 'Empty draft transaction'
+            'notes' => 'Empty draft transaction',
         ]);
 
         // Verify no items were created
@@ -74,7 +75,7 @@ class TransactionTest extends TestCase
 
         $transactionData = [
             'store_id' => $setup['store']->id,
-            'type' => 'incoming',
+            'type' => 'receipt',
             'reference' => 'TRX002',
             'transaction_date' => now()->format('Y-m-d H:i:s'),
             'notes' => 'Transaction with initial items',
@@ -83,15 +84,15 @@ class TransactionTest extends TestCase
                     'item_id' => $setup['items']->first()->id,
                     'quantity' => 5,
                     'unit_price' => 15.00, // Dollars
-                    'notes' => 'First item'
+                    'notes' => 'First item',
                 ],
                 [
                     'item_id' => $setup['items']->last()->id,
                     'quantity' => 3,
                     'unit_price' => 20.00, // Dollars
-                    'notes' => 'Second item'
-                ]
-            ]
+                    'notes' => 'Second item',
+                ],
+            ],
         ];
 
         $response = $this->actingAs($setup['user'])
@@ -101,12 +102,12 @@ class TransactionTest extends TestCase
             ->assertJson([
                 'data' => [
                     'status' => 'draft',
-                    'type' => 'incoming',
+                    'type' => 'receipt',
                     'reference' => 'TRX002',
                     'notes' => 'Transaction with initial items',
                     'is_draft' => true,
                     'is_incoming' => true,
-                ]
+                ],
             ]);
 
         $transaction = $response->json('data');
@@ -115,7 +116,7 @@ class TransactionTest extends TestCase
         $this->assertDatabaseHas('inventory_transactions', [
             'id' => $transaction['id'],
             'reference' => 'TRX002',
-            'status' => 'draft'
+            'status' => 'draft',
         ]);
 
         // Verify items were created
@@ -125,16 +126,16 @@ class TransactionTest extends TestCase
             'transaction_id' => $transaction['id'],
             'item_id' => $setup['items']->first()->id,
             'quantity' => 5,
-            'unit_price' => 15, //00, // Stored as cents in database
-            'notes' => 'First item'
+            'unit_price' => 15, // 00, // Stored as cents in database
+            'notes' => 'First item',
         ]);
 
         $this->assertDatabaseHas('inventory_transaction_items', [
             'transaction_id' => $transaction['id'],
             'item_id' => $setup['items']->last()->id,
             'quantity' => 3,
-            'unit_price' => 20, //00, // Stored as cents in database
-            'notes' => 'Second item'
+            'unit_price' => 20, // 00, // Stored as cents in database
+            'notes' => 'Second item',
         ]);
 
         // Verify items are in response (converted back to dollars)
@@ -163,7 +164,7 @@ class TransactionTest extends TestCase
         // Create transaction WITHOUT items
         $transactionData = [
             'store_id' => $setup['store']->id,
-            'type' => 'incoming',
+            'type' => 'receipt',
             'reference' => 'TRX003',
             'transaction_date' => now()->format('Y-m-d H:i:s'),
             // No items
@@ -184,18 +185,18 @@ class TransactionTest extends TestCase
                 'item_id' => $setup['items']->first()->id,
                 'quantity' => 10,
                 'unit_price' => 25.50,
-                'notes' => 'Added item'
-            ]
+                'notes' => 'Added item',
+            ],
         ];
 
         $response = $this->actingAs($setup['user'])
             ->postJson("/api/inventory/transactions/{$transaction['id']}/items", [
-                'items' => $items
+                'items' => $items,
             ]);
 
         $response->assertStatus(200)
             ->assertJson([
-                'message' => 'Items added to transaction successfully'
+                'message' => 'Items added to transaction successfully',
             ]);
 
         // Verify item was added
@@ -203,7 +204,7 @@ class TransactionTest extends TestCase
             'transaction_id' => $transaction['id'],
             'item_id' => $setup['items']->first()->id,
             'quantity' => 10,
-            'notes' => 'Added item'
+            'notes' => 'Added item',
         ]);
 
         // Verify total count
@@ -218,16 +219,16 @@ class TransactionTest extends TestCase
         // Create transaction WITH some initial items
         $transactionData = [
             'store_id' => $setup['store']->id,
-            'type' => 'incoming',
+            'type' => 'receipt',
             'reference' => 'TRX004',
             'transaction_date' => now()->format('Y-m-d H:i:s'),
             'items' => [
                 [
                     'item_id' => $setup['items'][0]->id,
                     'quantity' => 5,
-                    'unit_price' => 10.00
-                ]
-            ]
+                    'unit_price' => 10.00,
+                ],
+            ],
         ];
 
         $response = $this->actingAs($setup['user'])
@@ -244,19 +245,19 @@ class TransactionTest extends TestCase
                 'item_id' => $setup['items'][1]->id,
                 'quantity' => 8,
                 'unit_price' => 15.50,
-                'notes' => 'Additional item 1'
+                'notes' => 'Additional item 1',
             ],
             [
                 'item_id' => $setup['items'][2]->id,
                 'quantity' => 3,
                 'unit_price' => 20.00,
-                'notes' => 'Additional item 2'
-            ]
+                'notes' => 'Additional item 2',
+            ],
         ];
 
         $response = $this->actingAs($setup['user'])
             ->postJson("/api/inventory/transactions/{$transaction['id']}/items", [
-                'items' => $additionalItems
+                'items' => $additionalItems,
             ]);
 
         $response->assertStatus(200);
@@ -267,21 +268,21 @@ class TransactionTest extends TestCase
         $this->assertDatabaseHas('inventory_transaction_items', [
             'transaction_id' => $transaction['id'],
             'item_id' => $setup['items'][0]->id,
-            'quantity' => 5
+            'quantity' => 5,
         ]);
 
         $this->assertDatabaseHas('inventory_transaction_items', [
             'transaction_id' => $transaction['id'],
             'item_id' => $setup['items'][1]->id,
             'quantity' => 8,
-            'notes' => 'Additional item 1'
+            'notes' => 'Additional item 1',
         ]);
 
         $this->assertDatabaseHas('inventory_transaction_items', [
             'transaction_id' => $transaction['id'],
             'item_id' => $setup['items'][2]->id,
             'quantity' => 3,
-            'notes' => 'Additional item 2'
+            'notes' => 'Additional item 2',
         ]);
     }
 
@@ -293,7 +294,7 @@ class TransactionTest extends TestCase
         // Create empty transaction
         $transactionData = [
             'store_id' => $setup['store']->id,
-            'type' => 'incoming',
+            'type' => 'receipt',
             'reference' => 'TRX005',
             'transaction_date' => now()->format('Y-m-d H:i:s'),
             // No items initially
@@ -309,13 +310,13 @@ class TransactionTest extends TestCase
             [
                 'item_id' => $setup['items']->first()->id,
                 'quantity' => 25,
-                'unit_price' => 15.50
-            ]
+                'unit_price' => 15.50,
+            ],
         ];
 
         $this->actingAs($setup['user'])
             ->postJson("/api/inventory/transactions/{$transaction['id']}/items", [
-                'items' => $items
+                'items' => $items,
             ]);
 
         // Now finalize the transaction
@@ -328,14 +329,14 @@ class TransactionTest extends TestCase
         // Check transaction status updated
         $this->assertDatabaseHas('inventory_transactions', [
             'id' => $transaction['id'],
-            'status' => 'finalized'
+            'status' => 'finalized',
         ]);
 
         // Check store inventory updated
         $this->assertDatabaseHas('inventory_store_items', [
             'store_id' => $setup['store']->id,
             'item_id' => $setup['items']->first()->id,
-            'quantity' => 25
+            'quantity' => 25,
         ]);
     }
 
@@ -347,16 +348,16 @@ class TransactionTest extends TestCase
         // Create transaction WITH items
         $transactionData = [
             'store_id' => $setup['store']->id,
-            'type' => 'incoming',
+            'type' => 'receipt',
             'reference' => 'TRX006',
             'transaction_date' => now()->format('Y-m-d H:i:s'),
             'items' => [
                 [
                     'item_id' => $setup['items']->first()->id,
                     'quantity' => 30,
-                    'unit_price' => 12.50
-                ]
-            ]
+                    'unit_price' => 12.50,
+                ],
+            ],
         ];
 
         $response = $this->actingAs($setup['user'])
@@ -374,14 +375,14 @@ class TransactionTest extends TestCase
         // Check transaction status
         $this->assertDatabaseHas('inventory_transactions', [
             'id' => $transaction['id'],
-            'status' => 'finalized'
+            'status' => 'finalized',
         ]);
 
         // Check store inventory
         $this->assertDatabaseHas('inventory_store_items', [
             'store_id' => $setup['store']->id,
             'item_id' => $setup['items']->first()->id,
-            'quantity' => 30
+            'quantity' => 30,
         ]);
     }
 
@@ -393,7 +394,7 @@ class TransactionTest extends TestCase
         // Create empty transaction
         $transactionData = [
             'store_id' => $setup['store']->id,
-            'type' => 'incoming',
+            'type' => 'receipt',
             'reference' => 'TRX007',
             'transaction_date' => now()->format('Y-m-d H:i:s'),
             // No items
@@ -411,6 +412,7 @@ class TransactionTest extends TestCase
         // Should fail because transaction has no items
         $response->assertStatus(422); // Or whatever status code your service throws
     }
+
     #[Test]
     public function it_cannot_add_items_to_finalized_transaction()
     {
@@ -419,16 +421,16 @@ class TransactionTest extends TestCase
         // Create and finalize a transaction
         $transactionData = [
             'store_id' => $setup['store']->id,
-            'type' => 'incoming',
+            'type' => 'receipt',
             'reference' => 'TRX008',
             'transaction_date' => now()->format('Y-m-d H:i:s'),
             'items' => [
                 [
                     'item_id' => $setup['items']->first()->id,
                     'quantity' => 5,
-                    'unit_price' => 10.00
-                ]
-            ]
+                    'unit_price' => 10.00,
+                ],
+            ],
         ];
 
         $response = $this->actingAs($setup['user'])
@@ -447,13 +449,13 @@ class TransactionTest extends TestCase
                 'item_id' => $setup['items']->last()->id,
                 'quantity' => 10,
                 'unit_price' => 15.00,
-                'notes' => 'Should not be added'
-            ]
+                'notes' => 'Should not be added',
+            ],
         ];
 
         $response = $this->actingAs($setup['user'])
             ->postJson("/api/inventory/transactions/{$transaction['id']}/items", [
-                'items' => $items
+                'items' => $items,
             ]);
 
         // Should be forbidden or return error
@@ -466,7 +468,7 @@ class TransactionTest extends TestCase
         $this->assertDatabaseMissing('inventory_transaction_items', [
             'transaction_id' => $transaction['id'],
             'item_id' => $setup['items']->last()->id,
-            'notes' => 'Should not be added'
+            'notes' => 'Should not be added',
         ]);
     }
 
@@ -478,26 +480,26 @@ class TransactionTest extends TestCase
         // Create transactions with different statuses
         $draftTransaction = [
             'store_id' => $setup['store']->id,
-            'type' => 'incoming',
+            'type' => 'receipt',
             'reference' => 'TRX-DRAFT-001',
             'transaction_date' => now()->format('Y-m-d H:i:s'),
             'items' => [[
                 'item_id' => $setup['items']->first()->id,
                 'quantity' => 10,
-                'unit_price' => 15.00
-            ]]
+                'unit_price' => 15.00,
+            ]],
         ];
 
         $finalizedTransaction = [
             'store_id' => $setup['store']->id,
-            'type' => 'outgoing',
+            'type' => 'issue',
             'reference' => 'TRX-FINAL-001',
             'transaction_date' => now()->format('Y-m-d H:i:s'),
             'items' => [[
                 'item_id' => $setup['items']->last()->id,
                 'quantity' => 5,
-                'unit_price' => 20.00
-            ]]
+                'unit_price' => 20.00,
+            ]],
         ];
 
         $anotherDraftTransaction = [
@@ -508,8 +510,8 @@ class TransactionTest extends TestCase
             'items' => [[
                 'item_id' => $setup['items']->first()->id,
                 'quantity' => 3,
-                'unit_price' => 8.50
-            ]]
+                'unit_price' => 8.50,
+            ]],
         ];
 
         // Create draft transactions
@@ -539,7 +541,7 @@ class TransactionTest extends TestCase
         $this->assertIsArray($data);
 
         // Should find 2 draft transactions
-        $draftTransactions = array_filter($data, fn($tx) => $tx['status'] === 'draft');
+        $draftTransactions = array_filter($data, fn ($tx) => $tx['status'] === 'draft');
         $this->assertCount(2, $draftTransactions);
 
         // Verify the references of draft transactions
@@ -555,7 +557,7 @@ class TransactionTest extends TestCase
         $response->assertStatus(200);
 
         $data = $response->json('data');
-        $finalizedTransactions = array_filter($data, fn($tx) => $tx['status'] === 'finalized');
+        $finalizedTransactions = array_filter($data, fn ($tx) => $tx['status'] === 'finalized');
         $this->assertCount(1, $finalizedTransactions);
         $this->assertEquals('TRX-FINAL-001', $finalizedTransactions[0]['reference']);
     }
@@ -567,26 +569,26 @@ class TransactionTest extends TestCase
 
         $transactionData = [
             'store_id' => $setup['store']->id,
-            'type' => 'incoming',
+            'type' => 'receipt',
             'reference' => 'TRX009',
             'transaction_date' => now()->format('Y-m-d H:i:s'),
             'items' => [
                 [
                     'item_id' => $setup['items']->first()->id,
                     'quantity' => 10,
-                    'unit_price' => 25.50 // 255.00 total
+                    'unit_price' => 25.50, // 255.00 total
                 ],
                 [
                     'item_id' => $setup['items']->last()->id,
                     'quantity' => 5,
-                    'unit_price' => 15.00 // 75.00 total
+                    'unit_price' => 15.00, // 75.00 total
                 ],
                 [
                     'item_id' => $setup['items'][1]->id, // Middle item
                     'quantity' => 3,
-                    'unit_price' => 8.75 // 26.25 total
-                ]
-            ]
+                    'unit_price' => 8.75, // 26.25 total
+                ],
+            ],
         ];
 
         $response = $this->actingAs($setup['user'])
@@ -608,10 +610,10 @@ class TransactionTest extends TestCase
                             'id',
                             'quantity',
                             'unit_price',
-                            'total_price'
-                        ]
-                    ]
-                ]
+                            'total_price',
+                        ],
+                    ],
+                ],
             ]);
 
         // Verify calculations
@@ -656,16 +658,16 @@ class TransactionTest extends TestCase
         // Create and finalize a transaction
         $transactionData = [
             'store_id' => $setup['store']->id,
-            'type' => 'incoming',
+            'type' => 'receipt',
             'reference' => 'TRX010',
             'transaction_date' => now()->format('Y-m-d H:i:s'),
             'items' => [
                 [
                     'item_id' => $setup['items']->first()->id,
                     'quantity' => 8,
-                    'unit_price' => 12.50
-                ]
-            ]
+                    'unit_price' => 12.50,
+                ],
+            ],
         ];
 
         $response = $this->actingAs($setup['user'])
@@ -681,7 +683,7 @@ class TransactionTest extends TestCase
         // Attempt 1: Try to update transaction notes
         $response = $this->actingAs($setup['user'])
             ->putJson("/api/inventory/transactions/{$transaction['id']}", [
-                'notes' => 'This should not be allowed'
+                'notes' => 'This should not be allowed',
             ]);
 
         $response->assertStatus(403); // Should be forbidden
@@ -689,7 +691,7 @@ class TransactionTest extends TestCase
         // Verify notes were not updated
         $this->assertDatabaseHas('inventory_transactions', [
             'id' => $transaction['id'],
-            'notes' => null // Original notes were null
+            'notes' => null, // Original notes were null
         ]);
 
         // Attempt 2: Try to add items (already tested in separate test, but good to have here too)
@@ -697,13 +699,13 @@ class TransactionTest extends TestCase
             [
                 'item_id' => $setup['items']->last()->id,
                 'quantity' => 5,
-                'unit_price' => 10.00
-            ]
+                'unit_price' => 10.00,
+            ],
         ];
 
         $response = $this->actingAs($setup['user'])
             ->postJson("/api/inventory/transactions/{$transaction['id']}/items", [
-                'items' => $items
+                'items' => $items,
             ]);
 
         $response->assertStatus(403); // Should be forbidden
@@ -718,7 +720,7 @@ class TransactionTest extends TestCase
         $this->assertDatabaseHas('inventory_transactions', [
             'id' => $transaction['id'],
             'status' => 'finalized',
-            'deleted_at' => null
+            'deleted_at' => null,
         ]);
     }
 
@@ -730,7 +732,7 @@ class TransactionTest extends TestCase
         // Create transaction without items
         $transactionData = [
             'store_id' => $setup['store']->id,
-            'type' => 'incoming',
+            'type' => 'receipt',
             'reference' => 'TRX011',
             'transaction_date' => now()->format('Y-m-d H:i:s'),
             // No items

@@ -40,9 +40,19 @@ Route::prefix('inventory')->name('inventory.')->group(function () {
     Route::prefix('/transactions')->name('transactions.')->group(function () {
         Route::get('/', [InventoryTransactionController::class, 'index'])->name('index');
         Route::get('/create', [InventoryTransactionController::class, 'create'])->name('create');
-        Route::get('/wizard', [InventoryTransactionController::class, 'wizard'])->name('wizard');
+        Route::get('/{transaction}/edit', [InventoryTransactionController::class, 'edit'])->name('edit');
         Route::post('/', [InventoryTransactionController::class, 'store'])->name('store');
         Route::get('/{transaction}', [InventoryTransactionController::class, 'show'])->name('show');
+        Route::put('/{transaction}', [InventoryTransactionController::class, 'update'])->name('update');
+        Route::delete('/{transaction}', [InventoryTransactionController::class, 'destroy'])->name('destroy');
+        Route::post('/{transaction}/finalize', [InventoryTransactionController::class, 'finalize'])->name('finalize');
+        Route::post('/{transaction}/cancel', [InventoryTransactionController::class, 'cancel'])->name('cancel');
+
+        // Legacy wizard routes (kept for backward compatibility)
+        Route::get('/wizard', [InventoryTransactionController::class, 'wizard'])->name('wizard');
+        Route::post('/wizard/step1', [InventoryTransactionController::class, 'wizardStep1'])->name('wizard.step1');
+        Route::get('/wizard/step2', [InventoryTransactionController::class, 'wizardStep2'])->name('wizard.step2');
+        Route::post('/wizard/step2', [InventoryTransactionController::class, 'wizardStep2Submit'])->name('wizard.step2.submit');
     });
 
     // Inventory Reports - fixed to match your nav structure
@@ -51,7 +61,7 @@ Route::prefix('inventory')->name('inventory.')->group(function () {
         Route::get('/low-stock', [InventoryReportController::class, 'lowStock'])->name('low-stock');
         Route::get('/movement', [InventoryReportController::class, 'movement'])->name('movement');
         Route::get('/stock-levels', [InventoryReportController::class, 'stockLevels'])->name('stock-levels');
-        
+
         // PDF Downloads
         Route::get('/download/low-stock', [InventoryReportController::class, 'downloadLowStock'])->name('download.low-stock');
         Route::get('/download/stock-levels', [InventoryReportController::class, 'downloadStockLevels'])->name('download.stock-levels');
@@ -60,6 +70,7 @@ Route::prefix('inventory')->name('inventory.')->group(function () {
 
     // Inventory Stock Operations
     Route::prefix('/stock')->name('stock.')->group(function () {
+        Route::get('/', [InventoryStockController::class, 'index'])->name('index');
         Route::get('/adjustment', [InventoryStockController::class, 'adjustment'])->name('adjustment');
         Route::post('/adjustment', [InventoryStockController::class, 'processAdjustment'])->name('process-adjustment');
         Route::get('/count', [InventoryStockController::class, 'count'])->name('count');
@@ -69,8 +80,8 @@ Route::prefix('inventory')->name('inventory.')->group(function () {
     });
 });
 
-    // Mobile Inventory
-    // Route::prefix('mobile/inventory')->name('mobile.inventory.')->group(function () {
-    //     Route::get('/dashboard', [MobileInventoryController::class, 'dashboard'])->name('mobile.dashboard');
-    //     Route::get('/stock-count', [MobileInventoryController::class, 'stockCount'])->name('mobile.stock-count');
-    // });
+// Mobile Inventory
+// Route::prefix('mobile/inventory')->name('mobile.inventory.')->group(function () {
+//     Route::get('/dashboard', [MobileInventoryController::class, 'dashboard'])->name('mobile.dashboard');
+//     Route::get('/stock-count', [MobileInventoryController::class, 'stockCount'])->name('mobile.stock-count');
+// });

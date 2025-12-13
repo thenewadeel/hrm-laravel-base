@@ -97,6 +97,11 @@ class Member extends Model
         return trim("{$this->title} {$this->first_name} {$this->last_name}");
     }
 
+    public function getNameAttribute(): string
+    {
+        return $this->full_name;
+    }
+
     public function getAgeAttribute(): ?int
     {
         return $this->date_of_birth ? $this->date_of_birth->age : null;

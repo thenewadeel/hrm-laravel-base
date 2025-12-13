@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Services;
 
-use App\Models\Inventory\Store;
 use App\Models\Inventory\Item;
+use App\Models\Inventory\Store;
 use App\Models\Inventory\Transaction;
 use App\Models\Organization;
 use App\Models\OrganizationUnit;
@@ -11,15 +11,14 @@ use App\Models\User;
 use App\Services\InventoryService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\Traits\SetupInventory;
-use Illuminate\Support\Facades\Artisan;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
+use Tests\Traits\SetupInventory;
 use Tests\Traits\SetupOrganization;
 
 class InventoryServiceTest extends TestCase
 {
-    use RefreshDatabase, SetupOrganization, SetupInventory;
+    use RefreshDatabase, SetupInventory, SetupOrganization;
 
     private InventoryService $inventoryService;
     // private User $user;
@@ -43,7 +42,7 @@ class InventoryServiceTest extends TestCase
             'code' => 'WH002',
             'location' => 'Building B',
             // 'organization_id' => $this->organization->id,
-            'organization_unit_id' => $this->organizationUnit->id
+            'organization_unit_id' => $this->organizationUnit->id,
         ];
 
         $store = $this->inventoryService->createStore($storeData, $this->user);
@@ -63,7 +62,7 @@ class InventoryServiceTest extends TestCase
         $this->assertDatabaseHas('inventory_store_items', [
             'store_id' => $this->store->id,
             'item_id' => $this->item->id,
-            'quantity' => 100
+            'quantity' => 100,
         ]);
     }
 
@@ -84,7 +83,7 @@ class InventoryServiceTest extends TestCase
             'item_id' => $this->item->id,
             'quantity' => 100,
             'min_stock' => 10,
-            'max_stock' => 200
+            'max_stock' => 200,
         ]);
     }
 
@@ -100,7 +99,7 @@ class InventoryServiceTest extends TestCase
         $this->assertDatabaseHas('inventory_store_items', [
             'store_id' => $this->store->id,
             'item_id' => $this->item->id,
-            'quantity' => 80
+            'quantity' => 80,
         ]);
 
         // Adjust by -20
@@ -109,7 +108,7 @@ class InventoryServiceTest extends TestCase
         $this->assertDatabaseHas('inventory_store_items', [
             'store_id' => $this->store->id,
             'item_id' => $this->item->id,
-            'quantity' => 60
+            'quantity' => 60,
         ]);
     }
 
@@ -118,7 +117,7 @@ class InventoryServiceTest extends TestCase
     {
         $transactionData = [
             'store_id' => $this->store->id,
-            'type' => 'incoming',
+            'type' => 'receipt',
             'reference' => 'TRX001',
             'transaction_date' => now(),
         ];
@@ -132,7 +131,7 @@ class InventoryServiceTest extends TestCase
             'item_id' => $this->item->id,
             'quantity' => 25,
             'unit_price' => 15.50,
-            'notes' => 'Test item'
+            'notes' => 'Test item',
         ]];
 
         $transaction = $this->inventoryService->addItemsToTransaction($transaction, $items, $this->user);
@@ -147,7 +146,7 @@ class InventoryServiceTest extends TestCase
         $this->assertDatabaseHas('inventory_store_items', [
             'store_id' => $this->store->id,
             'item_id' => $this->item->id,
-            'quantity' => 25
+            'quantity' => 25,
         ]);
     }
 
@@ -156,7 +155,7 @@ class InventoryServiceTest extends TestCase
     {
         $transactionData = [
             'store_id' => $this->store->id,
-            'type' => 'incoming',
+            'type' => 'receipt',
             'reference' => 'TRX002',
             'transaction_date' => now(),
         ];
@@ -178,7 +177,7 @@ class InventoryServiceTest extends TestCase
         $lowStockItem = Item::factory()->create([
             'organization_id' => $this->organization->id,
             // 'organization_unit_id' => $this->organizationUnit->id,
-            'reorder_level' => 20
+            'reorder_level' => 20,
         ]);
         $this->store->items()->attach($lowStockItem->id, ['quantity' => 10]);
 
@@ -198,7 +197,7 @@ class InventoryServiceTest extends TestCase
             // 'organization_id' => $this->organization->id,
             'organization_unit_id' => $this->organizationUnit->id,
             'name' => 'Secondary Store',
-            'code' => 'WH002'
+            'code' => 'WH002',
         ]);
 
         $this->store->items()->attach($this->item->id, ['quantity' => 50]);
@@ -219,15 +218,15 @@ class InventoryServiceTest extends TestCase
         $transaction = Transaction::factory()->create([
             'store_id' => $this->store->id,
             'status' => 'finalized',
-            'type' => 'incoming',
-            'created_by' => $this->user->id
+            'type' => 'receipt',
+            'created_by' => $this->user->id,
         ]);
 
         $items = [[
             'item_id' => $this->item->id,
             'quantity' => 10,
             'unit_price' => 10.00,
-            'notes' => 'Test'
+            'notes' => 'Test',
         ]];
 
         // ✅ Change to expect AuthorizationException instead of generic Exception
@@ -242,7 +241,7 @@ class InventoryServiceTest extends TestCase
     {
         $transactionData = [
             'store_id' => $this->store->id,
-            'type' => 'incoming',
+            'type' => 'receipt',
             'reference' => 'TRX003',
             'transaction_date' => now(),
         ];
@@ -261,8 +260,8 @@ class InventoryServiceTest extends TestCase
         $transaction = Transaction::factory()->create([
             'store_id' => $this->store->id,
             'status' => 'finalized',
-            'type' => 'incoming',
-            'created_by' => $this->user->id
+            'type' => 'receipt',
+            'created_by' => $this->user->id,
         ]);
 
         $this->expectException(\Exception::class);
@@ -277,7 +276,7 @@ class InventoryServiceTest extends TestCase
         $lowStockItem = Item::factory()->create([
             'organization_id' => $this->organization->id,
             // 'organization_unit_id' => $this->organizationUnit->id,
-            'reorder_level' => 20
+            'reorder_level' => 20,
         ]);
 
         $this->store->items()->attach($lowStockItem->id, ['quantity' => 15]); // Below reorder level
@@ -300,7 +299,7 @@ class InventoryServiceTest extends TestCase
 
         $this->store->items()->attach($itemWithMaxStock->id, [
             'quantity' => 150,
-            'max_stock' => 100
+            'max_stock' => 100,
         ]);
 
         $stockLevels = $this->inventoryService->getStoreStockLevels($this->store, $this->user);

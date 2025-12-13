@@ -205,6 +205,14 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasPermission(MembershipPermissions::VIEW_DASHBOARD);
         });
 
+        Gate::define(MembershipPermissions::EXPORT_DATA, function (User $user) {
+            return $user->hasPermission(MembershipPermissions::EXPORT_DATA);
+        });
+
+        Gate::define(MembershipPermissions::GENERATE_REPORTS, function (User $user) {
+            return $user->hasPermission(MembershipPermissions::GENERATE_REPORTS);
+        });
+
         // Membership Role Gates
         Gate::define(MembershipRoles::MEMBERSHIP_ADMIN, function (User $user, $organization = null) {
             return $user->hasRole(MembershipRoles::MEMBERSHIP_ADMIN, $organization);

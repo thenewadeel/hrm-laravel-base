@@ -3,15 +3,110 @@
 namespace App\Http\Controllers\Inventory;
 
 use App\Http\Controllers\Controller;
-use App\Models\Inventory\Store;
 use App\Models\Inventory\Item;
+use App\Models\Inventory\Store;
 use App\Models\Inventory\Transaction;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 
 class InventoryStockController extends Controller
 {
+    /**
+     * Display stock management dashboard.
+     */
+    public function index(): View
+    {
+        // Get recent stock adjustments
+        $recentAdjustments = Transaction::where('type', 'adjustment')
+            ->with(['store', 'createdBy'])
+            ->latest()
+            ->limit(5)
+            ->get();
+
+        // Get recent stock transfers
+        $recentTransfers = Transaction::where('type', 'transfer')
+            ->with(['store', 'toStore', 'createdBy'])
+            ->latest()
+            ->limit(5)
+            ->get();
+
+        // Get recent stock counts
+        $recentCounts = Transaction::where('type', 'count')
+            ->with(['store', 'createdBy'])
+            ->latest()
+            ->limit(5)
+            ->get();
+
+        // Calculate total stock value across all stores
+        $stores = Store::with('items')->get();
+        $totalStockValue = $stores->sum(function ($store) {
+            return $store->items->sum(function ($item) {
+                return $item->pivot->quantity * ($item->cost_price ?? 0);
+            });
+        });
+
+        // Count pending adjustments (draft status)
+        $pendingAdjustments = Transaction::where('type', 'adjustment')
+            ->where('status', 'draft')
+            ->count();
+
+        // Count active transfers (non-completed transfers)
+        $activeTransfers = Transaction::where('type', 'transfer')
+            ->whereIn('status', ['draft', 'pending'])
+            ->count();
+
+        // Count stock counts this month
+        $monthlyCounts = Transaction::where('type', 'count')
+            ->whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->count();
+
+        // Get critical stock items (below reorder level)
+        $criticalStockItems = 0;
+        foreach ($stores as $store) {
+            $criticalStockItems += $store->lowStockItems()->count();
+        }
+
+        // Get pending approvals (if approval system is implemented)
+        $pendingApprovals = Transaction::whereIn('type', ['adjustment', 'transfer'])
+            ->where('status', 'pending')
+            ->count();
+
+        // Get overdue counts (if count scheduling is implemented)
+        $overdueCounts = 0; // Placeholder - would depend on count scheduling system
+
+        // Get scheduled transfers (if transfer scheduling is implemented)
+        $scheduledTransfers = 0; // Placeholder - would depend on transfer scheduling system
+
+        // Get store stock summary
+        $storeStockSummary = $stores->map(function ($store) {
+            return (object) [
+                'name' => $store->name,
+                'total_items' => $store->items->count(),
+                'total_quantity' => $store->items->sum('pivot.quantity'),
+                'total_value' => $store->items->sum(function ($item) {
+                    return $item->pivot->quantity * ($item->cost_price ?? 0);
+                }),
+            ];
+        });
+
+        return view('inventory.stock.index', compact(
+            'recentAdjustments',
+            'recentTransfers',
+            'recentCounts',
+            'totalStockValue',
+            'pendingAdjustments',
+            'activeTransfers',
+            'monthlyCounts',
+            'criticalStockItems',
+            'pendingApprovals',
+            'overdueCounts',
+            'scheduledTransfers',
+            'storeStockSummary'
+        ));
+    }
+
     /**
      * Show stock adjustment form.
      */
@@ -20,7 +115,14 @@ class InventoryStockController extends Controller
         $stores = Store::where('is_active', true)->get();
         $items = Item::where('is_active', true)->get();
 
-        return view('inventory.stock.adjustment', compact('stores', 'items'));
+        // Get recent stock adjustments for display
+        $recentAdjustments = Transaction::where('type', 'adjustment')
+            ->with(['store', 'createdBy'])
+            ->latest()
+            ->limit(5)
+            ->get();
+
+        return view('inventory.stock.adjustment', compact('stores', 'items', 'recentAdjustments'));
     }
 
     /**
@@ -41,7 +143,7 @@ class InventoryStockController extends Controller
         $transaction = Transaction::create([
             'store_id' => $validated['store_id'],
             'type' => 'adjustment',
-            'reference' => 'ADJ-' . date('Ymd-His'),
+            'reference' => 'ADJ-'.date('Ymd-His'),
             'transaction_date' => now(),
             'notes' => $validated['notes'],
             'created_by' => auth()->id(),
@@ -68,7 +170,7 @@ class InventoryStockController extends Controller
             if ($storeItem) {
                 $newQuantity = $storeItem->pivot->quantity + $adjustment['quantity'];
                 $store->items()->updateExistingPivot($adjustment['item_id'], [
-                    'quantity' => max(0, $newQuantity)
+                    'quantity' => max(0, $newQuantity),
                 ]);
                 // dd($transaction->all());
             }
@@ -84,7 +186,15 @@ class InventoryStockController extends Controller
     public function count(): View
     {
         $stores = Store::where('is_active', true)->get();
-        return view('inventory.stock.count', compact('stores'));
+
+        // Get recent stock counts for display
+        $recentCounts = Transaction::where('type', 'count')
+            ->with(['store', 'createdBy'])
+            ->latest()
+            ->limit(5)
+            ->get();
+
+        return view('inventory.stock.count', compact('stores', 'recentCounts'));
     }
 
     /**
@@ -104,7 +214,7 @@ class InventoryStockController extends Controller
         $transaction = Transaction::create([
             'store_id' => $validated['store_id'],
             'type' => 'count',
-            'reference' => 'CNT-' . date('Ymd-His'),
+            'reference' => 'CNT-'.date('Ymd-His'),
             'transaction_date' => now(),
             'notes' => $validated['notes'],
             'created_by' => auth()->id(),
@@ -133,7 +243,7 @@ class InventoryStockController extends Controller
 
                     // Update to counted quantity
                     $store->items()->updateExistingPivot($count['item_id'], [
-                        'quantity' => $count['counted_quantity']
+                        'quantity' => $count['counted_quantity'],
                     ]);
                 }
             }
@@ -151,7 +261,14 @@ class InventoryStockController extends Controller
         $stores = Store::where('is_active', true)->get();
         $items = Item::where('is_active', true)->get();
 
-        return view('inventory.stock.transfer', compact('stores', 'items'));
+        // Get recent stock transfers for display
+        $recentTransfers = Transaction::where('type', 'transfer')
+            ->with(['store', 'toStore', 'createdBy'])
+            ->latest()
+            ->limit(5)
+            ->get();
+
+        return view('inventory.stock.transfer', compact('stores', 'items', 'recentTransfers'));
     }
 
     /**
@@ -168,28 +285,28 @@ class InventoryStockController extends Controller
             'notes' => 'nullable|string',
         ]);
 
-        // Create out transaction for source store
+        // Create issue transaction for source store
         $outTransaction = Transaction::create([
             'store_id' => $validated['from_store_id'],
-            'type' => 'out',
-            'reference' => 'TRF-OUT-' . date('Ymd-His'),
+            'type' => 'issue',
+            'reference' => 'TRF-OUT-'.date('Ymd-His'),
             'transaction_date' => now(),
-            'notes' => $validated['notes'] . ' (Transfer out)',
+            'notes' => $validated['notes'].' (Transfer out)',
             'created_by' => auth()->id(),
-            'status' => 'completed',
+            'status' => 'finalized',
             'finalized_at' => now(),
             'approved_by' => auth()->id(),
         ]);
 
-        // Create in transaction for destination store
+        // Create receipt transaction for destination store
         $inTransaction = Transaction::create([
             'store_id' => $validated['to_store_id'],
-            'type' => 'in',
-            'reference' => 'TRF-IN-' . date('Ymd-His'),
+            'type' => 'receipt',
+            'reference' => 'TRF-IN-'.date('Ymd-His'),
             'transaction_date' => now(),
-            'notes' => $validated['notes'] . ' (Transfer in)',
+            'notes' => $validated['notes'].' (Transfer in)',
             'created_by' => auth()->id(),
-            'status' => 'completed',
+            'status' => 'finalized',
             'finalized_at' => now(),
             'approved_by' => auth()->id(),
         ]);
@@ -202,7 +319,7 @@ class InventoryStockController extends Controller
                 'item_id' => $transfer['item_id'],
                 'quantity' => $transfer['quantity'],
                 'unit_price' => $item->unit_price ?? 0, // Add this line
-                'notes' => 'Transfer to ' . Store::find($validated['to_store_id'])->name,
+                'notes' => 'Transfer to '.Store::find($validated['to_store_id'])->name,
             ]);
 
             // In transaction item
@@ -210,7 +327,7 @@ class InventoryStockController extends Controller
                 'item_id' => $transfer['item_id'],
                 'quantity' => $transfer['quantity'],
                 'unit_price' => $item->unit_price ?? 0, // Add this line
-                'notes' => 'Transfer from ' . Store::find($validated['from_store_id'])->name,
+                'notes' => 'Transfer from '.Store::find($validated['from_store_id'])->name,
             ]);
 
             // Update quantities
@@ -226,13 +343,13 @@ class InventoryStockController extends Controller
 
             if ($fromStoreItem) {
                 $fromStoreItem->pivot->update([
-                    'quantity' => max(0, $fromStoreItem->pivot->quantity - $transfer['quantity'])
+                    'quantity' => max(0, $fromStoreItem->pivot->quantity - $transfer['quantity']),
                 ]);
             }
 
             if ($toStoreItem) {
                 $toStoreItem->pivot->update([
-                    'quantity' => $toStoreItem->pivot->quantity + $transfer['quantity']
+                    'quantity' => $toStoreItem->pivot->quantity + $transfer['quantity'],
                 ]);
             }
             // dd([

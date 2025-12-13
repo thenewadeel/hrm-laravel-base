@@ -12,7 +12,7 @@ uses(RefreshDatabase::class);
 
 test('customer financial fields work correctly', function () {
     $organization = Organization::factory()->create();
-    
+
     $customer = Customer::factory()->create([
         'organization_id' => $organization->id,
         'credit_limit' => 10000.00,
@@ -36,28 +36,28 @@ test('customer relationships work correctly', function () {
 
 test('customer soft deletes work', function () {
     $customer = Customer::factory()->create();
-    
+
     $customer->delete();
-    
+
     expect($customer->trashed())->toBeTrue();
     expect(Customer::find($customer->id))->toBeNull();
 });
 
 test('customer scopes work correctly', function () {
     $organization = Organization::factory()->create();
-    
+
     $activeCustomer = Customer::factory()->create([
         'organization_id' => $organization->id,
         'is_active' => true,
     ]);
-    
+
     $inactiveCustomer = Customer::factory()->create([
         'organization_id' => $organization->id,
         'is_active' => false,
     ]);
 
     $activeCustomers = Customer::active()->get();
-    
+
     expect($activeCustomers)->toHaveCount(1);
     expect($activeCustomers->first()->id)->toBe($activeCustomer->id);
 });
@@ -72,7 +72,7 @@ test('customer full address concatenates correctly', function () {
     ]);
 
     $expectedAddress = '123 Main St, Test City, TX, 12345, US';
-    
+
     expect($customer->full_address)->toBe($expectedAddress);
 });
 
@@ -81,7 +81,7 @@ test('invoice can be created with all relationships', function () {
     $customer = Customer::factory()->create(['organization_id' => $organization->id]);
     $vendor = Vendor::factory()->create(['organization_id' => $organization->id]);
     $user = User::factory()->create();
-    
+
     $invoice = Invoice::factory()->create([
         'organization_id' => $organization->id,
         'customer_id' => $customer->id,
@@ -101,17 +101,17 @@ test('invoice can be created with all relationships', function () {
 
 test('invoice status scopes work correctly', function () {
     $organization = Organization::factory()->create();
-    
+
     $draftInvoice = Invoice::factory()->create([
         'organization_id' => $organization->id,
         'status' => 'draft',
     ]);
-    
+
     $sentInvoice = Invoice::factory()->create([
         'organization_id' => $organization->id,
         'status' => 'sent',
     ]);
-    
+
     $paidInvoice = Invoice::factory()->create([
         'organization_id' => $organization->id,
         'status' => 'paid',
@@ -125,14 +125,14 @@ test('invoice status scopes work correctly', function () {
 
 test('invoice amount due calculation works', function () {
     $organization = Organization::factory()->create();
-    
+
     $invoice = Invoice::factory()->create([
         'organization_id' => $organization->id,
         'total_amount' => 5000.00,
     ]);
 
     // Create some payments for the invoice
-    Payment::factory()->count(3)->create([
+    Payment::factory()->create([
         'invoice_id' => $invoice->id,
         'amount' => 2000.00,
         'status' => 'received',
@@ -143,7 +143,7 @@ test('invoice amount due calculation works', function () {
 
 test('invoice overdue detection works', function () {
     $organization = Organization::factory()->create();
-    
+
     $paidInvoice = Invoice::factory()->create([
         'organization_id' => $organization->id,
         'total_amount' => 5000.00,
@@ -167,7 +167,7 @@ test('payment can be created with relationships', function () {
     $customer = Customer::factory()->create(['organization_id' => $organization->id]);
     $invoice = Invoice::factory()->create(['organization_id' => $organization->id]);
     $user = User::factory()->create();
-    
+
     $payment = Payment::factory()->create([
         'organization_id' => $organization->id,
         'customer_id' => $customer->id,
@@ -188,12 +188,12 @@ test('payment can be created with relationships', function () {
 
 test('payment status scopes work correctly', function () {
     $organization = Organization::factory()->create();
-    
+
     $receivedPayment = Payment::factory()->create([
         'organization_id' => $organization->id,
         'status' => 'received',
     ]);
-    
+
     $pendingPayment = Payment::factory()->create([
         'organization_id' => $organization->id,
         'status' => 'pending',
@@ -206,12 +206,12 @@ test('payment status scopes work correctly', function () {
 
 test('payment fully applied calculation works', function () {
     $organization = Organization::factory()->create();
-    
+
     $invoice = Invoice::factory()->create([
         'organization_id' => $organization->id,
         'total_amount' => 5000.00,
     ]);
-    
+
     // Create payments that fully cover the invoice
     Payment::factory()->count(2)->create([
         'invoice_id' => $invoice->id,

@@ -14,6 +14,7 @@ uses(RefreshDatabase::class);
 test('fee distribution rule manager component renders', function () {
     $user = User::factory()->create();
     $organization = Organization::factory()->create();
+    $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
@@ -25,6 +26,7 @@ test('fee distribution rule manager component renders', function () {
 test('fee distribution rule manager loads rules for organization', function () {
     $user = User::factory()->create();
     $organization = Organization::factory()->create();
+    $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
     $rule = FeeDistributionRule::factory()->create([
@@ -48,6 +50,7 @@ test('fee distribution rule manager loads rules for organization', function () {
 test('fee distribution rule manager loads chart of accounts', function () {
     $user = User::factory()->create();
     $organization = Organization::factory()->create();
+    $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
     $account = ChartOfAccount::factory()->create([

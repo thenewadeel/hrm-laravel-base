@@ -2,16 +2,13 @@
 
 namespace App\Services;
 
-use App\Models\Inventory\Store;
 use App\Models\Inventory\Item;
+use App\Models\Inventory\Store;
 use App\Models\Inventory\Transaction;
-use App\Models\Inventory\TransactionItem;
 use App\Models\Organization;
 use App\Models\User;
-use App\Permissions\InventoryPermissions;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Validation\ValidationException;
 
 class InventoryService
 {
@@ -24,8 +21,7 @@ class InventoryService
         // dd(Gate::authorize('create', Store::class));
         Gate::authorize('create', Store::class);
 
-
-        return DB::transaction(function () use ($data, $user) {
+        return DB::transaction(function () use ($data) {
             $store = Store::create($data);
 
             // Log activity or trigger events here if needed
@@ -57,11 +53,11 @@ class InventoryService
         DB::transaction(function () use ($store, $item, $quantity, $minStock, $maxStock) {
             $pivotData = ['quantity' => max(0, $quantity)];
 
-            if (!is_null($minStock)) {
+            if (! is_null($minStock)) {
                 $pivotData['min_stock'] = $minStock;
             }
 
-            if (!is_null($maxStock)) {
+            if (! is_null($maxStock)) {
                 $pivotData['max_stock'] = $maxStock;
             }
 
@@ -71,8 +67,6 @@ class InventoryService
             $store->touch();
         });
     }
-
-
 
     /**
      * Adjust store inventory (increment/decrement)
@@ -85,8 +79,13 @@ class InventoryService
             $currentQuantity = $store->getItemQuantity($item);
             $newQuantity = max(0, $currentQuantity + $adjustment);
 
+            // Ensure we're working with the correct store instance
+            if (! $store->exists) {
+                $store = Store::find($store->id);
+            }
+
             $store->items()->syncWithoutDetaching([
-                $item->id => ['quantity' => $newQuantity]
+                $item->id => ['quantity' => $newQuantity],
             ]);
 
             // Log adjustment activity
@@ -114,7 +113,7 @@ class InventoryService
             ]);
 
             // ✅ FIX: Check if items exist and create them
-            if (isset($data['items']) && is_array($data['items']) && !empty($data['items'])) {
+            if (isset($data['items']) && is_array($data['items']) && ! empty($data['items'])) {
                 foreach ($data['items'] as $itemData) {
                     $transaction->items()->create([
                         'item_id' => $itemData['item_id'],
@@ -131,6 +130,7 @@ class InventoryService
             return $transaction;
         });
     }
+
     /**
      * Add items to a draft transaction
      */
@@ -138,7 +138,7 @@ class InventoryService
     {
         Gate::authorize('update', $transaction);
 
-        if (!$transaction->isDraft()) {
+        if (! $transaction->isDraft()) {
             throw new \Exception('Cannot modify finalized or cancelled transaction');
         }
 
@@ -163,17 +163,13 @@ class InventoryService
     {
         Gate::authorize('finalize', $transaction);
 
-        if (!$transaction->isDraft()) {
+        if (! $transaction->isDraft()) {
             throw new \Exception('Transaction is not in draft status');
         }
 
         if ($transaction->items->isEmpty()) {
-            // ✅ Change from generic Exception to ValidationException
-            throw ValidationException::withMessages([
-                'items' => ['Cannot finalize transaction with no items']
-            ]);
+            throw new \Exception('Cannot finalize transaction with no items');
         }
-
 
         return DB::transaction(function () use ($transaction, $user) {
             // Update store inventory based on transaction type
@@ -349,8 +345,9 @@ class InventoryService
     private function getQuantityAdjustment(string $transactionType, int $quantity): int
     {
         return match ($transactionType) {
-            Transaction::TYPE_INCOMING => $quantity, // Increase stock
-            Transaction::TYPE_OUTGOING => -$quantity, // Decrease stock
+            Transaction::TYPE_RECEIPT => $quantity, // Increase stock
+            Transaction::TYPE_ISSUE => -$quantity, // Decrease stock
+            Transaction::TYPE_TRANSFER => -$quantity, // Decrease from source store
             Transaction::TYPE_ADJUSTMENT => $quantity, // Can be positive or negative
             default => 0,
         };

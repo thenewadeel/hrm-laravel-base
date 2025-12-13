@@ -40,6 +40,10 @@
         </div>
     </div>
 
+    <x-navigation.dropdown-link href="{{ route('inventory.stock.index') }}" icon="📊">
+        Stock Dashboard
+    </x-navigation.dropdown-link>
+
     <x-navigation.dropdown-link href="{{ route('inventory.stock.adjustment') }}" icon="⚖️">
         Stock Adjustment
     </x-navigation.dropdown-link>

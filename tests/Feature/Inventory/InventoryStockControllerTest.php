@@ -2,16 +2,16 @@
 
 namespace Tests\Feature\Inventory;
 
-use Tests\TestCase;
 use App\Models\Inventory\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupInventory;
 use Tests\Traits\SetupOrganization;
 
 class InventoryStockControllerTest extends TestCase
 {
-    use RefreshDatabase, SetupOrganization, SetupInventory;
+    use RefreshDatabase, SetupInventory, SetupOrganization;
 
     protected function setUp(): void
     {
@@ -49,14 +49,14 @@ class InventoryStockControllerTest extends TestCase
                 [
                     'item_id' => $items[0]->id,
                     'quantity' => 5, // Positive adjustment
-                    'reason' => 'Found extra stock'
+                    'reason' => 'Found extra stock',
                 ],
                 [
                     'item_id' => $items[1]->id,
                     'quantity' => -3, // Negative adjustment
-                    'reason' => 'Damaged goods'
-                ]
-            ]
+                    'reason' => 'Damaged goods',
+                ],
+            ],
         ];
         // dd([$adjustmentData]);
         $response = $this->post(route('inventory.stock.process-adjustment'), $adjustmentData);
@@ -66,7 +66,7 @@ class InventoryStockControllerTest extends TestCase
 
         $this->assertDatabaseHas('inventory_transactions', [
             'type' => 'adjustment',
-            'status' => 'completed'
+            'status' => 'completed',
         ]);
 
         // Refresh the pivot data
@@ -107,13 +107,13 @@ class InventoryStockControllerTest extends TestCase
             'counts' => [
                 [
                     'item_id' => $items[0]->id,
-                    'counted_quantity' => 12 // Should create +2 adjustment
+                    'counted_quantity' => 12, // Should create +2 adjustment
                 ],
                 [
                     'item_id' => $items[1]->id,
-                    'counted_quantity' => 8 // Should create -2 adjustment
-                ]
-            ]
+                    'counted_quantity' => 8, // Should create -2 adjustment
+                ],
+            ],
         ];
 
         $response = $this->post(route('inventory.stock.process-count'), $countData);
@@ -123,7 +123,7 @@ class InventoryStockControllerTest extends TestCase
 
         $this->assertDatabaseHas('inventory_transactions', [
             'type' => 'count',
-            'status' => 'completed'
+            'status' => 'completed',
         ]);
 
         // Check if quantities were updated to counted values
@@ -145,8 +145,6 @@ class InventoryStockControllerTest extends TestCase
         $response->assertViewHas('items');
     }
 
-
-
     #[Test]
     public function it_processes_stock_transfer()
     {
@@ -158,12 +156,12 @@ class InventoryStockControllerTest extends TestCase
         // Set initial quantities
         $fromStore->items()->sync([
             $items[0]->id => ['quantity' => 20],
-            $items[1]->id => ['quantity' => 15]
+            $items[1]->id => ['quantity' => 15],
         ]);
 
         $toStore->items()->sync([
             $items[0]->id => ['quantity' => 5],
-            $items[1]->id => ['quantity' => 10]
+            $items[1]->id => ['quantity' => 10],
         ]);
         // dd([
         //     'fromItems' => $fromStore->items()->get()->toArray(),
@@ -176,13 +174,13 @@ class InventoryStockControllerTest extends TestCase
             'transfers' => [
                 [
                     'item_id' => $items[0]->id,
-                    'quantity' => 5
+                    'quantity' => 5,
                 ],
                 [
                     'item_id' => $items[1]->id,
-                    'quantity' => 3
-                ]
-            ]
+                    'quantity' => 3,
+                ],
+            ],
         ];
 
         $response = $this->post(route('inventory.stock.process-transfer'), $transferData);
@@ -193,13 +191,13 @@ class InventoryStockControllerTest extends TestCase
         // Check if out transaction was created
         $this->assertDatabaseHas('inventory_transactions', [
             'store_id' => $fromStore->id,
-            'type' => 'out',
+            'type' => 'issue',
         ]);
 
         // Check if in transaction was created
         $this->assertDatabaseHas('inventory_transactions', [
             'store_id' => $toStore->id,
-            'type' => 'in',
+            'type' => 'receipt',
         ]);
 
         // Refresh pivot data

@@ -49,7 +49,8 @@ test('payroll calculation includes allowances correctly', function () {
         'organization_id' => $organization->id,
         'allowance_type_id' => $allowanceType->id,
         'amount' => 500,
-        'effective_date' => now()->subMonth(), // Make it effective before the period
+        'effective_date' => now()->subMonths(2), // Make it effective well before the period
+        'is_active' => true,
     ]);
 
     $service = new PayrollCalculationService;
@@ -80,7 +81,8 @@ test('payroll calculation includes deductions correctly', function () {
         'organization_id' => $organization->id,
         'deduction_type_id' => $deductionType->id,
         'amount' => 200,
-        'effective_date' => now()->subMonth(), // Make it effective before the period
+        'effective_date' => now()->subMonths(2), // Make it effective well before the period
+        'is_active' => true,
     ]);
 
     $service = new PayrollCalculationService;

@@ -16,7 +16,7 @@
                 </div>
                 <div>
                     <p class="text-sm text-gray-500 dark:text-gray-400">Active Rules</p>
-                    <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ $getActiveRulesCount() }}</p>
+                    <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ $this->getActiveRulesCount() }}</p>
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
                 </div>
                 <div>
                     <p class="text-sm text-gray-500 dark:text-gray-400">Annual Revenue</p>
-                    <p class="text-2xl font-bold text-gray-900 dark:text-white">${{ number_format($getTotalAnnualRevenue(), 0) }}</p>
+                    <p class="text-2xl font-bold text-gray-900 dark:text-white">${{ number_format($this->getTotalAnnualRevenue(), 0) }}</p>
                 </div>
             </div>
         </div>

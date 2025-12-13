@@ -149,19 +149,23 @@ it('creates a cash payment successfully', function () {
         'name' => 'Expense Account',
     ]);
 
-    // Create a receipt first to give cash account balance
+    // Create a receipt first to give cash account balance using the service
     $creditAccount = ChartOfAccount::factory()->create([
         'organization_id' => $organization->id,
         'type' => 'revenue',
         'name' => 'Revenue Account',
     ]);
 
-    \App\Models\Accounting\CashReceipt::factory()->create([
-        'organization_id' => $organization->id,
+    $receiptData = [
+        'date' => now()->format('Y-m-d'),
+        'received_from' => 'Initial Balance',
+        'amount' => 1000.00,
         'cash_account_id' => $cashAccount->id,
         'credit_account_id' => $creditAccount->id,
-        'amount' => 1000.00,
-    ]);
+        'description' => 'Initial cash balance for testing',
+    ];
+
+    app(\App\Services\CashReceiptService::class)->createReceipt($receiptData, $organization->id);
 
     Livewire::actingAs($user)
         ->test(CashManagementDemo::class, ['organizationId' => $organization->id])
@@ -268,19 +272,23 @@ it('resets form after successful payment creation', function () {
         'name' => 'Expense Account',
     ]);
 
-    // Create a receipt first to give cash account balance
+    // Create a receipt first to give cash account balance using the service
     $creditAccount = ChartOfAccount::factory()->create([
         'organization_id' => $organization->id,
         'type' => 'revenue',
         'name' => 'Revenue Account',
     ]);
 
-    \App\Models\Accounting\CashReceipt::factory()->create([
-        'organization_id' => $organization->id,
+    $receiptData = [
+        'date' => now()->format('Y-m-d'),
+        'received_from' => 'Initial Balance',
+        'amount' => 1000.00,
         'cash_account_id' => $cashAccount->id,
         'credit_account_id' => $creditAccount->id,
-        'amount' => 1000.00,
-    ]);
+        'description' => 'Initial cash balance for testing',
+    ];
+
+    app(\App\Services\CashReceiptService::class)->createReceipt($receiptData, $organization->id);
 
     Livewire::actingAs($user)
         ->test(CashManagementDemo::class, ['organizationId' => $organization->id])

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Inventory\Item;
 use App\Models\Inventory\Store;
 use App\Models\Inventory\Transaction;
+use App\Models\Inventory\TransactionItem;
 use App\Services\InventoryPdfService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
