@@ -93,6 +93,6 @@ class PermissionTest extends TestCase
         Auth::logout();
         $this->actingAs($setupA['user'])
             ->getJson("/api/inventory/stores/{$storeB->id}")
-            ->assertStatus(403);
+            ->assertStatus(404); // Store not found due to organization scope
     }
 }

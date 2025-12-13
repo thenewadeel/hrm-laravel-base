@@ -60,9 +60,12 @@ test('fee distribution rule manager loads chart of accounts', function () {
         'type' => 'revenue',
     ]);
 
-    Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class)
-        ->assertSee('4000 - Test Account (revenue)');
+    $component = Livewire::actingAs($user)
+        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class);
+    
+    // Test that chart of accounts are loaded in component property
+    expect($component->chartOfAccounts)->toHaveCount(1);
+    expect($component->chartOfAccounts)->toHaveKey($account->id);
 });
 
 // RED: Test creating a new rule
@@ -109,6 +112,7 @@ test('fee distribution rule manager validates rule creation', function () {
 test('fee distribution rule manager can edit rule', function () {
     $user = User::factory()->create();
     $organization = Organization::factory()->create();
+    $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
     $rule = FeeDistributionRule::factory()->create([

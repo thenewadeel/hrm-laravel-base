@@ -323,7 +323,7 @@ class ItemTest extends TestCase
             ->getJson("/api/inventory/items/{$itemB->id}/availability");
         // dd($response->json());
 
-        $response->assertStatus(403);
+        $response->assertStatus(404); // Item not found due to organization scope
     }
 
     #[Test]

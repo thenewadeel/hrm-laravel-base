@@ -72,15 +72,23 @@ test('fee distribution log viewer searches by description', function () {
         'description' => 'Late Payment Penalty',
     ]);
 
-    FeeDistributionLog::factory()->successful()->create([
-        'organization_id' => $organization->id,
-        'member_fee_id' => $memberFee1->id,
-    ]);
+    FeeDistributionLog::factory()
+        ->successful()
+        ->create([
+            'organization_id' => $organization->id,
+            'member_fee_id' => $memberFee1->id,
+            'total_amount' => 1000,
+            'fee_distribution_rule_id' => null,
+        ]);
 
-    FeeDistributionLog::factory()->successful()->create([
-        'organization_id' => $organization->id,
-        'member_fee_id' => $memberFee2->id,
-    ]);
+    FeeDistributionLog::factory()
+        ->successful()
+        ->create([
+            'organization_id' => $organization->id,
+            'member_fee_id' => $memberFee2->id,
+            'total_amount' => 500,
+            'fee_distribution_rule_id' => null,
+        ]);
 
     Livewire::actingAs($user)
         ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
@@ -127,15 +135,21 @@ test('fee distribution log viewer filters by status', function () {
 
     $memberFee = MemberFee::factory()->create(['organization_id' => $organization->id]);
 
-    FeeDistributionLog::factory()->successful()->create([
-        'organization_id' => $organization->id,
-        'member_fee_id' => $memberFee->id,
-    ]);
+    FeeDistributionLog::factory()
+        ->successful()
+        ->create([
+            'organization_id' => $organization->id,
+            'member_fee_id' => $memberFee->id,
+            'fee_distribution_rule_id' => null,
+        ]);
 
-    FeeDistributionLog::factory()->failed()->create([
-        'organization_id' => $organization->id,
-        'member_fee_id' => $memberFee->id,
-    ]);
+    FeeDistributionLog::factory()
+        ->failed()
+        ->create([
+            'organization_id' => $organization->id,
+            'member_fee_id' => $memberFee->id,
+            'fee_distribution_rule_id' => null,
+        ]);
 
     Livewire::actingAs($user)
         ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
@@ -161,15 +175,21 @@ test('fee distribution log viewer filters by fee type', function () {
         'fee_type' => 'late_fee',
     ]);
 
-    FeeDistributionLog::factory()->successful()->create([
-        'organization_id' => $organization->id,
-        'member_fee_id' => $subscriptionFee->id,
-    ]);
+    FeeDistributionLog::factory()
+        ->successful()
+        ->create([
+            'organization_id' => $organization->id,
+            'member_fee_id' => $subscriptionFee->id,
+            'fee_distribution_rule_id' => null,
+        ]);
 
-    FeeDistributionLog::factory()->successful()->create([
-        'organization_id' => $organization->id,
-        'member_fee_id' => $lateFee->id,
-    ]);
+    FeeDistributionLog::factory()
+        ->successful()
+        ->create([
+            'organization_id' => $organization->id,
+            'member_fee_id' => $lateFee->id,
+            'fee_distribution_rule_id' => null,
+        ]);
 
     Livewire::actingAs($user)
         ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
@@ -283,7 +303,7 @@ test('fee distribution log viewer calculates summary correctly', function () {
 
     $summary = $component->summary;
 
-    expect($summary['total_amount'])->toBe(2000.0); // 1000 + 500 (successful only)
+    expect($summary['total_amount'])->toBe(1500.0); // 1000 + 500 (successful only)
     expect($summary['success_count'])->toBe(2);
     expect($summary['failed_count'])->toBe(1);
     expect($summary['partial_count'])->toBe(1);
@@ -408,16 +428,22 @@ test('fee distribution log viewer respects organization isolation', function () 
     $user->update(['current_organization_id' => $organization1->id]);
 
     // Create log for user's organization
-    $userLog = FeeDistributionLog::factory()->successful()->create([
-        'organization_id' => $organization1->id,
-        'total_amount' => 1000,
-    ]);
+    $userLog = FeeDistributionLog::factory()
+        ->successful()
+        ->create([
+            'organization_id' => $organization1->id,
+            'total_amount' => 1000,
+            'fee_distribution_rule_id' => null,
+        ]);
 
     // Create log for different organization
-    $otherLog = FeeDistributionLog::factory()->successful()->create([
-        'organization_id' => $organization2->id,
-        'total_amount' => 500,
-    ]);
+    $otherLog = FeeDistributionLog::factory()
+        ->successful()
+        ->create([
+            'organization_id' => $organization2->id,
+            'total_amount' => 500,
+            'fee_distribution_rule_id' => null,
+        ]);
 
     Livewire::actingAs($user)
         ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
@@ -442,12 +468,14 @@ test('fee distribution log viewer loads logs with relationships', function () {
     $rule = FeeDistributionRule::factory()->create(['organization_id' => $organization->id]);
     $journalEntry = JournalEntry::factory()->create(['organization_id' => $organization->id]);
 
-    $log = FeeDistributionLog::factory()->successful()->create([
-        'organization_id' => $organization->id,
-        'member_fee_id' => $memberFee->id,
-        'fee_distribution_rule_id' => $rule->id,
-        'journal_entry_id' => $journalEntry->id,
-    ]);
+    $log = FeeDistributionLog::factory()
+        ->successful()
+        ->create([
+            'organization_id' => $organization->id,
+            'member_fee_id' => $memberFee->id,
+            'fee_distribution_rule_id' => $rule->id,
+            'journal_entry_id' => $journalEntry->id,
+        ]);
 
     $component = Livewire::actingAs($user)
         ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class);
