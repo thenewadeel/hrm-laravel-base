@@ -69,6 +69,25 @@ resources/views/
 │   │   └── stat-card.blade.php
 │   ├── data-table.blade.php
 │   ├── dialog-modal.blade.php
+│   ├── drawer
+│   │   ├── accounting-settings.blade.php
+│   │   ├── app-info.blade.php
+│   │   ├── app-navigation.blade.php
+│   │   ├── container.blade.php
+│   │   ├── drawer.blade.php
+│   │   ├── general-settings.blade.php
+│   │   ├── hr-settings.blade.php
+│   │   ├── inventory-settings.blade.php
+│   │   ├── module-settings.blade.php
+│   │   ├── organization-settings.blade.php
+│   │   ├── overlay.blade.php
+│   │   ├── toggle.blade.php
+│   │   ├── toggles
+│   │   │   ├── floating-toggles.blade.php
+│   │   │   └── header-toggles.blade.php
+│   │   └── user-preferences.blade.php
+│   ├── drawer-layout.blade.php
+│   ├── drawer-layout-simple.blade.php
 │   ├── dropdown.blade.php
 │   ├── dropdown-link.blade.php
 │   ├── empty-state.blade.php
@@ -377,7 +396,11 @@ resources/views/
 │   ├── team-member-manager.blade.php
 │   └── update-team-name-form.blade.php
 ├── terms.blade.php
+├── test-component.blade.php
+├── test-drawers.blade.php
+├── test-drawers-simple.blade.php
+├── test-minimal.blade.php
 ├── test-navigation.blade.php
 └── welcome.blade.php
 
-72 directories, 309 files
+74 directories, 330 files

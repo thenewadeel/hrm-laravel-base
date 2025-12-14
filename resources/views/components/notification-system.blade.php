@@ -1,6 +1,6 @@
 @props(['position' => 'top-right'])<div x-data="{
-    notifications: [{
-        id: Date.now() + Math.random(),
+    notifications: [{{-- {
+         id: Date.now() + Math.random(),
         type: 'success',
         message: 'Welcome to our application!',
         show: true
@@ -23,7 +23,7 @@
         id: Date.now() + Math.random(),
         message: 'Welcome to our application!',
         show: true
-    }],
+    } --}}],
     addNotification(type, message, event) {
         {{-- console.log('Type:' + type + ' Message:' + message + ' Event:'); --}}
         {{-- console.log({ event }); --}}

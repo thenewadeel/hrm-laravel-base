@@ -12,7 +12,21 @@ Based on comprehensive analysis of screenshots, UX mockups, and current implemen
 
 ### 🔴 **Critical Priority Gaps**
 
-#### 1. **Mobile Kiosk Interface Incomplete**
+#### 1. **Multi-Drawer Layout System Missing**
+**Impact**: High - Affects user experience and navigation efficiency  
+**Current State**: Traditional navigation layout  
+**Target**: Modern 4-drawer layout system
+
+**Specific Issues:**
+- ❌ No drawer-based navigation system
+- ❌ Limited contextual settings access
+- ❌ No dedicated app information panel
+- ❌ User preferences not easily accessible
+
+**Specification**: `docs/UX/simple-blade-drawer-system.md`  
+**Implementation Plan**: `docs/features/plans/multi-drawer-layout-system.md`
+
+#### 2. **Mobile Kiosk Interface Incomplete**
 **Impact**: High - Affects field operations and mobile workers  
 **Current State**: Basic responsive design only  
 **Target**: Dedicated kiosk mode with offline capabilities

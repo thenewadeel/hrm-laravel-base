@@ -6,5 +6,113 @@
 @tailwind utilities;
 
 [x-cloak] {
-    display: none;
+    display: none !important;
+}
+
+/* ========================================
+   ALPINE.JS-FIRST DRAWER SYSTEM
+   ======================================== */
+
+/* Drawer Container - Provides stacking context */
+.drawer-container {
+    @apply relative;
+    isolation: isolate;
+}
+
+/* Drawer Base Styles - NO transforms here! */
+.drawer {
+    @apply fixed bg-surface border-secondary z-50;
+    pointer-events: auto;
+}
+
+/* Drawer Positions - Hidden state ONLY */
+.drawer-left {
+    @apply left-0 top-0 h-full;
+    border-right: 1px solid;
+}
+
+.drawer-right {
+    @apply right-0 top-0 h-full;
+    border-left: 1px solid;
+}
+
+.drawer-top {
+    @apply top-0 left-0 w-full;
+    border-bottom: 1px solid;
+}
+
+.drawer-bottom {
+    @apply bottom-0 left-0 w-full;
+    border-top: 1px solid;
+}
+
+/* Drawer Content - No positioning conflicts */
+.drawer-content {
+    @apply overflow-y-auto overscroll-contain;
+}
+
+.drawer-header {
+    @apply flex items-center justify-between px-4 py-3 border-b border-secondary;
+    flex-shrink: 0;
+}
+
+/* Drawer Overlay */
+.drawer-overlay {
+    @apply fixed inset-0 bg-black bg-opacity-50 z-40;
+}
+
+/* Focus Management */
+.drawer:focus-within {
+    @apply ring-2 ring-primary ring-offset-2;
+}
+
+/* Drawer Toggle States */
+.drawer-toggle[aria-expanded="true"] {
+    @apply bg-primary text-white;
+}
+
+/* Accessibility */
+.drawer[aria-hidden="true"] {
+    pointer-events: none;
+}
+
+/* Responsive Behavior */
+@media (max-width: 768px) {
+    .drawer-left,
+    .drawer-right {
+        @apply w-full;
+    }
+    
+    .drawer-top,
+    .drawer-bottom {
+        @apply h-64;
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    [x-transition] {
+        transition: none !important;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .drawer-overlay {
+        @apply bg-opacity-70;
+    }
+}
+
+/* Prevent layout shift - ensure proper stacking */
+header.z-30 {
+    z-index: 30;
+}
+
+/* Remove any potential conflicts */
+.drawer * {
+    transform: none !important;
+}
+
+.drawer[x-show="false"] {
+    display: none !important;
 }

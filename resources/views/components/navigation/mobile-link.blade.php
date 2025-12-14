@@ -1,4 +1,5 @@
 @props([
+    'href' => '#',
     'title' => '',
     'icon' => null,
     'active' => false,
@@ -14,9 +15,9 @@ $classes = $active
     : $baseClasses . ' ' . $inactiveClasses;
 @endphp
 
-<button type="button" 
-        {{ $attributes->merge(['class' => $classes]) }}
-        @click="$wire.dispatch('close-mobile-menu')">
+<a href="{{ $href }}" 
+   {{ $attributes->merge(['class' => $classes]) }}
+   @click="$wire.dispatch('close-mobile-menu')">
     
     @if($icon)
         <span class="mr-3 h-5 w-5 flex-shrink-0">
@@ -25,7 +26,7 @@ $classes = $active
     @endif
     
     <span class="flex-1">
-        {{ $title }}
+        {{ $title ?? $slot }}
     </span>
     
     @if($badge)
@@ -33,4 +34,6 @@ $classes = $active
             {{ $badge }}
         </span>
     @endif
-</button>
+    
+    {{ $slot }}
+</a>
