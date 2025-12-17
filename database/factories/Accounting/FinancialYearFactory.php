@@ -17,7 +17,8 @@ class FinancialYearFactory extends Factory
      */
     public function definition(): array
     {
-        $year = $this->faker->year;
+        // Use a sequence to ensure unique years for each factory instance
+        $year = $this->faker->unique()->numberBetween(1980, 2030);
         $startYear = $year;
         $endYear = $year + 1;
 

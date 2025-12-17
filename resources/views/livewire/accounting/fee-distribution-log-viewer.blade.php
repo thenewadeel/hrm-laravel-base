@@ -19,7 +19,7 @@
                 <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Search</label>
                     <input 
-                        wire:model.live.debounce.300ms="search" 
+                        wire:model.live="search" 
                         type="text" 
                         placeholder="Search logs..."
                         class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white"

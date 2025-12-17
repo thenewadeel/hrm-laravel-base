@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api\Membership;
 use App\Http\Controllers\Controller;
 use App\Models\Membership\Member;
 use App\Services\Membership\MembershipService;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MemberController extends Controller
@@ -23,13 +23,12 @@ class MemberController extends Controller
         $organizationId = Auth::user()->current_organization_id;
         $search = $request->get('search', '');
         $filters = $request->only(['status', 'has_family', 'subscription_status', 'per_page']);
-        
-        $members = $this->membershipService->searchMembers($organizationId, $search, $filters);
-        
-        // Apply pagination
+
         $perPage = $filters['per_page'] ?? 20;
-        $paginatedMembers = $members->paginate($perPage);
-        
+        $filters['per_page'] = $perPage;
+
+        $paginatedMembers = $this->membershipService->searchMembers($organizationId, $search, $filters);
+
         return response()->json([
             'data' => $paginatedMembers->items(),
             'pagination' => [
@@ -62,14 +61,14 @@ class MemberController extends Controller
             'expiry_date' => 'nullable|date|after:join_date',
             'notes' => 'nullable|string|max:1000',
         ]);
-        
+
         $organizationId = Auth::user()->current_organization_id;
         $memberData = array_merge($request->all(), [
             'organization_id' => $organizationId,
         ]);
-        
+
         $member = $this->membershipService->createMember($memberData);
-        
+
         return response()->json([
             'success' => true,
             'data' => $member,
@@ -83,9 +82,9 @@ class MemberController extends Controller
     public function show(Member $member): JsonResponse
     {
         $this->authorize('view', $member);
-        
+
         $member->load(['familyMembers', 'activeSubscription.subscriptionPlan', 'fees']);
-        
+
         return response()->json([
             'success' => true,
             'data' => $member,
@@ -98,11 +97,11 @@ class MemberController extends Controller
     public function update(Request $request, Member $member): JsonResponse
     {
         $this->authorize('update', $member);
-        
+
         $request->validate([
             'first_name' => 'sometimes|string|max:100',
             'last_name' => 'sometimes|string|max:100',
-            'email' => 'sometimes|email|unique:members,email,' . $member->id,
+            'email' => 'sometimes|email|unique:members,email,'.$member->id,
             'phone' => 'sometimes|string|max:50',
             'date_of_birth' => 'sometimes|date|before:today',
             'gender' => 'sometimes|in:male,female,other',
@@ -114,9 +113,9 @@ class MemberController extends Controller
             'expiry_date' => 'sometimes|date',
             'notes' => 'sometimes|string|max:1000',
         ]);
-        
+
         $member = $this->membershipService->updateMember($member, $request->all());
-        
+
         return response()->json([
             'success' => true,
             'data' => $member,
@@ -130,9 +129,9 @@ class MemberController extends Controller
     public function destroy(Member $member): JsonResponse
     {
         $this->authorize('delete', $member);
-        
+
         $member->delete();
-        
+
         return response()->json([
             'success' => true,
             'message' => 'Member deleted successfully.',
@@ -146,7 +145,7 @@ class MemberController extends Controller
     {
         $organizationId = Auth::user()->current_organization_id;
         $statistics = $this->membershipService->getMemberStatistics($organizationId);
-        
+
         return response()->json([
             'success' => true,
             'data' => $statistics,
@@ -160,9 +159,9 @@ class MemberController extends Controller
     {
         $organizationId = Auth::user()->current_organization_id;
         $days = $request->get('days', 30);
-        
+
         $members = $this->membershipService->getExpiringMembers($organizationId, $days);
-        
+
         return response()->json([
             'success' => true,
             'data' => $members,
@@ -177,19 +176,51 @@ class MemberController extends Controller
         $organizationId = Auth::user()->current_organization_id;
         $search = $request->get('q', '');
         $filters = $request->only(['status', 'has_family']);
-        
+
         if (strlen($search) < 2) {
             return response()->json([
                 'success' => false,
                 'message' => 'Search term must be at least 2 characters.',
             ], 400);
         }
-        
+
         $members = $this->membershipService->searchMembers($organizationId, $search, $filters);
-        
+
         return response()->json([
             'success' => true,
             'data' => $members->take(20), // Limit search results
+        ]);
+    }
+
+    /**
+     * Export members to CSV.
+     */
+    public function export(Request $request): JsonResponse
+    {
+        $organizationId = Auth::user()->current_organization_id;
+        $search = $request->get('search', '');
+        $filters = $request->only(['status', 'has_family', 'subscription_status']);
+
+        $members = $this->membershipService->searchMembers($organizationId, $search, $filters);
+
+        $csvData = $members->getCollection()->map(function ($member) {
+            return [
+                'id' => $member->id,
+                'first_name' => $member->first_name,
+                'last_name' => $member->last_name,
+                'membership_number' => $member->membership_number,
+                'email' => $member->email,
+                'phone' => $member->phone,
+                'join_date' => $member->join_date,
+                'expiry_date' => $member->expiry_date,
+                'status' => $member->status,
+                'organization_id' => $member->organization_id,
+            ];
+        });
+
+        return response()->json([
+            'success' => true,
+            'data' => $csvData,
         ]);
     }
 }

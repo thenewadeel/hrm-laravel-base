@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Employee;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class EmployeePolicy
 {
@@ -13,7 +12,7 @@ class EmployeePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true; // Users can view employees in their organization
     }
 
     /**
@@ -21,7 +20,7 @@ class EmployeePolicy
      */
     public function view(User $user, Employee $employee): bool
     {
-        return false;
+        return $user->current_organization_id === $employee->organization_id;
     }
 
     /**
@@ -29,7 +28,7 @@ class EmployeePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true; // Users can create employees in their organization
     }
 
     /**
@@ -37,7 +36,7 @@ class EmployeePolicy
      */
     public function update(User $user, Employee $employee): bool
     {
-        return false;
+        return $user->current_organization_id === $employee->organization_id;
     }
 
     /**
@@ -45,7 +44,7 @@ class EmployeePolicy
      */
     public function delete(User $user, Employee $employee): bool
     {
-        return false;
+        return $user->current_organization_id === $employee->organization_id;
     }
 
     /**

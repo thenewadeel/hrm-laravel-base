@@ -510,12 +510,20 @@ class FeeService
      */
     private function calculateLateFeeAmount(MemberFee $fee): float
     {
-        $daysOverdue = now()->diffInDays($fee->due_date);
-        
+        // Calculate days overdue - ensure positive value for past due dates
+        if ($fee->due_date->isPast()) {
+            // Use startOfDay to get full days overdue, ignoring partial days
+            $daysOverdue = now()->startOfDay()->diffInDays($fee->due_date->startOfDay());
+            // diffInDays can return negative for past dates, so take absolute value
+            $daysOverdue = abs($daysOverdue);
+        } else {
+            $daysOverdue = 0;
+        }
+
         // Late fee calculation: 5% of original fee + $1 per day overdue
         $percentageFee = $fee->amount * 0.05;
         $dailyFee = $daysOverdue * 1.00;
-        
+
         return round($percentageFee + $dailyFee, 2);
     }
 

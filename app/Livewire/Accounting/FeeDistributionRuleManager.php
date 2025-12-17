@@ -159,7 +159,7 @@ class FeeDistributionRuleManager extends Component
 
     public function updateRule()
     {
-        $this->validate();
+        $this->validate($this->validationRules);
 
         $this->editingRule->update([
             'name' => $this->name,
@@ -171,11 +171,13 @@ class FeeDistributionRuleManager extends Component
             'description' => $this->description,
         ]);
 
+        $updatedName = $this->name; // Use the updated name from form
+
         $this->resetForm();
         $this->showEditModal = false;
         $this->loadRules();
 
-        $this->dispatch('rule-updated', "Rule '{$this->editingRule->name}' updated successfully.");
+        $this->dispatch('rule-updated', "Rule '{$updatedName}' updated successfully.");
     }
 
     public function deleteRule(FeeDistributionRule $rule)

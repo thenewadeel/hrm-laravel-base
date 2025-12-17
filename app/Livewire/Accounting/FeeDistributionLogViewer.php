@@ -59,18 +59,19 @@ class FeeDistributionLogViewer extends Component
         $query = FeeDistributionLog::where('organization_id', $organizationId)
             ->with(['rule', 'memberFee.member', 'journalEntry']);
 
-        // Apply search filter
+        // Apply all filters in one place to avoid conflicts
         if ($this->search) {
-            $query->whereHas('memberFee', function ($q) {
-                $q->where('description', 'like', '%'.$this->search.'%')
-                    ->orWhereHas('member', function ($mq) {
-                        $mq->where('first_name', 'like', '%'.$this->search.'%')
-                            ->orWhere('last_name', 'like', '%'.$this->search.'%');
-                    });
+            $searchTerm = $this->search;
+            $query->where(function ($q) use ($searchTerm) {
+                $q->whereHas('memberFee', function ($subQ) use ($searchTerm) {
+                    $subQ->where('description', 'like', '%'.$searchTerm.'%');
+                })->orWhereHas('memberFee.member', function ($memberQ) use ($searchTerm) {
+                    $memberQ->where('first_name', 'like', '%'.$searchTerm.'%')
+                        ->orWhere('last_name', 'like', '%'.$searchTerm.'%');
+                });
             });
         }
 
-        // Apply other filters
         if ($this->statusFilter) {
             $query->where('status', $this->statusFilter);
         }
@@ -137,23 +138,31 @@ class FeeDistributionLogViewer extends Component
             ];
         }
 
-        $baseQuery = FeeDistributionLog::where('organization_id', Auth::user()->current_organization_id)
-            ->when($this->dateFrom, function ($query) {
-                $query->whereDate('distributed_at', '>=', $this->dateFrom);
-            })
-            ->when($this->dateTo, function ($query) {
-                $query->whereDate('distributed_at', '<=', $this->dateTo);
-            });
+        $organizationId = Auth::user()->current_organization_id;
+
+        // Create separate queries to avoid modification issues
+        $baseQuery = function () use ($organizationId) {
+            return FeeDistributionLog::where('organization_id', $organizationId)
+                ->when($this->dateFrom, function ($query) {
+                    $query->whereDate('distributed_at', '>=', $this->dateFrom);
+                })
+                ->when($this->dateTo, function ($query) {
+                    $query->whereDate('distributed_at', '<=', $this->dateTo);
+                });
+        };
+
+        // Get all logs for distributed amount calculation
+        $allLogs = $baseQuery()->get();
 
         return [
-            'total_amount' => (float) $baseQuery->where('status', 'success')->sum('total_amount'),
-            'total_distributed' => (float) $baseQuery->get()->sum(function ($log) {
+            'total_amount' => (float) $baseQuery()->where('status', 'success')->sum('total_amount'),
+            'total_distributed' => (float) $allLogs->sum(function ($log) {
                 return $log->actual_distributed_amount;
             }),
-            'success_count' => $baseQuery->where('status', 'success')->count(),
-            'failed_count' => $baseQuery->where('status', 'failed')->count(),
-            'partial_count' => $baseQuery->where('status', 'partial')->count(),
-            'total_count' => $baseQuery->count(),
+            'success_count' => $baseQuery()->where('status', 'success')->count(),
+            'failed_count' => $baseQuery()->where('status', 'failed')->count(),
+            'partial_count' => $baseQuery()->where('status', 'partial')->count(),
+            'total_count' => $baseQuery()->count(),
         ];
     }
 

@@ -214,6 +214,11 @@ test('prevents waiver of paid fees', function () {
 });
 
 test('generates overdue fees with proper business rules', function () {
+    // Clean up any existing late fees for this organization to ensure test isolation
+    MemberFee::where('organization_id', $this->organization->id)
+        ->where('fee_type', 'late_fee')
+        ->delete();
+
     // Create a new member to avoid conflicts
     $newMember = Member::factory()->create([
         'organization_id' => $this->organization->id,
@@ -262,6 +267,11 @@ test('prevents duplicate late fees', function () {
 });
 
 test('calculates late fee amount correctly', function () {
+    // Clean up any existing late fees for this organization to ensure test isolation
+    MemberFee::where('organization_id', $this->organization->id)
+        ->where('fee_type', 'late_fee')
+        ->delete();
+
     // Create overdue fee
     $overdueFee = MemberFee::factory()->create([
         'organization_id' => $this->organization->id,
@@ -273,7 +283,9 @@ test('calculates late fee amount correctly', function () {
 
     $this->service->generateOverdueFees($this->organization->id);
 
-    $lateFee = MemberFee::where('fee_type', 'late_fee')->first();
+    $lateFee = MemberFee::where('fee_type', 'late_fee')
+        ->where('member_id', $this->member->id)
+        ->first();
 
     // Expected: 5% of 100 + 10 days * $1 = $5 + $10 = $15
     expect((float) $lateFee->amount)->toBe(15.0);

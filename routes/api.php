@@ -170,3 +170,9 @@ Route::prefix('inventory')->middleware(['auth:sanctum'])->group(function () {
     // ->middleware('can:' . InventoryPermissions::VIEW_INVENTORY_REPORTS)
     // ->name('inventory.reports.movement');
 });
+
+// Include Membership API routes
+require __DIR__ . '/api/membership.php';
+
+// Include HRM API routes
+require __DIR__ . '/api/hrm.php';

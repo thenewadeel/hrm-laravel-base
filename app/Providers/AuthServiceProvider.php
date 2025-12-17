@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Accounting\TaxExemption;
 use App\Models\Accounting\TaxFiling;
 use App\Models\Accounting\TaxRate;
+use App\Models\Employee;
 use App\Models\Inventory\Store;
 use App\Models\JobPosition;
 use App\Models\Membership\Member;
@@ -23,12 +24,13 @@ use Illuminate\Support\Facades\Gate;
 class AuthServiceProvider extends ServiceProvider
 {
     protected $policies = [
+        Employee::class => \App\Policies\EmployeePolicy::class,
         JobPosition::class => \App\Policies\JobPositionPolicy::class,
         Shift::class => \App\Policies\ShiftPolicy::class,
         TaxRate::class => \App\Policies\TaxRatePolicy::class,
         TaxExemption::class => \App\Policies\TaxExemptionPolicy::class,
         TaxFiling::class => \App\Policies\TaxFilingPolicy::class,
-        Member::class => \App\Policies\Membership\MemberPolicy::class,
+        Member::class => \App\Policies\MemberPolicy::class,
         MemberFee::class => \App\Policies\Membership\FeePolicy::class,
         MemberSubscription::class => \App\Policies\Membership\MemberSubscriptionPolicy::class,
     ];
@@ -42,6 +44,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define(InventoryPermissions::CREATE_STORES, function (User $user) {
             return $user->hasPermission(InventoryPermissions::CREATE_STORES);
+        });
+
+        Gate::define(InventoryPermissions::MANAGE_STORE_INVENTORY, function (User $user, $organization = null) {
+            return $user->hasPermission(InventoryPermissions::MANAGE_STORE_INVENTORY, $organization);
         });
 
         Gate::define(InventoryPermissions::EDIT_STORES, function (User $user, Store $store) {

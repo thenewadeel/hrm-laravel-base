@@ -6,59 +6,41 @@
 +------------------+------------------+
 | Metric           | Count/Percentage |
 +------------------+------------------+
-| Total Tests      | 1398             |
-| Passed           | 1362 (97.4%)     |
-| Failed           | 31 (2.2%)        |
-| Warnings/Skipped | 5 (0.4%)         |
+| Total Tests      | 1449             |
+| Passed           | 1432 (98.8%)     |
+| Failed           | 13 (0.9%)        |
+| Warnings/Skipped | 4 (0.3%)         |
 +------------------+------------------+
 
---- ❌ Detailed Failures (31 Total) ---
+--- ❌ Detailed Failures (13 Total) ---
 
- CrossModuleWorkflow (6/7 failures):
-   ⨯ payroll to accounting integration creates salary vouchers
-   ⨯ inventory to accounting integration posts stock movements
-   ⨯ membership fee to accounting integration creates cash receipts
-   ⨯ multi-module data consistency across organization boundaries
-   ⨯ financial year management affects all modules
-   ⨯ audit trail captures cross-module activities
+ FeeDistributionRule (1/20 failures):
+   ⨯ calculate distribution with fixed amount items
 
- FeeDistributionLogViewer (7/18 failures):
+ InventoryService (1/13 failures):
+   ⨯ it prevents modifying finalized transaction
+
+ FeeDistributionIntegration (1/7 failures):
+   ⨯ workflow with error handling and recovery
+
+ FeeDistributionLogViewer (6/18 failures):
    ⨯ fee distribution log viewer searches by description
    ⨯ fee distribution log viewer searches by member name
    ⨯ fee distribution log viewer filters by status
    ⨯ fee distribution log viewer filters by fee type
-   ⨯ fee distribution log viewer calculates summary correctly
    ⨯ fee distribution log viewer respects organization isolation
    ⨯ fee distribution log viewer loads logs with relationships
 
- FeeDistributionRuleManager (1/18 failures):
-   ⨯ fee distribution rule manager can edit rule
-
- EnhancedFeeService (2/16 failures):
-   ⨯ generates overdue fees with proper business rules
-   ⨯ calculates late fee amount correctly
-
- AdvancedReporting (7/7 failures):
+ AdvancedReporting (3/7 failures):
    ⨯ generates comprehensive financial reports with filters
    ⨯ generates balance sheet with asset liability equity verification
    ⨯ generates trial balance with debits credits verification
-   ⨯ generates comparative period analysis reports
-   ⨯ generates department-wise performance reports
-   ⨯ generates aging analysis with configurable periods
-   ⨯ generates cash flow statements with operating investing financing a…
 
- Compliance (8/8 failures):
+ Compliance (1/8 failures):
    ⨯ multi-tenant data isolation under load testing
-   ⨯ role-based access control enforcement across modules
-   ⨯ audit trail completeness for critical operations
-   ⨯ data integrity validation prevents corruption
-   ⨯ concurrent operations handling with proper locking
-   ⨯ input validation and sanitization prevents xss attacks
-   ⨯ api rate limiting prevents abuse
-   ⨯ data export functionality includes all required fields
 
 
---- ⚠️ Warnings/Skipped Tests (5 Total) ---
+--- ⚠️ Warnings/Skipped Tests (4 Total) ---
 
  EmailVerification (3/3 warnings):
    - email verification screen can be rendered → Email verification not…
@@ -67,9 +49,6 @@
 
  Registration (1/3 warnings):
    - registration screen cannot be rendered if support is disabled → Reg…
-
- CrossModuleWorkflow (1/7 warnings):
-   - ---------------------------------------------------------------------------------
 
 
 --- ✅ Fully Passed Modules ---
@@ -85,7 +64,6 @@
 | DimensionReport                  | 1/1          |
 | FeeDistributionLog               | 19/19        |
 | FeeDistributionRuleItem          | 18/18        |
-| FeeDistributionRule              | 20/20        |
 | FinancialReports                 | 1/1          |
 | IncomeStatement                  | 3/3          |
 | InvalidAccountTypeException      | 3/3          |
@@ -130,7 +108,6 @@
 | UserProfile                      | 15/15        |
 | AccountingReportService          | 2/2          |
 | AccountingService                | 3/3          |
-| InventoryService                 | 13/13        |
 | SequenceService                  | 2/2          |
 | CreateTeam                       | 1/1          |
 | DeleteTeam                       | 2/2          |
@@ -152,7 +129,6 @@
 | UpdatePassword                   | 3/3          |
 | CashPayment                      | 7/7          |
 | CashReceipt                      | 7/7          |
-| FeeDistributionIntegration       | 7/7          |
 | FeeDistributionService           | 15/15        |
 | FinancialYear                    | 15/15        |
 | SpecializedVoucher               | 10/10        |
@@ -169,8 +145,14 @@
 | AttendanceSync                   | 8/8          |
 | BadgeShowcase                    | 4/4          |
 | BadgeStandalone                  | 1/1          |
+| CompleteDrawerSystem             | 6/6          |
 | BadgeSystem                      | 20/20        |
 | Dashboard                        | 11/11        |
+| DrawerAccessibility              | 10/10        |
+| DrawerIntegration                | 4/4          |
+| DrawerResponsive                 | 11/11        |
+| DrawerSystem                     | 16/16        |
+| DrawerSystem                     | 5/5          |
 | EmployeeIndexEnhancement         | 5/5          |
 | Example                          | 1/1          |
 | BankAccount                      | 9/9          |
@@ -181,6 +163,7 @@
 | JobPositionController            | 6/6          |
 | ShiftController                  | 5/5          |
 | HrmDashboardController           | 18/18        |
+| CrossModuleWorkflow              | 6/6          |
 | InventoryController              | 5/5          |
 | InventoryItemController          | 5/5          |
 | InventoryReportController        | 8/8          |
@@ -196,6 +179,7 @@
 | Create                           | 7/7          |
 | Create                           | 7/7          |
 | ChartOfAccounts                  | 5/5          |
+| FeeDistributionRuleManager       | 18/18        |
 | JournalEntries                   | 3/3          |
 | Create                           | 7/7          |
 | CashManagementDemo               | 11/11        |
@@ -210,6 +194,7 @@
 | AdvancedMemberList               | 14/14        |
 | BulkMemberUpload                 | 18/18        |
 | EnhancedFeeManager               | 7/7          |
+| EnhancedFeeService               | 16/16        |
 | FamilyMemberManager              | 14/14        |
 | FeeManager                       | 8/8          |
 | MemberDetails                    | 15/15        |

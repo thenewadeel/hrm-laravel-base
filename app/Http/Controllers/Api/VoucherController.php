@@ -25,6 +25,51 @@ class VoucherController extends Controller
     ) {}
 
     /**
+     * Store a newly created voucher in storage.
+     */
+    public function store(Request $request): JsonResponse
+    {
+        $request->validate([
+            'date' => 'required|date',
+            'amount' => 'required|numeric|min:0',
+            'description' => 'required|string',
+            'type' => 'required|in:sales,purchase,salary,expense,general',
+        ]);
+
+        $organizationId = auth()->user()->current_organization_id;
+
+        // Check if financial year is active for the given date
+        $financialYear = \App\Models\Accounting\FinancialYear::where('organization_id', $organizationId)
+            ->where('start_date', '<=', $request->date)
+            ->where('end_date', '>=', $request->date)
+            ->where('status', 'active')
+            ->first();
+
+        if (! $financialYear) {
+            return response()->json([
+                'message' => 'No active financial year found for the given date',
+            ], 422);
+        }
+
+        // Create a Voucher model for the test
+        $voucher = \App\Models\Accounting\Voucher::create([
+            'organization_id' => $organizationId,
+            'date' => $request->date,
+            'amount' => $request->amount,
+            'description' => $request->description,
+            'type' => $request->type,
+            'number' => \App\Models\Accounting\Voucher::generateNumber($request->type, $organizationId),
+            'status' => 'draft',
+            'created_by' => auth()->id(),
+        ]);
+
+        return response()->json([
+            'message' => 'Voucher created successfully',
+            'voucher' => $voucher,
+        ], 201);
+    }
+
+    /**
      * Display a listing of vouchers.
      */
     public function index(Request $request): JsonResponse

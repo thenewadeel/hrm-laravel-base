@@ -10,6 +10,7 @@ use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\JournalEntry;
 use App\Models\Accounting\LedgerEntry;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 
 class AccountingService
 {
@@ -165,5 +166,152 @@ class AccountingService
             'status' => 'posted',
             // Debit Salary Expense, Credit Payroll Payable
         ]);
+    }
+
+    /**
+     * Process membership fee payment and create cash receipt
+     */
+    public function processMembershipPayment($memberFee)
+    {
+        return DB::transaction(function () use ($memberFee) {
+            // Get cash and membership revenue accounts
+            $cashAccount = ChartOfAccount::where('organization_id', $memberFee->organization_id)
+                ->where('type', 'asset')
+                ->where(function ($query) {
+                    $query->where('name', 'like', '%cash%')
+                        ->orWhere('name', 'Cash');
+                })
+                ->first();
+
+            $membershipRevenueAccount = ChartOfAccount::where('organization_id', $memberFee->organization_id)
+                ->where('type', 'revenue')
+                ->where(function ($query) {
+                    $query->where('name', 'like', '%membership%')
+                        ->orWhere('name', 'Membership Revenue');
+                })
+                ->first();
+
+            if (! $cashAccount || ! $membershipRevenueAccount) {
+                throw new \Exception('Required accounts for membership payment not found');
+            }
+
+            // Create journal entries for the payment
+            $this->postTransaction([
+                [
+                    'account' => $cashAccount,
+                    'type' => 'debit',
+                    'amount' => $memberFee->paid_amount,
+                ],
+                [
+                    'account' => $membershipRevenueAccount,
+                    'type' => 'credit',
+                    'amount' => $memberFee->paid_amount,
+                ],
+            ], "Membership fee payment - {$memberFee->member->name}", $memberFee);
+
+            // Create a cash receipt record
+            $cashReceipt = [
+                'id' => $memberFee->id,
+                'amount' => $memberFee->paid_amount,
+                'description' => "Membership fee payment - {$memberFee->member->name}",
+                'date' => $memberFee->paid_date,
+                'member_fee_id' => $memberFee->id,
+            ];
+
+            // Dispatch payment processed event
+            Event::dispatch('App\\Events\\Membership\\FeePaymentProcessed', [
+                'member_fee' => $memberFee,
+                'cash_receipt' => $cashReceipt,
+                'organization_id' => $memberFee->organization_id,
+                'user_id' => auth()->id(),
+            ]);
+
+            return (object) $cashReceipt;
+        });
+    }
+
+    /**
+     * Post inventory transaction to accounting
+     */
+    public function postInventoryTransaction($transaction)
+    {
+        return DB::transaction(function () use ($transaction) {
+            // Load items if not already loaded
+            $transaction->load('items');
+
+            // Get inventory and COGS accounts - be more flexible with names
+            $inventoryAccount = ChartOfAccount::where('organization_id', $transaction->organization_id)
+                ->where('type', 'asset')
+                ->where(function ($query) {
+                    $query->where('name', 'Inventory')
+                        ->orWhere('name', 'like', '%inventory%');
+                })
+                ->first();
+
+            $cogsAccount = ChartOfAccount::where('organization_id', $transaction->organization_id)
+                ->where('type', 'expense')
+                ->where(function ($query) {
+                    $query->where('name', 'Cost of Goods Sold')
+                        ->orWhere('name', 'like', '%cogs%')
+                        ->orWhere('name', 'like', '%cost of goods%');
+                })
+                ->first();
+
+            $cogsAccount = $cogsAccount ?: ChartOfAccount::where('organization_id', $transaction->organization_id)
+                ->where('type', 'expense')
+                ->where('name', 'Cost of Goods Sold')
+                ->first();
+
+            if (! $inventoryAccount || ! $cogsAccount) {
+                throw new \Exception('Required accounts for inventory transaction not found');
+            }
+
+            // Calculate total amount for the transaction
+            $totalAmount = $transaction->items->sum(function ($item) {
+                return $item->quantity * $item->unit_cost;
+            });
+
+            // Create journal entries based on transaction type
+            if ($transaction->type === 'OUT') {
+                // Stock out: Debit COGS, Credit Inventory
+                $entries = [
+                    [
+                        'account' => $cogsAccount,
+                        'type' => 'debit',
+                        'amount' => $totalAmount,
+                    ],
+                    [
+                        'account' => $inventoryAccount,
+                        'type' => 'credit',
+                        'amount' => $totalAmount,
+                    ],
+                ];
+            } else {
+                // Stock in: Debit Inventory, Credit COGS (for returns/adjustments)
+                $entries = [
+                    [
+                        'account' => $inventoryAccount,
+                        'type' => 'debit',
+                        'amount' => $totalAmount,
+                    ],
+                    [
+                        'account' => $cogsAccount,
+                        'type' => 'credit',
+                        'amount' => $totalAmount,
+                    ],
+                ];
+            }
+
+            $this->postVoucherTransaction($entries, "Inventory transaction - {$transaction->type}", $transaction);
+
+            // Dispatch transaction posted event
+            Event::dispatch('App\\Events\\Inventory\\TransactionPosted', [
+                'transaction' => $transaction,
+                'organization_id' => $transaction->organization_id,
+                'user_id' => auth()->id(),
+            ]);
+
+            return $transaction;
+        });
     }
 }
