@@ -21,6 +21,7 @@
 
 <body x-data="{
     test: 'working',
+    search: '',
     drawers: {
         left: false,
         right: false,

@@ -13,13 +13,26 @@ return new class extends Migration
     {
         Schema::table('journal_entries', function (Blueprint $table) {
             $table->enum('voucher_type', ['GENERAL', 'SALES', 'PURCHASE', 'SALARY', 'EXPENSE'])->default('GENERAL')->after('description');
-            $table->foreignId('customer_id')->nullable()->after('voucher_type')->constrained('customers');
-            $table->foreignId('vendor_id')->nullable()->after('customer_id')->constrained('vendors');
+            $table->foreignId('customer_id')->nullable()->after('voucher_type');
+            $table->foreignId('vendor_id')->nullable()->after('customer_id');
             $table->decimal('total_amount', 15, 2)->nullable()->after('vendor_id');
             $table->decimal('tax_amount', 15, 2)->default(0)->after('total_amount');
             $table->string('invoice_number')->nullable()->after('tax_amount');
             $table->date('due_date')->nullable()->after('invoice_number');
         });
+
+        // Add foreign key constraints separately if tables exist
+        if (Schema::hasTable('customers')) {
+            Schema::table('journal_entries', function (Blueprint $table) {
+                $table->foreign('customer_id')->references('id')->on('customers');
+            });
+        }
+
+        if (Schema::hasTable('vendors')) {
+            Schema::table('journal_entries', function (Blueprint $table) {
+                $table->foreign('vendor_id')->references('id')->on('vendors');
+            });
+        }
     }
 
     /**

@@ -4,6 +4,7 @@
 @endphp
 
 <div class="p-4 space-y-6" x-data="{ 
+    search: '',
     expandedSections: {
         inventory: {{ $currentModule === 'inventory' ? 'true' : 'false' }},
         accounting: {{ in_array($currentModule, ['accounts', 'accounting']) ? 'true' : 'false' }},
