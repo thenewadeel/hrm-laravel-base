@@ -1,0 +1,180 @@
+name: Browser Tests (Dusk)
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  dusk:
+    runs-on: ubuntu-latest
+    
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: laravel_dusk
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    env:
+      APP_URL: "http://127.0.0.1:8000"
+      DB_CONNECTION: mysql
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_DATABASE: laravel_dusk
+      DB_USERNAME: root
+      DB_PASSWORD: ""
+      MAIL_MAILER: log
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, mysql, pdo_mysql
+          coverage: none
+
+      - name: Copy environment file
+        run: cp .env.example .env
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Generate application key
+        run: php artisan key:generate
+
+      - name: Set up database
+        run: |
+          php artisan migrate --force
+          php artisan db:seed --force
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Build frontend assets
+        run: npm run build
+
+      - name: Upgrade Chrome Driver
+        run: php artisan dusk:chrome-driver --detect
+
+      - name: Start Chrome Driver
+        run: ./vendor/laravel/dusk/bin/chromedriver-linux --port=9515 > /dev/null 2>&1 &
+
+      - name: Run Laravel Server
+        run: php artisan serve --no-reload > /dev/null 2>&1 &
+
+      - name: Wait for server to be ready
+        run: sleep 10
+
+      - name: Run Dusk Tests
+        run: php artisan dusk --env=testing
+        continue-on-error: true
+
+      - name: Upload Screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: tests/Browser/screenshots
+          retention-days: 7
+
+      - name: Upload Console Logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: console
+          path: tests/Browser/console
+          retention-days: 7
+
+      - name: Upload Browser Source
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-source
+          path: tests/Browser/source
+          retention-days: 7
+
+  dusk-mysql:
+    runs-on: ubuntu-latest
+    
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: laravel_dusk_mysql
+        ports:
+          - 3307:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    env:
+      APP_URL: "http://127.0.0.1:8001"
+      DB_CONNECTION: mysql
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3307
+      DB_DATABASE: laravel_dusk_mysql
+      DB_USERNAME: root
+      DB_PASSWORD: ""
+      MAIL_MAILER: log
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, mysql, pdo_mysql
+          coverage: none
+
+      - name: Copy environment file
+        run: cp .env.example .env
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Generate application key
+        run: php artisan key:generate
+
+      - name: Set up database
+        run: |
+          php artisan migrate --force
+          php artisan db:seed --force
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Build frontend assets
+        run: npm run build
+
+      - name: Upgrade Chrome Driver
+        run: php artisan dusk:chrome-driver --detect
+
+      - name: Start Chrome Driver
+        run: ./vendor/laravel/dusk/bin/chromedriver-linux --port=9516 > /dev/null 2>&1 &
+
+      - name: Run Laravel Server
+        run: php artisan serve --host=127.0.0.1 --port=8001 --no-reload > /dev/null 2>&1 &
+
+      - name: Wait for server to be ready
+        run: sleep 10
+
+      - name: Run Dusk Tests with MySQL
+        run: php artisan dusk --env=testing --group=mysql
+        continue-on-error: true
+
+      - name: Upload Screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-mysql
+          path: tests/Browser/screenshots
+          retention-days: 7

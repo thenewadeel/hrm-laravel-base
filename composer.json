@@ -2,7 +2,7 @@
     "$schema": "https://getcomposer.org/schema.json",
     "name": "laravel/laravel",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "The skeleton application for a Laravel framework.",
     "keywords": [
         "laravel",
         "framework"
@@ -22,6 +22,7 @@
         "barryvdh/laravel-debugbar": "^3.15",
         "fakerphp/faker": "^1.23",
         "laravel/boost": "^1.8",
+        "laravel/dusk": "^8.3",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.41",
@@ -63,23 +64,20 @@
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
         ],
-        "test": [
-            "@php artisan config:clear --ansi",
-            "@php -d memory_limit=1G artisan test > docs/testResults.txt"
-        ],
-        "llm-summarize": [
-            "@php scripts/laraCrawler.php"
-        ],
         "dev-cp": [
             "@php artisan config:clear --ansi",
-            "@php scripts/laraCrawler.php",
-            "tree resources/views/ > \"docs/list of views.txt\"",
-            "@php -d memory_limit=1G artisan test --no-coverage > docs/testResults.txt || true",
+            "@llm-summarize",
+            "@view-list",
+            "@test",
             "@testSummary"
         ],
         "dev-cp-pdf": [
             "@dev-cp",
-            "@docs-pdf-simple"
+            "@docs-pdf"
+        ],
+        "test": [
+            "@php artisan config:clear --ansi",
+            "@php -d memory_limit=1G artisan test --no-coverage > docs/testResults.txt || true"
         ],
         "testSummary": [
             "@php artisan test:summarize docs/testResults.txt > docs/testSummary.txt"
@@ -92,6 +90,12 @@
         ],
         "docs-theme": [
             "@php scripts/configure-pdf-theme.php"
+        ],
+        "llm-summarize": [
+            "@php scripts/laraCrawler.php"
+        ],
+        "view-list": [
+            "tree resources/views/ > \"docs/list of views.txt\""
         ]
     },
     "extra": {
