@@ -2,6 +2,7 @@
 
 namespace Tests\Browser\Concerns;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 trait HandlesDatabaseIsolation
@@ -13,7 +14,7 @@ trait HandlesDatabaseIsolation
     {
         $className = class_basename(static::class);
         $testName = $this->name(); // Dusk uses $this->name() property
-        $hash = substr(md5($className.$testName), 0, 8);
+        $hash = substr(md5($className . $testName), 0, 8);
 
         return storage_path("testing_dusk_{$className}_{$testName}_{$hash}.sqlite");
     }
@@ -25,7 +26,7 @@ trait HandlesDatabaseIsolation
     {
         $dbFile = $this->getUniqueDatabaseFile();
 
-        config(['database.default' => 'sqlite']);
+        config(['database.default' => 'testing_sqlite']);
         config(['database.connections.sqlite.database' => $dbFile]);
         config(['database.connections.sqlite.foreign_key_constraints' => true]);
         config(['database.connections.sqlite.busy_timeout' => 5000]);
@@ -44,8 +45,8 @@ trait HandlesDatabaseIsolation
         }
 
         // Also clean up WAL and SHM files if they exist
-        $walFile = $dbFile.'-wal';
-        $shmFile = $dbFile.'-shm';
+        $walFile = $dbFile . '-wal';
+        $shmFile = $dbFile . '-shm';
 
         if (file_exists($walFile)) {
             File::delete($walFile);
@@ -75,7 +76,7 @@ trait HandlesDatabaseIsolation
                 break;
             } catch (\Exception $e) {
                 if ($i === $maxRetries - 1) {
-                    throw new \Exception("Failed to connect to database after {$maxRetries} attempts: ".$e->getMessage());
+                    throw new \Exception("Failed to connect to database after {$maxRetries} attempts: " . $e->getMessage());
                 }
                 usleep($retryDelay * 1000);
             }

@@ -75,12 +75,34 @@
             "@dev-cp",
             "@docs-pdf"
         ],
+        "dev-cp-dusk": [
+            "@php artisan config:clear --ansi",
+            "@view-list",
+            "@test-dusk",
+            "@testSummaryDusk"
+        ],
+        "dev-cp-complete": [
+            "@dev-cp",
+            "@dev-cp-dusk"
+        ],
         "test": [
             "@php artisan config:clear --ansi",
             "@php -d memory_limit=1G artisan test --no-coverage > docs/testResults.txt || true"
         ],
+        "test-dusk": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php scripts/dusk-runner.php",
+            "@test-dusk-aggregate",
+            "@testSummaryDusk"
+        ],
         "testSummary": [
             "@php artisan test:summarize docs/testResults.txt > docs/testSummary.txt"
+        ],
+        "testSummaryDusk": [
+            "@php artisan test:summarize docs/testResultsDusk.txt > docs/testSummaryDusk.txt"
+        ],
+        "test-dusk-aggregate": [
+            "@php scripts/dusk-aggregator.php"
         ],
         "docs-pdf": [
             "@php scripts/generate-docs-pdf-simple.php --verbose"

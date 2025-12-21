@@ -1,0 +1,138 @@
+{
+    "categorization": {
+        "rules": [
+            {
+                "name": "basic",
+                "description": "Basic connection tests",
+                "timeout": 180,
+                "maxTestsPerBatch": 10,
+                "patterns": [
+                    "*Connection*",
+                    "*Installation*", 
+                    "*Minimal*",
+                    "SimpleConnection*",
+                    "DuskInstallation*"
+                ],
+                "contentPatterns": [
+                    "*basic connection*",
+                    "*installation test*",
+                    "*minimal setup*"
+                ]
+            },
+            {
+                "name": "simple",
+                "description": "Basic page navigation and simple authentication",
+                "timeout": 240,
+                "maxTestsPerBatch": 8,
+                "patterns": [
+                    "*Simple*",
+                    "*Basic*",
+                    "*Auth*",
+                    "WorkingDusk*",
+                    "SimpleDashboard*",
+                    "AuthenticatedDusk*"
+                ],
+                "contentPatterns": [
+                    "*page loads*",
+                    "*basic navigation*",
+                    "*simple authentication*"
+                ]
+            },
+            {
+                "name": "interactive",
+                "description": "JavaScript, Livewire, and Alpine.js tests",
+                "timeout": 240,
+                "maxTestsPerBatch": 8,
+                "patterns": [
+                    "*Livewire*",
+                    "*Alpine*",
+                    "*JavaScript*",
+                    "*Dashboard*",
+                    "SearchVariable*",
+                    "LivewireInteraction*"
+                ],
+                "contentPatterns": [
+                    "*livewire*",
+                    "*alpine*",
+                    "*javascript*",
+                    "*interactive*"
+                ]
+            },
+            {
+                "name": "features",
+                "description": "Module-specific functionality tests",
+                "timeout": 300,
+                "maxTestsPerBatch": 6,
+                "patterns": [
+                    "*HR*",
+                    "*Fee*",
+                    "*Debug*",
+                    "HR*",
+                    "FeeManagement*"
+                ],
+                "contentPatterns": [
+                    "*workflow*",
+                    "*feature*",
+                    "*module*"
+                ]
+            },
+            {
+                "name": "complex",
+                "description": "Full workflows with heavy database setup",
+                "timeout": 420,
+                "maxTestsPerBatch": 4,
+                "patterns": [
+                    "*Workflow*",
+                    "*E2E*",
+                    "*Employee*",
+                    "EmployeeManagement*",
+                    "InventoryManagement*",
+                    "MemberRegistration*"
+                ],
+                "contentPatterns": [
+                    "*end-to-end*",
+                    "*complete workflow*",
+                    "*integration*"
+                ]
+            },
+            {
+                "name": "e2e",
+                "description": "End-to-end workflow tests",
+                "timeout": 600,
+                "maxTestsPerBatch": 2,
+                "patterns": [
+                    "*E2E*",
+                    "*Management*",
+                    "*Registration*"
+                ],
+                "contentPatterns": [
+                    "*full application*",
+                    "*complete system*",
+                    "*business process*"
+                ]
+            }
+        ]
+    },
+    "execution": {
+        "parallelBatches": false,
+        "maxConcurrentBatches": 1,
+        "defaultTimeout": 300,
+        "retryFailures": true,
+        "maxRetries": 1,
+        "captureScreenshots": true,
+        "generateReports": true
+    },
+    "logging": {
+        "level": "info",
+        "outputDirectory": "docs/DuskTestResults",
+        "combinedOutput": "docs/testResultsDusk.txt",
+        "summaryOutput": "docs/testSummaryDusk.txt",
+        "batchOutputFormat": "docs/testResultsDusk_batch_{category}.txt"
+    },
+    "performance": {
+        "trackMemory": true,
+        "trackExecutionTime": true,
+        "trackDatabaseQueries": false,
+        "generateMetrics": true
+    }
+}

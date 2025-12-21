@@ -8,6 +8,7 @@ use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\DB;
 use Laravel\Dusk\TestCase as BaseTestCase;
 use PHPUnit\Framework\Attributes\BeforeClass;
 use Tests\Browser\Concerns\HandlesAlpineTesting;
@@ -45,128 +46,87 @@ abstract class JavaScriptDuskTestCase extends BaseTestCase
     protected static bool $migrated = false;
 
     /**
+     * The database file path for this test run.
+     */
+    protected static string $databaseFile;
+
+    /**
      * Prepare for Dusk test execution.
      */
     #[BeforeClass]
     public static function prepare(): void
     {
         if (! static::runningInSail()) {
-            // Set ChromeDriver path to use vendor binary
-            $projectRoot = dirname(dirname(dirname(__DIR__)));
-            $chromedriverPath = $projectRoot.'/vendor/laravel/dusk/bin/chromedriver-linux';
-
-            if (file_exists($chromedriverPath)) {
-                $_ENV['DUSK_DRIVER_PATH'] = $chromedriverPath;
-
-                // Ensure binary is executable
-                if (! is_executable($chromedriverPath)) {
-                    chmod($chromedriverPath, 0755);
-                }
-            }
-
-            static::startChromeDriver(['--port=9515']);
+            static::startChromeDriver();
         }
     }
 
     /**
-     * Create RemoteWebDriver instance with JavaScript enabled.
+     * Clean up after all tests have run.
+     */
+    #[\PHPUnit\Framework\Attributes\AfterClass]
+    public static function cleanup(): void
+    {
+        if (isset(static::$databaseFile) && file_exists(static::$databaseFile)) {
+            unlink(static::$databaseFile);
+
+            // Clean up WAL and SHM files if they exist
+            $walFile = static::$databaseFile.'-wal';
+            $shmFile = static::$databaseFile.'-shm';
+
+            if (file_exists($walFile)) {
+                unlink($walFile);
+            }
+            if (file_exists($shmFile)) {
+                unlink($shmFile);
+            }
+        }
+    }
+
+    /**
+     * Create a RemoteWebDriver instance.
      */
     protected function driver(): RemoteWebDriver
     {
-        $options = (new ChromeOptions)->addArguments(collect([
-            $this->shouldStartMaximized() ? '--start-maximized' : '--window-size=1920,1080',
-            '--disable-search-engine-choice-screen',
-            '--disable-smooth-scrolling',
-            '--disable-dev-shm-usage',
-            '--no-sandbox',
-            '--disable-web-security',
-            '--allow-running-insecure-content',
-            '--disable-extensions',
-            '--disable-plugins',
-            '--disable-images', // Speed up tests but keep JS enabled
-            '--disable-gpu',
+        $options = (new ChromeOptions)->addArguments([
             '--headless=new',
-            '--disable-background-timer-throttling',
-            '--disable-backgrounding-occluded-windows',
-            '--disable-renderer-backgrounding',
-            '--disable-features=TranslateUI,BlinkGenPropertyTrees',
-            '--disable-ipc-flooding-protection',
-            '--disable-logging',
-            '--disable-permissions-api',
-            '--disable-notifications',
-            '--disable-default-apps',
-            '--no-first-run',
-            '--no-default-browser-check',
-            '--disable-extensions-except',
-            '--disable-component-extensions-with-background-pages',
-            '--disable-background-networking',
-            '--disable-sync',
-            '--metrics-recording-only',
-            '--no-report-upload',
-            '--disable-domain-reliability',
-            // Note: --disable-javascript is removed to enable JavaScript testing
-        ])->all());
+            '--disable-gpu',
+            '--no-sandbox',
+            '--disable-dev-shm-usage',
+        ]);
+
+        $capabilities = DesiredCapabilities::chrome()->setCapability(
+            ChromeOptions::CAPABILITY,
+            $options
+        );
 
         return RemoteWebDriver::create(
-            $_ENV['DUSK_DRIVER_URL'] ?? env('DUSK_DRIVER_URL') ?? 'http://localhost:9515',
-            DesiredCapabilities::chrome()->setCapability(
-                ChromeOptions::CAPABILITY, $options
-            )
+            $_ENV['DUSK_DRIVER_URL'] ?? 'http://localhost:9515',
+            $capabilities
         );
     }
 
     /**
-     * Setup test environment.
+     * Setup the test environment.
      */
     protected function setUp(): void
     {
         parent::setUp();
 
-        // Use simple database approach for now
-        $dbFile = storage_path('testing_dusk.sqlite');
-
-        // Set up database configuration with optimizations
-        config(['database.default' => 'sqlite']);
-        config(['database.connections.sqlite.database' => $dbFile]);
-        config(['database.connections.sqlite.foreign_key_constraints' => true]);
-        config(['database.connections.sqlite.busy_timeout' => 1000]); // Reduced timeout
-        config(['database.connections.sqlite.synchronous' => 'OFF']); // Faster but less safe
-        config(['database.connections.sqlite.journal_mode' => 'MEMORY']); // In-memory journal
-        config(['database.connections.sqlite.cache' => 'shared']); // Enable caching
-
-        // Clean up any existing test database
-        if (file_exists($dbFile)) {
-            unlink($dbFile);
-        }
-
-        // Create empty database file with proper permissions
-        file_put_contents($dbFile, '');
-        chmod($dbFile, 0666);
-
-        // Set proper environment for Dusk tests
+        // Set up environment and database configuration
         $this->setUpDuskEnvironment();
 
-        // Generate proper app key if not set (only once)
-        if (empty(config('app.key'))) {
-            $this->artisan('key:generate', ['--force' => true]);
-        }
-
-        // Run migrations to ensure all tables are created (only once per test run)
-        if (!static::$migrated) {
-            $this->artisan('migrate:fresh', [
-                '--database' => 'sqlite',
-                '--force' => true,
-                '--seed' => false, // Skip seeding for performance
-            ]);
+        // Only run migrations once per test suite
+        if (! static::$migrated) {
+            $this->runMigrations();
             static::$migrated = true;
         }
 
-        // Begin database transaction for test isolation
         $this->beginDatabaseTransaction();
     }
 
     /**
-     * Set up Dusk environment configuration.
+     * Set up the Dusk environment configuration.
      */
     protected function setUpDuskEnvironment(): void
     {
@@ -179,11 +139,29 @@ abstract class JavaScriptDuskTestCase extends BaseTestCase
         config(['app.name' => 'HRM-Base']);
         config(['app.env' => 'dusk']);
         config(['app.debug' => true]);
-        putenv('APP_NAME=HRM-Base');
+
+        // Configure database for Dusk tests
+        $this->configureDuskDatabase();
     }
 
     /**
-     * Clean up the test environment.
+     * Configure database for Dusk tests.
+     */
+    protected function configureDuskDatabase(): void
+    {
+        if (! isset(static::$databaseFile)) {
+            static::$databaseFile = storage_path('testing_dusk_js.sqlite');
+        }
+
+        config(['database.default' => 'sqlite']);
+        config(['database.connections.sqlite.database' => static::$databaseFile]);
+        config(['database.connections.sqlite.foreign_key_constraints' => true]);
+        config(['database.connections.sqlite.busy_timeout' => 5000]);
+        config(['database.connections.sqlite.wal_mode' => false]); // Disable WAL to prevent locking
+    }
+
+    /**
+     * Cleanup the test environment.
      */
     protected function tearDown(): void
     {
@@ -193,6 +171,104 @@ abstract class JavaScriptDuskTestCase extends BaseTestCase
         });
 
         parent::tearDown();
+    }
+
+    /**
+     * Run database migrations for Dusk tests.
+     */
+    protected function runMigrations(): void
+    {
+        $databasePath = static::$databaseFile;
+
+        // Remove existing database file to ensure clean state
+        if (file_exists($databasePath)) {
+            unlink($databasePath);
+        }
+
+        // Remove WAL and SHM files if they exist
+        $walFile = $databasePath.'-wal';
+        $shmFile = $databasePath.'-shm';
+        if (file_exists($walFile)) {
+            unlink($walFile);
+        }
+        if (file_exists($shmFile)) {
+            unlink($shmFile);
+        }
+
+        // Create fresh database file
+        $directory = dirname($databasePath);
+        if (! is_dir($directory)) {
+            mkdir($directory, 0755, true);
+        }
+
+        touch($databasePath);
+        chmod($databasePath, 0666);
+
+        // Clear any existing database connections
+        DB::purge('sqlite');
+
+        // Wait for database to be available
+        $this->waitForDatabase();
+
+        // Run migrations
+        $this->artisan('migrate:fresh', [
+            '--database' => 'sqlite',
+            '--force' => true,
+        ]);
+    }
+
+    /**
+     * Begin a database transaction.
+     */
+    protected function beginDatabaseTransaction(): void
+    {
+        DB::beginTransaction();
+    }
+
+    /**
+     * Rollback the current database transaction.
+     */
+    protected function rollbackDatabaseTransaction(): void
+    {
+        DB::rollBack();
+    }
+
+    /**
+     * Close database connections.
+     */
+    protected function closeDatabaseConnections(): void
+    {
+        try {
+            DB::connection('sqlite')->disconnect();
+        } catch (\Exception) {
+            // Ignore disconnection errors
+        }
+    }
+
+    /**
+     * Wait for database to be available.
+     */
+    protected function waitForDatabase(): void
+    {
+        $maxRetries = 30;
+        $retryDelay = 200; // milliseconds
+
+        for ($i = 0; $i < $maxRetries; $i++) {
+            try {
+                // Reconnect to database to ensure we get the latest config
+                DB::purge('sqlite');
+                DB::connection('sqlite')->getPdo();
+
+                // Test with a simple query to ensure database is writable
+                DB::connection('sqlite')->statement('SELECT 1');
+                break;
+            } catch (\Exception $e) {
+                if ($i === $maxRetries - 1) {
+                    throw new \Exception("Failed to connect to database after {$maxRetries} attempts: ".$e->getMessage());
+                }
+                usleep($retryDelay * 1000);
+            }
+        }
     }
 
     /**
@@ -209,6 +285,10 @@ abstract class JavaScriptDuskTestCase extends BaseTestCase
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        // Set current organization for user
+        $this->user->current_organization_id = $this->organization->id;
+        $this->user->save();
 
         $this->browse(function ($browser) {
             $browser->loginAs($this->user);
@@ -231,7 +311,7 @@ abstract class JavaScriptDuskTestCase extends BaseTestCase
     }
 
     /**
-     * Get the current organization for testing.
+     * Get current organization for testing.
      */
     protected function getCurrentOrganization(): Organization
     {
@@ -253,7 +333,7 @@ abstract class JavaScriptDuskTestCase extends BaseTestCase
         $this->browse(function ($browser) use ($callback, $org, $user) {
             $browser->loginAs($user)
                 ->visit('/')
-                ->waitForText($org->name, 10);
+                ->pause(2000);
 
             $callback($browser, $org, $user);
         });

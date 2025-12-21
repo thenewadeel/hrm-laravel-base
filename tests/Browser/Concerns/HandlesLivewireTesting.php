@@ -17,6 +17,16 @@ trait HandlesLivewireTesting
     }
 
     /**
+     * Wait for Livewire to be ready (alias for compatibility).
+     */
+    protected function waitForLivewire(Browser $browser): void
+    {
+        $browser->waitUntil('window.Livewire !== undefined', 10)
+            ->waitUntil('window.Livewire.components !== undefined', 10)
+            ->pause(200); // Allow Livewire to fully initialize
+    }
+
+    /**
      * Get the current Livewire component instance from browser.
      */
     protected function getLivewireComponent(Browser $browser, string $componentName): ?object

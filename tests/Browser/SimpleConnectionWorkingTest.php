@@ -17,7 +17,8 @@ class SimpleConnectionWorkingTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                ->waitForPageLoad(null, 2)
+                ->pause(2000)
+                ->waitForText('HRM', 5)
                 ->assertSourceHas('<html')
                 ->assertTitleContains('HRM-Base');
         });
@@ -42,7 +43,8 @@ class SimpleConnectionWorkingTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/login')
-                ->waitForText('Email', 3)
+                ->pause(2000)
+                ->waitForText('Email', 5)
                 ->assertPathIs('/login')
                 ->assertSee('Email')
                 ->assertSee('Password');

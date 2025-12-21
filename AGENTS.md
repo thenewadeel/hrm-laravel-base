@@ -18,14 +18,19 @@ All Software Requirements Specification (SRS) requirements have been successfull
 ## Build/Lint/Test Commands
 
 -   **Run all tests**: `composer test` (outputs to docs/testResults.txt)
+-   **Run Dusk browser tests**: `composer run test-dusk` (outputs to docs/testResultsDusk.txt & docs/testSummaryDusk.txt)
+-   **Run Dusk tests with verbose output**: `composer run test-dusk-verbose`
+-   **Run Dusk tests with stop-on-failure**: `composer run test-dusk-stop`
 -   **Run single test**: `php artisan test --filter=TestClass::testMethod`
 -   **Run specific test file**: `php artisan test tests/Feature/SpecificTest.php`
+-   **Run single Dusk test**: `php artisan dusk tests/Browser/SpecificTest.php`
 -   **Lint PHP code**: `vendor/bin/pint` (Laravel Pint code formatter)
 -   **Build frontend assets**: `npm run build`
 -   **Development server**: `composer run dev` (runs Laravel, queue, logs, and Vite concurrently)
 -   **Database migrations**: `php artisan migrate`
 -   **Seed demo data**: `php artisan db:seed --class=DemoDataSeeder`
 -   **Test snapshot & summary**: `composer run dev-cp` (captures test results to docs/testResults.txt & docs/testSummary.txt)
+-   **Full development cycle with Dusk**: `composer run dev-cp-complete` (includes unit tests AND Dusk browser tests)
 
 ## Architecture Overview
 
@@ -107,6 +112,116 @@ app/
 -   **Assertions**: Prefer specific assertions (`assertDatabaseHas`, `assertStatus`, etc.)
 -   **Factories/Seeders**: Use for test data creation
 -   **Coverage**: Maintain 85%+ test coverage for critical business logic
+
+### Browser Testing (Dusk) Standards
+
+-   **Framework**: Laravel Dusk for browser automation testing
+-   **Test Organization**: Group browser tests in `tests/Browser/` directory
+-   **Base Classes**: Use `JavaScriptDuskTestCase` for JS-enabled tests, `DuskTestCase` for basic tests
+-   **Test Execution**: Run with `composer run test-dusk` for dynamic batched tests, `composer run dev-cp-complete` for full cycle
+-   **Environment**: Uses file-based SQLite for reliable testing with proper database transactions
+-   **Browser Management**: Automatic ChromeDriver startup and cleanup
+-   **Results Capture**: Automatic generation of `docs/testResultsDusk.txt` and `docs/testSummaryDusk.txt`
+-   **Dynamic Batching**: Automatic test discovery and categorization without manual script editing
+-   **Performance Tracking**: Tracks execution time, pass/fail rates, and generates detailed metrics
+-   **Configuration**: Centralized config in `config/dusk-testing.json` for all batching behavior
+-   **Batch Organization**: Creates category-specific output files for granular analysis
+-   **Unicode Support**: Proper handling of test result symbols (⨯, ✅, ✓, etc.)
+-   **Zero Configuration**: Works out-of-box with intelligent auto-categorization
+
+### Dynamic Test Categorization
+
+The system automatically categorizes tests into complexity-based batches with intelligent pattern matching:
+
+-   **Basic** (120s): Fast connection tests without database setup (max 15 tests/batch)
+-   **Simple** (180s): Basic page navigation and simple authentication (max 10 tests/batch)
+-   **Interactive** (240s): JavaScript, Livewire, and Alpine.js tests (max 8 tests/batch)
+-   **Features** (300s): Module-specific functionality tests (max 6 tests/batch)
+-   **Complex** (420s): Full workflows with heavy database setup (max 4 tests/batch)
+-   **E2E** (600s): End-to-end workflow tests (max 2 tests/batch)
+
+**Categorization Methods:**
+- Filename pattern matching (e.g., `*Connection*`, `*Livewire*`)
+- Content analysis (scanning test file contents for keywords)
+- Configurable rules in `config/dusk-testing.json`
+
+### Configuration Management
+
+Edit `config/dusk-testing.json` to customize behavior:
+
+-   **Categorization Rules**: Pattern and content-based test classification
+-   **Timeout Settings**: Per-category timeout configuration
+-   **Batch Limits**: Maximum tests per batch with automatic splitting
+-   **Logging Levels**: Control script verbosity
+
+### Test Categories & Best Practices
+
+-   **Connection Tests**: Basic browser connectivity and page loading
+-   **Authentication Tests**: User login, organization context, and permissions
+-   **Interaction Tests**: JavaScript, Livewire, and Alpine.js functionality
+-   **Integration Tests**: End-to-end workflows and user journeys
+-   **Feature Tests**: Module-specific functionality testing
+-   **E2E Workflows**: Complete user journey testing
+
+### Management Commands
+
+```bash
+# Direct Script Usage
+php scripts/dusk-runner.php                    # Run all tests in dynamic batches
+php scripts/dusk-runner.php --verbose          # Run with verbose output
+php scripts/dusk-runner.php --category basic    # Run specific category only
+php scripts/dusk-runner.php --dry-run         # Show execution plan without running
+php scripts/dusk-runner.php --show-categorization    # Show current batch organization
+php scripts/dusk-aggregator.php              # Aggregate batch results into combined report
+php scripts/dusk-aggregator.php --verbose     # Aggregate with detailed output
+php scripts/dusk-aggregator.php --clean       # Clean batch files after aggregation
+
+# Composer Scripts (recommended)
+composer run test-dusk                     # Run all tests in dynamic batches
+composer run test-dusk-aggregate          # Aggregate batch results into combined report
+composer run test-dusk-complete            # Run tests and aggregate in one command
+```
+
+### Adding New Tests
+
+1. Create test file as normal (ends with `Test.php`)
+2. System auto-discovers and categorizes it
+3. Check categorization with `php scripts/dusk-runner.php --show-categorization`
+4. If needed, add custom rule to `config/dusk-testing.json`
+5. No script editing required!
+
+### Script Architecture
+
+- **dusk-runner.php**: Dynamic test discovery, categorization, and execution
+- **dusk-aggregator.php**: Results aggregation and reporting
+- **config/dusk-testing.json**: Centralized configuration for all behavior
+
+### Workflow
+
+1. **Run Tests**: `php scripts/dusk-runner.php` creates batch result files
+2. **Aggregate Results**: `php scripts/dusk-aggregator.php` combines into comprehensive reports
+3. **Clean Up**: Use `--clean` flag to remove batch files after aggregation
+
+### System Benefits
+
+- **Zero Configuration Required**: Works out of box with intelligent auto-categorization
+- **Performance Optimized**: Category-specific timeouts prevent test timeouts while optimizing execution speed
+- **Scalable Architecture**: Handles growing test suites automatically with proper batching
+- **Comprehensive Reporting**: Detailed metrics, pass/fail analysis, and execution tracking
+- **Developer Friendly**: Easy CLI interface with helpful commands and dry-run capabilities
+- **Production Ready**: Robust error handling, Unicode support, and comprehensive logging
+
+### Best Practices\*\*
+
+-   Use `waitFor()` and `pause()` appropriately for dynamic content
+-   Take screenshots on failure for debugging (`screenshot()`)
+-   Test both authenticated and unauthenticated states
+-   Verify responsive design and accessibility
+-   Use proper selectors (`wire:id`, CSS selectors, XPath)
+-   Clean up test data and maintain isolation between tests
+-   Let the dynamic system handle batching and timeouts
+-   Use `--show-categorization` to understand test organization
+-   Customize configuration instead of editing script files
 
 ### Frontend/JavaScript
 

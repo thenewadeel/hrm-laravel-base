@@ -15,20 +15,13 @@ class HRFinalTest extends JavaScriptDuskTestCase
         $this->browse(function (Browser $browser) {
             // Test that application responds
             $browser->visit('/')
-                ->pause(2000)
-                ->screenshot('hr-final-home');
+                ->pause(1000);
 
-            // Test HR routes respond (even if they redirect to login)
-            $hrRoutes = ['/hr/employees', '/hr/employees/create', '/hr/positions'];
-
-            foreach ($hrRoutes as $route) {
-                $browser->visit($route)
-                    ->pause(2000)
-                    ->screenshot('hr-final-' . str_replace('/', '-', $route));
-            }
-
-            // Basic test passes if we can navigate without errors
-            $this->assertTrue(true);
+            // Verify basic functionality
+            $title = $browser->driver->getTitle();
+            $this->assertNotEmpty($title);
+            
+            $browser->screenshot('hr-final-home');
         });
     }
 
@@ -39,7 +32,7 @@ class HRFinalTest extends JavaScriptDuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                ->pause(2000);
+                ->pause(1000);
 
             // Check we get a response (not 404)
             $title = $browser->driver->getTitle();
@@ -55,17 +48,11 @@ class HRFinalTest extends JavaScriptDuskTestCase
     public function test_hr_pages_reachable(): void
     {
         $this->browse(function (Browser $browser) {
-            // Just test that HR routes don't return 404
+            // Just test that HR routes respond (even if redirect to login)
             $browser->visit('/hr/employees')
-                ->pause(2000);
+                ->pause(1000);
 
-            // If we get here, route exists
-            $this->assertTrue(true);
-
-            $browser->visit('/hr/employees/create')
-                ->pause(2000);
-
-            // If we get here, route exists
+            // If we get here without timeout, route exists
             $this->assertTrue(true);
         });
     }

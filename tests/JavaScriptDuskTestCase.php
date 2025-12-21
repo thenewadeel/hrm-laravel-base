@@ -12,7 +12,7 @@ use Laravel\Dusk\TestCase as BaseTestCase;
 use PHPUnit\Framework\Attributes\BeforeClass;
 use Tests\Browser\Concerns\HandlesDatabaseIsolation;
 
-abstract class DuskTestCase extends BaseTestCase
+abstract class JavaScriptDuskTestCase extends BaseTestCase
 {
     use DatabaseTransactions;
     use HandlesDatabaseIsolation;
@@ -34,12 +34,13 @@ abstract class DuskTestCase extends BaseTestCase
     public static function prepare(): void
     {
         if (! static::runningInSail()) {
+            // Ensure ChromeDriver is running with proper settings
             static::startChromeDriver();
         }
     }
 
     /**
-     * Create the RemoteWebDriver instance.
+     * Create the RemoteWebDriver instance with JavaScript support.
      */
     protected function driver(): RemoteWebDriver
     {
@@ -48,17 +49,40 @@ abstract class DuskTestCase extends BaseTestCase
             '--disable-gpu',
             '--no-sandbox',
             '--disable-dev-shm-usage',
-            '--window-size=1920,1080',
+            '--disable-extensions',
+            '--disable-plugins',
+            // Keep images enabled for JS tests
             '--disable-web-security',
             '--allow-running-insecure-content',
+            '--window-size=1920,1080',
+            '--disable-features=VizDisplayCompositor',
+            '--disable-software-rasterizer',
+            '--disable-background-timer-throttling',
+            '--disable-renderer-backgrounding',
+            '--disable-backgrounding-occluded-windows',
+            '--disable-ipc-flooding-protection',
+            '--enable-automation', // Allow automation
+            '--disable-infobars', // Remove infobars
+            '--start-maximized', // Start maximized
+            '--disable-notifications', // Disable notifications
+            '--disable-popup-blocking', // Allow popups if needed
         ]);
 
         $capabilities = DesiredCapabilities::chrome();
         $capabilities->setCapability(ChromeOptions::CAPABILITY, $options);
+        $capabilities->setCapability('acceptInsecureCerts', true); // Allow self-signed certs
 
         return RemoteWebDriver::create(
-            'http://127.0.0.1:9515',
-            $capabilities
+            $_ENV['DUSK_DRIVER_URL'] ?? env('DUSK_DRIVER_URL') ?? 'http://localhost:9515',
+            $capabilities,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            30000,  // connection timeout 30 seconds
+            30000   // request timeout 30 seconds
         );
     }
 
@@ -71,6 +95,18 @@ abstract class DuskTestCase extends BaseTestCase
 
         // Set proper environment for Dusk tests BEFORE app initialization
         $this->setUpDuskEnvironment();
+
+        // Always recreate the database file
+        // $dbFile = storage_path('testing_dusk.sqlite');
+
+        // // Delete existing file if it exists
+        // if (file_exists($dbFile)) {
+        //     unlink($dbFile);
+        // }
+
+        // // Create new empty database file
+        // file_put_contents($dbFile, '');
+        // chmod($dbFile, 0666);
 
         // For batched testing, use shared database to reduce overhead
         // Individual tests will handle their own isolation via transactions
@@ -95,7 +131,6 @@ abstract class DuskTestCase extends BaseTestCase
                 '--force' => true,
             ]);
         }
-
         // Begin database transaction for test isolation
         $this->beginDatabaseTransaction();
     }
@@ -208,22 +243,22 @@ abstract class DuskTestCase extends BaseTestCase
     }
 
     /**
-     * Take a screenshot on failure for debugging.
-     * Note: Dusk automatically handles screenshots on test failure.
+     * Wait for JavaScript to be ready with longer timeout for JS tests.
      */
-    protected function takeScreenshotOnFailure(): void
+    protected function waitForJavaScriptReady($browser, int $timeout = 10): void
     {
-        // Dusk automatically captures screenshots on failure
-        // Screenshots are stored in tests/Browser/screenshots
+        $browser->waitUsing($timeout, 500, function () use ($browser) {
+            return $browser->script('return document.readyState === "complete"')[0] ?? false;
+        });
     }
 
     /**
-     * Store console output on failure for debugging.
-     * Note: Dusk automatically handles console logs on test failure.
+     * Wait for Livewire to be available.
      */
-    protected function storeConsoleOutputOnFailure(): void
+    protected function waitForLivewire($browser, int $timeout = 10): void
     {
-        // Dusk automatically captures console logs on failure
-        // Console logs are stored in tests/Browser/console
+        $browser->waitUsing($timeout, 500, function () use ($browser) {
+            return $browser->script('return window.Livewire !== undefined')[0] ?? false;
+        });
     }
 }

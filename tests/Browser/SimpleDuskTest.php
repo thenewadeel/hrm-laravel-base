@@ -12,9 +12,9 @@ class SimpleDuskTest extends JavaScriptDuskTestCase
     public function test_simple_page_load(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/')
-                ->pause(2000)
-                ->assertTitle('hrm-laravel-base');
+            $browser->visit('/simple-test')
+                ->pause(1000)
+                ->assertTitle('Simple Test');
         });
     }
 

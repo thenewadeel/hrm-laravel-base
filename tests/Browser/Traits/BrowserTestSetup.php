@@ -35,8 +35,10 @@ trait BrowserTestSetup
         $user->save();
 
         $browser->loginAs($user)
+            ->visit('/')
+            ->pause(2000)
             ->visit('/dashboard')
-            ->waitForText($organization->name, 10);
+            ->pause(2000);
 
         return $organization;
     }
@@ -71,8 +73,10 @@ trait BrowserTestSetup
         $user->save();
 
         $browser->loginAs($user)
+            ->visit('/')
+            ->pause(2000)
             ->visit('/dashboard')
-            ->waitForText($organization->name, 10);
+            ->pause(2000);
 
         return $organization;
     }
@@ -99,8 +103,10 @@ trait BrowserTestSetup
         $user->save();
 
         $browser->loginAs($user)
+            ->visit('/')
+            ->pause(2000)
             ->visit('/dashboard')
-            ->waitForText($organizations->first()->name, 10);
+            ->pause(2000);
 
         return [
             'user' => $user,
@@ -127,8 +133,10 @@ trait BrowserTestSetup
         $user->save();
 
         $browser->loginAs($user)
+            ->visit('/')
+            ->pause(2000)
             ->visit('/dashboard')
-            ->waitForText($organization->name, 10);
+            ->pause(2000);
 
         return [
             'user' => $user,

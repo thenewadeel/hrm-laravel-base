@@ -12,4 +12,10 @@
             <directory suffix="Test.php">./tests/Browser</directory>
         </testsuite>
     </testsuites>
+    <php>
+        <env name="CACHE_STORE" value="array"/>
+        <env name="DB_CONNECTION" value="testing_sqlite"/>
+        <env name="DB_DATABASE" value="storage/testing_dusk.sqlite"/>
+        <ini name="memory_limit" value="1G"/>
+    </php>
 </phpunit>
