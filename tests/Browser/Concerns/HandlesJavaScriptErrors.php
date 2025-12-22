@@ -606,6 +606,7 @@ trait HandlesJavaScriptErrors
             return $result[0] ?? null;
         } catch (\Exception $e) {
             $this->fail("JavaScript execution failed: " . $e->getMessage());
+            return null;
         }
     }
 }

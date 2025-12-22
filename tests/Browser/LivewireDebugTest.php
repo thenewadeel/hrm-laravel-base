@@ -40,34 +40,34 @@ class LivewireDebugTest extends DuskTestCase
 
             // Get current URL
             $currentUrl = $browser->driver->getCurrentURL();
-            echo "\n=== CURRENT URL: {$currentUrl} ===\n";
+            // echo "\n=== CURRENT URL: {$currentUrl} ===\n";
 
             // Check response status
             $statusCode = $browser->driver->executeScript("return window.performance.getEntriesByType('navigation')[0]?.responseStatus || 200;")[0] ?? 200;
-            echo "\n=== RESPONSE STATUS: {$statusCode} ===\n";
+            // echo "\n=== RESPONSE STATUS: {$statusCode} ===\n";
 
             // Get page source
             $pageSource = $browser->driver->getPageSource();
-            echo "\n=== PAGE SOURCE LENGTH: " . strlen($pageSource) . " ===\n";
-            
+            // echo "\n=== PAGE SOURCE LENGTH: " . strlen($pageSource) . " ===\n";
+
             // Look for specific error patterns
             if (strpos($pageSource, 'Not Found') !== false) {
-                echo "\n=== PAGE SHOWING 'Not Found' ===\n";
+                // echo "\n=== PAGE SHOWING 'Not Found' ===\n";
             }
             if (strpos($pageSource, '404') !== false) {
-                echo "\n=== PAGE SHOWING '404' ===\n";
+                // echo "\n=== PAGE SHOWING '404' ===\n";
             }
 
             // Try alternative routes
-            echo "\n=== TRYING ALTERNATIVE ROUTES ===\n";
-            
+            // echo "\n=== TRYING ALTERNATIVE ROUTES ===\n";
+
             $browser->visit('/fees')->pause(1000);
             $feesUrl = $browser->driver->getCurrentURL();
-            echo "\n=== VISITED /fees: {$feesUrl} ===\n";
-            
+            // echo "\n=== VISITED /fees: {$feesUrl} ===\n";
+
             $feesSource = $browser->driver->getPageSource();
             if (strpos($feesSource, 'Not Found') === false) {
-                echo "\n=== /fees ROUTE WORKS! ===\n";
+                // echo "\n=== /fees ROUTE WORKS! ===\n";
             }
 
             // Take screenshot
@@ -75,15 +75,15 @@ class LivewireDebugTest extends DuskTestCase
 
             // Check for any Livewire elements
             $livewireElements = $browser->elements('[wire\\:id]');
-            echo "\n=== LIVEWIRE ELEMENTS COUNT: " . count($livewireElements) . " ===\n";
+            // echo "\n=== LIVEWIRE ELEMENTS COUNT: " . count($livewireElements) . " ===\n";
 
             // Check if Alpine is loaded
             $alpineLoaded = $browser->script("return typeof window.Alpine !== 'undefined'")[0] ?? false;
-            echo "\n=== ALPINE LOADED: " . ($alpineLoaded ? 'YES' : 'NO') . " ===\n";
+            // echo "\n=== ALPINE LOADED: " . ($alpineLoaded ? 'YES' : 'NO') . " ===\n";
 
             // Check if Livewire is loaded
             $livewireLoaded = $browser->script("return typeof window.Livewire !== 'undefined'")[0] ?? false;
-            echo "\n=== LIVEWIRE LOADED: " . ($livewireLoaded ? 'YES' : 'NO') . " ===\n";
+            // echo "\n=== LIVEWIRE LOADED: " . ($livewireLoaded ? 'YES' : 'NO') . " ===\n";
 
             // Simple assertion that should pass
             $this->assertNotEmpty($currentUrl, 'URL should not be empty');
@@ -101,15 +101,15 @@ class LivewireDebugTest extends DuskTestCase
                 ->pause(2000);
 
             $currentUrl = $browser->driver->getCurrentURL();
-            echo "\n=== FEES PAGE URL: {$currentUrl} ===\n";
+            // echo "\n=== FEES PAGE URL: {$currentUrl} ===\n";
 
             $pageSource = $browser->driver->getPageSource();
             if (strpos($pageSource, 'livewire:fee-manager') !== false) {
-                echo "\n=== FOUND FEE-MANAGER COMPONENT ===\n";
+                // echo "\n=== FOUND FEE-MANAGER COMPONENT ===\n";
             }
 
             if (strpos($pageSource, 'Manage member fees and payments') !== false) {
-                echo "\n=== FOUND PAGE CONTENT ===\n";
+                // echo "\n=== FOUND PAGE CONTENT ===\n";
             }
 
             // Take screenshot

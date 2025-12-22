@@ -169,7 +169,7 @@ class AccountingReportService
         $expenses = $accountBalances->filter(fn ($account) => $account['account']->type === 'expense');
 
         $totalRevenue = $revenue->sum('balance');
-        $totalExpenses = $expenses->sum('balance');
+        $totalExpenses = abs($expenses->sum('balance')); // Take absolute value for expenses
         $netIncome = $totalRevenue - $totalExpenses;
 
         return [

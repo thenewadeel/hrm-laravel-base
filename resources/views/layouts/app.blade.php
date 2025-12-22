@@ -19,51 +19,51 @@
     @livewireStyles
 </head>
 
-<body x-data="{
-    test: 'working',
-    search: '',
-    drawers: {
-        left: false,
-        right: false,
-        top: false,
-        bottom: false
-    },
-    drawerState(position) {
-        return this.drawers[position] || false;
-    },
-    toggleDrawer(position) {
-        const newState = !this.drawers[position];
-        this.closeAllDrawers();
-        this.drawers[position] = newState;
+<body class="font-sans antialiased bg-primary text-primary" 
+     x-data="{
+         test: 'working',
+         search: '',
+         drawers: {
+             left: false,
+             right: false,
+             top: false,
+             bottom: false
+         },
+         drawerState(position) {
+             return this.drawers[position] || false;
+         },
+         toggleDrawer(position) {
+             const newState = !this.drawers[position];
+             this.closeAllDrawers();
+             this.drawers[position] = newState;
 
-        // Focus management
-        if (newState) {
-            this.$nextTick(() => {
-                const drawerEl = document.querySelector(`.drawer-${position}`);
-                if (drawerEl) {
-                    drawerEl.focus();
-                }
-            });
-        }
-    },
-    closeDrawer(position) {
-        this.drawers[position] = false;
-    },
-    closeAllDrawers() {
-        Object.keys(this.drawers).forEach(key => {
-            this.drawers[key] = false;
-        });
-    },
-    handleKeydown(e) {
-        if (e.key === 'Escape') {
-            this.closeAllDrawers();
-        }
-    },
-    init() {
-        // Initialize drawer system
-    }
-}" x-init="init()" @keydown.window="handleKeydown($event)"
-    class="font-sans antialiased bg-primary text-primary">
+             // Focus management
+             if (newState) {
+                 this.$nextTick(() => {
+                     const drawerEl = document.querySelector(`.drawer-${position}`);
+                     if (drawerEl) {
+                         drawerEl.focus();
+                     }
+                 });
+             }
+         },
+         closeDrawer(position) {
+             this.drawers[position] = false;
+         },
+         closeAllDrawers() {
+             Object.keys(this.drawers).forEach(key => {
+                 this.drawers[key] = false;
+             });
+         },
+         handleKeydown(e) {
+             if (e.key === 'Escape') {
+                 this.closeAllDrawers();
+             }
+         },
+         init() {
+             // Initialize drawer system
+         }
+     }" x-init="init()" @keydown.window="handleKeydown($event)">
 
     <x-banner />
 
@@ -155,7 +155,25 @@
     @stack('modals')
     <x-navigation.scripts />
 
+    {!! \Livewire\Mechanisms\FrontendAssets\FrontendAssets::scriptConfig() !!}
     @livewireScripts
+    
+    <script>
+        // Manually ensure Livewire is initialized
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.Livewire && typeof window.Livewire.start === 'function') {
+                // Livewire might have already started, but let's ensure components are ready
+                setTimeout(function() {
+                    console.log('Livewire debug:', {
+                        loaded: !!window.Livewire,
+                        components: !!window.Livewire.components,
+                        componentsArray: !!window.Livewire.components?.componentsArray,
+                        elements: document.querySelectorAll('[wire\\\\:id]').length
+                    });
+                }, 1000);
+            }
+        });
+    </script>
 </body>
 
 </html>

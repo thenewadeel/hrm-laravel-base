@@ -6,6 +6,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/simple-test', function () {
+    return '<html><head><title>Simple Test</title></head><body><h1>Simple Test Page</h1><p>This is a simple test page.</p></body></html>';
+});
+
 Route::get('/test-navigation', function () {
     return view('test-navigation');
 })->name('test-navigation');
@@ -33,7 +37,7 @@ Route::get('/docs', function () {
 
 Route::get('/docs/{path?}', function ($path = null) {
     $docsPath = public_path('docs');
-    $filePath = $docsPath.'/'.$path;
+    $filePath = $docsPath . '/' . $path;
 
     // Security: prevent directory traversal
     if (str_contains($path, '..') || ! file_exists($filePath)) {
@@ -41,8 +45,8 @@ Route::get('/docs/{path?}', function ($path = null) {
     }
 
     // If directory requested, serve index.html
-    if (is_dir($filePath) && file_exists($filePath.'/index.html')) {
-        $filePath = $filePath.'/index.html';
+    if (is_dir($filePath) && file_exists($filePath . '/index.html')) {
+        $filePath = $filePath . '/index.html';
     }
 
     return response()->file($filePath);
@@ -65,44 +69,44 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // -------------------
     // Setup Wizard Routes
     // -------------------
-    require __DIR__.'/setup.php';
+    require __DIR__ . '/setup.php';
 
     // -------------------
     // Admin routes
     // -------------------
-    require __DIR__.'/admin.php';
+    require __DIR__ . '/admin.php';
 
     // -------------------
     // Organization routes
     // -------------------
-    require __DIR__.'/organization.php';
+    require __DIR__ . '/organization.php';
 
     // -------------------
     // HRM routes
     // -------------------
-    require __DIR__.'/hrm.php';
+    require __DIR__ . '/hrm.php';
 
     // -------------------
     // Accounting routes
     // -------------------
-    require __DIR__.'/accounts.php';
+    require __DIR__ . '/accounts.php';
 
     // -------------------
     // Inventory routes
     // -------------------
-    require __DIR__.'/inventory.php';
+    require __DIR__ . '/inventory.php';
 
     // -------------------
     // Membership routes
     // -------------------
-    require __DIR__.'/membership.php';
+    require __DIR__ . '/membership.php';
 });
 // -----------------------
 // -----------------------
 // Demo routes
 // -----------------------
-require __DIR__.'/demo.php';
+require __DIR__ . '/demo.php';
 
 // Temporary debug routes
 // -----------------------
-require __DIR__.'/debug.php';
+require __DIR__ . '/debug.php';

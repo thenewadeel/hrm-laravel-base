@@ -343,7 +343,7 @@ test('workflow with error handling and recovery', function () {
 
     $summary = $allLogsViewer->summary;
     expect($summary['success_count'])->toBe(1);
-    expect($summary['failed_count'])->toBe(0); // Retry may have updated the failed log to success
+    expect($summary['failed_count'])->toBe(1); // Original failed log should remain, retry creates new success log
 });
 
 // RED: Test workflow with mixed distribution types

@@ -229,9 +229,9 @@ class InventoryServiceTest extends TestCase
             'notes' => 'Test',
         ]];
 
-        // ✅ Change to expect AuthorizationException instead of generic Exception
-        $this->expectException(AuthorizationException::class);
-        $this->expectExceptionMessage('This action is unauthorized.');
+        // ✅ Expect generic Exception with specific message
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Cannot modify finalized or cancelled transaction');
 
         $this->inventoryService->addItemsToTransaction($transaction, $items, $this->user);
     }

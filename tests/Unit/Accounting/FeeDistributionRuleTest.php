@@ -212,7 +212,7 @@ test('calculate distribution with fixed amount items', function () {
     $organization = \App\Models\Organization::factory()->create();
 
     // Create rule without items first
-    $rule = FeeDistributionRule::factory()->create(['organization_id' => $organization->id]);
+    $rule = FeeDistributionRule::factory()->fixedBased()->create(['organization_id' => $organization->id]);
     $account1 = ChartOfAccount::factory()->create(['organization_id' => $organization->id]);
     $account2 = ChartOfAccount::factory()->create(['organization_id' => $organization->id]);
 

@@ -4,6 +4,7 @@ namespace Tests\Browser;
 
 use App\Models\Organization;
 use App\Models\User;
+use App\Permissions\MembershipPermissions;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
@@ -24,6 +25,12 @@ class SimpleFeesTest extends DuskTestCase
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        // Give the user required membership permissions
+        $this->adminUser->givePermissionTo('membership.view_fees', $this->organization);
+        $this->adminUser->givePermissionTo('membership.manage_fees', $this->organization);
+        $this->adminUser->current_organization_id = $this->organization->id;
+        $this->adminUser->save();
     }
 
     /**
@@ -39,7 +46,7 @@ class SimpleFeesTest extends DuskTestCase
 
             // Check if Livewire is loaded
             $livewireLoaded = $browser->script("
-                return typeof window.Livewire !== 'undefined' && 
+                return typeof window.Livewire !== 'undefined' &&
                        window.Livewire.components &&
                        window.Livewire.components.componentsArray &&
                        window.Livewire.components.componentsArray.length > 0;
@@ -49,31 +56,31 @@ class SimpleFeesTest extends DuskTestCase
 
             // Debug what's actually on the page
             $pageTitle = $browser->driver->getTitle();
-            echo "\n=== PAGE TITLE: {$pageTitle} ===\n";
+            // echo "\n=== PAGE TITLE: {$pageTitle} ===\n";
 
             $pageSource = $browser->driver->getPageSource();
             if (strpos($pageSource, 'Manage member fees') !== false) {
-                echo "\n=== FOUND EXPECTED TEXT ===\n";
+                // echo "\n=== FOUND EXPECTED TEXT ===\n";
             } else {
-                echo "\n=== DID NOT FIND EXPECTED TEXT ===\n";
-                echo "\n=== FIRST 2000 CHARS ===\n" . substr($pageSource, 0, 2000) . "\n=== END ===\n";
+                // echo "\n=== DID NOT FIND EXPECTED TEXT ===\n";
+                // echo "\n=== FIRST 2000 CHARS ===\n" . substr($pageSource, 0, 2000) . "\n=== END ===\n";
             }
 
             // Check if Alpine is loaded
             $alpineLoaded = $browser->script("return typeof window.Alpine !== 'undefined'")[0] ?? false;
-            echo "\n=== ALPINE LOADED: " . ($alpineLoaded ? 'YES' : 'NO') . " ===\n";
+            // echo "\n=== ALPINE LOADED: " . ($alpineLoaded ? 'YES' : 'NO') . " ===\n";
 
             // Check if Livewire is loaded
             $livewireLoaded = $browser->script("
-                return typeof window.Livewire !== 'undefined' && 
+                return typeof window.Livewire !== 'undefined' &&
                        window.Livewire.components &&
                        window.Livewire.components.componentsArray;
             ")[0] ?? false;
-            echo "\n=== LIVEWIRE LOADED: " . ($livewireLoaded ? 'YES' : 'NO') . " ===\n";
+            // echo "\n=== LIVEWIRE LOADED: " . ($livewireLoaded ? 'YES' : 'NO') . " ===\n";
 
             if ($livewireLoaded) {
                 $componentCount = $browser->script("return window.Livewire.components.componentsArray.length")[0] ?? 0;
-                echo "\n=== LIVEWIRE COMPONENTS: {$componentCount} ===\n";
+                // echo "\n=== LIVEWIRE COMPONENTS: {$componentCount} ===\n";
             }
 
             // Take screenshot for debugging
@@ -98,7 +105,7 @@ class SimpleFeesTest extends DuskTestCase
 
             // Check if search value was set
             $searchValue = $browser->script("
-                const component = window.Livewire.components.componentsArray.find(c => 
+                const component = window.Livewire.components.componentsArray.find(c =>
                     c.name && c.name.includes('fee-manager')
                 );
                 return component ? component.search : null;
@@ -132,7 +139,7 @@ class SimpleFeesTest extends DuskTestCase
 
             // Check if form appeared
             $showCreateForm = $browser->script("
-                const component = window.Livewire.components.componentsArray.find(c => 
+                const component = window.Livewire.components.componentsArray.find(c =>
                     c.name && c.name.includes('fee-manager')
                 );
                 return component ? component.showCreateForm : false;

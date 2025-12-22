@@ -47,7 +47,7 @@ class SimpleLivewireTest extends DuskTestCase
                     pageUrl: window.location.href,
                     readyState: document.readyState
                 };
-                
+
                 // Try to find components safely
                 if (window.Livewire && window.Livewire.componentsComponentsArray) {
                     info.componentCount = window.Livewire.componentsComponentsArray.length;
@@ -56,20 +56,20 @@ class SimpleLivewireTest extends DuskTestCase
                     info.componentCount = 0;
                     info.componentNames = [];
                 }
-                
+
                 return info;
             ")[0] ?? [];
 
-            echo "\n=== LIVEWIRE INFO ===\n";
-            echo "Livewire Defined: " . ($livewireInfo['livewireDefined'] ? 'YES' : 'NO') . "\n";
-            echo "Has Components: " . ($livewireInfo['hasComponents'] ? 'YES' : 'NO') . "\n";
-            echo "Has Find Method: " . ($livewireInfo['hasFind'] ? 'YES' : 'NO') . "\n";
-            echo "Has Components Array: " . ($livewireInfo['hasComponentsArray'] ? 'YES' : 'NO') . "\n";
-            echo "Component Count: " . $livewireInfo['componentCount'] . "\n";
-            echo "Component Names: " . implode(', ', $livewireInfo['componentNames']) . "\n";
-            echo "Page URL: " . $livewireInfo['pageUrl'] . "\n";
-            echo "Ready State: " . $livewireInfo['readyState'] . "\n";
-            echo "==========================\n";
+            // echo "\n=== LIVEWIRE INFO ===\n";
+            // echo "Livewire Defined: " . ($livewireInfo['livewireDefined'] ? 'YES' : 'NO') . "\n";
+            // echo "Has Components: " . ($livewireInfo['hasComponents'] ? 'YES' : 'NO') . "\n";
+            // echo "Has Find Method: " . ($livewireInfo['hasFind'] ? 'YES' : 'NO') . "\n";
+            // echo "Has Components Array: " . ($livewireInfo['hasComponentsArray'] ? 'YES' : 'NO') . "\n";
+            // echo "Component Count: " . $livewireInfo['componentCount'] . "\n";
+            // echo "Component Names: " . implode(', ', $livewireInfo['componentNames']) . "\n";
+            // echo "Page URL: " . $livewireInfo['pageUrl'] . "\n";
+            // echo "Ready State: " . $livewireInfo['readyState'] . "\n";
+            // echo "==========================\n";
 
             // Take screenshot
             $browser->screenshot('livewire_availability');
@@ -92,11 +92,11 @@ class SimpleLivewireTest extends DuskTestCase
                 ->pause(3000);
 
             $currentUrl = $browser->driver->getCurrentURL();
-            echo "\n=== FEES PAGE URL: {$currentUrl} ===\n";
+            // echo "\n=== FEES PAGE URL: {$currentUrl} ===\n";
 
             // Check if redirected
             if (strpos($currentUrl, '/login') !== false) {
-                echo "\n=== REDIRECTED TO LOGIN - AUTHENTICATION ISSUE ===\n";
+                // echo "\n=== REDIRECTED TO LOGIN - AUTHENTICATION ISSUE ===\n";
                 $this->markTestSkipped('Authentication issue - redirected to login');
                 return;
             }
@@ -104,18 +104,18 @@ class SimpleLivewireTest extends DuskTestCase
             // Check page content
             $pageContent = $browser->driver->getPageSource();
             if (strpos($pageContent, 'livewire:') === false) {
-                echo "\n=== NO LIVEWIRE COMPONENTS FOUND IN SOURCE ===\n";
+                // echo "\n=== NO LIVEWIRE COMPONENTS FOUND IN SOURCE ===\n";
                 $this->markTestSkipped('No Livewire components found on page');
                 return;
             }
 
-            echo "\n=== FOUND LIVEWIRE COMPONENTS ===\n";
+            // echo "\n=== FOUND LIVEWIRE COMPONENTS ===\n";
 
             // Extract Livewire component info
             $livewireComponents = $browser->script("
                 const components = [];
                 const elements = document.querySelectorAll('[wire\\\\:id]');
-                
+
                 elements.forEach(el => {
                     const wireId = el.getAttribute('wire:id');
                     if (wireId) {
@@ -128,22 +128,22 @@ class SimpleLivewireTest extends DuskTestCase
                         });
                     }
                 });
-                
+
                 return {
                     count: components.length,
                     components: components
                 };
             ")[0] ?? [];
 
-            echo "\n=== LIVEWIRE COMPONENT COUNT: " . $livewireComponents['count'] . " ===\n";
-            
+            // echo "\n=== LIVEWIRE COMPONENT COUNT: " . $livewireComponents['count'] . " ===\n";
+
             if ($livewireComponents['count'] > 0) {
                 foreach ($livewireComponents['components'] as $component) {
-                    echo "Component: {$component['wireId']} ({$component['tagName']})\n";
-                    echo "  Has Data: " . ($component['hasData'] ? 'YES' : 'NO') . "\n";
-                    echo "  Has Model: " . ($component['hasModel'] ? 'YES' : 'NO') . "\n";
-                    echo "  Has Click: " . ($component['hasClick'] ? 'YES' : 'NO') . "\n";
-                    echo "  ---\n";
+                    // echo "Component: {$component['wireId']} ({$component['tagName']})\n";
+                    // echo "  Has Data: " . ($component['hasData'] ? 'YES' : 'NO') . "\n";
+                    // echo "  Has Model: " . ($component['hasModel'] ? 'YES' : 'NO') . "\n";
+                    // echo "  Has Click: " . ($component['hasClick'] ? 'YES' : 'NO') . "\n";
+                    // echo "  ---\n";
                 }
             }
 

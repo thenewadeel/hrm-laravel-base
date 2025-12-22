@@ -18,7 +18,7 @@ class FeeManagementSetupTest extends JavaScriptDuskTestCase
 
             // Debug: check what tables exist before test
             $tables = \DB::select("SELECT name FROM sqlite_master WHERE type='table'");
-            echo 'Tables before test: '.json_encode(array_column($tables, 'name'))."\n";
+            // echo 'Tables before test: '.json_encode(array_column($tables, 'name'))."\n";
 
             // Test page loading without authentication
             $browser->visit('/fees')
@@ -28,18 +28,18 @@ class FeeManagementSetupTest extends JavaScriptDuskTestCase
             $pageTitle = $browser->script('return document.title;')[0];
             $bodyContent = $browser->script('return document.body.innerText;')[0];
 
-            echo "Page title: $pageTitle\n";
-            echo 'Body content preview: '.substr($bodyContent, 0, 300)."...\n";
+            // echo "Page title: $pageTitle\n";
+            // echo 'Body content preview: '.substr($bodyContent, 0, 300)."...\n";
 
             // Check for error indicators
             if (strpos($bodyContent, '500') !== false) {
-                echo "Found 500 error in page content\n";
+                // echo "Found 500 error in page content\n";
             }
             if (strpos($bodyContent, '404') !== false) {
-                echo "Found 404 error in page content\n";
+                // echo "Found 404 error in page content\n";
             }
             if (strpos($bodyContent, 'Unauthorized') !== false) {
-                echo "Found Unauthorized in page content\n";
+                // echo "Found Unauthorized in page content\n";
             }
 
             $browser->assertSee('Fees');
