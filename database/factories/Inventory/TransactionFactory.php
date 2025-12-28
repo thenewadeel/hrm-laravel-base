@@ -13,10 +13,14 @@ class TransactionFactory extends Factory
     {
         return [
             'store_id' => \App\Models\Inventory\Store::factory(),
+            'item_id' => \App\Models\Inventory\Item::factory(),
             'created_by' => User::factory(),
             'type' => $this->faker->randomElement(['incoming', 'outgoing', 'adjustment']),
             'status' => 'draft',
-            'reference' => 'TRX' . $this->faker->unique()->numberBetween(10000, 99999),
+            'reference' => 'TRX'.$this->faker->unique()->numberBetween(10000, 99999),
+            'quantity' => $this->faker->numberBetween(1, 100),
+            'unit_price' => $this->faker->randomFloat(10, 1000, 2),
+            'total_amount' => $this->faker->randomFloat(10, 10000, 2),
             'notes' => $this->faker->sentence,
             'transaction_date' => $this->faker->dateTimeThisYear(),
         ];

@@ -168,7 +168,7 @@
                         loaded: !!window.Livewire,
                         components: !!window.Livewire.components,
                         componentsArray: !!window.Livewire.components?.componentsArray,
-                        elements: document.querySelectorAll('[wire\\\\:id]').length
+                        elements: document.querySelectorAll('[wire\\:id]').length
                     });
                 }, 1000);
             }
