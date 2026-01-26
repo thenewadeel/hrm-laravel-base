@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 /**
@@ -40,7 +41,7 @@ class ProductionOptimizationTest extends TestCase
         $this->actingAs($this->user);
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_multi_tenant_queries_efficiently()
     {
         // Create test data across multiple organizations
@@ -66,7 +67,7 @@ class ProductionOptimizationTest extends TestCase
         $this->assertTrue($accounts->every(fn ($account) => $account->organization_id === $this->organization->id));
     }
 
-    /** @test */
+    #[Test]
     public function it_prevents_n_plus_one_queries_in_livewire_components()
     {
         // Create test data
@@ -97,7 +98,7 @@ class ProductionOptimizationTest extends TestCase
         $this->assertCount(10, $results->items());
     }
 
-    /** @test */
+    #[Test]
     public function it_caches_configuration_efficiently()
     {
         // Clear any existing cache
@@ -120,7 +121,7 @@ class ProductionOptimizationTest extends TestCase
         $this->assertLessThan(50, $executionTime, 'Configuration access should be cached and fast');
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_large_datasets_efficiently()
     {
         // Create large dataset
@@ -147,7 +148,7 @@ class ProductionOptimizationTest extends TestCase
         $this->assertLessThan(1000, $executionTime, 'Large dataset processing should be efficient');
     }
 
-    /** @test */
+    #[Test]
     public function it_maintains_data_integrity_under_load()
     {
         // Create concurrent-like operations
@@ -165,7 +166,7 @@ class ProductionOptimizationTest extends TestCase
         $this->assertEquals(10, $updatedAccounts->count());
     }
 
-    /** @test */
+    #[Test]
     public function it_optimizes_database_indexes()
     {
         // Test that queries use proper indexes
@@ -194,7 +195,7 @@ class ProductionOptimizationTest extends TestCase
         $this->assertStringContainsString('account_number', $lastQuery);
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_memory_efficiently()
     {
         $memoryBefore = memory_get_usage(true);
@@ -214,7 +215,7 @@ class ProductionOptimizationTest extends TestCase
         $this->assertLessThan(50, $memoryUsed, 'Memory usage should be under 50MB for 500 records');
     }
 
-    /** @test */
+    #[Test]
     public function it_validates_api_response_performance()
     {
         // Create test data
@@ -239,7 +240,7 @@ class ProductionOptimizationTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_secures_multi_tenant_data_isolation()
     {
         // Create another organization and user
@@ -268,7 +269,7 @@ class ProductionOptimizationTest extends TestCase
             ->assertStatus(404);
     }
 
-    /** @test */
+    #[Test]
     public function it_optimizes_livewire_rendering_performance()
     {
         // Create test data

@@ -49,7 +49,7 @@ test('payroll calculation includes allowances correctly', function () {
         'organization_id' => $organization->id,
         'allowance_type_id' => $allowanceType->id,
         'amount' => 500,
-        'effective_date' => now()->subMonths(2), // Make it effective well before the period
+        'effective_date' => '2025-09-01', // Explicitly set to well before November 2025 period
         'is_active' => true,
     ]);
 
@@ -81,7 +81,7 @@ test('payroll calculation includes deductions correctly', function () {
         'organization_id' => $organization->id,
         'deduction_type_id' => $deductionType->id,
         'amount' => 200,
-        'effective_date' => now()->subMonths(2), // Make it effective well before the period
+        'effective_date' => '2025-09-01', // Explicitly set to well before November 2025 period
         'is_active' => true,
     ]);
 
@@ -135,7 +135,7 @@ test('effective basic salary considers increments', function () {
         'increment_value' => 10,
         'previous_salary' => 5000,
         'new_salary' => 5500,
-        'effective_date' => now()->subMonth(), // Effective before period
+        'effective_date' => '2025-10-15', // Effective before November 2025 period
         'status' => 'approved',
     ]);
 

@@ -46,8 +46,9 @@ test('voucher service generates sequential voucher numbers', function () {
     $voucher1 = app(GeneralVoucherService::class)->createVoucher($data, $organization->id, $user->id);
     $voucher2 = app(GeneralVoucherService::class)->createVoucher($data, $organization->id, $user->id);
 
-    expect($voucher1->number)->toBe('SALES-2025-0001');
-    expect($voucher2->number)->toBe('SALES-2025-0002');
+    $currentYear = now()->year;
+    expect($voucher1->number)->toBe("SALES-{$currentYear}-0001");
+    expect($voucher2->number)->toBe("SALES-{$currentYear}-0002");
 });
 
 test('voucher service validates amount is positive', function () {

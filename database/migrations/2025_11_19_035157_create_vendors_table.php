@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('payment_terms')->default('NET30');
             $table->enum('status', ['ACTIVE', 'INACTIVE', 'SUSPENDED'])->default('ACTIVE');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

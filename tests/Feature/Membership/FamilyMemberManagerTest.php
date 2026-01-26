@@ -328,6 +328,10 @@ it('generates barcode for family member correctly', function () {
 });
 
 it('uploads photo for family member correctly', function () {
+    // Skip test if GD extension is not available
+    if (!extension_loaded('gd')) {
+        $this->markTestSkipped('GD extension is required for image processing tests');
+    }
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);

@@ -120,7 +120,7 @@ class InventoryService
                     $transaction->items()->create([
                         'item_id' => $itemData['item_id'],
                         'quantity' => $itemData['quantity'],
-                        'unit_price' => ($itemData['unit_price']), // Convert to cents
+                    'unit_price' => $itemData['unit_price'],
                         'notes' => $itemData['notes'] ?? null,
                     ]);
                 }
