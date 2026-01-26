@@ -6,22 +6,21 @@
 +------------------+------------------+
 | Metric           | Count/Percentage |
 +------------------+------------------+
-| Total Tests      | 1449             |
-| Passed           | 1432 (98.8%)     |
+| Total Tests      | 1445             |
+| Passed           | 1427 (98.8%)     |
 | Failed           | 13 (0.9%)        |
-| Warnings/Skipped | 4 (0.3%)         |
+| Warnings/Skipped | 5 (0.3%)         |
 +------------------+------------------+
 
 --- ❌ Detailed Failures (13 Total) ---
 
- FeeDistributionRule (1/20 failures):
-   ⨯ calculate distribution with fixed amount items
+ TwoFactorAuthenticationSettings (3/3 failures):
+   ⨯ two factor authentication can be enabled
+   ⨯ recovery codes can be regenerated
+   ⨯ two factor authentication can be disabled
 
- InventoryService (1/13 failures):
-   ⨯ it prevents modifying finalized transaction
-
- FeeDistributionIntegration (1/7 failures):
-   ⨯ workflow with error handling and recovery
+ Voucher (1/11 failures):
+   ⨯ voucher generates sequential numbers
 
  FeeDistributionLogViewer (6/18 failures):
    ⨯ fee distribution log viewer searches by description
@@ -31,16 +30,17 @@
    ⨯ fee distribution log viewer respects organization isolation
    ⨯ fee distribution log viewer loads logs with relationships
 
- AdvancedReporting (3/7 failures):
-   ⨯ generates comprehensive financial reports with filters
-   ⨯ generates balance sheet with asset liability equity verification
-   ⨯ generates trial balance with debits credits verification
+ EnhancedFeeService (1/16 failures):
+   ⨯ calculates late fee amount correctly
 
- Compliance (1/8 failures):
-   ⨯ multi-tenant data isolation under load testing
+ MemberDetails (1/15 failures):
+   ⨯ it uploads member photo correctly
+
+ AdvancedReporting (1/7 failures):
+   ⨯ generates comparative period analysis reports
 
 
---- ⚠️ Warnings/Skipped Tests (4 Total) ---
+--- ⚠️ Warnings/Skipped Tests (5 Total) ---
 
  EmailVerification (3/3 warnings):
    - email verification screen can be rendered → Email verification not…
@@ -50,12 +50,14 @@
  Registration (1/3 warnings):
    - registration screen cannot be rendered if support is disabled → Reg…
 
+ FamilyMemberManager (1/14 warnings):
+   - it uploads photo for family member correctly → GD extension is requ…
+
 
 --- ✅ Fully Passed Modules ---
 +----------------------------------+--------------+
 | Module                           | Tests Passed |
 +----------------------------------+--------------+
-| ProductionOptimization           | 10/10        |
 | AccountTypeValidation            | 7/7          |
 | BalanceSheet                     | 3/3          |
 | CashPaymentService               | 5/5          |
@@ -64,6 +66,7 @@
 | DimensionReport                  | 1/1          |
 | FeeDistributionLog               | 19/19        |
 | FeeDistributionRuleItem          | 18/18        |
+| FeeDistributionRule              | 20/20        |
 | FinancialReports                 | 1/1          |
 | IncomeStatement                  | 3/3          |
 | InvalidAccountTypeException      | 3/3          |
@@ -108,6 +111,7 @@
 | UserProfile                      | 15/15        |
 | AccountingReportService          | 2/2          |
 | AccountingService                | 3/3          |
+| InventoryService                 | 13/13        |
 | SequenceService                  | 2/2          |
 | CreateTeam                       | 1/1          |
 | DeleteTeam                       | 2/2          |
@@ -125,14 +129,13 @@
 | PasswordConfirmation             | 3/3          |
 | PasswordReset                    | 4/4          |
 | ProfileInformation               | 2/2          |
-| TwoFactorAuthenticationSettings  | 3/3          |
 | UpdatePassword                   | 3/3          |
 | CashPayment                      | 7/7          |
 | CashReceipt                      | 7/7          |
+| FeeDistributionIntegration       | 7/7          |
 | FeeDistributionService           | 15/15        |
 | FinancialYear                    | 15/15        |
 | SpecializedVoucher               | 10/10        |
-| Voucher                          | 11/11        |
 | AdminPortal                      | 3/3          |
 | AdvanceReportService             | 11/11        |
 | AdvanceReportsLivewire           | 12/12        |
@@ -194,10 +197,7 @@
 | AdvancedMemberList               | 14/14        |
 | BulkMemberUpload                 | 18/18        |
 | EnhancedFeeManager               | 7/7          |
-| EnhancedFeeService               | 16/16        |
-| FamilyMemberManager              | 14/14        |
 | FeeManager                       | 8/8          |
-| MemberDetails                    | 15/15        |
 | MemberForm                       | 6/6          |
 | MemberList                       | 7/7          |
 | MemberListing                    | 15/15        |
@@ -227,12 +227,15 @@
 | OrganizationUserIntegration      | 7/7          |
 | OutstandingStatementsBasic       | 1/1          |
 | OutstandingStatements            | 12/12        |
+| PDODebug                         | 1/1          |
 | EmployeeIncrement                | 6/6          |
 | PayrollCalculation               | 7/7          |
 | PdfGeneration                    | 12/12        |
 | CompletePortal                   | 7/7          |
 | EmployeePortal                   | 8/8          |
 | ManagerPortal                    | 5/5          |
+| ProductionOptimization           | 10/10        |
+| Compliance                       | 3/3          |
 | MembershipService                | 12/12        |
 | SetupChartOfAccounts             | 3/3          |
 | SetupStore                       | 3/3          |

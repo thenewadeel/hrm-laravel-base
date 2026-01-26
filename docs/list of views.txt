@@ -359,7 +359,6 @@ resources/views/
 │   └── processing.blade.php
 ├── policy.blade.php
 ├── portal
-│   ├── components
 │   ├── employee
 │   │   ├── attendance.blade.php
 │   │   ├── dashboard.blade.php
@@ -369,7 +368,6 @@ resources/views/
 │   │   ├── payslips.blade.php
 │   │   ├── payslip-show.blade.php
 │   │   └── setup.blade.php
-│   ├── layouts
 │   └── manager
 │       ├── dashboard.blade.php
 │       ├── reports.blade.php
@@ -403,4 +401,4 @@ resources/views/
 ├── test-navigation.blade.php
 └── welcome.blade.php
 
-74 directories, 330 files
+72 directories, 330 files
