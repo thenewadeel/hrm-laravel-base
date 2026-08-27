@@ -80,6 +80,13 @@ class ShiftController extends Controller
 
         Shift::create($validated);
 
+        $returnTo = $request->input('return_to');
+
+        if ($returnTo && (str_contains($returnTo, 'hr.employees') || str_contains($returnTo, '/hr/employees'))) {
+            return redirect($returnTo)
+                ->with('success', 'Shift created successfully.');
+        }
+
         return redirect()->route('hr.shifts.index')
             ->with('success', 'Shift created successfully.');
     }

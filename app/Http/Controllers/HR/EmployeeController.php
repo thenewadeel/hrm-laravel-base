@@ -4,8 +4,10 @@ namespace App\Http\Controllers\HR;
 
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
+use App\Models\JobPosition;
 use App\Models\OrganizationUnit;
 use App\Models\OrganizationUser;
+use App\Models\Shift;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -40,8 +42,8 @@ class EmployeeController extends Controller
 
         // Load organization user data manually
         $employeeIds = $employees->getCollection()->pluck('id');
-        $organizationUsers = \App\Models\OrganizationUser::whereIn('user_id',
-            \App\Models\Employee::whereIn('id', $employeeIds)->pluck('user_id')
+        $organizationUsers = OrganizationUser::whereIn('user_id',
+            Employee::whereIn('id', $employeeIds)->pluck('user_id')
         )->where('organization_id', $currentOrganizationId)->get()->keyBy('user_id');
 
         $employees->getCollection()->each(function ($employee) use ($organizationUsers) {
@@ -55,12 +57,21 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        $organizationUnits = OrganizationUnit::where(
-            'organization_id',
-            auth()->user()->current_organization_id
-        )->get();
+        $currentOrganizationId = auth()->user()->current_organization_id;
 
-        return view('hr.employees.create', compact('organizationUnits'));
+        $organizationUnits = OrganizationUnit::where('organization_id', $currentOrganizationId)->get();
+
+        $jobPositions = JobPosition::where('organization_id', $currentOrganizationId)
+            ->where('is_active', true)
+            ->orderBy('title')
+            ->get();
+
+        $shifts = Shift::where('organization_id', $currentOrganizationId)
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get();
+
+        return view('hr.employees.create', compact('organizationUnits', 'jobPositions', 'shifts'));
     }
 
     public function store(Request $request)
@@ -129,6 +140,7 @@ class EmployeeController extends Controller
             'biometric_id' => $validated['biometric_id'] ?? null,
             'is_admin' => $validated['is_admin'] ?? false,
             'is_active' => true,
+            'basic_salary' => $validated['salary_per_month'] ?? 0,
         ]);
 
         // Create organization user relationship for permissions/roles
@@ -185,12 +197,21 @@ class EmployeeController extends Controller
         // Authorization check - ensure employee belongs to same organization
         // $this->authorize('update', $employee);
 
-        $organizationUnits = OrganizationUnit::where(
-            'organization_id',
-            auth()->user()->current_organization_id
-        )->get();
+        $currentOrganizationId = auth()->user()->current_organization_id;
 
-        return view('hr.employees.edit', compact('employee', 'organizationUnits'));
+        $organizationUnits = OrganizationUnit::where('organization_id', $currentOrganizationId)->get();
+
+        $jobPositions = JobPosition::where('organization_id', $currentOrganizationId)
+            ->where('is_active', true)
+            ->orderBy('title')
+            ->get();
+
+        $shifts = Shift::where('organization_id', $currentOrganizationId)
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get();
+
+        return view('hr.employees.edit', compact('employee', 'organizationUnits', 'jobPositions', 'shifts'));
     }
 
     public function updateBiometric(Request $request, Employee $employee)
@@ -232,7 +253,11 @@ class EmployeeController extends Controller
                     ->ignore($employee->id),
                 Rule::unique('users', 'email')->ignore($employee->user_id),
             ],
-            'position' => 'required|string|max:255',
+            'position_id' => 'nullable|exists:job_positions,id',
+            'position' => 'nullable|string|max:255',
+            'shift_id' => 'nullable|exists:shifts,id',
+            'roles' => 'nullable|array',
+            'roles.*' => 'string',
             'organization_unit_id' => 'nullable|exists:organization_units,id',
             'date_of_birth' => 'nullable|date',
             'gender' => 'nullable|string|in:male,female,other',
@@ -243,10 +268,15 @@ class EmployeeController extends Controller
             'country' => 'nullable|string|max:255',
             'zip_code' => 'nullable|string|max:20',
             'salary_per_month' => 'nullable|numeric|min:0',
+            'pay_frequency' => 'nullable|in:monthly,biweekly,weekly',
             'required_daily_hours' => 'nullable|numeric|min:0|max:24',
             'is_admin' => 'nullable|boolean',
             'is_active' => 'nullable|boolean',
         ]);
+
+        $positionTitle = $employee->position?->title
+            ?? ($validated['position'] ?? null)
+            ?? 'Employee';
 
         // Update employee record
         $employee->update([
@@ -263,6 +293,9 @@ class EmployeeController extends Controller
             'country' => $validated['country'] ?? null,
             'zip_code' => $validated['zip_code'] ?? null,
             'organization_unit_id' => $validated['organization_unit_id'] ?? null,
+            'position_id' => $validated['position_id'] ?? null,
+            'shift_id' => $validated['shift_id'] ?? null,
+            'basic_salary' => $validated['salary_per_month'] ?? 0,
             'is_admin' => $validated['is_admin'] ?? false,
             'is_active' => $validated['is_active'] ?? true,
         ]);
@@ -278,7 +311,8 @@ class EmployeeController extends Controller
             OrganizationUser::where('user_id', $employee->user_id)
                 ->where('organization_id', $currentOrganizationId)
                 ->update([
-                    'position' => $validated['position'],
+                    'position' => $positionTitle,
+                    'roles' => $validated['roles'] ?? [],
                     'organization_unit_id' => $validated['organization_unit_id'] ?? null,
                 ]);
         }
@@ -342,6 +376,7 @@ class EmployeeController extends Controller
             'biometric_id' => $validated['biometric_id'] ?? null,
             'is_admin' => $validated['is_admin'] ?? false,
             'is_active' => true,
+            'basic_salary' => $validated['salary_per_month'] ?? 0,
         ]);
 
         return redirect()->route('hr.employees.index')

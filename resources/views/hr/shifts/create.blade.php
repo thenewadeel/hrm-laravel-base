@@ -17,6 +17,9 @@
             <div class="surface shadow-md rounded-lg">
                 <form method="POST" action="{{ route('hr.shifts.store') }}">
                     @csrf
+                    @if(request('return_to'))
+                        <input type="hidden" name="return_to" value="{{ request('return_to') }}">
+                    @endif
 
                     <div class="p-6">
                         <div class="grid grid-cols-1 gap-6">

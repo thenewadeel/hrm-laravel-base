@@ -141,7 +141,7 @@
                                         Active Loans
                                     </dt>
                                     <dd class="text-lg font-medium text-gray-900">
-                                        {{ $summary['employee_breakdown']->count() ?? 0 }}
+                                        {{ count($summary['employee_breakdown'] ?? []) }}
                                     </dd>
                                 </dl>
                             </div>

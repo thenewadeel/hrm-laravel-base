@@ -92,6 +92,13 @@ class JobPositionController extends Controller
 
         JobPosition::create($validated);
 
+        $returnTo = $request->input('return_to');
+
+        if ($returnTo && (str_contains($returnTo, 'hr.employees') || str_contains($returnTo, '/hr/employees'))) {
+            return redirect($returnTo)
+                ->with('success', 'Job position created successfully.');
+        }
+
         return redirect()->route('hr.positions.index')
             ->with('success', 'Job position created successfully.');
     }

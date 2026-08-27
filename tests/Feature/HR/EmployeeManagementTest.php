@@ -80,12 +80,48 @@ class EmployeeManagementTest extends TestCase
             'first_name' => 'Jane',
             'last_name' => 'Smith',
             'email' => 'jane.smith@test.com',
+            'basic_salary' => 5000.00,
         ]);
 
         // Verify user was created and linked
         $this->assertDatabaseHas('users', [
             'email' => 'jane.smith@test.com',
         ]);
+    }
+
+    #[Test]
+    public function test_create_employee_form_renders()
+    {
+        $this->actingAsHrUser();
+
+        $response = $this->get(route('hr.employees.create'));
+
+        $response->assertStatus(200);
+        $response->assertSee('Add New Employee');
+        $response->assertSee('first_name');
+        $response->assertSee('password');
+        $response->assertSee('position_id');
+        $response->assertSee('shift_id');
+    }
+
+    #[Test]
+    public function test_edit_employee_form_renders_with_payroll_and_assignment_fields()
+    {
+        $this->actingAsHrUser();
+
+        $this->employee->update([
+            'basic_salary' => 7500.00,
+        ]);
+
+        $response = $this->get(route('hr.employees.edit', $this->employee));
+
+        $response->assertStatus(200);
+        $response->assertSee('Edit Employee');
+        $response->assertSee('position_id');
+        $response->assertSee('shift_id');
+        $response->assertSee('salary_per_month');
+        $response->assertSee('roles[]');
+        $response->assertSee('7500');
     }
 
     #[Test]
@@ -113,6 +149,7 @@ class EmployeeManagementTest extends TestCase
             'first_name' => 'John',
             'last_name' => 'Updated',
             'email' => 'john.updated@test.com',
+            'basic_salary' => 6000.00,
         ]);
     }
 
@@ -211,7 +248,7 @@ class EmployeeManagementTest extends TestCase
         $response->assertDontSee('John Doe');
     }
 
-#[Test]
+    #[Test]
     public function test_employee_attendance_integration()
     {
         $this->actingAsHrUser();
@@ -225,13 +262,13 @@ class EmployeeManagementTest extends TestCase
             ->create(['employee_id' => $this->employee->id, 'status' => 'late']);
 
         $response = $this->get(route('hr.employees.show', $this->employee));
-        
+
         $response->assertStatus(200);
         // Verify attendance functionality works
         $response->assertSee('Attendance');
     }
 
-#[Test]
+    #[Test]
     public function test_employee_leave_balance_calculation()
     {
         $this->actingAsHrUser();
@@ -256,7 +293,7 @@ class EmployeeManagementTest extends TestCase
             ]);
 
         $response = $this->get(route('hr.employees.show', $this->employee));
-        
+
         $response->assertStatus(200);
 
         // Verify leave functionality works
@@ -289,6 +326,7 @@ class EmployeeManagementTest extends TestCase
             'last_name' => 'Record Only',
             'email' => 'hr.record@test.com',
             'user_id' => null,
+            'basic_salary' => 3000.00,
         ]);
     }
 

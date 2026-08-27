@@ -6,18 +6,13 @@
 +------------------+------------------+
 | Metric           | Count/Percentage |
 +------------------+------------------+
-| Total Tests      | 1445             |
-| Passed           | 1427 (98.8%)     |
-| Failed           | 13 (0.9%)        |
+| Total Tests      | 1456             |
+| Passed           | 1442 (99%)       |
+| Failed           | 9 (0.6%)         |
 | Warnings/Skipped | 5 (0.3%)         |
 +------------------+------------------+
 
---- ❌ Detailed Failures (13 Total) ---
-
- TwoFactorAuthenticationSettings (3/3 failures):
-   ⨯ two factor authentication can be enabled
-   ⨯ recovery codes can be regenerated
-   ⨯ two factor authentication can be disabled
+--- ❌ Detailed Failures (9 Total) ---
 
  Voucher (1/11 failures):
    ⨯ voucher generates sequential numbers
@@ -31,13 +26,10 @@
    ⨯ fee distribution log viewer loads logs with relationships
 
  EnhancedFeeService (1/16 failures):
-   ⨯ calculates late fee amount correctly
+   ⨯ generates overdue fees with proper business rules
 
  MemberDetails (1/15 failures):
    ⨯ it uploads member photo correctly
-
- AdvancedReporting (1/7 failures):
-   ⨯ generates comparative period analysis reports
 
 
 --- ⚠️ Warnings/Skipped Tests (5 Total) ---
@@ -129,6 +121,7 @@
 | PasswordConfirmation             | 3/3          |
 | PasswordReset                    | 4/4          |
 | ProfileInformation               | 2/2          |
+| TwoFactorAuthenticationSettings  | 3/3          |
 | UpdatePassword                   | 3/3          |
 | CashPayment                      | 7/7          |
 | CashReceipt                      | 7/7          |
@@ -161,9 +154,9 @@
 | BankAccount                      | 9/9          |
 | FixedAsset                       | 11/11        |
 | ModelSelectDropdown              | 4/4          |
-| EmployeeManagement               | 14/14        |
+| EmployeeManagement               | 16/16        |
 | EmployeePositionShiftIntegration | 5/5          |
-| JobPositionController            | 6/6          |
+| JobPositionController            | 8/8          |
 | ShiftController                  | 5/5          |
 | HrmDashboardController           | 18/18        |
 | CrossModuleWorkflow              | 6/6          |
@@ -223,6 +216,7 @@
 | PortalHrDashboardRoute           | 2/2          |
 | NavigationHover                  | 4/4          |
 | NewBadge                         | 2/2          |
+| DepartmentManagement             | 7/7          |
 | OrganizationDashboard            | 5/5          |
 | OrganizationUserIntegration      | 7/7          |
 | OutstandingStatementsBasic       | 1/1          |
@@ -235,6 +229,7 @@
 | EmployeePortal                   | 8/8          |
 | ManagerPortal                    | 5/5          |
 | ProductionOptimization           | 10/10        |
+| AdvancedReporting                | 7/7          |
 | Compliance                       | 3/3          |
 | MembershipService                | 12/12        |
 | SetupChartOfAccounts             | 3/3          |

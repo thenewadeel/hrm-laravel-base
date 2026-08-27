@@ -28,27 +28,9 @@
             "yunyami/clockwork"
         ]
     },
-    "timestamp": "2026-01-26T12:28:31+00:00",
-    "component_count": 566,
+    "timestamp": "2026-08-27T18:36:33+00:00",
+    "component_count": 570,
     "components": [
-        {
-            "type": "Model",
-            "name": "Membership",
-            "file": "app/Models/Membership.php",
-            "essential": false
-        },
-        {
-            "type": "Model",
-            "name": "Team",
-            "file": "app/Models/Team.php",
-            "essential": false
-        },
-        {
-            "type": "Model",
-            "name": "TeamInvitation",
-            "file": "app/Models/TeamInvitation.php",
-            "essential": false
-        },
         {
             "type": "Model",
             "name": "AssetDisposal",
@@ -213,66 +195,6 @@
         },
         {
             "type": "Model",
-            "name": "Dimension",
-            "file": "app/Models/Dimension.php",
-            "essential": false
-        },
-        {
-            "type": "Model",
-            "name": "Head",
-            "file": "app/Models/Inventory/Head.php",
-            "essential": false
-        },
-        {
-            "type": "Model",
-            "name": "Item",
-            "file": "app/Models/Inventory/Item.php",
-            "essential": false
-        },
-        {
-            "type": "Model",
-            "name": "Store",
-            "file": "app/Models/Inventory/Store.php",
-            "essential": false
-        },
-        {
-            "type": "Model",
-            "name": "Transaction",
-            "file": "app/Models/Inventory/Transaction.php",
-            "essential": false
-        },
-        {
-            "type": "Model",
-            "name": "TransactionItem",
-            "file": "app/Models/Inventory/TransactionItem.php",
-            "essential": false
-        },
-        {
-            "type": "Model",
-            "name": "OrganizationScope",
-            "file": "app/Models/Scopes/OrganizationScope.php",
-            "essential": false
-        },
-        {
-            "type": "Model",
-            "name": "StoreOrganizationScope",
-            "file": "app/Models/Scopes/StoreOrganizationScope.php",
-            "essential": false
-        },
-        {
-            "type": "Model",
-            "name": "TestTransaction",
-            "file": "app/Models/TestTransaction.php",
-            "essential": false
-        },
-        {
-            "type": "Model",
-            "name": "BelongsToOrganization",
-            "file": "app/Models/Traits/BelongsToOrganization.php",
-            "essential": false
-        },
-        {
-            "type": "Model",
             "name": "AllowanceType",
             "file": "app/Models/AllowanceType.php",
             "essential": false
@@ -293,6 +215,12 @@
             "type": "Model",
             "name": "DeductionType",
             "file": "app/Models/DeductionType.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "Dimension",
+            "file": "app/Models/Dimension.php",
             "essential": false
         },
         {
@@ -327,6 +255,36 @@
         },
         {
             "type": "Model",
+            "name": "Head",
+            "file": "app/Models/Inventory/Head.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "Item",
+            "file": "app/Models/Inventory/Item.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "Store",
+            "file": "app/Models/Inventory/Store.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "Transaction",
+            "file": "app/Models/Inventory/Transaction.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "TransactionItem",
+            "file": "app/Models/Inventory/TransactionItem.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
             "name": "Invoice",
             "file": "app/Models/Invoice.php",
             "essential": false
@@ -347,6 +305,12 @@
             "type": "Model",
             "name": "LeaveRequest",
             "file": "app/Models/LeaveRequest.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "Membership",
+            "file": "app/Models/Membership.php",
             "essential": false
         },
         {
@@ -435,6 +399,18 @@
         },
         {
             "type": "Model",
+            "name": "OrganizationScope",
+            "file": "app/Models/Scopes/OrganizationScope.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "StoreOrganizationScope",
+            "file": "app/Models/Scopes/StoreOrganizationScope.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
             "name": "Shift",
             "file": "app/Models/Shift.php",
             "essential": false
@@ -443,6 +419,30 @@
             "type": "Model",
             "name": "TaxBracket",
             "file": "app/Models/TaxBracket.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "Team",
+            "file": "app/Models/Team.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "TeamInvitation",
+            "file": "app/Models/TeamInvitation.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "TestTransaction",
+            "file": "app/Models/TestTransaction.php",
+            "essential": false
+        },
+        {
+            "type": "Model",
+            "name": "BelongsToOrganization",
+            "file": "app/Models/Traits/BelongsToOrganization.php",
             "essential": false
         },
         {
@@ -456,96 +456,6 @@
             "type": "Model",
             "name": "Vendor",
             "file": "app/Models/Vendor.php",
-            "essential": false
-        },
-        {
-            "type": "Controller",
-            "name": "FinancialReportsController",
-            "file": "app/Http/Controllers/Api/Accounting/FinancialReportsController.php",
-            "essential": false
-        },
-        {
-            "type": "Controller",
-            "name": "JournalEntriesController",
-            "file": "app/Http/Controllers/Api/Accounting/JournalEntriesController.php",
-            "essential": false
-        },
-        {
-            "type": "Controller",
-            "name": "ChartOfAccountsController",
-            "file": "app/Http/Controllers/Api/Accounting/ChartOfAccountsController.php",
-            "essential": false
-        },
-        {
-            "type": "Controller",
-            "name": "ItemController",
-            "file": "app/Http/Controllers/Api/Inventory/ItemController.php",
-            "essential": false
-        },
-        {
-            "type": "Controller",
-            "name": "StoreController",
-            "file": "app/Http/Controllers/Api/Inventory/StoreController.php",
-            "essential": false
-        },
-        {
-            "type": "Controller",
-            "name": "TransactionController",
-            "file": "app/Http/Controllers/Api/Inventory/TransactionController.php",
-            "essential": false
-        },
-        {
-            "type": "Controller",
-            "name": "OrganizationController",
-            "file": "app/Http/Controllers/Api/OrganizationController.php",
-            "essential": false
-        },
-        {
-            "type": "Controller",
-            "name": "OrganizationUnitController",
-            "file": "app/Http/Controllers/Api/OrganizationUnitController.php",
-            "essential": false
-        },
-        {
-            "type": "Controller",
-            "name": "EmployeeController",
-            "file": "app/Http/Controllers/Api/HRM/EmployeeController.php",
-            "essential": false
-        },
-        {
-            "type": "Controller",
-            "name": "MemberController",
-            "file": "app/Http/Controllers/Api/Membership/MemberController.php",
-            "essential": false
-        },
-        {
-            "type": "Controller",
-            "name": "ScanController",
-            "file": "app/Http/Controllers/Api/Membership/ScanController.php",
-            "essential": false
-        },
-        {
-            "type": "Controller",
-            "name": "OrganizationInvitationController",
-            "file": "app/Http/Controllers/Api/OrganizationInvitationController.php",
-            "essential": false
-        },
-        {
-            "type": "Controller",
-            "name": "OutstandingStatementsController",
-            "file": "app/Http/Controllers/Api/OutstandingStatementsController.php",
-            "essential": false
-        },
-        {
-            "type": "Controller",
-            "name": "VoucherController",
-            "file": "app/Http/Controllers/Api/VoucherController.php",
-            "essential": false
-        },
-        {
-            "type": "Controller",
-            "name": "OrganizationController",
-            "file": "app/Http/Controllers/OrganizationController.php",
             "essential": false
         },
         {
@@ -570,6 +480,90 @@
             "type": "Controller",
             "name": "AdminPortalController",
             "file": "app/Http/Controllers/Admin/AdminPortalController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "ChartOfAccountsController",
+            "file": "app/Http/Controllers/Api/Accounting/ChartOfAccountsController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "FinancialReportsController",
+            "file": "app/Http/Controllers/Api/Accounting/FinancialReportsController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "JournalEntriesController",
+            "file": "app/Http/Controllers/Api/Accounting/JournalEntriesController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "EmployeeController",
+            "file": "app/Http/Controllers/Api/HRM/EmployeeController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "ItemController",
+            "file": "app/Http/Controllers/Api/Inventory/ItemController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "StoreController",
+            "file": "app/Http/Controllers/Api/Inventory/StoreController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "TransactionController",
+            "file": "app/Http/Controllers/Api/Inventory/TransactionController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "MemberController",
+            "file": "app/Http/Controllers/Api/Membership/MemberController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "ScanController",
+            "file": "app/Http/Controllers/Api/Membership/ScanController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "OrganizationController",
+            "file": "app/Http/Controllers/Api/OrganizationController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "OrganizationInvitationController",
+            "file": "app/Http/Controllers/Api/OrganizationInvitationController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "OrganizationUnitController",
+            "file": "app/Http/Controllers/Api/OrganizationUnitController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "OutstandingStatementsController",
+            "file": "app/Http/Controllers/Api/OutstandingStatementsController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "VoucherController",
+            "file": "app/Http/Controllers/Api/VoucherController.php",
             "essential": false
         },
         {
@@ -694,6 +688,12 @@
         },
         {
             "type": "Controller",
+            "name": "OrganizationController",
+            "file": "app/Http/Controllers/OrganizationController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
             "name": "OrganizationDashboardController",
             "file": "app/Http/Controllers/OrganizationDashboardController.php",
             "essential": false
@@ -750,6 +750,12 @@
             "type": "Controller",
             "name": "TaxController",
             "file": "app/Http/Controllers/TaxController.php",
+            "essential": false
+        },
+        {
+            "type": "Controller",
+            "name": "OrganizationUnitController",
+            "file": "app/Http/Controllers/OrganizationUnitController.php",
             "essential": false
         },
         {
@@ -1610,33 +1616,6 @@
         },
         {
             "type": "Migration",
-            "name": "2025_10_29_204937_add_current_organization_id_to_users_table",
-            "file": "database/migrations/2025_10_29_204937_add_current_organization_id_to_users_table.php",
-            "essential": false,
-            "database_schema": {
-                "tables": [],
-                "operations": [
-                    {
-                        "type": "update_table",
-                        "table": "users",
-                        "changes": [
-                            {
-                                "operation": "foreignId",
-                                "column": "current_organization_id",
-                                "options": ")\n                ->nullable()\n                ->constrained('organizations') // Constrain to the organizations table\n                ->after('password'"
-                            },
-                            {
-                                "operation": "index",
-                                "column": "current_organization_id",
-                                "options": ""
-                            }
-                        ]
-                    }
-                ]
-            }
-        },
-        {
-            "type": "Migration",
             "name": "2025_10_17_065345_create_inventory_stores_table",
             "file": "database/migrations/2025_10_17_065345_create_inventory_stores_table.php",
             "essential": false,
@@ -2176,6 +2155,33 @@
                     {
                         "type": "create_table",
                         "table": "inventory_heads"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Migration",
+            "name": "2025_10_29_204937_add_current_organization_id_to_users_table",
+            "file": "database/migrations/2025_10_29_204937_add_current_organization_id_to_users_table.php",
+            "essential": false,
+            "database_schema": {
+                "tables": [],
+                "operations": [
+                    {
+                        "type": "update_table",
+                        "table": "users",
+                        "changes": [
+                            {
+                                "operation": "foreignId",
+                                "column": "current_organization_id",
+                                "options": ")\n                ->nullable()\n                ->constrained('organizations') // Constrain to the organizations table\n                ->after('password'"
+                            },
+                            {
+                                "operation": "index",
+                                "column": "current_organization_id",
+                                "options": ""
+                            }
+                        ]
                     }
                 ]
             }
@@ -7939,12 +7945,6 @@
         },
         {
             "type": "Route",
-            "name": "console",
-            "file": "routes/console.php",
-            "essential": false
-        },
-        {
-            "type": "Route",
             "name": "accounts",
             "file": "routes/accounts.php",
             "essential": false,
@@ -8112,6 +8112,12 @@
                 "Route::get('/members/expiring', [MemberController::class, 'expiring'])->name('api.members.expiring')...",
                 "Route::get('/members/search', [MemberController::class, 'search'])->name('api.members.search');"
             ]
+        },
+        {
+            "type": "Route",
+            "name": "console",
+            "file": "routes/console.php",
+            "essential": false
         },
         {
             "type": "Route",
@@ -8334,6 +8340,7 @@
                 "Route::get('/dashboard', [OrganizationDashboardController::class, 'index']) ->name('dashboard');",
                 "Route::get('/structure', [OrganizationDashboardController::class, 'structure']) ->name('structure');",
                 "Route::get('/analytics', [OrganizationDashboardController::class, 'analytics']) ->name('analytics');",
+                "Route::resource('units', OrganizationUnitController::class) ->parameters(['units' => 'department']) ...",
                 "Route::livewire(['/organizations', OrganizationList::class])->name('organizations.index');",
                 "Route::get('/companies/create', CompanyForm::class)->name('companies.create');",
                 "Route::get('/companies/{company}/edit', CompanyForm::class)->name('companies.edit');",
@@ -8379,7 +8386,97 @@
         {
             "type": "View",
             "name": "index.blade.php",
-            "file": "resources/views/api/index.blade.php",
+            "file": "resources/views/accounting/cash-payments/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/accounting/cash-receipts/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "create.blade.php",
+            "file": "resources/views/accounting/financial-years/create.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "edit.blade.php",
+            "file": "resources/views/accounting/financial-years/edit.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/accounting/fixed-assets/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "asset-register.blade.php",
+            "file": "resources/views/accounting/pdf/asset-register.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "balance-sheet.blade.php",
+            "file": "resources/views/accounting/pdf/balance-sheet.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "depreciation-schedule.blade.php",
+            "file": "resources/views/accounting/pdf/depreciation-schedule.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "income-statement.blade.php",
+            "file": "resources/views/accounting/pdf/income-statement.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "payables-outstanding.blade.php",
+            "file": "resources/views/accounting/pdf/payables-outstanding.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "receivables-outstanding.blade.php",
+            "file": "resources/views/accounting/pdf/receivables-outstanding.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "trial-balance.blade.php",
+            "file": "resources/views/accounting/pdf/trial-balance.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/accounts/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "attach-user.blade.php",
+            "file": "resources/views/admin/attach-user.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "dashboard.blade.php",
+            "file": "resources/views/admin/dashboard.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/alerts/index.blade.php",
             "essential": false
         },
         {
@@ -8390,20 +8487,14 @@
         },
         {
             "type": "View",
-            "name": "verify-email.blade.php",
-            "file": "resources/views/auth/verify-email.blade.php",
+            "name": "index.blade.php",
+            "file": "resources/views/api/index.blade.php",
             "essential": false
         },
         {
             "type": "View",
-            "name": "reset-password.blade.php",
-            "file": "resources/views/auth/reset-password.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "two-factor-challenge.blade.php",
-            "file": "resources/views/auth/two-factor-challenge.blade.php",
+            "name": "dashboard.blade.php",
+            "file": "resources/views/attendance/dashboard.blade.php",
             "essential": false
         },
         {
@@ -8432,6 +8523,48 @@
         },
         {
             "type": "View",
+            "name": "reset-password.blade.php",
+            "file": "resources/views/auth/reset-password.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "two-factor-challenge.blade.php",
+            "file": "resources/views/auth/two-factor-challenge.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "verify-email.blade.php",
+            "file": "resources/views/auth/verify-email.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "badge-showcase.blade.php",
+            "file": "resources/views/badge-showcase.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "badge-standalone.blade.php",
+            "file": "resources/views/badge-standalone.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "badge-test.blade.php",
+            "file": "resources/views/badge-test.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/categories/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
             "name": "action-message.blade.php",
             "file": "resources/views/components/action-message.blade.php",
             "essential": false
@@ -8440,6 +8573,18 @@
             "type": "View",
             "name": "action-section.blade.php",
             "file": "resources/views/components/action-section.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "advanced-search.blade.php",
+            "file": "resources/views/components/advanced-search.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "app-layout.blade.php",
+            "file": "resources/views/components/app-layout.blade.php",
             "essential": false
         },
         {
@@ -8468,74 +8613,32 @@
         },
         {
             "type": "View",
+            "name": "badge.blade.php",
+            "file": "resources/views/components/badge.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
             "name": "banner.blade.php",
             "file": "resources/views/components/banner.blade.php",
             "essential": false
         },
         {
             "type": "View",
-            "name": "confirmation-modal.blade.php",
-            "file": "resources/views/components/confirmation-modal.blade.php",
+            "name": "barcode-scanner.blade.php",
+            "file": "resources/views/components/barcode-scanner.blade.php",
             "essential": false
         },
         {
             "type": "View",
-            "name": "dialog-modal.blade.php",
-            "file": "resources/views/components/dialog-modal.blade.php",
+            "name": "bulk-actions.blade.php",
+            "file": "resources/views/components/bulk-actions.blade.php",
             "essential": false
         },
         {
             "type": "View",
-            "name": "dropdown-link.blade.php",
-            "file": "resources/views/components/dropdown-link.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "dropdown.blade.php",
-            "file": "resources/views/components/dropdown.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "nav-link.blade.php",
-            "file": "resources/views/components/nav-link.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "responsive-nav-link.blade.php",
-            "file": "resources/views/components/responsive-nav-link.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "section-border.blade.php",
-            "file": "resources/views/components/section-border.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "section-title.blade.php",
-            "file": "resources/views/components/section-title.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "validation-errors.blade.php",
-            "file": "resources/views/components/validation-errors.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "form-section.blade.php",
-            "file": "resources/views/components/form-section.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "switchable-team.blade.php",
-            "file": "resources/views/components/switchable-team.blade.php",
+            "name": "button.blade.php",
+            "file": "resources/views/components/button.blade.php",
             "essential": false
         },
         {
@@ -8564,128 +8667,26 @@
         },
         {
             "type": "View",
-            "name": "secondary.blade.php",
-            "file": "resources/views/components/button/secondary.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
             "name": "primary.blade.php",
             "file": "resources/views/components/button/primary.blade.php",
             "essential": false
         },
         {
             "type": "View",
+            "name": "secondary.blade.php",
+            "file": "resources/views/components/button/secondary.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "confirmation-modal.blade.php",
+            "file": "resources/views/components/confirmation-modal.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
             "name": "confirms-password.blade.php",
             "file": "resources/views/components/confirms-password.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "input-error.blade.php",
-            "file": "resources/views/components/form/input-error.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "input.blade.php",
-            "file": "resources/views/components/form/input.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "checkbox.blade.php",
-            "file": "resources/views/components/form/checkbox.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "date.blade.php",
-            "file": "resources/views/components/form/date.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "help.blade.php",
-            "file": "resources/views/components/form/help.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "label.blade.php",
-            "file": "resources/views/components/form/label.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "select.blade.php",
-            "file": "resources/views/components/form/select.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "textarea.blade.php",
-            "file": "resources/views/components/form/textarea.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "loading-spinner.blade.php",
-            "file": "resources/views/components/loading-spinner.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "card.blade.php",
-            "file": "resources/views/components/organization/card.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "sort-indicator.blade.php",
-            "file": "resources/views/components/sort-indicator.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "welcome.blade.php",
-            "file": "resources/views/components/welcome.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "advanced-search.blade.php",
-            "file": "resources/views/components/advanced-search.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "app-layout.blade.php",
-            "file": "resources/views/components/app-layout.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "badge.blade.php",
-            "file": "resources/views/components/badge.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "barcode-scanner.blade.php",
-            "file": "resources/views/components/barcode-scanner.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "bulk-actions.blade.php",
-            "file": "resources/views/components/bulk-actions.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "button.blade.php",
-            "file": "resources/views/components/button.blade.php",
             "essential": false
         },
         {
@@ -8698,6 +8699,12 @@
             "type": "View",
             "name": "data-table.blade.php",
             "file": "resources/views/components/data-table.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "dialog-modal.blade.php",
+            "file": "resources/views/components/dialog-modal.blade.php",
             "essential": false
         },
         {
@@ -8804,6 +8811,18 @@
         },
         {
             "type": "View",
+            "name": "dropdown-link.blade.php",
+            "file": "resources/views/components/dropdown-link.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "dropdown.blade.php",
+            "file": "resources/views/components/dropdown.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
             "name": "empty-state.blade.php",
             "file": "resources/views/components/empty-state.blade.php",
             "essential": false
@@ -8818,6 +8837,60 @@
             "type": "View",
             "name": "form-group.blade.php",
             "file": "resources/views/components/form-group.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "form-section.blade.php",
+            "file": "resources/views/components/form-section.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "checkbox.blade.php",
+            "file": "resources/views/components/form/checkbox.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "date.blade.php",
+            "file": "resources/views/components/form/date.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "help.blade.php",
+            "file": "resources/views/components/form/help.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "input-error.blade.php",
+            "file": "resources/views/components/form/input-error.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "input.blade.php",
+            "file": "resources/views/components/form/input.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "label.blade.php",
+            "file": "resources/views/components/form/label.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "select.blade.php",
+            "file": "resources/views/components/form/select.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "textarea.blade.php",
+            "file": "resources/views/components/form/textarea.blade.php",
             "essential": false
         },
         {
@@ -8846,6 +8919,12 @@
         },
         {
             "type": "View",
+            "name": "loading-spinner.blade.php",
+            "file": "resources/views/components/loading-spinner.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
             "name": "modal.blade.php",
             "file": "resources/views/components/modal.blade.php",
             "essential": false
@@ -8854,6 +8933,12 @@
             "type": "View",
             "name": "model-select-dropdown.blade.php",
             "file": "resources/views/components/model-select-dropdown.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "nav-link.blade.php",
+            "file": "resources/views/components/nav-link.blade.php",
             "essential": false
         },
         {
@@ -9002,8 +9087,44 @@
         },
         {
             "type": "View",
+            "name": "card.blade.php",
+            "file": "resources/views/components/organization/card.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
             "name": "quick-adjustment.blade.php",
             "file": "resources/views/components/quick-adjustment.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "responsive-nav-link.blade.php",
+            "file": "resources/views/components/responsive-nav-link.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "section-border.blade.php",
+            "file": "resources/views/components/section-border.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "section-title.blade.php",
+            "file": "resources/views/components/section-title.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "sort-indicator.blade.php",
+            "file": "resources/views/components/sort-indicator.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "switchable-team.blade.php",
+            "file": "resources/views/components/switchable-team.blade.php",
             "essential": false
         },
         {
@@ -9014,830 +9135,14 @@
         },
         {
             "type": "View",
-            "name": "guest.blade.php",
-            "file": "resources/views/layouts/guest.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "app.blade.php",
-            "file": "resources/views/layouts/app.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "update-password-form.blade.php",
-            "file": "resources/views/profile/update-password-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "delete-user-form.blade.php",
-            "file": "resources/views/profile/delete-user-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "logout-other-browser-sessions-form.blade.php",
-            "file": "resources/views/profile/logout-other-browser-sessions-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "show.blade.php",
-            "file": "resources/views/profile/show.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "two-factor-authentication-form.blade.php",
-            "file": "resources/views/profile/two-factor-authentication-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "update-profile-information-form.blade.php",
-            "file": "resources/views/profile/update-profile-information-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "terms.blade.php",
-            "file": "resources/views/terms.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "policy.blade.php",
-            "file": "resources/views/policy.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "create.blade.php",
-            "file": "resources/views/teams/create.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "show.blade.php",
-            "file": "resources/views/teams/show.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "create-team-form.blade.php",
-            "file": "resources/views/teams/create-team-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "delete-team-form.blade.php",
-            "file": "resources/views/teams/delete-team-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "team-member-manager.blade.php",
-            "file": "resources/views/teams/team-member-manager.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "update-team-name-form.blade.php",
-            "file": "resources/views/teams/update-team-name-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "team-invitation.blade.php",
-            "file": "resources/views/emails/team-invitation.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "index.blade.php",
-            "file": "resources/views/accounts/index.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "chart-of-accounts.blade.php",
-            "file": "resources/views/livewire/accounting/chart-of-accounts.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "dashboard.blade.php",
-            "file": "resources/views/livewire/accounting/dashboard.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "journal-entries.blade.php",
-            "file": "resources/views/livewire/accounting/journal-entries.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "ledger-entries.blade.php",
-            "file": "resources/views/livewire/accounting/ledger-entries.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "reports.blade.php",
-            "file": "resources/views/livewire/accounting/reports.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "asset-disposal-form.blade.php",
-            "file": "resources/views/livewire/accounting/asset-disposal-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "asset-maintenance-form.blade.php",
-            "file": "resources/views/livewire/accounting/asset-maintenance-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "asset-transfer-form.blade.php",
-            "file": "resources/views/livewire/accounting/asset-transfer-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "create.blade.php",
-            "file": "resources/views/livewire/accounting/bank-accounts/create.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "index.blade.php",
-            "file": "resources/views/livewire/accounting/bank-accounts/index.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "reconcile.blade.php",
-            "file": "resources/views/livewire/accounting/bank-reconciliation/reconcile.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "import.blade.php",
-            "file": "resources/views/livewire/accounting/bank-statements/import.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "index.blade.php",
-            "file": "resources/views/livewire/accounting/bank-statements/index.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "index.blade.php",
-            "file": "resources/views/livewire/accounting/bank-transactions/index.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "create.blade.php",
-            "file": "resources/views/livewire/accounting/cash-payments/create.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "create.blade.php",
-            "file": "resources/views/livewire/accounting/cash-receipts/create.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "depreciation-posting.blade.php",
-            "file": "resources/views/livewire/accounting/depreciation-posting.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "expense-voucher-form.blade.php",
-            "file": "resources/views/livewire/accounting/expense-voucher-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "fee-distribution-log-viewer.blade.php",
-            "file": "resources/views/livewire/accounting/fee-distribution-log-viewer.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "fee-distribution-rule-manager.blade.php",
-            "file": "resources/views/livewire/accounting/fee-distribution-rule-manager.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "financial-year-form.blade.php",
-            "file": "resources/views/livewire/accounting/financial-years/financial-year-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "financial-year-index.blade.php",
-            "file": "resources/views/livewire/accounting/financial-years/financial-year-index.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "opening-balance-form.blade.php",
-            "file": "resources/views/livewire/accounting/financial-years/opening-balance-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "year-end-closing.blade.php",
-            "file": "resources/views/livewire/accounting/financial-years/year-end-closing.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "fixed-asset-form.blade.php",
-            "file": "resources/views/livewire/accounting/fixed-asset-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "fixed-asset-index.blade.php",
-            "file": "resources/views/livewire/accounting/fixed-asset-index.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "payables-outstanding.blade.php",
-            "file": "resources/views/livewire/accounting/payables-outstanding.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "purchase-voucher-form.blade.php",
-            "file": "resources/views/livewire/accounting/purchase-voucher-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "receivables-outstanding.blade.php",
-            "file": "resources/views/livewire/accounting/receivables-outstanding.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "salary-voucher-form.blade.php",
-            "file": "resources/views/livewire/accounting/salary-voucher-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "sales-voucher-form.blade.php",
-            "file": "resources/views/livewire/accounting/sales-voucher-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "tax-exemption-form.blade.php",
-            "file": "resources/views/livewire/accounting/tax-exemption-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "tax-exemption-index.blade.php",
-            "file": "resources/views/livewire/accounting/tax-exemption-index.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "tax-filing-manager.blade.php",
-            "file": "resources/views/livewire/accounting/tax-filing-manager.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "tax-rate-form.blade.php",
-            "file": "resources/views/livewire/accounting/tax-rate-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "tax-rate-index.blade.php",
-            "file": "resources/views/livewire/accounting/tax-rate-index.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "tax-reporting-dashboard.blade.php",
-            "file": "resources/views/livewire/accounting/tax-reporting-dashboard.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "create.blade.php",
-            "file": "resources/views/livewire/accounting/vouchers/create.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "organization-form.blade.php",
-            "file": "resources/views/livewire/organization/organization-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "organization-list.blade.php",
-            "file": "resources/views/livewire/organization/organization-list.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "cash-management-demo.blade.php",
-            "file": "resources/views/livewire/cash-management-demo.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "model-select-demo.blade.php",
-            "file": "resources/views/livewire/demo/model-select-demo.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "member-manager.blade.php",
-            "file": "resources/views/livewire/member-manager.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "advanced-member-list.blade.php",
-            "file": "resources/views/livewire/membership/advanced-member-list.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "batch-card-printing.blade.php",
-            "file": "resources/views/livewire/membership/batch-card-printing.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "bulk-member-upload.blade.php",
-            "file": "resources/views/livewire/membership/bulk-member-upload.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "card-designer.blade.php",
-            "file": "resources/views/livewire/membership/card-designer.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "card-management-page.blade.php",
-            "file": "resources/views/livewire/membership/card-management-page.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "card-scanner.blade.php",
-            "file": "resources/views/livewire/membership/card-scanner.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "enhanced-fee-manager.blade.php",
-            "file": "resources/views/livewire/membership/enhanced-fee-manager.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "family-member-manager.blade.php",
-            "file": "resources/views/livewire/membership/family-member-manager.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "family-profile-view.blade.php",
-            "file": "resources/views/livewire/membership/family-profile-view.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "fee-collection-dashboard.blade.php",
-            "file": "resources/views/livewire/membership/fee-collection-dashboard.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "fee-manager.blade.php",
-            "file": "resources/views/livewire/membership/fee-manager.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "fee-structure-settings.blade.php",
-            "file": "resources/views/livewire/membership/fee-structure-settings.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "member-details.blade.php",
-            "file": "resources/views/livewire/membership/member-details.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "member-form.blade.php",
-            "file": "resources/views/livewire/membership/member-form.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "member-list.blade.php",
-            "file": "resources/views/livewire/membership/member-list.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "member-listing.blade.php",
-            "file": "resources/views/livewire/membership/member-listing.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "membership-dashboard.blade.php",
-            "file": "resources/views/livewire/membership/membership-dashboard.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "membership-demo.blade.php",
-            "file": "resources/views/livewire/membership/membership-demo.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "simple-fees.blade.php",
-            "file": "resources/views/livewire/membership/simple-fees.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "simple-registration.blade.php",
-            "file": "resources/views/livewire/membership/simple-registration.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "simple-scanner.blade.php",
-            "file": "resources/views/livewire/membership/simple-scanner.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "simple-subscriptions.blade.php",
-            "file": "resources/views/livewire/membership/simple-subscriptions.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "subscription-manager.blade.php",
-            "file": "resources/views/livewire/membership/subscription-manager.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "user-registration-system.blade.php",
-            "file": "resources/views/livewire/membership/user-registration-system.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "navigation-main.blade.php",
-            "file": "resources/views/livewire/navigation-main.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "organization-tree.blade.php",
-            "file": "resources/views/livewire/organization-tree.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "advance-management.blade.php",
-            "file": "resources/views/livewire/payroll/advance-management.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "advance-reports.blade.php",
-            "file": "resources/views/livewire/payroll/advance-reports.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "allowance-management.blade.php",
-            "file": "resources/views/livewire/payroll/allowance-management.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "deduction-management.blade.php",
-            "file": "resources/views/livewire/payroll/deduction-management.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "increment-management.blade.php",
-            "file": "resources/views/livewire/payroll/increment-management.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "loan-management.blade.php",
-            "file": "resources/views/livewire/payroll/loan-management.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "payroll-dashboard.blade.php",
-            "file": "resources/views/livewire/payroll/payroll-dashboard.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "advance-vs-salary.blade.php",
-            "file": "resources/views/livewire/payroll/reports/advance-vs-salary.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "aging-analysis.blade.php",
-            "file": "resources/views/livewire/payroll/reports/aging-analysis.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "analytics-overview.blade.php",
-            "file": "resources/views/livewire/payroll/reports/analytics-overview.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "department-report.blade.php",
-            "file": "resources/views/livewire/payroll/reports/department-report.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "employee-statement.blade.php",
-            "file": "resources/views/livewire/payroll/reports/employee-statement.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "monthly-summary.blade.php",
-            "file": "resources/views/livewire/payroll/reports/monthly-summary.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "outstanding-advances.blade.php",
-            "file": "resources/views/livewire/payroll/reports/outstanding-advances.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "tax-configuration.blade.php",
-            "file": "resources/views/livewire/payroll/tax-configuration.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "user-placement.blade.php",
-            "file": "resources/views/livewire/user-placement.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "analytics.blade.php",
-            "file": "resources/views/organizations/analytics.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "dashboard.blade.php",
-            "file": "resources/views/organizations/dashboard.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "index.blade.php",
-            "file": "resources/views/organizations/index.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "structure.blade.php",
-            "file": "resources/views/organizations/structure.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "balance-sheet.blade.php",
-            "file": "resources/views/partials/accounting/balance-sheet.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "income-statement.blade.php",
-            "file": "resources/views/partials/accounting/income-statement.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "trial-balance.blade.php",
-            "file": "resources/views/partials/accounting/trial-balance.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "accounts-table.blade.php",
-            "file": "resources/views/partials/accounts-table.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "organization-unit-tree.blade.php",
-            "file": "resources/views/partials/organization-unit-tree.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "user-unit-tree.blade.php",
-            "file": "resources/views/partials/user-unit-tree.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "accounts.blade.php",
-            "file": "resources/views/setup/accounts.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "stores.blade.php",
-            "file": "resources/views/setup/stores.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "inventory.blade.php",
-            "file": "resources/views/setup/inventory.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "organization.blade.php",
-            "file": "resources/views/setup/organization.blade.php",
+            "name": "validation-errors.blade.php",
+            "file": "resources/views/components/validation-errors.blade.php",
             "essential": false
         },
         {
             "type": "View",
             "name": "welcome.blade.php",
-            "file": "resources/views/setup/welcome.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "index.blade.php",
-            "file": "resources/views/accounting/cash-payments/index.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "index.blade.php",
-            "file": "resources/views/accounting/cash-receipts/index.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "create.blade.php",
-            "file": "resources/views/accounting/financial-years/create.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "edit.blade.php",
-            "file": "resources/views/accounting/financial-years/edit.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "index.blade.php",
-            "file": "resources/views/accounting/fixed-assets/index.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "asset-register.blade.php",
-            "file": "resources/views/accounting/pdf/asset-register.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "balance-sheet.blade.php",
-            "file": "resources/views/accounting/pdf/balance-sheet.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "depreciation-schedule.blade.php",
-            "file": "resources/views/accounting/pdf/depreciation-schedule.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "income-statement.blade.php",
-            "file": "resources/views/accounting/pdf/income-statement.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "payables-outstanding.blade.php",
-            "file": "resources/views/accounting/pdf/payables-outstanding.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "receivables-outstanding.blade.php",
-            "file": "resources/views/accounting/pdf/receivables-outstanding.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "trial-balance.blade.php",
-            "file": "resources/views/accounting/pdf/trial-balance.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "attach-user.blade.php",
-            "file": "resources/views/admin/attach-user.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "dashboard.blade.php",
-            "file": "resources/views/admin/dashboard.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "index.blade.php",
-            "file": "resources/views/alerts/index.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "dashboard.blade.php",
-            "file": "resources/views/attendance/dashboard.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "badge-showcase.blade.php",
-            "file": "resources/views/badge-showcase.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "badge-standalone.blade.php",
-            "file": "resources/views/badge-standalone.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "badge-test.blade.php",
-            "file": "resources/views/badge-test.blade.php",
-            "essential": false
-        },
-        {
-            "type": "View",
-            "name": "index.blade.php",
-            "file": "resources/views/categories/index.blade.php",
+            "file": "resources/views/components/welcome.blade.php",
             "essential": false
         },
         {
@@ -9862,6 +9167,12 @@
             "type": "View",
             "name": "docs.blade.php",
             "file": "resources/views/docs.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "team-invitation.blade.php",
+            "file": "resources/views/emails/team-invitation.blade.php",
             "essential": false
         },
         {
@@ -10100,6 +9411,528 @@
         },
         {
             "type": "View",
+            "name": "app.blade.php",
+            "file": "resources/views/layouts/app.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "guest.blade.php",
+            "file": "resources/views/layouts/guest.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "asset-disposal-form.blade.php",
+            "file": "resources/views/livewire/accounting/asset-disposal-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "asset-maintenance-form.blade.php",
+            "file": "resources/views/livewire/accounting/asset-maintenance-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "asset-transfer-form.blade.php",
+            "file": "resources/views/livewire/accounting/asset-transfer-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "create.blade.php",
+            "file": "resources/views/livewire/accounting/bank-accounts/create.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/livewire/accounting/bank-accounts/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "reconcile.blade.php",
+            "file": "resources/views/livewire/accounting/bank-reconciliation/reconcile.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "import.blade.php",
+            "file": "resources/views/livewire/accounting/bank-statements/import.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/livewire/accounting/bank-statements/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/livewire/accounting/bank-transactions/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "create.blade.php",
+            "file": "resources/views/livewire/accounting/cash-payments/create.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "create.blade.php",
+            "file": "resources/views/livewire/accounting/cash-receipts/create.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "chart-of-accounts.blade.php",
+            "file": "resources/views/livewire/accounting/chart-of-accounts.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "dashboard.blade.php",
+            "file": "resources/views/livewire/accounting/dashboard.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "depreciation-posting.blade.php",
+            "file": "resources/views/livewire/accounting/depreciation-posting.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "expense-voucher-form.blade.php",
+            "file": "resources/views/livewire/accounting/expense-voucher-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "fee-distribution-log-viewer.blade.php",
+            "file": "resources/views/livewire/accounting/fee-distribution-log-viewer.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "fee-distribution-rule-manager.blade.php",
+            "file": "resources/views/livewire/accounting/fee-distribution-rule-manager.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "financial-year-form.blade.php",
+            "file": "resources/views/livewire/accounting/financial-years/financial-year-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "financial-year-index.blade.php",
+            "file": "resources/views/livewire/accounting/financial-years/financial-year-index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "opening-balance-form.blade.php",
+            "file": "resources/views/livewire/accounting/financial-years/opening-balance-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "year-end-closing.blade.php",
+            "file": "resources/views/livewire/accounting/financial-years/year-end-closing.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "fixed-asset-form.blade.php",
+            "file": "resources/views/livewire/accounting/fixed-asset-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "fixed-asset-index.blade.php",
+            "file": "resources/views/livewire/accounting/fixed-asset-index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "journal-entries.blade.php",
+            "file": "resources/views/livewire/accounting/journal-entries.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "ledger-entries.blade.php",
+            "file": "resources/views/livewire/accounting/ledger-entries.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "payables-outstanding.blade.php",
+            "file": "resources/views/livewire/accounting/payables-outstanding.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "purchase-voucher-form.blade.php",
+            "file": "resources/views/livewire/accounting/purchase-voucher-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "receivables-outstanding.blade.php",
+            "file": "resources/views/livewire/accounting/receivables-outstanding.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "reports.blade.php",
+            "file": "resources/views/livewire/accounting/reports.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "salary-voucher-form.blade.php",
+            "file": "resources/views/livewire/accounting/salary-voucher-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "sales-voucher-form.blade.php",
+            "file": "resources/views/livewire/accounting/sales-voucher-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "tax-exemption-form.blade.php",
+            "file": "resources/views/livewire/accounting/tax-exemption-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "tax-exemption-index.blade.php",
+            "file": "resources/views/livewire/accounting/tax-exemption-index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "tax-filing-manager.blade.php",
+            "file": "resources/views/livewire/accounting/tax-filing-manager.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "tax-rate-form.blade.php",
+            "file": "resources/views/livewire/accounting/tax-rate-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "tax-rate-index.blade.php",
+            "file": "resources/views/livewire/accounting/tax-rate-index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "tax-reporting-dashboard.blade.php",
+            "file": "resources/views/livewire/accounting/tax-reporting-dashboard.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "create.blade.php",
+            "file": "resources/views/livewire/accounting/vouchers/create.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "cash-management-demo.blade.php",
+            "file": "resources/views/livewire/cash-management-demo.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "model-select-demo.blade.php",
+            "file": "resources/views/livewire/demo/model-select-demo.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "member-manager.blade.php",
+            "file": "resources/views/livewire/member-manager.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "advanced-member-list.blade.php",
+            "file": "resources/views/livewire/membership/advanced-member-list.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "batch-card-printing.blade.php",
+            "file": "resources/views/livewire/membership/batch-card-printing.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "bulk-member-upload.blade.php",
+            "file": "resources/views/livewire/membership/bulk-member-upload.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "card-designer.blade.php",
+            "file": "resources/views/livewire/membership/card-designer.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "card-management-page.blade.php",
+            "file": "resources/views/livewire/membership/card-management-page.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "card-scanner.blade.php",
+            "file": "resources/views/livewire/membership/card-scanner.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "enhanced-fee-manager.blade.php",
+            "file": "resources/views/livewire/membership/enhanced-fee-manager.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "family-member-manager.blade.php",
+            "file": "resources/views/livewire/membership/family-member-manager.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "family-profile-view.blade.php",
+            "file": "resources/views/livewire/membership/family-profile-view.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "fee-collection-dashboard.blade.php",
+            "file": "resources/views/livewire/membership/fee-collection-dashboard.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "fee-manager.blade.php",
+            "file": "resources/views/livewire/membership/fee-manager.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "fee-structure-settings.blade.php",
+            "file": "resources/views/livewire/membership/fee-structure-settings.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "member-details.blade.php",
+            "file": "resources/views/livewire/membership/member-details.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "member-form.blade.php",
+            "file": "resources/views/livewire/membership/member-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "member-list.blade.php",
+            "file": "resources/views/livewire/membership/member-list.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "member-listing.blade.php",
+            "file": "resources/views/livewire/membership/member-listing.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "membership-dashboard.blade.php",
+            "file": "resources/views/livewire/membership/membership-dashboard.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "membership-demo.blade.php",
+            "file": "resources/views/livewire/membership/membership-demo.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "simple-fees.blade.php",
+            "file": "resources/views/livewire/membership/simple-fees.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "simple-registration.blade.php",
+            "file": "resources/views/livewire/membership/simple-registration.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "simple-scanner.blade.php",
+            "file": "resources/views/livewire/membership/simple-scanner.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "simple-subscriptions.blade.php",
+            "file": "resources/views/livewire/membership/simple-subscriptions.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "subscription-manager.blade.php",
+            "file": "resources/views/livewire/membership/subscription-manager.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "user-registration-system.blade.php",
+            "file": "resources/views/livewire/membership/user-registration-system.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "navigation-main.blade.php",
+            "file": "resources/views/livewire/navigation-main.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "organization-tree.blade.php",
+            "file": "resources/views/livewire/organization-tree.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "organization-form.blade.php",
+            "file": "resources/views/livewire/organization/organization-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "organization-list.blade.php",
+            "file": "resources/views/livewire/organization/organization-list.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "advance-management.blade.php",
+            "file": "resources/views/livewire/payroll/advance-management.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "advance-reports.blade.php",
+            "file": "resources/views/livewire/payroll/advance-reports.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "allowance-management.blade.php",
+            "file": "resources/views/livewire/payroll/allowance-management.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "deduction-management.blade.php",
+            "file": "resources/views/livewire/payroll/deduction-management.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "increment-management.blade.php",
+            "file": "resources/views/livewire/payroll/increment-management.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "loan-management.blade.php",
+            "file": "resources/views/livewire/payroll/loan-management.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "payroll-dashboard.blade.php",
+            "file": "resources/views/livewire/payroll/payroll-dashboard.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "advance-vs-salary.blade.php",
+            "file": "resources/views/livewire/payroll/reports/advance-vs-salary.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "aging-analysis.blade.php",
+            "file": "resources/views/livewire/payroll/reports/aging-analysis.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "analytics-overview.blade.php",
+            "file": "resources/views/livewire/payroll/reports/analytics-overview.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "department-report.blade.php",
+            "file": "resources/views/livewire/payroll/reports/department-report.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "employee-statement.blade.php",
+            "file": "resources/views/livewire/payroll/reports/employee-statement.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "monthly-summary.blade.php",
+            "file": "resources/views/livewire/payroll/reports/monthly-summary.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "outstanding-advances.blade.php",
+            "file": "resources/views/livewire/payroll/reports/outstanding-advances.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "tax-configuration.blade.php",
+            "file": "resources/views/livewire/payroll/tax-configuration.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "user-placement.blade.php",
+            "file": "resources/views/livewire/user-placement.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
             "name": "fee-payment-reminder.blade.php",
             "file": "resources/views/mail/fee-payment-reminder.blade.php",
             "essential": false
@@ -10220,6 +10053,84 @@
         },
         {
             "type": "View",
+            "name": "analytics.blade.php",
+            "file": "resources/views/organizations/analytics.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "dashboard.blade.php",
+            "file": "resources/views/organizations/dashboard.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/organizations/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "structure.blade.php",
+            "file": "resources/views/organizations/structure.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "index.blade.php",
+            "file": "resources/views/organizations/units/index.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "create.blade.php",
+            "file": "resources/views/organizations/units/create.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "edit.blade.php",
+            "file": "resources/views/organizations/units/edit.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "balance-sheet.blade.php",
+            "file": "resources/views/partials/accounting/balance-sheet.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "income-statement.blade.php",
+            "file": "resources/views/partials/accounting/income-statement.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "trial-balance.blade.php",
+            "file": "resources/views/partials/accounting/trial-balance.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "accounts-table.blade.php",
+            "file": "resources/views/partials/accounts-table.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "organization-unit-tree.blade.php",
+            "file": "resources/views/partials/organization-unit-tree.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "user-unit-tree.blade.php",
+            "file": "resources/views/partials/user-unit-tree.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
             "name": "advance-reports.blade.php",
             "file": "resources/views/payroll/advance-reports.blade.php",
             "essential": false
@@ -10240,6 +10151,12 @@
             "type": "View",
             "name": "processing.blade.php",
             "file": "resources/views/payroll/processing.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "policy.blade.php",
+            "file": "resources/views/policy.blade.php",
             "essential": false
         },
         {
@@ -10310,8 +10227,116 @@
         },
         {
             "type": "View",
+            "name": "delete-user-form.blade.php",
+            "file": "resources/views/profile/delete-user-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "logout-other-browser-sessions-form.blade.php",
+            "file": "resources/views/profile/logout-other-browser-sessions-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "show.blade.php",
+            "file": "resources/views/profile/show.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "two-factor-authentication-form.blade.php",
+            "file": "resources/views/profile/two-factor-authentication-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "update-password-form.blade.php",
+            "file": "resources/views/profile/update-password-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "update-profile-information-form.blade.php",
+            "file": "resources/views/profile/update-profile-information-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "accounts.blade.php",
+            "file": "resources/views/setup/accounts.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "inventory.blade.php",
+            "file": "resources/views/setup/inventory.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "organization.blade.php",
+            "file": "resources/views/setup/organization.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "stores.blade.php",
+            "file": "resources/views/setup/stores.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "welcome.blade.php",
+            "file": "resources/views/setup/welcome.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
             "name": "simple-badge-test.blade.php",
             "file": "resources/views/simple-badge-test.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "create-team-form.blade.php",
+            "file": "resources/views/teams/create-team-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "create.blade.php",
+            "file": "resources/views/teams/create.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "delete-team-form.blade.php",
+            "file": "resources/views/teams/delete-team-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "show.blade.php",
+            "file": "resources/views/teams/show.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "team-member-manager.blade.php",
+            "file": "resources/views/teams/team-member-manager.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "update-team-name-form.blade.php",
+            "file": "resources/views/teams/update-team-name-form.blade.php",
+            "essential": false
+        },
+        {
+            "type": "View",
+            "name": "terms.blade.php",
+            "file": "resources/views/terms.blade.php",
             "essential": false
         },
         {
@@ -10352,8 +10377,20 @@
         },
         {
             "type": "Config",
+            "name": "app",
+            "file": "config/app.php",
+            "essential": false
+        },
+        {
+            "type": "Config",
             "name": "auth",
             "file": "config/auth.php",
+            "essential": false
+        },
+        {
+            "type": "Config",
+            "name": "blade-heroicons",
+            "file": "config/blade-heroicons.php",
             "essential": false
         },
         {
@@ -10364,8 +10401,32 @@
         },
         {
             "type": "Config",
+            "name": "database",
+            "file": "config/database.php",
+            "essential": false
+        },
+        {
+            "type": "Config",
             "name": "filesystems",
             "file": "config/filesystems.php",
+            "essential": false
+        },
+        {
+            "type": "Config",
+            "name": "fortify",
+            "file": "config/fortify.php",
+            "essential": false
+        },
+        {
+            "type": "Config",
+            "name": "jetstream",
+            "file": "config/jetstream.php",
+            "essential": false
+        },
+        {
+            "type": "Config",
+            "name": "livewire",
+            "file": "config/livewire.php",
             "essential": false
         },
         {
@@ -10388,6 +10449,12 @@
         },
         {
             "type": "Config",
+            "name": "sanctum",
+            "file": "config/sanctum.php",
+            "essential": false
+        },
+        {
+            "type": "Config",
             "name": "services",
             "file": "config/services.php",
             "essential": false
@@ -10396,48 +10463,6 @@
             "type": "Config",
             "name": "session",
             "file": "config/session.php",
-            "essential": false
-        },
-        {
-            "type": "Config",
-            "name": "fortify",
-            "file": "config/fortify.php",
-            "essential": false
-        },
-        {
-            "type": "Config",
-            "name": "sanctum",
-            "file": "config/sanctum.php",
-            "essential": false
-        },
-        {
-            "type": "Config",
-            "name": "app",
-            "file": "config/app.php",
-            "essential": false
-        },
-        {
-            "type": "Config",
-            "name": "blade-heroicons",
-            "file": "config/blade-heroicons.php",
-            "essential": false
-        },
-        {
-            "type": "Config",
-            "name": "jetstream",
-            "file": "config/jetstream.php",
-            "essential": false
-        },
-        {
-            "type": "Config",
-            "name": "database",
-            "file": "config/database.php",
-            "essential": false
-        },
-        {
-            "type": "Config",
-            "name": "livewire",
-            "file": "config/livewire.php",
             "essential": false
         }
     ]

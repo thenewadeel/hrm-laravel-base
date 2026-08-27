@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\OrganizationDashboardController;
+use App\Http\Controllers\OrganizationUnitController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('organization')->name('organization.')->group(function () {
@@ -12,6 +13,13 @@ Route::prefix('organization')->name('organization.')->group(function () {
         ->name('structure');
     Route::get('/analytics', [OrganizationDashboardController::class, 'analytics'])
         ->name('analytics');
+
+    // Department (organization unit) management
+    Route::resource('units', OrganizationUnitController::class)
+        ->parameters(['units' => 'department'])
+        ->only([
+            'index', 'create', 'store', 'edit', 'update', 'destroy',
+        ]);
 });
 // Route::livewire(['/organizations', OrganizationList::class])->name('organizations.index');
 // Route::get('/companies/create', CompanyForm::class)->name('companies.create');

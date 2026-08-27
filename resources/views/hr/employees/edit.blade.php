@@ -192,19 +192,73 @@
                             
                             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
                                 <div>
-                                    <label for="position" class="block text-sm font-medium text-primary">
+                                    <label for="position_id" class="block text-sm font-medium text-primary">
                                         Position
                                     </label>
-                                    <input type="text" id="position" name="position" value="{{ old('position', $employee->organizationUser?->position) }}" required
-                                        class="mt-1 block w-full border-secondary rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                    <div class="flex space-x-2">
+                                        <select id="position_id" name="position_id"
+                                            class="mt-1 block w-full border-secondary rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                            <option value="">Select Position</option>
+                                            @foreach($jobPositions as $position)
+                                                <option value="{{ $position->id }}" {{ old('position_id', $employee->position_id) == $position->id ? 'selected' : '' }}>
+                                                    {{ $position->title }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <a href="{{ route('hr.positions.create', ['return_to' => route('hr.employees.edit', $employee)]) }}"
+                                            class="mt-1 inline-flex items-center px-3 py-2 border border-transparent text-xs font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 whitespace-nowrap"
+                                            title="Add new position">
+                                            + New
+                                        </a>
+                                    </div>
+                                    @error('position_id')
+                                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div>
+                                    <label for="shift_id" class="block text-sm font-medium text-primary">
+                                        Shift
+                                    </label>
+                                    <div class="flex space-x-2">
+                                        <select id="shift_id" name="shift_id"
+                                            class="mt-1 block w-full border-secondary rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                            <option value="">Select Shift</option>
+                                            @foreach($shifts as $shift)
+                                                <option value="{{ $shift->id }}" {{ old('shift_id', $employee->shift_id) == $shift->id ? 'selected' : '' }}>
+                                                    {{ $shift->name }} ({{ \Illuminate\Support\Carbon::parse($shift->start_time)->format('H:i') }} - {{ \Illuminate\Support\Carbon::parse($shift->end_time)->format('H:i') }})
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <a href="{{ route('hr.shifts.create', ['return_to' => route('hr.employees.edit', $employee)]) }}"
+                                            class="mt-1 inline-flex items-center px-3 py-2 border border-transparent text-xs font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 whitespace-nowrap"
+                                            title="Add new shift">
+                                            + New
+                                        </a>
+                                    </div>
+                                    @error('shift_id')
+                                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div>
                                     <label for="salary_per_month" class="block text-sm font-medium text-primary">
                                         Monthly Salary
                                     </label>
-                                    <input type="number" id="salary_per_month" name="salary_per_month" value="{{ old('salary_per_month', $employee->salary_per_month) }}" step="0.01" min="0"
+                                    <input type="number" id="salary_per_month" name="salary_per_month" value="{{ old('salary_per_month', $employee->basic_salary) }}" step="0.01" min="0"
                                         class="mt-1 block w-full border-secondary rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                </div>
+
+                                <div>
+                                    <label for="pay_frequency" class="block text-sm font-medium text-primary">
+                                        Pay Frequency
+                                    </label>
+                                    <select id="pay_frequency" name="pay_frequency"
+                                        class="mt-1 block w-full border-secondary rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                        <option value="monthly" {{ old('pay_frequency', 'monthly') == 'monthly' ? 'selected' : '' }}>Monthly</option>
+                                        <option value="biweekly" {{ old('pay_frequency') == 'biweekly' ? 'selected' : '' }}>Biweekly</option>
+                                        <option value="weekly" {{ old('pay_frequency') == 'weekly' ? 'selected' : '' }}>Weekly</option>
+                                    </select>
                                 </div>
 
                                 <div>
@@ -213,6 +267,25 @@
                                     </label>
                                     <input type="number" id="required_daily_hours" name="required_daily_hours" value="{{ old('required_daily_hours', $employee->required_daily_hours) }}" step="0.1" min="0" max="24"
                                         class="mt-1 block w-full border-secondary rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-primary mb-2">
+                                        Roles
+                                    </label>
+                                    <div class="grid grid-cols-1 gap-2">
+                                        @php
+                                            $currentRoles = old('roles', $employee->organizationUser?->roles ?? []);
+                                        @endphp
+                                        @foreach(['inventory_admin', 'store_manager', 'inventory_clerk', 'auditor'] as $role)
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="roles[]" value="{{ $role }}"
+                                                    @if(in_array($role, $currentRoles)) checked @endif
+                                                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-secondary rounded">
+                                                <span class="ml-2 text-sm text-primary">{{ ucfirst(str_replace('_', ' ', $role)) }}</span>
+                                            </label>
+                                        @endforeach
+                                    </div>
                                 </div>
 
                                 <div class="flex items-center space-x-4 pt-6">

@@ -343,7 +343,11 @@ resources/views/
 │   ├── analytics.blade.php
 │   ├── dashboard.blade.php
 │   ├── index.blade.php
-│   └── structure.blade.php
+│   ├── structure.blade.php
+│   └── units
+│       ├── create.blade.php
+│       ├── edit.blade.php
+│       └── index.blade.php
 ├── partials
 │   ├── accounting
 │   │   ├── balance-sheet.blade.php
@@ -401,4 +405,4 @@ resources/views/
 ├── test-navigation.blade.php
 └── welcome.blade.php
 
-72 directories, 330 files
+73 directories, 333 files

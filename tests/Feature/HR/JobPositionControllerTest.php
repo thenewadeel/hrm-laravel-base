@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\JobPosition;
+use App\Models\Organization;
 use App\Models\OrganizationUnit;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,7 +20,7 @@ it('displays job positions index', function () {
 
 it('creates a job position', function () {
     $user = User::factory()->create();
-    $organization = \App\Models\Organization::factory()->create();
+    $organization = Organization::factory()->create();
     $user->current_organization_id = $organization->id;
     $user->save();
 
@@ -60,7 +61,7 @@ it('validates required fields on create', function () {
 
 it('updates a job position', function () {
     $user = User::factory()->create();
-    $organization = \App\Models\Organization::factory()->create();
+    $organization = Organization::factory()->create();
     $user->current_organization_id = $organization->id;
     $user->save();
 
@@ -81,7 +82,7 @@ it('updates a job position', function () {
 
 it('deletes a job position', function () {
     $user = User::factory()->create();
-    $organization = \App\Models\Organization::factory()->create();
+    $organization = Organization::factory()->create();
     $user->current_organization_id = $organization->id;
     $user->save();
 
@@ -101,7 +102,7 @@ it('deletes a job position', function () {
 
 it('searches job positions', function () {
     $user = User::factory()->create();
-    $organization = \App\Models\Organization::factory()->create();
+    $organization = Organization::factory()->create();
     $user->current_organization_id = $organization->id;
     $user->save();
 
@@ -114,4 +115,42 @@ it('searches job positions', function () {
         ->assertViewHas('positions', function ($positions) {
             return $positions->count() === 1 && $positions->first()->title === 'Developer';
         });
+});
+
+it('redirects back to employee form when return_to targets employee routes', function () {
+    $user = User::factory()->create();
+    $organization = Organization::factory()->create();
+    $user->current_organization_id = $organization->id;
+    $user->save();
+
+    $returnTo = route('hr.employees.create');
+
+    $response = $this->actingAs($user)->post(route('hr.positions.store'), [
+        'title' => 'Cashier',
+        'code' => empty(JobPosition::where('code', 'CASH123')->count()) ? 'CASH123' : 'CASH124',
+        'organization_id' => $organization->id,
+        'is_active' => true,
+        'return_to' => $returnTo,
+    ]);
+
+    $response->assertRedirect($returnTo)
+        ->assertSessionHas('success');
+});
+
+it('redirects to positions index when return_to is not an employee route', function () {
+    $user = User::factory()->create();
+    $organization = Organization::factory()->create();
+    $user->current_organization_id = $organization->id;
+    $user->save();
+
+    $response = $this->actingAs($user)->post(route('hr.positions.store'), [
+        'title' => 'Analyst',
+        'code' => 'AN001',
+        'organization_id' => $organization->id,
+        'is_active' => true,
+        'return_to' => 'https://example.com',
+    ]);
+
+    $response->assertRedirect(route('hr.positions.index'))
+        ->assertSessionHas('success');
 });
