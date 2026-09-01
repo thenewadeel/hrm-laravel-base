@@ -65,7 +65,8 @@ class ShiftController extends Controller
                 'required',
                 'string',
                 'max:50',
-                Rule::unique('shifts', 'code'),
+                Rule::unique('shifts', 'code')
+                    ->where('organization_id', $currentOrganizationId),
             ],
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i',
@@ -120,13 +121,17 @@ class ShiftController extends Controller
     {
         $this->authorize('update', $shift);
 
+        $currentOrganizationId = auth()->user()->current_organization_id;
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'code' => [
                 'required',
                 'string',
                 'max:50',
-                Rule::unique('shifts', 'code')->ignore($shift->id),
+                Rule::unique('shifts', 'code')
+                    ->where('organization_id', $currentOrganizationId)
+                    ->ignore($shift->id),
             ],
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i',

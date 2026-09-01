@@ -66,11 +66,12 @@ it('updates a job position', function () {
     $user->save();
 
     $position = JobPosition::factory()->create(['organization_id' => $organization->id]);
+    $unit = OrganizationUnit::factory()->create(['organization_id' => $organization->id]);
 
     $data = [
         'title' => 'Updated Title',
         'code' => $position->code,
-        'organization_unit_id' => $position->organization_unit_id,
+        'organization_unit_id' => $unit->id,
     ];
 
     $response = $this->actingAs($user)->put(route('hr.positions.update', $position), $data);

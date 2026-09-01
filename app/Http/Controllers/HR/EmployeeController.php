@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Exists;
 
 class EmployeeController extends Controller
 {
@@ -91,9 +92,9 @@ class EmployeeController extends Controller
                 Rule::unique('users', 'email'),
             ],
             'password' => 'required|confirmed|min:8',
-            'position_id' => 'nullable|exists:job_positions,id',
-            'shift_id' => 'nullable|exists:shifts,id',
-            'organization_unit_id' => 'nullable|exists:organization_units,id',
+            'position_id' => ['nullable', $this->orgScopedExists('job_positions', $currentOrganizationId, true)],
+            'shift_id' => ['nullable', $this->orgScopedExists('shifts', $currentOrganizationId, true)],
+            'organization_unit_id' => ['nullable', $this->orgScopedExists('organization_units', $currentOrganizationId)],
             'roles' => 'required|array',
             'date_of_birth' => 'nullable|date',
             'gender' => 'nullable|string|in:male,female,other',
@@ -109,6 +110,15 @@ class EmployeeController extends Controller
             'pay_frequency' => 'nullable|in:monthly,biweekly,weekly',
             'is_admin' => 'nullable|boolean',
         ]);
+
+        $position = isset($validated['position_id']) && $validated['position_id'] ? JobPosition::find($validated['position_id']) : null;
+        $shift = isset($validated['shift_id']) && $validated['shift_id'] ? Shift::find($validated['shift_id']) : null;
+
+        $requiredDailyHours = $validated['required_daily_hours'] ?? $shift?->working_hours;
+        $effectiveRoles = array_values(array_unique(array_merge(
+            $position?->default_roles ?? [],
+            $validated['roles']
+        )));
 
         // Create user account for system access
         $user = User::create([
@@ -141,6 +151,8 @@ class EmployeeController extends Controller
             'is_admin' => $validated['is_admin'] ?? false,
             'is_active' => true,
             'basic_salary' => $validated['salary_per_month'] ?? 0,
+            'required_daily_hours' => $requiredDailyHours,
+            'pay_frequency' => $validated['pay_frequency'] ?? null,
         ]);
 
         // Create organization user relationship for permissions/roles
@@ -148,8 +160,9 @@ class EmployeeController extends Controller
             'user_id' => $user->id,
             'organization_id' => $currentOrganizationId,
             'organization_unit_id' => $validated['organization_unit_id'] ?? null,
-            'roles' => $validated['roles'],
-            'position' => $employee->position?->title ?? 'Employee',
+            'position_id' => $position?->id,
+            'roles' => $effectiveRoles,
+            'position' => $position?->title ?? 'Employee',
         ]);
 
         return redirect()->route('hr.employees.index')
@@ -253,12 +266,12 @@ class EmployeeController extends Controller
                     ->ignore($employee->id),
                 Rule::unique('users', 'email')->ignore($employee->user_id),
             ],
-            'position_id' => 'nullable|exists:job_positions,id',
+            'position_id' => ['nullable', $this->orgScopedExists('job_positions', $currentOrganizationId, true)],
             'position' => 'nullable|string|max:255',
-            'shift_id' => 'nullable|exists:shifts,id',
+            'shift_id' => ['nullable', $this->orgScopedExists('shifts', $currentOrganizationId, true)],
             'roles' => 'nullable|array',
             'roles.*' => 'string',
-            'organization_unit_id' => 'nullable|exists:organization_units,id',
+            'organization_unit_id' => ['nullable', $this->orgScopedExists('organization_units', $currentOrganizationId)],
             'date_of_birth' => 'nullable|date',
             'gender' => 'nullable|string|in:male,female,other',
             'phone' => 'nullable|string|max:20',
@@ -274,9 +287,20 @@ class EmployeeController extends Controller
             'is_active' => 'nullable|boolean',
         ]);
 
-        $positionTitle = $employee->position?->title
+        $position = isset($validated['position_id']) && $validated['position_id'] ? JobPosition::find($validated['position_id']) : null;
+
+        $positionTitle = $position?->title
             ?? ($validated['position'] ?? null)
+            ?? $employee->position?->title
             ?? 'Employee';
+
+        $effectiveRoles = array_values(array_unique(array_merge(
+            $position?->default_roles ?? [],
+            $validated['roles'] ?? [],
+        )));
+
+        $shift = isset($validated['shift_id']) && $validated['shift_id'] ? Shift::find($validated['shift_id']) : null;
+        $requiredDailyHours = $validated['required_daily_hours'] ?? $shift?->working_hours ?? $employee->required_daily_hours;
 
         // Update employee record
         $employee->update([
@@ -296,6 +320,8 @@ class EmployeeController extends Controller
             'position_id' => $validated['position_id'] ?? null,
             'shift_id' => $validated['shift_id'] ?? null,
             'basic_salary' => $validated['salary_per_month'] ?? 0,
+            'required_daily_hours' => $requiredDailyHours,
+            'pay_frequency' => $validated['pay_frequency'] ?? null,
             'is_admin' => $validated['is_admin'] ?? false,
             'is_active' => $validated['is_active'] ?? true,
         ]);
@@ -312,7 +338,8 @@ class EmployeeController extends Controller
                 ->where('organization_id', $currentOrganizationId)
                 ->update([
                     'position' => $positionTitle,
-                    'roles' => $validated['roles'] ?? [],
+                    'position_id' => $position?->id,
+                    'roles' => $effectiveRoles,
                     'organization_unit_id' => $validated['organization_unit_id'] ?? null,
                 ]);
         }
@@ -340,7 +367,9 @@ class EmployeeController extends Controller
                 }),
             ],
             'position' => 'required|string|max:255',
-            'organization_unit_id' => 'nullable|exists:organization_units,id',
+            'position_id' => ['nullable', $this->orgScopedExists('job_positions', $currentOrganizationId, true)],
+            'shift_id' => ['nullable', $this->orgScopedExists('shifts', $currentOrganizationId, true)],
+            'organization_unit_id' => ['nullable', $this->orgScopedExists('organization_units', $currentOrganizationId)],
             'date_of_birth' => 'nullable|date',
             'gender' => 'nullable|string|in:male,female,other',
             'phone' => 'nullable|string|max:20',
@@ -356,11 +385,16 @@ class EmployeeController extends Controller
             'is_admin' => 'nullable|boolean',
         ]);
 
+        $position = isset($validated['position_id']) && $validated['position_id'] ? JobPosition::find($validated['position_id']) : null;
+        $shift = isset($validated['shift_id']) && $validated['shift_id'] ? Shift::find($validated['shift_id']) : null;
+
         // Create employee record only (no user account)
         $employee = Employee::create([
             'user_id' => null, // No user account
             'organization_id' => $currentOrganizationId,
             'organization_unit_id' => $validated['organization_unit_id'] ?? null,
+            'position_id' => $validated['position_id'] ?? null,
+            'shift_id' => $validated['shift_id'] ?? null,
             'first_name' => $validated['first_name'],
             'last_name' => $validated['last_name'],
             'middle_name' => $validated['middle_name'] ?? null,
@@ -377,6 +411,8 @@ class EmployeeController extends Controller
             'is_admin' => $validated['is_admin'] ?? false,
             'is_active' => true,
             'basic_salary' => $validated['salary_per_month'] ?? 0,
+            'required_daily_hours' => $validated['required_daily_hours'] ?? $shift?->working_hours,
+            'pay_frequency' => $validated['pay_frequency'] ?? null,
         ]);
 
         return redirect()->route('hr.employees.index')
@@ -417,11 +453,27 @@ class EmployeeController extends Controller
             'user_id' => $user->id,
             'organization_id' => $employee->organization_id,
             'organization_unit_id' => $employee->organization_unit_id,
+            'position_id' => $employee->position_id,
             'roles' => $validated['roles'],
             'position' => $validated['position'],
         ]);
 
         return redirect()->route('hr.employees.show', $employee)
             ->with('success', 'System access granted successfully!');
+    }
+
+    /**
+     * Build an existence validation rule scoped to the current organization,
+     * optionally restricting to active records only.
+     */
+    private function orgScopedExists(string $table, int $organizationId, bool $activeOnly = false): Exists
+    {
+        return Rule::exists($table, 'id')->where(function ($query) use ($organizationId, $activeOnly) {
+            $query->where('organization_id', $organizationId);
+
+            if ($activeOnly) {
+                $query->where('is_active', true);
+            }
+        });
     }
 }

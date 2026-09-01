@@ -2,6 +2,7 @@
 
 use App\Models\Employee;
 use App\Models\JobPosition;
+use App\Models\Organization;
 use App\Models\OrganizationUnit;
 use App\Models\Shift;
 use App\Models\User;
@@ -11,13 +12,13 @@ uses(RefreshDatabase::class);
 
 it('assigns position and shift to employee during creation', function () {
     $user = User::factory()->create();
-    $organization = \App\Models\Organization::factory()->create();
+    $organization = Organization::factory()->create();
     $user->current_organization_id = $organization->id;
     $user->save();
 
     $orgUnit = OrganizationUnit::factory()->create(['organization_id' => $organization->id]);
-    $position = JobPosition::factory()->create(['organization_unit_id' => $orgUnit->id]);
-    $shift = Shift::factory()->create();
+    $position = JobPosition::factory()->create(['organization_id' => $organization->id, 'organization_unit_id' => $orgUnit->id, 'is_active' => true]);
+    $shift = Shift::factory()->create(['organization_id' => $organization->id, 'is_active' => true]);
 
     $data = [
         'first_name' => 'John',
@@ -38,6 +39,9 @@ it('assigns position and shift to employee during creation', function () {
         'position_id' => $position->id,
         'shift_id' => $shift->id,
     ]);
+    $this->assertDatabaseHas('organization_user', [
+        'position_id' => $position->id,
+    ]);
 });
 
 it('loads employee with position and shift relationships', function () {
@@ -56,13 +60,13 @@ it('loads employee with position and shift relationships', function () {
         ->and($loadedEmployee->shift)->toBeInstanceOf(Shift::class);
 });
 
-it('prevents assigning inactive position to employee', function () {
+it('rejects an inactive position assigned to employee', function () {
     $user = User::factory()->create();
-    $organization = \App\Models\Organization::factory()->create();
+    $organization = Organization::factory()->create();
     $user->current_organization_id = $organization->id;
     $user->save();
 
-    $inactivePosition = JobPosition::factory()->create(['is_active' => false]);
+    $inactivePosition = JobPosition::factory()->create(['organization_id' => $organization->id, 'is_active' => false]);
 
     $data = [
         'first_name' => 'Jane',
@@ -76,13 +80,125 @@ it('prevents assigning inactive position to employee', function () {
 
     $response = $this->actingAs($user)->post(route('hr.employees.store'), $data);
 
-    // Note: Current validation only checks existence, not active status
-    // So this test expects creation to succeed, but the position should be inactive
+    $response->assertSessionHasErrors('position_id');
+    $this->assertDatabaseMissing('employees', [
+        'email' => 'jane@example.com',
+    ]);
+});
+
+it('rejects a position from another organization', function () {
+    $user = User::factory()->create();
+    $organization = Organization::factory()->create();
+    $otherOrganization = Organization::factory()->create();
+    $user->current_organization_id = $organization->id;
+    $user->save();
+
+    $crossOrgPosition = JobPosition::factory()->create(['organization_id' => $otherOrganization->id]);
+
+    $data = [
+        'first_name' => 'Cross',
+        'last_name' => 'Org',
+        'email' => 'cross.org@example.com',
+        'password' => 'password',
+        'password_confirmation' => 'password',
+        'position_id' => $crossOrgPosition->id,
+        'roles' => ['employee'],
+    ];
+
+    $response = $this->actingAs($user)->post(route('hr.employees.store'), $data);
+
+    $response->assertSessionHasErrors('position_id');
+});
+
+it('propagates position default roles to the organization user roles', function () {
+    $user = User::factory()->create();
+    $organization = Organization::factory()->create();
+    $user->current_organization_id = $organization->id;
+    $user->save();
+
+    $position = JobPosition::factory()->create([
+        'organization_id' => $organization->id,
+        'is_active' => true,
+        'default_roles' => ['store_manager', 'inventory_clerk'],
+    ]);
+
+    $data = [
+        'first_name' => 'Role',
+        'last_name' => 'Test',
+        'email' => 'roles.test@example.com',
+        'password' => 'password',
+        'password_confirmation' => 'password',
+        'position_id' => $position->id,
+        'roles' => ['employee'],
+    ];
+
+    $response = $this->actingAs($user)->post(route('hr.employees.store'), $data);
+
     $response->assertRedirect();
 
-    // Check that employee was created but with inactive position
+    $employee = Employee::where('email', 'roles.test@example.com')->first();
+    $orgUser = $employee->organizationUser()->first();
+
+    expect($orgUser->roles)
+        ->toContain('store_manager')
+        ->toContain('inventory_clerk')
+        ->toContain('employee')
+        ->toHaveCount(3);
+});
+
+it('defaults required daily hours from the assigned shift', function () {
+    $user = User::factory()->create();
+    $organization = Organization::factory()->create();
+    $user->current_organization_id = $organization->id;
+    $user->save();
+
+    $shift = Shift::factory()->create(['organization_id' => $organization->id, 'is_active' => true, 'working_hours' => 9]);
+    $email = 'hours-'.uniqid().'@test.com';
+
+    $data = [
+        'first_name' => 'Hours',
+        'last_name' => 'Test',
+        'email' => $email,
+        'password' => 'password',
+        'password_confirmation' => 'password',
+        'shift_id' => $shift->id,
+        'roles' => ['employee'],
+    ];
+
+    $response = $this->actingAs($user)->post(route('hr.employees.store'), $data);
+
+    $response->assertRedirect();
     $this->assertDatabaseHas('employees', [
-        'position_id' => $inactivePosition->id,
+        'email' => $email,
+        'required_daily_hours' => '9',
+    ]);
+});
+
+it('persists required daily hours and pay frequency', function () {
+    $user = User::factory()->create();
+    $organization = Organization::factory()->create();
+    $user->current_organization_id = $organization->id;
+    $user->save();
+
+    $email = 'payroll-'.uniqid().'@test.com';
+
+    $data = [
+        'first_name' => 'Payroll',
+        'last_name' => 'Test',
+        'email' => $email,
+        'password' => 'password',
+        'password_confirmation' => 'password',
+        'roles' => ['employee'],
+        'required_daily_hours' => 7.5,
+        'pay_frequency' => 'biweekly',
+    ];
+
+    $this->actingAs($user)->post(route('hr.employees.store'), $data);
+
+    $this->assertDatabaseHas('employees', [
+        'email' => $email,
+        'required_daily_hours' => '7.5',
+        'pay_frequency' => 'biweekly',
     ]);
 });
 

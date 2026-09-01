@@ -12,11 +12,14 @@ class JobPositionFactory extends Factory
 
     public function definition(): array
     {
+        $unit = OrganizationUnit::factory()->create();
+
         return [
+            'organization_id' => $unit->organization_id,
             'title' => fake()->jobTitle(),
             'code' => fake()->unique()->regexify('[A-Z]{2}[0-9]{3}'),
             'description' => fake()->paragraph(),
-            'organization_unit_id' => OrganizationUnit::factory(),
+            'organization_unit_id' => $unit->id,
             'min_salary' => fake()->numberBetween(30000, 60000),
             'max_salary' => fake()->numberBetween(60000, 120000),
             'requirements' => fake()->paragraph(),

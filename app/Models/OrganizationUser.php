@@ -17,7 +17,13 @@ class OrganizationUser extends Pivot
             'position' => 'string',
             'organization_id' => 'integer',
             'organization_unit_id' => 'integer',
+            'position_id' => 'integer',
         ];
+    }
+
+    public function position()
+    {
+        return $this->belongsTo(JobPosition::class, 'position_id');
     }
 
     /**

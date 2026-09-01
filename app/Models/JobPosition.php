@@ -20,6 +20,7 @@ class JobPosition extends Model
         'min_salary',
         'max_salary',
         'requirements',
+        'default_roles',
         'is_active',
     ];
 
@@ -55,10 +56,44 @@ class JobPosition extends Model
         return [
 
             'requirements' => 'array',
+            'default_roles' => 'array',
             'min_salary' => 'decimal:2',
             'max_salary' => 'decimal:2',
             'is_active' => 'boolean',
 
+        ];
+    }
+
+    /**
+     * All roles available in the system, usable as position default roles.
+     *
+     * @return array<string, string>
+     */
+    public static function roleOptions(): array
+    {
+        return [
+            'admin' => 'Super Admin',
+            'organization_admin' => 'Organization Admin',
+            'organization_unit_manager' => 'Unit Manager',
+            'user_manager' => 'User Manager',
+            'inventory_admin' => 'Inventory Admin',
+            'store_manager' => 'Store Manager',
+            'inventory_clerk' => 'Inventory Clerk',
+            'accounting_manager' => 'Accounting Manager',
+            'senior_accountant' => 'Senior Accountant',
+            'accountant' => 'Accountant',
+            'ap_clerk' => 'Accounts Payable Clerk',
+            'ar_clerk' => 'Accounts Receivable Clerk',
+            'budget_analyst' => 'Budget Analyst',
+            'financial_approver' => 'Financial Approver',
+            'membership.admin' => 'Membership Admin',
+            'membership.manager' => 'Membership Manager',
+            'membership.clerk' => 'Membership Clerk',
+            'membership.viewer' => 'Membership Viewer',
+            'auditor' => 'Auditor',
+            'employee' => 'Employee',
+            'hr' => 'HR Manager',
+            'manager' => 'Manager',
         ];
     }
 }

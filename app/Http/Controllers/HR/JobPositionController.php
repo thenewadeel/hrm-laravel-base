@@ -57,12 +57,16 @@ class JobPositionController extends Controller
      */
     public function create()
     {
+        $currentOrganizationId = auth()->user()->current_organization_id;
+
         $organizationUnits = OrganizationUnit::where(
             'organization_id',
-            auth()->user()->current_organization_id
+            $currentOrganizationId
         )->get();
 
-        return view('hr.positions.create', compact('organizationUnits'));
+        $roleOptions = JobPosition::roleOptions();
+
+        return view('hr.positions.create', compact('organizationUnits', 'roleOptions'));
     }
 
     /**
@@ -78,13 +82,20 @@ class JobPositionController extends Controller
                 'required',
                 'string',
                 'max:50',
-                Rule::unique('job_positions', 'code'),
+                Rule::unique('job_positions', 'code')
+                    ->where('organization_id', $currentOrganizationId),
             ],
             'description' => 'nullable|string|max:1000',
-            'organization_unit_id' => 'nullable|exists:organization_units,id',
+            'organization_unit_id' => [
+                'nullable',
+                Rule::exists('organization_units', 'id')
+                    ->where('organization_id', $currentOrganizationId),
+            ],
             'min_salary' => 'nullable|numeric|min:0',
             'max_salary' => 'nullable|numeric|min:0',
             'requirements' => 'nullable|array',
+            'default_roles' => 'nullable|array',
+            'default_roles.*' => 'string',
             'is_active' => 'boolean',
         ]);
 
@@ -127,7 +138,9 @@ class JobPositionController extends Controller
             auth()->user()->current_organization_id
         )->get();
 
-        return view('hr.positions.edit', compact('position', 'organizationUnits'));
+        $roleOptions = JobPosition::roleOptions();
+
+        return view('hr.positions.edit', compact('position', 'organizationUnits', 'roleOptions'));
     }
 
     /**
@@ -137,19 +150,29 @@ class JobPositionController extends Controller
     {
         $this->authorize('update', $position);
 
+        $currentOrganizationId = auth()->user()->current_organization_id;
+
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'code' => [
                 'required',
                 'string',
                 'max:50',
-                Rule::unique('job_positions', 'code')->ignore($position->id),
+                Rule::unique('job_positions', 'code')
+                    ->where('organization_id', $currentOrganizationId)
+                    ->ignore($position->id),
             ],
             'description' => 'nullable|string|max:1000',
-            'organization_unit_id' => 'nullable|exists:organization_units,id',
+            'organization_unit_id' => [
+                'nullable',
+                Rule::exists('organization_units', 'id')
+                    ->where('organization_id', $currentOrganizationId),
+            ],
             'min_salary' => 'nullable|numeric|min:0',
             'max_salary' => 'nullable|numeric|min:0',
             'requirements' => 'nullable|array',
+            'default_roles' => 'nullable|array',
+            'default_roles.*' => 'string',
             'is_active' => 'boolean',
         ]);
 

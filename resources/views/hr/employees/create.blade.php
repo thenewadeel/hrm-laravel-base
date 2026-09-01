@@ -191,10 +191,11 @@
                                         Shift
                                     </label>
                                     <select id="shift_id" name="shift_id"
-                                        class="mt-1 block w-full border-secondary rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                        class="mt-1 block w-full border-secondary rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                        data-required-hours-field="required_daily_hours">
                                         <option value="">Select Shift</option>
                                         @foreach($shifts as $shift)
-                                            <option value="{{ $shift->id }}" {{ old('shift_id') == $shift->id ? 'selected' : '' }}>
+                                            <option value="{{ $shift->id }}" data-working-hours="{{ $shift->working_hours }}" {{ old('shift_id') == $shift->id ? 'selected' : '' }}>
                                                 {{ $shift->name }} ({{ \Illuminate\Support\Carbon::parse($shift->start_time)->format('H:i') }} - {{ \Illuminate\Support\Carbon::parse($shift->end_time)->format('H:i') }})
                                             </option>
                                         @endforeach
@@ -343,4 +344,22 @@
             </form>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const shiftSelect = document.getElementById('shift_id');
+            const requiredHours = document.getElementById('required_daily_hours');
+
+            if (shiftSelect && requiredHours) {
+                shiftSelect.addEventListener('change', function () {
+                    const selected = shiftSelect.options[shiftSelect.selectedIndex];
+                    const hours = selected ? selected.dataset.workingHours : null;
+
+                    if (hours) {
+                        requiredHours.value = hours;
+                    }
+                });
+            }
+        });
+    </script>
 </x-app-layout>

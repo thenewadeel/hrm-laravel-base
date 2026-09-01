@@ -39,6 +39,8 @@ class Employee extends Model
         'is_active',
         'is_admin',
         'basic_salary',
+        'required_daily_hours',
+        'pay_frequency',
     ];
 
     /**
@@ -209,6 +211,7 @@ class Employee extends Model
             'is_active' => 'boolean',
             'is_admin' => 'boolean',
             'basic_salary' => 'decimal:2',
+            'required_daily_hours' => 'decimal:1',
 
         ];
     }
