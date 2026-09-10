@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Witness Tech — One-Pager (A4)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --brand: #1e3f20;
+            --brand-dark: #0f1f10;
+            --brand-light: #4c784e;
+            --brand-muted: #a3b899;
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --muted: #5b6358;
+            --line: #dadce0;
+        }
+
+        @page { size: A4; margin: 0; }
+
+        html, body {
+            font-family: "Inter", "Poppins", system-ui, -apple-system, sans-serif;
+            color: var(--text);
+            background: #e6e7e4;
+            font-size: 11pt;
+            line-height: 1.4;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background: var(--bg);
+            margin: 5mm auto;
+            box-shadow: 0 2px 12px rgba(0,0,0,.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ---------- Shared ---------- */
+        .brandbar {
+            background: var(--brand);
+            color: #fff;
+            padding: 8mm 12mm;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .wordmark { font-size: 20pt; font-weight: 800; letter-spacing: .5px; }
+        .wordmark span { color: var(--brand-muted); }
+        .brandbar .strap { font-size: 8.5pt; opacity: .85; text-align: right; }
+
+        /* Logo placeholder — replace with final artwork. */
+        .logo-placeholder {
+            display: flex;
+            align-items: center;
+            gap: 3mm;
+            background: rgba(255,255,255,.1);
+            border: 1px dashed var(--brand-muted);
+            border-radius: 1.5mm;
+            padding: 2mm 3mm;
+            font-size: 8pt;
+        }
+        .logo-placeholder .logo-box {
+            width: 11mm;
+            height: 11mm;
+            background: var(--brand-muted);
+            border-radius: 1.5mm;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: var(--brand-dark);
+            font-size: 7pt;
+            letter-spacing: .5px;
+        }
+        .logo-placeholder .logo-caption { opacity: .9; font-size: 6.5pt; text-transform: uppercase; letter-spacing: 1px; }
+
+        h1 { font-size: 19pt; line-height: 1.15; color: var(--brand-dark); font-weight: 800; }
+        .kick { color: var(--brand-light); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; font-size: 8.5pt; margin-bottom: 2mm; }
+
+        .body { padding: 9mm 12mm 0; flex: 1; }
+        .footer {
+            background: var(--brand-dark);
+            color: #fff;
+            padding: 6mm 12mm;
+            font-size: 9pt;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer strong { font-size: 10.5pt; }
+        .qr { width: 18mm; height: 18mm; background: #fff; color: var(--brand); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 7pt; text-align: center; border-radius: 2mm; }
+
+        ul { list-style: none; }
+        li { padding-left: 6mm; position: relative; margin: 1.6mm 0; }
+        li::before { content: "✓"; color: var(--brand-light); font-weight: 800; position: absolute; left: 0; }
+
+        .grid { display: grid; gap: 4mm; }
+        .grid-two { grid-template-columns: 1fr 1fr; }
+        .grid-four { grid-template-columns: repeat(4, 1fr); }
+
+        .module { border: 1px solid var(--line); border-top: 3px solid var(--brand); border-radius: 2mm; padding: 4mm; }
+        .module h3 { font-size: 10.5pt; color: var(--brand); margin-bottom: 1.5mm; }
+        .module p { font-size: 8.5pt; color: var(--muted); }
+
+        .proof { background: var(--brand-muted); color: var(--brand-dark); border-radius: 2mm; padding: 4mm 5mm; font-size: 9pt; }
+
+        h2 { font-size: 12.5pt; color: var(--brand); margin: 4mm 0 2mm; }
+        .hr { height: 1px; background: var(--line); margin: 4mm 0; }
+
+        @media print {
+            html, body { background: #fff; }
+            .page { margin: 0; box-shadow: none; width: 210mm; height: 297mm; }
+            .pagebreak { page-break-after: always; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ======== FRONT ======== -->
+<div class="page">
+    <div class="brandbar">
+        <div class="wordmark">Witness<span>Tech</span></div>
+        <div class="logo-placeholder" title="Replace with final Witness Tech logo artwork">
+            <div class="logo-box">WT</div>
+            <div class="logo-caption">Final logo<br>goes here</div>
+        </div>
+        <div class="strap">One system. Accounts, staff, stock & members.</div>
+    </div>
+
+    <div class="body">
+        <div class="kick">Business Management Software for Growing Australian Businesses</div>
+        <h1>Stop re-entering the same numbers in three different programs.</h1>
+        <p style="margin:3mm 0;">Witness Tech brings your <strong>accounting, HR &amp; payroll, inventory and membership</strong> into one system — so when one module changes, the others update automatically. No more spreadsheets, no more double data entry, no more end-of-month reconciliations by hand.</p>
+
+        <h2>Four modules, one source of truth</h2>
+        <div class="grid grid-four">
+            <div class="module">
+                <h3>Accounting</h3>
+                <p>Sales &amp; purchase vouchers, cash receipts &amp; payments, GST-ready reporting, outstandings, bank and financial-year management.</p>
+            </div>
+            <div class="module">
+                <h3>HR &amp; Payroll</h3>
+                <p>Employees, attendance &amp; shifts, leave, loans and advances. Payroll posting creates accounting entries automatically.</p>
+            </div>
+            <div class="module">
+                <h3>Inventory</h3>
+                <p>Multi-store stock, batch &amp; expiry tracking, reorder alerts, FIFO / weighted-average valuation — synced to your financials.</p>
+            </div>
+            <div class="module">
+                <h3>Membership</h3>
+                <p>Subscriptions &amp; renewals, member cards, fee collection — fees flow straight into cash management.</p>
+            </div>
+        </div>
+
+        <h2>Why businesses make the switch</h2>
+        <div class="grid grid-two">
+            <div>
+                <ul>
+                    <li>Payroll updates your accounts — no re-keying</li>
+                    <li>Every stock movement hits the balance sheet</li>
+                    <li>Membership fees appear in your cash reports</li>
+                    <li>Multi-location tracking with unified reporting</li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li>Role-based access for owners, managers, staff</li>
+                    <li>Cloud-based — work from office or mobile</li>
+                    <li>Full audit trail behind every transaction</li>
+                    <li>Easy start: existing data imported via CSV</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-top:5mm;" class="proof">
+            <strong>Built for how Australian businesses actually run</strong> — GST-friendly reporting, PAYG-style payroll structure, and multi-store stock control your accountants and bookkeepers will recognise from day one.
+        </div>
+    </div>
+
+    <div class="footer">
+        <div>
+            <strong>Come and see it on your premises.</strong><br>
+            We'll bring a live demo — free, no obligation.<br>
+            Call or email to book a 20-minute visit.
+        </div>
+        <div class="qr">SCAN TO<br>BOOK A<br>DEMO</div>
+    </div>
+</div>
+
+<!-- ======== BACK ======== -->
+<div class="page pagebreak">
+    <div class="brandbar">
+        <div class="wordmark">Witness<span>Tech</span></div>
+        <div class="logo-placeholder" title="Replace with final Witness Tech logo artwork">
+            <div class="logo-box">WT</div>
+            <div class="logo-caption">Final logo<br>goes here</div>
+        </div>
+        <div class="strap">One system. Accounts, staff, stock &amp; members.</div>
+    </div>
+
+    <div class="body">
+        <div class="kick">The problem we solve</div>
+        <h1>Pharmacy owners, schools, wholesalers &amp; traders share one headache — disconnected records.</h1>
+        <p style="margin:3mm 0;">Selling something in the front of the shop should update stock <em>and</em> the ledgers at the same time. Paying staff should post itself to your accounts. Renewing a member should show up in cash in real time.</p>
+        <div class="hr"></div>
+
+        <h2>Tailored to your business</h2>
+        <div class="grid" style="grid-template-columns:1fr 1fr 1fr; gap:4mm;">
+            <div class="module">
+                <h3>Pharmacy &amp; health</h3>
+                <p>Expiry &amp; batch control, supplier reconciliations, stockouts, staff rostering and payroll in one place.</p>
+            </div>
+            <div class="module">
+                <h3>School &amp; club</h3>
+                <p>Registrations, fees, subscription renewals, member cards and reminders — with fee income linked to your accounts.</p>
+            </div>
+            <div class="module">
+                <h3>Trade &amp; wholesale</h3>
+                <p>Purchases to sales trail, FIFO / weighted valuation, multi-store transfers and cost-of-stock reporting.</p>
+            </div>
+        </div>
+
+        <h2>What to expect</h2>
+        <ul>
+            <li><strong>20-minute demo at your premises</strong> — we use your products, your prices, your staff names</li>
+            <li><strong>Free data import</strong> of your existing lists via CSV so you start clean</li>
+            <li><strong>No lock-in</strong> — your data is yours, export anytime</li>
+            <li><strong>Local support</strong> — a person, not a ticket queue</li>
+        </ul>
+
+        <div class="hr"></div>
+
+        <h2>The numbers that matter</h2>
+        <div class="grid" style="grid-template-columns:1fr 1fr 1fr; gap:4mm; text-align:center;">
+            <div class="module" style="border-top-color:var(--brand-muted);">
+                <p style="font-size:16pt;font-weight:800;color:var(--brand);">60%+</p>
+                <p>less manual re-entry of data</p>
+            </div>
+            <div class="module" style="border-top-color:var(--brand-muted);">
+                <p style="font-size:16pt;font-weight:800;color:var(--brand);">1×</p>
+                <p>single source of truth — no version chaos</p>
+            </div>
+            <div class="module" style="border-top-color:var(--brand-muted);">
+                <p style="font-size:16pt;font-weight:800;color:var(--brand);">Real-time</p>
+                <p>stock, cash &amp; payroll visibility</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div>
+            <strong>Witness Tech</strong><br>
+            Phone: [PHONE]&nbsp;&nbsp;·&nbsp;&nbsp;Email: [EMAIL]<br>
+            [WEBSITE]&nbsp;&nbsp;·&nbsp;&nbsp;Serving Australian small &amp; medium businesses locally
+        </div>
+        <div class="qr">SCAN TO<br>BOOK A<br>DEMO</div>
+    </div>
+</div>
+
+</body>
+</html>

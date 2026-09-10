@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Witness Tech — Flyer (A5)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --brand: #1e3f20;
+            --brand-dark: #0f1f10;
+            --brand-light: #4c784e;
+            --brand-muted: #a3b899;
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --muted: #5b6358;
+        }
+
+        @page { size: A5; margin: 0; }
+
+        html, body {
+            font-family: "Inter", "Poppins", system-ui, -apple-system, sans-serif;
+            color: var(--text);
+            background: #e6e7e4;
+            font-size: 10pt;
+            line-height: 1.35;
+        }
+
+        .page {
+            width: 148mm;
+            height: 210mm;
+            background: var(--bg);
+            margin: 5mm auto;
+            box-shadow: 0 2px 12px rgba(0,0,0,.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .head {
+            background: var(--brand);
+            color: #fff;
+            padding: 7mm 8mm;
+        }
+        .wordmark { font-size: 17pt; font-weight: 800; letter-spacing: .5px; }
+        .wordmark span { color: var(--brand-muted); }
+        .head .strap { font-size: 8pt; opacity: .85; }
+
+        /* Logo placeholder — replace with final artwork. */
+        .logo-placeholder {
+            display: flex;
+            align-items: center;
+            gap: 3mm;
+            background: rgba(255,255,255,.1);
+            border: 1px dashed var(--brand-muted);
+            border-radius: 1.5mm;
+            padding: 1.5mm 2.5mm;
+            font-size: 7pt;
+        }
+        .logo-placeholder .logo-box {
+            width: 10mm;
+            height: 10mm;
+            background: var(--brand-muted);
+            border-radius: 1.5mm;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: var(--brand-dark);
+            font-size: 6.5pt;
+            letter-spacing: .5px;
+        }
+        .logo-placeholder .logo-caption { opacity: .9; font-size: 6pt; text-transform: uppercase; letter-spacing: 1px; }
+
+        .body { padding: 6mm 8mm; flex: 1; }
+
+        .kick {
+            color: var(--brand-light); font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1.5px; font-size: 7.5pt; margin-bottom: 2mm;
+        }
+        h1 { font-size: 16pt; line-height: 1.15; color: var(--brand-dark); font-weight: 800; }
+
+        ul { list-style: none; margin-top: 3mm; }
+        li { padding-left: 5mm; position: relative; margin: 1.4mm 0; font-size: 9pt; }
+        li::before { content: "✓"; color: var(--brand-light); font-weight: 800; position: absolute; left: 0; }
+
+        .offer {
+            background: var(--brand-muted);
+            color: var(--brand-dark);
+            border-radius: 2mm;
+            padding: 3.5mm 4.5mm;
+            font-size: 9pt;
+            margin-top: 4mm;
+        }
+        .offer strong { font-size: 10pt; }
+
+        .foot {
+            background: var(--brand-dark);
+            color: #fff;
+            padding: 5mm 8mm;
+            font-size: 8.5pt;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .foot strong { font-size: 9.5pt; display: block; }
+        .qr { width: 16mm; height: 16mm; background: #fff; color: var(--brand); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 6pt; text-align: center; border-radius: 2mm; }
+
+        @media print {
+            html, body { background: #fff; }
+            .page { margin: 0; box-shadow: none; width: 148mm; height: 210mm; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <div class="head">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+            <div class="wordmark">Witness<span>Tech</span></div>
+            <div class="logo-placeholder" title="Replace with final Witness Tech logo artwork">
+                <div class="logo-box">WT</div>
+                <div class="logo-caption">Final logo<br>goes here</div>
+            </div>
+        </div>
+        <div class="strap">Accounts · HR &amp; Payroll · Stock · Members — in one system</div>
+    </div>
+
+    <div class="body">
+        <div class="kick">To the owner / business manager</div>
+        <h1>Re-keying the same numbers into three programs? There's a better way.</h1>
+
+        <ul>
+            <li>Pay staff → your accounts update themselves</li>
+            <li>Make a sale → stock and the ledger move together</li>
+            <li>Renew a member → fees hit your cash reports instantly</li>
+            <li>Multi-store stock with expiry &amp; reorder alerts</li>
+            <li>GST-ready reporting your accountant will love</li>
+            <li>Cloud software — office, home or mobile</li>
+        </ul>
+
+        <div class="offer">
+            <strong>We'll bring the demo to you.</strong> 20 minutes at your premises, using your products and your prices. Free, no obligation.
+        </div>
+    </div>
+
+    <div class="foot">
+        <div>
+            <strong>Witness Tech</strong>
+            [PHONE] · [EMAIL]<br>
+            [WEBSITE]
+        </div>
+        <div class="qr">SCAN TO<br>BOOK A<br>DEMO</div>
+    </div>
+</div>
+
+</body>
+</html>

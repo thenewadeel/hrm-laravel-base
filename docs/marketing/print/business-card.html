@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Witness Tech — Business Card (90×50mm)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --brand: #1e3f20;
+            --brand-dark: #0f1f10;
+            --brand-light: #4c784e;
+            --brand-muted: #a3b899;
+            --bg: #ffffff;
+            --text: #1a1a1a;
+        }
+
+        @page { size: 90mm 50mm; margin: 0; }
+
+        html, body {
+            font-family: "Inter", "Poppins", system-ui, -apple-system, sans-serif;
+            color: var(--text);
+            background: #e6e7e4;
+            font-size: 8pt;
+            line-height: 1.35;
+        }
+
+        .card {
+            width: 90mm;
+            height: 50mm;
+            background: var(--bg);
+            margin: 3mm auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .card + .card { margin-top: 6mm; }
+
+        .face-top {
+            background: var(--brand);
+            color: #fff;
+            padding: 4mm 5mm;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .logo-placeholder {
+            display: inline-flex;
+            align-items: center;
+            gap: 2mm;
+            background: rgba(255,255,255,.12);
+            border: 1px dashed var(--brand-muted);
+            border-radius: 1.5mm;
+            padding: 1mm 2mm;
+            font-size: 5.5pt;
+        }
+        .logo-placeholder .logo-box {
+            width: 7mm; height: 7mm;
+            background: var(--brand-muted);
+            border-radius: 1mm;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; color: var(--brand-dark);
+            font-size: 4.5pt; letter-spacing: .5px;
+        }
+        .logo-placeholder .logo-caption { text-transform: uppercase; letter-spacing: 1px; opacity: .9; }
+        .wordmark { font-size: 13pt; font-weight: 800; letter-spacing: .5px; }
+        .wordmark span { color: var(--brand-muted); }
+
+        .contact { font-size: 7.5pt; }
+        .contact strong { display: block; font-size: 9pt; }
+        .qr { width: 11mm; height: 11mm; background: #fff; color: var(--brand); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 4pt; text-align: center; border-radius: 1mm; }
+
+        .face-bottom {
+            background: var(--brand-dark);
+            color: #fff;
+            padding: 5mm;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 7.5pt;
+            line-height: 1.5;
+        }
+
+        @media print {
+            html, body { background: #fff; }
+            .card { margin: 0; box-shadow: none; }
+            .card + .card { page-break-before: always; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- FRONT FACE -->
+<div class="card">
+    <div class="face-top">
+        <div>
+            <div class="logo-placeholder" title="Replace with final Witness Tech logo artwork">
+                <div class="logo-box">WT</div>
+                <div class="logo-caption">Final logo<br>goes here</div>
+            </div>
+            <div class="wordmark" style="margin-top:2mm;">Witness<span>Tech</span></div>
+        </div>
+        <div style="display:flex; align-items:flex-end; justify-content:space-between;">
+            <div class="contact">
+                <strong>[SALESPERSON NAME]</strong>
+                [ROLE] · Ph: [PHONE]<br>
+                [EMAIL] · [WEBSITE]
+            </div>
+            <div class="qr">SCAN TO<br>BOOK A<br>DEMO</div>
+        </div>
+    </div>
+</div>
+
+<!-- BACK FACE -->
+<div class="card">
+    <div class="face-bottom">
+        One system — accounts, staff, stock &amp; members.<br>
+        We bring a 20-minute live demo to your premises.<br>
+        Free · No obligation.
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Witness Tech — Direct-Mail Letter (A4)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --brand: #1e3f20;
+            --brand-dark: #0f1f10;
+            --brand-light: #4c784e;
+            --brand-muted: #a3b899;
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --muted: #5b6358;
+            --line: #dadce0;
+        }
+
+        @page { size: A4; margin: 20mm 22mm; }
+
+        html, body {
+            font-family: "Inter", "Georgia", system-ui, serif;
+            color: var(--text);
+            background: #e6e7e4;
+            font-size: 11pt;
+            line-height: 1.55;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            background: var(--bg);
+            margin: 5mm auto;
+            box-shadow: 0 2px 12px rgba(0,0,0,.15);
+            padding: 20mm 22mm;
+        }
+
+        .masthead {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6mm;
+            border-bottom: 2px solid var(--brand);
+            padding-bottom: 5mm;
+            margin-bottom: 10mm;
+        }
+        .logo-placeholder {
+            display: inline-flex;
+            align-items: center;
+            gap: 2.5mm;
+            background: #f2f4ef;
+            border: 1px dashed var(--brand-muted);
+            border-radius: 1.5mm;
+            padding: 1.5mm 2.5mm;
+            font-size: 6.5pt;
+        }
+        .logo-placeholder .logo-box {
+            width: 8mm; height: 8mm;
+            background: var(--brand-muted);
+            border-radius: 1mm;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; color: var(--brand-dark);
+            font-size: 5.5pt; letter-spacing: .5px;
+        }
+        .logo-placeholder .logo-caption { color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+        .wordmark { font-size: 16pt; font-weight: 800; letter-spacing: .5px; color: var(--brand); }
+        .wordmark span { color: var(--brand-muted); }
+        .masthead .meta { text-align: right; font-size: 8.5pt; color: var(--muted); }
+
+        .address {
+            margin-bottom: 10mm;
+            font-size: 10.5pt;
+        }
+        .date { margin-bottom: 6mm; font-size: 10pt; color: var(--muted); }
+        .salutation { margin-bottom: 6mm; font-weight: 600; }
+
+        .body p { margin-bottom: 4mm; }
+        .body ol { margin: 3mm 0 4mm 6mm; }
+        .body li { margin-bottom: 2mm; }
+
+        .cta {
+            background: #f2f4ef;
+            border-left: 4px solid var(--brand);
+            padding: 4mm 5mm;
+            margin: 6mm 0;
+            font-size: 10.5pt;
+        }
+        .cta strong { color: var(--brand); }
+
+        .signoff {
+            margin-top: 10mm;
+            font-size: 10.5pt;
+        }
+        .signoff .name { font-weight: 700; margin-top: 6mm; }
+        .signoff .contact { font-size: 9pt; color: var(--muted); line-height: 1.5; }
+        .footer-note {
+            margin-top: 12mm;
+            border-top: 1px solid var(--line);
+            padding-top: 4mm;
+            font-size: 8pt;
+            color: var(--muted);
+        }
+
+        @media print {
+            html, body { background: #fff; }
+            .page { margin: 0; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <div class="masthead">
+        <div>
+            <div class="logo-placeholder" title="Replace with final Witness Tech logo artwork">
+                <div class="logo-box">WT</div>
+                <div class="logo-caption">Final logo<br>goes here</div>
+            </div>
+            <div class="wordmark" style="margin-top:2mm;">Witness<span>Tech</span></div>
+        </div>
+        <div class="meta">
+            [PHONE]<br>[EMAIL]<br>[WEBSITE]
+        </div>
+    </div>
+
+    <div class="address">
+        [CONTACT NAME]<br>
+        [BUSINESS NAME]<br>
+        [STREET ADDRESS]<br>
+        [SUBURB, STATE, POSTCODE]
+    </div>
+
+    <div class="date">[DATE]</div>
+
+    <div class="salutation">Dear [Contact first name],</div>
+
+    <div class="body">
+        <p>You might be running your accounts in one program, payroll in another, and stock in a spreadsheet — and spending hours each week re-entering the same numbers between them.</p>
+
+        <p>Witness Tech brings <strong>accounting, HR &amp; payroll, inventory and membership</strong> into one system, so they update each other automatically:</p>
+
+        <ol>
+            <li>Pay staff, and the accounting entries post themselves.</li>
+            <li>Make a sale, and stock and the ledger move together.</li>
+            <li>Renew a member or collect a fee, and it flows into your cash reports.</li>
+        </ol>
+
+        <p>It's cloud software built for how Australian businesses actually run — GST-friendly reporting, PAYG-style payroll, multi-store stock — with your data fully exportable at any time.</p>
+
+        <div class="cta">
+            <strong>We'd like to show you personally.</strong> We'll bring a live, fully set-up demo to your premises — twenty minutes, using your products and your prices. No charge, no obligation.
+        </div>
+
+        <p>To take us up on it, call [PHONE], reply to this letter at [EMAIL], or book online via [WEBSITE]. If the timing isn't right, keep the enclosed brochure for later.</p>
+    </div>
+
+    <div class="signoff">
+        Kind regards,<br>
+        <div class="name">[SALESPERSON NAME]</div>
+        <div class="contact">
+            Witness Tech · [ROLE]<br>
+            [PHONE] · [EMAIL] · [WEBSITE]
+        </div>
+    </div>
+
+    <div class="footer-note">
+        Witness Tech provides business management software to Australian small and medium businesses. P.S. — the enclosed one-pager shows the four modules in a single page; keep it near your desk so it's handy when you're ready.
+    </div>
+</div>
+
+</body>
+</html>
