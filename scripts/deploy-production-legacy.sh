@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# =============================================================================
+# LEGACY — In-place git-pull deployment (pre-Blue/Green)
+# =============================================================================
+# Retained as the emergency escape hatch per the Blue/Green MVP rollout plan
+# (see docs/features/plans/erp-saas-blue-green-rollout-mvp.md).
+#
+# DEPRECATED in favor of scripts/deploy-bluegreen.sh. This script performs an
+# in-place deploy with downtime risk — use only when the Blue/Green pipeline
+# is unavailable and an immediate deploy is critical.
+# =============================================================================
+
 # Production Deployment Script for HRM Laravel Base
 # This script automates the deployment process with proper error handling
 
