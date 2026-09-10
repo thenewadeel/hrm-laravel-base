@@ -9,10 +9,15 @@ use Illuminate\View\Component;
 class UiBadge extends Component
 {
     public string $color;
+
     public string $size;
+
     public ?string $icon;
+
     public bool $dismissible;
+
     public bool $dot;
+
     public string $variant;
 
     public function __construct(

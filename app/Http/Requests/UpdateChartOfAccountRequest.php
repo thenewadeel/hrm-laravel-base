@@ -1,4 +1,5 @@
 <?php
+
 // app/Http/Requests/UpdateChartOfAccountRequest.php
 
 namespace App\Http\Requests;
@@ -23,7 +24,7 @@ class UpdateChartOfAccountRequest extends FormRequest
                 'required',
                 'string',
                 'max:10',
-                Rule::unique('chart_of_accounts', 'code')->ignore($accountId)
+                Rule::unique('chart_of_accounts', 'code')->ignore($accountId),
             ],
             'name' => ['required', 'string', 'max:255'],
             'type' => ['required', Rule::in(['asset', 'liability', 'equity', 'revenue', 'expense'])],

@@ -2,27 +2,32 @@
 
 namespace App\Livewire\Accounting;
 
+use App\Exceptions\InvalidAccountTypeException;
+use App\Exceptions\UnbalancedTransactionException;
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\JournalEntry;
-use App\Exceptions\UnbalancedTransactionException;
-use App\Exceptions\InvalidAccountTypeException;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Validator;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class JournalEntries extends Component
 {
     use WithPagination;
 
     public $entry_date;
+
     public $description;
+
     public $transactions = [];
+
     public $accounts;
 
     public $is_balanced = false;
+
     public $total_debits = 0;
+
     public $total_credits = 0;
 
     protected $rules = [
@@ -58,12 +63,12 @@ class JournalEntries extends Component
                 ->paginate(10);
         } catch (\Exception $e) {
             // Log the error and show empty results
-            Log::error('Error loading journal entries: ' . $e->getMessage());
+            Log::error('Error loading journal entries: '.$e->getMessage());
             $entries = collect([]); // Empty collection as fallback
         }
 
         return view('livewire.accounting.journal-entries', [
-            'entries' => $entries
+            'entries' => $entries,
         ]);
     }
 
@@ -75,7 +80,7 @@ class JournalEntries extends Component
                 return ChartOfAccount::orderBy('name')->get();
             });
         } catch (\Exception $e) {
-            Log::error('Error loading accounts: ' . $e->getMessage());
+            Log::error('Error loading accounts: '.$e->getMessage());
             $this->accounts = collect([]); // Empty collection as fallback
         }
     }
@@ -86,7 +91,7 @@ class JournalEntries extends Component
             'account_id' => null,
             'debit' => null,
             'credit' => null,
-            'error' => null
+            'error' => null,
         ];
     }
 
@@ -109,9 +114,9 @@ class JournalEntries extends Component
             $field = $path[2];
 
             // Ensure only debit or credit has value, not both
-            if ($field === 'debit' && !empty($value)) {
+            if ($field === 'debit' && ! empty($value)) {
                 $this->transactions[$index]['credit'] = null;
-            } elseif ($field === 'credit' && !empty($value)) {
+            } elseif ($field === 'credit' && ! empty($value)) {
                 $this->transactions[$index]['debit'] = null;
             }
 
@@ -133,7 +138,7 @@ class JournalEntries extends Component
 
         if (empty($transaction['debit']) && empty($transaction['credit'])) {
             $this->transactions[$index]['error'] = 'Either debit or credit must be entered.';
-        } elseif (!empty($transaction['debit']) && !empty($transaction['credit'])) {
+        } elseif (! empty($transaction['debit']) && ! empty($transaction['credit'])) {
             $this->transactions[$index]['error'] = 'Only debit or credit can be entered, not both.';
         }
     }
@@ -161,13 +166,13 @@ class JournalEntries extends Component
         // Custom validation for balanced transaction
         $this->withValidator(function (Validator $validator) {
             $validator->after(function ($validator) {
-                if (!$this->is_balanced) {
+                if (! $this->is_balanced) {
                     $validator->errors()->add('transactions', 'Total debits must equal total credits.');
                 }
 
                 // Check for transactions with errors
                 foreach ($this->transactions as $index => $transaction) {
-                    if (!empty($transaction['error'])) {
+                    if (! empty($transaction['error'])) {
                         $validator->errors()->add("transactions.$index.account_id", $transaction['error']);
                     }
                 }
@@ -182,10 +187,10 @@ class JournalEntries extends Component
                         $type = null;
                         $amount = 0;
 
-                        if (!empty($transaction['debit']) && $transaction['debit'] > 0) {
+                        if (! empty($transaction['debit']) && $transaction['debit'] > 0) {
                             $type = 'debit';
                             $amount = $transaction['debit'];
-                        } elseif (!empty($transaction['credit']) && $transaction['credit'] > 0) {
+                        } elseif (! empty($transaction['credit']) && $transaction['credit'] > 0) {
                             $type = 'credit';
                             $amount = $transaction['credit'];
                         }
@@ -219,34 +224,35 @@ class JournalEntries extends Component
             $this->dispatch('notify', [
                 'type' => 'success',
                 // 'show' => true,
-                'message' => 'Journal Entry created and posted successfully.'
+                'message' => 'Journal Entry created and posted successfully.',
             ]);
         } catch (InvalidAccountTypeException $e) {
             // Catch the specific exception and dispatch an error message
-            Log::error('CP2:InvalidAccountTypeException caught: ' . $e->getMessage());
+            Log::error('CP2:InvalidAccountTypeException caught: '.$e->getMessage());
             $this->dispatch('notify', [
                 // 'show' => true,
                 'type' => 'error',
-                'message' => 'Invalid account type: ' . $e->getMessage()
+                'message' => 'Invalid account type: '.$e->getMessage(),
             ]);
         } catch (UnbalancedTransactionException $e) {
             // Dispatch an error notification for unbalanced transactions
-            Log::error('CP3:UnbalancedTransactionException caught: ' . $e->getMessage());
+            Log::error('CP3:UnbalancedTransactionException caught: '.$e->getMessage());
             $this->dispatch('notify', [
                 // 'show' => true,
                 'type' => 'error',
-                'message' => 'ERR:' .  $e->getMessage()
+                'message' => 'ERR:'.$e->getMessage(),
             ]);
         } catch (\Exception $e) {
-            Log::error('Journal entry creation failed: ' . $e->getMessage());
+            Log::error('Journal entry creation failed: '.$e->getMessage());
             // Dispatch a general error notification
             $this->dispatch('notify', [
                 // 'show' => true,
                 'type' => 'error',
-                'message' => 'An error occurred while creating the journal entry: ' . $e->getMessage()
+                'message' => 'An error occurred while creating the journal entry: '.$e->getMessage(),
             ]);
         }
     }
+
     protected function resetForm()
     {
         $this->reset(['description', 'transactions']);

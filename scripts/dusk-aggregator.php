@@ -10,7 +10,6 @@
  * 3. Extracts only test result lines, ignoring error dumps
  * 4. Provides detailed reporting and metrics
  */
-
 $baseDir = dirname(__DIR__);
 
 // Command line options
@@ -20,7 +19,7 @@ $options = getopt('', [
     'summary-file:',
     'verbose',
     'clean',
-    'help'
+    'help',
 ]);
 
 if (isset($options['help'])) {
@@ -39,9 +38,9 @@ if (isset($options['help'])) {
 }
 
 // Configuration
-$inputDir = $options['input-dir'] ?? $baseDir . '/docs/DuskTestResults';
-$outputFile = $options['output-file'] ?? $baseDir . '/docs/testResultsDusk.txt';
-$summaryFile = $options['summary-file'] ?? $baseDir . '/docs/testSummaryDusk.txt';
+$inputDir = $options['input-dir'] ?? $baseDir.'/docs/DuskTestResults';
+$outputFile = $options['output-file'] ?? $baseDir.'/docs/testResultsDusk.txt';
+$summaryFile = $options['summary-file'] ?? $baseDir.'/docs/testSummaryDusk.txt';
 $verbose = isset($options['verbose']);
 $cleanAfter = isset($options['clean']);
 
@@ -52,15 +51,15 @@ echo "===============================\n";
 function findBatchFiles(string $inputDir): array
 {
     $batchFiles = [];
-    
-    if (!is_dir($inputDir)) {
+
+    if (! is_dir($inputDir)) {
         return $batchFiles;
     }
-    
+
     $iterator = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($inputDir, FilesystemIterator::SKIP_DOTS)
     );
-    
+
     foreach ($iterator as $file) {
         if ($file->isFile() && $file->getExtension() === 'txt') {
             $content = file_get_contents($file->getPathname());
@@ -70,8 +69,9 @@ function findBatchFiles(string $inputDir): array
             }
         }
     }
-    
+
     sort($batchFiles);
+
     return $batchFiles;
 }
 
@@ -81,18 +81,18 @@ function parseTestResults(string $content): array
     $lines = explode("\n", $content);
     $results = [];
     $currentTestClass = null;
-    
+
     foreach ($lines as $line) {
         $line = trim($line);
-        
+
         // Skip empty lines and warnings
-        if (empty($line) || 
-            str_starts_with($line, 'Warning:') || 
+        if (empty($line) ||
+            str_starts_with($line, 'Warning:') ||
             str_starts_with($line, 'Note:') ||
             str_starts_with($line, 'PHPUnit')) {
             continue;
         }
-        
+
         // Detect test class header (format: "   FAIL  Tests\Browser\ClassName")
         if (preg_match('/^\s*(PASS|FAIL)\s+Tests\\\\Browser\\\\(.+)$/i', $line, $matches)) {
             $currentTestClass = $matches[2];
@@ -100,25 +100,26 @@ function parseTestResults(string $content): array
             $results[$currentTestClass] = [
                 'class' => $currentTestClass,
                 'class_status' => $classStatus,
-                'tests' => []
+                'tests' => [],
             ];
+
             continue;
         }
-        
+
         // Detect individual test results - simplified approach
         // Look for any line that ends with duration (number + 's')
         if (preg_match('/^(.*?)\s+([\d.]+)s\s*$/', $line, $matches)) {
             $testPart = $matches[1];
             $duration = floatval($matches[2]);
-            
+
             // Extract test name and symbol more carefully
             // Skip if this looks like an error message rather than test result
-            if (str_contains($testPart, 'Expected') || 
+            if (str_contains($testPart, 'Expected') ||
                 str_contains($testPart, 'Failed') ||
                 str_contains($testPart, 'at ')) {
                 continue;
             }
-            
+
             // Find the first non-whitespace character (symbol)
             $symbol = '';
             $testName = '';
@@ -130,31 +131,32 @@ function parseTestResults(string $content): array
                     $testName .= $char;
                 }
             }
-            
+
             $testName = trim($testName);
-            
+
             // If we have a test name and symbol, record it
-            if (!empty($testName) && !empty($symbol)) {
+            if (! empty($testName) && ! empty($symbol)) {
                 // Use simple heuristics to determine pass/fail
                 // For now, treat everything as FAIL since we're seeing ⨯ symbols
                 // In real runs with passing tests, these would be ✅ or ✓ symbols
                 $passSymbols = ['✅', '✓', '✔', "\xE2\x9C\x85", "\xE2\x9C\x93"]; // Include Unicode check marks
                 $status = in_array($symbol, $passSymbols) ? 'PASS' : 'FAIL';
-                
+
                 if ($currentTestClass) {
                     $results[$currentTestClass]['tests'][] = [
                         'name' => $testName,
                         'status' => $status,
                         'duration' => $duration,
-                        'symbol' => $symbol
+                        'symbol' => $symbol,
                     ];
                 }
             }
+
             continue;
         }
-        
+
         // Skip error details, stack traces, etc.
-        if (str_contains($line, '---') || 
+        if (str_contains($line, '---') ||
             str_contains($line, 'at ') ||
             str_contains($line, '➜') ||
             str_contains($line, '▕') ||
@@ -163,11 +165,11 @@ function parseTestResults(string $content): array
             str_contains($line, 'vendor frames') ||
             str_starts_with($line, '+') ||
             preg_match('/^\s*\d+\s+\w+/', $line) ||
-            str_contains($line, 'FAILED') && !str_contains($line, 'Tests\\Browser\\')) {
+            str_contains($line, 'FAILED') && ! str_contains($line, 'Tests\\Browser\\')) {
             continue;
         }
     }
-    
+
     return $results;
 }
 
@@ -179,11 +181,11 @@ if (empty($batchFiles)) {
     exit(1);
 }
 
-echo "Found " . count($batchFiles) . " batch files to process\n";
+echo 'Found '.count($batchFiles)." batch files to process\n";
 
 if ($verbose) {
     foreach ($batchFiles as $file) {
-        echo "  - " . str_replace($baseDir . '/', '', $file) . "\n";
+        echo '  - '.str_replace($baseDir.'/', '', $file)."\n";
     }
 }
 
@@ -196,30 +198,30 @@ $totalDuration = 0;
 
 foreach ($batchFiles as $batchFile) {
     if ($verbose) {
-        echo "Processing: " . basename($batchFile) . "\n";
+        echo 'Processing: '.basename($batchFile)."\n";
     }
-    
+
     $content = file_get_contents($batchFile);
     $batchResults = parseTestResults($content);
-    
+
     foreach ($batchResults as $classResult) {
         $className = $classResult['class'];
-        
-        if (!isset($allResults[$className])) {
+
+        if (! isset($allResults[$className])) {
             $allResults[$className] = [
                 'class' => $className,
                 'class_status' => $classResult['class_status'],
                 'tests' => [],
-                'source_files' => []
+                'source_files' => [],
             ];
         }
-        
+
         $allResults[$className]['tests'] = array_merge(
             $allResults[$className]['tests'],
             $classResult['tests']
         );
-        
-        if (!in_array($batchFile, $allResults[$className]['source_files'])) {
+
+        if (! in_array($batchFile, $allResults[$className]['source_files'])) {
             $allResults[$className]['source_files'][] = $batchFile;
         }
     }
@@ -238,60 +240,60 @@ foreach ($allResults as $classResult) {
     }
 }
 
-echo "Processed " . count($allResults) . " test classes\n";
+echo 'Processed '.count($allResults)." test classes\n";
 echo "Total: {$totalTests} tests ({$totalPassed} passed, {$totalFailed} failed)\n";
 
 // Generate combined output
-$combinedOutput = "Dusk Test Results - " . date('Y-m-d H:i:s') . "\n";
-$combinedOutput .= str_repeat("=", 60) . "\n";
-$combinedOutput .= "Summary: {$totalPassed}/{$totalTests} tests passed (" . 
-                 round(($totalPassed / max($totalTests, 1)) * 100, 1) . "%)\n";
-$combinedOutput .= "Total Duration: " . round($totalDuration, 2) . "s\n";
-$combinedOutput .= str_repeat("=", 60) . "\n\n";
+$combinedOutput = 'Dusk Test Results - '.date('Y-m-d H:i:s')."\n";
+$combinedOutput .= str_repeat('=', 60)."\n";
+$combinedOutput .= "Summary: {$totalPassed}/{$totalTests} tests passed (".
+                 round(($totalPassed / max($totalTests, 1)) * 100, 1)."%)\n";
+$combinedOutput .= 'Total Duration: '.round($totalDuration, 2)."s\n";
+$combinedOutput .= str_repeat('=', 60)."\n\n";
 
 foreach ($allResults as $className => $classResult) {
     $classStatus = $classResult['class_status'];
     $classStatusSymbol = $classStatus === 'PASS' ? '✅' : '❌';
     $testCount = count($classResult['tests']);
-    $passedCount = count(array_filter($classResult['tests'], fn($t) => $t['status'] === 'PASS'));
-    
+    $passedCount = count(array_filter($classResult['tests'], fn ($t) => $t['status'] === 'PASS'));
+
     $combinedOutput .= "{$classStatusSymbol} {$classStatus} {$className}\n";
-    
+
     foreach ($classResult['tests'] as $test) {
         $combinedOutput .= "   {$test['symbol']} {$test['name']}\n";
     }
-    
+
     $combinedOutput .= "   ──────────────────────────────────────────────────────────────\n";
     $combinedOutput .= "   Summary: {$passedCount}/{$testCount} tests passed\n\n";
 }
 
 // Ensure output directory exists
 $outputDir = dirname($outputFile);
-if (!is_dir($outputDir)) {
+if (! is_dir($outputDir)) {
     mkdir($outputDir, 0755, true);
 }
 
 // Save combined output
 file_put_contents($outputFile, $combinedOutput);
-echo "Combined results saved to: " . str_replace($baseDir . '/', '', $outputFile) . "\n";
+echo 'Combined results saved to: '.str_replace($baseDir.'/', '', $outputFile)."\n";
 
 // Generate summary
 $summary = "Dusk Test Execution Summary\n";
 $summary .= "==========================\n";
-$summary .= "Date: " . date('Y-m-d H:i:s') . "\n";
-$summary .= "Batch Files Processed: " . count($batchFiles) . "\n";
-$summary .= "Test Classes: " . count($allResults) . "\n";
+$summary .= 'Date: '.date('Y-m-d H:i:s')."\n";
+$summary .= 'Batch Files Processed: '.count($batchFiles)."\n";
+$summary .= 'Test Classes: '.count($allResults)."\n";
 $summary .= "Total Tests: {$totalTests}\n";
 $summary .= "Passed: {$totalPassed} ✅\n";
 $summary .= "Failed: {$totalFailed} ❌\n";
-$summary .= "Success Rate: " . round(($totalPassed / max($totalTests, 1)) * 100, 1) . "%\n";
-$summary .= "Total Duration: " . round($totalDuration, 2) . "s\n";
-$summary .= "Average Test Duration: " . round($totalDuration / max($totalTests, 1), 2) . "s\n\n";
+$summary .= 'Success Rate: '.round(($totalPassed / max($totalTests, 1)) * 100, 1)."%\n";
+$summary .= 'Total Duration: '.round($totalDuration, 2)."s\n";
+$summary .= 'Average Test Duration: '.round($totalDuration / max($totalTests, 1), 2)."s\n\n";
 
 $summary .= "Results by Class:\n";
 foreach ($allResults as $className => $classResult) {
     $testCount = count($classResult['tests']);
-    $passedCount = count(array_filter($classResult['tests'], fn($t) => $t['status'] === 'PASS'));
+    $passedCount = count(array_filter($classResult['tests'], fn ($t) => $t['status'] === 'PASS'));
     $status = $passedCount === $testCount ? '✅' : '❌';
     $summary .= "{$status} {$className}: {$passedCount}/{$testCount} passed\n";
 }
@@ -299,8 +301,8 @@ foreach ($allResults as $className => $classResult) {
 if ($totalFailed > 0) {
     $summary .= "\nFailed Tests:\n";
     foreach ($allResults as $className => $classResult) {
-        $failedTests = array_filter($classResult['tests'], fn($t) => $t['status'] === 'FAIL');
-        if (!empty($failedTests)) {
+        $failedTests = array_filter($classResult['tests'], fn ($t) => $t['status'] === 'FAIL');
+        if (! empty($failedTests)) {
             foreach ($failedTests as $test) {
                 $summary .= "❌ {$className} > {$test['name']}\n";
             }
@@ -310,20 +312,20 @@ if ($totalFailed > 0) {
 
 $summary .= "\nSource Files:\n";
 foreach ($batchFiles as $batchFile) {
-    $relativePath = str_replace($baseDir . '/', '', $batchFile);
+    $relativePath = str_replace($baseDir.'/', '', $batchFile);
     $summary .= "- {$relativePath}\n";
 }
 
 // Save summary
 file_put_contents($summaryFile, $summary);
-echo "Summary saved to: " . str_replace($baseDir . '/', '', $summaryFile) . "\n";
+echo 'Summary saved to: '.str_replace($baseDir.'/', '', $summaryFile)."\n";
 
 // Clean old batch files if requested
 if ($cleanAfter) {
     echo "\n🧹 Cleaning up batch files...\n";
     foreach ($batchFiles as $batchFile) {
         if (unlink($batchFile)) {
-            echo "  Deleted: " . basename($batchFile) . "\n";
+            echo '  Deleted: '.basename($batchFile)."\n";
         }
     }
 }

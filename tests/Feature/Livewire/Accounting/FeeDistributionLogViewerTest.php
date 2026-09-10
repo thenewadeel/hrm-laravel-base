@@ -1,8 +1,10 @@
 <?php
 
+use App\Livewire\Accounting\FeeDistributionLogViewer;
 use App\Models\Accounting\FeeDistributionLog;
 use App\Models\Accounting\FeeDistributionRule;
 use App\Models\Accounting\JournalEntry;
+use App\Models\Membership\Member;
 use App\Models\Membership\MemberFee;
 use App\Models\Organization;
 use App\Models\User;
@@ -19,7 +21,7 @@ test('fee distribution log viewer component renders', function () {
     $user->update(['current_organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
+        ->test(FeeDistributionLogViewer::class)
         ->assertStatus(200);
 });
 
@@ -50,7 +52,7 @@ test('fee distribution log viewer loads logs for organization', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
+        ->test(FeeDistributionLogViewer::class)
         ->assertSee('1,000.00')
         ->assertDontSee('500.00');
 });
@@ -91,7 +93,7 @@ test('fee distribution log viewer searches by description', function () {
         ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
+        ->test(FeeDistributionLogViewer::class)
         ->set('search', 'Subscription')
         ->assertSee('Monthly Subscription Fee')
         ->assertDontSee('Late Payment Penalty');
@@ -104,7 +106,7 @@ test('fee distribution log viewer searches by member name', function () {
     $user->organizations()->attach($organization->id);
     $user->update(['current_organization_id' => $organization->id]);
 
-    $member = \App\Models\Membership\Member::factory()->create([
+    $member = Member::factory()->create([
         'organization_id' => $organization->id,
         'first_name' => 'John',
         'last_name' => 'Doe',
@@ -121,7 +123,7 @@ test('fee distribution log viewer searches by member name', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
+        ->test(FeeDistributionLogViewer::class)
         ->set('search', 'John')
         ->assertSee('John Doe');
 });
@@ -152,7 +154,7 @@ test('fee distribution log viewer filters by status', function () {
         ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
+        ->test(FeeDistributionLogViewer::class)
         ->set('statusFilter', 'success')
         ->assertSee('success')
         ->assertDontSee('failed');
@@ -192,7 +194,7 @@ test('fee distribution log viewer filters by fee type', function () {
         ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
+        ->test(FeeDistributionLogViewer::class)
         ->set('feeTypeFilter', 'subscription')
         ->assertSee('subscription')
         ->assertDontSee('late_fee');
@@ -220,7 +222,7 @@ test('fee distribution log viewer filters by date range', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
+        ->test(FeeDistributionLogViewer::class)
         ->set('dateFrom', now()->subDays(5)->format('Y-m-d'))
         ->set('dateTo', now()->addDays(5)->format('Y-m-d'))
         ->assertSee(number_format($recentLog->total_amount, 2))
@@ -250,7 +252,7 @@ test('fee distribution log viewer shows log details', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
+        ->test(FeeDistributionLogViewer::class)
         ->call('showDetails', $log)
         ->assertSet('selectedLog.id', $log->id)
         ->assertSet('showDetailsModal', true)
@@ -299,7 +301,7 @@ test('fee distribution log viewer calculates summary correctly', function () {
     ]);
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class);
+        ->test(FeeDistributionLogViewer::class);
 
     $summary = $component->summary;
 
@@ -318,7 +320,7 @@ test('fee distribution log viewer provides fee types', function () {
     $user->update(['current_organization_id' => $organization->id]);
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class);
+        ->test(FeeDistributionLogViewer::class);
 
     $feeTypes = $component->feeTypes;
 
@@ -336,7 +338,7 @@ test('fee distribution log viewer provides status options', function () {
     $user->update(['current_organization_id' => $organization->id]);
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class);
+        ->test(FeeDistributionLogViewer::class);
 
     $statusOptions = $component->statusOptions;
 
@@ -355,7 +357,7 @@ test('fee distribution log viewer resets filters', function () {
     $user->update(['current_organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
+        ->test(FeeDistributionLogViewer::class)
         ->set('search', 'test')
         ->set('statusFilter', 'success')
         ->set('feeTypeFilter', 'subscription')
@@ -373,7 +375,7 @@ test('fee distribution log viewer sets default date range', function () {
     $user->update(['current_organization_id' => $organization->id]);
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class);
+        ->test(FeeDistributionLogViewer::class);
 
     expect($component->dateFrom)->toBe(now()->startOfMonth()->format('Y-m-d'));
     expect($component->dateTo)->toBe(now()->endOfMonth()->format('Y-m-d'));
@@ -387,7 +389,7 @@ test('fee distribution log viewer maintains query string parameters', function (
     $user->update(['current_organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class, [
+        ->test(FeeDistributionLogViewer::class, [
             'search' => 'test',
             'statusFilter' => 'success',
             'feeTypeFilter' => 'subscription',
@@ -413,7 +415,7 @@ test('fee distribution log viewer paginates results', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
+        ->test(FeeDistributionLogViewer::class)
         ->assertViewHas('logs', function ($logs) {
             return $logs->count() <= 15; // Default pagination
         });
@@ -446,14 +448,14 @@ test('fee distribution log viewer respects organization isolation', function () 
         ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
+        ->test(FeeDistributionLogViewer::class)
         ->assertSee('1,000.00')
         ->assertDontSee('500.00');
 });
 
 // RED: Test authorization
 test('fee distribution log viewer requires authentication', function () {
-    Livewire::test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
+    Livewire::test(FeeDistributionLogViewer::class)
         ->assertStatus(401);
 });
 
@@ -478,7 +480,7 @@ test('fee distribution log viewer loads logs with relationships', function () {
         ]);
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class);
+        ->test(FeeDistributionLogViewer::class);
 
     $logs = $component->logs;
 

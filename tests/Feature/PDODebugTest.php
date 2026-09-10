@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\TestCase;
 
 class PDODebugTest extends TestCase
 {
-    public function testFindPDOError()
+    public function test_find_pdo_error()
     {
         // Set up error handler to catch the deprecation
         set_error_handler(function ($errno, $errstr, $errfile, $errline) {
@@ -29,6 +29,7 @@ class PDODebugTest extends TestCase
             }
 
             restore_error_handler();
+
             return true;
         });
 

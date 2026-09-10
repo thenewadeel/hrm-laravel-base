@@ -22,7 +22,7 @@ class UiTypeBadge extends Component
 
     public function getColor(): string
     {
-        return match($this->type) {
+        return match ($this->type) {
             'pdf' => 'red',
             'doc', 'docx' => 'blue',
             'xls', 'xlsx' => 'green',

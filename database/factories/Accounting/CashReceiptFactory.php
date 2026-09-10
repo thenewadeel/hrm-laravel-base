@@ -2,10 +2,11 @@
 
 namespace Database\Factories\Accounting;
 
+use App\Models\Accounting\CashReceipt;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Accounting\CashReceipt>
+ * @extends Factory<CashReceipt>
  */
 class CashReceiptFactory extends Factory
 {

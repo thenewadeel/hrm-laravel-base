@@ -2,17 +2,17 @@
 
 namespace Tests\Feature\Inventory;
 
-use Tests\Traits\SetupInventory;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Roles\InventoryRoles;
 use Illuminate\Support\Facades\Auth;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
+use Tests\Traits\SetupInventory;
 use Tests\Traits\SetupOrganization;
 
 class PermissionTest extends TestCase
 {
-    use RefreshDatabase, SetupOrganization, SetupInventory;
+    use RefreshDatabase, SetupInventory, SetupOrganization;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -34,7 +34,7 @@ class PermissionTest extends TestCase
                 'name' => 'Test Store',
                 'code' => 'TEST001',
                 // 'organization_id' => $setup['organization']->id,
-                'organization_unit_id' => $setup['organization_unit']->id
+                'organization_unit_id' => $setup['organization_unit']->id,
             ])
             ->assertStatus(201);
     }

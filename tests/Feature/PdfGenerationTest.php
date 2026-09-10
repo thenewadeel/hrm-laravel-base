@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\Employee;
+use App\Models\Organization;
 use App\Models\PayrollEntry;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -21,7 +23,7 @@ class PdfGenerationTest extends TestCase
         parent::setUp();
 
         // Create test user and organization
-        $this->organization = \App\Models\Organization::factory()->create();
+        $this->organization = Organization::factory()->create();
         $this->user = User::factory()->create();
         $this->user->organizations()->attach($this->organization->id, [
             'organization_unit_id' => null,
@@ -42,7 +44,7 @@ class PdfGenerationTest extends TestCase
     public function payslip_download_should_work_correctly(): void
     {
         // Create employee profile for the authenticated user
-        $employee = \App\Models\Employee::factory()->create([
+        $employee = Employee::factory()->create([
             'user_id' => $this->user->id,
             'organization_id' => $this->organization->id,
         ]);
@@ -70,7 +72,7 @@ class PdfGenerationTest extends TestCase
     public function payslip_download_should_return_pdf_response(): void
     {
         // Create employee profile for the authenticated user
-        $employee = \App\Models\Employee::factory()->create([
+        $employee = Employee::factory()->create([
             'user_id' => $this->user->id,
             'organization_id' => $this->organization->id,
         ]);
@@ -102,7 +104,7 @@ class PdfGenerationTest extends TestCase
     public function payslip_pdf_should_have_correct_filename(): void
     {
         // Create employee profile for the authenticated user
-        $employee = \App\Models\Employee::factory()->create([
+        $employee = Employee::factory()->create([
             'user_id' => $this->user->id,
             'organization_id' => $this->organization->id,
         ]);

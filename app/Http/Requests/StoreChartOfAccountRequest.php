@@ -1,4 +1,5 @@
 <?php
+
 // app/Http/Requests/StoreChartOfAccountRequest.php
 
 namespace App\Http\Requests;

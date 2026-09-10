@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\Models\Inventory\Item;
 use App\Models\Inventory\Store;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupInventory;
 
 class InventoryScopeTest extends TestCase
@@ -31,13 +31,13 @@ class InventoryScopeTest extends TestCase
             $items[0]->id => [
                 'quantity' => 5,
                 'min_stock' => 10,
-                'max_stock' => 100
+                'max_stock' => 100,
             ],
             $items[1]->id => [
                 'quantity' => 15,
                 'min_stock' => 10,
-                'max_stock' => 100
-            ]
+                'max_stock' => 100,
+            ],
         ]);
 
         $lowStockItems = Item::lowInStock()->get();
@@ -52,7 +52,7 @@ class InventoryScopeTest extends TestCase
         $setup = $this->createInventorySetup();
         $store1 = $setup['store'];
         $store2 = Store::factory()->create([
-            'organization_unit_id' => $setup['organization_unit']->id
+            'organization_unit_id' => $setup['organization_unit']->id,
         ]);
 
         $items = $setup['items']->take(2);
@@ -62,21 +62,21 @@ class InventoryScopeTest extends TestCase
             $items[0]->id => [
                 'quantity' => 5,
                 'min_stock' => 10,
-                'max_stock' => 100
-            ]
+                'max_stock' => 100,
+            ],
         ]);
 
         // Store 2 has adequate stock with different items to avoid unique constraint
         $store2Items = Item::factory()->count(2)->create([
-            'organization_id' => $setup['organization']->id
+            'organization_id' => $setup['organization']->id,
         ]);
 
         $store2->items()->sync([
             $store2Items[0]->id => [
                 'quantity' => 15,
                 'min_stock' => 10,
-                'max_stock' => 100
-            ]
+                'max_stock' => 100,
+            ],
         ]);
 
         $lowStockItems = Item::lowInStockInStore($store1->id)->get();
@@ -95,13 +95,13 @@ class InventoryScopeTest extends TestCase
             $items[0]->id => [
                 'quantity' => 0,
                 'min_stock' => 10,
-                'max_stock' => 100
+                'max_stock' => 100,
             ],
             $items[1]->id => [
                 'quantity' => 5,
                 'min_stock' => 10,
-                'max_stock' => 100
-            ]
+                'max_stock' => 100,
+            ],
         ]);
 
         $outOfStockItems = Item::outOfStock()->get();
@@ -120,7 +120,7 @@ class InventoryScopeTest extends TestCase
         $store->items()->sync([
             $items[0]->id => ['quantity' => 5, 'min_stock' => 10, 'max_stock' => 100],
             $items[1]->id => ['quantity' => 15, 'min_stock' => 10, 'max_stock' => 100],
-            $items[2]->id => ['quantity' => 3, 'min_stock' => 10, 'max_stock' => 100]
+            $items[2]->id => ['quantity' => 3, 'min_stock' => 10, 'max_stock' => 100],
         ]);
 
         $lowStockItems = $store->lowStockItems()->get();
@@ -139,7 +139,7 @@ class InventoryScopeTest extends TestCase
 
         $store->items()->sync([
             $items[0]->id => ['quantity' => 0, 'min_stock' => 10, 'max_stock' => 100],
-            $items[1]->id => ['quantity' => 5, 'min_stock' => 10, 'max_stock' => 100]
+            $items[1]->id => ['quantity' => 5, 'min_stock' => 10, 'max_stock' => 100],
         ]);
 
         $outOfStockItems = $store->outOfStockItems()->get();

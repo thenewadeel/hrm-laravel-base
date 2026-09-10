@@ -26,35 +26,35 @@ class OrganizationUserFactory extends Factory
 
     public function withRoles(array $roles): static
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'roles' => $roles,
         ]);
     }
 
     public function withPermissions(array $permissions): static
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'permissions' => $permissions,
         ]);
     }
 
     public function forOrganization(Organization $organization): static
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'organization_id' => $organization->id,
         ]);
     }
 
     public function admin(): static
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'roles' => ['admin'],
         ]);
     }
 
     public function manager(): static
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'roles' => ['manager'],
         ]);
     }

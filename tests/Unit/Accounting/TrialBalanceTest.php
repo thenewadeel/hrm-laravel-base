@@ -1,4 +1,5 @@
 <?php
+
 // tests/Unit/Accounting/TrialBalanceTest.php
 
 namespace Tests\Unit\Accounting;
@@ -7,8 +8,8 @@ use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\LedgerEntry;
 use App\Services\AccountingReportService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
 
 class TrialBalanceTest extends TestCase
@@ -44,13 +45,13 @@ class TrialBalanceTest extends TestCase
         LedgerEntry::factory()->create([
             'chart_of_account_id' => $cashAccount->id,
             'type' => 'debit',
-            'amount' => 100.00
+            'amount' => 100.00,
         ]);
 
         LedgerEntry::factory()->create([
             'chart_of_account_id' => $revenueAccount->id,
             'type' => 'credit',
-            'amount' => 100.00
+            'amount' => 100.00,
         ]);
 
         $trialBalance = $this->reportService->generateTrialBalance();

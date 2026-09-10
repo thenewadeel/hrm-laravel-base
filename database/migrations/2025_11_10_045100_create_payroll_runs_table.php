@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('period');
             $table->date('start_date');
             $table->date('end_date');
-            $table->string('status')->default('draft'); //['draft', 'calculated', 'processed', 'paid']);
+            $table->string('status')->default('draft'); // ['draft', 'calculated', 'processed', 'paid']);
             $table->decimal('total_gross', 12, 2);
             $table->decimal('total_net', 12, 2);
             $table->foreignId('journal_entry_id')->nullable()->constrained('journal_entries');

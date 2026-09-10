@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Organization;
+use Carbon\Carbon;
 use Dompdf\Dompdf;
 
 class AdvancePdfService
@@ -17,7 +18,7 @@ class AdvancePdfService
     /**
      * Generate employee statement PDF
      */
-    public function generateEmployeeStatementPdf(Organization $organization, ?int $employeeId = null, ?\Carbon\Carbon $startDate = null, ?\Carbon\Carbon $endDate = null): string
+    public function generateEmployeeStatementPdf(Organization $organization, ?int $employeeId = null, ?Carbon $startDate = null, ?Carbon $endDate = null): string
     {
         $data = $this->reportService->generateEmployeeStatement($organization, $employeeId, $startDate, $endDate);
 
@@ -85,7 +86,7 @@ class AdvancePdfService
     /**
      * Generate advance vs salary analysis PDF
      */
-    public function generateAdvanceVsSalaryPdf(Organization $organization, ?\Carbon\Carbon $startDate = null, ?\Carbon\Carbon $endDate = null): string
+    public function generateAdvanceVsSalaryPdf(Organization $organization, ?Carbon $startDate = null, ?Carbon $endDate = null): string
     {
         $data = $this->reportService->generateAdvanceVsSalaryAnalysis($organization, $startDate, $endDate);
 
@@ -255,7 +256,7 @@ class AdvancePdfService
                         <tbody>';
 
                 foreach ($bucket['advances'] as $advance) {
-                    $daysOutstanding = \Carbon\Carbon::parse($advance->first_deduction_month)->diffInDays(now());
+                    $daysOutstanding = Carbon::parse($advance->first_deduction_month)->diffInDays(now());
                     $html .= "
                         <tr>
                             <td>{$advance->employee->first_name} {$advance->employee->last_name}</td>

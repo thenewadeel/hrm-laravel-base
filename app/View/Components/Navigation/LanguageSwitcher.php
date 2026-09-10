@@ -2,11 +2,13 @@
 
 namespace App\View\Components\Navigation;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class LanguageSwitcher extends Component
 {
     public string $currentLocale = 'en';
+
     public array $availableLocales = [];
 
     public function __construct(
@@ -17,7 +19,7 @@ class LanguageSwitcher extends Component
         $this->availableLocales = $availableLocales;
     }
 
-    public function render(): \Illuminate\Contracts\View\View
+    public function render(): View
     {
         return view('components.navigation.language-switcher');
     }

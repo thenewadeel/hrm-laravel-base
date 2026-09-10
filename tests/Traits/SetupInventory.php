@@ -65,7 +65,7 @@ trait SetupInventory
         $user = $user ?: $setup['user'];
         $organization = $organization ?: $setup['organization'];
         // Get permissions for the role
-        $permissions = \App\Roles\InventoryRoles::getPermissionsForRole($role);
+        $permissions = InventoryRoles::getPermissionsForRole($role);
 
         // Assign permissions to user for the specific organization
         $user->givePermissionTo($permissions, $organization);
@@ -118,7 +118,7 @@ trait SetupInventory
             'organization_id' => $organization->id,
         ]);
         $user->assignRole($roles[0], $organization);
-        $permissions = \App\Roles\InventoryRoles::getPermissionsForRole($roles[0]);
+        $permissions = InventoryRoles::getPermissionsForRole($roles[0]);
 
         // Assign permissions to user for the specific organization
         $user->givePermissionTo($permissions, $organization);
@@ -181,7 +181,7 @@ trait SetupInventory
             'name' => 'test store',
             'organization_unit_id' => $organization_unit->id,
         ]);
-        $permissions = \App\Roles\InventoryRoles::getPermissionsForRole($roles[0]);
+        $permissions = InventoryRoles::getPermissionsForRole($roles[0]);
 
         // Assign permissions to user for the specific organization
         $user->givePermissionTo($permissions, $organization);

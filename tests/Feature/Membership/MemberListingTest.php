@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Membership\MemberListing;
 use App\Models\Membership\Member;
 use App\Models\Organization;
 use App\Models\User;
@@ -21,7 +22,7 @@ test('member listing component requires view members permission', function () {
     $user->current_organization_id = $organization->id;
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MemberListing::class)
+        ->test(MemberListing::class)
         ->assertStatus(403);
 });
 
@@ -35,7 +36,7 @@ test('member listing renders with members data', function () {
     $members = Member::factory()->count(3)->create(['organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MemberListing::class)
+        ->test(MemberListing::class)
         ->assertStatus(200)
         ->assertSee('Member Management')
         ->assertSee($members[0]->full_name)
@@ -63,7 +64,7 @@ test('member listing search functionality works', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MemberListing::class)
+        ->test(MemberListing::class)
         ->set('search', 'John')
         ->assertSee($member1->full_name)
         ->assertDontSee($member2->full_name);
@@ -87,7 +88,7 @@ test('member listing status filter works', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MemberListing::class)
+        ->test(MemberListing::class)
         ->set('statusFilter', 'active')
         ->assertSee($activeMember->full_name)
         ->assertDontSee($inactiveMember->full_name);
@@ -105,7 +106,7 @@ test('member listing respects organization isolation', function () {
     $member2 = Member::factory()->create(['organization_id' => $organization2->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MemberListing::class)
+        ->test(MemberListing::class)
         ->assertSee($member1->full_name)
         ->assertDontSee($member2->full_name);
 });
@@ -121,7 +122,7 @@ test('member listing pagination works', function () {
     Member::factory()->count(25)->create(['organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MemberListing::class)
+        ->test(MemberListing::class)
         ->set('perPage', 10)
         ->assertViewHas('members', function ($members) {
             return $members->perPage() === 10;
@@ -149,7 +150,7 @@ test('member listing sorting works', function () {
 
     // Test that sorting method exists and works
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MemberListing::class);
+        ->test(MemberListing::class);
 
     expect($component->sortBy)->toBe('first_name');
     expect($component->sortDirection)->toBe('asc');
@@ -172,7 +173,7 @@ test('member listing shows correct statistics', function () {
     Member::factory()->count(1)->create(['organization_id' => $organization->id, 'status' => 'expired']);
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MemberListing::class);
+        ->test(MemberListing::class);
 
     $stats = $component->memberStats;
 
@@ -197,7 +198,7 @@ test('member listing query string parameters work', function () {
             'sortDirection' => 'asc',
             'perPage' => 25,
         ])
-        ->test(\App\Livewire\Membership\MemberListing::class);
+        ->test(MemberListing::class);
 
     expect($component->search)->toBe('test');
     expect($component->statusFilter)->toBe('active');
@@ -214,7 +215,7 @@ test('member listing handles null organization gracefully', function () {
     // Don't set current_organization_id
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MemberListing::class)
+        ->test(MemberListing::class)
         ->assertStatus(200)
         ->assertViewHas('memberStats', function ($stats) {
             return $stats['total'] === 0 &&

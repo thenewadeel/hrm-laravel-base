@@ -2,8 +2,8 @@
 
 namespace Tests\Browser;
 
-use Laravel\Dusk\Browser;
 use Illuminate\Support\Facades\DB;
+use Laravel\Dusk\Browser;
 
 class JSDebugTest extends JavaScriptDuskTestCase
 {
@@ -14,7 +14,7 @@ class JSDebugTest extends JavaScriptDuskTestCase
     {
         // Test if database file exists
         $this->assertTrue(file_exists(storage_path('testing_dusk_javascript.sqlite')), 'Database file should exist');
-        
+
         // Test if we can query the migrations table
         $migrations = DB::table('migrations')->count();
         $this->assertGreaterThan(0, $migrations, 'Migrations should have been run');

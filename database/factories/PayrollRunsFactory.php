@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Accounting\JournalEntry;
-use App\Models\PayrollRuns;
 use App\Models\Organization;
+use App\Models\PayrollRuns;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PayrollRunsFactory extends Factory
@@ -14,7 +14,7 @@ class PayrollRunsFactory extends Factory
     public function definition()
     {
         $period = $this->faker->dateTimeBetween('-1 year', 'now')->format('Y-m');
-        $startDate = $this->faker->dateTimeBetween("-1 month", "now")->format('Y-m-01');
+        $startDate = $this->faker->dateTimeBetween('-1 month', 'now')->format('Y-m-01');
         $endDate = date('Y-m-t', strtotime($startDate));
 
         $totalGross = $this->faker->randomFloat(2, 50000, 200000);

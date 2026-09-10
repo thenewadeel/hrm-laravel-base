@@ -2,7 +2,6 @@
 
 namespace Tests\Browser\HR;
 
-use Laravel\Dusk\Browser;
 use Tests\Browser\JavaScriptDuskTestCase;
 
 class HREmployeeAlpineTest extends JavaScriptDuskTestCase
@@ -19,9 +18,9 @@ class HREmployeeAlpineTest extends JavaScriptDuskTestCase
 
             // Check if Alpine is loaded by checking for Alpine object
             $alpineLoaded = $browser->script("return typeof window.Alpine !== 'undefined'")[0];
-            
+
             $this->assertTrue($alpineLoaded, 'Alpine.js should be loaded on HR pages');
-            
+
             $browser->screenshot('hr-alpine-loaded');
         });
     }
@@ -37,7 +36,7 @@ class HREmployeeAlpineTest extends JavaScriptDuskTestCase
                 ->waitForText('Employee Management', 10);
 
             // Clear any existing console errors
-            $browser->script("console.clear()");
+            $browser->script('console.clear()');
 
             // Type in search box
             $browser->type('input[name="search"]', 'John')
@@ -56,7 +55,7 @@ class HREmployeeAlpineTest extends JavaScriptDuskTestCase
 
             // Assert no JavaScript errors occurred
             $this->assertEmpty($consoleErrors, 'No JavaScript errors should occur during search');
-            
+
             $browser->screenshot('hr-search-no-js-errors');
         });
     }
@@ -103,7 +102,7 @@ class HREmployeeAlpineTest extends JavaScriptDuskTestCase
                 ->waitForText('Add Employee', 10);
 
             // Clear console
-            $browser->script("console.clear()");
+            $browser->script('console.clear()');
 
             // Try to submit empty form
             $browser->press('Create Employee')
@@ -115,8 +114,8 @@ class HREmployeeAlpineTest extends JavaScriptDuskTestCase
                 ->assertSee('The email field is required');
 
             // Check no JavaScript errors occurred
-            $consoleErrors = $browser->script("return []")[0]; // Simplified check
-            
+            $consoleErrors = $browser->script('return []')[0]; // Simplified check
+
             $browser->screenshot('hr-form-validation-works');
         });
     }

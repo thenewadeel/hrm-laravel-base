@@ -586,11 +586,11 @@ class JavaScriptTestUtilities
      */
     public static function resetTestHarness(Browser $browser): void
     {
-        $browser->script("
+        $browser->script('
             if (window.__duskTestHarness) {
                 window.__duskTestHarness.reset();
             }
-        ");
+        ');
     }
 
     /**
@@ -599,14 +599,14 @@ class JavaScriptTestUtilities
     public static function generateTestReport(Browser $browser): string
     {
         $results = self::getTestResults($browser);
-        
+
         if (isset($results['error'])) {
-            return "Error: " . $results['error'];
+            return 'Error: '.$results['error'];
         }
-        
+
         $report = "=== JavaScript Test Report ===\n";
-        $report .= "Generated: " . date('Y-m-d H:i:s') . "\n\n";
-        
+        $report .= 'Generated: '.date('Y-m-d H:i:s')."\n\n";
+
         // Summary
         $summary = $results['summary'];
         $report .= "SUMMARY:\n";
@@ -614,18 +614,18 @@ class JavaScriptTestUtilities
         $report .= "Passed: {$summary['passedTests']}\n";
         $report .= "Failed: {$summary['failedTests']}\n";
         $report .= "Errors: {$summary['totalErrors']}\n\n";
-        
+
         // Performance metrics
-        if (!empty($results['performance'])) {
+        if (! empty($results['performance'])) {
             $report .= "PERFORMANCE:\n";
             foreach ($results['performance'] as $test => $metrics) {
                 $report .= "- {$test}:\n";
-                $report .= "  Success: " . ($metrics['success'] ? 'Yes' : 'No') . "\n";
+                $report .= '  Success: '.($metrics['success'] ? 'Yes' : 'No')."\n";
                 if (isset($metrics['executionTime'])) {
-                    $report .= "  Execution Time: " . round($metrics['executionTime'], 2) . "ms\n";
+                    $report .= '  Execution Time: '.round($metrics['executionTime'], 2)."ms\n";
                 }
                 if (isset($metrics['memoryDelta'])) {
-                    $report .= "  Memory Delta: " . round($metrics['memoryDelta'] / 1024, 2) . "KB\n";
+                    $report .= '  Memory Delta: '.round($metrics['memoryDelta'] / 1024, 2)."KB\n";
                 }
                 if (isset($metrics['error'])) {
                     $report .= "  Error: {$metrics['error']}\n";
@@ -633,9 +633,9 @@ class JavaScriptTestUtilities
             }
             $report .= "\n";
         }
-        
+
         // Test results
-        if (!empty($results['results'])) {
+        if (! empty($results['results'])) {
             $report .= "TEST RESULTS:\n";
             foreach ($results['results'] as $result) {
                 $status = strtoupper($result['result']);
@@ -646,9 +646,9 @@ class JavaScriptTestUtilities
             }
             $report .= "\n";
         }
-        
+
         // Errors
-        if (!empty($results['errors'])) {
+        if (! empty($results['errors'])) {
             $report .= "ERRORS:\n";
             foreach ($results['errors'] as $error) {
                 $report .= "- {$error['test']}: {$error['error']}\n";
@@ -657,7 +657,7 @@ class JavaScriptTestUtilities
                 }
             }
         }
-        
+
         return $report;
     }
 }

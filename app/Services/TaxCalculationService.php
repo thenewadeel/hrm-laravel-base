@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Accounting\TaxCalculation;
 use App\Models\Accounting\TaxExemption;
 use App\Models\Accounting\TaxRate;
+use App\Models\TaxBracket;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
@@ -74,7 +75,7 @@ class TaxCalculationService
 
     public function calculateIncomeTax(float $taxableIncome, int $organizationId): float
     {
-        $taxBracket = \App\Models\TaxBracket::active()
+        $taxBracket = TaxBracket::active()
             ->effective()
             ->where('organization_id', $organizationId)
             ->where(function ($query) use ($taxableIncome) {

@@ -2,8 +2,6 @@
 
 namespace Tests\Browser;
 
-use App\Models\Membership\Member;
-use App\Models\Membership\MemberFee;
 use App\Models\Organization;
 use App\Models\User;
 use Laravel\Dusk\Browser;
@@ -12,6 +10,7 @@ use Tests\DuskTestCase;
 class LivewireDebugTest extends DuskTestCase
 {
     protected ?Organization $organization = null;
+
     protected ?User $adminUser = null;
 
     protected function setUp(): void

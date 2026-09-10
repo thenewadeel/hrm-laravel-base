@@ -7,9 +7,9 @@ use App\Models\Inventory\Head;
 use App\Models\Inventory\Item;
 use App\Models\Inventory\Store;
 use App\Models\Organization;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 
 class InventoryItemController extends Controller
 {
@@ -20,15 +20,15 @@ class InventoryItemController extends Controller
     {
         $query = Item::with([
             // 'organization',
-            'head'
+            'head',
         ]);
 
         // Search functionality
         if ($request->has('search') && $request->search) {
             $query->where(function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->search . '%')
-                    ->orWhere('sku', 'like', '%' . $request->search . '%')
-                    ->orWhere('description', 'like', '%' . $request->search . '%');
+                $q->where('name', 'like', '%'.$request->search.'%')
+                    ->orWhere('sku', 'like', '%'.$request->search.'%')
+                    ->orWhere('description', 'like', '%'.$request->search.'%');
             });
         }
 
@@ -51,6 +51,7 @@ class InventoryItemController extends Controller
         $items = $query->latest()->paginate(20);
         $categories = Item::distinct()->pluck('category')->filter();
         $stores = Store::where('is_active', true)->get();
+
         // dd($items);
         return view('inventory.items.index', compact('items', 'categories', 'stores'));
     }
@@ -62,6 +63,7 @@ class InventoryItemController extends Controller
     {
         $organizations = Organization::where('is_active', true)->get();
         $heads = Head::where('is_active', true)->get();
+
         return view('inventory.items.form', compact('organizations', 'heads'));
     }
 
@@ -95,6 +97,7 @@ class InventoryItemController extends Controller
     public function show(Item $item): View
     {
         $item->load(['organization', 'head', 'stores']);
+
         return view('inventory.items.show', compact('item'));
     }
 
@@ -105,6 +108,7 @@ class InventoryItemController extends Controller
     {
         $organizations = Organization::where('is_active', true)->get();
         $heads = Head::where('is_active', true)->get();
+
         return view('inventory.items.form', compact('item', 'organizations', 'heads'));
     }
 
@@ -116,7 +120,7 @@ class InventoryItemController extends Controller
         $validated = $request->validate([
             'organization_id' => 'required|exists:organizations,id',
             'name' => 'required|string|max:255',
-            'sku' => 'required|string|unique:inventory_items,sku,' . $item->id,
+            'sku' => 'required|string|unique:inventory_items,sku,'.$item->id,
             'description' => 'nullable|string',
             'category' => 'nullable|string|max:255',
             'unit' => 'required|string|max:50',

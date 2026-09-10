@@ -493,7 +493,7 @@ class SubscriptionService
     /**
      * Get revenue by date range
      */
-    public function getRevenueByDateRange(int $organizationId, \Carbon\Carbon $startDate, \Carbon\Carbon $endDate): float
+    public function getRevenueByDateRange(int $organizationId, Carbon $startDate, Carbon $endDate): float
     {
         return MemberSubscription::whereHas('member', function ($query) use ($organizationId) {
             $query->where('organization_id', $organizationId);

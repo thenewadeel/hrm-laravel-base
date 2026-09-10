@@ -1,21 +1,21 @@
 <?php
+
 // tests/Feature/SetupStoreTest.php
 
 namespace Tests\Feature;
 
-use App\Models\User;
-use App\Models\Organization;
 use App\Models\Inventory\Store;
+use App\Models\Organization;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Artisan;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupInventory;
 use Tests\Traits\SetupOrganization;
 
 class SetupStoreTest extends TestCase
 {
-    use RefreshDatabase, SetupOrganization, SetupInventory;
+    use RefreshDatabase, SetupInventory, SetupOrganization;
 
     protected function setUp(): void
     {
@@ -31,7 +31,7 @@ class SetupStoreTest extends TestCase
         $organization = Organization::factory()->create();
         $user->organizations()->attach($organization->id, [
             'roles' => json_encode(['admin']),
-            'organization_unit_id' => null
+            'organization_unit_id' => null,
         ]);
 
         $response = $this->actingAs($user)
@@ -57,7 +57,7 @@ class SetupStoreTest extends TestCase
         $organization = Organization::factory()->create();
         $user->organizations()->attach($organization->id, [
             'roles' => json_encode(['admin']),
-            'organization_unit_id' => null
+            'organization_unit_id' => null,
         ]);
 
         $response = $this->actingAs($user)
@@ -73,7 +73,7 @@ class SetupStoreTest extends TestCase
         $organization = Organization::factory()->create();
         $user->organizations()->attach($organization->id, [
             'roles' => json_encode(['admin']),
-            'organization_unit_id' => null
+            'organization_unit_id' => null,
         ]);
 
         $response = $this->actingAs($user)

@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Membership\CardDesigner;
 use App\Models\Membership\Member;
 use App\Models\Organization;
 use App\Models\User;
@@ -10,7 +11,7 @@ test('card designer renders without person', function () {
     $user = User::factory()->create(['current_organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\CardDesigner::class)
+        ->test(CardDesigner::class)
         ->assertStatus(200);
 });
 
@@ -20,7 +21,7 @@ test('card designer renders with member', function () {
     $member = Member::factory()->create(['organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\CardDesigner::class, ['member' => $member])
+        ->test(CardDesigner::class, ['member' => $member])
         ->assertStatus(200);
 });
 
@@ -29,7 +30,7 @@ test('batch mode can be toggled', function () {
     $user = User::factory()->create(['current_organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\CardDesigner::class)
+        ->test(CardDesigner::class)
         ->assertSet('batchMode', false)
         ->call('toggleBatchMode')
         ->assertSet('batchMode', true);
@@ -41,7 +42,7 @@ test('card template can be changed', function () {
     $member = Member::factory()->create(['organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\CardDesigner::class, ['member' => $member])
+        ->test(CardDesigner::class, ['member' => $member])
         ->set('cardTemplate', 'premium')
         ->assertSet('cardTemplate', 'premium');
 });
@@ -52,7 +53,7 @@ test('design settings can be updated', function () {
     $member = Member::factory()->create(['organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\CardDesigner::class, ['member' => $member])
+        ->test(CardDesigner::class, ['member' => $member])
         ->set('designSettings.primary_color', '#ff0000')
         ->assertSet('designSettings.primary_color', '#ff0000');
 });
@@ -66,7 +67,7 @@ test('member card can be created', function () {
     $member = Member::factory()->create(['organization_id' => $organization->id]);
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\CardDesigner::class)
+        ->test(CardDesigner::class)
         ->set('member', $member)
         ->set('cardType', 'premium')
         ->set('cardTemplate', 'premium');

@@ -5,6 +5,7 @@ use App\Models\Accounting\ChartOfAccount;
 use App\Models\Organization;
 use App\Models\User;
 use App\Permissions\AccountingPermissions;
+use App\Services\CashReceiptService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 
@@ -13,13 +14,13 @@ uses(RefreshDatabase::class);
 test('cash receipt create component renders successfully', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create(['current_organization_id' => $organization->id]);
-    
+
     // Grant permission to user
     $user->organizations()->attach($organization->id, ['roles' => ['accounting_admin']]);
     $user->givePermissionTo(AccountingPermissions::CREATE_CASH_RECEIPTS, $organization);
-    
+
     $this->actingAs($user);
-    
+
     Livewire::test(Create::class)
         ->assertStatus(200);
 });
@@ -27,13 +28,13 @@ test('cash receipt create component renders successfully', function () {
 test('cash receipt create component has required fields', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create(['current_organization_id' => $organization->id]);
-    
+
     // Grant permission to user
     $user->organizations()->attach($organization->id, ['roles' => ['accounting_admin']]);
     $user->givePermissionTo(AccountingPermissions::CREATE_CASH_RECEIPTS, $organization);
-    
+
     $this->actingAs($user);
-    
+
     Livewire::test(Create::class)
         ->assertSet('date', now()->format('Y-m-d'))
         ->assertSet('received_from', '')
@@ -47,22 +48,22 @@ test('cash receipt create component has required fields', function () {
 test('cash receipt create component loads cash accounts', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create(['current_organization_id' => $organization->id]);
-    
+
     // Grant permission to user
     $user->organizations()->attach($organization->id, ['roles' => ['accounting_admin']]);
     $user->givePermissionTo(AccountingPermissions::CREATE_CASH_RECEIPTS, $organization);
-    
+
     $cashAccount = ChartOfAccount::factory()->create([
         'organization_id' => $organization->id,
-        'type' => 'asset'
+        'type' => 'asset',
     ]);
     $otherAccount = ChartOfAccount::factory()->create([
         'organization_id' => $organization->id,
-        'type' => 'liability'
+        'type' => 'liability',
     ]);
-    
+
     $this->actingAs($user);
-    
+
     Livewire::test(Create::class)
         ->assertViewHas('cashAccounts')
         ->assertViewHas('creditAccounts')
@@ -72,13 +73,13 @@ test('cash receipt create component loads cash accounts', function () {
 test('cash receipt create component validates required fields', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create(['current_organization_id' => $organization->id]);
-    
+
     // Grant permission to user
     $user->organizations()->attach($organization->id, ['roles' => ['accounting_admin']]);
     $user->givePermissionTo(AccountingPermissions::CREATE_CASH_RECEIPTS, $organization);
-    
+
     $this->actingAs($user);
-    
+
     Livewire::test(Create::class)
         ->set('date', '')
         ->set('received_from', '')
@@ -98,16 +99,16 @@ test('cash receipt create component validates required fields', function () {
 test('cash receipt create component validates amount is positive', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create(['current_organization_id' => $organization->id]);
-    
+
     // Grant permission to user
     $user->organizations()->attach($organization->id, ['roles' => ['accounting_admin']]);
     $user->givePermissionTo(AccountingPermissions::CREATE_CASH_RECEIPTS, $organization);
-    
+
     $cashAccount = ChartOfAccount::factory()->create(['organization_id' => $organization->id]);
     $creditAccount = ChartOfAccount::factory()->create(['organization_id' => $organization->id]);
-    
+
     $this->actingAs($user);
-    
+
     Livewire::test(Create::class)
         ->set('date', now()->format('Y-m-d'))
         ->set('received_from', 'John Doe')
@@ -121,22 +122,22 @@ test('cash receipt create component validates amount is positive', function () {
 test('cash receipt create component creates receipt successfully', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create(['current_organization_id' => $organization->id]);
-    
+
     // Grant permission to user
     $user->organizations()->attach($organization->id, ['roles' => ['accounting_admin']]);
     $user->givePermissionTo(AccountingPermissions::CREATE_CASH_RECEIPTS, $organization);
-    
+
     $cashAccount = ChartOfAccount::factory()->create([
         'organization_id' => $organization->id,
-        'type' => 'asset'
+        'type' => 'asset',
     ]);
     $creditAccount = ChartOfAccount::factory()->create([
         'organization_id' => $organization->id,
-        'type' => 'revenue'
+        'type' => 'revenue',
     ]);
-    
+
     $this->actingAs($user);
-    
+
     Livewire::test(Create::class)
         ->set('date', now()->format('Y-m-d'))
         ->set('received_from', 'John Doe')
@@ -158,21 +159,21 @@ test('cash receipt create component creates receipt successfully', function () {
 test('cash receipt create component handles creation errors', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create(['current_organization_id' => $organization->id]);
-    
+
     // Grant permission to user
     $user->organizations()->attach($organization->id, ['roles' => ['accounting_admin']]);
     $user->givePermissionTo(AccountingPermissions::CREATE_CASH_RECEIPTS, $organization);
-    
+
     $cashAccount = ChartOfAccount::factory()->create(['organization_id' => $organization->id]);
     $creditAccount = ChartOfAccount::factory()->create(['organization_id' => $organization->id]);
-    
+
     $this->actingAs($user);
-    
+
     // Mock the service to throw an exception
-    $this->mock(\App\Services\CashReceiptService::class)
+    $this->mock(CashReceiptService::class)
         ->shouldReceive('createReceipt')
-        ->andThrow(new \Exception('Service error'));
-    
+        ->andThrow(new Exception('Service error'));
+
     Livewire::test(Create::class)
         ->set('date', now()->format('Y-m-d'))
         ->set('received_from', 'John Doe')

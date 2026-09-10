@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Payroll;
 
 use App\Http\Controllers\Controller;
+use App\Models\AttendanceRecord;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -134,7 +136,7 @@ class PayrollController extends Controller
 
         // Get attendance data for the period
         $employeeId = $request->get('employee_id');
-        $query = \App\Models\AttendanceRecord::whereMonth('record_date', $period->month)
+        $query = AttendanceRecord::whereMonth('record_date', $period->month)
             ->whereYear('record_date', $period->year);
 
         if ($employeeId) {
@@ -154,7 +156,7 @@ class PayrollController extends Controller
             'totalHours' => $totalHours,
             'overtimeHours' => $overtimeHours,
             'regularHours' => $regularHours,
-            'employee' => $employeeId ? \App\Models\Employee::find($employeeId) : null,
+            'employee' => $employeeId ? Employee::find($employeeId) : null,
         ]);
     }
 

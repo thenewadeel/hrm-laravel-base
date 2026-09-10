@@ -3,6 +3,7 @@
 namespace Tests\Browser;
 
 use App\Models\Organization;
+use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\Browser\Traits\BrowserTestSetup;
 
@@ -31,7 +32,7 @@ class DuskInstallationTest extends JavaScriptDuskTestCase
         $this->browse(function (Browser $browser) {
             // Create basic test scenario
             $organization = Organization::factory()->create();
-            $user = \App\Models\User::factory()->create();
+            $user = User::factory()->create();
 
             // Attach user to organization
             $organization->users()->attach($user->id, [
@@ -51,7 +52,7 @@ class DuskInstallationTest extends JavaScriptDuskTestCase
             // Verify we can access application without hitting login
             $currentUrl = $browser->driver->getCurrentURL();
             $this->assertStringNotContainsString('/login', $currentUrl);
-            
+
             $browser->screenshot('multi-tenant-auth-success');
         });
     }
@@ -67,9 +68,9 @@ class DuskInstallationTest extends JavaScriptDuskTestCase
 
             // Verify organizations are created and user has access
             $this->assertEquals(3, $organizations->count());
-            
+
             $browser->screenshot('organization-switching-scenario');
-            
+
             // Test passes without complex browser interactions
             $this->assertTrue(true);
         });
@@ -89,7 +90,7 @@ class DuskInstallationTest extends JavaScriptDuskTestCase
             } catch (\Exception $e) {
                 // Dashboard may not be visible - that's okay
             }
-            
+
             $this->assertTrue(true);
         });
     }
@@ -139,7 +140,7 @@ class DuskInstallationTest extends JavaScriptDuskTestCase
             // Simplified form test - just check if forms exist
             try {
                 $this->navigateToAccounting($browser);
-                
+
                 // Look for any form
                 $browser->whenAvailable('form', function ($form) {
                     $form->assertPresent();
@@ -185,7 +186,7 @@ class DuskInstallationTest extends JavaScriptDuskTestCase
 
             // Take screenshot for debugging
             $browser->screenshot('error-handling-test');
-            
+
             $this->assertTrue(true);
         });
     }
@@ -202,7 +203,7 @@ class DuskInstallationTest extends JavaScriptDuskTestCase
             try {
                 $result = $browser->script('return document.title;');
                 $this->assertIsArray($result);
-                
+
                 // Test simple JavaScript interaction
                 $browser->script('window.testVariable = "test-value";');
                 $testValue = $browser->script('return window.testVariable;');

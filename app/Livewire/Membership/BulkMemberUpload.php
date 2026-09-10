@@ -4,6 +4,7 @@ namespace App\Livewire\Membership;
 
 use App\Models\Membership\FamilyMember;
 use App\Models\Membership\Member;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -402,7 +403,7 @@ class BulkMemberUpload extends Component
     {
         try {
             $this->authorize('membership.create_members');
-        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+        } catch (AuthorizationException $e) {
             abort(403);
         }
     }

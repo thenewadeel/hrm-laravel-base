@@ -3,7 +3,6 @@
 namespace Tests\Browser\HR;
 
 use App\Models\Employee;
-use Laravel\Dusk\Browser;
 use Tests\Browser\JavaScriptDuskTestCase;
 
 class HREmployeeWorkflowTest extends JavaScriptDuskTestCase
@@ -45,7 +44,7 @@ class HREmployeeWorkflowTest extends JavaScriptDuskTestCase
             try {
                 $timestamp = time();
                 $email = "test.employee.{$timestamp}@example.com";
-                
+
                 $browser->type('input[name="first_name"]', 'Jane')
                     ->type('input[name="last_name"]', 'Smith')
                     ->type('input[name="email"]', $email)
@@ -78,7 +77,7 @@ class HREmployeeWorkflowTest extends JavaScriptDuskTestCase
         // First create an employee to test with
         $this->createBrowserWithOrganization(function ($browser) {
             $organization = $this->getCurrentOrganization();
-            
+
             // Create a test employee using factory
             $employee = Employee::factory()->create([
                 'organization_id' => $organization->id,
@@ -124,7 +123,7 @@ class HREmployeeWorkflowTest extends JavaScriptDuskTestCase
     {
         $this->createBrowserWithOrganization(function ($browser) {
             $organization = $this->getCurrentOrganization();
-            
+
             // Create a test employee
             $employee = Employee::factory()->create([
                 'organization_id' => $organization->id,

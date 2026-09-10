@@ -24,14 +24,14 @@ class HRMinimalTest extends JavaScriptDuskTestCase
                 '/hr/employees',
                 '/hr/employees/create',
                 '/hr/positions',
-                '/hr/shifts'
+                '/hr/shifts',
             ];
 
             foreach ($hrRoutes as $route) {
                 $browser->visit($route)
                     ->pause(2000)
-                    ->screenshot('hr-minimal-' . str_replace('/', '-', $route));
-                
+                    ->screenshot('hr-minimal-'.str_replace('/', '-', $route));
+
                 // Should not be 404 - should either show page or redirect to login
                 $browser->assertDontSee('404');
             }
@@ -51,7 +51,7 @@ class HRMinimalTest extends JavaScriptDuskTestCase
 
             // If there's a login link, try to use it
             $loginLinks = $browser->elements('a[href*="login"]');
-            if (!empty($loginLinks)) {
+            if (! empty($loginLinks)) {
                 $browser->click('a[href*="login"]')
                     ->pause(2000)
                     ->screenshot('hr-minimal-clicked-login');
@@ -64,14 +64,14 @@ class HRMinimalTest extends JavaScriptDuskTestCase
 
             // Check if there are any forms to interact with
             $forms = $browser->elements('form');
-            if (!empty($forms)) {
-                $browser->dump("Found " . count($forms) . " forms on login page");
+            if (! empty($forms)) {
+                $browser->dump('Found '.count($forms).' forms on login page');
             }
 
             // Check if there are any input fields
             $inputs = $browser->elements('input');
-            if (!empty($inputs)) {
-                $browser->dump("Found " . count($inputs) . " input fields");
+            if (! empty($inputs)) {
+                $browser->dump('Found '.count($inputs).' input fields');
                 foreach ($inputs as $index => $input) {
                     $name = $input->getAttribute('name');
                     $type = $input->getAttribute('type');
@@ -102,13 +102,13 @@ class HRMinimalTest extends JavaScriptDuskTestCase
             $hasHR = strpos(strtolower($pageText), 'hr') !== false;
             $hasManagement = strpos(strtolower($pageText), 'management') !== false;
 
-            $browser->dump("Page contains 'employee': " . ($hasEmployee ? 'yes' : 'no'));
-            $browser->dump("Page contains 'hr': " . ($hasHR ? 'yes' : 'no'));
-            $browser->dump("Page contains 'management': " . ($hasManagement ? 'yes' : 'no'));
+            $browser->dump("Page contains 'employee': ".($hasEmployee ? 'yes' : 'no'));
+            $browser->dump("Page contains 'hr': ".($hasHR ? 'yes' : 'no'));
+            $browser->dump("Page contains 'management': ".($hasManagement ? 'yes' : 'no'));
 
             // Look for any forms or tables
             $forms = $browser->elements('form, table, div');
-            $browser->dump("Page elements: " . count($forms) . " total elements found");
+            $browser->dump('Page elements: '.count($forms).' total elements found');
         });
     }
 }

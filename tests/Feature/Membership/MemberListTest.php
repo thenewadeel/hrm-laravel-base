@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Membership\MemberList;
 use App\Models\Membership\Member;
 use App\Models\Organization;
 use App\Models\User;
@@ -33,7 +34,7 @@ test('member list displays members correctly', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MemberList::class)
+        ->test(MemberList::class)
         ->assertSee($members->first()->first_name)
         ->assertSee($members->first()->membership_number)
         ->assertSeeHtml('<span class="font-medium">'.$members->count().'</span>')
@@ -61,7 +62,7 @@ test('member list search functionality works', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MemberList::class)
+        ->test(MemberList::class)
         ->set('search', 'John')
         ->assertSee($member1->first_name)
         ->assertDontSee($member2->first_name);
@@ -86,7 +87,7 @@ test('member list status filter works', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MemberList::class)
+        ->test(MemberList::class)
         ->set('status', 'active')
         ->assertSee($activeMember->first_name)
         ->assertDontSee($inactiveMember->first_name);
@@ -106,7 +107,7 @@ test('member list can delete member', function () {
     ]);
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MemberList::class)
+        ->test(MemberList::class)
         ->call('deleteMember', $member->id);
 
     // Check if member was actually deleted
@@ -137,7 +138,7 @@ test('member list respects organization isolation', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MemberList::class)
+        ->test(MemberList::class)
         ->assertSee($member1->first_name)
         ->assertDontSee($member2->first_name);
 });
@@ -155,7 +156,7 @@ test('member list pagination works', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MemberList::class)
+        ->test(MemberList::class)
         ->set('perPage', 10)
         ->assertSee('25')
         ->assertSee('results');

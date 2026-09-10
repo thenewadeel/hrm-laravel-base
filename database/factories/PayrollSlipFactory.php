@@ -3,10 +3,10 @@
 namespace Database\Factories;
 
 use App\Models\Employee;
-use App\Models\PayrollSlip;
-use App\Models\PayrollRuns;
-use App\Models\User;
 use App\Models\Organization;
+use App\Models\PayrollRuns;
+use App\Models\PayrollSlip;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PayrollSlipFactory extends Factory
@@ -46,7 +46,7 @@ class PayrollSlipFactory extends Factory
             // 'overtime_pay' => $overtimePay,
             // 'bonus' => $bonus,
             'gross_pay' => $grossPay,
-            'deductions' =>  $this->faker->randomFloat(2, 0, 200),
+            'deductions' => $this->faker->randomFloat(2, 0, 200),
             // 'insurance_deduction' => $insuranceDeduction,
             // 'other_deductions' => $otherDeductions,
             // 'total_deductions' => $totalDeductions,

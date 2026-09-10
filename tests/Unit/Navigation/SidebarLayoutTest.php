@@ -1,8 +1,9 @@
 <?php
 
 use App\View\Components\Navigation\SidebarLayout;
-use Tests\TestCase;
+use Illuminate\Contracts\View\View;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class SidebarLayoutTest extends TestCase
 {
@@ -30,6 +31,6 @@ class SidebarLayoutTest extends TestCase
         $component = new SidebarLayout;
 
         expect(method_exists($component, 'render'))->toBeTrue();
-        expect($component->render())->toBeInstanceOf(\Illuminate\Contracts\View\View::class);
+        expect($component->render())->toBeInstanceOf(View::class);
     }
 }

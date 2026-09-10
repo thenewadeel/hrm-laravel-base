@@ -1,4 +1,5 @@
 <?php
+
 // database/seeders/ProductionSequencesSeeder.php
 
 namespace Database\Seeders;

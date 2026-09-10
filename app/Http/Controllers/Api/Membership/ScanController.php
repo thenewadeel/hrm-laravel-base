@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api\Membership;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Membership\ScanBarcodeRequest;
-use App\Models\Membership\Member;
 use App\Models\Membership\FamilyMember;
-use Illuminate\Http\Request;
+use App\Models\Membership\Member;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ScanController extends Controller
@@ -19,29 +19,29 @@ class ScanController extends Controller
     {
         $organizationId = Auth::user()->current_organization_id;
         $barcodeNumber = $request->validated()['barcode'];
-        
+
         // Search for member
         $member = Member::where('organization_id', $organizationId)
             ->where('barcode_number', $barcodeNumber)
             ->with(['familyMembers', 'activeSubscription.subscriptionPlan', 'fees'])
             ->first();
-        
-        if (!$member) {
+
+        if (! $member) {
             return response()->json([
                 'success' => false,
                 'message' => 'Member not found.',
             ], 404);
         }
-        
+
         // Check if member is active
-        if (!$member->isActive()) {
+        if (! $member->isActive()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Member is not active.',
                 'status' => $member->status,
             ], 403);
         }
-        
+
         return response()->json([
             'success' => true,
             'type' => 'member',
@@ -55,7 +55,7 @@ class ScanController extends Controller
                 'status' => $member->status,
                 'join_date' => $member->join_date,
                 'expiry_date' => $member->expiry_date,
-                'photo_url' => $member->photo_path ? url('storage/' . $member->photo_path) : null,
+                'photo_url' => $member->photo_path ? url('storage/'.$member->photo_path) : null,
                 'family_members_count' => $member->familyMembers->count(),
                 'active_subscription' => $member->activeSubscription ? [
                     'plan_name' => $member->activeSubscription->subscriptionPlan->name,
@@ -74,29 +74,29 @@ class ScanController extends Controller
     {
         $organizationId = Auth::user()->current_organization_id;
         $barcodeNumber = $request->validated()['barcode'];
-        
+
         // Search for family member
         $familyMember = FamilyMember::where('organization_id', $organizationId)
             ->where('barcode_number', $barcodeNumber)
             ->with('primaryMember')
             ->first();
-        
-        if (!$familyMember) {
+
+        if (! $familyMember) {
             return response()->json([
                 'success' => false,
                 'message' => 'Family member not found.',
             ], 404);
         }
-        
+
         // Check if family member is active
-        if (!$familyMember->isActive()) {
+        if (! $familyMember->isActive()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Family member is not active.',
                 'status' => $familyMember->status,
             ], 403);
         }
-        
+
         return response()->json([
             'success' => true,
             'type' => 'family_member',
@@ -113,7 +113,7 @@ class ScanController extends Controller
                     'status' => $familyMember->primaryMember->status,
                     'expiry_date' => $familyMember->primaryMember->expiry_date,
                 ],
-                'photo_url' => $familyMember->photo_path ? url('storage/' . $familyMember->photo_path) : null,
+                'photo_url' => $familyMember->photo_path ? url('storage/'.$familyMember->photo_path) : null,
             ],
         ]);
     }
@@ -125,25 +125,25 @@ class ScanController extends Controller
     {
         $organizationId = Auth::user()->current_organization_id;
         $barcodeNumber = $request->validated()['barcode'];
-        
+
         // Try member first
         $member = Member::where('organization_id', $organizationId)
             ->where('barcode_number', $barcodeNumber)
             ->first();
-        
+
         if ($member) {
             return $this->scanMember($request);
         }
-        
+
         // Try family member
         $familyMember = FamilyMember::where('organization_id', $organizationId)
             ->where('barcode_number', $barcodeNumber)
             ->first();
-        
+
         if ($familyMember) {
             return $this->scanFamilyMember($request);
         }
-        
+
         return response()->json([
             'success' => false,
             'message' => 'No member or family member found with this barcode.',
@@ -158,15 +158,15 @@ class ScanController extends Controller
         $request->validate([
             'barcode' => 'required|string|max:100',
         ]);
-        
+
         $barcode = $request->barcode;
-        
+
         // Check barcode format
         $memberPattern = '/^MBR-\d+-\d+$/';
         $familyPattern = '/^FAM-\d+-\d+$/';
-        
+
         $isValid = preg_match($memberPattern, $barcode) || preg_match($familyPattern, $barcode);
-        
+
         return response()->json([
             'valid' => $isValid,
             'type' => preg_match($memberPattern, $barcode) ? 'member' : (preg_match($familyPattern, $barcode) ? 'family_member' : 'unknown'),
@@ -181,14 +181,14 @@ class ScanController extends Controller
     {
         $organizationId = Auth::user()->current_organization_id;
         $limit = $request->get('limit', 50);
-        
+
         // This would typically come from a scan logs table
         // For now, return recent members as a placeholder
         $recentMembers = Member::where('organization_id', $organizationId)
             ->orderBy('updated_at', 'desc')
             ->take($limit)
             ->get(['id', 'full_name', 'membership_number', 'barcode_number', 'updated_at']);
-        
+
         return response()->json([
             'success' => true,
             'data' => $recentMembers,

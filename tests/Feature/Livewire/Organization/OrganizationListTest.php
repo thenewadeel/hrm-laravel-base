@@ -7,9 +7,10 @@ namespace Tests\Feature\Livewire\Organization;
 use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Livewire;
-use PHPUnit\Framework\Attributes\Test;
-use Tests\TestCase; // Updated namespace
+use PHPUnit\Framework\Attributes\Test; // Updated namespace
+use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
 
 class OrganizationListTest extends TestCase
@@ -124,7 +125,7 @@ class OrganizationListTest extends TestCase
 
         // Check that we have pagination data
         $organizationsData = $test->viewData('organizations');
-        $this->assertInstanceOf(\Illuminate\Pagination\LengthAwarePaginator::class, $organizationsData);
+        $this->assertInstanceOf(LengthAwarePaginator::class, $organizationsData);
         $this->assertEquals(10, $organizationsData->perPage());
         $this->assertEquals(21, $organizationsData->total());
         $this->assertEquals(3, $organizationsData->lastPage());

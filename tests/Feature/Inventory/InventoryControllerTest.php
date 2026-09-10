@@ -2,12 +2,13 @@
 
 namespace Tests\Feature\Inventory;
 
-use Tests\TestCase;
 use App\Models\Inventory\Item;
 use App\Models\Inventory\Store;
 use App\Models\Inventory\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\View\View;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupInventory;
 use Tests\Traits\SetupOrganization;
 
@@ -30,14 +31,14 @@ class InventoryControllerTest extends TestCase
 
         // Check if we get a successful response (200) or handle 500 errors
         if ($response->status() === 500) {
-            $this->fail('Server error: ' . $response->getContent());
+            $this->fail('Server error: '.$response->getContent());
         }
 
         $response->assertStatus(200);
         $response->assertViewIs('inventory.index');
 
         // Only assert view has stats if it's a view response
-        if ($response->original instanceof \Illuminate\View\View) {
+        if ($response->original instanceof View) {
             $response->assertViewHas('stats');
 
             $stats = $response->viewData('stats');
@@ -64,18 +65,18 @@ class InventoryControllerTest extends TestCase
         $this->store->items()->attach($lowStockItem->id, [
             'quantity' => 5,
             'min_stock' => 10,
-            'max_stock' => 100
+            'max_stock' => 100,
         ]);
 
         $response = $this->get(route('inventory.index'));
 
         if ($response->status() === 500) {
-            $this->fail('Server error: ' . $response->getContent());
+            $this->fail('Server error: '.$response->getContent());
         }
 
         $response->assertStatus(200);
 
-        if ($response->original instanceof \Illuminate\View\View) {
+        if ($response->original instanceof View) {
             $stats = $response->viewData('stats');
             $this->assertEquals(9, $stats['total_items']); // 1 from setup + 3 new + 1 low stock
             $this->assertEquals(3, $stats['total_stores']); // 1 from setup + 2 new
@@ -112,12 +113,12 @@ class InventoryControllerTest extends TestCase
         $response = $this->get(route('inventory.index'));
 
         if ($response->status() === 500) {
-            $this->fail('Server error: ' . $response->getContent());
+            $this->fail('Server error: '.$response->getContent());
         }
 
         $response->assertStatus(200);
 
-        if ($response->original instanceof \Illuminate\View\View) {
+        if ($response->original instanceof View) {
             $stats = $response->viewData('stats');
             $this->assertEquals(1, $stats['total_transactions_today']);
         }
@@ -134,12 +135,12 @@ class InventoryControllerTest extends TestCase
         $response = $this->get(route('inventory.index'));
 
         if ($response->status() === 500) {
-            $this->fail('Server error: ' . $response->getContent());
+            $this->fail('Server error: '.$response->getContent());
         }
 
         $response->assertStatus(200);
 
-        if ($response->original instanceof \Illuminate\View\View) {
+        if ($response->original instanceof View) {
             $stats = $response->viewData('stats');
             $this->assertEquals(0, $stats['total_items']);
             $this->assertEquals(0, $stats['total_stores']);

@@ -2,12 +2,16 @@
 
 namespace Database\Factories\Accounting;
 
+use App\Models\Accounting\FeeDistributionLog;
 use App\Models\Accounting\FeeDistributionRule;
+use App\Models\Accounting\JournalEntry;
 use App\Models\Membership\MemberFee;
+use App\Models\Organization;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Accounting\FeeDistributionLog>
+ * @extends Factory<FeeDistributionLog>
  */
 class FeeDistributionLogFactory extends Factory
 {
@@ -58,10 +62,10 @@ class FeeDistributionLogFactory extends Factory
             'journal_entry_id' => function () use ($attributes) {
                 // Create a proper journal entry with organization_id and user
                 $organizationId = $attributes['organization_id'] ?? 1;
-                $organization = \App\Models\Organization::find($organizationId) ?: \App\Models\Organization::factory()->create(['id' => $organizationId]);
-                $user = \App\Models\User::factory()->create(['current_organization_id' => $organizationId]);
+                $organization = Organization::find($organizationId) ?: Organization::factory()->create(['id' => $organizationId]);
+                $user = User::factory()->create(['current_organization_id' => $organizationId]);
 
-                $journalEntry = \App\Models\Accounting\JournalEntry::factory()->create([
+                $journalEntry = JournalEntry::factory()->create([
                     'organization_id' => $organizationId,
                     'created_by' => $user->id,
                 ]);

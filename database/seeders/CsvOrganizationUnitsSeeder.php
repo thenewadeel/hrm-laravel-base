@@ -1,4 +1,5 @@
 <?php
+
 // database/seeders/CsvOrganizationUnitsSeeder.php
 
 namespace Database\Seeders;
@@ -14,8 +15,9 @@ class CsvOrganizationUnitsSeeder extends Seeder
     {
         $csvFile = database_path('seeders/seedData/organization_units.csv');
 
-        if (!File::exists($csvFile)) {
+        if (! File::exists($csvFile)) {
             $this->command->error("CSV file not found: {$csvFile}");
+
             return;
         }
 
@@ -30,27 +32,28 @@ class CsvOrganizationUnitsSeeder extends Seeder
 
             $organization = Organization::where('name', $orgName)->first();
 
-            if (!$organization) {
+            if (! $organization) {
                 $this->command->warn("Organization {$orgName} not found for unit {$unitName}");
+
                 continue;
             }
 
             $parentUnit = $parentUnitName ?
                 OrganizationUnit::where('name', $parentUnitName)
-                ->where('organization_id', $organization->id)
-                ->first() : null;
+                    ->where('organization_id', $organization->id)
+                    ->first() : null;
 
             $customFields = $customFieldsJson ? json_decode($customFieldsJson, true) : null;
 
             OrganizationUnit::firstOrCreate(
                 [
                     'name' => $unitName,
-                    'organization_id' => $organization->id
+                    'organization_id' => $organization->id,
                 ],
                 [
                     'type' => $type,
                     'parent_id' => $parentUnit ? $parentUnit->id : null,
-                    'custom_fields' => $customFields
+                    'custom_fields' => $customFields,
                 ]
             );
 

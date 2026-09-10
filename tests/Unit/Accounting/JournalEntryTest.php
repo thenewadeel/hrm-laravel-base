@@ -1,24 +1,28 @@
 <?php
+
 // tests/Unit/Accounting/JournalEntryTest.php
 
 namespace Tests\Unit\Accounting;
 
+use App\Exceptions\UnbalancedTransactionException;
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\JournalEntry;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
 
 class JournalEntryTest extends TestCase
 {
     use RefreshDatabase, SetupOrganization;
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->setupOrganization();
     }
+
     #[Test]
     public function it_can_create_a_journal_entry()
     {
@@ -75,7 +79,7 @@ class JournalEntryTest extends TestCase
             'created_by' => $user->id,
         ]);
 
-        $this->expectException(\App\Exceptions\UnbalancedTransactionException::class);
+        $this->expectException(UnbalancedTransactionException::class);
 
         $journalEntry->post([
             ['account' => $cashAccount, 'type' => 'debit', 'amount' => 100.00],

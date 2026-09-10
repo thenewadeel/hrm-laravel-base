@@ -1,12 +1,13 @@
 <?php
+
 // app/Http/Livewire/Organization/OrganizationForm.php
 
 namespace App\Livewire\Organization;
 
 use App\Models\Organization;
-use Livewire\Component;
-use Livewire\Attributes\On; // Add this import
-use Livewire\Attributes\Validate; // For validation attributes
+use Livewire\Attributes\On;
+use Livewire\Attributes\Validate; // Add this import
+use Livewire\Component; // For validation attributes
 
 class OrganizationForm extends Component
 {
@@ -22,6 +23,7 @@ class OrganizationForm extends Component
     public $is_active = true;
 
     public $showModal = false;
+
     public $isEditing = false;
 
     // Use On attribute instead of $listeners array
@@ -56,7 +58,7 @@ class OrganizationForm extends Component
 
         // For edit mode, ignore current organization in unique rule
         if ($this->isEditing && $this->organization) {
-            $rules['name'] = 'required|min:3|max:255|unique:organizations,name,' . $this->organization->id;
+            $rules['name'] = 'required|min:3|max:255|unique:organizations,name,'.$this->organization->id;
         }
 
         $this->validate($rules);

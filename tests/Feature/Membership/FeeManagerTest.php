@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Membership\FeeManager;
 use App\Models\Membership\Member;
 use App\Models\Membership\MemberFee;
 use App\Models\Organization;
@@ -34,7 +35,7 @@ test('fee manager displays fees correctly', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\FeeManager::class)
+        ->test(FeeManager::class)
         ->assertSee($fees->first()->description)
         ->assertSee($fees->first()->member->full_name);
 });
@@ -49,7 +50,7 @@ test('fee manager can create fee', function () {
     $member = Member::factory()->create(['organization_id' => $organization->id]);
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\FeeManager::class, ['member' => $member])
+        ->test(FeeManager::class, ['member' => $member])
         ->set('showCreateForm', true)
         ->set('fee_type', 'subscription')
         ->set('description', 'Test Fee')
@@ -95,7 +96,7 @@ test('fee manager can process payment', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\FeeManager::class)
+        ->test(FeeManager::class)
         ->call('showPaymentForm', $fee->id)
         ->assertSet('selectedFeeId', $fee->id)
         ->assertSet('payment_amount', 100.00)
@@ -132,7 +133,7 @@ test('fee manager can waive fee', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\FeeManager::class)
+        ->test(FeeManager::class)
         ->call('waiveFee', $fee->id, 'Test waiver');
 
     $this->assertDatabaseHas('member_fees', [
@@ -178,7 +179,7 @@ test('fee manager search functionality works', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\FeeManager::class)
+        ->test(FeeManager::class)
         ->set('search', 'John')
         ->assertSee('John\'s Fee')
         ->assertDontSee('Jane\'s Fee');
@@ -206,7 +207,7 @@ test('fee manager status filter works', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\FeeManager::class)
+        ->test(FeeManager::class)
         ->set('status', 'pending')
         ->assertSee($pendingFee->description)
         ->assertDontSee($paidFee->description);
@@ -236,7 +237,7 @@ test('fee manager respects organization isolation', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\FeeManager::class)
+        ->test(FeeManager::class)
         ->assertSee('Organization 1 Fee')
         ->assertDontSee('Organization 2 Fee');
 });

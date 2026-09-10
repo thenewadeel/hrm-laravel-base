@@ -34,7 +34,7 @@ class InvoiceItem extends Model
     /**
      * Get organization that owns the invoice item.
      */
-    public function organization(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function organization(): BelongsTo
     {
         return $this->belongsTo(Organization::class);
     }

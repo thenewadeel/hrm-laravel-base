@@ -6,6 +6,8 @@ use App\Models\Membership\Member;
 use App\Models\Membership\MemberSubscription;
 use App\Models\Membership\SubscriptionPlan;
 use App\Services\Membership\SubscriptionService;
+use Illuminate\Support\Collection;
+use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -148,7 +150,7 @@ class SubscriptionManager extends Component
 
         try {
             $this->validate($rules);
-        } catch (\Illuminate\Validation\ValidationException $e) {
+        } catch (ValidationException $e) {
             if (app()->environment('testing')) {
                 \Log::error('Validation failed: '.json_encode($e->errors()));
             }
@@ -368,7 +370,7 @@ class SubscriptionManager extends Component
         $this->resetPage();
     }
 
-    public function getExpiringSubscriptionsProperty(): \Illuminate\Support\Collection
+    public function getExpiringSubscriptionsProperty(): Collection
     {
         $organizationId = auth()->user()->operating_organization_id;
 

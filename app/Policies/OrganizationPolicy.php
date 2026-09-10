@@ -5,9 +5,7 @@ namespace App\Policies;
 use App\Models\Organization;
 use App\Models\User;
 use App\Permissions\OrganizationPermissions;
-use App\Roles\InventoryRoles;
 use App\Roles\OrganizationRoles;
-use Illuminate\Auth\Access\Response;
 
 class OrganizationPolicy
 {
@@ -19,8 +17,7 @@ class OrganizationPolicy
 
     public function view(User $user, Organization $organization): bool
     {
-        return
-            $user->organizations->contains($organization->id);
+        return $user->organizations->contains($organization->id);
     }
 
     /**
@@ -28,9 +25,8 @@ class OrganizationPolicy
      */
     public function create(User $user)
     {
-        return true; //$user->hasPermission(OrganizationPermissions::CREATE_ORGANIZATION) || $user->hasRole(OrganizationRoles::SUPER_ADMIN);
+        return true; // $user->hasPermission(OrganizationPermissions::CREATE_ORGANIZATION) || $user->hasRole(OrganizationRoles::SUPER_ADMIN);
     }
-
 
     /**
      * Determine whether the user can update the model.
@@ -65,6 +61,7 @@ class OrganizationPolicy
     public function forceDelete(User $user, Organization $organization): bool
     {
         return false; // Short circuit
+
         return $user->hasPermission(OrganizationPermissions::DELETE_ORGANIZATION) &&
             $user->organizations->contains($organization->id);
     }

@@ -286,7 +286,7 @@ describe('MembershipService', function () {
             ]);
 
             expect(fn () => $this->service->reactivateMember($member))
-                ->toThrow(\InvalidArgumentException::class, 'Cannot reactivate expired member');
+                ->toThrow(InvalidArgumentException::class, 'Cannot reactivate expired member');
         });
 
         test('wraps reactivation in database transaction', function () {

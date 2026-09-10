@@ -44,18 +44,18 @@ class ChromeDebugTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('about:blank')
                 ->pause(2000);
-            
+
             $source = $browser->driver->getPageSource();
             $title = $browser->driver->getTitle();
             $url = $browser->driver->getCurrentURL();
-            
+
             echo "\n=== DEBUG INFO ===\n";
-            echo "URL: " . $url . "\n";
-            echo "Title: " . $title . "\n";
-            echo "Source length: " . strlen($source) . "\n";
-            echo "First 500 chars:\n" . substr($source, 0, 500) . "\n";
+            echo 'URL: '.$url."\n";
+            echo 'Title: '.$title."\n";
+            echo 'Source length: '.strlen($source)."\n";
+            echo "First 500 chars:\n".substr($source, 0, 500)."\n";
             echo "==================\n";
-            
+
             // Take screenshot for visual debugging
             $browser->screenshot('chrome_debug_test');
         });

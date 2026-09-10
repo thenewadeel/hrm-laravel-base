@@ -56,21 +56,21 @@ test('validates fee amount business rules', function () {
         'amount' => -50, // Negative amount
         'due_date' => now()->addDays(30),
         'distribute_to_accounts' => false,
-    ]))->toThrow(\Exception::class);
+    ]))->toThrow(Exception::class);
 
     expect(fn () => $this->service->createFee($this->member, [
         'fee_type' => 'subscription',
         'amount' => 0, // Zero amount
         'due_date' => now()->addDays(30),
         'distribute_to_accounts' => false,
-    ]))->toThrow(\Exception::class);
+    ]))->toThrow(Exception::class);
 
     expect(fn () => $this->service->createFee($this->member, [
         'fee_type' => 'subscription',
         'amount' => 1000000, // Excessive amount
         'due_date' => now()->addDays(30),
         'distribute_to_accounts' => false,
-    ]))->toThrow(\Exception::class);
+    ]))->toThrow(Exception::class);
 });
 
 test('validates fee type business rules', function () {
@@ -79,7 +79,7 @@ test('validates fee type business rules', function () {
         'amount' => 100,
         'due_date' => now()->addDays(30),
         'distribute_to_accounts' => false,
-    ]))->toThrow(\Exception::class);
+    ]))->toThrow(Exception::class);
 });
 
 test('validates due date business rules', function () {
@@ -148,17 +148,17 @@ test('validates payment amount business rules', function () {
     expect(fn () => $this->service->processFeePayment($fee, [
         'amount' => 0, // Zero payment
         'payment_method' => 'cash',
-    ]))->toThrow(\Exception::class);
+    ]))->toThrow(Exception::class);
 
     expect(fn () => $this->service->processFeePayment($fee, [
         'amount' => -50, // Negative payment
         'payment_method' => 'cash',
-    ]))->toThrow(\Exception::class);
+    ]))->toThrow(Exception::class);
 
     expect(fn () => $this->service->processFeePayment($fee, [
         'amount' => 150, // Overpayment
         'payment_method' => 'cash',
-    ]))->toThrow(\Exception::class);
+    ]))->toThrow(Exception::class);
 });
 
 test('waives fee with proper authorization and accounting', function () {
@@ -210,7 +210,7 @@ test('prevents waiver of paid fees', function () {
     ]);
 
     expect(fn () => $this->service->waiveFee($fee, 'Test waiver'))
-        ->toThrow(\Exception::class);
+        ->toThrow(Exception::class);
 });
 
 test('generates overdue fees with proper business rules', function () {
@@ -353,7 +353,7 @@ test('validates member status before fee creation', function () {
         'amount' => 100.00,
         'due_date' => now()->addDays(30),
         'distribute_to_accounts' => false,
-    ]))->toThrow(\Exception::class);
+    ]))->toThrow(Exception::class);
 });
 
 test('sends payment reminders successfully', function () {

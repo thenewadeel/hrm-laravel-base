@@ -1,4 +1,5 @@
 <?php
+
 // tests/Unit/Accounting/BalanceSheetTest.php
 
 namespace Tests\Unit\Accounting;
@@ -7,8 +8,8 @@ use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\LedgerEntry;
 use App\Services\AccountingReportService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
 
 class BalanceSheetTest extends TestCase
@@ -73,7 +74,7 @@ class BalanceSheetTest extends TestCase
         $retainedEarnings = ChartOfAccount::factory()->create([
             'type' => 'equity',
             'code' => '3020',
-            'name' => 'Retained Earnings'
+            'name' => 'Retained Earnings',
         ]);
 
         $cash = ChartOfAccount::factory()->create(['type' => 'asset', 'code' => '1010']);
@@ -92,26 +93,26 @@ class BalanceSheetTest extends TestCase
             'chart_of_account_id' => $cash->id,
             'type' => 'debit',
             'amount' => 5000.00,
-            'entry_date' => $startDate->copy()->addDays(1)
+            'entry_date' => $startDate->copy()->addDays(1),
         ]);
         LedgerEntry::factory()->create([
             'chart_of_account_id' => $revenue->id,
             'type' => 'credit',
             'amount' => 5000.00,
-            'entry_date' => $startDate->copy()->addDays(1)
+            'entry_date' => $startDate->copy()->addDays(1),
         ]);
 
         LedgerEntry::factory()->create([
             'chart_of_account_id' => $cash->id,
             'type' => 'credit',
             'amount' => 2000.00,
-            'entry_date' => $startDate->copy()->addDays(5)
+            'entry_date' => $startDate->copy()->addDays(5),
         ]);
         LedgerEntry::factory()->create([
             'chart_of_account_id' => $expense->id,
             'type' => 'debit',
             'amount' => 2000.00,
-            'entry_date' => $startDate->copy()->addDays(5)
+            'entry_date' => $startDate->copy()->addDays(5),
         ]);
 
         $balanceSheet = $this->reportService->generateBalanceSheet($endDate);

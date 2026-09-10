@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Inventory\Item;
 use App\Models\Inventory\Store;
 use App\Models\Inventory\Transaction;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class InventoryController extends Controller

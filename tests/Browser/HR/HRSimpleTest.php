@@ -50,14 +50,14 @@ class HRSimpleTest extends JavaScriptDuskTestCase
                 '/hr/employees',
                 '/hr/employees/create',
                 '/hr/positions',
-                '/hr/shifts'
+                '/hr/shifts',
             ];
 
             foreach ($routes as $route) {
                 $browser->visit($route)
                     ->pause(2000)
-                    ->screenshot('hr-simple-route-' . str_replace('/', '-', $route));
-                
+                    ->screenshot('hr-simple-route-'.str_replace('/', '-', $route));
+
                 // Check if page loads (not an error page)
                 $title = $browser->driver->getTitle();
                 $browser->dump("Route {$route}: {$title}");
@@ -77,16 +77,16 @@ class HRSimpleTest extends JavaScriptDuskTestCase
 
             // Get all text from page body
             $pageText = $browser->text('body');
-            $browser->dump("Page length: " . strlen($pageText) . " characters");
+            $browser->dump('Page length: '.strlen($pageText).' characters');
 
             // Look for common application elements
             $hasForms = strpos($pageText, '<form') !== false || strpos($pageText, 'form') !== false;
             $hasInputs = strpos($pageText, '<input') !== false || strpos($pageText, 'input') !== false;
             $hasLinks = strpos($pageText, '<a') !== false || strpos($pageText, 'href') !== false;
 
-            $browser->dump("Has forms: " . ($hasForms ? 'yes' : 'no'));
-            $browser->dump("Has inputs: " . ($hasInputs ? 'yes' : 'no'));
-            $browser->dump("Has links: " . ($hasLinks ? 'yes' : 'no'));
+            $browser->dump('Has forms: '.($hasForms ? 'yes' : 'no'));
+            $browser->dump('Has inputs: '.($hasInputs ? 'yes' : 'no'));
+            $browser->dump('Has links: '.($hasLinks ? 'yes' : 'no'));
         });
     }
 
@@ -106,7 +106,7 @@ class HRSimpleTest extends JavaScriptDuskTestCase
                 return '200 (OK)';
             }
         } catch (\Exception $e) {
-            return 'Error: ' . $e->getMessage();
+            return 'Error: '.$e->getMessage();
         }
     }
 }

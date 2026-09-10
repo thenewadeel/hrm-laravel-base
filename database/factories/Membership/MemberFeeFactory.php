@@ -8,7 +8,7 @@ use App\Models\Organization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Membership\MemberFee>
+ * @extends Factory<MemberFee>
  */
 class MemberFeeFactory extends Factory
 {
@@ -23,7 +23,7 @@ class MemberFeeFactory extends Factory
     {
         $feeTypes = ['subscription', 'late_fee', 'penalty', 'additional_service'];
         $statuses = ['pending', 'paid', 'waived', 'overdue'];
-        
+
         return [
             'organization_id' => Organization::factory(),
             'member_id' => Member::factory(),
@@ -92,7 +92,7 @@ class MemberFeeFactory extends Factory
             'status' => 'paid',
             'paid_date' => $this->faker->dateTimeBetween('-30 days', 'now'),
             'payment_method' => $this->faker->randomElement(['cash', 'card', 'bank_transfer', 'online']),
-            'payment_reference' => 'PAY-' . $this->faker->unique()->numerify('##########'),
+            'payment_reference' => 'PAY-'.$this->faker->unique()->numerify('##########'),
         ]);
     }
 

@@ -3,12 +3,13 @@
 namespace Tests\Feature\Inventory;
 
 use App\Models\Inventory\Item;
+use App\Models\Inventory\Store;
 use App\Models\Scopes\OrganizationScope;
-use Tests\Traits\SetupInventory;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
+use Tests\Traits\SetupInventory;
 
 class ItemTest extends TestCase
 {
@@ -55,16 +56,15 @@ class ItemTest extends TestCase
                 'data' => [ // ✅ Now check inside 'data' key
                     'name' => 'Laptop Dell XPS 13',
                     'sku' => 'DLXPS13-2024',
-                    'category' => 'electronics'
-                ]
+                    'category' => 'electronics',
+                ],
             ]);
 
         $this->assertDatabaseHas('inventory_items', [
             'sku' => 'DLXPS13-2024',
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
     }
-
 
     #[Test]
     public function it_can_search_items_by_name_or_sku()
@@ -80,7 +80,7 @@ class ItemTest extends TestCase
         ];
 
         foreach ($searchableItems as $itemData) {
-            \App\Models\Inventory\Item::factory()->create($itemData);
+            Item::factory()->create($itemData);
         }
 
         // Test search by name
@@ -116,7 +116,7 @@ class ItemTest extends TestCase
         ];
 
         foreach ($items as $itemData) {
-            \App\Models\Inventory\Item::factory()->create($itemData);
+            Item::factory()->create($itemData);
         }
 
         $response = $this->actingAs($this->inventoryAdminUser)
@@ -143,7 +143,7 @@ class ItemTest extends TestCase
         ];
 
         foreach ($items as $itemData) {
-            \App\Models\Inventory\Item::factory()->create($itemData);
+            Item::factory()->create($itemData);
         }
 
         // dd(Item::pluck('organization_id'));
@@ -181,13 +181,13 @@ class ItemTest extends TestCase
         // $this->actingAs($setupA['user']);
         $itemA = Item::factory()->create([
             'name' => 'Org A Item',
-            'organization_id' => $setupA['organization']->id
+            'organization_id' => $setupA['organization']->id,
         ]);
 
         // $this->actingAs($setupB['user']);
         $itemB = Item::factory()->create([
             'name' => 'Org B Item',
-            'organization_id' => $setupB['organization']->id
+            'organization_id' => $setupB['organization']->id,
         ]);
         // dd([
         //     $setupA['user']->organizations->pluck('pivot.organization_id'),
@@ -216,21 +216,21 @@ class ItemTest extends TestCase
         // Create multiple stores
         $stores = [
             $this->store,
-            \App\Models\Inventory\Store::factory()->create([
+            Store::factory()->create([
                 // 'organization_id' => $this->organization->id,
                 'organization_unit_id' => $this->organizationUnit->id,
                 'name' => 'Warehouse A',
-                'code' => 'WH-A'
+                'code' => 'WH-A',
             ]),
-            \App\Models\Inventory\Store::factory()->create([
+            Store::factory()->create([
                 // 'organization_id' => $this->organization->id,
                 'organization_unit_id' => $this->organizationUnit->id,
                 'name' => 'Warehouse B',
-                'code' => 'WH-B'
+                'code' => 'WH-B',
             ]),
         ];
 
-        $item = Item::factory()->create(['organization_id' => $this->organization->id]); //$setup['items']->first();
+        $item = Item::factory()->create(['organization_id' => $this->organization->id]); // $setup['items']->first();
 
         // Add item to stores with different quantities
         $stores[0]->items()->attach($item->id, ['quantity' => 50]);
@@ -260,7 +260,7 @@ class ItemTest extends TestCase
                             'quantity',
                             'is_low_stock',
                             'is_out_of_stock',
-                        ]
+                        ],
                     ],
                     'summary' => [
                         'total_quantity',
@@ -268,8 +268,8 @@ class ItemTest extends TestCase
                         'stores_with_stock',
                         'low_stock_stores',
                         'out_of_stock_stores',
-                    ]
-                ]
+                    ],
+                ],
             ])
             ->assertJsonPath('data.summary.total_quantity', 75)
             ->assertJsonPath('data.summary.stores_count', 3)
@@ -282,10 +282,10 @@ class ItemTest extends TestCase
     {
         $setup = $this->createUserWithInventoryPermissions();
 
-        $item = \App\Models\Inventory\Item::factory()->create([
+        $item = Item::factory()->create([
             'organization_id' => $this->organization->id,
             // 'organization_unit_id' => $setup['orgUnit']->id,
-            'reorder_level' => 20
+            'reorder_level' => 20,
         ]);
 
         // Add item with low stock
@@ -334,7 +334,7 @@ class ItemTest extends TestCase
         $item = Item::factory()->create([
             'organization_id' => $this->organization->id,
             // 'organization_unit_id' => $setupB['orgUnit']->id,
-        ]);;
+        ]);
         // Don't attach to any stores
 
         $response = $this->actingAs($this->inventoryAdminUser)

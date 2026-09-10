@@ -1,12 +1,13 @@
 <?php
+
 // app/Http/Controllers/SetupController.php
 
 namespace App\Http\Controllers;
 
+use App\Models\Accounting\ChartOfAccount;
+use App\Models\Inventory\Store;
 use App\Models\Organization;
 use App\Models\OrganizationUnit;
-use App\Models\Inventory\Store;
-use App\Models\Accounting\ChartOfAccount;
 use App\Roles\InventoryRoles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -39,7 +40,7 @@ class SetupController extends Controller
             auth()->user()->organizations()->attach($organization->id, [
                 'roles' => json_encode([InventoryRoles::INVENTORY_ADMIN]),
                 'organization_unit_id' => $rootUnit->id,
-                'position' => 'Administrator'
+                'position' => 'Administrator',
             ]);
             auth()->user()->current_organization_id = $organization->id;
             auth()->user()->save();
@@ -63,7 +64,7 @@ class SetupController extends Controller
             // Get or create root organization unit
             $rootUnit = $organization->units()->where('name', 'Head Office')->first();
 
-            if (!$rootUnit) {
+            if (! $rootUnit) {
                 $rootUnit = OrganizationUnit::create([
                     'name' => 'Head Office',
                     'type' => 'head_office',
@@ -73,7 +74,7 @@ class SetupController extends Controller
             }
 
             // Auto-generate code if not provided
-            $code = $validated['code'] ?? 'STORE' . str_pad((Store::forOrganization($organization->id)->count() +  1), 3, '0', STR_PAD_LEFT);
+            $code = $validated['code'] ?? 'STORE'.str_pad((Store::forOrganization($organization->id)->count() + 1), 3, '0', STR_PAD_LEFT);
 
             // Create store
             Store::create([

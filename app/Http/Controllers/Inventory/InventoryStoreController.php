@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Inventory;
 
 use App\Http\Controllers\Controller;
 use App\Models\Inventory\Store;
-use App\Models\Inventory\Transaction;
 use App\Models\OrganizationUnit;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 
 class InventoryStoreController extends Controller
 {
@@ -22,9 +21,9 @@ class InventoryStoreController extends Controller
         // Search functionality
         if ($request->has('search') && $request->search) {
             $query->where(function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->search . '%')
-                    ->orWhere('code', 'like', '%' . $request->search . '%')
-                    ->orWhere('location', 'like', '%' . $request->search . '%');
+                $q->where('name', 'like', '%'.$request->search.'%')
+                    ->orWhere('code', 'like', '%'.$request->search.'%')
+                    ->orWhere('location', 'like', '%'.$request->search.'%');
             });
         }
 
@@ -48,6 +47,7 @@ class InventoryStoreController extends Controller
     public function create(): View
     {
         $organizationUnits = OrganizationUnit::with('organization')->get();
+
         return view('inventory.stores.form', compact('organizationUnits'));
     }
 
@@ -66,6 +66,7 @@ class InventoryStoreController extends Controller
             'is_active' => 'required|boolean',
         ]);
         $store = Store::create($validated);
+
         // dd($store);
         return redirect()->route('inventory.stores.index')
             ->with('success', 'Store created successfully.');
@@ -116,6 +117,7 @@ class InventoryStoreController extends Controller
     public function edit(Store $store): View
     {
         $organizationUnits = OrganizationUnit::with('organization')->get();
+
         return view('inventory.stores.form', compact('store', 'organizationUnits'));
     }
 
@@ -127,7 +129,7 @@ class InventoryStoreController extends Controller
         $validated = $request->validate([
             'organization_unit_id' => 'nullable|exists:organization_units,id',
             'name' => 'required|string|max:255',
-            'code' => 'required|string|unique:inventory_stores,code,' . $store->id,
+            'code' => 'required|string|unique:inventory_stores,code,'.$store->id,
             'location' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'is_active' => 'boolean',

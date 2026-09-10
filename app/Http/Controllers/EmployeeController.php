@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\HR;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Models\OrganizationUnit;
 use App\Models\OrganizationUser;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -19,8 +19,8 @@ class EmployeeController extends Controller
 
         // Search
         if ($request->has('search') && $request->search) {
-            $query->where('name', 'like', '%' . $request->search . '%')
-                ->orWhere('email', 'like', '%' . $request->search . '%');
+            $query->where('name', 'like', '%'.$request->search.'%')
+                ->orWhere('email', 'like', '%'.$request->search.'%');
         }
 
         // Filter by department
@@ -51,7 +51,7 @@ class EmployeeController extends Controller
             },
             'payrollEntries' => function ($q) {
                 $q->latest()->take(3);
-            }
+            },
         ]);
 
         return view('hr.employees.show', compact('employee'));
@@ -60,6 +60,7 @@ class EmployeeController extends Controller
     public function create()
     {
         $organizationUnits = OrganizationUnit::where('organization_id', auth()->user()->current_organization_id)->get();
+
         return view('hr.employees.create', compact('organizationUnits'));
     }
 
@@ -75,7 +76,7 @@ class EmployeeController extends Controller
             'biometric_id' => 'nullable|string|max:50',
             'required_daily_hours' => 'nullable|numeric|min:0',
             'salary_per_month' => 'nullable|numeric|min:0',
-            'pay_frequency' => 'nullable|in:monthly,biweekly,weekly'
+            'pay_frequency' => 'nullable|in:monthly,biweekly,weekly',
         ]);
 
         // Create user
@@ -111,19 +112,19 @@ class EmployeeController extends Controller
                 'required',
                 'string',
                 'max:50',
-                Rule::unique('employees', 'biometric_id')->ignore($employee->id)
-            ]
+                Rule::unique('employees', 'biometric_id')->ignore($employee->id),
+            ],
         ]);
 
         // Debug: Check what we're receiving
         \Log::info('Updating biometric ID', [
             'employee_id' => $employee->id,
             'current_biometric' => $employee->biometric_id,
-            'new_biometric' => $validated['biometric_id']
+            'new_biometric' => $validated['biometric_id'],
         ]);
 
         $employee->update([
-            'biometric_id' => $validated['biometric_id']
+            'biometric_id' => $validated['biometric_id'],
         ]);
 
         return redirect()->route('hr.employees.show', $employee)
@@ -136,11 +137,11 @@ class EmployeeController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $employee->id,
+            'email' => 'required|email|unique:users,email,'.$employee->id,
             'position' => 'required|string|max:255',
             'organization_unit_id' => 'nullable|exists:organization_units,id',
             'salary_per_month' => 'nullable|numeric|min:0',
-            'required_daily_hours' => 'nullable|numeric|min:0'
+            'required_daily_hours' => 'nullable|numeric|min:0',
         ]);
 
         // Update user

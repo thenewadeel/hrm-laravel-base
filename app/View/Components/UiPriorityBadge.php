@@ -22,7 +22,7 @@ class UiPriorityBadge extends Component
 
     public function getColor(): string
     {
-        return match($this->priority) {
+        return match ($this->priority) {
             'critical', 'urgent' => 'red',
             'high' => 'orange',
             'medium' => 'yellow',

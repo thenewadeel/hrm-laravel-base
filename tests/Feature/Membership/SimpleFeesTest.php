@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Membership\SimpleFees;
 use App\Models\Membership\Member;
 use App\Models\Membership\MemberFee;
 use App\Models\Organization;
@@ -24,7 +25,7 @@ test('simple fees component renders with real data', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleFees::class)
+        ->test(SimpleFees::class)
         ->assertStatus(200)
         ->assertSee('Fee Management Overview')
         ->assertSee('$100.00');
@@ -88,7 +89,7 @@ test('simple fees shows correct statistics', function () {
     ]);
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleFees::class);
+        ->test(SimpleFees::class);
 
     $stats = $component->feeStats;
 
@@ -124,7 +125,7 @@ test('simple fees respects organization isolation', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleFees::class)
+        ->test(SimpleFees::class)
         ->assertSee($member1->full_name) // Should see member from organization 1
         ->assertDontSee($member2->full_name); // Should not see member from organization 2
 });
@@ -143,7 +144,7 @@ test('simple fees handles unauthorized access', function () {
     $user->current_organization_id = $organization->id;
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleFees::class)
+        ->test(SimpleFees::class)
         ->assertStatus(200)
         ->assertDontSee('Add New Fee'); // Should not see add button without permission
 });

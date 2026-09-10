@@ -25,9 +25,10 @@ trait HandlesAlpineTesting
     {
         try {
             $result = $browser->script($script);
+
             return $result[0] ?? null;
         } catch (\Exception $e) {
-            $this->fail("Alpine.js script execution failed: " . $e->getMessage());
+            $this->fail('Alpine.js script execution failed: '.$e->getMessage());
         }
     }
 
@@ -47,7 +48,7 @@ trait HandlesAlpineTesting
     protected function assertAlpineReactivity(Browser $browser, string $selector, callable $testLogic): void
     {
         $browser->waitFor($selector, 5);
-        $browser->script("window.alpineTestValue = null;");
+        $browser->script('window.alpineTestValue = null;');
         $browser->click($selector);
 
         // Execute test logic
@@ -57,7 +58,7 @@ trait HandlesAlpineTesting
         $browser->pause(500);
 
         // Check if Alpine state was updated
-        $result = $browser->script("return window.alpineTestValue;");
+        $result = $browser->script('return window.alpineTestValue;');
         $this->assertNotNull($result[0], 'Alpine reactivity should have updated the value');
     }
 
@@ -78,7 +79,7 @@ trait HandlesAlpineTesting
         // Trigger some Alpine interactions to surface errors
         $browser->pause(1000);
 
-        $errors = $browser->script("return window.alpineErrors;");
+        $errors = $browser->script('return window.alpineErrors;');
         $this->assertEmpty($errors[0], 'Should not have Alpine.js errors');
     }
 
@@ -97,10 +98,10 @@ trait HandlesAlpineTesting
     {
         // Just pause and let Alpine initialize - we know it works from our tests
         $browser->pause(2000);
-        
+
         // Check Alpine is available (but don't fail if not)
         $alpineAvailable = $browser->script("return typeof window.Alpine !== 'undefined'")[0] ?? false;
-        if (!$alpineAvailable) {
+        if (! $alpineAvailable) {
             $browser->pause(3000); // Extra wait
         }
     }
@@ -112,10 +113,10 @@ trait HandlesAlpineTesting
     {
         // Wait for page load first
         $browser->pause(1000);
-        
+
         $loaded = $browser->script("return typeof window.Alpine !== 'undefined'")[0] ?? false;
-        
-        if (!$loaded) {
+
+        if (! $loaded) {
             // Try to wait for Alpine to load from Livewire
             $browser->script("
                 console.log('Checking for Alpine.js availability...');
@@ -126,14 +127,14 @@ trait HandlesAlpineTesting
                     }
                 }
             ");
-            
+
             // Wait longer for dynamic loading
             $browser->pause(3000);
-            
+
             // Check again
             $loaded = $browser->script("return typeof window.Alpine !== 'undefined'")[0] ?? false;
-            
-            if (!$loaded) {
+
+            if (! $loaded) {
                 $browser->script("
                     console.error('Alpine.js failed to load in testing environment');
                     console.log('Document ready state:', document.readyState);
@@ -141,7 +142,7 @@ trait HandlesAlpineTesting
                 ");
             }
         }
-        
+
         // Final wait for Alpine to be ready
         $this->waitForAlpineReady($browser);
     }

@@ -5,6 +5,7 @@ use App\Models\Accounting\TaxExemption;
 use App\Models\Accounting\TaxFiling;
 use App\Models\Accounting\TaxJurisdiction;
 use App\Models\Accounting\TaxRate;
+use App\Models\Accounting\Voucher;
 use App\Models\Customer;
 use App\Models\Organization;
 use App\Models\User;
@@ -166,7 +167,7 @@ test('tax calculation service calculates taxes correctly', function () {
         'type' => 'sales',
     ]);
 
-    $voucher = \App\Models\Accounting\Voucher::factory()->create([
+    $voucher = Voucher::factory()->create([
         'organization_id' => $organization->id,
         'amount' => 1000,
         'type' => 'sales',
@@ -197,7 +198,7 @@ test('tax calculation service applies exemptions correctly', function () {
         'exemption_percentage' => 50,
     ]);
 
-    $voucher = \App\Models\Accounting\Voucher::factory()->create([
+    $voucher = Voucher::factory()->create([
         'organization_id' => $organization->id,
         'amount' => 1000,
         'type' => 'sales',
@@ -228,7 +229,7 @@ test('tax calculation service handles compound taxes', function () {
         'is_compound' => true,
     ]);
 
-    $voucher = \App\Models\Accounting\Voucher::factory()->create([
+    $voucher = Voucher::factory()->create([
         'organization_id' => $organization->id,
         'amount' => 1000,
         'type' => 'sales',
@@ -340,7 +341,7 @@ test('voucher tax integration works end-to-end', function () {
         'type' => 'sales',
     ]);
 
-    $voucher = \App\Models\Accounting\Voucher::factory()->create([
+    $voucher = Voucher::factory()->create([
         'organization_id' => $organization->id,
         'amount' => 500,
         'type' => 'sales',
@@ -377,13 +378,13 @@ test('tax calculations are properly scoped to organization', function () {
         'type' => 'sales',
     ]);
 
-    $voucher1 = \App\Models\Accounting\Voucher::factory()->create([
+    $voucher1 = Voucher::factory()->create([
         'organization_id' => $org1->id,
         'amount' => 1000,
         'type' => 'sales',
     ]);
 
-    $voucher2 = \App\Models\Accounting\Voucher::factory()->create([
+    $voucher2 = Voucher::factory()->create([
         'organization_id' => $org2->id,
         'amount' => 1000,
         'type' => 'sales',

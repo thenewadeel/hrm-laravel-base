@@ -1,4 +1,5 @@
 <?php
+
 // database/factories/LedgerEntryFactory.php
 
 namespace Database\Factories\Accounting;

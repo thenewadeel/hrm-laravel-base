@@ -4,7 +4,9 @@ namespace App\Services\Accounting;
 
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\LedgerEntry;
+use App\Models\Employee;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
 class AccountingReportService
 {
@@ -31,9 +33,9 @@ class AccountingReportService
                 $debits = $entries->where('type', 'debit')->sum('amount');
                 $credits = $entries->where('type', 'credit')->sum('amount');
                 $account = $entries->first()->account;
-                
+
                 // Skip if account is not found
-                if (!$account) {
+                if (! $account) {
                     return null;
                 }
 
@@ -150,9 +152,9 @@ class AccountingReportService
                 $debits = $entries->where('type', 'debit')->sum('amount');
                 $credits = $entries->where('type', 'credit')->sum('amount');
                 $account = $entries->first()->account;
-                
+
                 // Skip if account is not found
-                if (!$account) {
+                if (! $account) {
                     return null;
                 }
 
@@ -255,12 +257,10 @@ class AccountingReportService
         ];
     }
 
-
-
     /**
      * Helper method to process aging for specific accounts
      */
-    private function processAgingForAccounts(\Illuminate\Support\Collection $accountIds, string $entryType, Carbon $asOfDate, ?int $organizationId = null): \Illuminate\Support\Collection
+    private function processAgingForAccounts(Collection $accountIds, string $entryType, Carbon $asOfDate, ?int $organizationId = null): Collection
     {
         $query = LedgerEntry::whereIn('chart_of_account_id', $accountIds)
             ->where('type', $entryType);
@@ -271,8 +271,8 @@ class AccountingReportService
 
         return $query->get()->map(function ($entry) use ($asOfDate) {
             $daysOverdue = $asOfDate->diffInDays($entry->entry_date);
-            
-            $agingBucket = match(true) {
+
+            $agingBucket = match (true) {
                 $daysOverdue <= 0 => 'current',
                 $daysOverdue <= 30 => '1_30_days',
                 $daysOverdue <= 60 => '31_60_days',
@@ -300,11 +300,11 @@ class AccountingReportService
     /**
      * Generate aging analysis with configurable periods
      */
-    public function generateAgingAnalysis(?int $organizationId = null, ?Carbon $asOfDate = null, array $periods = null): array
+    public function generateAgingAnalysis(?int $organizationId = null, ?Carbon $asOfDate = null, ?array $periods = null): array
     {
         $asOfDate = $asOfDate ?? now();
         $periods = $periods ?? [30, 60, 90, 120];
-        
+
         // Get receivable accounts (typically asset accounts with receivable nature)
         $receivableAccounts = ChartOfAccount::where('type', 'asset')
             ->where(function ($query) {
@@ -337,15 +337,15 @@ class AccountingReportService
         $agingBuckets = [];
         $previousDays = 0;
         foreach ($periods as $days) {
-            $key = $previousDays . '_' . $days . '_days';
+            $key = $previousDays.'_'.$days.'_days';
             $agingBuckets[$key] = 0;
             $previousDays = $days;
         }
-        $agingBuckets['over_' . end($periods) . '_days'] = 0;
+        $agingBuckets['over_'.end($periods).'_days'] = 0;
 
         // Process receivables
         $receivables = $this->processAgingForAccountsWithPeriods($receivableAccountIds, 'debit', $asOfDate, $organizationId, $periods);
-        
+
         // Process payables
         $payables = $this->processAgingForAccountsWithPeriods($payableAccountIds, 'credit', $asOfDate, $organizationId, $periods);
 
@@ -369,7 +369,7 @@ class AccountingReportService
     /**
      * Helper method to process aging for specific accounts with custom periods
      */
-    private function processAgingForAccountsWithPeriods(\Illuminate\Support\Collection $accountIds, string $entryType, Carbon $asOfDate, ?int $organizationId = null, array $periods): \Illuminate\Support\Collection
+    private function processAgingForAccountsWithPeriods(Collection $accountIds, string $entryType, Carbon $asOfDate, ?int $organizationId, array $periods): Collection
     {
         $query = LedgerEntry::whereIn('chart_of_account_id', $accountIds)
             ->where('type', $entryType);
@@ -380,12 +380,12 @@ class AccountingReportService
 
         return $query->get()->map(function ($entry) use ($asOfDate, $periods) {
             $daysOverdue = $asOfDate->diffInDays($entry->entry_date);
-            
-            $agingBucket = 'over_' . end($periods) . '_days';
+
+            $agingBucket = 'over_'.end($periods).'_days';
             $previousDays = 0;
             foreach ($periods as $days) {
                 if ($daysOverdue <= $days) {
-                    $agingBucket = $previousDays . '_' . $days . '_days';
+                    $agingBucket = $previousDays.'_'.$days.'_days';
                     break;
                 }
                 $previousDays = $days;
@@ -405,12 +405,12 @@ class AccountingReportService
      */
     public function generateDepartmentReport(?int $organizationId = null): array
     {
-        if (!$organizationId) {
+        if (! $organizationId) {
             return [];
         }
 
         // Get employees grouped by organization unit (department)
-        $employees = \App\Models\Employee::where('organization_id', $organizationId)
+        $employees = Employee::where('organization_id', $organizationId)
             ->with('organizationUnit')
             ->get()
             ->groupBy(function ($employee) {
@@ -441,15 +441,15 @@ class AccountingReportService
     {
         // For simplicity, we'll compare income statements between two periods
         $midPoint = $startDate->copy()->addDays($startDate->diffInDays($endDate) / 2);
-        
+
         $previousPeriod = $this->generateIncomeStatement($organizationId, $startDate, $midPoint);
         $currentPeriod = $this->generateIncomeStatement($organizationId, $midPoint->copy()->addDay(), $endDate);
-        
+
         $previousTotal = $previousPeriod['net_income'];
         $currentTotal = $currentPeriod['net_income'];
         $variance = $currentTotal - $previousTotal;
         $variancePercentage = $previousTotal != 0 ? ($variance / $previousTotal) * 100 : 0;
-        
+
         return [
             'previous_period' => [
                 'start_date' => $startDate,

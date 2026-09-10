@@ -5,6 +5,8 @@ namespace App\Livewire\Accounting;
 use App\Models\Vendor;
 use App\Services\OutstandingStatementsService;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -68,7 +70,7 @@ class PayablesOutstanding extends Component
     }
 
     #[Computed]
-    public function vendors(): \Illuminate\Database\Eloquent\Collection
+    public function vendors(): Collection
     {
         return Vendor::where('organization_id', auth()->user()->current_organization_id)
             ->when($this->search, function ($query, $search) {
@@ -132,7 +134,7 @@ class PayablesOutstanding extends Component
         $this->resetPage();
     }
 
-    public function render(): \Illuminate\View\View
+    public function render(): View
     {
         return view('livewire.accounting.payables-outstanding');
     }

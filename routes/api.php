@@ -9,8 +9,8 @@ use App\Http\Controllers\Api\Inventory\TransactionController;
 use App\Http\Controllers\Api\OrganizationController;
 use App\Http\Controllers\Api\OrganizationInvitationController;
 use App\Http\Controllers\Api\OrganizationUnitController;
-use App\Http\Controllers\Api\VoucherController;
 use App\Http\Controllers\Api\OutstandingStatementsController;
+use App\Http\Controllers\Api\VoucherController;
 use App\Models\Accounting\JournalEntry;
 use App\Permissions\InventoryPermissions;
 use Illuminate\Http\Request;
@@ -172,7 +172,7 @@ Route::prefix('inventory')->middleware(['auth:sanctum'])->group(function () {
 });
 
 // Include Membership API routes
-require __DIR__ . '/api/membership.php';
+require __DIR__.'/api/membership.php';
 
 // Include HRM API routes
-require __DIR__ . '/api/hrm.php';
+require __DIR__.'/api/hrm.php';

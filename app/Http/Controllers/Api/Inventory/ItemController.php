@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\Inventory;
 
 use App\Http\Controllers\Controller;
-use App\Models\Inventory\Item;
 use App\Http\Resources\ItemResource;
+use App\Models\Inventory\Item;
 use App\Services\InventoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -30,11 +30,11 @@ class ItemController extends Controller
         // ]);
         Gate::authorize('viewAny', Item::class);
 
-        $query = Item:: //where('organization_id', $request->user()->current_organization_id)
+        $query = Item:: // where('organization_id', $request->user()->current_organization_id)
             with('stores');
 
         // Search functionality
-        if ($request->has('search') && !empty($request->search)) {
+        if ($request->has('search') && ! empty($request->search)) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
@@ -44,7 +44,7 @@ class ItemController extends Controller
         }
 
         // Filter by category
-        if ($request->has('category') && !empty($request->category)) {
+        if ($request->has('category') && ! empty($request->category)) {
             $query->where('category', $request->category);
         }
 
@@ -101,14 +101,14 @@ class ItemController extends Controller
 
         $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
-            'sku' => 'sometimes|string|unique:inventory_items,sku,' . $item->id,
+            'sku' => 'sometimes|string|unique:inventory_items,sku,'.$item->id,
             'description' => 'nullable|string',
             'category' => 'nullable|string|max:255',
             'unit' => 'sometimes|string|max:50',
             'cost_price' => 'nullable|numeric|min:0',
             'selling_price' => 'nullable|numeric|min:0',
             'reorder_level' => 'nullable|integer|min:0',
-            'is_active' => 'sometimes|boolean'
+            'is_active' => 'sometimes|boolean',
         ]);
 
         $item->update($validated);
@@ -136,7 +136,7 @@ class ItemController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $availability
+            'data' => $availability,
         ]);
     }
 

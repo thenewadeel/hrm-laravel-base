@@ -2,16 +2,16 @@
 
 namespace Tests\Feature\Inventory;
 
-use Tests\TestCase;
 use App\Models\Inventory\Item;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupInventory;
 use Tests\Traits\SetupOrganization;
 
 class InventoryItemControllerTest extends TestCase
 {
-    use RefreshDatabase, SetupOrganization, SetupInventory;
+    use RefreshDatabase, SetupInventory, SetupOrganization;
 
     protected function setUp(): void
     {
@@ -40,7 +40,7 @@ class InventoryItemControllerTest extends TestCase
         $specificItem = Item::factory()->create([
             'organization_id' => $this->organization->id,
             'name' => 'Special Test Item',
-            'sku' => 'UNIQUE123'
+            'sku' => 'UNIQUE123',
         ]);
 
         $response = $this->get(route('inventory.items.index', ['search' => 'Special Test']));
@@ -82,7 +82,7 @@ class InventoryItemControllerTest extends TestCase
 
         $this->assertDatabaseHas('inventory_items', [
             'name' => 'New Test Item',
-            'sku' => 'NEWSKU123'
+            'sku' => 'NEWSKU123',
         ]);
     }
 

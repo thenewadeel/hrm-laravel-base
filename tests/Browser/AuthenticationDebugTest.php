@@ -26,22 +26,22 @@ class AuthenticationDebugTest extends JavaScriptDuskTestCase
             ]);
 
             // Debug info
-            dump("Organization: " . $organization->name);
-            dump("User: " . $user->email);
+            dump('Organization: '.$organization->name);
+            dump('User: '.$user->email);
 
             // Login and visit
             $browser->loginAs($user)
                 ->visit('/')
                 ->pause(5000)
                 ->screenshot('auth-debug-after-login')
-                ->dump('Current URL: ' . $browser->driver->getCurrentURL())
-                ->dump('Page title: ' . $browser->driver->getTitle());
+                ->dump('Current URL: '.$browser->driver->getCurrentURL())
+                ->dump('Page title: '.$browser->driver->getTitle());
 
             // Try to find any text on the page
             $pageSource = $browser->driver->getPageSource();
-            dump('Page source length: ' . strlen($pageSource));
-            dump('Page contains org name: ' . (strpos($pageSource, $organization->name) !== false ? 'YES' : 'NO'));
-            dump('Page contains Dashboard: ' . (strpos($pageSource, 'Dashboard') !== false ? 'YES' : 'NO'));
+            dump('Page source length: '.strlen($pageSource));
+            dump('Page contains org name: '.(strpos($pageSource, $organization->name) !== false ? 'YES' : 'NO'));
+            dump('Page contains Dashboard: '.(strpos($pageSource, 'Dashboard') !== false ? 'YES' : 'NO'));
         });
     }
 
@@ -54,7 +54,7 @@ class AuthenticationDebugTest extends JavaScriptDuskTestCase
             $browser->visit('/')
                 ->pause(3000)
                 ->screenshot('unauthenticated-access')
-                ->dump('Unauthenticated page title: ' . $browser->driver->getTitle());
+                ->dump('Unauthenticated page title: '.$browser->driver->getTitle());
         });
     }
 }

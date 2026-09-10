@@ -11,7 +11,7 @@ class CheckInventoryPermission
 {
     public function handle(Request $request, Closure $next, string $permission): Response
     {
-        if (!Gate::allows($permission)) {
+        if (! Gate::allows($permission)) {
             abort(403, 'Unauthorized action.');
         }
 

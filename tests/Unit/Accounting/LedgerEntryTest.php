@@ -6,14 +6,16 @@ use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\LedgerEntry;
 use App\Models\Dimension;
 use App\Models\TestTransaction;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
 
 class LedgerEntryTest extends TestCase
 {
     use RefreshDatabase, SetupOrganization;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -70,8 +72,9 @@ class LedgerEntryTest extends TestCase
     {
         // For databases that support check constraints (MySQL, PostgreSQL)
         if (config('database.default') !== 'sqlite') {
-            $this->expectException(\Illuminate\Database\QueryException::class);
+            $this->expectException(QueryException::class);
             LedgerEntry::factory()->create(['amount' => -100.00]);
+
             return;
         }
 

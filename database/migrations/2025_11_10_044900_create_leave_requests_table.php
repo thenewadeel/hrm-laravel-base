@@ -12,12 +12,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('employee_id')->constrained()->onDelete('cascade');
             $table->foreignId('organization_id')->constrained()->onDelete('cascade');
-            $table->string('leave_type'); //, ['sick', 'vacation', 'personal', 'emergency', 'maternity', 'paternity']);
+            $table->string('leave_type'); // , ['sick', 'vacation', 'personal', 'emergency', 'maternity', 'paternity']);
             $table->date('start_date');
             $table->date('end_date');
             $table->integer('total_days');
             $table->text('reason');
-            $table->string('status'); //, ['pending', 'approved', 'rejected', 'cancelled'])->default('pending');
+            $table->string('status'); // , ['pending', 'approved', 'rejected', 'cancelled'])->default('pending');
             $table->foreignId('approved_by')->nullable()->constrained('users');
             $table->foreignId('rejected_by')->nullable()->constrained('users');
             $table->timestamp('approved_at')->nullable();

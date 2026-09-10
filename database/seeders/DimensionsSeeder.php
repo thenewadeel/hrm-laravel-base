@@ -1,4 +1,5 @@
 <?php
+
 // database/seeders/DimensionsSeeder.php
 
 namespace Database\Seeders;

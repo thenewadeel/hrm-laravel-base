@@ -4,6 +4,7 @@ namespace App\Livewire\Membership;
 
 use App\Models\Membership\Member;
 use App\Services\Membership\MembershipService;
+use Illuminate\Support\Collection;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -163,7 +164,7 @@ class MemberList extends Component
         $this->resetPage();
     }
 
-    public function getExpiringMembersProperty(): \Illuminate\Support\Collection
+    public function getExpiringMembersProperty(): Collection
     {
         $organizationId = auth()->user()->current_organization_id ??
                          auth()->user()->operating_organization_id ??

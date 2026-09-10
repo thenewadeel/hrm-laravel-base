@@ -15,7 +15,7 @@ class LeaveRequestFactory extends Factory
     public function definition()
     {
         $startDate = $this->faker->dateTimeBetween('-1 month', '+1 month');
-        $endDate = $this->faker->dateTimeBetween($startDate, $startDate->format('Y-m-d') . ' +5 days');
+        $endDate = $this->faker->dateTimeBetween($startDate, $startDate->format('Y-m-d').' +5 days');
         $totalDays = $startDate->diff($endDate)->days + 1;
 
         return [
@@ -120,7 +120,7 @@ class LeaveRequestFactory extends Factory
         return $this->state(function (array $attributes) {
             $year = now()->year;
             $startDate = $this->faker->dateTimeBetween("{$year}-01-01", "{$year}-12-31");
-            $endDate = $this->faker->dateTimeBetween($startDate, $startDate->format('Y-m-d') . ' +7 days');
+            $endDate = $this->faker->dateTimeBetween($startDate, $startDate->format('Y-m-d').' +7 days');
             $totalDays = $startDate->diff($endDate)->days + 1;
 
             return [

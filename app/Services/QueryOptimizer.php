@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -24,7 +25,7 @@ class QueryOptimizer
         array $relations = [],
         int $cacheMinutes = 5,
         ?string $cacheKey = null
-    ): \Illuminate\Contracts\Pagination\LengthAwarePaginator {
+    ): LengthAwarePaginator {
 
         // Apply eager loading
         if (! empty($relations)) {

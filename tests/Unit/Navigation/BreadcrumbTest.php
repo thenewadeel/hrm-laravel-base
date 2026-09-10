@@ -1,8 +1,8 @@
 <?php
 
 use App\View\Components\Navigation\Breadcrumb;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class BreadcrumbTest extends TestCase
 {

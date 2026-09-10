@@ -1,4 +1,5 @@
 <?php
+
 // database/migrations/xxxx_create_journal_entries_table.php
 
 use Illuminate\Database\Migrations\Migration;

@@ -36,7 +36,7 @@ class HRWorkingTest extends JavaScriptDuskTestCase
             } catch (\Exception $e) {
                 // Log error but still take screenshot
                 $browser->screenshot('hr-working-error');
-                $this->assertTrue(false, "HR pages failed to load: " . $e->getMessage());
+                $this->assertTrue(false, 'HR pages failed to load: '.$e->getMessage());
             }
         });
     }
@@ -57,7 +57,7 @@ class HRWorkingTest extends JavaScriptDuskTestCase
 
                 $browser->screenshot('hr-working-verify');
             } catch (\Exception $e) {
-                $this->assertTrue(false, "HR functionality test failed: " . $e->getMessage());
+                $this->assertTrue(false, 'HR functionality test failed: '.$e->getMessage());
             }
         });
     }

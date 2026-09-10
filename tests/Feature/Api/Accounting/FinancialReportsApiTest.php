@@ -1,4 +1,5 @@
 <?php
+
 // tests/Feature/Api/Accounting/FinancialReportsApiTest.php
 
 namespace Tests\Feature\Api\Accounting;
@@ -7,8 +8,8 @@ use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\LedgerEntry;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
 
 class FinancialReportsApiTest extends TestCase
@@ -34,13 +35,13 @@ class FinancialReportsApiTest extends TestCase
         LedgerEntry::factory()->create([
             'chart_of_account_id' => $cashAccount->id,
             'type' => 'debit',
-            'amount' => 1000.00
+            'amount' => 1000.00,
         ]);
 
         LedgerEntry::factory()->create([
             'chart_of_account_id' => $revenueAccount->id,
             'type' => 'credit',
-            'amount' => 1000.00
+            'amount' => 1000.00,
         ]);
 
         $this->actingAs($this->user);
@@ -54,15 +55,15 @@ class FinancialReportsApiTest extends TestCase
                     'total_debits',
                     'total_credits',
                     'is_balanced',
-                    'generated_at'
-                ]
+                    'generated_at',
+                ],
             ])
             ->assertJson([
                 'data' => [
                     'is_balanced' => true,
                     'total_debits' => 1000.00,
-                    'total_credits' => 1000.00
-                ]
+                    'total_credits' => 1000.00,
+                ],
             ]);
     }
 
@@ -77,19 +78,19 @@ class FinancialReportsApiTest extends TestCase
         LedgerEntry::factory()->create([
             'chart_of_account_id' => $cashAccount->id,
             'type' => 'debit',
-            'amount' => 5000.00
+            'amount' => 5000.00,
         ]);
 
         LedgerEntry::factory()->create([
             'chart_of_account_id' => $loanAccount->id,
             'type' => 'credit',
-            'amount' => 2000.00
+            'amount' => 2000.00,
         ]);
 
         LedgerEntry::factory()->create([
             'chart_of_account_id' => $equityAccount->id,
             'type' => 'credit',
-            'amount' => 3000.00
+            'amount' => 3000.00,
         ]);
 
         $this->actingAs($this->user);
@@ -106,8 +107,8 @@ class FinancialReportsApiTest extends TestCase
                     'total_liabilities',
                     'total_equity',
                     'is_balanced',
-                    'as_of_date'
-                ]
+                    'as_of_date',
+                ],
             ]);
     }
 
@@ -124,14 +125,14 @@ class FinancialReportsApiTest extends TestCase
             'chart_of_account_id' => $revenueAccount->id,
             'type' => 'credit',
             'amount' => 5000.00,
-            'entry_date' => $startDate->copy()->addDays(1)
+            'entry_date' => $startDate->copy()->addDays(1),
         ]);
 
         LedgerEntry::factory()->create([
             'chart_of_account_id' => $expenseAccount->id,
             'type' => 'debit',
             'amount' => 3000.00,
-            'entry_date' => $startDate->copy()->addDays(5)
+            'entry_date' => $startDate->copy()->addDays(5),
         ]);
 
         $this->actingAs($this->user);
@@ -147,15 +148,15 @@ class FinancialReportsApiTest extends TestCase
                     'total_expenses',
                     'net_income',
                     'period',
-                    'generated_at'
-                ]
+                    'generated_at',
+                ],
             ])
             ->assertJson([
                 'data' => [
                     'total_revenue' => 5000.00,
                     'total_expenses' => 3000.00,
-                    'net_income' => 2000.00
-                ]
+                    'net_income' => 2000.00,
+                ],
             ]);
     }
 

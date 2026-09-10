@@ -1,17 +1,20 @@
 <?php
+
 // tests/Unit/Accounting/JournalEntryFactoryTest.php
 
 namespace Tests\Unit\Accounting;
 
 use App\Models\Accounting\JournalEntry;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
 
 class JournalEntryFactoryTest extends TestCase
 {
     use RefreshDatabase, SetupOrganization;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -50,7 +53,7 @@ class JournalEntryFactoryTest extends TestCase
     public function it_can_create_journal_entry_with_specific_approver()
     {
         $journalEntry = JournalEntry::factory()
-            ->approvedBy(\App\Models\User::factory()->create())
+            ->approvedBy(User::factory()->create())
             ->create();
 
         $this->assertNotNull($journalEntry->approved_by);

@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Auth;
 class BasePortalController extends Controller
 {
     protected $currentUser;
+
     protected $organizationUser;
+
     protected $currentOrganization;
 
     public function __construct()
@@ -28,7 +30,7 @@ class BasePortalController extends Controller
      */
     protected function getOrganizationUser()
     {
-        if (!$this->currentOrganization) {
+        if (! $this->currentOrganization) {
             return null;
         }
 
@@ -58,15 +60,15 @@ class BasePortalController extends Controller
      */
     protected function authorizePortalAccess(array $allowedRoles = []): bool
     {
-        if (!$this->currentOrganization) {
+        if (! $this->currentOrganization) {
             abort(403, 'No organization selected');
         }
 
-        if (!$this->organizationUser) {
+        if (! $this->organizationUser) {
             abort(403, 'Not a member of this organization');
         }
 
-        if (!empty($allowedRoles) && !$this->hasAnyRole($allowedRoles)) {
+        if (! empty($allowedRoles) && ! $this->hasAnyRole($allowedRoles)) {
             abort(403, 'Insufficient permissions for this portal');
         }
 

@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Accounting;
 
-use Livewire\Component;
 use App\Services\AccountingReportService;
 use Carbon\Carbon;
+use Livewire\Component;
 
 class Reports extends Component
 {
@@ -12,7 +12,9 @@ class Reports extends Component
 
     // Initialize public properties with a default, empty data structure
     public array $trialBalanceReport = [];
+
     public array $balanceSheetReport = [];
+
     public array $incomeStatementReport = [];
 
     protected AccountingReportService $reportService;

@@ -3,17 +3,17 @@
 namespace Tests\Feature\Inventory;
 
 use App\Models\Inventory\Item;
-use Tests\TestCase;
 use App\Models\Inventory\Store;
 use App\Models\Inventory\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupInventory;
 use Tests\Traits\SetupOrganization;
 
 class InventoryStoreControllerTest extends TestCase
 {
-    use RefreshDatabase, SetupOrganization, SetupInventory;
+    use RefreshDatabase, SetupInventory, SetupOrganization;
 
     protected function setUp(): void
     {
@@ -42,7 +42,7 @@ class InventoryStoreControllerTest extends TestCase
         Store::factory()->create([
             'organization_unit_id' => $this->organizationUnit->id,
             'name' => 'Special Warehouse',
-            'code' => 'WH001'
+            'code' => 'WH001',
         ]);
 
         $response = $this->get(route('inventory.stores.index', ['search' => 'Warehouse']));
@@ -80,7 +80,7 @@ class InventoryStoreControllerTest extends TestCase
 
         $this->assertDatabaseHas('inventory_stores', [
             'name' => 'New Warehouse',
-            'code' => 'NW001'
+            'code' => 'NW001',
         ]);
     }
 
@@ -91,16 +91,16 @@ class InventoryStoreControllerTest extends TestCase
 
         // Create some related data to avoid empty relationships
         $item = Item::factory()->create([
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
         $store->items()->attach($item->id, [
             'quantity' => 5,
             'min_stock' => 10,
-            'max_stock' => 100
+            'max_stock' => 100,
         ]);
 
         $transaction = Transaction::factory()->create([
-            'store_id' => $store->id
+            'store_id' => $store->id,
         ]);
 
         $response = $this->get(route('inventory.stores.show', $store));
@@ -133,7 +133,7 @@ class InventoryStoreControllerTest extends TestCase
         $this->assertDatabaseHas('inventory_stores', [
             'id' => $store->id,
             'name' => 'Updated Store Name',
-            'location' => 'Updated Location'
+            'location' => 'Updated Location',
         ]);
     }
 
@@ -141,7 +141,7 @@ class InventoryStoreControllerTest extends TestCase
     public function it_deletes_store_without_transactions_or_items()
     {
         $store = Store::factory()->create([
-            'organization_unit_id' => $this->organizationUnit->id
+            'organization_unit_id' => $this->organizationUnit->id,
         ]);
 
         $response = $this->delete(route('inventory.stores.destroy', $store));

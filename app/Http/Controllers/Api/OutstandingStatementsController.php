@@ -19,7 +19,7 @@ class OutstandingStatementsController extends Controller
     public function receivablesAging(Request $request): JsonResponse
     {
         $customerId = $request->get('customer_id');
-        
+
         $aging = $this->outstandingService->generateReceivablesAging($customerId);
         $summary = $this->outstandingService->getReceivablesAgingSummary();
 
@@ -35,7 +35,7 @@ class OutstandingStatementsController extends Controller
     public function payablesAging(Request $request): JsonResponse
     {
         $vendorId = $request->get('vendor_id');
-        
+
         $aging = $this->outstandingService->generatePayablesAging($vendorId);
         $summary = $this->outstandingService->getPayablesAgingSummary();
 

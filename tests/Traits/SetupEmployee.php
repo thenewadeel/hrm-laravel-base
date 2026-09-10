@@ -2,11 +2,14 @@
 
 namespace Tests\Traits;
 
+use App\Models\AttendanceRecord;
 use App\Models\Employee;
 use App\Models\JobPosition;
+use App\Models\LeaveRequest;
 use App\Models\Organization;
 use App\Models\OrganizationUnit;
 use App\Models\OrganizationUser;
+use App\Models\PayrollEntry;
 use App\Models\Shift;
 use App\Models\User;
 
@@ -223,14 +226,14 @@ trait SetupEmployee
      */
     protected function createEmployeeDetailsTestData(Employee $employee): array
     {
-        $attendanceRecords = \App\Models\AttendanceRecord::factory()
+        $attendanceRecords = AttendanceRecord::factory()
             ->count(5)
             ->create(['employee_id' => $employee->id, 'status' => 'present']);
 
-        $leaveRequests = \App\Models\LeaveRequest::factory()
+        $leaveRequests = LeaveRequest::factory()
             ->create(['employee_id' => $employee->id, 'status' => 'approved']);
 
-        $payrollEntries = \App\Models\PayrollEntry::factory()
+        $payrollEntries = PayrollEntry::factory()
             ->create(['employee_id' => $employee->id, 'status' => 'paid']);
 
         return [

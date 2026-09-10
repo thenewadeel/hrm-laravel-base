@@ -5,6 +5,7 @@ namespace App\Services\Membership;
 use App\Models\Membership\FamilyMember;
 use App\Models\Membership\Member;
 use App\Models\Organization;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class MembershipService
@@ -254,7 +255,7 @@ class MembershipService
     /**
      * Get members by date range
      */
-    public function getMembersByDateRange(int $organizationId, \Carbon\Carbon $startDate, \Carbon\Carbon $endDate): int
+    public function getMembersByDateRange(int $organizationId, Carbon $startDate, Carbon $endDate): int
     {
         return Member::where('organization_id', $organizationId)
             ->whereBetween('created_at', [$startDate, $endDate])

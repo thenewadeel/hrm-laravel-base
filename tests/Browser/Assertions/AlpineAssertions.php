@@ -3,6 +3,7 @@
 namespace Tests\Browser\Assertions;
 
 use Laravel\Dusk\Browser;
+use PHPUnit\Framework\ExpectationFailedException;
 
 trait AlpineAssertions
 {
@@ -33,11 +34,11 @@ trait AlpineAssertions
     public function assertAlpineData(Browser $browser, string $property, mixed $expectedValue, string $selector = '[x-data]'): self
     {
         $actualValue = $this->getAlpineData($browser, $property, $selector);
-        
+
         if ($actualValue !== $expectedValue) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
-                "Alpine data property '{$property}' expected to be " . var_export($expectedValue, true) . 
-                " but got " . var_export($actualValue, true)
+            throw new ExpectationFailedException(
+                "Alpine data property '{$property}' expected to be ".var_export($expectedValue, true).
+                ' but got '.var_export($actualValue, true)
             );
         }
 
@@ -50,10 +51,10 @@ trait AlpineAssertions
     public function assertAlpineDataNot(Browser $browser, string $property, mixed $unexpectedValue, string $selector = '[x-data]'): self
     {
         $actualValue = $this->getAlpineData($browser, $property, $selector);
-        
+
         if ($actualValue === $unexpectedValue) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
-                "Alpine data property '{$property}' should not be " . var_export($unexpectedValue, true)
+            throw new ExpectationFailedException(
+                "Alpine data property '{$property}' should not be ".var_export($unexpectedValue, true)
             );
         }
 
@@ -66,10 +67,10 @@ trait AlpineAssertions
     public function assertAlpineDataTruthy(Browser $browser, string $property, string $selector = '[x-data]'): self
     {
         $actualValue = $this->getAlpineData($browser, $property, $selector);
-        
-        if (!$actualValue) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
-                "Alpine data property '{$property}' should be truthy but is " . var_export($actualValue, true)
+
+        if (! $actualValue) {
+            throw new ExpectationFailedException(
+                "Alpine data property '{$property}' should be truthy but is ".var_export($actualValue, true)
             );
         }
 
@@ -82,10 +83,10 @@ trait AlpineAssertions
     public function assertAlpineDataFalsy(Browser $browser, string $property, string $selector = '[x-data]'): self
     {
         $actualValue = $this->getAlpineData($browser, $property, $selector);
-        
+
         if ($actualValue) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
-                "Alpine data property '{$property}' should be falsy but is " . var_export($actualValue, true)
+            throw new ExpectationFailedException(
+                "Alpine data property '{$property}' should be falsy but is ".var_export($actualValue, true)
             );
         }
 
@@ -104,8 +105,8 @@ trait AlpineAssertions
             return typeof alpine.{$method} === 'function';
         ");
 
-        if (!$exists) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
+        if (! $exists) {
+            throw new ExpectationFailedException(
                 "Alpine method '{$method}' should exist in component '{$selector}'"
             );
         }
@@ -126,7 +127,7 @@ trait AlpineAssertions
         ");
 
         if ($exists) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
+            throw new ExpectationFailedException(
                 "Alpine method '{$method}' should not exist in component '{$selector}'"
             );
         }
@@ -150,8 +151,8 @@ trait AlpineAssertions
                    computedStyle.opacity !== '0';
         ");
 
-        if (!$isVisible) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
+        if (! $isVisible) {
+            throw new ExpectationFailedException(
                 "Element '{$selector}' should be visible (x-show=true)"
             );
         }
@@ -175,8 +176,8 @@ trait AlpineAssertions
                    computedStyle.opacity === '0';
         ");
 
-        if (!$isHidden) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
+        if (! $isHidden) {
+            throw new ExpectationFailedException(
                 "Element '{$selector}' should be hidden (x-show=false)"
             );
         }
@@ -217,19 +218,19 @@ trait AlpineAssertions
         ");
 
         if ($inputValue !== $expectedValue) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
-                "Input '{$inputSelector}' value should be " . var_export($expectedValue, true) . 
-                " but is " . var_export($inputValue, true)
+            throw new ExpectationFailedException(
+                "Input '{$inputSelector}' value should be ".var_export($expectedValue, true).
+                ' but is '.var_export($inputValue, true)
             );
         }
 
         // Check Alpine property
         $alpineValue = $this->getAlpineData($browser, $property, $componentSelector);
-        
+
         if ($alpineValue !== $expectedValue) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
-                "Alpine property '{$property}' should be " . var_export($expectedValue, true) . 
-                " but is " . var_export($alpineValue, true)
+            throw new ExpectationFailedException(
+                "Alpine property '{$property}' should be ".var_export($expectedValue, true).
+                ' but is '.var_export($alpineValue, true)
             );
         }
 
@@ -247,7 +248,7 @@ trait AlpineAssertions
         ");
 
         if ($actualText !== $expectedText) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
+            throw new ExpectationFailedException(
                 "Element '{$selector}' text should be '{$expectedText}' but is '{$actualText}'"
             );
         }
@@ -266,7 +267,7 @@ trait AlpineAssertions
         ");
 
         if ($actualHtml !== $expectedHtml) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
+            throw new ExpectationFailedException(
                 "Element '{$selector}' HTML should be '{$expectedHtml}' but is '{$actualHtml}'"
             );
         }
@@ -285,7 +286,7 @@ trait AlpineAssertions
         ");
 
         if ($actualClass !== $expectedClass) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
+            throw new ExpectationFailedException(
                 "Element '{$selector}' class should be '{$expectedClass}' but is '{$actualClass}'"
             );
         }
@@ -304,7 +305,7 @@ trait AlpineAssertions
         ");
 
         if ($actualStyle !== $expectedStyle) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
+            throw new ExpectationFailedException(
                 "Element '{$selector}' style should be '{$expectedStyle}' but is '{$actualStyle}'"
             );
         }
@@ -324,8 +325,8 @@ trait AlpineAssertions
             return alpine.{$testProperty} === true;
         ");
 
-        if (!$isInitialized) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
+        if (! $isInitialized) {
+            throw new ExpectationFailedException(
                 "Alpine component '{$selector}' should be initialized (x-init executed)"
             );
         }
@@ -355,9 +356,9 @@ trait AlpineAssertions
         ");
 
         if ($result !== $expectedResult) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
-                "Alpine expression '{$expression}' should evaluate to " . var_export($expectedResult, true) . 
-                " but got " . var_export($result, true)
+            throw new ExpectationFailedException(
+                "Alpine expression '{$expression}' should evaluate to ".var_export($expectedResult, true).
+                ' but got '.var_export($result, true)
             );
         }
 
@@ -380,11 +381,11 @@ trait AlpineAssertions
 
         // Check value was set
         $currentValue = $this->getAlpineData($browser, $property, $selector);
-        
+
         if ($currentValue !== $newValue) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
-                "Alpine reactivity should update '{$property}' to " . var_export($newValue, true) . 
-                " but it is " . var_export($currentValue, true)
+            throw new ExpectationFailedException(
+                "Alpine reactivity should update '{$property}' to ".var_export($newValue, true).
+                ' but it is '.var_export($currentValue, true)
             );
         }
 
@@ -397,14 +398,14 @@ trait AlpineAssertions
     public function assertNoAlpineErrors(Browser $browser): self
     {
         $errors = $this->checkAlpineErrors($browser);
-        
-        if (!empty($errors)) {
+
+        if (! empty($errors)) {
             $errorMessages = array_map(function ($error) {
                 return "[{$error['type']}] {$error['message']}";
             }, $errors);
 
-            throw new \PHPUnit\Framework\ExpectationFailedException(
-                "Alpine.js errors detected:\n" . implode("\n", $errorMessages)
+            throw new ExpectationFailedException(
+                "Alpine.js errors detected:\n".implode("\n", $errorMessages)
             );
         }
 
@@ -417,21 +418,21 @@ trait AlpineAssertions
     public function assertAlpinePerformance(Browser $browser, float $maxEvaluationTime = 100.0, int $maxMemoryDelta = 1048576): self
     {
         $performance = $this->measureAlpinePerformance($browser);
-        
+
         if (isset($performance['error'])) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
+            throw new ExpectationFailedException(
                 "Cannot measure Alpine performance: {$performance['error']}"
             );
         }
 
         if ($performance['evaluationTime'] > $maxEvaluationTime) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
+            throw new ExpectationFailedException(
                 "Alpine evaluation time {$performance['evaluationTime']}ms exceeds maximum {$maxEvaluationTime}ms"
             );
         }
 
         if ($performance['memoryDelta'] > $maxMemoryDelta) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
+            throw new ExpectationFailedException(
                 "Alpine memory delta {$performance['memoryDelta']} bytes exceeds maximum {$maxMemoryDelta} bytes"
             );
         }
@@ -449,7 +450,7 @@ trait AlpineAssertions
         ");
 
         if ($actualCount !== $expectedCount) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
+            throw new ExpectationFailedException(
                 "Expected {$expectedCount} Alpine components but found {$actualCount}"
             );
         }
@@ -466,9 +467,9 @@ trait AlpineAssertions
             return typeof window.Alpine !== 'undefined' && window.Alpine.version;
         ");
 
-        if (!$isLoaded) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
-                "Alpine.js should be loaded and initialized"
+        if (! $isLoaded) {
+            throw new ExpectationFailedException(
+                'Alpine.js should be loaded and initialized'
             );
         }
 
@@ -500,6 +501,7 @@ trait AlpineAssertions
     private function executeScript(Browser $browser, string $script): mixed
     {
         $result = $browser->script($script);
+
         return $result[0] ?? null;
     }
 

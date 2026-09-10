@@ -4,13 +4,14 @@ namespace App\Models\Inventory;
 
 use App\Models\Organization;
 use App\Models\Traits\BelongsToOrganization;
+use Database\Factories\Inventory\ItemFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 // Assuming Store model location
 // Assuming Head model location
 // Assuming TransactionItem model location
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Item extends Model
@@ -232,7 +233,7 @@ class Item extends Model
 
     protected static function newFactory()
     {
-        return \Database\Factories\Inventory\ItemFactory::new();
+        return ItemFactory::new();
     }
 
     /**

@@ -2,6 +2,9 @@
 
 namespace Tests\Browser\Concerns;
 
+use App\Models\Inventory\Item;
+use App\Models\Inventory\Store;
+use App\Models\Inventory\Transaction;
 use App\Models\Organization;
 use App\Models\User;
 use Laravel\Dusk\Browser;
@@ -27,17 +30,17 @@ trait HandlesMultiTenantTesting
     protected function createOrganizationTestData(Organization $organization): void
     {
         // Create stores
-        \App\Models\Inventory\Store::factory()->count(3)->create([
+        Store::factory()->count(3)->create([
             'organization_id' => $organization->id,
         ]);
 
         // Create items
-        \App\Models\Inventory\Item::factory()->count(10)->create([
+        Item::factory()->count(10)->create([
             'organization_id' => $organization->id,
         ]);
 
         // Create transactions
-        \App\Models\Inventory\Transaction::factory()->count(5)->create([
+        Transaction::factory()->count(5)->create([
             'organization_id' => $organization->id,
         ]);
     }
@@ -210,8 +213,8 @@ trait HandlesMultiTenantTesting
                 ->waitForJavaScript($this);
 
             // Check that only org1 data is loaded
-            $org1Stores = \App\Models\Inventory\Store::where('organization_id', $org1->id)->count();
-            $org2Stores = \App\Models\Inventory\Store::where('organization_id', $org2->id)->count();
+            $org1Stores = Store::where('organization_id', $org1->id)->count();
+            $org2Stores = Store::where('organization_id', $org2->id)->count();
 
             // Dashboard should show org1 store count
             $browser->assertSeeIn('[data-stats="stores"]', (string) $org1Stores);
@@ -340,8 +343,8 @@ trait HandlesMultiTenantTesting
                 ->assertSeeIn('[data-stats="items"]', (string) $initialItems);
 
             // Verify data belongs to correct organization
-            $dbStores = \App\Models\Inventory\Store::where('organization_id', $org->id)->count();
-            $dbItems = \App\Models\Inventory\Item::where('organization_id', $org->id)->count();
+            $dbStores = Store::where('organization_id', $org->id)->count();
+            $dbItems = Item::where('organization_id', $org->id)->count();
 
             $this->assertEquals($dbStores, $initialStores, 'Dashboard store count should match database');
             $this->assertEquals($dbItems, $initialItems, 'Dashboard item count should match database');

@@ -1,4 +1,5 @@
 <?php
+
 // database/seeders/CsvChartOfAccountsSeeder.php
 
 namespace Database\Seeders;
@@ -13,8 +14,9 @@ class CsvChartOfAccountsSeeder extends Seeder
     {
         $csvFile = database_path('seeders/seedData/charts_of_accounts.csv');
 
-        if (!File::exists($csvFile)) {
+        if (! File::exists($csvFile)) {
             $this->command->error("CSV file not found: {$csvFile}");
+
             return;
         }
 
@@ -30,7 +32,7 @@ class CsvChartOfAccountsSeeder extends Seeder
                 [
                     'name' => $name,
                     'type' => $type,
-                    'description' => $description
+                    'description' => $description,
                 ]
             );
 

@@ -26,7 +26,7 @@ test('cash payment service creates payment with journal entry', function () {
     ]);
 
     // Set up initial cash balance by creating a ledger entry
-    \App\Models\Accounting\LedgerEntry::create([
+    LedgerEntry::create([
         'entry_date' => now(),
         'chart_of_account_id' => $cashAccount->id,
         'type' => 'debit',
@@ -98,7 +98,7 @@ test('cash payment service validates amount is positive', function () {
     ];
 
     expect(fn () => $service->createPayment($paymentData, $organization->id))
-        ->toThrow(\InvalidArgumentException::class, 'Amount must be positive');
+        ->toThrow(InvalidArgumentException::class, 'Amount must be positive');
 });
 
 test('cash payment service generates sequential voucher numbers', function () {
@@ -113,7 +113,7 @@ test('cash payment service generates sequential voucher numbers', function () {
     ]);
 
     // Set up initial cash balance
-    \App\Models\Accounting\LedgerEntry::create([
+    LedgerEntry::create([
         'entry_date' => now(),
         'chart_of_account_id' => $cashAccount->id,
         'type' => 'debit',
@@ -157,7 +157,7 @@ test('cash payment service validates account ownership', function () {
     ];
 
     expect(fn () => $service->createPayment($paymentData, $organization2->id))
-        ->toThrow(\InvalidArgumentException::class, 'Accounts must belong to the same organization');
+        ->toThrow(InvalidArgumentException::class, 'Accounts must belong to the same organization');
 });
 
 test('cash payment service validates sufficient cash balance', function () {
@@ -183,5 +183,5 @@ test('cash payment service validates sufficient cash balance', function () {
     ];
 
     expect(fn () => $service->createPayment($paymentData, $organization->id))
-        ->toThrow(\InvalidArgumentException::class, 'Insufficient cash balance');
+        ->toThrow(InvalidArgumentException::class, 'Insufficient cash balance');
 });

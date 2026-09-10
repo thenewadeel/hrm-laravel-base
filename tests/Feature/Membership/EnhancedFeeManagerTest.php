@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Membership\EnhancedFeeManager;
 use App\Models\Membership\Member;
 use App\Models\Membership\MemberFee;
 use App\Models\Organization;
@@ -23,7 +24,7 @@ it('renders enhanced fee manager successfully', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\EnhancedFeeManager::class)
+        ->test(EnhancedFeeManager::class)
         ->assertStatus(200)
         ->assertSee('Total Revenue')
         ->assertSee('Collection Rate');
@@ -56,7 +57,7 @@ it('displays fee statistics correctly', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\EnhancedFeeManager::class)
+        ->test(EnhancedFeeManager::class)
         ->assertSee('100.00') // Paid amount
         ->assertSee('50.00')  // Pending amount
         ->assertSee('66.7%'); // Collection rate (100/150 * 100)
@@ -73,7 +74,7 @@ it('can create enhanced fee with recurring option', function () {
     $member = Member::factory()->create(['organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\EnhancedFeeManager::class)
+        ->test(EnhancedFeeManager::class)
         ->set('member_id', $member->id)
         ->set('fee_type', 'subscription')
         ->set('description', 'Monthly Membership')
@@ -113,7 +114,7 @@ it('can process payment with receipt generation', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\EnhancedFeeManager::class)
+        ->test(EnhancedFeeManager::class)
         ->set('selectedFeeId', $fee->id)
         ->set('payment_amount', 100)
         ->set('payment_method', 'credit_card')
@@ -145,7 +146,7 @@ it('can generate invoice for fee', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\EnhancedFeeManager::class)
+        ->test(EnhancedFeeManager::class)
         ->call('generateInvoice', $fee)
         ->assertSet('showInvoiceModal', true)
         ->assertSet('selectedFee.id', $fee->id)
@@ -161,7 +162,7 @@ it('can toggle analytics dashboard', function () {
     $user->update(['current_organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\EnhancedFeeManager::class)
+        ->test(EnhancedFeeManager::class)
         ->assertSet('showAnalytics', false)
         ->call('toggleAnalytics')
         ->assertSet('showAnalytics', true)
@@ -195,7 +196,7 @@ it('respects organization isolation', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\EnhancedFeeManager::class)
+        ->test(EnhancedFeeManager::class)
         ->assertSee('Organization 1 Fee')
         ->assertDontSee('Organization 2 Fee');
 });

@@ -1,4 +1,5 @@
 <?php
+
 // database/seeders/SampleTransactionsSeeder.php
 
 namespace Database\Seeders;

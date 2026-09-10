@@ -7,7 +7,9 @@ use App\Models\Accounting\FeeDistributionLog;
 use App\Models\Accounting\FeeDistributionRule;
 use App\Models\Accounting\JournalEntry;
 use App\Models\Membership\MemberFee;
+use App\Models\User;
 use App\Services\AccountingService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -93,10 +95,10 @@ class FeeDistributionService
         ];
 
         if (! isset($attributes['created_by'])) {
-            $userId = \Illuminate\Support\Facades\Auth::id();
+            $userId = Auth::id();
             if (! $userId) {
                 // Create or get system user for automated entries
-                $systemUser = \App\Models\User::firstOrCreate([
+                $systemUser = User::firstOrCreate([
                     'email' => 'system@hrm.local',
                 ], [
                     'name' => 'System',

@@ -1,8 +1,9 @@
 <?php
 
 use App\View\Components\Navigation\NotificationBell;
-use Tests\TestCase;
+use Illuminate\Contracts\View\View;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class NotificationBellTest extends TestCase
 {
@@ -30,6 +31,6 @@ class NotificationBellTest extends TestCase
         $component = new NotificationBell;
 
         expect(method_exists($component, 'render'))->toBeTrue();
-        expect($component->render())->toBeInstanceOf(\Illuminate\Contracts\View\View::class);
+        expect($component->render())->toBeInstanceOf(View::class);
     }
 }

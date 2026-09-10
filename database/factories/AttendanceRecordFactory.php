@@ -15,8 +15,8 @@ class AttendanceRecordFactory extends Factory
     public function definition()
     {
         $recordDate = $this->faker->dateTimeBetween('-30 days', 'now');
-        $punchIn = $this->faker->dateTimeBetween($recordDate->format('Y-m-d') . ' 08:00:00', $recordDate->format('Y-m-d') . ' 10:00:00');
-        $punchOut = $this->faker->dateTimeBetween($recordDate->format('Y-m-d') . ' 16:00:00', $recordDate->format('Y-m-d') . ' 18:00:00');
+        $punchIn = $this->faker->dateTimeBetween($recordDate->format('Y-m-d').' 08:00:00', $recordDate->format('Y-m-d').' 10:00:00');
+        $punchOut = $this->faker->dateTimeBetween($recordDate->format('Y-m-d').' 16:00:00', $recordDate->format('Y-m-d').' 18:00:00');
 
         $status = $this->faker->randomElement(['present', 'late', 'absent', 'leave', 'missed_punch']);
 
@@ -38,8 +38,8 @@ class AttendanceRecordFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'status' => 'present',
-                'punch_in' => $this->faker->dateTimeBetween($attributes['record_date']->format('Y-m-d') . ' 08:00:00', $attributes['record_date']->format('Y-m-d') . ' 09:00:00'),
-                'punch_out' => $this->faker->dateTimeBetween($attributes['record_date']->format('Y-m-d') . ' 16:00:00', $attributes['record_date']->format('Y-m-d') . ' 17:00:00'),
+                'punch_in' => $this->faker->dateTimeBetween($attributes['record_date']->format('Y-m-d').' 08:00:00', $attributes['record_date']->format('Y-m-d').' 09:00:00'),
+                'punch_out' => $this->faker->dateTimeBetween($attributes['record_date']->format('Y-m-d').' 16:00:00', $attributes['record_date']->format('Y-m-d').' 17:00:00'),
                 'total_hours' => $this->faker->randomFloat(2, 7, 9),
             ];
         });
@@ -50,8 +50,8 @@ class AttendanceRecordFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'status' => 'late',
-                'punch_in' => $this->faker->dateTimeBetween($attributes['record_date']->format('Y-m-d') . ' 09:15:00', $attributes['record_date']->format('Y-m-d') . ' 10:30:00'),
-                'punch_out' => $this->faker->dateTimeBetween($attributes['record_date']->format('Y-m-d') . ' 17:00:00', $attributes['record_date']->format('Y-m-d') . ' 18:00:00'),
+                'punch_in' => $this->faker->dateTimeBetween($attributes['record_date']->format('Y-m-d').' 09:15:00', $attributes['record_date']->format('Y-m-d').' 10:30:00'),
+                'punch_out' => $this->faker->dateTimeBetween($attributes['record_date']->format('Y-m-d').' 17:00:00', $attributes['record_date']->format('Y-m-d').' 18:00:00'),
                 'total_hours' => $this->faker->randomFloat(2, 6, 8),
             ];
         });

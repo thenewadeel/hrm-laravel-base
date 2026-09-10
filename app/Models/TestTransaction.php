@@ -1,4 +1,5 @@
 <?php
+
 // app/Models/TestTransaction.php
 
 namespace App\Models;

@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\EmployeeDeduction;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\EmployeeDeduction>
+ * @extends Factory<EmployeeDeduction>
  */
 class EmployeeDeductionFactory extends Factory
 {

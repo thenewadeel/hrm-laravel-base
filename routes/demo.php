@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Demo\ModelSelectDemo;
+use App\Models\Organization;
 use Illuminate\Support\Facades\Route;
 
 // Demo Components
@@ -9,9 +10,9 @@ Route::get('/demo/inventory-components', function () {
 })->name('demo.inventory-components');
 
 Route::get('/demo/cash-management', function () {
-    $organization = \App\Models\Organization::first();
+    $organization = Organization::first();
     if (! $organization) {
-        $organization = \App\Models\Organization::factory()->create();
+        $organization = Organization::factory()->create();
     }
 
     return view('demo.cash-management', ['organization' => $organization]);

@@ -1,22 +1,23 @@
 <?php
+
 // tests/Feature/SetupChartOfAccountsTest.php
 
 namespace Tests\Feature;
 
-use App\Models\User;
-use App\Models\Organization;
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Inventory\Store;
+use App\Models\Organization;
 use App\Models\OrganizationUnit;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupInventory;
 use Tests\Traits\SetupOrganization;
 
 class SetupChartOfAccountsTest extends TestCase
 {
-    use RefreshDatabase, SetupOrganization, SetupInventory;
+    use RefreshDatabase, SetupInventory, SetupOrganization;
 
     protected function setUp(): void
     {
@@ -24,6 +25,7 @@ class SetupChartOfAccountsTest extends TestCase
         $this->migrateInventory();
         $this->setupOrganization();
     }
+
     #[Test]
     public function it_creates_default_chart_of_accounts()
     {
@@ -51,17 +53,16 @@ class SetupChartOfAccountsTest extends TestCase
         $this->assertTrue($accounts->count() > 0, 'No chart of accounts were created');
 
         // Check for specific default accounts using where()
-        $cashAccount = ChartOfAccount:: //where('organization_id', $organization->id)
+        $cashAccount = ChartOfAccount:: // where('organization_id', $organization->id)
             where('name', 'Cash')
-            ->first();
+                ->first();
         $this->assertNotNull($cashAccount, 'Cash account was not created');
 
-        $payableAccount = ChartOfAccount:: //where('organization_id', $organization->id)
+        $payableAccount = ChartOfAccount:: // where('organization_id', $organization->id)
             where('name', 'Accounts Payable')
-            ->first();
+                ->first();
         $this->assertNotNull($payableAccount, 'Accounts Payable account was not created');
     }
-
 
     #[Test]
     public function it_skips_account_creation_if_not_requested()
@@ -70,7 +71,7 @@ class SetupChartOfAccountsTest extends TestCase
         $organization = Organization::factory()->create();
         $user->organizations()->attach($organization->id, [
             'roles' => json_encode(['admin']),
-            'organization_unit_id' => null
+            'organization_unit_id' => null,
         ]);
 
         $response = $this->actingAs($user)
@@ -84,7 +85,6 @@ class SetupChartOfAccountsTest extends TestCase
         $this->assertEquals(0, $accounts->count());
     }
 
-
     #[Test]
     public function it_creates_organization_unit_for_accounting_department()
     {
@@ -92,7 +92,7 @@ class SetupChartOfAccountsTest extends TestCase
         $organization = Organization::factory()->create();
         $user->organizations()->attach($organization->id, [
             'roles' => json_encode(['admin']),
-            'organization_unit_id' => null
+            'organization_unit_id' => null,
         ]);
 
         // Create a store to pass the store check

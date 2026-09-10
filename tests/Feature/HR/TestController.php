@@ -9,7 +9,7 @@ class TestController extends Controller
 
     public function test()
     {
-        $this->authorize('test', new \stdClass);
+        $this->authorize('test', new stdClass);
 
         return 'ok';
     }

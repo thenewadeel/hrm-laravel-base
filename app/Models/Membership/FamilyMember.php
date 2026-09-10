@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FamilyMember extends Model
 {
-    use HasFactory, BelongsToOrganization, SoftDeletes;
+    use BelongsToOrganization, HasFactory, SoftDeletes;
 
     protected $fillable = [
         'organization_id',
@@ -42,7 +42,7 @@ class FamilyMember extends Model
         return $this->belongsTo(Member::class, 'primary_member_id');
     }
 
-    public function organization(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function organization(): BelongsTo
     {
         return $this->belongsTo(Organization::class);
     }
@@ -59,16 +59,16 @@ class FamilyMember extends Model
 
     public function isActive(): bool
     {
-        return $this->status === 'active' && 
+        return $this->status === 'active' &&
                $this->primaryMember?->isActive();
     }
 
     public function scopeActive($query)
     {
         return $query->where('status', 'active')
-                    ->whereHas('primaryMember', function ($q) {
-                        $q->active();
-                    });
+            ->whereHas('primaryMember', function ($q) {
+                $q->active();
+            });
     }
 
     public function scopeByRelationship($query, string $relationship)
@@ -80,9 +80,9 @@ class FamilyMember extends Model
     {
         return $query->where(function ($q) use ($search) {
             $q->where('first_name', 'like', "%{$search}%")
-              ->orWhere('last_name', 'like', "%{$search}%")
-              ->orWhere('relationship', 'like', "%{$search}%")
-              ->orWhere('barcode_number', 'like', "%{$search}%");
+                ->orWhere('last_name', 'like', "%{$search}%")
+                ->orWhere('relationship', 'like', "%{$search}%")
+                ->orWhere('barcode_number', 'like', "%{$search}%");
         });
     }
 }

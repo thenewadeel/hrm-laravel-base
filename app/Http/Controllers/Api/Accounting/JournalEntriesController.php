@@ -1,13 +1,14 @@
 <?php
+
 // app/Http/Controllers/Api/Accounting/JournalEntriesController.php
 
 namespace App\Http\Controllers\Api\Accounting;
 
 use App\Http\Controllers\Controller;
-use App\Models\Accounting\JournalEntry;
 use App\Http\Requests\StoreJournalEntryRequest;
 use App\Http\Requests\UpdateJournalEntryRequest;
 use App\Http\Resources\JournalEntryResource;
+use App\Models\Accounting\JournalEntry;
 use App\Services\AccountingService;
 
 class JournalEntriesController extends Controller
@@ -69,7 +70,7 @@ class JournalEntriesController extends Controller
         $journalEntry->update([
             'status' => 'posted',
             'posted_at' => now(),
-            'approved_by' => auth()->id()
+            'approved_by' => auth()->id(),
         ]);
 
         return new JournalEntryResource($journalEntry);

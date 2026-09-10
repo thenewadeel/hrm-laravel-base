@@ -8,7 +8,7 @@ use App\Models\Organization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Membership\FamilyMember>
+ * @extends Factory<FamilyMember>
  */
 class FamilyMemberFactory extends Factory
 {
@@ -30,7 +30,7 @@ class FamilyMemberFactory extends Factory
             'last_name' => $this->faker->lastName,
             'date_of_birth' => $this->faker->dateTimeBetween('-70 years', '-1 year'),
             'gender' => $this->faker->randomElement(['male', 'female', 'other']),
-            'barcode_number' => 'FAM-' . $this->faker->unique()->numerify('##########'),
+            'barcode_number' => 'FAM-'.$this->faker->unique()->numerify('##########'),
             'photo_path' => null,
             'status' => 'active',
             'notes' => $this->faker->optional(0.2)->sentence,
@@ -64,7 +64,7 @@ class FamilyMemberFactory extends Factory
     public function withPhoto(): static
     {
         return $this->state(fn (array $attributes) => [
-            'photo_path' => 'members/family-photos/' . $this->faker->uuid() . '.jpg',
+            'photo_path' => 'members/family-photos/'.$this->faker->uuid().'.jpg',
         ]);
     }
 

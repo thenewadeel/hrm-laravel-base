@@ -7,7 +7,7 @@ use App\Models\SalaryAdvance;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\SalaryAdvance>
+ * @extends Factory<SalaryAdvance>
  */
 class SalaryAdvanceFactory extends Factory
 {

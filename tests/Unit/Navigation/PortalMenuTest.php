@@ -1,8 +1,9 @@
 <?php
 
 use App\View\Components\Navigation\PortalMenu;
-use Tests\TestCase;
+use Illuminate\Contracts\View\View;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class PortalMenuTest extends TestCase
 {
@@ -30,6 +31,6 @@ class PortalMenuTest extends TestCase
         $component = new PortalMenu;
 
         expect(method_exists($component, 'render'))->toBeTrue();
-        expect($component->render())->toBeInstanceOf(\Illuminate\Contracts\View\View::class);
+        expect($component->render())->toBeInstanceOf(View::class);
     }
 }

@@ -45,7 +45,7 @@ class MemberFee extends Model
         return $this->belongsTo(Member::class);
     }
 
-    public function organization(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function organization(): BelongsTo
     {
         return $this->belongsTo(Organization::class);
     }

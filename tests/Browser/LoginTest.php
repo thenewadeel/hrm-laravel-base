@@ -2,6 +2,9 @@
 
 namespace Tests\Browser;
 
+use App\Models\Organization;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
@@ -36,12 +39,12 @@ class LoginTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             // Create a user and organization
-            $user = \App\Models\User::factory()->create([
+            $user = User::factory()->create([
                 'email' => 'test@example.com',
-                'password' => \Illuminate\Support\Facades\Hash::make('password'),
+                'password' => Hash::make('password'),
             ]);
 
-            $organization = \App\Models\Organization::factory()->create();
+            $organization = Organization::factory()->create();
 
             // Attach user to organization
             $organization->users()->attach($user->id, [

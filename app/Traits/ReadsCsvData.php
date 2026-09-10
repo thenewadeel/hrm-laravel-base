@@ -1,9 +1,8 @@
 <?php
+
 // app/Traits/ReadsCsvData.php
 
 namespace App\Traits;
-
-use Illuminate\Support\Facades\Storage;
 
 trait ReadsCsvData
 {
@@ -11,7 +10,7 @@ trait ReadsCsvData
     {
         $fullPath = database_path("data/{$filePath}");
 
-        if (!file_exists($fullPath)) {
+        if (! file_exists($fullPath)) {
             throw new \Exception("CSV file not found: {$fullPath}");
         }
 
@@ -20,8 +19,9 @@ trait ReadsCsvData
 
         if (($handle = fopen($fullPath, 'r')) !== false) {
             while (($row = fgetcsv($handle)) !== false) {
-                if (!$header) {
+                if (! $header) {
                     $header = $row;
+
                     continue;
                 }
 
@@ -39,7 +39,7 @@ trait ReadsCsvData
     {
         $fullPath = database_path("data/{$filePath}");
 
-        if (!file_exists($fullPath)) {
+        if (! file_exists($fullPath)) {
             throw new \Exception("JSON file not found: {$fullPath}");
         }
 

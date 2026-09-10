@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Accounting\BankAccount;
+use App\Models\Accounting\BankTransaction;
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Organization;
 use App\Models\User;
@@ -73,7 +74,7 @@ test('bank account has chart of account relationship', function () {
     $chartOfAccount = ChartOfAccount::factory()->create(['organization_id' => $organization->id]);
     $bankAccount = BankAccount::factory()->create([
         'chart_of_account_id' => $chartOfAccount->id,
-        'organization_id' => $organization->id
+        'organization_id' => $organization->id,
     ]);
 
     expect($bankAccount->chartOfAccount)->toBeInstanceOf(ChartOfAccount::class);
@@ -82,7 +83,7 @@ test('bank account has chart of account relationship', function () {
 
 test('bank account can have bank transactions', function () {
     $bankAccount = BankAccount::factory()->create();
-    $transaction = \App\Models\Accounting\BankTransaction::factory()
+    $transaction = BankTransaction::factory()
         ->create(['bank_account_id' => $bankAccount->id]);
 
     expect($bankAccount->bankTransactions)->toHaveCount(1);

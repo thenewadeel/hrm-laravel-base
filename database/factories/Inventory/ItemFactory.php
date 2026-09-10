@@ -2,12 +2,14 @@
 
 namespace Database\Factories\Inventory;
 
+use App\Models\Inventory\Item;
 use App\Models\Organization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ItemFactory extends Factory
 {
-    protected $model = \App\Models\Inventory\Item::class;
+    protected $model = Item::class;
+
     public function definition(): array
     {
         return [
@@ -21,7 +23,7 @@ class ItemFactory extends Factory
             'selling_price' => $this->faker->numberBetween(1000, 10000),
             'reorder_level' => 10,
             'is_active' => true,
-            'head_id' => null
+            'head_id' => null,
         ];
     }
 }

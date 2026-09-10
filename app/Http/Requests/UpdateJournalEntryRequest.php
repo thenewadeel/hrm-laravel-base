@@ -1,4 +1,5 @@
 <?php
+
 // app/Http/Requests/UpdateJournalEntryRequest.php
 
 namespace App\Http\Requests;
@@ -31,7 +32,7 @@ class UpdateJournalEntryRequest extends FormRequest
             'entries' => ['sometimes', 'array', 'min:2'],
             'entries.*.account_id' => [
                 'required_with:entries',
-                'exists:chart_of_accounts,id'
+                'exists:chart_of_accounts,id',
             ],
             'entries.*.type' => ['required_with:entries', Rule::in(['debit', 'credit'])],
             'entries.*.amount' => ['required_with:entries', 'numeric', 'min:0.01', 'max:9999999.99'],
@@ -62,7 +63,7 @@ class UpdateJournalEntryRequest extends FormRequest
                 if (abs($totalDebits - $totalCredits) > 0.001) {
                     $validator->errors()->add(
                         'entries',
-                        "Debits must equal credits. Difference: " . abs($totalDebits - $totalCredits)
+                        'Debits must equal credits. Difference: '.abs($totalDebits - $totalCredits)
                     );
                 }
             }

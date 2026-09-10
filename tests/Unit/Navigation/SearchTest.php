@@ -1,8 +1,9 @@
 <?php
 
 use App\View\Components\Navigation\Search;
-use Tests\TestCase;
+use Illuminate\Contracts\View\View;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class SearchTest extends TestCase
 {
@@ -115,6 +116,6 @@ class SearchTest extends TestCase
         $component = new Search;
 
         expect(method_exists($component, 'render'))->toBeTrue();
-        expect($component->render())->toBeInstanceOf(\Illuminate\Contracts\View\View::class);
+        expect($component->render())->toBeInstanceOf(View::class);
     }
 }

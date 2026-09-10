@@ -9,6 +9,7 @@ use App\Http\Controllers\Payroll\EnhancedPayrollController;
 use App\Http\Controllers\Payroll\PayrollController;
 use App\Http\Controllers\Portal\EmployeePortalController;
 use App\Http\Controllers\Portal\ManagerPortalController;
+use App\Livewire\Payroll\AdvanceReports;
 use Illuminate\Support\Facades\Route;
 
 // -------------------
@@ -59,7 +60,7 @@ Route::prefix('payroll')->name('payroll.')->group(function () {
     Route::get('/advances', [EnhancedPayrollController::class, 'advances'])->name('advances');
     Route::post('/advances', [EnhancedPayrollController::class, 'storeAdvance'])->name('advances.store');
     Route::post('/advances/{advance}/approve', [EnhancedPayrollController::class, 'approveAdvance'])->name('advances.approve');
-    Route::get('/advance-reports', \App\Livewire\Payroll\AdvanceReports::class)->name('advance-reports');
+    Route::get('/advance-reports', AdvanceReports::class)->name('advance-reports');
 
     // Tax Configuration
     Route::get('/tax', [EnhancedPayrollController::class, 'taxConfiguration'])->name('tax');
@@ -108,13 +109,13 @@ Route::prefix('hr')->group(function () {
     ]);
 
     // Additional routes for employee management
-    Route::put('employees/{employee}/biometric', [\App\Http\Controllers\HR\EmployeeController::class, 'updateBiometric'])
+    Route::put('employees/{employee}/biometric', [EmployeeController::class, 'updateBiometric'])
         ->name('hr.employees.update-biometric');
 
-    Route::post('employees/{employee}/grant-access', [\App\Http\Controllers\HR\EmployeeController::class, 'grantSystemAccess'])
+    Route::post('employees/{employee}/grant-access', [EmployeeController::class, 'grantSystemAccess'])
         ->name('hr.employees.grant-access');
 
-    Route::post('employees/without-user', [\App\Http\Controllers\HR\EmployeeController::class, 'storeWithoutUser'])
+    Route::post('employees/without-user', [EmployeeController::class, 'storeWithoutUser'])
         ->name('hr.employees.store-without-user');
 
     // Job Positions Routes

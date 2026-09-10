@@ -2,10 +2,14 @@
 
 namespace Database\Factories\Accounting;
 
+use App\Models\Accounting\TaxCalculation;
+use App\Models\Accounting\TaxRate;
+use App\Models\Accounting\Voucher;
+use App\Models\Organization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Accounting\TaxCalculation>
+ * @extends Factory<TaxCalculation>
  */
 class TaxCalculationFactory extends Factory
 {
@@ -17,10 +21,10 @@ class TaxCalculationFactory extends Factory
     public function definition(): array
     {
         return [
-            'organization_id' => \App\Models\Organization::factory(),
-            'calculable_type' => \App\Models\Accounting\Voucher::class,
-            'calculable_id' => \App\Models\Accounting\Voucher::factory(),
-            'tax_rate_id' => \App\Models\Accounting\TaxRate::factory(),
+            'organization_id' => Organization::factory(),
+            'calculable_type' => Voucher::class,
+            'calculable_id' => Voucher::factory(),
+            'tax_rate_id' => TaxRate::factory(),
             'tax_exemption_id' => null,
             'base_amount' => fake()->randomFloat(2, 100, 10000),
             'taxable_amount' => fake()->randomFloat(2, 100, 10000),

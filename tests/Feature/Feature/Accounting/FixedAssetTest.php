@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Accounting\AssetMaintenance;
+use App\Models\Accounting\AssetTransfer;
 use App\Models\Accounting\ChartOfAccount;
+use App\Models\Accounting\Depreciation;
 use App\Models\Accounting\FixedAsset;
 use App\Models\Accounting\FixedAssetCategory;
 use App\Models\Organization;
@@ -140,7 +143,7 @@ test('can post depreciation for asset', function () {
     $fixedAssetService = app(FixedAssetService::class);
     $depreciation = $fixedAssetService->postDepreciation($asset);
 
-    expect($depreciation)->toBeInstanceOf(\App\Models\Accounting\Depreciation::class);
+    expect($depreciation)->toBeInstanceOf(Depreciation::class);
     expect($depreciation->depreciation_amount)->toBeGreaterThan(0);
 
     $asset->refresh();
@@ -203,7 +206,7 @@ test('can transfer asset between locations', function () {
     $fixedAssetService = app(FixedAssetService::class);
     $transfer = $fixedAssetService->transferAsset($asset, $transferData);
 
-    expect($transfer)->toBeInstanceOf(\App\Models\Accounting\AssetTransfer::class);
+    expect($transfer)->toBeInstanceOf(AssetTransfer::class);
 
     $asset->refresh();
     expect($asset->location)->toBe('Branch Office');
@@ -232,7 +235,7 @@ test('can record asset maintenance', function () {
     $fixedAssetService = app(FixedAssetService::class);
     $maintenance = $fixedAssetService->recordMaintenance($asset, $maintenanceData);
 
-    expect($maintenance)->toBeInstanceOf(\App\Models\Accounting\AssetMaintenance::class);
+    expect($maintenance)->toBeInstanceOf(AssetMaintenance::class);
     expect($maintenance->cost)->toBe(150.00);
     expect($maintenance->maintenance_type)->toBe('repair');
 });

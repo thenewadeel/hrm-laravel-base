@@ -9,6 +9,7 @@ use App\Models\Membership\MemberFee;
 use App\Models\Organization;
 use App\Models\User;
 use App\Services\Accounting\FeeDistributionService;
+use App\Services\AccountingService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 
@@ -68,7 +69,7 @@ test('fee distribution service distributes fee successfully', function () {
         'fixed_amount' => null,
     ]);
 
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $result = $service->distributeFee($fee);
 
     expect($result->status)->toBe('success');
@@ -119,7 +120,7 @@ test('fee distribution service handles fixed amount distribution', function () {
         'fixed_amount' => 400,
     ]);
 
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $result = $service->distributeFee($fee);
 
     expect($result->status)->toBe('success');
@@ -170,7 +171,7 @@ test('fee distribution service handles mixed distribution types', function () {
         'fixed_amount' => 200,
     ]);
 
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $result = $service->distributeFee($fee);
 
     expect($result->status)->toBe('success');
@@ -222,7 +223,7 @@ test('fee distribution service respects rule conditions', function () {
         'percentage' => 100,
     ]);
 
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $result = $service->distributeFee($fee);
 
     expect($result->status)->toBe('success');
@@ -277,7 +278,7 @@ test('fee distribution service respects rule priority', function () {
         'percentage' => 100,
     ]);
 
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $result = $service->distributeFee($fee);
 
     expect($result->status)->toBe('success');
@@ -316,7 +317,7 @@ test('fee distribution service handles batch distribution', function () {
         'percentage' => 100,
     ]);
 
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $results = $service->distributeBatch($fees->pluck('id')->toArray());
 
     expect($results)->toHaveCount(3);
@@ -330,7 +331,7 @@ test('fee distribution service handles batch distribution', function () {
 
 // RED: Test batch distribution with missing fees
 test('fee distribution service handles batch distribution with missing fees', function () {
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $results = $service->distributeBatch([999, 1000]);
 
     expect($results)->toHaveCount(2);
@@ -351,7 +352,7 @@ test('fee distribution service validates rules correctly', function () {
         'fixed_amount' => 50,
     ]);
 
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $errors = $service->validateRule($rule);
 
     expect($errors)->toBeArray();
@@ -362,7 +363,7 @@ test('fee distribution service validates rules correctly', function () {
 test('fee distribution service detects rules with no items', function () {
     $rule = FeeDistributionRule::factory()->create();
 
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $errors = $service->validateRule($rule);
 
     expect($errors)->toContain('Rule must have at least one distribution item');
@@ -384,7 +385,7 @@ test('fee distribution service detects invalid percentage totals', function () {
         'percentage' => 30, // Total: 110%
     ]);
 
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $errors = $service->validateRule($rule);
 
     expect($errors)->toContain('Total percentage distribution cannot exceed 100%');
@@ -400,7 +401,7 @@ test('fee distribution service detects incomplete percentage totals', function (
         'percentage' => 80, // Only 80%, should be 100%
     ]);
 
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $errors = $service->validateRule($rule);
 
     expect($errors)->toContain('Total percentage distribution should equal 100%');
@@ -422,7 +423,7 @@ test('fee distribution service provides distribution summary', function () {
         'total_amount' => 500,
     ]);
 
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $summary = $service->getDistributionSummary($organization->id);
 
     expect($summary['total_distributed'])->toBe(4000.0); // 3 * 1000 + 2 * 500
@@ -448,7 +449,7 @@ test('fee distribution service provides filtered distribution summary', function
         'distributed_at' => now(),
     ]);
 
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $summary = $service->getDistributionSummary($organization->id, [
         'date_from' => now()->subDays(5)->format('Y-m-d'),
         'date_to' => now()->addDays(5)->format('Y-m-d'),
@@ -479,7 +480,7 @@ test('fee distribution service rolls back transaction on failure', function () {
     $initialLogCount = FeeDistributionLog::count();
     $initialJournalCount = JournalEntry::count();
 
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $result = $service->distributeFee($fee);
 
     expect($result->status)->toBe('failed');
@@ -506,7 +507,7 @@ test('fee distribution service respects organization isolation', function () {
         'is_active' => true,
     ]);
 
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $result = $service->distributeFee($fee);
 
     expect($result->status)->toBe('failed');

@@ -12,21 +12,21 @@ class SearchVariableTest extends DuskTestCase
         $this->browse(function ($browser) {
             // Test employee create page
             $browser->visit('/hr/employees/create')
-                    ->waitForText('Employee Management', 10)
-                    ->assertScript('typeof window.Alpine !== "undefined"')
-                    ->assertScript('document.querySelector("[x-data]") !== null');
+                ->waitForText('Employee Management', 10)
+                ->assertScript('typeof window.Alpine !== "undefined"')
+                ->assertScript('document.querySelector("[x-data]") !== null');
 
             // Test employee show page
             $browser->visit('/hr/employees/1')
-                    ->waitForText('Employee Profile', 10)
-                    ->assertScript('typeof window.Alpine !== "undefined"')
-                    ->assertScript('document.querySelector("[x-data]") !== null');
+                ->waitForText('Employee Profile', 10)
+                ->assertScript('typeof window.Alpine !== "undefined"')
+                ->assertScript('document.querySelector("[x-data]") !== null');
 
             // Test employee edit page
             $browser->visit('/hr/employees/1/edit')
-                    ->waitForText('Edit Employee', 10)
-                    ->assertScript('typeof window.Alpine !== "undefined"')
-                    ->assertScript('document.querySelector("[x-data]") !== null');
+                ->waitForText('Edit Employee', 10)
+                ->assertScript('typeof window.Alpine !== "undefined"')
+                ->assertScript('document.querySelector("[x-data]") !== null');
         });
     }
 
@@ -38,9 +38,9 @@ class SearchVariableTest extends DuskTestCase
         $this->browse(function ($browser) {
             // Test bank statements page
             $browser->visit('/accounts/bank-statements')
-                    ->waitForText('Bank Statements', 10)
-                    ->assertScript('typeof window.Alpine !== "undefined"')
-                    ->assertScript('document.querySelector("[x-data]") !== null');
+                ->waitForText('Bank Statements', 10)
+                ->assertScript('typeof window.Alpine !== "undefined"')
+                ->assertScript('document.querySelector("[x-data]") !== null');
         });
     }
 
@@ -51,8 +51,8 @@ class SearchVariableTest extends DuskTestCase
     {
         $this->browse(function ($browser) {
             $browser->visit('/hr/employees/create')
-                    ->waitForText('Employee Management', 10)
-                    ->waitUntil("
+                ->waitForText('Employee Management', 10)
+                ->waitUntil("
                         return (() => {
                             // Check for Alpine.js errors in console
                             const errors = [];

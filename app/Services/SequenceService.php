@@ -1,10 +1,10 @@
 <?php
+
 // app/Services/SequenceService.php
 
 namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class SequenceService
 {
@@ -16,7 +16,7 @@ class SequenceService
                 ->lockForUpdate()
                 ->first();
 
-            if (!$sequence) {
+            if (! $sequence) {
                 throw new \InvalidArgumentException("Sequence '{$sequenceName}' not found");
             }
 
@@ -47,7 +47,7 @@ class SequenceService
             return [
                 'value' => $nextValue,
                 'formatted' => $formattedCode,
-                'sequence_data' => (array) $sequence
+                'sequence_data' => (array) $sequence,
             ];
         });
     }
@@ -79,6 +79,6 @@ class SequenceService
 
         $number = str_pad($value, $padLength, '0', STR_PAD_LEFT);
 
-        return $prefix . $number . $suffix;
+        return $prefix.$number.$suffix;
     }
 }

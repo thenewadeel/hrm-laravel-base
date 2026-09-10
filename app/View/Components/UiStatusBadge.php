@@ -9,6 +9,7 @@ use Illuminate\View\Component;
 class UiStatusBadge extends Component
 {
     public string $status;
+
     public ?string $customLabel;
 
     public function __construct(string $status, ?string $customLabel = null)
@@ -24,7 +25,7 @@ class UiStatusBadge extends Component
 
     public function getColor(): string
     {
-        return match($this->status) {
+        return match ($this->status) {
             'active', 'completed', 'success' => 'green',
             'inactive', 'failed', 'error' => 'red',
             'pending', 'warning' => 'yellow',

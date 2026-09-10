@@ -6,40 +6,42 @@ use App\Livewire\OrganizationTree;
 use App\Models\OrganizationUnit;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
 
 class OrganizationTreeTest extends TestCase
 {
     use RefreshDatabase, SetupOrganization;
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->setupOrganization();
     }
+
     #[Test]
     public function it_can_display_the_organization_tree()
     {
         // 1. Arrange: Create a sample organization tree structure.
         $root = OrganizationUnit::factory()->create([
             'name' => 'CEO Office',
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
         $child1 = OrganizationUnit::factory()->create([
-            'name' => 'Marketing', 
+            'name' => 'Marketing',
             'parent_id' => $root->id,
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
         $grandchild = OrganizationUnit::factory()->create([
-            'name' => 'Social Media', 
+            'name' => 'Social Media',
             'parent_id' => $child1->id,
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
         $child2 = OrganizationUnit::factory()->create([
-            'name' => 'Sales', 
+            'name' => 'Sales',
             'parent_id' => $root->id,
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
 
         // 2. Act: Render the Livewire component with organization filter.
@@ -57,22 +59,22 @@ class OrganizationTreeTest extends TestCase
         // 1. Arrange: Create a sample organization tree.
         $ceoOffice = OrganizationUnit::factory()->create([
             'name' => 'CEO Office',
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
         $marketing = OrganizationUnit::factory()->create([
-            'name' => 'Marketing', 
+            'name' => 'Marketing',
             'parent_id' => $ceoOffice->id,
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
         $sales = OrganizationUnit::factory()->create([
-            'name' => 'Sales', 
+            'name' => 'Sales',
             'parent_id' => $ceoOffice->id,
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
         $hr = OrganizationUnit::factory()->create([
-            'name' => 'HR', 
+            'name' => 'HR',
             'parent_id' => $ceoOffice->id,
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
 
         // 2. Act: Simulate the drag-and-drop event.
@@ -86,14 +88,13 @@ class OrganizationTreeTest extends TestCase
         $this->assertNotEquals($ceoOffice->id, $marketing->fresh()->parent_id);
     }
 
-
     #[Test]
     public function an_organizational_unit_cannot_be_dropped_onto_itself()
     {
         // Arrange
         $unit = OrganizationUnit::factory()->create([
             'name' => 'Department A',
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
 
         // Act
@@ -110,12 +111,12 @@ class OrganizationTreeTest extends TestCase
         // Arrange
         $root = OrganizationUnit::factory()->create([
             'name' => 'Root',
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
         $child = OrganizationUnit::factory()->create([
-            'name' => 'Child', 
+            'name' => 'Child',
             'parent_id' => $root->id,
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
 
         // Act
@@ -132,22 +133,22 @@ class OrganizationTreeTest extends TestCase
         // Arrange
         $grandparent = OrganizationUnit::factory()->create([
             'name' => 'Grandparent',
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
         $parent = OrganizationUnit::factory()->create([
-            'name' => 'Parent', 
+            'name' => 'Parent',
             'parent_id' => $grandparent->id,
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
         $child = OrganizationUnit::factory()->create([
-            'name' => 'Child', 
+            'name' => 'Child',
             'parent_id' => $parent->id,
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
         $grandchild = OrganizationUnit::factory()->create([
-            'name' => 'Grandchild', 
+            'name' => 'Grandchild',
             'parent_id' => $child->id,
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
 
         // Assert: The 'Grandparent' should not be able to be dropped on 'Grandchild'
@@ -163,17 +164,17 @@ class OrganizationTreeTest extends TestCase
         // Arrange
         $root = OrganizationUnit::factory()->create([
             'name' => 'Root',
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
         $siblingA = OrganizationUnit::factory()->create([
-            'name' => 'Sibling A', 
+            'name' => 'Sibling A',
             'parent_id' => $root->id,
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
         $siblingB = OrganizationUnit::factory()->create([
-            'name' => 'Sibling B', 
+            'name' => 'Sibling B',
             'parent_id' => $root->id,
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
 
         // Act
@@ -201,7 +202,7 @@ class OrganizationTreeTest extends TestCase
     {
         // Arrange
         OrganizationUnit::factory()->count(100)->create([
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ]);
 
         // Act & Assert: Just rendering the component should work without errors
@@ -215,7 +216,7 @@ class OrganizationTreeTest extends TestCase
         // Arrange
         $nonExistentId = 9999;
         $targetId = OrganizationUnit::factory()->create([
-            'organization_id' => $this->organization->id
+            'organization_id' => $this->organization->id,
         ])->id;
 
         // Act

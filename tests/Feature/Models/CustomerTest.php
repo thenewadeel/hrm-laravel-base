@@ -10,7 +10,7 @@ uses(RefreshDatabase::class);
 test('customer can be created with financial fields', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create(['current_organization_id' => $organization->id]);
-    
+
     $customer = Customer::factory()->create([
         'organization_id' => $organization->id,
         'name' => 'Test Customer',
@@ -49,9 +49,9 @@ test('customer belongs to organization', function () {
 
 test('customer uses soft deletes', function () {
     $customer = Customer::factory()->create();
-    
+
     $customer->delete();
-    
+
     expect($customer->trashed())->toBeTrue();
     expect(Customer::find($customer->id))->toBeNull();
     expect(Customer::withTrashed()->find($customer->id))->not->toBeNull();
@@ -75,38 +75,38 @@ test('customer casts financial fields correctly', function () {
 
 test('customer scope active works correctly', function () {
     $organization = Organization::factory()->create();
-    
+
     $activeCustomer = Customer::factory()->create([
         'organization_id' => $organization->id,
         'is_active' => true,
     ]);
-    
+
     $inactiveCustomer = Customer::factory()->create([
         'organization_id' => $organization->id,
         'is_active' => false,
     ]);
 
     $activeCustomers = Customer::active()->get();
-    
+
     expect($activeCustomers)->toHaveCount(1);
     expect($activeCustomers->first()->id)->toBe($activeCustomer->id);
 });
 
 test('customer scope with balance works correctly', function () {
     $organization = Organization::factory()->create();
-    
+
     $highBalanceCustomer = Customer::factory()->create([
         'organization_id' => $organization->id,
         'current_balance' => 5000.00,
     ]);
-    
+
     $lowBalanceCustomer = Customer::factory()->create([
         'organization_id' => $organization->id,
         'current_balance' => 1000.00,
     ]);
-    
+
     $highBalanceCustomers = Customer::withBalance('>', 3000.00)->get();
-    
+
     expect($highBalanceCustomers)->toHaveCount(1);
     expect($highBalanceCustomers->first()->id)->toBe($highBalanceCustomer->id);
 });
@@ -121,7 +121,7 @@ test('customer full address concatenates correctly', function () {
     ]);
 
     $expectedAddress = '123 Main St, Test City, TX, 12345, US';
-    
+
     expect($customer->full_address)->toBe($expectedAddress);
 });
 

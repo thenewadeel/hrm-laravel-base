@@ -185,9 +185,9 @@ trait HandlesJavaScriptErrors
      */
     protected function getJavaScriptErrors(Browser $browser): array
     {
-        return $this->executeScript($browser, "
+        return $this->executeScript($browser, '
             return window.__duskErrorMonitor ? window.__duskErrorMonitor.errors : [];
-        ");
+        ');
     }
 
     /**
@@ -195,9 +195,9 @@ trait HandlesJavaScriptErrors
      */
     protected function getJavaScriptWarnings(Browser $browser): array
     {
-        return $this->executeScript($browser, "
+        return $this->executeScript($browser, '
             return window.__duskErrorMonitor ? window.__duskErrorMonitor.warnings : [];
-        ");
+        ');
     }
 
     /**
@@ -205,9 +205,9 @@ trait HandlesJavaScriptErrors
      */
     protected function getNetworkErrors(Browser $browser): array
     {
-        return $this->executeScript($browser, "
+        return $this->executeScript($browser, '
             return window.__duskErrorMonitor ? window.__duskErrorMonitor.networkErrors : [];
-        ");
+        ');
     }
 
     /**
@@ -215,9 +215,9 @@ trait HandlesJavaScriptErrors
      */
     protected function getUnhandledRejections(Browser $browser): array
     {
-        return $this->executeScript($browser, "
+        return $this->executeScript($browser, '
             return window.__duskErrorMonitor ? window.__duskErrorMonitor.unhandledRejections : [];
-        ");
+        ');
     }
 
     /**
@@ -226,8 +226,8 @@ trait HandlesJavaScriptErrors
     protected function assertNoJavaScriptErrors(Browser $browser): void
     {
         $errors = $this->getJavaScriptErrors($browser);
-        
-        if (!empty($errors)) {
+
+        if (! empty($errors)) {
             $errorMessages = array_map(function ($error) {
                 return "[{$error['type']}] {$error['message']} at {$error['source']}:{$error['line']}:{$error['column']}";
             }, $errors);
@@ -242,8 +242,8 @@ trait HandlesJavaScriptErrors
     protected function assertNoJavaScriptWarnings(Browser $browser): void
     {
         $warnings = $this->getJavaScriptWarnings($browser);
-        
-        if (!empty($warnings)) {
+
+        if (! empty($warnings)) {
             $warningMessages = array_map(function ($warning) {
                 return "[{$warning['type']}] {$warning['message']}";
             }, $warnings);
@@ -258,8 +258,8 @@ trait HandlesJavaScriptErrors
     protected function assertNoNetworkErrors(Browser $browser): void
     {
         $networkErrors = $this->getNetworkErrors($browser);
-        
-        if (!empty($networkErrors)) {
+
+        if (! empty($networkErrors)) {
             $errorMessages = array_map(function ($error) {
                 return "[{$error['type']}] {$error['method']} {$error['url']}: {$error['error']}";
             }, $networkErrors);
@@ -274,8 +274,8 @@ trait HandlesJavaScriptErrors
     protected function assertNoUnhandledRejections(Browser $browser): void
     {
         $rejections = $this->getUnhandledRejections($browser);
-        
-        if (!empty($rejections)) {
+
+        if (! empty($rejections)) {
             $rejectionMessages = array_map(function ($rejection) {
                 return "[{$rejection['type']}] {$rejection['reason']}";
             }, $rejections);
@@ -301,9 +301,9 @@ trait HandlesJavaScriptErrors
     protected function getJavaScriptErrorsByPattern(Browser $browser, string $pattern): array
     {
         $errors = $this->getJavaScriptErrors($browser);
-        
+
         return array_filter($errors, function ($error) use ($pattern) {
-            return preg_match('/' . preg_quote($pattern, '/') . '/i', $error['message']);
+            return preg_match('/'.preg_quote($pattern, '/').'/i', $error['message']);
         });
     }
 
@@ -313,8 +313,8 @@ trait HandlesJavaScriptErrors
     protected function assertNoJavaScriptErrorPattern(Browser $browser, string $pattern): void
     {
         $errors = $this->getJavaScriptErrorsByPattern($browser, $pattern);
-        
-        if (!empty($errors)) {
+
+        if (! empty($errors)) {
             $errorMessages = array_map(function ($error) {
                 return "[{$error['type']}] {$error['message']}";
             }, $errors);
@@ -585,7 +585,7 @@ trait HandlesJavaScriptErrors
      */
     protected function clearJavaScriptErrorMonitoring(Browser $browser): void
     {
-        $this->executeScript($browser, "
+        $this->executeScript($browser, '
             if (window.__duskErrorMonitor) {
                 window.__duskErrorMonitor.errors = [];
                 window.__duskErrorMonitor.warnings = [];
@@ -593,7 +593,7 @@ trait HandlesJavaScriptErrors
                 window.__duskErrorMonitor.networkErrors = [];
                 window.__duskErrorMonitor.unhandledRejections = [];
             }
-        ");
+        ');
     }
 
     /**
@@ -603,9 +603,11 @@ trait HandlesJavaScriptErrors
     {
         try {
             $result = $browser->script($script);
+
             return $result[0] ?? null;
         } catch (\Exception $e) {
-            $this->fail("JavaScript execution failed: " . $e->getMessage());
+            $this->fail('JavaScript execution failed: '.$e->getMessage());
+
             return null;
         }
     }

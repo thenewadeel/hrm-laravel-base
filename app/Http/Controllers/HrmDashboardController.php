@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class HrmDashboardController extends Controller
@@ -38,7 +37,7 @@ class HrmDashboardController extends Controller
                 'Marketing' => 18,
                 'Operations' => 35,
                 'Finance' => 10,
-            ]
+            ],
         ];
     }
 
@@ -54,7 +53,7 @@ class HrmDashboardController extends Controller
                 'present' => [130, 135, 132, 140, 132],
                 'absent' => [8, 5, 8, 2, 6],
                 'late' => [4, 2, 5, 3, 4],
-            ]
+            ],
         ];
     }
 
@@ -83,7 +82,7 @@ class HrmDashboardController extends Controller
                     'end_date' => now()->addDays(2),
                     'status' => 'pending',
                 ],
-            ]
+            ],
         ];
     }
 
@@ -107,7 +106,7 @@ class HrmDashboardController extends Controller
                     'avatar' => 'https://ui-avatars.com/api/?name=Emily+Davis&background=6C5CE7&color=fff',
                 ],
             ],
-            'improvement_areas' => ['Customer Service', 'Project Management', 'Technical Skills']
+            'improvement_areas' => ['Customer Service', 'Project Management', 'Technical Skills'],
         ];
     }
 

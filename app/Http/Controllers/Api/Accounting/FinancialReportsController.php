@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api\Accounting;
 
 use App\Http\Controllers\Controller;
 use App\Services\AccountingReportService;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class FinancialReportsController extends Controller
 {
@@ -32,11 +32,11 @@ class FinancialReportsController extends Controller
 
             return response()->json([
                 'data' => $trialBalance,
-                'message' => 'Trial balance generated successfully'
+                'message' => 'Trial balance generated successfully',
             ]);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Failed to generate trial balance: ' . $e->getMessage()
+                'message' => 'Failed to generate trial balance: '.$e->getMessage(),
             ], 500);
         }
     }
@@ -57,11 +57,11 @@ class FinancialReportsController extends Controller
 
             return response()->json([
                 'data' => $balanceSheet,
-                'message' => 'Balance sheet generated successfully'
+                'message' => 'Balance sheet generated successfully',
             ]);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Failed to generate balance sheet: ' . $e->getMessage()
+                'message' => 'Failed to generate balance sheet: '.$e->getMessage(),
             ], 500);
         }
     }
@@ -84,11 +84,11 @@ class FinancialReportsController extends Controller
 
             return response()->json([
                 'data' => $incomeStatement,
-                'message' => 'Income statement generated successfully'
+                'message' => 'Income statement generated successfully',
             ]);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Failed to generate income statement: ' . $e->getMessage()
+                'message' => 'Failed to generate income statement: '.$e->getMessage(),
             ], 500);
         }
     }

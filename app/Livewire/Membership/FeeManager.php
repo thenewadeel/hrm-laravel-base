@@ -5,6 +5,7 @@ namespace App\Livewire\Membership;
 use App\Models\Membership\Member;
 use App\Models\Membership\MemberFee;
 use App\Services\Membership\FeeService;
+use Illuminate\Support\Collection;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -364,7 +365,7 @@ class FeeManager extends Component
         $this->resetPage();
     }
 
-    public function getOverdueFeesProperty(): \Illuminate\Support\Collection
+    public function getOverdueFeesProperty(): Collection
     {
         return app(FeeService::class)->getOverdueFees(auth()->user()->current_organization_id);
     }

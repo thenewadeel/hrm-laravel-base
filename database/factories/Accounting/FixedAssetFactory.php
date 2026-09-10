@@ -2,12 +2,14 @@
 
 namespace Database\Factories\Accounting;
 
+use App\Models\Accounting\ChartOfAccount;
+use App\Models\Accounting\FixedAsset;
 use App\Models\Accounting\FixedAssetCategory;
 use App\Models\Organization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Accounting\FixedAsset>
+ * @extends Factory<FixedAsset>
  */
 class FixedAssetFactory extends Factory
 {
@@ -24,8 +26,8 @@ class FixedAssetFactory extends Factory
         return [
             'organization_id' => Organization::factory(),
             'fixed_asset_category_id' => FixedAssetCategory::factory(),
-            'chart_of_account_id' => \App\Models\Accounting\ChartOfAccount::factory(),
-            'accumulated_depreciation_account_id' => \App\Models\Accounting\ChartOfAccount::factory(),
+            'chart_of_account_id' => ChartOfAccount::factory(),
+            'accumulated_depreciation_account_id' => ChartOfAccount::factory(),
             'asset_tag' => 'AST-'.$this->faker->unique()->numerify('#####'),
             'name' => $this->faker->words(3, true),
             'description' => $this->faker->sentence(),

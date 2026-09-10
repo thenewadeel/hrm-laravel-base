@@ -1,24 +1,26 @@
 <?php
+
 // tests/Feature/Livewire/Organization/OrganizationFormTest.php
 
 namespace Tests\Feature\Livewire\Organization;
 
 use App\Models\Organization;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
-use PHPUnit\Framework\Attributes\Test;
 
 class OrganizationFormTest extends TestCase
 {
     use RefreshDatabase, SetupOrganization;
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->setupOrganization();
     }
+
     #[Test]
     public function it_shows_create_form()
     {
@@ -52,7 +54,6 @@ class OrganizationFormTest extends TestCase
     public function it_creates_new_organization()
     {
         [$organization, $user] = [$this->organization, $this->user];
-
 
         Livewire::actingAs($user)
             ->test('organization.organization-form')

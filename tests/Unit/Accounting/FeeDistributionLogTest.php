@@ -4,13 +4,16 @@ use App\Models\Accounting\FeeDistributionLog;
 use App\Models\Accounting\FeeDistributionRule;
 use App\Models\Accounting\JournalEntry;
 use App\Models\Membership\MemberFee;
+use App\Models\Organization;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
 // RED: Test that FeeDistributionLog can be created with required fields
 test('fee distribution log can be created with required fields', function () {
-    $organization = \App\Models\Organization::factory()->create();
+    $organization = Organization::factory()->create();
     $memberFee = MemberFee::factory()->create();
     $rule = FeeDistributionRule::factory()->create();
 
@@ -32,7 +35,7 @@ test('fee distribution log can be created with required fields', function () {
     expect($log->fee_distribution_rule_id)->toBe($rule->id);
     expect($log->total_amount)->toBe('1000.00');
     expect($log->status)->toBe('success');
-    expect($log->distributed_at)->toBeInstanceOf(\Carbon\Carbon::class);
+    expect($log->distributed_at)->toBeInstanceOf(Carbon::class);
 });
 
 // RED: Test that log belongs to member fee
@@ -55,8 +58,8 @@ test('fee distribution log belongs to rule', function () {
 
 // RED: Test that log belongs to journal entry
 test('fee distribution log belongs to journal entry', function () {
-    $organization = \App\Models\Organization::factory()->create();
-    $user = \App\Models\User::factory()->create(['current_organization_id' => $organization->id]);
+    $organization = Organization::factory()->create();
+    $user = User::factory()->create(['current_organization_id' => $organization->id]);
 
     $journalEntry = JournalEntry::factory()->create([
         'created_by' => $user->id,
@@ -202,13 +205,13 @@ test('distribution breakdown is cast to array', function () {
 test('distributed at is cast to datetime', function () {
     $log = FeeDistributionLog::factory()->create(['distributed_at' => '2025-01-15 10:30:00']);
 
-    expect($log->distributed_at)->toBeInstanceOf(\Carbon\Carbon::class);
+    expect($log->distributed_at)->toBeInstanceOf(Carbon::class);
     expect($log->distributed_at->format('Y-m-d H:i:s'))->toBe('2025-01-15 10:30:00');
 });
 
 // RED: Test organization scoping
 test('fee distribution log belongs to organization', function () {
-    $organization = \App\Models\Organization::factory()->create();
+    $organization = Organization::factory()->create();
     $log = FeeDistributionLog::factory()->create(['organization_id' => $organization->id]);
 
     expect($log->organization_id)->toBe($organization->id);

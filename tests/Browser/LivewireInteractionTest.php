@@ -100,7 +100,7 @@ class LivewireInteractionTest extends DuskTestCase
     {
         $member = Member::factory()->create(['organization_id' => $this->organization->id]);
 
-        $this->browse(function (Browser $browser) use ($member) {
+        $this->browse(function (Browser $browser) {
             $browser->loginAs($this->adminUser)
                 ->visit('/fees')
                 ->waitForLivewireToLoad($browser)
@@ -117,12 +117,12 @@ class LivewireInteractionTest extends DuskTestCase
             // Test form field interactions
             $browser->select('[wire\\:model="fee_type"]', 'subscription')
                 ->pause(200);
-            
+
             $this->assertLivewirePropertyEquals($browser, 'fee-manager', 'fee_type', 'subscription');
 
             $browser->type('[wire\\:model="description"]', 'Test Subscription Fee')
                 ->pause(200);
-            
+
             $this->assertLivewirePropertyEquals($browser, 'fee-manager', 'description', 'Test Subscription Fee');
 
             // Test form closing

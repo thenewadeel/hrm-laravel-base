@@ -54,7 +54,7 @@ class TransactionPolicy
     {
         return $user->hasPermission(InventoryPermissions::CANCEL_TRANSACTIONS) &&
             $user->organizations->contains($transaction->store->organization->id) &&
-            !$transaction->isCancelled();
+            ! $transaction->isCancelled();
     }
 
     public function restore(User $user, Transaction $transaction): bool

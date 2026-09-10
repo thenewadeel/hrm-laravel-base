@@ -50,7 +50,7 @@ trait SetupOrganization
             'organization_id' => $organization->id,
             // 'organization_unit_id' => $organizationUnit->id
         ]);
-        $permissions = \App\Roles\OrganizationRoles::getPermissionsForRole($roles[0]);
+        $permissions = OrganizationRoles::getPermissionsForRole($roles[0]);
 
         // Assign permissions to user for the specific organization
         $user->givePermissionTo($permissions, $organization);

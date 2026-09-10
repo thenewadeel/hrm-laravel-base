@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Membership\BulkMemberUpload;
 use App\Models\Membership\Member;
 use App\Models\Organization;
 use App\Models\User;
@@ -22,7 +23,7 @@ test('bulk member upload component requires create members permission', function
     $user->current_organization_id = $organization->id;
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\BulkMemberUpload::class)
+        ->test(BulkMemberUpload::class)
         ->assertStatus(403);
 });
 
@@ -34,7 +35,7 @@ test('bulk member upload renders correctly', function () {
     $user->current_organization_id = $organization->id;
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\BulkMemberUpload::class)
+        ->test(BulkMemberUpload::class)
         ->assertStatus(200)
         ->assertSee('Bulk Member Upload')
         ->assertSee('Upload Type');
@@ -56,7 +57,7 @@ test('bulk member upload validates upload type', function () {
     $file = UploadedFile::fake()->create('test.csv', 100, 'text/csv');
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\BulkMemberUpload::class)
+        ->test(BulkMemberUpload::class)
         ->set('csvFile', $file)
         ->set('uploadType', 'invalid')
         ->call('uploadCsv')
@@ -98,7 +99,7 @@ test('bulk member upload checks email uniqueness', function () {
     $file = UploadedFile::fake()->createWithContent('members.csv', $csvContent);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\BulkMemberUpload::class)
+        ->test(BulkMemberUpload::class)
         ->set('csvFile', $file)
         ->set('uploadType', 'individual')
         ->call('uploadCsv')
@@ -140,7 +141,7 @@ test('bulk member upload cancels import', function () {
     $file = UploadedFile::fake()->createWithContent('members.csv', $csvContent);
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\BulkMemberUpload::class)
+        ->test(BulkMemberUpload::class)
         ->set('csvFile', $file)
         ->set('uploadType', 'individual')
         ->call('uploadCsv')
@@ -163,7 +164,7 @@ test('bulk member upload handles invalid CSV format', function () {
     $file = UploadedFile::fake()->createWithContent('empty.csv', '');
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\BulkMemberUpload::class)
+        ->test(BulkMemberUpload::class)
         ->set('csvFile', $file)
         ->set('uploadType', 'individual')
         ->call('uploadCsv')

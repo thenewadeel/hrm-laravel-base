@@ -59,7 +59,7 @@ class JournalEntry extends Model
                 $userId = Auth::id();
                 if (! $userId) {
                     // Create or get system user for automated entries
-                    $systemUser = \App\Models\User::firstOrCreate([
+                    $systemUser = User::firstOrCreate([
                         'email' => 'system@hrm.local',
                     ], [
                         'name' => 'System',

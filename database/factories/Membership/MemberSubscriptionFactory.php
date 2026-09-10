@@ -9,7 +9,7 @@ use App\Models\Organization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Membership\MemberSubscription>
+ * @extends Factory<MemberSubscription>
  */
 class MemberSubscriptionFactory extends Factory
 {
@@ -25,7 +25,7 @@ class MemberSubscriptionFactory extends Factory
         $startDate = $this->faker->dateTimeBetween('-1 year', 'now');
         $billingPeriod = $this->faker->randomElement([1, 3, 6, 12]); // months
         $endDate = (clone $startDate)->modify("+{$billingPeriod} months");
-        
+
         return [
             'organization_id' => Organization::factory(),
             'member_id' => Member::factory(),

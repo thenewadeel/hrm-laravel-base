@@ -2,6 +2,10 @@
 
 namespace Tests\Browser\E2E\Concerns;
 
+use App\Models\Accounting\ChartOfAccount;
+use App\Models\Employee;
+use App\Models\Inventory\Item;
+use App\Models\Membership\Fee;
 use App\Models\Organization;
 use App\Models\User;
 use Laravel\Dusk\Browser;
@@ -80,19 +84,19 @@ trait HandlesE2ETestSetup
     protected function createChartOfAccounts(): array
     {
         return [
-            'cash_account' => \App\Models\Accounting\ChartOfAccount::factory()->create([
+            'cash_account' => ChartOfAccount::factory()->create([
                 'account_type' => 'asset',
                 'name' => 'Test Cash Account',
             ]),
-            'bank_account' => \App\Models\Accounting\ChartOfAccount::factory()->create([
+            'bank_account' => ChartOfAccount::factory()->create([
                 'account_type' => 'asset',
                 'name' => 'Test Bank Account',
             ]),
-            'revenue_account' => \App\Models\Accounting\ChartOfAccount::factory()->create([
+            'revenue_account' => ChartOfAccount::factory()->create([
                 'account_type' => 'revenue',
                 'name' => 'Test Revenue Account',
             ]),
-            'expense_account' => \App\Models\Accounting\ChartOfAccount::factory()->create([
+            'expense_account' => ChartOfAccount::factory()->create([
                 'account_type' => 'expense',
                 'name' => 'Test Expense Account',
             ]),
@@ -105,15 +109,15 @@ trait HandlesE2ETestSetup
     protected function createTestEmployees(): array
     {
         return [
-            'full_time' => \App\Models\Employee::factory()->create([
+            'full_time' => Employee::factory()->create([
                 'employment_type' => 'full_time',
                 'salary' => 50000,
             ]),
-            'part_time' => \App\Models\Employee::factory()->create([
+            'part_time' => Employee::factory()->create([
                 'employment_type' => 'part_time',
                 'salary' => 25000,
             ]),
-            'contract' => \App\Models\Employee::factory()->create([
+            'contract' => Employee::factory()->create([
                 'employment_type' => 'contract',
                 'salary' => 75000,
             ]),
@@ -126,12 +130,12 @@ trait HandlesE2ETestSetup
     protected function createTestInventoryItems(): array
     {
         return [
-            'product_a' => \App\Models\Inventory\Item::factory()->create([
+            'product_a' => Item::factory()->create([
                 'name' => 'Test Product A',
                 'unit_price' => 100.00,
                 'reorder_level' => 10,
             ]),
-            'product_b' => \App\Models\Inventory\Item::factory()->create([
+            'product_b' => Item::factory()->create([
                 'name' => 'Test Product B',
                 'unit_price' => 200.00,
                 'reorder_level' => 5,
@@ -145,12 +149,12 @@ trait HandlesE2ETestSetup
     protected function createTestFeeStructures(): array
     {
         return [
-            'membership_fee' => \App\Models\Membership\Fee::factory()->create([
+            'membership_fee' => Fee::factory()->create([
                 'name' => 'Annual Membership Fee',
                 'amount' => 1000.00,
                 'frequency' => 'annual',
             ]),
-            'registration_fee' => \App\Models\Membership\Fee::factory()->create([
+            'registration_fee' => Fee::factory()->create([
                 'name' => 'Registration Fee',
                 'amount' => 500.00,
                 'frequency' => 'one_time',
@@ -174,15 +178,15 @@ trait HandlesE2ETestSetup
     protected function assertNoJavaScriptErrors(Browser $browser): void
     {
         $browser->script([
-            "window.errors = [];",
-            "window.onerror = function(msg, url, line) { window.errors.push(msg); return false; };",
+            'window.errors = [];',
+            'window.onerror = function(msg, url, line) { window.errors.push(msg); return false; };',
         ]);
 
         // Check for accumulated errors
-        $errors = $browser->script("return window.errors;");
-        
-        if (!empty($errors[0])) {
-            throw new \Exception("JavaScript errors detected: " . implode(', ', $errors[0]));
+        $errors = $browser->script('return window.errors;');
+
+        if (! empty($errors[0])) {
+            throw new \Exception('JavaScript errors detected: '.implode(', ', $errors[0]));
         }
     }
 
@@ -213,11 +217,11 @@ trait HandlesE2ETestSetup
     protected function assertPageLoadPerformance(Browser $browser, int $maxLoadTimeMs = 3000): void
     {
         $startTime = microtime(true);
-        
+
         $this->waitForPageLoad($browser);
-        
+
         $loadTime = (microtime(true) - $startTime) * 1000;
-        
+
         if ($loadTime > $maxLoadTimeMs) {
             throw new \Exception("Page load time {$loadTime}ms exceeds maximum allowed {$maxLoadTimeMs}ms");
         }

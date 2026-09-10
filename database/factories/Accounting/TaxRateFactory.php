@@ -2,10 +2,12 @@
 
 namespace Database\Factories\Accounting;
 
+use App\Models\Accounting\TaxRate;
+use App\Models\Organization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Accounting\TaxRate>
+ * @extends Factory<TaxRate>
  */
 class TaxRateFactory extends Factory
 {
@@ -17,7 +19,7 @@ class TaxRateFactory extends Factory
     public function definition(): array
     {
         return [
-            'organization_id' => \App\Models\Organization::factory(),
+            'organization_id' => Organization::factory(),
             'name' => fake()->words(3, true),
             'code' => strtoupper(fake()->lexify('???')),
             'type' => fake()->randomElement(['sales', 'purchase', 'withholding', 'income', 'vat', 'service', 'other']),

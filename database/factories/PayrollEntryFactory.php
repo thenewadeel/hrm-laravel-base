@@ -3,9 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Employee;
-use App\Models\PayrollEntry;
 use App\Models\Organization;
-use App\Models\User;
+use App\Models\PayrollEntry;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PayrollEntryFactory extends Factory

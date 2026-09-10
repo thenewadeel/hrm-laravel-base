@@ -2,7 +2,6 @@
 
 namespace Tests\Browser\HR;
 
-use Laravel\Dusk\Browser;
 use Tests\Browser\JavaScriptDuskTestCase;
 
 class HRSimpleWorkingTest extends JavaScriptDuskTestCase
@@ -80,7 +79,7 @@ class HRSimpleWorkingTest extends JavaScriptDuskTestCase
             foreach ($pages as $page) {
                 $browser->visit($page)
                     ->pause(3000)
-                    ->screenshot('hr-page-' . str_replace('/', '-', $page));
+                    ->screenshot('hr-page-'.str_replace('/', '-', $page));
             }
         });
     }

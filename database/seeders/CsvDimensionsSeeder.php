@@ -1,4 +1,5 @@
 <?php
+
 // database/seeders/CsvDimensionsSeeder.php
 
 namespace Database\Seeders;
@@ -13,8 +14,9 @@ class CsvDimensionsSeeder extends Seeder
     {
         $csvFile = database_path('seeders/seedData/dimensions.csv');
 
-        if (!File::exists($csvFile)) {
+        if (! File::exists($csvFile)) {
             $this->command->error("CSV file not found: {$csvFile}");
+
             return;
         }
 
@@ -30,7 +32,7 @@ class CsvDimensionsSeeder extends Seeder
                 [
                     'name' => $name,
                     'type' => $type,
-                    'description' => $description
+                    'description' => $description,
                 ]
             );
 

@@ -1,4 +1,5 @@
 <?php
+
 // database/seeders/CsvSampleTransactionsSeeder.php
 
 namespace Database\Seeders;
@@ -17,8 +18,9 @@ class CsvSampleTransactionsSeeder extends Seeder
     {
         $csvFile = database_path('seeders/seedData/sample_transactions.csv');
 
-        if (!File::exists($csvFile)) {
-            $this->command->warn("Sample transactions CSV not found, skipping...");
+        if (! File::exists($csvFile)) {
+            $this->command->warn('Sample transactions CSV not found, skipping...');
+
             return;
         }
 
@@ -38,11 +40,11 @@ class CsvSampleTransactionsSeeder extends Seeder
             [$date, $description, $accountCode, $type, $amount, $dimensionCode] = $row;
 
             // Group transactions by date and description for journal entries
-            $key = $date . '-' . md5($description);
+            $key = $date.'-'.md5($description);
 
-            if (!isset($journalEntries[$key])) {
+            if (! isset($journalEntries[$key])) {
                 $journalEntries[$key] = JournalEntry::create([
-                    'reference_number' => 'JE-' . str_pad($count + 1, 6, '0', STR_PAD_LEFT),
+                    'reference_number' => 'JE-'.str_pad($count + 1, 6, '0', STR_PAD_LEFT),
                     'entry_date' => $date,
                     'description' => $description,
                     'status' => 'posted',

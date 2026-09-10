@@ -60,7 +60,7 @@ class TransactionTest extends TestCase
         ]);
 
         // Verify no items were created
-        $this->assertEquals(0, \App\Models\Inventory\TransactionItem::where('transaction_id', $transaction['id'])->count());
+        $this->assertEquals(0, TransactionItem::where('transaction_id', $transaction['id'])->count());
 
         // Verify items array exists but is empty in response
         $this->assertArrayHasKey('items', $transaction);
@@ -177,7 +177,7 @@ class TransactionTest extends TestCase
         $transaction = $response->json('data');
 
         // Verify transaction is empty initially
-        $this->assertEquals(0, \App\Models\Inventory\TransactionItem::where('transaction_id', $transaction['id'])->count());
+        $this->assertEquals(0, TransactionItem::where('transaction_id', $transaction['id'])->count());
 
         // Add items to the empty transaction
         $items = [
@@ -208,7 +208,7 @@ class TransactionTest extends TestCase
         ]);
 
         // Verify total count
-        $this->assertEquals(1, \App\Models\Inventory\TransactionItem::where('transaction_id', $transaction['id'])->count());
+        $this->assertEquals(1, TransactionItem::where('transaction_id', $transaction['id'])->count());
     }
 
     #[Test]
@@ -237,7 +237,7 @@ class TransactionTest extends TestCase
         $transaction = $response->json('data');
 
         // Verify initial item exists
-        $this->assertEquals(1, \App\Models\Inventory\TransactionItem::where('transaction_id', $transaction['id'])->count());
+        $this->assertEquals(1, TransactionItem::where('transaction_id', $transaction['id'])->count());
 
         // Add more items
         $additionalItems = [
@@ -263,7 +263,7 @@ class TransactionTest extends TestCase
         $response->assertStatus(200);
 
         // Verify all items exist (1 initial + 2 additional)
-        $this->assertEquals(3, \App\Models\Inventory\TransactionItem::where('transaction_id', $transaction['id'])->count());
+        $this->assertEquals(3, TransactionItem::where('transaction_id', $transaction['id'])->count());
 
         $this->assertDatabaseHas('inventory_transaction_items', [
             'transaction_id' => $transaction['id'],
@@ -462,7 +462,7 @@ class TransactionTest extends TestCase
         $response->assertStatus(403); // Or 422 depending on your implementation
 
         // Verify no new items were added
-        $this->assertEquals(1, \App\Models\Inventory\TransactionItem::where('transaction_id', $transaction['id'])->count());
+        $this->assertEquals(1, TransactionItem::where('transaction_id', $transaction['id'])->count());
 
         // Verify the attempted item doesn't exist
         $this->assertDatabaseMissing('inventory_transaction_items', [

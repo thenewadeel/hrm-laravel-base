@@ -44,7 +44,7 @@ trait OptimizedWaits
     protected function waitForJavaScriptReady(Browser $browser, int $timeout = 3): Browser
     {
         $script = 'return document.readyState === "complete" && typeof jQuery !== "undefined" ? jQuery.active === 0 : true;';
-        
+
         try {
             return $browser->waitUsing($timeout, 100, function () use ($browser, $script) {
                 return $browser->script($script)[0] ?? false;
@@ -62,10 +62,10 @@ trait OptimizedWaits
      */
     protected function waitForLivewireComponent(Browser $browser, ?string $component = null, int $timeout = 3): Browser
     {
-        $script = $component 
+        $script = $component
             ? "return window.Livewire?.components?.componentsByName?.['{$component}'] !== undefined;"
-            : "return window.Livewire !== undefined;";
-            
+            : 'return window.Livewire !== undefined;';
+
         try {
             return $browser->waitUsing($timeout, 100, function () use ($browser, $script) {
                 return $browser->script($script)[0] ?? false;
@@ -82,6 +82,7 @@ trait OptimizedWaits
     protected function microPause(Browser $browser, int $ms = 100): Browser
     {
         usleep($ms * 1000);
+
         return $browser;
     }
 
@@ -107,14 +108,14 @@ trait OptimizedWaits
     protected function waitForPageLoad(Browser $browser, ?string $expectedText = null, int $timeout = 5): Browser
     {
         $browser->waitForJavaScriptReady($timeout);
-        
+
         if ($expectedText) {
             $this->waitForText($browser, $expectedText, 2);
         }
-        
+
         // Micro pause for any remaining animations
         $this->microPause($browser, 200);
-        
+
         return $browser;
     }
 }

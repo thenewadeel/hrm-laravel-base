@@ -51,7 +51,7 @@ class MemberRegistrationAndFeePaymentTest extends BaseBrowserTest
                 $browser->visit('/membership')
                     ->pause(2000);
             }
-            
+
             $browser->screenshot('member-workflow-step-2-membership');
 
             // Step 3: Test member registration if available
@@ -59,7 +59,7 @@ class MemberRegistrationAndFeePaymentTest extends BaseBrowserTest
                 if ($browser->see('Add Member') || $browser->see('Register Member')) {
                     $browser->clickLink('Add Member')
                         ->pause(2000);
-                    
+
                     // Try to fill basic form fields
                     $timestamp = time();
                     try {
@@ -69,7 +69,7 @@ class MemberRegistrationAndFeePaymentTest extends BaseBrowserTest
                     } catch (\Exception $e) {
                         // Fields may have different names
                     }
-                    
+
                     $browser->pause(1000)
                         ->screenshot('member-workflow-step-3-form');
                 }

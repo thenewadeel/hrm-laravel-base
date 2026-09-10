@@ -39,20 +39,20 @@ class HRDebugTest extends JavaScriptDuskTestCase
 
             // Check what's on the page
             $pageTitle = $browser->text('h1, h2, .text-2xl, title');
-            $browser->dump("Page title/content: " . $pageTitle);
+            $browser->dump('Page title/content: '.$pageTitle);
 
             // Look for any forms or inputs
             $inputs = $browser->elements('input');
-            $browser->dump("Number of inputs found: " . count($inputs));
+            $browser->dump('Number of inputs found: '.count($inputs));
 
             // Look for links
             $links = $browser->elements('a');
-            $browser->dump("Number of links found: " . count($links));
+            $browser->dump('Number of links found: '.count($links));
 
             // Get page source for debugging
             $pageSource = $browser->driver->getPageSource();
-            $browser->dump("Page contains Employee Management: " . (strpos($pageSource, 'Employee Management') !== false));
-            $browser->dump("Page contains Add Employee: " . (strpos($pageSource, 'Add Employee') !== false));
+            $browser->dump('Page contains Employee Management: '.(strpos($pageSource, 'Employee Management') !== false));
+            $browser->dump('Page contains Add Employee: '.(strpos($pageSource, 'Add Employee') !== false));
 
             // Try create page
             $browser->visit('/hr/employees/create')
@@ -62,7 +62,7 @@ class HRDebugTest extends JavaScriptDuskTestCase
 
             // Check for form elements on create page
             $createInputs = $browser->elements('input');
-            $browser->dump("Number of inputs on create page: " . count($createInputs));
+            $browser->dump('Number of inputs on create page: '.count($createInputs));
 
             // Get input names
             $inputNames = [];
@@ -72,7 +72,7 @@ class HRDebugTest extends JavaScriptDuskTestCase
                     $inputNames[] = $name;
                 }
             }
-            $browser->dump("Input names found: " . json_encode($inputNames));
+            $browser->dump('Input names found: '.json_encode($inputNames));
         });
     }
 }

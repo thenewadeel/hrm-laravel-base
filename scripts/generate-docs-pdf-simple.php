@@ -7,36 +7,39 @@
  * Converts markdown files in docs/ to HTML and PDF formats
  * Configuration stored in config/docs-pdf.json
  */
-
 class SimpleDocsPdfGenerator
 {
     private array $config;
+
     private string $rootDir;
+
     private string $docsDir;
+
     private string $outputDir;
+
     private bool $verbose = false;
 
     public function __construct()
     {
         $this->rootDir = dirname(__DIR__);
-        $this->docsDir = $this->rootDir . '/docs';
+        $this->docsDir = $this->rootDir.'/docs';
         $this->loadConfig();
-        $this->outputDir = $this->rootDir . '/' . $this->config['output']['directory'];
+        $this->outputDir = $this->rootDir.'/'.$this->config['output']['directory'];
         $this->ensureDirectoryExists($this->outputDir);
     }
 
     private function loadConfig(): void
     {
-        $configFile = $this->rootDir . '/config/docs-pdf.json';
+        $configFile = $this->rootDir.'/config/docs-pdf.json';
 
-        if (!file_exists($configFile)) {
+        if (! file_exists($configFile)) {
             $this->error("Configuration file not found: {$configFile}");
             exit(1);
         }
 
         $config = json_decode(file_get_contents($configFile), true);
         if (json_last_error() !== JSON_ERROR_NONE) {
-            $this->error("Invalid JSON in configuration file: " . json_last_error_msg());
+            $this->error('Invalid JSON in configuration file: '.json_last_error_msg());
             exit(1);
         }
 
@@ -50,23 +53,24 @@ class SimpleDocsPdfGenerator
 
     public function generate(): void
     {
-        $this->log("🚀 Starting documentation generation...");
+        $this->log('🚀 Starting documentation generation...');
 
         // Find markdown files to process
         $mdFiles = $this->findMarkdownFiles();
 
         if (empty($mdFiles)) {
-            $this->log("ℹ️  No markdown files found in docs directory");
+            $this->log('ℹ️  No markdown files found in docs directory');
+
             return;
         }
 
-        $this->log("📄 Found " . count($mdFiles) . " markdown files to process");
+        $this->log('📄 Found '.count($mdFiles).' markdown files to process');
 
         // Check for PDF generation tools
         $canGeneratePdf = $this->checkPdfTools();
 
-        if (!$canGeneratePdf && $this->config['output']['generate_pdf']) {
-            $this->log("⚠️  PDF tools not available, generating HTML only");
+        if (! $canGeneratePdf && $this->config['output']['generate_pdf']) {
+            $this->log('⚠️  PDF tools not available, generating HTML only');
             $this->config['output']['generate_pdf'] = false;
         }
 
@@ -78,17 +82,17 @@ class SimpleDocsPdfGenerator
             try {
                 $this->convertFile($mdFile, $canGeneratePdf);
                 $successCount++;
-                $this->log("✅ Converted: " . $this->getRelativePath($mdFile));
+                $this->log('✅ Converted: '.$this->getRelativePath($mdFile));
             } catch (Exception $e) {
                 $errorCount++;
-                $this->log("❌ Failed to convert " . $this->getRelativePath($mdFile) . ": " . $e->getMessage());
+                $this->log('❌ Failed to convert '.$this->getRelativePath($mdFile).': '.$e->getMessage());
             }
         }
 
         $this->log("\n📊 Generation Summary:");
         $this->log("✅ Successfully converted: {$successCount} files");
         $this->log("❌ Failed conversions: {$errorCount} files");
-        $this->log("📁 Output directory: " . $this->outputDir);
+        $this->log('📁 Output directory: '.$this->outputDir);
 
         // Generate index if enabled
         if ($this->config['output']['generate_index']) {
@@ -128,7 +132,7 @@ class SimpleDocsPdfGenerator
 
         // If no recent files, process all files (first run scenario)
         if (empty($mdFiles)) {
-            $this->log("ℹ️  No recently changed files found, processing all markdown files");
+            $this->log('ℹ️  No recently changed files found, processing all markdown files');
             foreach ($iterator as $file) {
                 if ($file->isFile() && $file->getExtension() === 'md') {
                     if (strpos($file->getPathname(), $this->outputDir) === false) {
@@ -153,6 +157,7 @@ class SimpleDocsPdfGenerator
         foreach ($tools as $tool) {
             if ($this->commandExists($tool)) {
                 $this->log("🔧 Found PDF tool: {$tool}");
+
                 return true;
             }
         }
@@ -166,7 +171,7 @@ class SimpleDocsPdfGenerator
         $baseName = basename($relativePath, '.md');
 
         // Create output path maintaining directory structure
-        $outputPath = $this->outputDir . '/' . str_replace('.md', '', $relativePath);
+        $outputPath = $this->outputDir.'/'.str_replace('.md', '', $relativePath);
         $outputDir = dirname($outputPath);
 
         if ($outputDir !== $this->outputDir) {
@@ -179,13 +184,13 @@ class SimpleDocsPdfGenerator
 
         // Generate HTML if enabled
         if ($this->config['output']['generate_html']) {
-            $htmlPath = $outputPath . '.html';
+            $htmlPath = $outputPath.'.html';
             $this->createHtmlFile($html, $htmlPath, $baseName, $relativePath);
         }
 
         // Generate PDF if enabled and tools are available
         if ($this->config['output']['generate_pdf'] && $canGeneratePdf) {
-            $pdfPath = $outputPath . '.pdf';
+            $pdfPath = $outputPath.'.pdf';
             $this->createPdfFile($html, $pdfPath, $baseName);
         }
     }
@@ -227,8 +232,8 @@ class SimpleDocsPdfGenerator
 
         // Line breaks and paragraphs
         $html = str_replace("\n\n", "</p>\n<p>", $html);
-        $html = "<p>" . $html . "</p>";
-        $html = str_replace(["\n", "<p></p>"], ["<br>", ""], $html);
+        $html = '<p>'.$html.'</p>';
+        $html = str_replace(["\n", '<p></p>'], ['<br>', ''], $html);
 
         // Lists
         $html = preg_replace('/^\* (.+)$/m', '<li>$1</li>', $html);
@@ -253,14 +258,14 @@ class SimpleDocsPdfGenerator
         } elseif ($this->commandExists('pandoc')) {
             $this->createPdfWithPandoc($html, $pdfPath, $title);
         } else {
-            throw new Exception("No PDF generation tool available");
+            throw new Exception('No PDF generation tool available');
         }
     }
 
     private function createPdfWithPandoc(string $html, string $pdfPath, string $title): void
     {
-        $tempHtml = tempnam(sys_get_temp_dir(), 'pdf_') . '.html';
-        $tempCss = tempnam(sys_get_temp_dir(), 'css_') . '.css';
+        $tempHtml = tempnam(sys_get_temp_dir(), 'pdf_').'.html';
+        $tempCss = tempnam(sys_get_temp_dir(), 'css_').'.css';
 
         file_put_contents($tempHtml, $this->wrapHtmlForPdf($html, $title));
         file_put_contents($tempCss, $this->getCss());
@@ -306,7 +311,7 @@ class SimpleDocsPdfGenerator
             '--no-tex-ligatures',
             '-o',
             $pdfPath,
-            $tempHtml
+            $tempHtml,
         ];
 
         $this->executeCommand($command);
@@ -317,7 +322,7 @@ class SimpleDocsPdfGenerator
 
     private function createPdfWithWkHtml(string $html, string $pdfPath, string $title): void
     {
-        $tempHtml = tempnam(sys_get_temp_dir(), 'pdf_') . '.html';
+        $tempHtml = tempnam(sys_get_temp_dir(), 'pdf_').'.html';
         file_put_contents($tempHtml, $this->wrapHtmlForPdf($html, $title));
 
         $margins = $this->config['styling']['margins'];
@@ -362,7 +367,7 @@ class SimpleDocsPdfGenerator
             '--load-media-error-handling',
             'ignore',
             $tempHtml,
-            $pdfPath
+            $pdfPath,
         ];
 
         $this->executeCommand($command);
@@ -388,7 +393,7 @@ class SimpleDocsPdfGenerator
 
     private function getCss(): string
     {
-        $cssFile = $this->rootDir . '/config/' . $this->config['styling']['css_file'];
+        $cssFile = $this->rootDir.'/config/'.$this->config['styling']['css_file'];
 
         if (file_exists($cssFile)) {
             $css = file_get_contents($cssFile);
@@ -397,8 +402,8 @@ class SimpleDocsPdfGenerator
         }
 
         // Add custom CSS if configured
-        if (!empty($this->config['styling']['custom_css'])) {
-            $css .= "\n" . $this->config['styling']['custom_css'];
+        if (! empty($this->config['styling']['custom_css'])) {
+            $css .= "\n".$this->config['styling']['custom_css'];
         }
 
         // Add CSS variables from config
@@ -407,27 +412,27 @@ class SimpleDocsPdfGenerator
 
         $css = str_replace(
             '--font-family: "Inter", system-ui, sans-serif;',
-            '--font-family: ' . $this->config['styling']['font_family'] . ';',
+            '--font-family: '.$this->config['styling']['font_family'].';',
             $css
         );
         $css = str_replace(
             '--font-size: 10pt;',
-            '--font-size: ' . $this->config['styling']['font_size'] . ';',
+            '--font-size: '.$this->config['styling']['font_size'].';',
             $css
         );
         $css = str_replace(
             '--line-height: 1.25;',
-            '--line-height: ' . $this->config['styling']['line_height'] . ';',
+            '--line-height: '.$this->config['styling']['line_height'].';',
             $css
         );
         $css = str_replace(
             'var(--page-margin, 2mm)',
-            'var(--page-margin, ' . $marginValue . ')',
+            'var(--page-margin, '.$marginValue.')',
             $css
         );
         $css = str_replace(
             'var(--page-size, A4)',
-            'var(--page-size, ' . $this->config['styling']['page_size'] . ')',
+            'var(--page-size, '.$this->config['styling']['page_size'].')',
             $css
         );
 
@@ -456,7 +461,7 @@ class SimpleDocsPdfGenerator
         ];
 
         // Navigation
-        if ($this->config['output']['navigation'] && !$isPdf) {
+        if ($this->config['output']['navigation'] && ! $isPdf) {
             $data['nav_html'] = $this->generateNavigation($relativePath);
         }
 
@@ -471,7 +476,7 @@ class SimpleDocsPdfGenerator
         }
 
         // Watermark (PDF only)
-        if ($isPdf && !empty($this->config['branding']['watermark'])) {
+        if ($isPdf && ! empty($this->config['branding']['watermark'])) {
             $data['watermark_html'] = $this->generateWatermark();
         }
 
@@ -480,9 +485,9 @@ class SimpleDocsPdfGenerator
 
     private function renderTemplate(string $templateFile, array $data): string
     {
-        $templatePath = __DIR__ . '/templates/' . $templateFile;
+        $templatePath = __DIR__.'/templates/'.$templateFile;
 
-        if (!file_exists($templatePath)) {
+        if (! file_exists($templatePath)) {
             throw new Exception("Template not found: {$templateFile}");
         }
 
@@ -490,7 +495,7 @@ class SimpleDocsPdfGenerator
 
         // Replace placeholders with data
         foreach ($data as $key => $value) {
-            $template = str_replace('{' . $key . '}', $value, $template);
+            $template = str_replace('{'.$key.'}', $value, $template);
         }
 
         return $template;
@@ -510,14 +515,15 @@ class SimpleDocsPdfGenerator
         $navItemHtml = '';
 
         foreach ($navItems as $file => $title) {
-            if (file_exists($this->docsDir . '/' . $file)) {
+            if (file_exists($this->docsDir.'/'.$file)) {
                 $href = str_replace('.md', '.html', $file);
                 $active = $currentPath === $file ? ' style="font-weight: bold;"' : '';
                 $navItemHtml .= "<li><a href=\"{$href}\"{$active}>{$title}</a></li>";
             }
         }
 
-        $navTemplate = file_get_contents(__DIR__ . '/templates/docs-nav.blade.php');
+        $navTemplate = file_get_contents(__DIR__.'/templates/docs-nav.blade.php');
+
         return str_replace('{nav_items}', $navItemHtml, $navTemplate);
     }
 
@@ -540,9 +546,9 @@ class SimpleDocsPdfGenerator
             'header_content' => $content,
         ];
 
-        $template = file_get_contents(__DIR__ . '/templates/docs-header.blade.php');
+        $template = file_get_contents(__DIR__.'/templates/docs-header.blade.php');
         foreach ($templateData as $key => $value) {
-            $template = str_replace('{' . $key . '}', $value, $template);
+            $template = str_replace('{'.$key.'}', $value, $template);
         }
 
         return $template;
@@ -567,9 +573,9 @@ class SimpleDocsPdfGenerator
             'footer_content' => $content,
         ];
 
-        $template = file_get_contents(__DIR__ . '/templates/docs-footer.blade.php');
+        $template = file_get_contents(__DIR__.'/templates/docs-footer.blade.php');
         foreach ($templateData as $key => $value) {
-            $template = str_replace('{' . $key . '}', $value, $template);
+            $template = str_replace('{'.$key.'}', $value, $template);
         }
 
         return $template;
@@ -577,14 +583,15 @@ class SimpleDocsPdfGenerator
 
     private function generateWatermark(): string
     {
-        $template = file_get_contents(__DIR__ . '/templates/docs-watermark.blade.php');
+        $template = file_get_contents(__DIR__.'/templates/docs-watermark.blade.php');
+
         return str_replace('{watermark_text}', $this->config['branding']['watermark'], $template);
     }
 
     private function generateIndex(): void
     {
         $indexContent = "# {$this->config['branding']['title']}\n\n";
-        $indexContent .= "**Generated on:** " . date('Y-m-d H:i:s') . "\n\n";
+        $indexContent .= '**Generated on:** '.date('Y-m-d H:i:s')."\n\n";
         $indexContent .= "## 📚 Available Documentation\n\n";
 
         $iterator = new RecursiveIteratorIterator(
@@ -594,12 +601,12 @@ class SimpleDocsPdfGenerator
         $files = [];
         foreach ($iterator as $file) {
             if ($file->isFile() && in_array($file->getExtension(), ['html', 'pdf'])) {
-                $relativePath = str_replace($this->outputDir . '/', '', $file->getPathname());
-                $name = basename($file->getPathname(), '.' . $file->getExtension());
+                $relativePath = str_replace($this->outputDir.'/', '', $file->getPathname());
+                $name = basename($file->getPathname(), '.'.$file->getExtension());
                 $files[] = [
                     'path' => $relativePath,
                     'name' => $name,
-                    'type' => $file->getExtension()
+                    'type' => $file->getExtension(),
                 ];
             }
         }
@@ -611,23 +618,23 @@ class SimpleDocsPdfGenerator
             $indexContent .= "- {$icon} [{$file['name']}]({$file['path']})\n";
         }
 
-        file_put_contents($this->outputDir . '/index.md', $indexContent);
+        file_put_contents($this->outputDir.'/index.md', $indexContent);
 
         // Also generate HTML index
         if ($this->config['output']['generate_html']) {
             $html = $this->markdownToHtml($indexContent);
-            $this->createHtmlFile($html, $this->outputDir . '/index.html', 'Documentation Index', 'index.md');
+            $this->createHtmlFile($html, $this->outputDir.'/index.html', 'Documentation Index', 'index.md');
         }
 
-        $this->log("📋 Generated index files");
+        $this->log('📋 Generated index files');
     }
 
     private function copyToPublicDirectory(): void
     {
-        $publicDocsDir = $this->rootDir . '/public/docs';
+        $publicDocsDir = $this->rootDir.'/public/docs';
         $this->ensureDirectoryExists($publicDocsDir);
 
-        $this->log("📁 Copying generated files to public directory...");
+        $this->log('📁 Copying generated files to public directory...');
 
         // Copy all files from output to public
         $iterator = new RecursiveIteratorIterator(
@@ -637,8 +644,8 @@ class SimpleDocsPdfGenerator
         $copiedCount = 0;
         foreach ($iterator as $file) {
             if ($file->isFile()) {
-                $relativePath = str_replace($this->outputDir . '/', '', $file->getPathname());
-                $publicPath = $publicDocsDir . '/' . $relativePath;
+                $relativePath = str_replace($this->outputDir.'/', '', $file->getPathname());
+                $publicPath = $publicDocsDir.'/'.$relativePath;
 
                 // Ensure target directory exists
                 $publicDir = dirname($publicPath);
@@ -653,12 +660,12 @@ class SimpleDocsPdfGenerator
         }
 
         $this->log("✅ Copied {$copiedCount} files to public/docs/");
-        $this->log("🌐 Documentation available at: /docs");
+        $this->log('🌐 Documentation available at: /docs');
     }
 
     private function cleanupIntermediateHtmlFiles(): void
     {
-        $this->log("🧹 Cleaning up intermediate HTML files...");
+        $this->log('🧹 Cleaning up intermediate HTML files...');
 
         $iterator = new RecursiveIteratorIterator(
             new RecursiveDirectoryIterator($this->outputDir, RecursiveDirectoryIterator::SKIP_DOTS)
@@ -671,7 +678,7 @@ class SimpleDocsPdfGenerator
         foreach ($iterator as $file) {
             if ($file->isFile() && $file->getExtension() === 'html') {
                 // Keep index.html and README.md
-                if (!in_array($file->getBasename(), ['index.html', 'README.md'])) {
+                if (! in_array($file->getBasename(), ['index.html', 'README.md'])) {
                     unlink($file->getPathname());
                     $cleanedCount++;
                     $removedFiles[] = $file->getBasename();
@@ -683,15 +690,15 @@ class SimpleDocsPdfGenerator
 
         $this->log("✅ Cleaned up {$cleanedCount} intermediate HTML files");
 
-        if (!empty($removedFiles)) {
-            $this->log("🗑️  Removed: " . implode(', ', array_slice($removedFiles, 0, 5)));
+        if (! empty($removedFiles)) {
+            $this->log('🗑️  Removed: '.implode(', ', array_slice($removedFiles, 0, 5)));
             if (count($removedFiles) > 5) {
-                $this->log("    ... and " . (count($removedFiles) - 5) . " more files");
+                $this->log('    ... and '.(count($removedFiles) - 5).' more files');
             }
         }
 
-        if (!empty($keptFiles)) {
-            $this->log("📋  Kept: " . implode(', ', $keptFiles));
+        if (! empty($keptFiles)) {
+            $this->log('📋  Kept: '.implode(', ', $keptFiles));
         }
     }
 
@@ -716,7 +723,7 @@ class SimpleDocsPdfGenerator
             $exitCode = proc_close($process);
 
             if ($exitCode !== 0) {
-                throw new Exception("Command failed: " . $errorOutput);
+                throw new Exception('Command failed: '.$errorOutput);
             }
         } else {
             throw new Exception("Failed to execute command: {$cmd}");
@@ -739,6 +746,7 @@ class SimpleDocsPdfGenerator
             fclose($pipes[1]);
             fclose($pipes[2]);
             $exitCode = proc_close($process);
+
             return $exitCode === 0;
         }
 
@@ -747,12 +755,12 @@ class SimpleDocsPdfGenerator
 
     private function getRelativePath(string $fullPath): string
     {
-        return str_replace($this->docsDir . '/', '', $fullPath);
+        return str_replace($this->docsDir.'/', '', $fullPath);
     }
 
     private function ensureDirectoryExists(string $directory): void
     {
-        if (!is_dir($directory)) {
+        if (! is_dir($directory)) {
             mkdir($directory, 0755, true);
         }
     }
@@ -760,7 +768,7 @@ class SimpleDocsPdfGenerator
     private function log(string $message): void
     {
         if ($this->verbose) {
-            echo $message . "\n";
+            echo $message."\n";
         }
     }
 
@@ -781,9 +789,9 @@ class SimpleDocsPdfGenerator
         echo "    Edit config/docs-pdf.json to customize settings\n";
         echo "    Edit config/docs-pdf-theme.css for styling\n\n";
         echo "OUTPUT:\n";
-        echo "    - HTML files: " . $this->config['output']['directory'] . "/*.html\n";
-        echo "    - PDF files: " . $this->config['output']['directory'] . "/*.pdf (if tools available)\n";
-        echo "    - Index: " . $this->config['output']['directory'] . "/index.html\n\n";
+        echo '    - HTML files: '.$this->config['output']['directory']."/*.html\n";
+        echo '    - PDF files: '.$this->config['output']['directory']."/*.pdf (if tools available)\n";
+        echo '    - Index: '.$this->config['output']['directory']."/index.html\n\n";
         echo "REQUIREMENTS:\n";
         echo "    - PHP 8.0+\n";
         echo "    - Optional: pandoc or wkhtmltopdf (for PDF generation)\n";
@@ -796,15 +804,15 @@ try {
     $argv = $argv ?? [];
 
     if (in_array('--help', $argv) || in_array('-h', $argv)) {
-        $generator = new SimpleDocsPdfGenerator();
+        $generator = new SimpleDocsPdfGenerator;
         $generator->showHelp();
         exit(0);
     }
 
-    $generator = new SimpleDocsPdfGenerator();
+    $generator = new SimpleDocsPdfGenerator;
     $generator->setVerbose(in_array('--verbose', $argv) || in_array('-v', $argv));
     $generator->generate();
 } catch (Exception $e) {
-    echo "❌ Error: " . $e->getMessage() . "\n";
+    echo '❌ Error: '.$e->getMessage()."\n";
     exit(1);
 }

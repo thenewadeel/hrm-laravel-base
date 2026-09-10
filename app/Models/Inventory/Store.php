@@ -5,6 +5,7 @@ namespace App\Models\Inventory;
 use App\Models\Organization;
 use App\Models\OrganizationUnit;
 use App\Models\Scopes\StoreOrganizationScope;
+use Database\Factories\Inventory\StoreFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -237,7 +238,7 @@ class Store extends Model
 
     protected static function newFactory()
     {
-        return \Database\Factories\Inventory\StoreFactory::new();
+        return StoreFactory::new();
     }
 
     /**

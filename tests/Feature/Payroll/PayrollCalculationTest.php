@@ -5,7 +5,10 @@ use App\Models\DeductionType;
 use App\Models\Employee;
 use App\Models\EmployeeAllowance;
 use App\Models\EmployeeDeduction;
+use App\Models\EmployeeIncrement;
+use App\Models\Organization;
 use App\Models\TaxBracket;
+use App\Models\User;
 use App\Services\PayrollCalculationService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -140,7 +143,7 @@ test('effective basic salary considers increments', function () {
     ]);
 
     // Debug: Check if increment was created
-    expect($increment)->toBeInstanceOf(\App\Models\EmployeeIncrement::class);
+    expect($increment)->toBeInstanceOf(EmployeeIncrement::class);
     expect($increment->status)->toBe('approved');
     expect((float) $increment->new_salary)->toBe(5500.0);
 
@@ -193,8 +196,8 @@ test('payroll summary generation works correctly', function () {
 // Helper function to create user with organization
 function createUserWithOrganization()
 {
-    $user = \App\Models\User::factory()->create();
-    $organization = \App\Models\Organization::factory()->create();
+    $user = User::factory()->create();
+    $organization = Organization::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => json_encode(['admin'])]);
 
     return $user;

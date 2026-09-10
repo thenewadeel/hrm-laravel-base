@@ -15,7 +15,7 @@ $ignoredPaths = [
     'storage',
     'bootstrap/cache',
     'public/build',
-    'public/dist'
+    'public/dist',
 ];
 
 // Component-specific settings
@@ -26,7 +26,7 @@ $componentSettings = [
     'Route' => ['extract_methods' => false],
     'View' => ['extract_methods' => true],
     'Config' => ['extract_methods' => false],
-    'Environment' => ['extract_methods' => false]
+    'Environment' => ['extract_methods' => false],
 ];
 
 // Essential files to include fully
@@ -36,7 +36,7 @@ $essentialFiles = [
     // 'app/Http/Controllers/Controller.php',
     'app/Models/User.php',
     // 'app/Models/Inventory/Store.php',
-    '.env.example'
+    '.env.example',
 ];
 
 // Logging functions
@@ -68,7 +68,7 @@ function extract_migration_schema(string $content): array
 {
     $schema = [
         'tables' => [],
-        'operations' => []
+        'operations' => [],
     ];
 
     // Pattern to detect table creation
@@ -79,7 +79,7 @@ function extract_migration_schema(string $content): array
         $schema['tables'][$tableName] = extract_table_columns($tableDefinition);
         $schema['operations'][] = [
             'type' => 'create_table',
-            'table' => $tableName
+            'table' => $tableName,
         ];
     }
 
@@ -91,7 +91,7 @@ function extract_migration_schema(string $content): array
         $schema['operations'][] = [
             'type' => 'update_table',
             'table' => $tableName,
-            'changes' => extract_table_changes($tableChanges)
+            'changes' => extract_table_changes($tableChanges),
         ];
     }
 
@@ -99,7 +99,7 @@ function extract_migration_schema(string $content): array
     if (preg_match('/Schema::drop\(\s*[\'"]([^\'"]+)[\'"]\s*\);/', $content, $matches)) {
         $schema['operations'][] = [
             'type' => 'drop_table',
-            'table' => $matches[1]
+            'table' => $matches[1],
         ];
     }
 
@@ -107,7 +107,7 @@ function extract_migration_schema(string $content): array
         $schema['operations'][] = [
             'type' => 'rename_table',
             'from' => $matches[1],
-            'to' => $matches[2]
+            'to' => $matches[2],
         ];
     }
 
@@ -130,15 +130,15 @@ function extract_table_columns(string $tableDefinition): array
         $columnInfo = [
             'name' => $columnName,
             'type' => $columnType,
-            'options' => trim($columnOptions)
+            'options' => trim($columnOptions),
         ];
 
         // Extract common modifiers
-        if (strpos($tableDefinition, "->nullable()") !== false) {
+        if (strpos($tableDefinition, '->nullable()') !== false) {
             $columnInfo['nullable'] = true;
         }
 
-        if (strpos($tableDefinition, "->unique()") !== false) {
+        if (strpos($tableDefinition, '->unique()') !== false) {
             $columnInfo['unique'] = true;
         }
 
@@ -155,7 +155,7 @@ function extract_table_columns(string $tableDefinition): array
         if (preg_match("/->references\(['\"]([^'\"]+)['\"]\)->on\(['\"]([^'\"]+)['\"]\)/", $columnOptions, $foreignKeyMatch)) {
             $columnInfo['foreign_key'] = [
                 'references' => $foreignKeyMatch[1],
-                'on_table' => $foreignKeyMatch[2]
+                'on_table' => $foreignKeyMatch[2],
             ];
         }
 
@@ -181,7 +181,7 @@ function extract_table_changes(string $tableChanges): array
         $changes[] = [
             'operation' => $changeType,
             'column' => $columnName,
-            'options' => trim($options)
+            'options' => trim($options),
         ];
     }
 
@@ -189,9 +189,9 @@ function extract_table_changes(string $tableChanges): array
     if (preg_match_all('/\$table->(\w+)\(\s*[\'"]([^\'"]+)[\'"]([^;]*)\)->change\(\);/', $tableChanges, $matches, PREG_SET_ORDER)) {
         foreach ($matches as $match) {
             $changes[] = [
-                'operation' => 'modify_' . $match[1],
+                'operation' => 'modify_'.$match[1],
                 'column' => $match[2],
-                'options' => trim($match[3])
+                'options' => trim($match[3]),
             ];
         }
     }
@@ -199,11 +199,11 @@ function extract_table_changes(string $tableChanges): array
     // Pattern to match column drops
     if (preg_match_all('/\$table->dropColumn\(\s*\[([^]]+)\]\s*\);/', $tableChanges, $matches)) {
         foreach ($matches[1] as $columnsList) {
-            $droppedColumns = array_map('trim', explode(',', str_replace("'", "", $columnsList)));
+            $droppedColumns = array_map('trim', explode(',', str_replace("'", '', $columnsList)));
             foreach ($droppedColumns as $column) {
                 $changes[] = [
                     'operation' => 'drop_column',
-                    'column' => $column
+                    'column' => $column,
                 ];
             }
         }
@@ -224,7 +224,7 @@ function extract_method_signatures(string $content, int $maxMethods = 20): array
 
     foreach ($matches as $match) {
         $modifiers = [];
-        if (!empty($match[1])) {
+        if (! empty($match[1])) {
             // Split multiple modifiers
             $modifiers = preg_split('/\s+/', trim($match[1]));
         }
@@ -242,7 +242,7 @@ function extract_method_signatures(string $content, int $maxMethods = 20): array
             'name' => $methodName,
             'modifiers' => $modifiers,
             'parameters' => $parameters,
-            'line' => $linesBefore
+            'line' => $linesBefore,
         ];
 
         if (count($methods) >= $maxMethods) {
@@ -258,18 +258,19 @@ function is_essential_file(string $filePath): bool
 {
     global $essentialFiles, $projectRoot;
     $relativePath = str_replace('\\', '/', substr($filePath, strlen($projectRoot) + 1));
+
     return in_array($relativePath, $essentialFiles);
 }
 
 // Validation function
 function validate_project_root(string $projectRoot): void
 {
-    if (!is_dir($projectRoot)) {
+    if (! is_dir($projectRoot)) {
         log_error("Project root directory '$projectRoot' does not exist");
         exit(1);
     }
 
-    if (!is_file("$projectRoot/artisan")) {
+    if (! is_file("$projectRoot/artisan")) {
         log_error("Directory '$projectRoot' does not appear to be a Laravel project (artisan not found)");
         exit(1);
     }
@@ -283,6 +284,7 @@ function extract_class_name(string $content): string
     if (preg_match('/class\s+(\w+)/', $content, $matches)) {
         return $matches[1];
     }
+
     return '';
 }
 
@@ -292,6 +294,7 @@ function extract_namespace(string $content): string
     if (preg_match('/namespace\s+([^;]+);/', $content, $matches)) {
         return trim($matches[1]);
     }
+
     return '';
 }
 
@@ -303,8 +306,9 @@ function extract_components(string $projectRoot, string $type, string $subDir, a
     $dirPath = "$projectRoot/$subDir";
     $components = [];
 
-    if (!is_dir($dirPath)) {
+    if (! is_dir($dirPath)) {
         log_warning("$type directory not found: $dirPath");
+
         return $components;
     }
 
@@ -320,7 +324,7 @@ function extract_components(string $projectRoot, string $type, string $subDir, a
         $skip = false;
         foreach ($ignoredPaths as $ignoredPath) {
             if (str_starts_with($relativePath, $ignoredPath)) {
-                log_info("Skipping ignored path: " . $file->getPathname());
+                log_info('Skipping ignored path: '.$file->getPathname());
                 if ($file->isDir()) {
                     $files->next();
                 }
@@ -337,7 +341,7 @@ function extract_components(string $projectRoot, string $type, string $subDir, a
             $isAllowed = in_array($fileExtension, $extensions);
 
             // Special handling for blade templates
-            if (!$isAllowed && $type === 'View' && str_ends_with($file->getBasename(), '.blade.php')) {
+            if (! $isAllowed && $type === 'View' && str_ends_with($file->getBasename(), '.blade.php')) {
                 $isAllowed = true;
             }
 
@@ -347,7 +351,8 @@ function extract_components(string $projectRoot, string $type, string $subDir, a
                 str_ends_with($fileName, '.min.css') || str_ends_with($fileName, '.min.js') ||
                 str_ends_with($fileName, '.css.map') || str_ends_with($fileName, '.js.map')
             ) {
-                log_info("Skipping minified/compiled file: " . $file->getPathname());
+                log_info('Skipping minified/compiled file: '.$file->getPathname());
+
                 continue;
             }
 
@@ -356,7 +361,7 @@ function extract_components(string $projectRoot, string $type, string $subDir, a
                 $content = file_get_contents($file->getPathname());
 
                 // Use appropriate naming
-                $name = $file->getBasename('.' . $fileExtension);
+                $name = $file->getBasename('.'.$fileExtension);
                 if ($type === 'Route') {
                     $name = $file->getBasename('.php');
                 } elseif ($type === 'Environment') {
@@ -369,7 +374,7 @@ function extract_components(string $projectRoot, string $type, string $subDir, a
                     'type' => $type,
                     'name' => $name,
                     'file' => str_replace('\\', '/', $relativePath),
-                    'essential' => $isEssential
+                    'essential' => $isEssential,
                 ];
 
                 // Extract method signatures for appropriate components
@@ -377,9 +382,9 @@ function extract_components(string $projectRoot, string $type, string $subDir, a
                     $className = extract_class_name($content);
                     $namespace = extract_namespace($content);
 
-                    if (!empty($className)) {
+                    if (! empty($className)) {
                         $componentData['class'] = $className;
-                        if (!empty($namespace)) {
+                        if (! empty($namespace)) {
                             $componentData['namespace'] = $namespace;
                         }
 
@@ -388,27 +393,27 @@ function extract_components(string $projectRoot, string $type, string $subDir, a
                         $componentData['methods'] = $methods;
                         $componentData['method_count'] = count($methods);
 
-                        log_info("Found " . count($methods) . " methods in " . $className);
+                        log_info('Found '.count($methods).' methods in '.$className);
                     }
                 }
 
                 // Extract database schema from migrations
                 if ($type === 'Migration' && $componentSettings[$type]['extract_schema'] && $fileExtension === 'php') {
                     $schema = extract_migration_schema($content);
-                    if (!empty($schema['tables']) || !empty($schema['operations'])) {
+                    if (! empty($schema['tables']) || ! empty($schema['operations'])) {
                         $componentData['database_schema'] = $schema;
-                        log_info("Extracted schema from migration: " . $name);
+                        log_info('Extracted schema from migration: '.$name);
 
                         // Log table information
                         foreach ($schema['tables'] as $tableName => $columns) {
-                            log_info("  - Table: $tableName with " . count($columns) . " columns");
+                            log_info("  - Table: $tableName with ".count($columns).' columns');
                         }
                     }
                 }
 
                 // For essential files, include a small snippet of content
                 if ($isEssential && strlen($content) > 500) {
-                    $componentData['content_preview'] = substr($content, 0, 500) . '...';
+                    $componentData['content_preview'] = substr($content, 0, 500).'...';
                 } elseif ($isEssential) {
                     $componentData['content'] = $content;
                 }
@@ -416,13 +421,13 @@ function extract_components(string $projectRoot, string $type, string $subDir, a
                 // For routes, include a summary of route definitions
                 if ($type === 'Route') {
                     preg_match_all('/Route::\w+\([^;]*\);/', $content, $matches);
-                    if (!empty($matches[0])) {
+                    if (! empty($matches[0])) {
                         $routeSummary = [];
                         foreach ($matches[0] as $routeDef) {
                             // Simplify route definition for summary
                             $simplified = preg_replace('/\s+/', ' ', $routeDef);
                             if (strlen($simplified) > 100) {
-                                $simplified = substr($simplified, 0, 100) . '...';
+                                $simplified = substr($simplified, 0, 100).'...';
                             }
                             $routeSummary[] = $simplified;
                         }
@@ -442,12 +447,12 @@ function extract_components(string $projectRoot, string $type, string $subDir, a
 function extract_composer_info(string $projectRoot): array
 {
     $composerFile = "$projectRoot/composer.json";
-    if (!file_exists($composerFile)) {
+    if (! file_exists($composerFile)) {
         return [];
     }
 
     $composerData = json_decode(file_get_contents($composerFile), true);
-    if (!$composerData) {
+    if (! $composerData) {
         return [];
     }
 
@@ -455,14 +460,14 @@ function extract_composer_info(string $projectRoot): array
         'name' => $composerData['name'] ?? 'Unknown',
         'description' => $composerData['description'] ?? '',
         'require' => array_keys($composerData['require'] ?? []),
-        'require-dev' => array_keys($composerData['require-dev'] ?? [])
+        'require-dev' => array_keys($composerData['require-dev'] ?? []),
     ];
 }
 
 // Main execution function
 function main(string $projectRoot, string $outputFile, bool $verbose): void
 {
-    log_info("Laravel 12 Project Crawler started (Method Signatures & Database Schema for LLM)");
+    log_info('Laravel 12 Project Crawler started (Method Signatures & Database Schema for LLM)');
 
     // Validate project structure
     validate_project_root($projectRoot);
@@ -489,13 +494,13 @@ function main(string $projectRoot, string $outputFile, bool $verbose): void
         'composer' => $composerInfo,
         'timestamp' => $timestamp,
         'component_count' => count($components),
-        'components' => $components
+        'components' => $components,
     ];
 
     // Save output with a single, proper JSON encode
     $jsonOutput = json_encode($jsonData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     if ($jsonOutput === false) {
-        log_error("Failed to encode JSON data: " . json_last_error_msg());
+        log_error('Failed to encode JSON data: '.json_last_error_msg());
         exit(1);
     }
 
@@ -505,7 +510,7 @@ function main(string $projectRoot, string $outputFile, bool $verbose): void
     // Show summary
     show_summary($projectName, count($components), $outputFile);
 
-    log_success("Extraction completed successfully!");
+    log_success('Extraction completed successfully!');
 }
 
 function show_summary(string $projectName, int $componentCount, string $outputFile): void
@@ -515,7 +520,7 @@ function show_summary(string $projectName, int $componentCount, string $outputFi
     echo "Project: $projectName\n";
     echo "Total components: $componentCount\n";
     echo "Output file: $outputFile\n";
-    echo "File size: " . round($fileSize / 1024, 2) . " KB\n";
+    echo 'File size: '.round($fileSize / 1024, 2)." KB\n";
     echo "==========================\n";
 }
 

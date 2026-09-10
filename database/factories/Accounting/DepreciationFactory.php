@@ -2,10 +2,11 @@
 
 namespace Database\Factories\Accounting;
 
+use App\Models\Accounting\Depreciation;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Accounting\Depreciation>
+ * @extends Factory<Depreciation>
  */
 class DepreciationFactory extends Factory
 {

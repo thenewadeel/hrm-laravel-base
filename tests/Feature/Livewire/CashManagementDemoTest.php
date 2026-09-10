@@ -1,9 +1,12 @@
 <?php
 
 use App\Livewire\CashManagementDemo;
+use App\Models\Accounting\CashPayment;
+use App\Models\Accounting\CashReceipt;
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Organization;
 use App\Models\User;
+use App\Services\CashReceiptService;
 use Livewire\Livewire;
 
 it('renders the cash management demo component', function () {
@@ -165,7 +168,7 @@ it('creates a cash payment successfully', function () {
         'description' => 'Initial cash balance for testing',
     ];
 
-    app(\App\Services\CashReceiptService::class)->createReceipt($receiptData, $organization->id);
+    app(CashReceiptService::class)->createReceipt($receiptData, $organization->id);
 
     Livewire::actingAs($user)
         ->test(CashManagementDemo::class, ['organizationId' => $organization->id])
@@ -207,13 +210,13 @@ it('displays recent cash receipts and payments', function () {
         'type' => 'expense',
     ]);
 
-    $receipt = \App\Models\Accounting\CashReceipt::factory()->create([
+    $receipt = CashReceipt::factory()->create([
         'organization_id' => $organization->id,
         'cash_account_id' => $cashAccount->id,
         'credit_account_id' => $creditAccount->id,
     ]);
 
-    $payment = \App\Models\Accounting\CashPayment::factory()->create([
+    $payment = CashPayment::factory()->create([
         'organization_id' => $organization->id,
         'cash_account_id' => $cashAccount->id,
         'debit_account_id' => $debitAccount->id,
@@ -288,7 +291,7 @@ it('resets form after successful payment creation', function () {
         'description' => 'Initial cash balance for testing',
     ];
 
-    app(\App\Services\CashReceiptService::class)->createReceipt($receiptData, $organization->id);
+    app(CashReceiptService::class)->createReceipt($receiptData, $organization->id);
 
     Livewire::actingAs($user)
         ->test(CashManagementDemo::class, ['organizationId' => $organization->id])

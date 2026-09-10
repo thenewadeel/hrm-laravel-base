@@ -4,7 +4,6 @@ namespace App\Policies\Membership;
 
 use App\Models\Membership\MemberFee;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class FeePolicy
 {
@@ -21,7 +20,7 @@ class FeePolicy
      */
     public function view(User $user, MemberFee $memberFee): bool
     {
-        return $user->hasPermissionTo('membership.view_fees') 
+        return $user->hasPermissionTo('membership.view_fees')
             && $memberFee->organization_id === $user->current_organization_id;
     }
 
@@ -38,7 +37,7 @@ class FeePolicy
      */
     public function update(User $user, MemberFee $memberFee): bool
     {
-        return $user->hasPermissionTo('membership.manage_fees') 
+        return $user->hasPermissionTo('membership.manage_fees')
             && $memberFee->organization_id === $user->current_organization_id;
     }
 
@@ -47,7 +46,7 @@ class FeePolicy
      */
     public function delete(User $user, MemberFee $memberFee): bool
     {
-        return $user->hasPermissionTo('membership.manage_fees') 
+        return $user->hasPermissionTo('membership.manage_fees')
             && $memberFee->organization_id === $user->current_organization_id;
     }
 
@@ -56,7 +55,7 @@ class FeePolicy
      */
     public function restore(User $user, MemberFee $memberFee): bool
     {
-        return $user->hasPermissionTo('membership.manage_fees') 
+        return $user->hasPermissionTo('membership.manage_fees')
             && $memberFee->organization_id === $user->current_organization_id;
     }
 
@@ -65,7 +64,7 @@ class FeePolicy
      */
     public function forceDelete(User $user, MemberFee $memberFee): bool
     {
-        return $user->hasPermissionTo('membership.manage_fees') 
+        return $user->hasPermissionTo('membership.manage_fees')
             && $memberFee->organization_id === $user->current_organization_id;
     }
 }

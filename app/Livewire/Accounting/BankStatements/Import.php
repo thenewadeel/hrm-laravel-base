@@ -4,9 +4,12 @@ namespace App\Livewire\Accounting\BankStatements;
 
 use App\Models\Accounting\BankAccount;
 use App\Services\BankReconciliationService;
+use Carbon\Carbon;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class Import extends Component
 {
@@ -142,7 +145,7 @@ class Import extends Component
         $transactions = [];
 
         try {
-            $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($filePath);
+            $spreadsheet = IOFactory::load($filePath);
             $worksheet = $spreadsheet->getActiveSheet();
             $rows = $worksheet->toArray();
 
@@ -171,11 +174,11 @@ class Import extends Component
     public function parseDate($date): string
     {
         if (is_numeric($date)) {
-            return \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($date)->format('Y-m-d');
+            return Date::excelToDateTimeObject($date)->format('Y-m-d');
         }
 
         try {
-            return \Carbon\Carbon::parse($date)->format('Y-m-d');
+            return Carbon::parse($date)->format('Y-m-d');
         } catch (\Exception $e) {
             return now()->format('Y-m-d');
         }

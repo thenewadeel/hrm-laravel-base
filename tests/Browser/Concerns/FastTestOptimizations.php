@@ -31,6 +31,7 @@ trait FastTestOptimizations
             } catch (\Exception) {
                 // Ignore errors in fallback
             }
+
             // Don't fail the test, just continue
             return $browser;
         }

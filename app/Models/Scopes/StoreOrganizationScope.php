@@ -1,5 +1,7 @@
 <?php
+
 // Create a new scope for Store
+
 namespace App\Models\Scopes;
 
 use Illuminate\Database\Eloquent\Builder;

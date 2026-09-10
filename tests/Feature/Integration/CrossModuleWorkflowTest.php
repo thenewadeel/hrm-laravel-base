@@ -1,14 +1,20 @@
 <?php
 
 use App\Models\Accounting\ChartOfAccount;
+use App\Models\Accounting\FinancialYear;
+use App\Models\Accounting\LedgerEntry;
 use App\Models\Accounting\Voucher;
+use App\Models\Employee;
 use App\Models\Inventory\Item;
 use App\Models\Inventory\Store;
 use App\Models\Inventory\Transaction;
 use App\Models\Membership\Member;
 use App\Models\Membership\MemberFee;
 use App\Models\Organization;
+use App\Models\OrganizationUnit;
 use App\Models\User;
+use App\Roles\InventoryRoles;
+use App\Roles\OrganizationRoles;
 use App\Services\AccountingService;
 use App\Services\InventoryService;
 use App\Services\PayrollService;
@@ -37,7 +43,7 @@ test('payroll to accounting integration creates salary vouchers', function () {
     ]);
 
     // Create employee for payroll
-    $employee = \App\Models\Employee::factory()->create([
+    $employee = Employee::factory()->create([
         'organization_id' => $organization->id,
     ]);
 
@@ -87,7 +93,7 @@ test('inventory to accounting integration posts stock movements', function () {
     $user->save();
 
     // Get permissions for role and assign
-    $permissions = \App\Roles\InventoryRoles::getPermissionsForRole('inventory_admin');
+    $permissions = InventoryRoles::getPermissionsForRole('inventory_admin');
     $user->givePermissionTo($permissions, $organization);
 
     // Setup chart of accounts for inventory
@@ -106,7 +112,7 @@ test('inventory to accounting integration posts stock movements', function () {
     ]);
 
     // Create store and items
-    $organizationUnit = \App\Models\OrganizationUnit::factory()->create(['organization_id' => $organization->id]);
+    $organizationUnit = OrganizationUnit::factory()->create(['organization_id' => $organization->id]);
     $store = Store::factory()->create(['organization_unit_id' => $organizationUnit->id]);
     $item = Item::factory()->create(['organization_id' => $organization->id]);
 
@@ -175,7 +181,7 @@ test('membership fee to accounting integration creates cash receipts', function 
     expect((float) $cashReceipt->amount)->toBe(1000.0);
 
     // Verify journal entries were created
-    $journalEntries = \App\Models\Accounting\LedgerEntry::where('transactionable_type', 'App\Models\Membership\MemberFee')
+    $journalEntries = LedgerEntry::where('transactionable_type', 'App\Models\Membership\MemberFee')
         ->where('transactionable_id', $memberFee->id)
         ->get();
 
@@ -210,14 +216,14 @@ test('multi-module data consistency across organization boundaries', function ()
     $user2->save();
 
     // Create data in each organization
-    $employee1 = \App\Models\Employee::factory()->create(['organization_id' => $org1->id]);
-    $employee2 = \App\Models\Employee::factory()->create(['organization_id' => $org2->id]);
+    $employee1 = Employee::factory()->create(['organization_id' => $org1->id]);
+    $employee2 = Employee::factory()->create(['organization_id' => $org2->id]);
 
     $item1 = Item::factory()->create(['organization_id' => $org1->id]);
     $item2 = Item::factory()->create(['organization_id' => $org2->id]);
 
     // Grant permissions to users for testing
-    $adminPermissions = \App\Roles\OrganizationRoles::getPermissionsForRole('admin');
+    $adminPermissions = OrganizationRoles::getPermissionsForRole('admin');
     $user1->givePermissionTo($adminPermissions, $org1);
     $user1->assignRole('admin', $org1);
 
@@ -252,7 +258,7 @@ test('financial year management affects all modules', function () {
     $user = User::factory()->create(['current_organization_id' => $organization->id]);
 
     // Create financial year
-    $financialYear = \App\Models\Accounting\FinancialYear::factory()->create([
+    $financialYear = FinancialYear::factory()->create([
         'organization_id' => $organization->id,
         'name' => 'Fiscal Year 2024-2025',
         'code' => 'FY2024-2025',
@@ -279,7 +285,7 @@ test('financial year management affects all modules', function () {
         ->assertStatus(201); // Created successfully
 
     // Try to create transaction in different year (should fail if year is closed)
-    $closedYear = \App\Models\Accounting\FinancialYear::factory()->closed()->create([
+    $closedYear = FinancialYear::factory()->closed()->create([
         'organization_id' => $organization->id,
         'start_date' => '2023-01-01',
         'end_date' => '2023-12-31',
@@ -309,7 +315,7 @@ test('audit trail captures cross-module activities', function () {
     $user->current_organization_id = $organization->id;
     $user->save();
 
-    $adminPermissions = \App\Roles\OrganizationRoles::getPermissionsForRole('admin');
+    $adminPermissions = OrganizationRoles::getPermissionsForRole('admin');
     $user->givePermissionTo($adminPermissions, $organization);
     $user->assignRole('admin', $organization);
 
@@ -350,7 +356,7 @@ test('audit trail captures cross-module activities', function () {
     ]);
 
     // Process payroll (should create audit entries)
-    $employee = \App\Models\Employee::factory()->create(['organization_id' => $organization->id]);
+    $employee = Employee::factory()->create(['organization_id' => $organization->id]);
     $payrollService = app(PayrollService::class);
     $payroll = $payrollService->processPayroll($organization->id, [[
         'employee_id' => $employee->id,
@@ -359,7 +365,7 @@ test('audit trail captures cross-module activities', function () {
     ]]);
 
     // Process inventory transaction (should create audit entries)
-    $organizationUnit = \App\Models\OrganizationUnit::factory()->create(['organization_id' => $organization->id]);
+    $organizationUnit = OrganizationUnit::factory()->create(['organization_id' => $organization->id]);
     $store = Store::factory()->create(['organization_unit_id' => $organizationUnit->id]);
     $item = Item::factory()->create(['organization_id' => $organization->id]);
 

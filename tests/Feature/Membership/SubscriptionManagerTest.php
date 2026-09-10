@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Membership\SubscriptionManager;
 use App\Models\Membership\Member;
 use App\Models\Membership\MemberSubscription;
 use App\Models\Membership\SubscriptionPlan;
@@ -39,7 +40,7 @@ test('subscription manager displays subscriptions correctly', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SubscriptionManager::class)
+        ->test(SubscriptionManager::class)
         ->assertSee($subscriptions->first()->member->full_name)
         ->assertSee($plan->name)
         ->assertSee('Total Subscriptions');
@@ -57,21 +58,21 @@ test('subscription manager can create subscription', function () {
     $plan = SubscriptionPlan::factory()->create(['organization_id' => $organization->id]);
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SubscriptionManager::class)
+        ->test(SubscriptionManager::class)
         ->set('showCreateForm', true)
         ->set('member_id', $member->id)
         ->set('subscription_plan_id', $plan->id)
         ->set('start_date', now()->format('Y-m-d'))
         ->set('end_date', now()->addYear()->format('Y-m-d'))
         ->call('createSubscription');
-    
+
     // Check for any errors
     $component->assertHasNoErrors();
-    
+
     // Check if any notifications were dispatched (indicating errors)
     // Let's manually check if there are any validation errors by inspecting component
     $component->assertHasNoErrors();
-    
+
     $this->assertDatabaseHas('member_subscriptions', [
         'member_id' => $member->id,
         'subscription_plan_id' => $plan->id,
@@ -98,7 +99,7 @@ test('subscription manager can renew subscription', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SubscriptionManager::class)
+        ->test(SubscriptionManager::class)
         ->call('renewSubscription', $subscription->id)
         ->assertDispatched('subscription-renewed')
         ->assertDispatched('show-notification');
@@ -123,7 +124,7 @@ test('subscription manager can cancel subscription', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SubscriptionManager::class)
+        ->test(SubscriptionManager::class)
         ->call('confirmCancelSubscription', $subscription->id, 'Test cancellation')
         ->assertDispatched('subscription-cancelled')
         ->assertDispatched('show-notification');
@@ -169,7 +170,7 @@ test('subscription manager search functionality works', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SubscriptionManager::class)
+        ->test(SubscriptionManager::class)
         ->set('search', 'John')
         ->assertSee($member1->full_name)
         ->assertDontSee($member2->full_name);
@@ -203,7 +204,7 @@ test('subscription manager respects organization isolation', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SubscriptionManager::class)
+        ->test(SubscriptionManager::class)
         ->assertSee($member1->full_name)
         ->assertDontSee($member2->full_name);
 });

@@ -3,6 +3,7 @@
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\JournalEntry;
 use App\Models\Accounting\LedgerEntry;
+use App\Models\Membership\FamilyMember;
 use App\Models\Membership\Member;
 use App\Models\Membership\MemberSubscription;
 use App\Models\Membership\SubscriptionPlan;
@@ -235,7 +236,7 @@ describe('Membership Accounting Integration', function () {
             ]);
 
             // Add family members (2 additional, 1 included = 1 additional fee)
-            $familyMembers = \App\Models\Membership\FamilyMember::factory()->count(3)->create([
+            $familyMembers = FamilyMember::factory()->count(3)->create([
                 'organization_id' => $this->organization->id,
                 'primary_member_id' => $member->id,
             ]);
@@ -438,7 +439,7 @@ describe('Membership Accounting Integration', function () {
             ]);
 
             // Mock payment failure
-            DB::shouldReceive('transaction')->once()->andThrow(new \Exception('Payment failed'));
+            DB::shouldReceive('transaction')->once()->andThrow(new Exception('Payment failed'));
 
             $paymentData = [
                 'amount' => 299.99,
@@ -447,7 +448,7 @@ describe('Membership Accounting Integration', function () {
             ];
 
             expect(fn () => $this->subscriptionService->processPayment($subscription, $paymentData))
-                ->toThrow(\Exception::class);
+                ->toThrow(Exception::class);
 
             // Verify no journal entries were created
             $journalEntry = JournalEntry::where('organization_id', $this->organization->id)

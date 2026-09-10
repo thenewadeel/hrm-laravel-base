@@ -51,11 +51,11 @@ class E2EAssertions
     {
         $debitTotal = $browser->text("[data-transaction='{$transactionId}'] [data-debit-total]");
         $creditTotal = $browser->text("[data-transaction='{$transactionId}'] [data-credit-total]");
-        
+
         // Remove formatting and compare
         $debitAmount = (float) str_replace(['$', ','], '', $debitTotal);
         $creditAmount = (float) str_replace(['$', ','], '', $creditTotal);
-        
+
         if (abs($debitAmount - $creditAmount) > 0.01) {
             throw new \Exception("Double entry not balanced: Debit {$debitAmount} != Credit {$creditAmount}");
         }
@@ -165,7 +165,7 @@ class E2EAssertions
     /**
      * Assert modal is displayed with correct content.
      */
-    public static function assertModalDisplayed(Browser $browser, string $title, string $content = null): void
+    public static function assertModalDisplayed(Browser $browser, string $title, ?string $content = null): void
     {
         $browser->assertPresent('.modal.show')
             ->assertSeeIn('.modal-title', $title);
@@ -210,10 +210,10 @@ class E2EAssertions
     public static function assertPaginationWorks(Browser $browser, int $totalItems, int $itemsPerPage): void
     {
         $expectedPages = ceil($totalItems / $itemsPerPage);
-        
+
         if ($expectedPages > 1) {
             $browser->assertPresent('.pagination')
-                ->assertSeeIn('.pagination', (string)$expectedPages);
+                ->assertSeeIn('.pagination', (string) $expectedPages);
         }
     }
 
@@ -289,7 +289,7 @@ class E2EAssertions
     {
         foreach ($metrics as $metric => $maxValue) {
             $actualValue = $browser->script("return performance.{$metric};")[0];
-            
+
             if ($actualValue > $maxValue) {
                 throw new \Exception("Performance metric {$metric} ({$actualValue}) exceeds maximum ({$maxValue})");
             }
@@ -302,9 +302,9 @@ class E2EAssertions
     public static function assertRealTimeUpdate(Browser $browser, string $selector, callable $updateAction): void
     {
         $initialValue = $browser->text($selector);
-        
+
         $updateAction();
-        
+
         $browser->waitUntil(function ($browser) use ($selector, $initialValue) {
             return $browser->text($selector) !== $initialValue;
         }, 10);

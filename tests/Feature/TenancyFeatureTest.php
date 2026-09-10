@@ -14,6 +14,7 @@ use App\Models\PayrollEntry;
 use App\Models\PayrollRuns;
 use App\Models\PayrollSlip;
 use App\Models\Scopes\OrganizationScope;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use PHPUnit\Framework\Attributes\Test;
@@ -32,7 +33,7 @@ class TenancyFeatureTest extends TestCase
      * Implement the abstract method required by the SetupTenancy trait.
      * This method MUST return the array of models to be tested.
      *
-     * @return array<class-string<\Illuminate\Database\Eloquent\Model>>
+     * @return array<class-string<Model>>
      */
     protected function tenantModels(): array
     {

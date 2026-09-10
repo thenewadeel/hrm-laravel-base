@@ -424,7 +424,7 @@ class InventoryTransactionController extends Controller
      */
     private function updateStoreItemQuantity(int $storeId, int $itemId, int $quantity, string $operation): void
     {
-        $store = \App\Models\Inventory\Store::find($storeId);
+        $store = Store::find($storeId);
         if (! $store) {
             return;
         }

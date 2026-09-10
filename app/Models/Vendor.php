@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Accounting\JournalEntry;
 use App\Models\Traits\BelongsToOrganization;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -41,7 +42,7 @@ class Vendor extends Model
 
     public function journalEntries(): HasMany
     {
-        return $this->hasMany(\App\Models\Accounting\JournalEntry::class);
+        return $this->hasMany(JournalEntry::class);
     }
 
     public function getOutstandingBalanceAttribute(): float

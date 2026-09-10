@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Accounting;
 
-use Livewire\Component;
 use App\Models\Accounting\ChartOfAccount;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Validation\Rule;
-use Livewire\Attributes\On; // Import the On attribute
+use Livewire\Attributes\On;
+use Livewire\Component; // Import the On attribute
 
 class ChartOfAccounts extends Component
 {
@@ -14,8 +14,11 @@ class ChartOfAccounts extends Component
 
     // Public properties for the create form
     public $code;
+
     public $name;
+
     public $type;
+
     public $description;
 
     // Public properties for the update form

@@ -2,6 +2,8 @@
 
 namespace Tests\Browser;
 
+use App\Models\Organization;
+use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\Browser\Concerns\HandlesAlpineTesting;
 use Tests\Browser\Concerns\HandlesJavaScriptErrors;
@@ -28,7 +30,7 @@ class SimpleAlpineJsTest extends BaseBrowserTest
 
             // Check if Alpine.js is loaded
             $alpineLoaded = $browser->script("return typeof window.Alpine !== 'undefined'")[0] ?? false;
-            
+
             // Debug information
             $debugInfo = $browser->script("
                 return {
@@ -45,7 +47,7 @@ class SimpleAlpineJsTest extends BaseBrowserTest
             ")[0];
 
             echo "\n=== Alpine.js Debug Info ===\n";
-            echo json_encode($debugInfo, JSON_PRETTY_PRINT) . "\n";
+            echo json_encode($debugInfo, JSON_PRETTY_PRINT)."\n";
 
             // For now, just check the page loads successfully
             $this->assertTrue(true, 'Basic page loading test completed');
@@ -61,7 +63,7 @@ class SimpleAlpineJsTest extends BaseBrowserTest
             // Create a simple user and organization
             $organization = $this->createOrganization();
             $user = $this->createUser($organization);
-            
+
             $browser->loginAs($user)
                 ->visit('/dashboard')
                 ->pause(5000);
@@ -81,7 +83,7 @@ class SimpleAlpineJsTest extends BaseBrowserTest
             ")[0];
 
             echo "\n=== Dashboard Alpine State ===\n";
-            echo json_encode($alpineState, JSON_PRETTY_PRINT) . "\n";
+            echo json_encode($alpineState, JSON_PRETTY_PRINT)."\n";
 
             $this->assertNotEmpty($alpineState['alpineVersion'], 'Alpine.js should be loaded on dashboard');
         });
@@ -89,17 +91,18 @@ class SimpleAlpineJsTest extends BaseBrowserTest
 
     private function createOrganization()
     {
-        return \App\Models\Organization::factory()->create();
+        return Organization::factory()->create();
     }
 
     private function createUser($organization)
     {
-        $user = \App\Models\User::factory()->create(['email_verified_at' => now()]);
+        $user = User::factory()->create(['email_verified_at' => now()]);
         $organization->users()->attach($user->id, [
             'roles' => 'admin',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
         return $user;
     }
 }

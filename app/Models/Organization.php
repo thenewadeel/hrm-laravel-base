@@ -22,10 +22,12 @@ class Organization extends Model
             ->withPivot(['roles', 'permissions', 'organization_unit_id', 'position'])
             ->withTimestamps();
     }
+
     public function units()
     {
         return $this->hasMany(OrganizationUnit::class);
     }
+
     public function employees()
     {
         return $this->hasMany(OrganizationUser::class);

@@ -3,14 +3,16 @@
 use App\Livewire\Membership\AdvancedMemberList;
 use App\Models\Membership\FamilyMember;
 use App\Models\Membership\Member;
+use App\Models\Membership\MemberSubscription;
 use App\Models\Organization;
 use App\Models\User;
+use App\Roles\MembershipRoles;
 use Livewire\Livewire;
 
 it('renders the advanced member list component', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $this->actingAs($user);
 
@@ -24,7 +26,7 @@ it('renders the advanced member list component', function () {
 it('displays member statistics correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     // Create members with different statuses
     Member::factory()->count(5)->create(['organization_id' => $organization->id, 'status' => 'active']);
@@ -44,7 +46,7 @@ it('displays member statistics correctly', function () {
 it('filters members by status correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     // Create members with different statuses
     $activeMembers = Member::factory()->count(3)->create(['organization_id' => $organization->id, 'status' => 'active']);
@@ -66,7 +68,7 @@ it('filters members by status correctly', function () {
 it('searches members by name correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $member1 = Member::factory()->create([
         'organization_id' => $organization->id,
@@ -91,7 +93,7 @@ it('searches members by name correctly', function () {
 it('searches members by membership number correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $member = Member::factory()->create([
         'organization_id' => $organization->id,
@@ -108,7 +110,7 @@ it('searches members by membership number correctly', function () {
 it('sorts members by different columns', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $member1 = Member::factory()->create([
         'organization_id' => $organization->id,
@@ -139,7 +141,7 @@ it('sorts members by different columns', function () {
 it('filters by date range correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $member1 = Member::factory()->create([
         'organization_id' => $organization->id,
@@ -163,7 +165,7 @@ it('filters by date range correctly', function () {
 it('shows family members count correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $member = Member::factory()->create(['organization_id' => $organization->id]);
     FamilyMember::factory()->count(3)->create([
@@ -180,7 +182,7 @@ it('shows family members count correctly', function () {
 it('exports members to CSV correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     Member::factory()->count(3)->create(['organization_id' => $organization->id]);
 
@@ -194,7 +196,7 @@ it('exports members to CSV correctly', function () {
 it('performs bulk status changes correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $members = Member::factory()->count(3)->create([
         'organization_id' => $organization->id,
@@ -221,13 +223,13 @@ it('performs bulk status changes correctly', function () {
 it('filters by subscription status correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $memberWithSubscription = Member::factory()->create(['organization_id' => $organization->id]);
     $memberWithoutSubscription = Member::factory()->create(['organization_id' => $organization->id]);
 
     // Create subscription for first member
-    \App\Models\Membership\MemberSubscription::factory()->create([
+    MemberSubscription::factory()->create([
         'member_id' => $memberWithSubscription->id,
         'organization_id' => $organization->id,
         'status' => 'active',
@@ -245,7 +247,7 @@ it('filters by subscription status correctly', function () {
 it('handles pagination correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     Member::factory()->count(25)->create(['organization_id' => $organization->id]);
 
@@ -256,10 +258,10 @@ it('handles pagination correctly', function () {
 
     // Should show pagination controls
     $component->assertSee('Next');
-    
+
     // Should show pagination info (check for any of the possible pagination texts)
     $component->assertSee('Showing')
-              ->assertSee('25');
+        ->assertSee('25');
 });
 
 it('validates user permissions correctly', function () {
@@ -276,7 +278,7 @@ it('validates user permissions correctly', function () {
 it('saves and loads filter presets correctly', function () {
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
-    $user->organizations()->attach($organization->id, ['roles' => json_encode([App\Roles\MembershipRoles::MEMBERSHIP_ADMIN])]);
+    $user->organizations()->attach($organization->id, ['roles' => json_encode([MembershipRoles::MEMBERSHIP_ADMIN])]);
 
     $this->actingAs($user);
 

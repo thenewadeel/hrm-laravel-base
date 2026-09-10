@@ -4,10 +4,11 @@ namespace Database\Factories\Accounting;
 
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\FeeDistributionRule;
+use App\Models\Accounting\FeeDistributionRuleItem;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Accounting\FeeDistributionRuleItem>
+ * @extends Factory<FeeDistributionRuleItem>
  */
 class FeeDistributionRuleItemFactory extends Factory
 {

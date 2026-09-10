@@ -5,6 +5,8 @@ namespace App\Livewire\Accounting;
 use App\Models\Customer;
 use App\Services\OutstandingStatementsService;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -68,7 +70,7 @@ class ReceivablesOutstanding extends Component
     }
 
     #[Computed]
-    public function customers(): \Illuminate\Database\Eloquent\Collection
+    public function customers(): Collection
     {
         return Customer::where('organization_id', auth()->user()->current_organization_id)
             ->when($this->search, function ($query, $search) {
@@ -132,7 +134,7 @@ class ReceivablesOutstanding extends Component
         $this->resetPage();
     }
 
-    public function render(): \Illuminate\View\View
+    public function render(): View
     {
         return view('livewire.accounting.receivables-outstanding');
     }

@@ -7,8 +7,8 @@ use App\View\Components\Navigation\Link;
 use App\View\Components\Navigation\Search;
 use App\View\Components\Navigation\ThemeToggle;
 use App\View\Components\Navigation\UserProfile;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class NavigationEdgeCasesTest extends TestCase
 {

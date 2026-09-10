@@ -2,15 +2,18 @@
 
 namespace App\Livewire;
 
-use App\Models\Organization;
 use App\Livewire\Traits\ManagesOrganizationFilter;
+use App\Models\Organization;
 use Livewire\Component;
 
 class MemberManager extends Component
 {
     use ManagesOrganizationFilter;
+
     public $organizations;
+
     public $organizationId;
+
     public $search = '';
 
     public function mount()
@@ -22,7 +25,6 @@ class MemberManager extends Component
     {
         // This will re-render the component when the search or organizationId changes
     }
-
 
     public function filterByOrganization($id)
     {
@@ -39,8 +41,8 @@ class MemberManager extends Component
             if ($organization) {
                 $members = $organization->users()
                     ->when($this->search, function ($query) {
-                        $query->where('name', 'like', '%' . $this->search . '%')
-                            ->orWhere('email', 'like', '%' . $this->search . '%');
+                        $query->where('name', 'like', '%'.$this->search.'%')
+                            ->orWhere('email', 'like', '%'.$this->search.'%');
                     })
                     ->get();
             }
@@ -48,7 +50,7 @@ class MemberManager extends Component
 
         return view('livewire.member-manager', [
             'members' => $members,
-            'organizations' => $this->organizations // Pass organizations to the view
+            'organizations' => $this->organizations, // Pass organizations to the view
         ]);
     }
 }

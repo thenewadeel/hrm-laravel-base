@@ -4,11 +4,12 @@ namespace Database\Factories\Accounting;
 
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\FinancialYear;
+use App\Models\Accounting\OpeningBalance;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Accounting\OpeningBalance>
+ * @extends Factory<OpeningBalance>
  */
 class OpeningBalanceFactory extends Factory
 {

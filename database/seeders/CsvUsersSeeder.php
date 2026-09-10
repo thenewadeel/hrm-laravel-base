@@ -1,4 +1,5 @@
 <?php
+
 // database/seeders/CsvUsersSeeder.php
 
 namespace Database\Seeders;
@@ -16,8 +17,9 @@ class CsvUsersSeeder extends Seeder
     {
         $csvFile = database_path('seeders/seedData/users.csv');
 
-        if (!File::exists($csvFile)) {
+        if (! File::exists($csvFile)) {
             $this->command->error("CSV file not found: {$csvFile}");
+
             return;
         }
 
@@ -30,15 +32,16 @@ class CsvUsersSeeder extends Seeder
 
             $organization = Organization::firstOrCreate(['name' => $orgName]);
 
-            if (!$organization) {
+            if (! $organization) {
                 $this->command->warn("Organization {$orgName} not found for user {$email}");
+
                 continue;
             }
 
             $unit = $unitName ?
                 OrganizationUnit::where('name', $unitName)
-                ->where('organization_id', $organization->id)
-                ->first() : null;
+                    ->where('organization_id', $organization->id)
+                    ->first() : null;
 
             $roles = $rolesJson ? json_decode($rolesJson, true) : null;
             $permissions = $permissionsJson ? json_decode($permissionsJson, true) : null;
@@ -50,7 +53,7 @@ class CsvUsersSeeder extends Seeder
                     'name' => $name,
                     'password' => Hash::make($password),
                     // 'status' => $status,
-                    'email_verified_at' => now()
+                    'email_verified_at' => now(),
                 ]
             );
 
@@ -60,8 +63,8 @@ class CsvUsersSeeder extends Seeder
                     'organization_unit_id' => $unit ? $unit->id : null,
                     'position' => $position,
                     'roles' => json_encode($roles),
-                    'permissions' => json_encode($permissions)
-                ]
+                    'permissions' => json_encode($permissions),
+                ],
             ]);
 
             $count++;

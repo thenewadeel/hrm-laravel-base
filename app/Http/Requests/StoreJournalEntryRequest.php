@@ -1,8 +1,10 @@
 <?php
+
 // app/Http/Requests/StoreJournalEntryRequest.php
 
 namespace App\Http\Requests;
 
+use App\Models\Accounting\ChartOfAccount;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -72,32 +74,32 @@ class StoreJournalEntryRequest extends FormRequest
             if (abs($totalDebits - $totalCredits) > 0.001) {
                 $validator->errors()->add(
                     'entries',
-                    "Debits ({$totalDebits}) must equal credits ({$totalCredits}). Difference: " . abs($totalDebits - $totalCredits)
+                    "Debits ({$totalDebits}) must equal credits ({$totalCredits}). Difference: ".abs($totalDebits - $totalCredits)
                 );
             }
 
             // Custom validation: Check account types are valid for debit/credit
             foreach ($entries as $index => $entry) {
-                if (!isset($entry['account_id'])) {
+                if (! isset($entry['account_id'])) {
                     continue;
                 }
 
-                $account = \App\Models\Accounting\ChartOfAccount::find($entry['account_id']);
-                if (!$account) {
+                $account = ChartOfAccount::find($entry['account_id']);
+                if (! $account) {
                     continue;
                 }
 
                 $validDebitAccounts = ['asset', 'expense'];
                 $validCreditAccounts = ['liability', 'equity', 'revenue'];
 
-                if ($entry['type'] === 'debit' && !in_array($account->type, $validDebitAccounts)) {
+                if ($entry['type'] === 'debit' && ! in_array($account->type, $validDebitAccounts)) {
                     $validator->errors()->add(
                         "entries.{$index}.type",
                         "Cannot debit a {$account->type} account. Only asset and expense accounts can be debited."
                     );
                 }
 
-                if ($entry['type'] === 'credit' && !in_array($account->type, $validCreditAccounts)) {
+                if ($entry['type'] === 'credit' && ! in_array($account->type, $validCreditAccounts)) {
                     $validator->errors()->add(
                         "entries.{$index}.type",
                         "Cannot credit a {$account->type} account. Only liability, equity, and revenue accounts can be credited."

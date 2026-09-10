@@ -2,19 +2,19 @@
 
 namespace Tests\Feature\Inventory;
 
-use Tests\TestCase;
 use App\Models\Inventory\Item;
-use App\Models\Inventory\Transaction;
 use App\Models\Inventory\Store;
+use App\Models\Inventory\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupInventory;
 use Tests\Traits\SetupOrganization;
 
 class InventoryReportControllerTest extends TestCase
 {
-    use RefreshDatabase, SetupOrganization, SetupInventory;
+    use RefreshDatabase, SetupInventory, SetupOrganization;
 
     protected function setUp(): void
     {
@@ -42,14 +42,14 @@ class InventoryReportControllerTest extends TestCase
         // Create a low stock item in the current user's organization
         $lowStockItem = Item::factory()->create([
             'organization_id' => $this->organization->id,
-            'reorder_level' => 10
+            'reorder_level' => 10,
         ]);
 
         // Attach to store with low quantity
         $this->store->items()->attach($lowStockItem->id, [
             'quantity' => 5, // Below reorder level of 10
             'min_stock' => 5,
-            'max_stock' => 50
+            'max_stock' => 50,
         ]);
 
         $response = $this->get(route('inventory.reports.low-stock'));
@@ -75,26 +75,27 @@ class InventoryReportControllerTest extends TestCase
         $lowStockItem = Item::factory()->create([
             'organization_id' => $this->organization->id,
             // 'quantity' => 5,
-            'reorder_level' => 10
+            'reorder_level' => 10,
         ]);
 
         // Attach to store with low quantity
         $this->store->items()->attach($lowStockItem->id, [
             'quantity' => 5, // Below reorder level of 10
             'min_stock' => 5,
-            'max_stock' => 50
+            'max_stock' => 50,
         ]);
 
         // Attach item to specific store
         $otherStore->items()->attach($lowStockItem->id, ['quantity' => 5]);
 
         $response = $this->get(route('inventory.reports.low-stock', [
-            'store_id' => $otherStore->id
+            'store_id' => $otherStore->id,
         ]));
 
         $items = $response->viewData('lowStockItems');
         $this->assertTrue($items->contains('id', $lowStockItem->id));
     }
+
     #[Test]
     public function it_displays_stock_movement_report()
     {
@@ -147,7 +148,7 @@ class InventoryReportControllerTest extends TestCase
         ]);
         $response = $this->get(route('inventory.reports.movement', [
             'start_date' => now()->subWeek()->format('Y-m-d'),
-            'end_date' => now()->addWeek()->format('Y-m-d')
+            'end_date' => now()->addWeek()->format('Y-m-d'),
         ]));
 
         // dd(['transactions' => Transaction::with('items')->get()]);
@@ -182,18 +183,18 @@ class InventoryReportControllerTest extends TestCase
     {
         $electronicItem = Item::factory()->create([
             'organization_id' => $this->organization->id,
-            'category' => 'Electronics'
+            'category' => 'Electronics',
         ]);
 
         // Attach to store
         $this->store->items()->attach($electronicItem->id, [
             'quantity' => 10,
             'min_stock' => 5,
-            'max_stock' => 50
+            'max_stock' => 50,
         ]);
 
         $response = $this->get(route('inventory.reports.stock-levels', [
-            'category' => 'Electronics'
+            'category' => 'Electronics',
         ]));
 
         $response->assertStatus(200);

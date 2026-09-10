@@ -1,11 +1,13 @@
 <?php
+
 // database/factories/EmployeeFactory.php
+
 namespace Database\Factories;
 
 use App\Models\Employee;
 use App\Models\Organization;
-use App\Models\User;
 use App\Models\OrganizationUnit;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class EmployeeFactory extends Factory
@@ -33,6 +35,7 @@ class EmployeeFactory extends Factory
             'is_admin' => false,
         ];
     }
+
     public function withBiometricId()
     {
         return $this->state(function (array $attributes) {
@@ -41,6 +44,7 @@ class EmployeeFactory extends Factory
             ];
         });
     }
+
     // State methods for Employee-only concerns
     public function withUserAccount(): static
     {
@@ -64,28 +68,28 @@ class EmployeeFactory extends Factory
 
     public function active(): static
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'is_active' => true,
         ]);
     }
 
     public function inactive(): static
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'is_active' => false,
         ]);
     }
 
     public function forOrganization(Organization $organization): static
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'organization_id' => $organization->id,
         ]);
     }
 
     public function forUnit(OrganizationUnit $unit): static
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'organization_unit_id' => $unit->id,
             'organization_id' => $unit->organization_id,
         ]);

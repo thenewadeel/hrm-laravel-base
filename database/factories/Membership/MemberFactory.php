@@ -7,7 +7,7 @@ use App\Models\Organization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Membership\Member>
+ * @extends Factory<Member>
  */
 class MemberFactory extends Factory
 {
@@ -22,7 +22,7 @@ class MemberFactory extends Factory
     {
         return [
             'organization_id' => Organization::factory(),
-            'membership_number' => 'MEM-' . $this->faker->unique()->numerify('######'),
+            'membership_number' => 'MEM-'.$this->faker->unique()->numerify('######'),
             'title' => $this->faker->randomElement(['Mr', 'Mrs', 'Ms', 'Dr']),
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
@@ -35,7 +35,7 @@ class MemberFactory extends Factory
             'state' => $this->faker->state,
             'postal_code' => $this->faker->postcode,
             'country' => $this->faker->country,
-            'barcode_number' => 'BC-' . $this->faker->unique()->numerify('##########'),
+            'barcode_number' => 'BC-'.$this->faker->unique()->numerify('##########'),
             'photo_path' => null,
             'status' => 'active',
             'join_date' => $this->faker->dateTimeBetween('-2 years', '-1 month'),
@@ -77,7 +77,7 @@ class MemberFactory extends Factory
     public function withPhoto(): static
     {
         return $this->state(fn (array $attributes) => [
-            'photo_path' => 'members/photos/' . $this->faker->uuid() . '.jpg',
+            'photo_path' => 'members/photos/'.$this->faker->uuid().'.jpg',
         ]);
     }
 }

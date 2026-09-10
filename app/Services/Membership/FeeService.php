@@ -5,11 +5,14 @@ namespace App\Services\Membership;
 use App\Events\Membership\FeeCreated;
 use App\Events\Membership\FeePaymentProcessed;
 use App\Events\Membership\FeeWaived;
+use App\Mail\FeePaymentReminder;
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\JournalEntry;
 use App\Models\Accounting\LedgerEntry;
 use App\Models\Membership\Member;
 use App\Models\Membership\MemberFee;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class FeeService
@@ -155,7 +158,7 @@ class FeeService
     public function getFees(?int $organizationId, ?int $memberId = null, array $filters = []): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
         if (! $organizationId) {
-            return new \Illuminate\Pagination\LengthAwarePaginator([], 0, 15);
+            return new LengthAwarePaginator([], 0, 15);
         }
 
         $query = MemberFee::where('organization_id', $organizationId)
@@ -196,7 +199,7 @@ class FeeService
     /**
      * Get overdue fees for an organization
      */
-    public function getOverdueFees(?int $organizationId): \Illuminate\Support\Collection
+    public function getOverdueFees(?int $organizationId): Collection
     {
         if (! $organizationId) {
             return collect();
@@ -530,7 +533,7 @@ class FeeService
     /**
      * Get recent payments for an organization
      */
-    public function getRecentPayments(?int $organizationId, int $limit = 10): \Illuminate\Support\Collection
+    public function getRecentPayments(?int $organizationId, int $limit = 10): Collection
     {
         if (! $organizationId) {
             return collect();
@@ -555,7 +558,7 @@ class FeeService
 
             if ($type === 'email' || $type === 'both') {
                 // Send email reminder
-                \Mail::to($member->email)->send(new \App\Mail\FeePaymentReminder($fee, $message));
+                \Mail::to($member->email)->send(new FeePaymentReminder($fee, $message));
             }
 
             if ($type === 'sms' || $type === 'both') {

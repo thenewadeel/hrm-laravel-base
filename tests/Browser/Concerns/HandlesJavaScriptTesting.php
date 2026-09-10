@@ -9,7 +9,7 @@ trait HandlesJavaScriptTesting
     /**
      * Check for JavaScript errors in console.
      */
-    protected function checkForJavaScriptErrors(\Laravel\Dusk\Browser $browser): array
+    protected function checkForJavaScriptErrors(Browser $browser): array
     {
         $script = "
             var errors = [];
@@ -102,7 +102,7 @@ trait HandlesJavaScriptTesting
     /**
      * Wait for JavaScript to be ready.
      */
-    protected function waitForJavaScript(\Laravel\Dusk\Browser $browser): void
+    protected function waitForJavaScript(Browser $browser): void
     {
         $browser->waitUntil("return document.readyState === 'complete'", 10)
             ->waitUntil("return typeof jQuery !== 'undefined' ? jQuery.active === 0 : true", 10)

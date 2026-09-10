@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Accounting\FeeDistributionRuleManager;
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\FeeDistributionRule;
 use App\Models\Accounting\FeeDistributionRuleItem;
@@ -18,7 +19,7 @@ test('fee distribution rule manager component renders', function () {
     $user->update(['current_organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class)
+        ->test(FeeDistributionRuleManager::class)
         ->assertStatus(200);
 });
 
@@ -41,7 +42,7 @@ test('fee distribution rule manager loads rules for organization', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class)
+        ->test(FeeDistributionRuleManager::class)
         ->assertSee('Test Rule')
         ->assertDontSee('Other Rule');
 });
@@ -61,8 +62,8 @@ test('fee distribution rule manager loads chart of accounts', function () {
     ]);
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class);
-    
+        ->test(FeeDistributionRuleManager::class);
+
     // Test that chart of accounts are loaded in component property
     expect($component->chartOfAccounts)->toHaveCount(1);
     expect($component->chartOfAccounts)->toHaveKey($account->id);
@@ -75,7 +76,7 @@ test('fee distribution rule manager can create new rule', function () {
     $user->update(['current_organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class)
+        ->test(FeeDistributionRuleManager::class)
         ->set('name', 'New Test Rule')
         ->set('fee_type', 'subscription')
         ->set('rule_type', 'percentage')
@@ -101,7 +102,7 @@ test('fee distribution rule manager validates rule creation', function () {
     $user->update(['current_organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class)
+        ->test(FeeDistributionRuleManager::class)
         ->set('name', '') // Required field missing
         ->set('fee_type', 'subscription')
         ->call('createRule')
@@ -121,7 +122,7 @@ test('fee distribution rule manager can edit rule', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class)
+        ->test(FeeDistributionRuleManager::class)
         ->call('editRule', $rule)
         ->assertSet('editingRule.id', $rule->id)
         ->assertSet('name', 'Original Rule')
@@ -147,7 +148,7 @@ test('fee distribution rule manager can delete rule', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class)
+        ->test(FeeDistributionRuleManager::class)
         ->call('deleteRule', $rule)
         ->assertDispatched('rule-deleted', 'Rule \'Rule to Delete\' deleted successfully.');
 
@@ -169,7 +170,7 @@ test('fee distribution rule manager can manage rule items', function () {
     $account = ChartOfAccount::factory()->create(['organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class)
+        ->test(FeeDistributionRuleManager::class)
         ->call('manageItems', $rule)
         ->assertSet('selectedRule.id', $rule->id)
         ->assertSet('showItemsModal', true)
@@ -198,7 +199,7 @@ test('fee distribution rule manager validates item creation', function () {
     $rule = FeeDistributionRule::factory()->create(['organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class)
+        ->test(FeeDistributionRuleManager::class)
         ->call('manageItems', $rule)
         ->set('item_distribution_type', 'percentage')
         ->set('item_percentage', '') // Required when type is percentage
@@ -216,7 +217,7 @@ test('fee distribution rule manager can delete rule items', function () {
     $item = FeeDistributionRuleItem::factory()->create(['fee_distribution_rule_id' => $rule->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class)
+        ->test(FeeDistributionRuleManager::class)
         ->call('manageItems', $rule)
         ->call('deleteItem', $item->id)
         ->assertDispatched('item-deleted', 'Distribution item deleted successfully.');
@@ -233,7 +234,7 @@ test('fee distribution rule manager provides fee types', function () {
     $user->update(['current_organization_id' => $organization->id]);
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class);
+        ->test(FeeDistributionRuleManager::class);
 
     $feeTypes = $component->feeTypes;
 
@@ -251,7 +252,7 @@ test('fee distribution rule manager provides rule types', function () {
     $user->update(['current_organization_id' => $organization->id]);
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class);
+        ->test(FeeDistributionRuleManager::class);
 
     $ruleTypes = $component->ruleTypes;
 
@@ -269,7 +270,7 @@ test('fee distribution rule manager resets form after creation', function () {
     $user->update(['current_organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class)
+        ->test(FeeDistributionRuleManager::class)
         ->set('name', 'Test Rule')
         ->set('fee_type', 'subscription')
         ->set('description', 'Test Description')
@@ -290,7 +291,7 @@ test('fee distribution rule manager resets item form after adding item', functio
     $account = ChartOfAccount::factory()->create(['organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class)
+        ->test(FeeDistributionRuleManager::class)
         ->call('manageItems', $rule)
         ->set('item_chart_of_account_id', $account->id)
         ->set('item_percentage', 50)
@@ -321,14 +322,14 @@ test('fee distribution rule manager respects organization isolation', function (
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class)
+        ->test(FeeDistributionRuleManager::class)
         ->assertSee('User Rule')
         ->assertDontSee('Other Rule');
 });
 
 // RED: Test authorization
 test('fee distribution rule manager requires authentication', function () {
-    Livewire::test(\App\Livewire\Accounting\FeeDistributionRuleManager::class)
+    Livewire::test(FeeDistributionRuleManager::class)
         ->assertStatus(401);
 });
 
@@ -347,7 +348,7 @@ test('fee distribution rule manager loads rule items with chart of accounts', fu
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class)
+        ->test(FeeDistributionRuleManager::class)
         ->call('manageItems', $rule)
         ->assertSee($account->name);
 });
@@ -361,7 +362,7 @@ test('fee distribution rule manager refreshes rule items', function () {
     $rule = FeeDistributionRule::factory()->create(['organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class)
+        ->test(FeeDistributionRuleManager::class)
         ->call('manageItems', $rule)
         ->assertSet('ruleItems', [])
         ->call('refreshRuleItems')

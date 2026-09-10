@@ -3,6 +3,7 @@
 namespace App\Livewire\Accounting;
 
 use App\Models\Accounting\FeeDistributionLog;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -48,12 +49,12 @@ class FeeDistributionLogViewer extends Component
     public function getLogsProperty()
     {
         if (! Auth::check()) {
-            return new \Illuminate\Pagination\LengthAwarePaginator([], 0, 15);
+            return new LengthAwarePaginator([], 0, 15);
         }
 
         $organizationId = Auth::user()->current_organization_id;
         if (! $organizationId) {
-            return new \Illuminate\Pagination\LengthAwarePaginator([], 0, 15);
+            return new LengthAwarePaginator([], 0, 15);
         }
 
         $query = FeeDistributionLog::where('organization_id', $organizationId)

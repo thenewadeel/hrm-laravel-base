@@ -4,13 +4,13 @@ namespace Tests\Browser;
 
 use App\Models\Organization;
 use App\Models\User;
-use App\Permissions\MembershipPermissions;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class SimpleFeesTest extends DuskTestCase
 {
     protected ?Organization $organization = null;
+
     protected ?User $adminUser = null;
 
     protected function setUp(): void
@@ -79,7 +79,7 @@ class SimpleFeesTest extends DuskTestCase
             // echo "\n=== LIVEWIRE LOADED: " . ($livewireLoaded ? 'YES' : 'NO') . " ===\n";
 
             if ($livewireLoaded) {
-                $componentCount = $browser->script("return window.Livewire.components.componentsArray.length")[0] ?? 0;
+                $componentCount = $browser->script('return window.Livewire.components.componentsArray.length')[0] ?? 0;
                 // echo "\n=== LIVEWIRE COMPONENTS: {$componentCount} ===\n";
             }
 

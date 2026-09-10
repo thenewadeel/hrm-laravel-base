@@ -2,11 +2,12 @@
 
 namespace Database\Factories\Accounting;
 
+use App\Models\Accounting\FeeDistributionRule;
 use App\Models\Organization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Accounting\FeeDistributionRule>
+ * @extends Factory<FeeDistributionRule>
  */
 class FeeDistributionRuleFactory extends Factory
 {

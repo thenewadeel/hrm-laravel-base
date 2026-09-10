@@ -5,6 +5,7 @@ use App\Models\Accounting\ChartOfAccount;
 use App\Models\Organization;
 use App\Models\User;
 use App\Permissions\AccountingPermissions;
+use App\Services\GeneralVoucherService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 
@@ -146,9 +147,9 @@ test('voucher create component handles creation errors', function () {
     $this->actingAs($user);
 
     // Mock the service to throw an exception
-    $this->mock(\App\Services\GeneralVoucherService::class)
+    $this->mock(GeneralVoucherService::class)
         ->shouldReceive('createVoucher')
-        ->andThrow(new \Exception('Service error'));
+        ->andThrow(new Exception('Service error'));
 
     Livewire::test(Create::class)
         ->set('date', now()->format('Y-m-d'))

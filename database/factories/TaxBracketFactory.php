@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\TaxBracket;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\TaxBracket>
+ * @extends Factory<TaxBracket>
  */
 class TaxBracketFactory extends Factory
 {

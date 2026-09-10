@@ -1,14 +1,18 @@
 <?php
 
+use App\Livewire\Accounting\FeeDistributionLogViewer;
+use App\Livewire\Accounting\FeeDistributionRuleManager;
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\FeeDistributionLog;
 use App\Models\Accounting\FeeDistributionRule;
 use App\Models\Accounting\FeeDistributionRuleItem;
 use App\Models\Accounting\JournalEntry;
+use App\Models\Membership\Member;
 use App\Models\Membership\MemberFee;
 use App\Models\Organization;
 use App\Models\User;
 use App\Services\Accounting\FeeDistributionService;
+use App\Services\AccountingService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 
@@ -44,7 +48,7 @@ test('complete fee distribution workflow from rule creation to distribution', fu
 
     // Step 2: Create distribution rule via Livewire
     $ruleManager = Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class)
+        ->test(FeeDistributionRuleManager::class)
         ->set('name', 'Subscription Fee Distribution')
         ->set('fee_type', 'subscription')
         ->set('rule_type', 'percentage')
@@ -74,7 +78,7 @@ test('complete fee distribution workflow from rule creation to distribution', fu
     expect($rule->items)->toHaveCount(2);
 
     // Step 4: Create member fee
-    $member = \App\Models\Membership\Member::factory()->create(['organization_id' => $organization->id]);
+    $member = Member::factory()->create(['organization_id' => $organization->id]);
     $memberFee = MemberFee::factory()->create([
         'organization_id' => $organization->id,
         'member_id' => $member->id,
@@ -86,7 +90,7 @@ test('complete fee distribution workflow from rule creation to distribution', fu
     ]);
 
     // Step 5: Process distribution
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $distributionLog = $service->distributeFee($memberFee);
 
     // Step 6: Verify results
@@ -120,7 +124,7 @@ test('complete fee distribution workflow from rule creation to distribution', fu
 
     // Step 7: Verify log viewer shows the distribution
     $logViewer = Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class);
+        ->test(FeeDistributionLogViewer::class);
 
     $logs = $logViewer->logs;
     expect($logs)->toHaveCount(1);
@@ -184,7 +188,7 @@ test('workflow with multiple rules and priority handling', function () {
         'paid_amount' => 1000,
     ]);
 
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $distributionLog = $service->distributeFee($memberFee);
 
     expect($distributionLog->fee_distribution_rule_id)->toBe($highPriorityRule->id);
@@ -236,7 +240,7 @@ test('workflow with batch distribution', function () {
         'paid_amount' => 1000,
     ]);
 
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $results = $service->distributeBatch($fees->pluck('id')->toArray());
 
     expect($results)->toHaveCount(5);
@@ -255,7 +259,7 @@ test('workflow with batch distribution', function () {
 
     // Verify summary in log viewer
     $logViewer = Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class);
+        ->test(FeeDistributionLogViewer::class);
 
     $summary = $logViewer->summary;
     expect($summary['total_amount'])->toBe(5000.0); // 5 * 1000
@@ -302,7 +306,7 @@ test('workflow with error handling and recovery', function () {
         'paid_amount' => 1000,
     ]);
 
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $distributionLog = $service->distributeFee($memberFee);
 
     expect($distributionLog->status)->toBe('failed');
@@ -314,7 +318,7 @@ test('workflow with error handling and recovery', function () {
 
     // Verify failed log appears in log viewer
     $logViewer = Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
+        ->test(FeeDistributionLogViewer::class)
         ->set('statusFilter', 'failed');
 
     $logs = $logViewer->logs;
@@ -338,7 +342,7 @@ test('workflow with error handling and recovery', function () {
 
     // Verify both logs are visible (reset date filters to include all dates)
     $allLogsViewer = Livewire::actingAs($user)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class)
+        ->test(FeeDistributionLogViewer::class)
         ->call('resetFilters');
 
     $summary = $allLogsViewer->summary;
@@ -392,7 +396,7 @@ test('workflow with mixed distribution types', function () {
         'paid_amount' => 1000,
     ]);
 
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $distributionLog = $service->distributeFee($memberFee);
 
     expect($distributionLog->status)->toBe('success');
@@ -477,7 +481,7 @@ test('workflow maintains organization isolation', function () {
     ]);
 
     // Process distributions
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
 
     $log1 = $service->distributeFee($fee1);
     $log2 = $service->distributeFee($fee2);
@@ -487,27 +491,27 @@ test('workflow maintains organization isolation', function () {
 
     // Verify user1 only sees organization1 data
     $logViewer1 = Livewire::actingAs($user1)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class);
+        ->test(FeeDistributionLogViewer::class);
 
     expect($logViewer1->logs)->toHaveCount(1);
     expect($logViewer1->logs->first()->organization_id)->toBe($organization1->id);
 
     // Verify user2 only sees organization2 data
     $logViewer2 = Livewire::actingAs($user2)
-        ->test(\App\Livewire\Accounting\FeeDistributionLogViewer::class);
+        ->test(FeeDistributionLogViewer::class);
 
     expect($logViewer2->logs)->toHaveCount(1);
     expect($logViewer2->logs->first()->organization_id)->toBe($organization2->id);
 
     // Verify rule managers are isolated
     $ruleManager1 = Livewire::actingAs($user1)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class);
+        ->test(FeeDistributionRuleManager::class);
 
     expect($ruleManager1->rules)->toHaveCount(1);
     expect($ruleManager1->rules->first()->organization_id)->toBe($organization1->id);
 
     $ruleManager2 = Livewire::actingAs($user2)
-        ->test(\App\Livewire\Accounting\FeeDistributionRuleManager::class);
+        ->test(FeeDistributionRuleManager::class);
 
     expect($ruleManager2->rules)->toHaveCount(1);
     expect($ruleManager2->rules->first()->organization_id)->toBe($organization2->id);
@@ -546,7 +550,7 @@ test('workflow maintains complete audit trail', function () {
         'paid_amount' => 1000,
     ]);
 
-    $service = new FeeDistributionService(app(\App\Services\AccountingService::class));
+    $service = new FeeDistributionService(app(AccountingService::class));
     $distributionLog = $service->distributeFee($memberFee);
 
     // Verify audit trail completeness

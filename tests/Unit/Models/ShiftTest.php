@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Employee;
 use App\Models\Shift;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -33,7 +34,7 @@ it('handles overnight shifts', function () {
 
 it('has many employees', function () {
     $shift = Shift::factory()->create();
-    $employees = \App\Models\Employee::factory()->count(2)->create([
+    $employees = Employee::factory()->count(2)->create([
         'shift_id' => $shift->id,
     ]);
 

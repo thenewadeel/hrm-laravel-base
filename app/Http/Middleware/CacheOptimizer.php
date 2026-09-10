@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Accounting\ChartOfAccount;
+use App\Models\Organization;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -233,7 +235,7 @@ class CacheOptimizer
         // Pre-cache common data
         $warmupData = [
             'organizations_list' => function () {
-                return \App\Models\Organization::active()->get(['id', 'name']);
+                return Organization::active()->get(['id', 'name']);
             },
             'user_permissions' => function () {
                 if (auth()->check()) {
@@ -244,7 +246,7 @@ class CacheOptimizer
             },
             'chart_of_accounts' => function () {
                 if (auth()->check()) {
-                    return \App\Models\Accounting\ChartOfAccount::where('organization_id', auth()->user()->current_organization_id)
+                    return ChartOfAccount::where('organization_id', auth()->user()->current_organization_id)
                         ->get(['id', 'code', 'name', 'type']);
                 }
 

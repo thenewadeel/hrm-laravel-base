@@ -58,7 +58,7 @@ class NavigationMissingRoutesTest extends TestCase
                 // Try to generate the route to see the exact error
                 try {
                     route($routeName);
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     $brokenRoutes[$routeName] = $e->getMessage();
                 }
             }

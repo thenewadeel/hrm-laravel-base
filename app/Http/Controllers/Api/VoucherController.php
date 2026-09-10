@@ -7,7 +7,9 @@ use App\Http\Requests\CreateExpenseVoucherRequest;
 use App\Http\Requests\CreatePurchaseVoucherRequest;
 use App\Http\Requests\CreateSalaryVoucherRequest;
 use App\Http\Requests\CreateSalesVoucherRequest;
+use App\Models\Accounting\FinancialYear;
 use App\Models\Accounting\JournalEntry;
+use App\Models\Accounting\Voucher;
 use App\Services\ExpenseVoucherService;
 use App\Services\PurchaseVoucherService;
 use App\Services\SalaryVoucherService;
@@ -39,7 +41,7 @@ class VoucherController extends Controller
         $organizationId = auth()->user()->current_organization_id;
 
         // Check if financial year is active for the given date
-        $financialYear = \App\Models\Accounting\FinancialYear::where('organization_id', $organizationId)
+        $financialYear = FinancialYear::where('organization_id', $organizationId)
             ->where('start_date', '<=', $request->date)
             ->where('end_date', '>=', $request->date)
             ->where('status', 'active')
@@ -52,13 +54,13 @@ class VoucherController extends Controller
         }
 
         // Create a Voucher model for the test
-        $voucher = \App\Models\Accounting\Voucher::create([
+        $voucher = Voucher::create([
             'organization_id' => $organizationId,
             'date' => $request->date,
             'amount' => $request->amount,
             'description' => $request->description,
             'type' => $request->type,
-            'number' => \App\Models\Accounting\Voucher::generateNumber($request->type, $organizationId),
+            'number' => Voucher::generateNumber($request->type, $organizationId),
             'status' => 'draft',
             'created_by' => auth()->id(),
         ]);

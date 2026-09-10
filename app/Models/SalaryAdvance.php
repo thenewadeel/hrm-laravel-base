@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\BelongsToOrganization;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -136,8 +137,8 @@ class SalaryAdvance extends Model
             return false;
         }
 
-        $firstDeduction = \Carbon\Carbon::parse($this->first_deduction_month);
-        $currentPeriod = \Carbon\Carbon::parse($payrollPeriod);
+        $firstDeduction = Carbon::parse($this->first_deduction_month);
+        $currentPeriod = Carbon::parse($payrollPeriod);
 
         return $currentPeriod >= $firstDeduction &&
                $this->months_repaid < $this->repayment_months;

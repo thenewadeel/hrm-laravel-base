@@ -5,6 +5,7 @@ use App\Models\Membership\Member;
 use App\Models\Membership\MemberFee;
 use App\Models\Membership\MemberSubscription;
 use App\Models\Organization;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
@@ -55,9 +56,9 @@ describe('Member Model', function () {
             'expiry_date' => '2024-01-01',
         ]);
 
-        expect($member->date_of_birth)->toBeInstanceOf(\Carbon\Carbon::class);
-        expect($member->join_date)->toBeInstanceOf(\Carbon\Carbon::class);
-        expect($member->expiry_date)->toBeInstanceOf(\Carbon\Carbon::class);
+        expect($member->date_of_birth)->toBeInstanceOf(Carbon::class);
+        expect($member->join_date)->toBeInstanceOf(Carbon::class);
+        expect($member->expiry_date)->toBeInstanceOf(Carbon::class);
         expect($member->date_of_birth->format('Y-m-d'))->toBe('1990-01-01');
     });
 

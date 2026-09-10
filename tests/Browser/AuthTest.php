@@ -15,8 +15,8 @@ class AuthTest extends DuskTestCase
     public function test_auth_organization_setup(): void
     {
         $this->browse(function (Browser $browser) {
-            $user = \App\Models\User::factory()->create(['email_verified_at' => now()]);
-            $org = \App\Models\Organization::factory()->create();
+            $user = User::factory()->create(['email_verified_at' => now()]);
+            $org = Organization::factory()->create();
 
             $org->users()->attach($user->id, [
                 'roles' => 'admin',
@@ -50,8 +50,8 @@ class AuthTest extends DuskTestCase
     public function test_fees_with_proper_setup(): void
     {
         $this->browse(function (Browser $browser) {
-            $user = \App\Models\User::factory()->create(['email_verified_at' => now()]);
-            $org = \App\Models\Organization::factory()->create();
+            $user = User::factory()->create(['email_verified_at' => now()]);
+            $org = Organization::factory()->create();
 
             $org->users()->attach($user->id, [
                 'roles' => 'admin',

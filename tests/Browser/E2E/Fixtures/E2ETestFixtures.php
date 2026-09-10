@@ -2,13 +2,15 @@
 
 namespace Tests\Browser\E2E\Fixtures;
 
-use App\Models\Organization;
-use App\Models\User;
-use App\Models\Employee;
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\JournalEntry;
+use App\Models\Employee;
 use App\Models\Inventory\Item;
 use App\Models\Inventory\Store;
+use App\Models\Inventory\Transaction;
+use App\Models\Organization;
+use App\Models\User;
+
 // use App\Models\Membership\Fee; // Commented out - model doesn't exist
 // use App\Models\Membership\Member; // Commented out - model doesn't exist
 
@@ -31,14 +33,14 @@ class E2ETestFixtures
 
         // Create financial setup
         $chartOfAccounts = self::createChartOfAccounts($organization);
-        
+
         // Create employees
         $employees = self::createEmployees($organization);
-        
+
         // Create inventory setup
         $stores = self::createStores($organization);
         $items = self::createInventoryItems($organization);
-        
+
         // Create membership setup - disabled (models don't exist)
         // $fees = self::createMembershipFees($organization);
         // $members = self::createMembers($organization);
@@ -63,7 +65,7 @@ class E2ETestFixtures
         $user = User::factory()->create([
             'email' => $email,
             'email_verified_at' => now(),
-            'name' => ucwords($role) . ' User',
+            'name' => ucwords($role).' User',
         ]);
 
         $organization->users()->attach($user->id, [
@@ -365,7 +367,7 @@ class E2ETestFixtures
         $transactions = [];
 
         // Stock IN transaction
-        $stockIn = \App\Models\Inventory\Transaction::factory()->create([
+        $stockIn = Transaction::factory()->create([
             'organization_id' => $organization->id,
             'transaction_number' => 'TXN001',
             'transaction_type' => 'IN',
@@ -394,7 +396,7 @@ class E2ETestFixtures
         $transactions['stock_in'] = $stockIn;
 
         // Stock OUT transaction
-        $stockOut = \App\Models\Inventory\Transaction::factory()->create([
+        $stockOut = Transaction::factory()->create([
             'organization_id' => $organization->id,
             'transaction_number' => 'TXN002',
             'transaction_type' => 'OUT',

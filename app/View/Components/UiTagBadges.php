@@ -9,6 +9,7 @@ use Illuminate\View\Component;
 class UiTagBadges extends Component
 {
     public array $tags;
+
     public int $limit;
 
     public function __construct(array $tags, int $limit = 10)

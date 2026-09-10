@@ -18,11 +18,23 @@ use App\Livewire\Accounting\CashPayments\Create as CreateCashPayment;
 use App\Livewire\Accounting\CashReceipts\Create as CreateCashReceipt;
 use App\Livewire\Accounting\DepreciationPosting;
 use App\Livewire\Accounting\ExpenseVoucherForm;
+use App\Livewire\Accounting\FinancialYears\FinancialYearForm;
+use App\Livewire\Accounting\FinancialYears\FinancialYearIndex;
+use App\Livewire\Accounting\FinancialYears\OpeningBalanceForm;
+use App\Livewire\Accounting\FinancialYears\YearEndClosing;
 use App\Livewire\Accounting\FixedAssetForm;
 use App\Livewire\Accounting\FixedAssetIndex;
+use App\Livewire\Accounting\PayablesOutstanding;
 use App\Livewire\Accounting\PurchaseVoucherForm;
+use App\Livewire\Accounting\ReceivablesOutstanding;
 use App\Livewire\Accounting\SalaryVoucherForm;
 use App\Livewire\Accounting\SalesVoucherForm;
+use App\Livewire\Accounting\TaxExemptionForm;
+use App\Livewire\Accounting\TaxExemptionIndex;
+use App\Livewire\Accounting\TaxFilingManager;
+use App\Livewire\Accounting\TaxRateForm;
+use App\Livewire\Accounting\TaxRateIndex;
+use App\Livewire\Accounting\TaxReportingDashboard;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/accounts')->name('accounting.')->group(function () {
@@ -71,8 +83,8 @@ Route::prefix('/accounts')->name('accounting.')->group(function () {
 
     // Outstanding Statements
     Route::prefix('/outstanding')->name('outstanding.')->group(function () {
-        Route::get('/receivables', \App\Livewire\Accounting\ReceivablesOutstanding::class)->name('receivables');
-        Route::get('/payables', \App\Livewire\Accounting\PayablesOutstanding::class)->name('payables');
+        Route::get('/receivables', ReceivablesOutstanding::class)->name('receivables');
+        Route::get('/payables', PayablesOutstanding::class)->name('payables');
     });
 
     // Bank Accounts Management
@@ -131,26 +143,26 @@ Route::prefix('/accounts')->name('accounting.')->group(function () {
     Route::prefix('/tax')->name('tax.')->group(function () {
         // Tax Rates
         Route::prefix('/tax-rates')->name('tax-rates.')->group(function () {
-            Route::get('/', \App\Livewire\Accounting\TaxRateIndex::class)->name('index');
-            Route::get('/create', \App\Livewire\Accounting\TaxRateForm::class)->name('create');
-            Route::get('/edit/{taxRate}', \App\Livewire\Accounting\TaxRateForm::class)->name('edit');
+            Route::get('/', TaxRateIndex::class)->name('index');
+            Route::get('/create', TaxRateForm::class)->name('create');
+            Route::get('/edit/{taxRate}', TaxRateForm::class)->name('edit');
         });
 
         // Tax Exemptions
         Route::prefix('/tax-exemptions')->name('tax-exemptions.')->group(function () {
-            Route::get('/', \App\Livewire\Accounting\TaxExemptionIndex::class)->name('index');
-            Route::get('/create', \App\Livewire\Accounting\TaxExemptionForm::class)->name('create');
-            Route::get('/edit/{taxExemption}', \App\Livewire\Accounting\TaxExemptionForm::class)->name('edit');
+            Route::get('/', TaxExemptionIndex::class)->name('index');
+            Route::get('/create', TaxExemptionForm::class)->name('create');
+            Route::get('/edit/{taxExemption}', TaxExemptionForm::class)->name('edit');
         });
 
         // Tax Reporting
         Route::prefix('/reporting')->name('reporting.')->group(function () {
-            Route::get('/', \App\Livewire\Accounting\TaxReportingDashboard::class)->name('dashboard');
+            Route::get('/', TaxReportingDashboard::class)->name('dashboard');
         });
 
         // Tax Filings
         Route::prefix('/filings')->name('filings.')->group(function () {
-            Route::get('/', \App\Livewire\Accounting\TaxFilingManager::class)->name('index');
+            Route::get('/', TaxFilingManager::class)->name('index');
         });
 
         // Tax Downloads
@@ -162,12 +174,12 @@ Route::prefix('/accounts')->name('accounting.')->group(function () {
     // Financial Years Management
     Route::prefix('/financial-years')->name('financial-years.')->group(function () {
         // Routes without parameters (specific routes first)
-        Route::get('/', \App\Livewire\Accounting\FinancialYears\FinancialYearIndex::class)->name('index');
+        Route::get('/', FinancialYearIndex::class)->name('index');
         Route::get('/create', [FinancialYearController::class, 'create'])->name('create');
         Route::post('/', [FinancialYearController::class, 'store'])->name('store');
 
         // Routes with financialYear parameter - add explicit constraints
-        Route::get('/edit/{financialYear}', \App\Livewire\Accounting\FinancialYears\FinancialYearForm::class)
+        Route::get('/edit/{financialYear}', FinancialYearForm::class)
             ->where('financialYear', '[0-9]+')
             ->name('edit');
         Route::put('/{financialYear}', [FinancialYearController::class, 'update'])
@@ -185,10 +197,10 @@ Route::prefix('/accounts')->name('accounting.')->group(function () {
         Route::post('/{financialYear}/unlock', [FinancialYearController::class, 'unlock'])
             ->where('financialYear', '[0-9]+')
             ->name('unlock');
-        Route::get('/opening-balances/{financialYear}', \App\Livewire\Accounting\FinancialYears\OpeningBalanceForm::class)
+        Route::get('/opening-balances/{financialYear}', OpeningBalanceForm::class)
             ->where('financialYear', '[0-9]+')
             ->name('opening-balances');
-        Route::get('/close/{financialYear}', \App\Livewire\Accounting\FinancialYears\YearEndClosing::class)
+        Route::get('/close/{financialYear}', YearEndClosing::class)
             ->where('financialYear', '[0-9]+')
             ->name('close');
     });

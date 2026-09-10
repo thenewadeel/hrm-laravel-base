@@ -1,4 +1,5 @@
 <?php
+
 // tests/Unit/Accounting/InvalidAccountTypeExceptionTest.php
 
 namespace Tests\Unit\Accounting;
@@ -6,18 +7,20 @@ namespace Tests\Unit\Accounting;
 use App\Exceptions\InvalidAccountTypeException;
 use App\Models\Accounting\ChartOfAccount;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
 
 class InvalidAccountTypeExceptionTest extends TestCase
 {
     use RefreshDatabase, SetupOrganization;
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->setupOrganization();
     }
+
     #[Test]
     public function it_provides_detailed_error_message()
     {

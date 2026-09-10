@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Membership\SimpleSubscriptions;
 use App\Models\Membership\Member;
 use App\Models\Membership\MemberSubscription;
 use App\Models\Membership\SubscriptionPlan;
@@ -27,7 +28,7 @@ test('simple subscriptions component renders with real data', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleSubscriptions::class)
+        ->test(SimpleSubscriptions::class)
         ->assertStatus(200)
         ->assertSee('Subscription Management')
         ->assertSee($member->full_name)
@@ -42,7 +43,7 @@ test('simple subscriptions add subscription button opens form', function () {
     $user->current_organization_id = $organization->id;
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleSubscriptions::class)
+        ->test(SimpleSubscriptions::class)
         ->call('showAddSubscriptionForm')
         ->assertSet('showAddSubscriptionForm', true)
         ->assertSee('New Subscription');
@@ -58,7 +59,7 @@ test('simple subscriptions can create subscription with validation', function ()
     $member = Member::factory()->create(['organization_id' => $organization->id]);
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleSubscriptions::class)
+        ->test(SimpleSubscriptions::class)
         ->call('showAddSubscriptionForm')
         ->set('member_id', $member->id)
         ->set('subscription_plan_id', 'individual') // Use demo plan ID
@@ -85,7 +86,7 @@ test('simple subscriptions validation fails for invalid data', function () {
     $user->current_organization_id = $organization->id;
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleSubscriptions::class)
+        ->test(SimpleSubscriptions::class)
         ->call('showAddSubscriptionForm')
         ->set('member_id', '')
         ->set('subscription_plan_id', '')
@@ -139,7 +140,7 @@ test('simple subscriptions shows correct statistics', function () {
     ]);
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleSubscriptions::class);
+        ->test(SimpleSubscriptions::class);
 
     $stats = $component->subscriptionStats;
 
@@ -175,7 +176,7 @@ test('simple subscriptions respects organization isolation', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleSubscriptions::class)
+        ->test(SimpleSubscriptions::class)
         ->assertSee($member1->full_name)
         ->assertDontSee($member2->full_name);
 });
@@ -191,7 +192,7 @@ test('simple subscriptions loads members and plans for selection', function () {
     $plans = SubscriptionPlan::factory()->count(2)->create(['organization_id' => $organization->id]);
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleSubscriptions::class)
+        ->test(SimpleSubscriptions::class)
         ->call('showAddSubscriptionForm');
 
     $membersList = $component->members;
@@ -211,7 +212,7 @@ test('simple subscriptions handles unauthorized access', function () {
     $user->current_organization_id = $organization->id;
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleSubscriptions::class)
+        ->test(SimpleSubscriptions::class)
         ->assertStatus(200)
         ->assertDontSee('New Subscription'); // Should not see add button without permission
 });
@@ -235,7 +236,7 @@ test('simple subscriptions can renew existing subscription', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleSubscriptions::class)
+        ->test(SimpleSubscriptions::class)
         ->call('renewSubscription', $subscription->id);
 
     $this->assertDatabaseHas('member_subscriptions', [
@@ -281,7 +282,7 @@ test('simple subscriptions can process batch renewals', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleSubscriptions::class)
+        ->test(SimpleSubscriptions::class)
         ->call('processRenewals')
         ->assertDispatched('notify');
 
@@ -317,7 +318,7 @@ test('simple subscriptions can send reminders', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleSubscriptions::class)
+        ->test(SimpleSubscriptions::class)
         ->call('sendReminders')
         ->assertDispatched('notify');
 });
@@ -341,7 +342,7 @@ test('simple subscriptions can cancel subscription', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleSubscriptions::class)
+        ->test(SimpleSubscriptions::class)
         ->call('cancelSubscription', $subscription->id)
         ->assertDispatched('notify');
 
@@ -385,7 +386,7 @@ test('simple subscriptions search functionality works', function () {
     ]);
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleSubscriptions::class)
+        ->test(SimpleSubscriptions::class)
         ->set('search', 'John')
         ->assertSee('John Doe')
         ->assertDontSee('Jane Smith');
@@ -418,14 +419,14 @@ test('simple subscriptions status filter works', function () {
 
     // Test filtering by active status
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleSubscriptions::class)
+        ->test(SimpleSubscriptions::class)
         ->set('statusFilter', 'active')
         ->assertSee($member1->full_name)
         ->assertDontSee($member2->full_name);
 
     // Test filtering by expired status
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleSubscriptions::class)
+        ->test(SimpleSubscriptions::class)
         ->set('statusFilter', 'expired')
         ->assertSee($member2->full_name)
         ->assertDontSee($member1->full_name);

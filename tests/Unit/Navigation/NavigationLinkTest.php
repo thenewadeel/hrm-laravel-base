@@ -1,7 +1,6 @@
 <?php
 
 use App\View\Components\Navigation\Link;
-use PHPUnit\Framework\Attributes\Test;
 
 it('renders navigation link with href', function () {
     $component = new Link('https://example.com');

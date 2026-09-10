@@ -4,6 +4,7 @@ namespace App\Livewire\Membership;
 
 use App\Models\Membership\Member;
 use App\Services\Membership\MembershipService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
@@ -401,7 +402,7 @@ class FamilyMemberManager extends Component
     // Utility Methods
     public function getAgeFromDateOfBirth(string $dateOfBirth): int
     {
-        return \Carbon\Carbon::parse($dateOfBirth)->age;
+        return Carbon::parse($dateOfBirth)->age;
     }
 
     public function getStatusColor(string $status): string

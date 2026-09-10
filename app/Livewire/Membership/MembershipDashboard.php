@@ -6,6 +6,7 @@ use App\Services\Membership\CardPrintingService;
 use App\Services\Membership\FeeService;
 use App\Services\Membership\MembershipService;
 use App\Services\Membership\SubscriptionService;
+use Illuminate\Support\Collection;
 use Livewire\Component;
 
 class MembershipDashboard extends Component
@@ -151,7 +152,7 @@ class MembershipDashboard extends Component
         ];
     }
 
-    public function getExpiringMembersProperty(): \Illuminate\Support\Collection
+    public function getExpiringMembersProperty(): Collection
     {
         // Get the same organization ID as render method
         $userOrgs = auth()->user()->organizations()->pluck('organizations.id');
@@ -169,7 +170,7 @@ class MembershipDashboard extends Component
         );
     }
 
-    public function getExpiringSubscriptionsProperty(): \Illuminate\Support\Collection
+    public function getExpiringSubscriptionsProperty(): Collection
     {
         // Get the same organization ID as render method
         $userOrgs = auth()->user()->organizations()->pluck('organizations.id');
@@ -187,7 +188,7 @@ class MembershipDashboard extends Component
         );
     }
 
-    public function getOverdueFeesProperty(): \Illuminate\Support\Collection
+    public function getOverdueFeesProperty(): Collection
     {
         // Get same organization ID as render method
         $userOrgs = auth()->user()->organizations()->pluck('organizations.id');

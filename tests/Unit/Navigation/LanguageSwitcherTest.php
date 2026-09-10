@@ -1,8 +1,9 @@
 <?php
 
 use App\View\Components\Navigation\LanguageSwitcher;
-use Tests\TestCase;
+use Illuminate\Contracts\View\View;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class LanguageSwitcherTest extends TestCase
 {
@@ -30,6 +31,6 @@ class LanguageSwitcherTest extends TestCase
         $component = new LanguageSwitcher;
 
         expect(method_exists($component, 'render'))->toBeTrue();
-        expect($component->render())->toBeInstanceOf(\Illuminate\Contracts\View\View::class);
+        expect($component->render())->toBeInstanceOf(View::class);
     }
 }

@@ -7,13 +7,14 @@ use App\Models\User;
 use App\Roles\InventoryRoles;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
 
 class UserPlacementTest extends TestCase
 {
     use RefreshDatabase, SetupOrganization;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -30,7 +31,7 @@ class UserPlacementTest extends TestCase
         $organization->users()->attach($user, [
             'roles' => json_encode([InventoryRoles::INVENTORY_ADMIN]),
             'organization_id' => $organization->id,
-            'organization_unit_id' => $unit->id
+            'organization_unit_id' => $unit->id,
         ]);
 
         // Act
@@ -41,7 +42,7 @@ class UserPlacementTest extends TestCase
         $this->assertDatabaseHas('organization_user', [
             'user_id' => $user->id,
             'organization_id' => $organization->id,
-            'organization_unit_id' => $unit->id
+            'organization_unit_id' => $unit->id,
         ]);
     }
 
@@ -55,16 +56,16 @@ class UserPlacementTest extends TestCase
         $organization->users()->attach($user, [
             'roles' => json_encode([InventoryRoles::INVENTORY_ADMIN]),
             'organization_id' => $organization->id,
-            'organization_unit_id' => $unit->id
+            'organization_unit_id' => $unit->id,
         ]);
-        
+
         // Verify initial state
         $this->assertDatabaseHas('organization_user', [
             'user_id' => $user->id,
             'organization_id' => $organization->id,
-            'organization_unit_id' => $unit->id
+            'organization_unit_id' => $unit->id,
         ]);
-        
+
         // Act
         Livewire::test(UserPlacement::class, ['organizationId' => $organization->id])
             ->call('assignUserToUnit', $user->id, null);
@@ -73,14 +74,14 @@ class UserPlacementTest extends TestCase
         $this->assertDatabaseHas('organization_user', [
             'user_id' => $user->id,
             'organization_id' => $organization->id,
-            'organization_unit_id' => null
+            'organization_unit_id' => null,
         ]);
-        
+
         // Also verify the old state is gone
         $this->assertDatabaseMissing('organization_user', [
             'user_id' => $user->id,
             'organization_id' => $organization->id,
-            'organization_unit_id' => $unit->id
+            'organization_unit_id' => $unit->id,
         ]);
     }
 }

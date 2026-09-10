@@ -2,10 +2,11 @@
 
 namespace Database\Factories\Accounting;
 
+use App\Models\Accounting\TaxJurisdiction;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Accounting\TaxJurisdiction>
+ * @extends Factory<TaxJurisdiction>
  */
 class TaxJurisdictionFactory extends Factory
 {

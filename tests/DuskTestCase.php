@@ -8,6 +8,7 @@ use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\DB;
 use Laravel\Dusk\TestCase as BaseTestCase;
 use PHPUnit\Framework\Attributes\BeforeClass;
 use Tests\Browser\Concerns\HandlesDatabaseIsolation;
@@ -88,7 +89,7 @@ abstract class DuskTestCase extends BaseTestCase
 
         // Only run migrations if they haven't been run yet
         try {
-            \Illuminate\Support\Facades\DB::connection('sqlite')->table('migrations')->first();
+            DB::connection('sqlite')->table('migrations')->first();
         } catch (\Exception) {
             $this->artisan('migrate:fresh', [
                 '--database' => 'testing_sqlite',

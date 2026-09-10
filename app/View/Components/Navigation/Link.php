@@ -2,14 +2,19 @@
 
 namespace App\View\Components\Navigation;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class Link extends Component
 {
     public string $href;
+
     public bool $active = false;
+
     public ?string $icon = null;
+
     public ?string $badge = null;
+
     public string $target = '_self';
 
     public function __construct(
@@ -26,7 +31,7 @@ class Link extends Component
         $this->target = $target;
     }
 
-    public function render(): \Illuminate\Contracts\View\View
+    public function render(): View
     {
         return view('components.navigation.link');
     }

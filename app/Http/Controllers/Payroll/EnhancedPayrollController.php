@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Payroll;
 
 use App\Http\Controllers\Controller;
+use App\Models\AttendanceRecord;
 use App\Models\Employee;
 use App\Models\EmployeeIncrement;
 use App\Models\EmployeeLoan;
@@ -93,7 +94,7 @@ class EnhancedPayrollController extends Controller
             $startDate = $period->copy()->startOfMonth();
             $endDate = $period->copy()->endOfMonth();
 
-            $attendanceRecords = \App\Models\AttendanceRecord::where('employee_id', $employee->id)
+            $attendanceRecords = AttendanceRecord::where('employee_id', $employee->id)
                 ->where('record_date', '>=', $startDate)
                 ->where('record_date', '<=', $endDate)
                 ->get();

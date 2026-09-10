@@ -1,12 +1,13 @@
 <?php
+
 // tests/Unit/Services/SequenceServiceTest.php
 
 namespace Tests\Unit\Services;
 
 use App\Services\SequenceService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class SequenceServiceTest extends TestCase
 {

@@ -4,14 +4,13 @@ namespace App\Http\Controllers\Accounting;
 
 use App\Http\Controllers\Controller;
 use App\Models\Accounting\FixedAsset;
+use App\Services\AccountingPdfService;
 use App\Services\FixedAssetService;
 use Illuminate\Http\Request;
 
 class FixedAssetController extends Controller
 {
-    public function __construct(private FixedAssetService $fixedAssetService)
-    {
-    }
+    public function __construct(private FixedAssetService $fixedAssetService) {}
 
     /**
      * Display a listing of the resource.
@@ -198,7 +197,7 @@ class FixedAssetController extends Controller
             ->orderBy('asset_tag')
             ->get();
 
-        $pdfService = app(\App\Services\AccountingPdfService::class);
+        $pdfService = app(AccountingPdfService::class);
         $pdf = $pdfService->generateAssetRegister($assets);
 
         return $pdf->download('asset-register.pdf');
@@ -218,7 +217,7 @@ class FixedAssetController extends Controller
             ->orderBy('asset_tag')
             ->get();
 
-        $pdfService = app(\App\Services\AccountingPdfService::class);
+        $pdfService = app(AccountingPdfService::class);
         $pdf = $pdfService->generateDepreciationSchedule($assets);
 
         return $pdf->download('depreciation-schedule.pdf');

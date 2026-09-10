@@ -3,6 +3,7 @@
 use App\Models\Membership\FamilyMember;
 use App\Models\Membership\Member;
 use App\Models\Organization;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
@@ -41,7 +42,7 @@ describe('FamilyMember Model', function () {
             'date_of_birth' => '1995-05-15',
         ]);
 
-        expect($familyMember->date_of_birth)->toBeInstanceOf(\Carbon\Carbon::class);
+        expect($familyMember->date_of_birth)->toBeInstanceOf(Carbon::class);
         expect($familyMember->date_of_birth->format('Y-m-d'))->toBe('1995-05-15');
     });
 

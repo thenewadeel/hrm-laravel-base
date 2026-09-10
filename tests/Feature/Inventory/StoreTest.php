@@ -2,17 +2,16 @@
 
 namespace Tests\Feature\Inventory;
 
-use App\Models\Inventory\Item;
 use App\Models\Inventory\Store;
-use Tests\Traits\SetupInventory;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
+use Tests\Traits\SetupInventory;
 use Tests\Traits\SetupOrganization;
 
 class StoreTest extends TestCase
 {
-    use RefreshDatabase, SetupOrganization, SetupInventory;
+    use RefreshDatabase, SetupInventory, SetupOrganization;
 
     protected function setUp(): void
     {
@@ -20,6 +19,7 @@ class StoreTest extends TestCase
         $this->setupOrganization();
         $this->setupInventory();
     }
+
     #[Test]
     public function it_can_create_a_store()
     {
@@ -30,7 +30,7 @@ class StoreTest extends TestCase
             'code' => 'WH001',
             'location' => 'Building A',
             'description' => 'Primary storage facility',
-            'organization_unit_id' => $setup['organization_unit']->id
+            'organization_unit_id' => $setup['organization_unit']->id,
         ];
         $response = $this->actingAs($setup['user'])
             ->postJson('/api/inventory/stores', $storeData);
@@ -38,14 +38,14 @@ class StoreTest extends TestCase
         $response->assertStatus(201)
             ->assertJsonFragment([
                 'name' => 'Main Warehouse',
-                'code' => 'WH001'
+                'code' => 'WH001',
             ]);
 
         // dd('asd');
         $this->assertDatabaseHas('inventory_stores', [
             'name' => 'Main Warehouse',
             'code' => 'WH001',
-            'organization_unit_id' => $setup['organization_unit']->id
+            'organization_unit_id' => $setup['organization_unit']->id,
         ]);
     }
 
@@ -57,7 +57,7 @@ class StoreTest extends TestCase
         $response = $this->actingAs($setup['user'])
             ->postJson("/api/inventory/stores/{$setup['store']->id}/items", [
                 'item_id' => $setup['items']->first()->id,
-                'quantity' => 100
+                'quantity' => 100,
             ]);
 
         // dd($response->json());
@@ -65,7 +65,7 @@ class StoreTest extends TestCase
         $this->assertDatabaseHas('inventory_store_items', [
             'store_id' => $setup['store']->id,
             'item_id' => $setup['items']->first()->id,
-            'quantity' => 100
+            'quantity' => 100,
         ]);
     }
 
@@ -93,10 +93,10 @@ class StoreTest extends TestCase
                         '*' => [
                             'id',
                             'name',
-                            'pivot' => ['quantity']
-                        ]
-                    ]
-                ]
+                            'pivot' => ['quantity'],
+                        ],
+                    ],
+                ],
             ]);
     }
 
@@ -110,7 +110,7 @@ class StoreTest extends TestCase
 
         $response = $this->actingAs($setup['user'])
             ->putJson("/api/inventory/stores/{$setup['store']->id}/items/{$item->id}", [
-                'quantity' => 75
+                'quantity' => 75,
             ]);
 
         $response->assertStatus(200);
@@ -118,7 +118,7 @@ class StoreTest extends TestCase
         $this->assertDatabaseHas('inventory_store_items', [
             'store_id' => $setup['store']->id,
             'item_id' => $item->id,
-            'quantity' => 75
+            'quantity' => 75,
         ]);
     }
 
@@ -141,10 +141,11 @@ class StoreTest extends TestCase
                         'organization_id', // Now available through relationship
                         'organization_unit_id',
                         'items_count',
-                    ]
-                ]
+                    ],
+                ],
             ]);
     }
+
     #[Test]
     public function it_can_use_organization_scope()
     {
@@ -163,7 +164,7 @@ class StoreTest extends TestCase
         $store = Store::factory()->create([
             'organization_unit_id' => $setup['organization_unit']->id,
             'name' => 'Main Warehouse',
-            'code' => 'WH-MAIN'
+            'code' => 'WH-MAIN',
         ]);
 
         $results = Store::search('Main')->get();
@@ -182,7 +183,7 @@ class StoreTest extends TestCase
 
         $inactiveStore = Store::factory()->create([
             'organization_unit_id' => $setup['organization_unit']->id,
-            'is_active' => false
+            'is_active' => false,
         ]);
 
         $activeStores = Store::active()->get();

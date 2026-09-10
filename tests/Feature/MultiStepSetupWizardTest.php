@@ -1,23 +1,24 @@
 <?php
+
 // tests/Feature/MultiStepSetupWizardTest.php
 
 namespace Tests\Feature;
 
 use App\Models\Accounting\ChartOfAccount;
-use App\Models\User;
-use App\Models\Organization;
 use App\Models\Inventory\Store;
+use App\Models\Organization;
 use App\Models\OrganizationUnit;
+use App\Models\User;
 use App\Roles\InventoryRoles;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupInventory;
 use Tests\Traits\SetupOrganization;
 
 class MultiStepSetupWizardTest extends TestCase
 {
-    use RefreshDatabase, SetupOrganization, SetupInventory;
+    use RefreshDatabase, SetupInventory, SetupOrganization;
 
     protected function setUp(): void
     {
@@ -26,6 +27,7 @@ class MultiStepSetupWizardTest extends TestCase
         $this->setupInventory();
         // dd('ppp');
     }
+
     #[Test]
     public function it_shows_organization_step_for_new_users()
     {
@@ -43,7 +45,7 @@ class MultiStepSetupWizardTest extends TestCase
     #[Test]
     public function it_can_store_organization_and_proceed_to_store_step()
     {
-        $user =  User::factory()->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($user)
             ->post('/setup/organization', [
@@ -64,7 +66,7 @@ class MultiStepSetupWizardTest extends TestCase
         $organization = $setup['organization'];
         // $this->organization ?? Organization::factory()->create();
         $unit = $setup['organization_unit'];
-        //$this->unit ?? OrganizationUnit::factory()->for($organization)->create();
+        // $this->unit ?? OrganizationUnit::factory()->for($organization)->create();
         // $organization->users()->attach($user, [
         //     // 'roles' => $roles,
         //     'roles' => json_encode([InventoryRoles::INVENTORY_ADMIN]),
@@ -107,6 +109,7 @@ class MultiStepSetupWizardTest extends TestCase
         $this->assertNotNull($store);
         $this->assertEquals($organization->id, $store->organization->id);
     }
+
     #[Test]
     public function it_shows_accounting_setup_step_after_store()
     {

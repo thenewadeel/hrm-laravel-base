@@ -7,6 +7,7 @@ namespace App\Livewire;
 use App\Livewire\Traits\ManagesOrganizationFilter;
 use App\Models\Organization;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class UserPlacement extends Component
@@ -55,7 +56,7 @@ class UserPlacement extends Component
 
     public function loadUnassignedUsers()
     {
-        $this->unassignedUsers = \App\Models\User::where(function ($query) {
+        $this->unassignedUsers = User::where(function ($query) {
             $query->whereDoesntHave('organizations')
                 ->orWhereHas('organizations', function ($query) {
                     $query->where('organization_id', $this->organizationId)
@@ -77,7 +78,7 @@ class UserPlacement extends Component
 
     public function assignUserToUnit($userId, $unitId)
     {
-        $user = \App\Models\User::find($userId);
+        $user = User::find($userId);
 
         if (! $user) {
             return;
@@ -90,7 +91,7 @@ class UserPlacement extends Component
 
         if ($existingPivot) {
             // Update existing pivot record directly using DB
-            $affected = \Illuminate\Support\Facades\DB::table('organization_user')
+            $affected = DB::table('organization_user')
                 ->where('user_id', $userId)
                 ->where('organization_id', $this->organizationId)
                 ->update(['organization_unit_id' => $unitId]);

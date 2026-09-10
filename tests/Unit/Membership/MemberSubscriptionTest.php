@@ -4,6 +4,7 @@ use App\Models\Membership\Member;
 use App\Models\Membership\MemberSubscription;
 use App\Models\Membership\SubscriptionPlan;
 use App\Models\Organization;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
@@ -40,8 +41,8 @@ describe('MemberSubscription Model', function () {
             'end_date' => '2024-01-01',
         ]);
 
-        expect($subscription->start_date)->toBeInstanceOf(\Carbon\Carbon::class);
-        expect($subscription->end_date)->toBeInstanceOf(\Carbon\Carbon::class);
+        expect($subscription->start_date)->toBeInstanceOf(Carbon::class);
+        expect($subscription->end_date)->toBeInstanceOf(Carbon::class);
         expect($subscription->start_date->format('Y-m-d'))->toBe('2023-01-01');
         expect($subscription->end_date->format('Y-m-d'))->toBe('2024-01-01');
     });

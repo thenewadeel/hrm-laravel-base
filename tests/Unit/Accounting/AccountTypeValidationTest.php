@@ -1,4 +1,5 @@
 <?php
+
 // tests/Unit/Accounting/AccountTypeValidationTest.php
 
 namespace Tests\Unit\Accounting;
@@ -7,8 +8,8 @@ use App\Exceptions\InvalidAccountTypeException;
 use App\Models\Accounting\ChartOfAccount;
 use App\Services\AccountingService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
 
 class AccountTypeValidationTest extends TestCase
@@ -33,7 +34,7 @@ class AccountTypeValidationTest extends TestCase
      *
      * @return void
      */
-    /*******  035c4e9d-be51-4bf5-a46e-a38c524a3910  *******/    #[Test]
+    /*******  035c4e9d-be51-4bf5-a46e-a38c524a3910  *******/ #[Test]
     public function it_allows_debit_to_asset_accounts()
     {
         $assetAccount = ChartOfAccount::factory()->create(['type' => 'asset']);

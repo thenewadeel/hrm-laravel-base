@@ -1,8 +1,9 @@
 <?php
 
 use App\View\Components\Navigation\MobileLink;
-use Tests\TestCase;
+use Illuminate\Contracts\View\View;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class MobileLinkTest extends TestCase
 {
@@ -30,6 +31,6 @@ class MobileLinkTest extends TestCase
         $component = new MobileLink;
 
         expect(method_exists($component, 'render'))->toBeTrue();
-        expect($component->render())->toBeInstanceOf(\Illuminate\Contracts\View\View::class);
+        expect($component->render())->toBeInstanceOf(View::class);
     }
 }

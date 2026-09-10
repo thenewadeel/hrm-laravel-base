@@ -19,6 +19,7 @@ class InventoryReportController extends Controller
     {
         $this->pdfService = $pdfService;
     }
+
     /**
      * Display the inventory reports dashboard.
      */
@@ -27,6 +28,7 @@ class InventoryReportController extends Controller
         $user = auth()->user();
         // $organization = $user->organization;
         $stores = Store::all();
+
         return view('inventory.reports.index', compact('stores'));
     }
 
@@ -92,6 +94,7 @@ class InventoryReportController extends Controller
                 // Show items near reorder level (within 20%)
                 $lowStockItems = $items->filter(function ($item) {
                     $threshold = $item->reorder_level * 1.2;
+
                     return $item->total_quantity > $item->reorder_level && $item->total_quantity <= $threshold;
                 });
                 $outOfStockItems = collect();
@@ -139,6 +142,7 @@ class InventoryReportController extends Controller
             'category',
             'severity'
         );
+
         // dd([$returnBag]);
         return view('inventory.reports.low-stock', $returnBag);
     }
@@ -158,11 +162,11 @@ class InventoryReportController extends Controller
         $transactionType = $request->get('transaction_type');
 
         // Base query for transaction items within date range
-        $movementsQuery = \App\Models\Inventory\TransactionItem::query()
+        $movementsQuery = TransactionItem::query()
             ->with(['transaction.store', 'item'])
             ->whereHas('transaction', function ($query) use ($startDate, $endDate, $transactionType) {
                 $query->where('status', 'completed');
-                $query->whereBetween('transaction_date', [$startDate, $endDate . ' 23:59:59']);
+                $query->whereBetween('transaction_date', [$startDate, $endDate.' 23:59:59']);
 
                 if ($transactionType) {
                     $query->where('type', $transactionType);
@@ -194,14 +198,15 @@ class InventoryReportController extends Controller
         $topIssued = $this->getTopIssued($startDate, $endDate, 5);
 
         // Get data for filters
-        $allItems = \App\Models\Inventory\Item::where('organization_id', auth()->user()->operatingOrganizationId)
+        $allItems = Item::where('organization_id', auth()->user()->operatingOrganizationId)
             ->where('is_active', true)
             ->orderBy('name')
             ->get();
 
-        $stores = \App\Models\Inventory\Store::where('is_active', true)
+        $stores = Store::where('is_active', true)
             // ->forOrganization(auth()->user()->operatingOrganizationId)
             ->get();
+
         // dd([
         //     'movements' => $movements->toArray(),
         //     'summary' =>            $summary,
@@ -233,10 +238,10 @@ class InventoryReportController extends Controller
      */
     private function calculateMovementSummary(string $startDate, string $endDate, ?int $itemId = null, ?string $transactionType = null): array
     {
-        $baseQuery = \App\Models\Inventory\TransactionItem::query()
+        $baseQuery = TransactionItem::query()
             ->whereHas('transaction', function ($query) use ($startDate, $endDate, $transactionType) {
                 $query->where('status', 'completed');
-                $query->whereBetween('transaction_date', [$startDate, $endDate . ' 23:59:59']);
+                $query->whereBetween('transaction_date', [$startDate, $endDate.' 23:59:59']);
 
                 if ($transactionType) {
                     $query->where('type', $transactionType);
@@ -266,9 +271,9 @@ class InventoryReportController extends Controller
             ->sum('quantity');
 
         // Total transactions count
-        $totalTransactions = \App\Models\Inventory\Transaction::query()
+        $totalTransactions = Transaction::query()
             ->where('status', 'completed')
-            ->whereBetween('transaction_date', [$startDate, $endDate . ' 23:59:59'])
+            ->whereBetween('transaction_date', [$startDate, $endDate.' 23:59:59'])
             ->whereHas('store.organization_unit', function ($query) {
                 $query->where('organization_id', auth()->user()->operatingOrganizationId);
             })
@@ -290,7 +295,7 @@ class InventoryReportController extends Controller
      */
     private function getTopMovers(string $startDate, string $endDate, string $type, int $limit = 5)
     {
-        $query = \App\Models\Inventory\TransactionItem::query()
+        $query = TransactionItem::query()
             ->selectRaw('
             items.id,
             items.name,
@@ -307,7 +312,7 @@ class InventoryReportController extends Controller
             ->join('inventory_items as items', 'transaction_items.item_id', '=', 'items.id')
             ->join('inventory_transactions as transactions', 'transaction_items.transaction_id', '=', 'transactions.id')
             ->where('transactions.status', 'completed')
-            ->whereBetween('transactions.transaction_date', [$startDate, $endDate . ' 23:59:59'])
+            ->whereBetween('transactions.transaction_date', [$startDate, $endDate.' 23:59:59'])
             ->whereHas('transaction.store.organization_unit', function ($q) {
                 $q->where('organization_id', auth()->user()->operatingOrganizationId);
             })
@@ -330,14 +335,13 @@ class InventoryReportController extends Controller
             ->get();
     }
 
-
     private function getTopReceived(string $startDate, string $endDate, int $limit = 5)
     {
-        $items = \App\Models\Inventory\TransactionItem::with(['item', 'transaction'])
+        $items = TransactionItem::with(['item', 'transaction'])
             ->whereHas('transaction', function ($query) use ($startDate, $endDate) {
                 $query->where('status', 'completed')
                     ->where('type', 'receipt')
-                    ->whereBetween('transaction_date', [$startDate, $endDate . ' 23:59:59'])
+                    ->whereBetween('transaction_date', [$startDate, $endDate.' 23:59:59'])
                     ->whereHas('store.organization_unit', function ($q) {
                         $q->where('organization_id', auth()->user()->operatingOrganizationId);
                     });
@@ -346,12 +350,13 @@ class InventoryReportController extends Controller
             ->groupBy('item_id')
             ->map(function ($transactionItems, $itemId) {
                 $item = $transactionItems->first()->item;
+
                 return (object) [
                     'id' => $item->id,
                     'name' => $item->name,
                     'sku' => $item->sku,
                     'unit' => $item->unit,
-                    'total_quantity' => $transactionItems->sum('quantity')
+                    'total_quantity' => $transactionItems->sum('quantity'),
                 ];
             })
             ->sortByDesc('total_quantity')
@@ -363,11 +368,11 @@ class InventoryReportController extends Controller
 
     private function getTopIssued(string $startDate, string $endDate, int $limit = 5)
     {
-        $items = \App\Models\Inventory\TransactionItem::with(['item', 'transaction'])
+        $items = TransactionItem::with(['item', 'transaction'])
             ->whereHas('transaction', function ($query) use ($startDate, $endDate) {
                 $query->where('status', 'completed')
                     ->where('type', 'issue')
-                    ->whereBetween('transaction_date', [$startDate, $endDate . ' 23:59:59'])
+                    ->whereBetween('transaction_date', [$startDate, $endDate.' 23:59:59'])
                     ->whereHas('store.organization_unit', function ($q) {
                         $q->where('organization_id', auth()->user()->operatingOrganizationId);
                     });
@@ -376,12 +381,13 @@ class InventoryReportController extends Controller
             ->groupBy('item_id')
             ->map(function ($transactionItems, $itemId) {
                 $item = $transactionItems->first()->item;
+
                 return (object) [
                     'id' => $item->id,
                     'name' => $item->name,
                     'sku' => $item->sku,
                     'unit' => $item->unit,
-                    'total_quantity' => $transactionItems->sum('quantity')
+                    'total_quantity' => $transactionItems->sum('quantity'),
                 ];
             })
             ->sortByDesc('total_quantity')
@@ -396,13 +402,13 @@ class InventoryReportController extends Controller
      */
     private function getMovementChartData(string $startDate, string $endDate)
     {
-        return \App\Models\Inventory\TransactionItem::query()
+        return TransactionItem::query()
             ->selectRaw('DATE(transactions.transaction_date) as date,
                      transactions.type,
                      SUM(transaction_items.quantity) as total_quantity')
             ->join('inventory_transactions as transactions', 'transaction_items.transaction_id', '=', 'transactions.id')
             ->where('transactions.status', 'completed')
-            ->whereBetween('transactions.transaction_date', [$startDate, $endDate . ' 23:59:59'])
+            ->whereBetween('transactions.transaction_date', [$startDate, $endDate.' 23:59:59'])
             ->whereHas('transaction.store.organization_unit', function ($query) {
                 $query->where('organization_id', auth()->user()->operatingOrganizationId);
             })
@@ -411,6 +417,7 @@ class InventoryReportController extends Controller
             ->get()
             ->groupBy('type');
     }
+
     /**
      * Display out of stock report
      */
@@ -584,6 +591,7 @@ class InventoryReportController extends Controller
                 // Show items near reorder level (within 20%)
                 $lowStockItems = $items->filter(function ($item) {
                     $threshold = $item->reorder_level * 1.2;
+
                     return $item->total_quantity > $item->reorder_level && $item->total_quantity <= $threshold;
                 });
                 $outOfStockItems = collect();
@@ -610,7 +618,7 @@ class InventoryReportController extends Controller
         $filters = [
             'store_id' => $storeId,
             'category' => $category,
-            'severity' => $severity
+            'severity' => $severity,
         ];
 
         return $this->pdfService->downloadLowStock(
@@ -693,7 +701,7 @@ class InventoryReportController extends Controller
             'totalItems' => $totalItems,
             'lowStockCount' => $lowStockCount,
             'outOfStockCount' => $outOfStockCount,
-            'totalValue' => $totalValue
+            'totalValue' => $totalValue,
         ];
 
         $filters = $request->only(['store_id', 'category', 'status']);
@@ -721,7 +729,7 @@ class InventoryReportController extends Controller
             ->with(['transaction.store', 'item'])
             ->whereHas('transaction', function ($query) use ($startDate, $endDate, $transactionType) {
                 $query->where('status', 'completed');
-                $query->whereBetween('transaction_date', [$startDate, $endDate . ' 23:59:59']);
+                $query->whereBetween('transaction_date', [$startDate, $endDate.' 23:59:59']);
 
                 if ($transactionType) {
                     $query->where('type', $transactionType);
@@ -752,7 +760,7 @@ class InventoryReportController extends Controller
             'start_date' => $startDate,
             'end_date' => $endDate,
             'item_id' => $itemId,
-            'transaction_type' => $transactionType
+            'transaction_type' => $transactionType,
         ];
 
         return $this->pdfService->downloadMovement(

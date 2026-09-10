@@ -22,7 +22,7 @@ class UiCategoryBadge extends Component
 
     public function getColor(): string
     {
-        return match($this->category) {
+        return match ($this->category) {
             'sales', 'revenue' => 'green',
             'marketing', 'promotion' => 'purple',
             'support', 'service' => 'blue',

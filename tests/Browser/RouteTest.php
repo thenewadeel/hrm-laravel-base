@@ -2,6 +2,8 @@
 
 namespace Tests\Browser;
 
+use App\Models\Organization;
+use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
@@ -42,8 +44,8 @@ class RouteTest extends DuskTestCase
     public function test_fees_route_with_auth(): void
     {
         $this->browse(function (Browser $browser) {
-            $user = \App\Models\User::factory()->create(['email_verified_at' => now()]);
-            $org = \App\Models\Organization::factory()->create();
+            $user = User::factory()->create(['email_verified_at' => now()]);
+            $org = Organization::factory()->create();
 
             $org->users()->attach($user->id, [
                 'roles' => 'admin',

@@ -1,4 +1,5 @@
 <?php
+
 // tests/Feature/OrganizationUserPivotTest.php (or wherever you put feature tests)
 
 use App\Models\Organization;

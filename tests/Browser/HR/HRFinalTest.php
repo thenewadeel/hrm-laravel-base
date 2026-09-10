@@ -20,7 +20,7 @@ class HRFinalTest extends JavaScriptDuskTestCase
             // Verify basic functionality
             $title = $browser->driver->getTitle();
             $this->assertNotEmpty($title);
-            
+
             $browser->screenshot('hr-final-home');
         });
     }

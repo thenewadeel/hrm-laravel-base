@@ -16,20 +16,20 @@ class FixedConnectionTest extends JavaScriptDuskTestCase
             $browser->visit('/')
                 ->pause(3000) // Wait for page to fully load
                 ->screenshot('debug_homepage');
-            
+
             $title = $browser->driver->getTitle();
             $url = $browser->driver->getCurrentURL();
-            
+
             echo "\n=== DEBUG INFO ===\n";
-            echo "Title: " . $title . "\n";
-            echo "URL: " . $url . "\n";
+            echo 'Title: '.$title."\n";
+            echo 'URL: '.$url."\n";
             echo "==================\n";
-            
+
             // Basic checks that should always work
             $browser->assertSourceHas('<html')
                 ->assertSourceHas('<body')
                 ->assertTitleContains('HRM-Base');
-                
+
             // Verify the page loads with proper structure
             $pageSource = $browser->driver->getPageSource();
             assert(str_contains($pageSource, 'HRM-Base'), 'HRM-Base should be in page source');
@@ -63,7 +63,7 @@ class FixedConnectionTest extends JavaScriptDuskTestCase
                 ->assertSourceHas('name="password"')
                 ->assertSourceHas('type="email"')
                 ->assertSourceHas('type="password"');
-                
+
             // Check for email and password inputs
             $browser->assertPresent('input[name="email"]')
                 ->assertPresent('input[name="password"]')

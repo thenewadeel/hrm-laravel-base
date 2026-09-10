@@ -1,4 +1,5 @@
 <?php
+
 // database/factories/DimensionFactory.php
 
 namespace Database\Factories;

@@ -2,18 +2,21 @@
 
 namespace Database\Factories\Inventory;
 
+use App\Models\Inventory\Item;
+use App\Models\Inventory\Store;
+use App\Models\Inventory\Transaction;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TransactionFactory extends Factory
 {
-    protected $model = \App\Models\Inventory\Transaction::class;
+    protected $model = Transaction::class;
 
     public function definition()
     {
         return [
-            'store_id' => \App\Models\Inventory\Store::factory(),
-            'item_id' => \App\Models\Inventory\Item::factory(),
+            'store_id' => Store::factory(),
+            'item_id' => Item::factory(),
             'created_by' => User::factory(),
             'type' => $this->faker->randomElement(['incoming', 'outgoing', 'adjustment']),
             'status' => 'draft',

@@ -14,20 +14,20 @@ trait HandlesWorkflowAssertions
         // Check chart of accounts balance
         if (isset($expectedData['account_balances'])) {
             foreach ($expectedData['account_balances'] as $accountName => $expectedBalance) {
-                $browser->assertSeeIn('[data-account-balance="' . $accountName . '"]', 
+                $browser->assertSeeIn('[data-account-balance="'.$accountName.'"]',
                     number_format($expectedBalance, 2));
             }
         }
 
         // Check journal entries
         if (isset($expectedData['journal_entries_count'])) {
-            $browser->assertSeeIn('[data-journal-entries-count]', 
+            $browser->assertSeeIn('[data-journal-entries-count]',
                 $expectedData['journal_entries_count']);
         }
 
         // Check ledger entries balance
         if (isset($expectedData['ledger_balance'])) {
-            $browser->assertSeeIn('[data-ledger-balance]', 
+            $browser->assertSeeIn('[data-ledger-balance]',
                 number_format($expectedData['ledger_balance'], 2));
         }
     }
@@ -44,14 +44,14 @@ trait HandlesWorkflowAssertions
 
         // Check payroll totals
         if (isset($expectedData['payroll_total'])) {
-            $browser->assertSeeIn('[data-payroll-total]', 
+            $browser->assertSeeIn('[data-payroll-total]',
                 number_format($expectedData['payroll_total'], 2));
         }
 
         // Check attendance records
         if (isset($expectedData['attendance_records'])) {
             foreach ($expectedData['attendance_records'] as $employeeId => $records) {
-                $browser->assertSeeIn('[data-attendance="' . $employeeId . '"]', $records);
+                $browser->assertSeeIn('[data-attendance="'.$employeeId.'"]', $records);
             }
         }
     }
@@ -64,20 +64,20 @@ trait HandlesWorkflowAssertions
         // Check stock levels
         if (isset($expectedData['stock_levels'])) {
             foreach ($expectedData['stock_levels'] as $itemName => $expectedLevel) {
-                $browser->assertSeeIn('[data-stock-level="' . $itemName . '"]', $expectedLevel);
+                $browser->assertSeeIn('[data-stock-level="'.$itemName.'"]', $expectedLevel);
             }
         }
 
         // Check inventory value
         if (isset($expectedData['inventory_value'])) {
-            $browser->assertSeeIn('[data-inventory-value]', 
+            $browser->assertSeeIn('[data-inventory-value]',
                 number_format($expectedData['inventory_value'], 2));
         }
 
         // Check transaction counts
         if (isset($expectedData['transaction_counts'])) {
             foreach ($expectedData['transaction_counts'] as $transactionType => $count) {
-                $browser->assertSeeIn('[data-transaction-count="' . $transactionType . '"]', $count);
+                $browser->assertSeeIn('[data-transaction-count="'.$transactionType.'"]', $count);
             }
         }
     }
@@ -88,11 +88,11 @@ trait HandlesWorkflowAssertions
     protected function assertDataIsolation(Browser $browser, Organization $organization): void
     {
         $browser->assertSee($organization->name)
-            ->assertPresent('[data-organization-id="' . $organization->id . '"]')
+            ->assertPresent('[data-organization-id="'.$organization->id.'"]')
             ->assertDontSeeAnyText([
                 'Other Organization',
                 'Unauthorized Data',
-                'Access Denied'
+                'Access Denied',
             ]);
     }
 
@@ -103,13 +103,13 @@ trait HandlesWorkflowAssertions
     {
         // Check allowed actions are visible
         foreach ($allowedActions as $action) {
-            $browser->assertPresent('[data-action="' . $action . '"]')
-                ->assertVisible('[data-action="' . $action . '"]');
+            $browser->assertPresent('[data-action="'.$action.'"]')
+                ->assertVisible('[data-action="'.$action.'"]');
         }
 
         // Check denied actions are not visible or disabled
         foreach ($deniedActions as $action) {
-            $browser->assertMissing('[data-action="' . $action . '"]:not([disabled])');
+            $browser->assertMissing('[data-action="'.$action.'"]:not([disabled])');
         }
     }
 
@@ -119,7 +119,7 @@ trait HandlesWorkflowAssertions
     protected function assertBusinessProcessValidation(Browser $browser, array $processSteps): void
     {
         foreach ($processSteps as $step => $expectedStatus) {
-            $browser->assertSeeIn('[data-process-step="' . $step . '"]', $expectedStatus);
+            $browser->assertSeeIn('[data-process-step="'.$step.'"]', $expectedStatus);
         }
     }
 
@@ -129,7 +129,7 @@ trait HandlesWorkflowAssertions
     protected function assertWorkflowCompletion(Browser $browser, string $workflowName, bool $isCompleted = true): void
     {
         $status = $isCompleted ? 'completed' : 'pending';
-        $browser->assertSeeIn('[data-workflow="' . $workflowName . '"]', $status);
+        $browser->assertSeeIn('[data-workflow="'.$workflowName.'"]', $status);
     }
 
     /**
@@ -159,7 +159,7 @@ trait HandlesWorkflowAssertions
     {
         switch ($scenario) {
             case 'network_failure':
-                $browser->script("navigator.offline = true;");
+                $browser->script('navigator.offline = true;');
                 break;
             case 'invalid_data':
                 $browser->type('invalid_field', 'invalid_value')
@@ -217,7 +217,7 @@ trait HandlesWorkflowAssertions
             ->waitFor('.report-content', 15);
 
         foreach ($expectedData as $key => $value) {
-            $browser->assertSeeIn('[data-report-field="' . $key . '"]', $value);
+            $browser->assertSeeIn('[data-report-field="'.$key.'"]', $value);
         }
     }
 
@@ -253,7 +253,7 @@ trait HandlesWorkflowAssertions
      */
     protected function assertExportFunctionality(Browser $browser, string $exportType): void
     {
-        $browser->click('[data-export="' . $exportType . '"]')
+        $browser->click('[data-export="'.$exportType.'"]')
             ->waitFor('.export-success', 10)
             ->assertSee('Export completed successfully');
     }
@@ -266,11 +266,11 @@ trait HandlesWorkflowAssertions
         foreach ($operations as $operation) {
             // Select items for batch operation
             foreach ($operation['items'] as $item) {
-                $browser->check('[data-batch-item="' . $item . '"]');
+                $browser->check('[data-batch-item="'.$item.'"]');
             }
 
             // Execute batch operation
-            $browser->click('[data-batch-action="' . $operation['action'] . '"]')
+            $browser->click('[data-batch-action="'.$operation['action'].'"]')
                 ->waitFor('.batch-result', 10)
                 ->assertSee($operation['expected_result']);
         }

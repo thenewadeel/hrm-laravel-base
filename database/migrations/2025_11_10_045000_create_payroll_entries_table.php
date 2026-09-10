@@ -24,7 +24,7 @@ return new class extends Migration
             $table->decimal('other_deductions', 12, 2)->default(0);
             $table->decimal('total_deductions', 12, 2)->default(0);
             $table->decimal('net_pay', 12, 2)->default(0);
-            $table->string('status'); //, ['draft', 'processed', 'paid', 'cancelled'])->default('draft');
+            $table->string('status'); // , ['draft', 'processed', 'paid', 'cancelled'])->default('draft');
             $table->timestamp('paid_at')->nullable();
             $table->timestamps();
 

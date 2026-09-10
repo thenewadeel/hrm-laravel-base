@@ -4,23 +4,24 @@ namespace Tests\Feature\Livewire\Organization;
 
 use App\Livewire\MemberManager;
 use App\Models\Organization;
-use App\Models\OrganizationUnit;
 use App\Models\User;
 use App\Roles\InventoryRoles;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
 
 class MemberManagerTest extends TestCase
 {
     use RefreshDatabase, SetupOrganization;
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->setupOrganization();
     }
+
     #[Test]
     public function it_can_display_a_list_of_organization_members()
     {
@@ -31,7 +32,7 @@ class MemberManagerTest extends TestCase
         // $organization->users()->attach($user1);
         $organization->users()->attach($user2, [
             'roles' => json_encode([InventoryRoles::INVENTORY_ADMIN]),
-            'organization_id' => $organization->id
+            'organization_id' => $organization->id,
         ]);
         // Act & Assert
         Livewire::test(MemberManager::class, ['organization' => $organization])
@@ -49,7 +50,7 @@ class MemberManagerTest extends TestCase
         // $organization->users()->attach($user1);
         $organization->users()->attach($user2, [
             'roles' => json_encode([InventoryRoles::INVENTORY_ADMIN]),
-            'organization_id' => $organization->id
+            'organization_id' => $organization->id,
         ]);
 
         // Act & Assert - Search for John Doe

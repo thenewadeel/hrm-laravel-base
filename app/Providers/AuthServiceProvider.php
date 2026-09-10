@@ -16,6 +16,15 @@ use App\Models\User;
 use App\Permissions\AccountingPermissions;
 use App\Permissions\InventoryPermissions;
 use App\Permissions\MembershipPermissions;
+use App\Policies\EmployeePolicy;
+use App\Policies\JobPositionPolicy;
+use App\Policies\MemberPolicy;
+use App\Policies\Membership\FeePolicy;
+use App\Policies\Membership\MemberSubscriptionPolicy;
+use App\Policies\ShiftPolicy;
+use App\Policies\TaxExemptionPolicy;
+use App\Policies\TaxFilingPolicy;
+use App\Policies\TaxRatePolicy;
 use App\Roles\InventoryRoles;
 use App\Roles\MembershipRoles;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -24,15 +33,15 @@ use Illuminate\Support\Facades\Gate;
 class AuthServiceProvider extends ServiceProvider
 {
     protected $policies = [
-        Employee::class => \App\Policies\EmployeePolicy::class,
-        JobPosition::class => \App\Policies\JobPositionPolicy::class,
-        Shift::class => \App\Policies\ShiftPolicy::class,
-        TaxRate::class => \App\Policies\TaxRatePolicy::class,
-        TaxExemption::class => \App\Policies\TaxExemptionPolicy::class,
-        TaxFiling::class => \App\Policies\TaxFilingPolicy::class,
-        Member::class => \App\Policies\MemberPolicy::class,
-        MemberFee::class => \App\Policies\Membership\FeePolicy::class,
-        MemberSubscription::class => \App\Policies\Membership\MemberSubscriptionPolicy::class,
+        Employee::class => EmployeePolicy::class,
+        JobPosition::class => JobPositionPolicy::class,
+        Shift::class => ShiftPolicy::class,
+        TaxRate::class => TaxRatePolicy::class,
+        TaxExemption::class => TaxExemptionPolicy::class,
+        TaxFiling::class => TaxFilingPolicy::class,
+        Member::class => MemberPolicy::class,
+        MemberFee::class => FeePolicy::class,
+        MemberSubscription::class => MemberSubscriptionPolicy::class,
     ];
 
     public function boot(): void

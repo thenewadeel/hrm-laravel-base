@@ -1,4 +1,5 @@
 <?php
+
 // app/Models/Dimension.php
 
 namespace App\Models;

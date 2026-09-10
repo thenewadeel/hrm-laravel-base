@@ -2,7 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Livewire\Accounting\BankAccounts\Index;
 use App\Models\Accounting\BankAccount;
+use App\Models\Accounting\ChartOfAccount;
 use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -251,8 +253,8 @@ class ProductionOptimizationTest extends TestCase
         $otherUser->save();
 
         // Create data in both organizations
-        $account1 = \App\Models\Accounting\ChartOfAccount::factory()->create(['organization_id' => $this->organization->id]);
-        $account2 = \App\Models\Accounting\ChartOfAccount::factory()->create(['organization_id' => $otherOrg->id]);
+        $account1 = ChartOfAccount::factory()->create(['organization_id' => $this->organization->id]);
+        $account2 = ChartOfAccount::factory()->create(['organization_id' => $otherOrg->id]);
 
         // User should only access their own organization's data
         $this->actingAs($this->user)
@@ -278,7 +280,7 @@ class ProductionOptimizationTest extends TestCase
         $startTime = microtime(true);
 
         // Simulate Livewire component mount and render
-        $component = new \App\Livewire\Accounting\BankAccounts\Index;
+        $component = new Index;
         $component->mount();
 
         // Simulate rendering

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Organization;
 use App\Models\Shift;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -15,7 +16,7 @@ class ShiftFactory extends Factory
         $endHour = ($startHour + fake()->numberBetween(6, 10)) % 24;
 
         return [
-            'organization_id' => \App\Models\Organization::factory(),
+            'organization_id' => Organization::factory(),
             'name' => fake()->randomElement(['Morning', 'Afternoon', 'Night', 'Weekend']).' Shift',
             'code' => fake()->unique()->regexify('[A-Z]{2}[0-9]{3}'),
             'start_time' => sprintf('%02d:00', $startHour),

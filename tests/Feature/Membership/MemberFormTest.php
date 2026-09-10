@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Membership\MemberForm;
 use App\Models\Membership\Member;
 use App\Models\Organization;
 use App\Models\User;
@@ -84,7 +85,7 @@ test('member form can update existing member via HTTP', function () {
 test('member form component renders on page', function () {
     $this->actingAs($this->getMembershipAdmin())
         ->get('/members/create')
-        ->assertSeeLivewire(\App\Livewire\Membership\MemberForm::class)
+        ->assertSeeLivewire(MemberForm::class)
         ->assertSee('New Member')
         ->assertSuccessful();
 });

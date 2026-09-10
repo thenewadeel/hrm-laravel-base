@@ -9,7 +9,7 @@ use App\Models\Organization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Accounting\BankTransaction>
+ * @extends Factory<BankTransaction>
  */
 class BankTransactionFactory extends Factory
 {

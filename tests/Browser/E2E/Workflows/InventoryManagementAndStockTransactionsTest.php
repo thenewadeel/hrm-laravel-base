@@ -51,7 +51,7 @@ class InventoryManagementAndStockTransactionsTest extends BaseBrowserTest
                 $browser->visit('/inventory')
                     ->pause(2000);
             }
-            
+
             $browser->screenshot('inventory-workflow-step-2-inventory-module');
 
             // Step 3: Test basic inventory listing
@@ -69,17 +69,17 @@ class InventoryManagementAndStockTransactionsTest extends BaseBrowserTest
                 if ($browser->see('Add Item') || $browser->see('Create Item')) {
                     $browser->clickLink('Add Item')
                         ->pause(2000);
-                    
+
                     // Try to fill basic fields that might exist
                     $timestamp = time();
                     try {
-                        $browser->type('name', 'Test Item ' . $timestamp)
-                            ->type('sku', 'TEST-' . $timestamp)
+                        $browser->type('name', 'Test Item '.$timestamp)
+                            ->type('sku', 'TEST-'.$timestamp)
                             ->type('description', 'Test item description');
                     } catch (\Exception $e) {
                         // Fields may have different names
                     }
-                    
+
                     $browser->pause(1000)
                         ->screenshot('inventory-workflow-step-4-form-filled');
                 }

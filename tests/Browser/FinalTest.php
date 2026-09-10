@@ -15,14 +15,14 @@ class FinalTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->pause(2000);
-            
+
             $title = $browser->driver->getTitle();
             $currentUrl = $browser->driver->getCurrentURL();
-            
+
             // Verify basic page loads
             $this->assertNotEmpty($title);
             $this->assertStringContainsString('8000', $currentUrl); // Check we're on dev server
-            
+
             $browser->screenshot('homepage_content');
         });
     }

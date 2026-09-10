@@ -5,6 +5,7 @@ namespace App\Models\Accounting;
 use App\Models\Organization;
 use App\Models\Traits\BelongsToOrganization;
 use App\Models\User;
+use App\Services\TaxCalculationService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -128,7 +129,7 @@ class Voucher extends Model
             return; // Don't recalculate posted vouchers
         }
 
-        $taxService = app(\App\Services\TaxCalculationService::class);
+        $taxService = app(TaxCalculationService::class);
         $taxService->calculateTaxes($this, $this->amount, $this->type);
     }
 
@@ -141,7 +142,7 @@ class Voucher extends Model
             throw new \Exception('Cannot recalculate taxes for posted vouchers');
         }
 
-        $taxService = app(\App\Services\TaxCalculationService::class);
+        $taxService = app(TaxCalculationService::class);
         $taxService->recalculateTaxes($this);
     }
 

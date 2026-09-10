@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Membership\MembershipDashboard;
 use App\Models\Membership\Member;
 use App\Models\Membership\MemberFee;
 use App\Models\Organization;
@@ -27,7 +28,7 @@ test('membership dashboard displays statistics correctly', function () {
     Member::factory()->count(10)->create(['organization_id' => $organization->id]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MembershipDashboard::class)
+        ->test(MembershipDashboard::class)
         ->assertSee('Total Members')
         ->assertSee('10');
 });
@@ -45,7 +46,7 @@ test('membership dashboard shows recent members', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MembershipDashboard::class)
+        ->test(MembershipDashboard::class)
         ->assertSee($recentMember->full_name)
         ->assertSee($recentMember->membership_number);
 });
@@ -64,7 +65,7 @@ test('membership dashboard shows expiring members', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MembershipDashboard::class)
+        ->test(MembershipDashboard::class)
         ->assertSee($expiringMember->full_name)
         ->assertSee('Expiring Soon');
 });
@@ -84,7 +85,7 @@ test('membership dashboard shows alerts for overdue fees', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MembershipDashboard::class)
+        ->test(MembershipDashboard::class)
         ->assertSee('Overdue Fees')
         ->assertSee('3 fees are overdue');
 });
@@ -96,7 +97,7 @@ test('membership dashboard period selector works', function () {
     $user->givePermissionTo(MembershipPermissions::VIEW_DASHBOARD, $organization);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MembershipDashboard::class)
+        ->test(MembershipDashboard::class)
         ->set('period', 'week')
         ->assertSet('period', 'week')
         ->set('period', 'month')
@@ -114,7 +115,7 @@ test('membership dashboard shows quick actions', function () {
     $user->givePermissionTo(MembershipPermissions::VIEW_DASHBOARD, $organization);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MembershipDashboard::class)
+        ->test(MembershipDashboard::class)
         ->assertSee('Add New Member')
         ->assertSee('Create Subscription')
         ->assertSee('Generate Cards')
@@ -132,7 +133,7 @@ test('membership dashboard respects organization isolation', function () {
     Member::factory()->count(10)->create(['organization_id' => $organization2->id]);
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MembershipDashboard::class);
+        ->test(MembershipDashboard::class);
 
     // Should see organization 1 members count
     $component->assertSee('5');
@@ -156,7 +157,7 @@ test('membership dashboard shows growth metrics', function () {
     $user->givePermissionTo(MembershipPermissions::VIEW_DASHBOARD, $organization);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\MembershipDashboard::class)
+        ->test(MembershipDashboard::class)
         ->assertSee('Revenue (Month)')  // Default period is 'month' which shows as 'Month'
         ->assertSee('New Members')
         ->assertSee('Collection Rate') // This is shown in the secondary statistics

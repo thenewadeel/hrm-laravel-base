@@ -3,6 +3,7 @@
 use App\Models\Membership\Member;
 use App\Models\Membership\MemberFee;
 use App\Models\Organization;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
@@ -36,8 +37,8 @@ describe('MemberFee Model', function () {
             'paid_date' => '2024-12-15',
         ]);
 
-        expect($fee->due_date)->toBeInstanceOf(\Carbon\Carbon::class);
-        expect($fee->paid_date)->toBeInstanceOf(\Carbon\Carbon::class);
+        expect($fee->due_date)->toBeInstanceOf(Carbon::class);
+        expect($fee->paid_date)->toBeInstanceOf(Carbon::class);
         expect($fee->due_date->format('Y-m-d'))->toBe('2024-12-31');
         expect($fee->paid_date->format('Y-m-d'))->toBe('2024-12-15');
     });

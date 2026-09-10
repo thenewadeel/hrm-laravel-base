@@ -2,11 +2,13 @@
 
 namespace App\View\Components\Navigation;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class SidebarList extends Component
 {
     public string $title;
+
     public array $items = [];
 
     public function __construct(string $title = '', array $items = [])
@@ -15,7 +17,7 @@ class SidebarList extends Component
         $this->items = $items;
     }
 
-    public function render(): \Illuminate\Contracts\View\View
+    public function render(): View
     {
         return view('components.navigation.sidebar-list');
     }

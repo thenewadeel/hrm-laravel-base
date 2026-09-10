@@ -26,22 +26,22 @@ class SimpleDashboardTest extends JavaScriptDuskTestCase
             $browser->loginAs($user)
                 ->visit('/dashboard')
                 ->pause(2000) // Wait for page to load
-                ->dump('User ID: ' . $user->id)
-                ->dump('Email verified: ' . $user->email_verified_at)
-                ->dump('Current org ID: ' . $user->current_organization_id)
-                ->dump('Org name: ' . $organization->name)
+                ->dump('User ID: '.$user->id)
+                ->dump('Email verified: '.$user->email_verified_at)
+                ->dump('Current org ID: '.$user->current_organization_id)
+                ->dump('Org name: '.$organization->name)
                 ->assertPathIs('/dashboard')
                 ->assertSee('Dashboard')
-                ->dump('Looking for org name: ' . $organization->name)
+                ->dump('Looking for org name: '.$organization->name)
                 ->screenshot('dashboard-with-org')
                 ->pause(1000);
 
             // Check if organization name is displayed
             $pageSource = $browser->driver->getPageSource();
             $hasOrgName = strpos($pageSource, $organization->name) !== false;
-            $browser->dump('Page contains org name: ' . ($hasOrgName ? 'YES' : 'NO'));
+            $browser->dump('Page contains org name: '.($hasOrgName ? 'YES' : 'NO'));
 
-            if (!$hasOrgName) {
+            if (! $hasOrgName) {
                 $browser->dump('First 500 chars of page:');
                 $browser->dump(substr($pageSource, 0, 500));
             }

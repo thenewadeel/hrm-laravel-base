@@ -2,11 +2,12 @@
 
 namespace Database\Factories\Accounting;
 
+use App\Models\Accounting\FinancialYear;
 use App\Models\Organization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Accounting\FinancialYear>
+ * @extends Factory<FinancialYear>
  */
 class FinancialYearFactory extends Factory
 {

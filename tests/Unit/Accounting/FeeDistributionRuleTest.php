@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Accounting\ChartOfAccount;
+use App\Models\Accounting\FeeDistributionLog;
 use App\Models\Accounting\FeeDistributionRule;
 use App\Models\Accounting\FeeDistributionRuleItem;
 use App\Models\Membership\MemberFee;
@@ -55,8 +56,8 @@ test('fee distribution rule has many items', function () {
 // RED: Test that rule has many distribution logs
 test('fee distribution rule has many distribution logs', function () {
     $rule = FeeDistributionRule::factory()->create();
-    $log1 = \App\Models\Accounting\FeeDistributionLog::factory()->create(['fee_distribution_rule_id' => $rule->id]);
-    $log2 = \App\Models\Accounting\FeeDistributionLog::factory()->create(['fee_distribution_rule_id' => $rule->id]);
+    $log1 = FeeDistributionLog::factory()->create(['fee_distribution_rule_id' => $rule->id]);
+    $log2 = FeeDistributionLog::factory()->create(['fee_distribution_rule_id' => $rule->id]);
 
     expect($rule->distributionLogs)->toHaveCount(2);
     expect($rule->distributionLogs->first()->id)->toBe($log1->id);
@@ -209,7 +210,7 @@ test('calculate distribution with percentage items', function () {
 
 // RED: Test calculateDistribution with fixed amount items
 test('calculate distribution with fixed amount items', function () {
-    $organization = \App\Models\Organization::factory()->create();
+    $organization = Organization::factory()->create();
 
     // Create rule without items first
     $rule = FeeDistributionRule::factory()->fixedBased()->create(['organization_id' => $organization->id]);
@@ -270,7 +271,7 @@ test('calculate distribution throws exception for invalid percentage', function 
         'percentage' => 30, // Total: 110%
     ]);
 
-    expect(fn () => $rule->calculateDistribution(1000))->toThrow(\InvalidArgumentException::class, 'Total percentage distribution cannot exceed 100%');
+    expect(fn () => $rule->calculateDistribution(1000))->toThrow(InvalidArgumentException::class, 'Total percentage distribution cannot exceed 100%');
 });
 
 // RED: Test getTotalDistributedAmount

@@ -1,4 +1,5 @@
 <?php
+
 // tests/Unit/Accounting/IncomeStatementTest.php
 
 namespace Tests\Unit\Accounting;
@@ -7,8 +8,8 @@ use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\LedgerEntry;
 use App\Services\AccountingReportService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
 
 class IncomeStatementTest extends TestCase
@@ -53,7 +54,7 @@ class IncomeStatementTest extends TestCase
             'chart_of_account_id' => $revenueAccount->id,
             'type' => 'credit',
             'amount' => 10000.00,
-            'entry_date' => $startDate->copy()->addDays(5)
+            'entry_date' => $startDate->copy()->addDays(5),
         ]);
 
         // Expense transactions
@@ -61,14 +62,14 @@ class IncomeStatementTest extends TestCase
             'chart_of_account_id' => $cogsAccount->id,
             'type' => 'debit',
             'amount' => 6000.00,
-            'entry_date' => $startDate->copy()->addDays(10)
+            'entry_date' => $startDate->copy()->addDays(10),
         ]);
 
         LedgerEntry::factory()->create([
             'chart_of_account_id' => $salaryAccount->id,
             'type' => 'debit',
             'amount' => 2000.00,
-            'entry_date' => $startDate->copy()->addDays(15)
+            'entry_date' => $startDate->copy()->addDays(15),
         ]);
 
         // Debug: Check what ledger entries actually exist
@@ -99,7 +100,7 @@ class IncomeStatementTest extends TestCase
             'chart_of_account_id' => $revenueAccount->id,
             'type' => 'credit',
             'amount' => 5000.00,
-            'entry_date' => $startDate->copy()->addDays(1) // Use copy()
+            'entry_date' => $startDate->copy()->addDays(1), // Use copy()
         ]);
 
         // Excluded - before date range (use copy and go backwards)
@@ -107,7 +108,7 @@ class IncomeStatementTest extends TestCase
             'chart_of_account_id' => $revenueAccount->id,
             'type' => 'credit',
             'amount' => 3000.00,
-            'entry_date' => $startDate->copy()->subDays(10) // Before start date
+            'entry_date' => $startDate->copy()->subDays(10), // Before start date
         ]);
 
         // Excluded - after date range (use copy and go forwards)
@@ -115,7 +116,7 @@ class IncomeStatementTest extends TestCase
             'chart_of_account_id' => $expenseAccount->id,
             'type' => 'debit',
             'amount' => 1000.00,
-            'entry_date' => $endDate->copy()->addDays(10) // After end date
+            'entry_date' => $endDate->copy()->addDays(10), // After end date
         ]);
 
         $incomeStatement = $this->reportService->generateIncomeStatement($startDate, $endDate);

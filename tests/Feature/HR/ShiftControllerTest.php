@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Organization;
 use App\Models\Shift;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -18,7 +19,7 @@ it('displays shifts index', function () {
 
 it('creates a shift', function () {
     $user = User::factory()->create();
-    $organization = \App\Models\Organization::factory()->create();
+    $organization = Organization::factory()->create();
     $user->current_organization_id = $organization->id;
     $user->save();
 
@@ -54,7 +55,7 @@ it('validates required fields on create', function () {
 
 it('updates a shift', function () {
     $user = User::factory()->create();
-    $organization = \App\Models\Organization::factory()->create();
+    $organization = Organization::factory()->create();
     $user->current_organization_id = $organization->id;
     $user->save();
 
@@ -69,8 +70,8 @@ it('updates a shift', function () {
         'working_hours' => 8,
     ];
 
-$response = $this->actingAs($user)->put(route('hr.shifts.update', $shift), $data);
-    
+    $response = $this->actingAs($user)->put(route('hr.shifts.update', $shift), $data);
+
     if ($response->getSession()->has('errors')) {
         // If there are validation errors, that's okay for this test
         $this->assertTrue(true);
@@ -83,14 +84,14 @@ $response = $this->actingAs($user)->put(route('hr.shifts.update', $shift), $data
 
 it('deletes a shift', function () {
     $user = User::factory()->create();
-    $organization = \App\Models\Organization::factory()->create();
+    $organization = Organization::factory()->create();
     $user->current_organization_id = $organization->id;
     $user->save();
 
     $shift = Shift::factory()->create(['organization_id' => $organization->id]);
 
-$response = $this->actingAs($user)->delete(route('hr.shifts.destroy', $shift));
-    
+    $response = $this->actingAs($user)->delete(route('hr.shifts.destroy', $shift));
+
     $response->assertRedirect()
         ->assertSessionHas('success');
     // Check if shift was soft deleted

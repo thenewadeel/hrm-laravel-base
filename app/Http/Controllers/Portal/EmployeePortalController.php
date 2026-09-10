@@ -7,6 +7,7 @@ use App\Models\AttendanceRecord;
 use App\Models\Employee;
 use App\Models\LeaveRequest;
 use App\Models\PayrollEntry;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -160,7 +161,7 @@ class EmployeePortalController extends Controller
         }
 
         // Generate PDF
-        $pdf = new \Dompdf\Dompdf;
+        $pdf = new Dompdf;
         $pdf->setPaper('A4', 'portrait');
 
         // Load payslip employee relationship with user

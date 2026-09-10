@@ -4,6 +4,7 @@ namespace App\Livewire\Membership;
 
 use App\Models\Membership\Member;
 use App\Services\Membership\MembershipService;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -364,7 +365,7 @@ class AdvancedMemberList extends Component
     {
         // For testing and compatibility, we'll store the CSV content
         $csvContent = '';
-        
+
         // Header row
         $headers = [];
         foreach ($this->exportColumns as $column => $enabled) {
@@ -372,7 +373,7 @@ class AdvancedMemberList extends Component
                 $headers[] = ucwords(str_replace('_', ' ', $column));
             }
         }
-        $csvContent .= implode(',', $headers) . "\n";
+        $csvContent .= implode(',', $headers)."\n";
 
         // Data rows
         foreach ($members as $member) {
@@ -386,16 +387,16 @@ class AdvancedMemberList extends Component
                         'expiry_date' => $member->expiry_date?->format('Y-m-d'),
                         default => $member->$column,
                     };
-                    $row[] = '"' . str_replace('"', '""', (string) $value) . '"';
+                    $row[] = '"'.str_replace('"', '""', (string) $value).'"';
                 }
             }
-            $csvContent .= implode(',', $row) . "\n";
+            $csvContent .= implode(',', $row)."\n";
         }
 
         // Store the CSV content for download
         $this->csvContent = $csvContent;
         $this->csvFilename = $filename;
-        
+
         // In production, this would trigger a file download
         // For now, we'll just dispatch the event to indicate completion
         $this->dispatch('export-completed', filename: $filename);
@@ -414,10 +415,10 @@ class AdvancedMemberList extends Component
         $this->exportToCsv($members, $filename);
     }
 
-    public function saveFilterPreset(string $name = null): void
+    public function saveFilterPreset(?string $name = null): void
     {
         $presetName = $name ?? $this->presetName;
-        
+
         if (empty($presetName)) {
             return;
         }
@@ -524,7 +525,7 @@ class AdvancedMemberList extends Component
         $this->resetPage();
     }
 
-    public function getExpiringMembersProperty(): \Illuminate\Support\Collection
+    public function getExpiringMembersProperty(): Collection
     {
         $user = auth()->user();
         $organizationId = $user->current_organization_id ??

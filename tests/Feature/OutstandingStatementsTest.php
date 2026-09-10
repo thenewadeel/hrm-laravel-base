@@ -2,6 +2,7 @@
 
 use App\Models\Accounting\JournalEntry;
 use App\Models\Customer;
+use App\Models\Organization;
 use App\Models\Vendor;
 use App\Services\OutstandingStatementsService;
 use Tests\Traits\SetupOrganization;
@@ -421,7 +422,7 @@ test('respects organization isolation', function () {
     $this->actingAs($user);
 
     // Create another organization
-    $otherOrg = \App\Models\Organization::factory()->create();
+    $otherOrg = Organization::factory()->create();
 
     // Create customer in other organization
     $otherCustomer = Customer::factory()->create(['organization_id' => $otherOrg->id]);

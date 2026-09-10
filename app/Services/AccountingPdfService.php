@@ -160,11 +160,11 @@ class AccountingPdfService
     {
         $asOfDate = $asOfDate ?? now();
         $pdfContent = $this->generateTrialBalancePdf($asOfDate);
-        $filename = 'trial-balance-' . $asOfDate->format('Y-m-d') . '.pdf';
+        $filename = 'trial-balance-'.$asOfDate->format('Y-m-d').'.pdf';
 
         return response($pdfContent)
             ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
+            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"')
             ->header('Cache-Control', 'private, max-age=0, must-revalidate')
             ->header('Pragma', 'public');
     }
@@ -175,11 +175,11 @@ class AccountingPdfService
     public function downloadIncomeStatement(\DateTimeInterface $startDate, \DateTimeInterface $endDate)
     {
         $pdfContent = $this->generateIncomeStatementPdf($startDate, $endDate);
-        $filename = 'income-statement-' . $startDate->format('Y-m-d') . '-to-' . $endDate->format('Y-m-d') . '.pdf';
+        $filename = 'income-statement-'.$startDate->format('Y-m-d').'-to-'.$endDate->format('Y-m-d').'.pdf';
 
         return response($pdfContent)
             ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
+            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"')
             ->header('Cache-Control', 'private, max-age=0, must-revalidate')
             ->header('Pragma', 'public');
     }
@@ -242,11 +242,11 @@ class AccountingPdfService
     public function downloadBalanceSheet(\DateTimeInterface $asOfDate)
     {
         $pdfContent = $this->generateBalanceSheetPdf($asOfDate);
-        $filename = 'balance-sheet-' . $asOfDate->format('Y-m-d') . '.pdf';
+        $filename = 'balance-sheet-'.$asOfDate->format('Y-m-d').'.pdf';
 
         return response($pdfContent)
             ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
+            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"')
             ->header('Cache-Control', 'private, max-age=0, must-revalidate')
             ->header('Pragma', 'public');
     }
@@ -268,11 +268,11 @@ class AccountingPdfService
         );
 
         $asOfDate = $asOfDate ?? now();
-        $filename = 'receivables-outstanding-' . $asOfDate->format('Y-m-d') . '.pdf';
+        $filename = 'receivables-outstanding-'.$asOfDate->format('Y-m-d').'.pdf';
 
         return response($pdfContent)
             ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
+            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"')
             ->header('Cache-Control', 'private, max-age=0, must-revalidate')
             ->header('Pragma', 'public');
     }
@@ -294,11 +294,11 @@ class AccountingPdfService
         );
 
         $asOfDate = $asOfDate ?? now();
-        $filename = 'payables-outstanding-' . $asOfDate->format('Y-m-d') . '.pdf';
+        $filename = 'payables-outstanding-'.$asOfDate->format('Y-m-d').'.pdf';
 
         return response($pdfContent)
             ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
+            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"')
             ->header('Cache-Control', 'private, max-age=0, must-revalidate')
             ->header('Pragma', 'public');
     }
@@ -339,11 +339,11 @@ class AccountingPdfService
     public function downloadAssetRegister($assets)
     {
         $pdfContent = $this->generateAssetRegister($assets);
-        $filename = 'asset-register-' . now()->format('Y-m-d') . '.pdf';
+        $filename = 'asset-register-'.now()->format('Y-m-d').'.pdf';
 
         return response($pdfContent)
             ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
+            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"')
             ->header('Cache-Control', 'private, max-age=0, must-revalidate')
             ->header('Pragma', 'public');
     }
@@ -354,11 +354,11 @@ class AccountingPdfService
     public function downloadDepreciationSchedule($assets)
     {
         $pdfContent = $this->generateDepreciationSchedule($assets);
-        $filename = 'depreciation-schedule-' . now()->format('Y-m-d') . '.pdf';
+        $filename = 'depreciation-schedule-'.now()->format('Y-m-d').'.pdf';
 
         return response($pdfContent)
             ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
+            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"')
             ->header('Cache-Control', 'private, max-age=0, must-revalidate')
             ->header('Pragma', 'public');
     }

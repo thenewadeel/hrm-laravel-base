@@ -6,18 +6,20 @@ use App\Livewire\Accounting\ChartOfAccounts;
 use App\Models\Accounting\ChartOfAccount;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
 
 class ChartOfAccountsTest extends TestCase
 {
     use RefreshDatabase, SetupOrganization;
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->setupOrganization();
     }
+
     /**
      * Test that the chart of accounts page can be rendered.
      */
@@ -40,6 +42,7 @@ class ChartOfAccountsTest extends TestCase
             ->assertSee($accounts[1]->name)
             ->assertSee($accounts[2]->name);
     }
+
     public function it_renders_successfully()
     {
         Livewire::test('accounting.chart-of-accounts')
@@ -86,7 +89,7 @@ class ChartOfAccountsTest extends TestCase
         // Assert that the record was created in the database
         $this->assertDatabaseHas('chart_of_accounts', [
             'code' => '1010',
-            'name' => 'Cash'
+            'name' => 'Cash',
         ]);
     }
 
@@ -96,7 +99,7 @@ class ChartOfAccountsTest extends TestCase
         // Arrange: Create an account to be updated
         $account = ChartOfAccount::factory()->create([
             'code' => '1020',
-            'name' => 'Accounts Receivable'
+            'name' => 'Accounts Receivable',
         ]);
 
         // Act: Simulate the update process
@@ -111,7 +114,7 @@ class ChartOfAccountsTest extends TestCase
         $this->assertDatabaseHas('chart_of_accounts', [
             'id' => $account->id,
             'code' => '1021',
-            'name' => 'New Accounts Receivable'
+            'name' => 'New Accounts Receivable',
         ]);
     }
 }

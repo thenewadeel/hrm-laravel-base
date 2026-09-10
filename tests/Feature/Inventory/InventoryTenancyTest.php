@@ -2,23 +2,22 @@
 
 namespace Tests\Feature\Inventory;
 
-use Tests\TestCase;
 use App\Models\Inventory\Item;
 use App\Models\Inventory\Store;
 use App\Models\Inventory\Transaction;
 use App\Models\Organization;
 use App\Models\OrganizationUnit;
-use App\Models\Scopes\OrganizationScope;
-use Tests\Traits\SetupTenancy;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupInventory;
 use Tests\Traits\SetupOrganization;
+use Tests\Traits\SetupTenancy;
 
 class InventoryTenancyTest extends TestCase
 {
-    use RefreshDatabase, SetupOrganization, SetupInventory, SetupTenancy;
+    use RefreshDatabase, SetupInventory, SetupOrganization, SetupTenancy;
 
     protected function tenantModels(): array
     {
@@ -30,8 +29,11 @@ class InventoryTenancyTest extends TestCase
     }
 
     protected $user1;
+
     protected $user2;
+
     protected $organization1;
+
     protected $organization2;
 
     protected function setUp(): void
@@ -61,13 +63,13 @@ class InventoryTenancyTest extends TestCase
         //     'itemsWithScope' => Item::get()->pluck('organization_id')
         // ]);
         $this->assertCount(2, $itemsA);
-        $this->assertTrue($itemsA->every(fn($item) => $item->organization_id === $this->orgA->id));
+        $this->assertTrue($itemsA->every(fn ($item) => $item->organization_id === $this->orgA->id));
 
         $this->actingAs($this->userB);
 
         $itemsB = Item::all();
         $this->assertCount(1, $itemsB);
-        $this->assertTrue($itemsB->every(fn($item) => $item->organization_id === $this->orgB->id));
+        $this->assertTrue($itemsB->every(fn ($item) => $item->organization_id === $this->orgB->id));
     }
 
     #[Test]
@@ -131,10 +133,10 @@ class InventoryTenancyTest extends TestCase
         $ownOrgItem = Item::factory()->create(['organization_id' => $this->orgA->id]);
 
         $otherOrgStore = Store::factory()->create([
-            'organization_unit_id' => $this->orgB->units()->first()->id
+            'organization_unit_id' => $this->orgB->units()->first()->id,
         ]);
         $ownOrgStore = Store::factory()->create([
-            'organization_unit_id' => $this->orgA->units()->first()->id
+            'organization_unit_id' => $this->orgA->units()->first()->id,
         ]);
 
         $this->actingAs($this->userA);
@@ -156,7 +158,7 @@ class InventoryTenancyTest extends TestCase
         $response = $this->get(route('inventory.items.index'));
         $items = $response->viewData('items');
 
-        $this->assertTrue($items->every(fn($item) => $item->organization_id === $this->orgA->id));
+        $this->assertTrue($items->every(fn ($item) => $item->organization_id === $this->orgA->id));
 
         // Test stores isolation - inventory admin should see ALL stores including null org units
         $response = $this->get(route('inventory.stores.index'));

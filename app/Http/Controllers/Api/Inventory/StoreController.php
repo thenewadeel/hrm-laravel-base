@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\Inventory;
 
 use App\Http\Controllers\Controller;
-use App\Models\Inventory\Store;
-use App\Models\Inventory\Item;
 use App\Http\Resources\StoreResource;
+use App\Models\Inventory\Item;
+use App\Models\Inventory\Store;
 use App\Permissions\InventoryPermissions;
 use App\Services\InventoryService;
 use Illuminate\Http\Request;
@@ -31,7 +31,7 @@ class StoreController extends Controller
         // ]);
         Gate::authorize('viewAny', Store::class);
 
-        $organizationId = $request->has('organization_id') && !empty($request->organization_id)
+        $organizationId = $request->has('organization_id') && ! empty($request->organization_id)
             ? $request->organization_id
             : $request->user()->current_organization_id;
 
@@ -52,6 +52,7 @@ class StoreController extends Controller
 
         return StoreResource::collection($stores);
     }
+
     public function store(Request $request)
     {
         Gate::authorize('create', Store::class);
@@ -62,7 +63,7 @@ class StoreController extends Controller
             'location' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             // 'organization_id' => 'required|exists:organizations,id',
-            'organization_unit_id' => 'required|exists:organization_units,id'
+            'organization_unit_id' => 'required|exists:organization_units,id',
         ]);
 
         $store = Store::create($validated);
@@ -93,10 +94,10 @@ class StoreController extends Controller
 
         $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
-            'code' => 'sometimes|string|unique:inventory_stores,code,' . $store->id,
+            'code' => 'sometimes|string|unique:inventory_stores,code,'.$store->id,
             'location' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'is_active' => 'sometimes|boolean'
+            'is_active' => 'sometimes|boolean',
         ]);
 
         $store->update($validated);
@@ -124,7 +125,7 @@ class StoreController extends Controller
             'item_id' => 'required|exists:inventory_items,id',
             'quantity' => 'required|integer|min:0',
             'min_stock' => 'nullable|integer|min:0',
-            'max_stock' => 'nullable|integer|min:0'
+            'max_stock' => 'nullable|integer|min:0',
         ]);
 
         $item = Item::findOrFail($validated['item_id']);
@@ -132,7 +133,7 @@ class StoreController extends Controller
         // Check if item belongs to same organization
         if ($item->organization_id !== $store->organization->id) {
             return response()->json([
-                'message' => 'Item does not belong to the same organization'
+                'message' => 'Item does not belong to the same organization',
             ], 422);
         }
 
@@ -150,8 +151,8 @@ class StoreController extends Controller
             'data' => [
                 'store_id' => $store->id,
                 'item_id' => $item->id,
-                'quantity' => $validated['quantity']
-            ]
+                'quantity' => $validated['quantity'],
+            ],
         ], 201);
     }
 
@@ -165,13 +166,13 @@ class StoreController extends Controller
         $validated = $request->validate([
             'quantity' => 'required|integer|min:0',
             'min_stock' => 'nullable|integer|min:0',
-            'max_stock' => 'nullable|integer|min:0'
+            'max_stock' => 'nullable|integer|min:0',
         ]);
 
         // Check if item belongs to same organization
         if ($item->organization_id !== $store->organization->id) {
             return response()->json([
-                'message' => 'Item does not belong to the same organization'
+                'message' => 'Item does not belong to the same organization',
             ], 422);
         }
 
@@ -189,8 +190,8 @@ class StoreController extends Controller
             'data' => [
                 'store_id' => $store->id,
                 'item_id' => $item->id,
-                'quantity' => $validated['quantity']
-            ]
+                'quantity' => $validated['quantity'],
+            ],
         ]);
     }
 
@@ -204,14 +205,14 @@ class StoreController extends Controller
         // Check if item belongs to same organization
         if ($item->organization_id !== $store->organization->id) {
             return response()->json([
-                'message' => 'Item does not belong to the same organization'
+                'message' => 'Item does not belong to the same organization',
             ], 422);
         }
 
         $store->items()->detach($item->id);
 
         return response()->json([
-            'message' => 'Item removed from store successfully'
+            'message' => 'Item removed from store successfully',
         ]);
     }
 
@@ -227,7 +228,7 @@ class StoreController extends Controller
             ->paginate(request()->get('per_page', 15));
 
         return response()->json([
-            'data' => $items
+            'data' => $items,
         ]);
     }
 
@@ -241,7 +242,7 @@ class StoreController extends Controller
         $stockLevels = $this->inventoryService->getStoreStockLevels($store, request()->user());
 
         return response()->json([
-            'data' => $stockLevels
+            'data' => $stockLevels,
         ]);
     }
 }

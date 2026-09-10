@@ -10,6 +10,7 @@ use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\DB;
 use Laravel\Dusk\TestCase as BaseTestCase;
+use PHPUnit\Framework\Attributes\AfterClass;
 use PHPUnit\Framework\Attributes\BeforeClass;
 use Tests\Browser\Concerns\HandlesAlpineTesting;
 use Tests\Browser\Concerns\HandlesDatabaseIsolation;
@@ -64,7 +65,7 @@ abstract class JavaScriptDuskTestCase extends BaseTestCase
     /**
      * Clean up after all tests have run.
      */
-    #[\PHPUnit\Framework\Attributes\AfterClass]
+    #[AfterClass]
     public static function cleanup(): void
     {
         if (isset(static::$databaseFile) && file_exists(static::$databaseFile)) {

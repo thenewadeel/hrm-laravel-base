@@ -3,25 +3,25 @@
 
 /**
  * Livewire Test Runner Script
- * 
+ *
  * This script runs comprehensive Livewire component tests and generates reports.
  * Usage: php run-livewire-tests.php [options]
  */
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__.'/../../vendor/autoload.php';
 
-use Illuminate\Foundation\Application;
+use Illuminate\Contracts\Console\Kernel;
 use Tests\Browser\LivewireTestRunner;
 
 // Bootstrap Laravel
-$app = require_once __DIR__ . '/../../bootstrap/app.php';
-$app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+$app = require_once __DIR__.'/../../bootstrap/app.php';
+$app->make(Kernel::class)->bootstrap();
 
 // Parse command line arguments
 $options = getopt('r::c::v::h', ['report::', 'component::', 'verbose::', 'help']);
 
 if (isset($options['h']) || isset($options['help'])) {
-    echo "
+    echo '
 Livewire Test Runner
 
 Usage: php run-livewire-tests.php [options]
@@ -38,7 +38,7 @@ Examples:
     php run-livewire-tests.php -c FeeManager      # Test only FeeManager component
     php run-livewire-tests.php -v -r             # Verbose mode with report
 
-";
+';
     exit(0);
 }
 
@@ -50,9 +50,9 @@ echo "🧪 Starting Livewire Component Tests...\n\n";
 
 if ($verbose) {
     echo "Configuration:\n";
-    echo "  Verbose: " . ($verbose ? 'Yes' : 'No') . "\n";
-    echo "  Generate Report: " . ($generateReport ? 'Yes' : 'No') . "\n";
-    echo "  Specific Component: " . ($specificComponent ?? 'All') . "\n\n";
+    echo '  Verbose: '.($verbose ? 'Yes' : 'No')."\n";
+    echo '  Generate Report: '.($generateReport ? 'Yes' : 'No')."\n";
+    echo '  Specific Component: '.($specificComponent ?? 'All')."\n\n";
 }
 
 try {
@@ -72,7 +72,7 @@ try {
     // Generate report if requested
     if ($generateReport) {
         $report = LivewireTestRunner::generateReport($results);
-        $reportFile = __DIR__ . '/livewire-test-report-' . date('Y-m-d-H-i-s') . '.md';
+        $reportFile = __DIR__.'/livewire-test-report-'.date('Y-m-d-H-i-s').'.md';
         file_put_contents($reportFile, $report);
         echo "\n📄 Report generated: {$reportFile}\n";
     }
@@ -80,9 +80,9 @@ try {
     echo "\n✅ Tests completed successfully!\n";
 
 } catch (Exception $e) {
-    echo "\n❌ Test execution failed: " . $e->getMessage() . "\n";
+    echo "\n❌ Test execution failed: ".$e->getMessage()."\n";
     if ($verbose) {
-        echo "Stack trace:\n" . $e->getTraceAsString() . "\n";
+        echo "Stack trace:\n".$e->getTraceAsString()."\n";
     }
     exit(1);
 }
@@ -93,19 +93,19 @@ try {
 function testSpecificComponent(string $componentName, bool $verbose): array
 {
     $results = [];
-    
+
     echo "  Testing component initialization...\n";
     $results['initialization'] = simulateComponentTest($componentName, 'initialization');
-    
+
     echo "  Testing method calls...\n";
     $results['methods'] = simulateComponentTest($componentName, 'methods');
-    
+
     echo "  Testing state management...\n";
     $results['state'] = simulateComponentTest($componentName, 'state');
-    
+
     echo "  Testing event handling...\n";
     $results['events'] = simulateComponentTest($componentName, 'events');
-    
+
     return [$componentName => $results];
 }
 
@@ -116,7 +116,7 @@ function simulateComponentTest(string $componentName, string $testType): array
 {
     // In a real implementation, this would actually run the browser tests
     // For demonstration, we'll simulate test results
-    
+
     $testResults = [
         'FeeManager' => [
             'initialization' => ['status' => 'passed', 'details' => ['component_loaded' => true]],
@@ -153,25 +153,25 @@ function displayResults(array $results, bool $verbose): void
     foreach ($results as $category => $tests) {
         if (is_array($tests)) {
             echo "\n📋 {$category}:\n";
-            
+
             foreach ($tests as $testName => $result) {
                 $totalTests++;
-                
+
                 if (is_array($result)) {
                     $status = $result['status'] ?? 'unknown';
                     $icon = $status === 'passed' ? '✅' : ($status === 'failed' ? '❌' : '⏭️');
-                    
+
                     if ($status === 'passed') {
                         $passedTests++;
                     } elseif ($status === 'failed') {
                         $failedTests++;
                     }
-                    
+
                     echo "  {$icon} {$testName} - {$status}\n";
-                    
+
                     if ($verbose && isset($result['details'])) {
                         foreach ($result['details'] as $key => $value) {
-                            echo "    • {$key}: " . (is_bool($value) ? ($value ? 'Yes' : 'No') : $value) . "\n";
+                            echo "    • {$key}: ".(is_bool($value) ? ($value ? 'Yes' : 'No') : $value)."\n";
                         }
                     }
                 } else {
@@ -185,5 +185,5 @@ function displayResults(array $results, bool $verbose): void
     echo "  Total Tests: {$totalTests}\n";
     echo "  Passed: {$passedTests}\n";
     echo "  Failed: {$failedTests}\n";
-    echo "  Success Rate: " . round(($passedTests / max($totalTests, 1)) * 100, 2) . "%\n";
+    echo '  Success Rate: '.round(($passedTests / max($totalTests, 1)) * 100, 2)."%\n";
 }

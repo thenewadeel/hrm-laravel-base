@@ -1,17 +1,13 @@
 <?php
 
-use App\Events\EmployeeDeleted;
-use App\Events\EmployeeUpdated;
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Employee;
 use App\Models\Inventory\Item;
 use App\Models\Membership\Member;
 use App\Models\Organization;
 use App\Models\User;
-use App\Permissions\InventoryPermissions;
 use App\Roles\InventoryRoles;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Event;
 
 uses(RefreshDatabase::class);
 
@@ -21,7 +17,7 @@ test('multi-tenant data isolation under load testing', function () {
     $organizations = collect();
     for ($i = 1; $i <= 2; $i++) {
         $org = Organization::factory()->create([
-            'name' => 'Isolation Test ' . uniqid() . ' ' . now()->timestamp . '-' . $i . ' ' . str()->random(10),
+            'name' => 'Isolation Test '.uniqid().' '.now()->timestamp.'-'.$i.' '.str()->random(10),
         ]);
         $organizations->push($org);
     }
@@ -38,7 +34,7 @@ test('multi-tenant data isolation under load testing', function () {
         ]);
 
         // Give user necessary permissions
-        $inventoryPermissions = \App\Roles\InventoryRoles::getPermissionsForRole(InventoryRoles::INVENTORY_ADMIN);
+        $inventoryPermissions = InventoryRoles::getPermissionsForRole(InventoryRoles::INVENTORY_ADMIN);
         $user->givePermissionTo($inventoryPermissions, $organization);
 
         $users->push($user);
@@ -105,7 +101,7 @@ test('multi-tenant data isolation under load testing', function () {
         $otherOrganization = $organizations[$otherOrgIndex];
 
         $otherOrgResponse = test()->actingAs($user)
-            ->getJson("/api/employees")
+            ->getJson('/api/employees')
             ->assertStatus(200);
 
         // Verify all returned employees still belong to user's organization (data is filtered)
@@ -126,14 +122,14 @@ test('role-based access control enforcement across modules', function () {
     $adminUser->organizations()->attach($organization->id, [
         'roles' => json_encode([InventoryRoles::INVENTORY_ADMIN]),
     ]);
-    $adminPermissions = \App\Roles\InventoryRoles::getPermissionsForRole(InventoryRoles::INVENTORY_ADMIN);
+    $adminPermissions = InventoryRoles::getPermissionsForRole(InventoryRoles::INVENTORY_ADMIN);
     $adminUser->givePermissionTo($adminPermissions, $organization);
 
     // Assign clerk role with limited permissions
     $regularUser->organizations()->attach($organization->id, [
         'roles' => json_encode([InventoryRoles::INVENTORY_CLERK]),
     ]);
-    $clerkPermissions = \App\Roles\InventoryRoles::getPermissionsForRole(InventoryRoles::INVENTORY_CLERK);
+    $clerkPermissions = InventoryRoles::getPermissionsForRole(InventoryRoles::INVENTORY_CLERK);
     $regularUser->givePermissionTo($clerkPermissions, $organization);
 
     // Test admin can create items

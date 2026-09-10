@@ -1,4 +1,5 @@
 <?php
+
 // app/Exceptions/InvalidAccountTypeException.php
 
 namespace App\Exceptions;
@@ -9,9 +10,10 @@ use Exception;
 class InvalidAccountTypeException extends Exception
 {
     protected $account;
+
     protected $attemptedEntryType;
 
-    public function __construct(ChartOfAccount $account, string $attemptedEntryType, string $message = null)
+    public function __construct(ChartOfAccount $account, string $attemptedEntryType, ?string $message = null)
     {
         $this->account = $account;
         $this->attemptedEntryType = $attemptedEntryType;
@@ -57,7 +59,7 @@ class InvalidAccountTypeException extends Exception
             'attempted_entry_type' => $this->attemptedEntryType,
             'valid_account_types' => $this->attemptedEntryType === 'debit'
                 ? ['asset', 'expense']
-                : ['liability', 'equity', 'revenue']
+                : ['liability', 'equity', 'revenue'],
         ];
     }
 }

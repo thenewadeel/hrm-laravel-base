@@ -2,10 +2,12 @@
 
 namespace Database\Factories\Membership;
 
+use App\Models\Membership\Member;
+use App\Models\Membership\MemberCard;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Membership\MemberCard>
+ * @extends Factory<MemberCard>
  */
 class MemberCardFactory extends Factory
 {
@@ -18,7 +20,7 @@ class MemberCardFactory extends Factory
     {
         return [
             'organization_id' => 1,
-            'member_id' => \App\Models\Membership\Member::factory(),
+            'member_id' => Member::factory(),
             'card_number' => 'CARD-'.$this->faker->unique()->numerify('##########'),
             'card_type' => $this->faker->randomElement(['standard', 'premium', 'family', 'corporate']),
             'template' => $this->faker->randomElement(['modern', 'classic', 'corporate', 'family', 'minimal']),

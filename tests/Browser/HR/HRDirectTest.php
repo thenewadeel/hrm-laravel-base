@@ -18,7 +18,7 @@ class HRDirectTest extends JavaScriptDuskTestCase
             // Create organization and user directly
             $organization = Organization::factory()->create();
             $user = User::factory()->create();
-            
+
             // Attach user to organization
             $organization->users()->attach($user->id, [
                 'roles' => json_encode(['admin']),
@@ -136,15 +136,15 @@ class HRDirectTest extends JavaScriptDuskTestCase
                 '/hr/employees',
                 '/hr/employees/create',
                 '/hr/positions',
-                '/hr/shifts'
+                '/hr/shifts',
             ];
 
             foreach ($pages as $page) {
                 $browser->loginAs($user)
                     ->visit($page)
                     ->pause(3000)
-                    ->screenshot('hr-no-errors-' . str_replace('/', '-', $page));
-                
+                    ->screenshot('hr-no-errors-'.str_replace('/', '-', $page));
+
                 // Simple check - if page loads without crashing, test passes
                 $browser->assertPathBeginsWith('/hr');
             }

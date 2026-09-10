@@ -3,8 +3,8 @@
 namespace Tests\Browser;
 
 use Laravel\Dusk\Browser;
-use Tests\DuskTestCase;
 use Tests\Browser\Concerns\OptimizedWaits;
+use Tests\DuskTestCase;
 
 class SimpleConnectionWorkingTest extends DuskTestCase
 {

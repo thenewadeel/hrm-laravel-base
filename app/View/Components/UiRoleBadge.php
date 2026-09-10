@@ -22,7 +22,7 @@ class UiRoleBadge extends Component
 
     public function getColor(): string
     {
-        return match($this->role) {
+        return match ($this->role) {
             'admin', 'super_admin' => 'purple',
             'manager', 'supervisor' => 'blue',
             'user', 'employee' => 'green',

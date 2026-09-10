@@ -1,8 +1,9 @@
 <?php
 
 use App\View\Components\Navigation\PortalQuickLinks;
-use Tests\TestCase;
+use Illuminate\Contracts\View\View;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class PortalQuickLinksTest extends TestCase
 {
@@ -30,6 +31,6 @@ class PortalQuickLinksTest extends TestCase
         $component = new PortalQuickLinks;
 
         expect(method_exists($component, 'render'))->toBeTrue();
-        expect($component->render())->toBeInstanceOf(\Illuminate\Contracts\View\View::class);
+        expect($component->render())->toBeInstanceOf(View::class);
     }
 }

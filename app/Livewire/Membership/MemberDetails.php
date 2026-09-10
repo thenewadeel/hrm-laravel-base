@@ -5,9 +5,11 @@ namespace App\Livewire\Membership;
 use App\Models\Membership\Member;
 use App\Models\Membership\MemberCard;
 use App\Services\Membership\MembershipService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -125,7 +127,7 @@ class MemberDetails extends Component
             $this->dispatch('family-member-added', familyMemberId: $familyMember->id);
             $this->resetFamilyMemberForm();
             $this->showAddFamilyMember = false;
-        } catch (\Illuminate\Validation\ValidationException $e) {
+        } catch (ValidationException $e) {
             // Let Livewire handle validation errors
             throw $e;
         } catch (\Exception $e) {
@@ -184,7 +186,7 @@ class MemberDetails extends Component
             $this->resetFamilyMemberForm();
             $this->showEditFamilyMember = false;
             $this->editingFamilyMember = null;
-        } catch (\Illuminate\Validation\ValidationException $e) {
+        } catch (ValidationException $e) {
             // Let Livewire handle validation errors
             throw $e;
         } catch (\Exception $e) {
@@ -413,7 +415,7 @@ class MemberDetails extends Component
     // Utility Methods
     public function getAgeFromDateOfBirth(string $dateOfBirth): int
     {
-        return \Carbon\Carbon::parse($dateOfBirth)->age;
+        return Carbon::parse($dateOfBirth)->age;
     }
 
     public function formatCurrency(float $amount): string

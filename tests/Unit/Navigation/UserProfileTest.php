@@ -2,8 +2,9 @@
 
 use App\Models\User;
 use App\View\Components\Navigation\UserProfile;
-use Tests\TestCase;
+use Illuminate\Contracts\View\View;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class UserProfileTest extends TestCase
 {
@@ -136,6 +137,6 @@ class UserProfileTest extends TestCase
         $component = new UserProfile;
 
         expect(method_exists($component, 'render'))->toBeTrue();
-        expect($component->render())->toBeInstanceOf(\Illuminate\Contracts\View\View::class);
+        expect($component->render())->toBeInstanceOf(View::class);
     }
 }

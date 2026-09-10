@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Membership;
 
-use App\Models\Membership\Member;
 use App\Models\Membership\FamilyMember;
+use App\Models\Membership\Member;
 use App\Services\Membership\CardPrintingService;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -13,12 +13,19 @@ class BatchCardPrinting extends Component
     use WithPagination;
 
     public array $selectedMembers = [];
+
     public array $selectedFamilyMembers = [];
+
     public string $cardTemplate = 'default';
+
     public string $search = '';
+
     public string $status = 'all';
+
     public string $memberType = 'all'; // all, members, family_members
+
     public bool $selectAll = false;
+
     public bool $includeFamilyMembers = false;
 
     public array $availableTemplates = [
@@ -58,16 +65,16 @@ class BatchCardPrinting extends Component
         // Apply search
         if ($this->search) {
             $membersQuery->where(function ($query) {
-                $query->where('first_name', 'like', '%' . $this->search . '%')
-                      ->orWhere('last_name', 'like', '%' . $this->search . '%')
-                      ->orWhere('membership_number', 'like', '%' . $this->search . '%')
-                      ->orWhere('email', 'like', '%' . $this->search . '%');
+                $query->where('first_name', 'like', '%'.$this->search.'%')
+                    ->orWhere('last_name', 'like', '%'.$this->search.'%')
+                    ->orWhere('membership_number', 'like', '%'.$this->search.'%')
+                    ->orWhere('email', 'like', '%'.$this->search.'%');
             });
 
             $familyMembersQuery->where(function ($query) {
-                $query->where('first_name', 'like', '%' . $this->search . '%')
-                      ->orWhere('last_name', 'like', '%' . $this->search . '%')
-                      ->orWhere('barcode_number', 'like', '%' . $this->search . '%');
+                $query->where('first_name', 'like', '%'.$this->search.'%')
+                    ->orWhere('last_name', 'like', '%'.$this->search.'%')
+                    ->orWhere('barcode_number', 'like', '%'.$this->search.'%');
             });
         }
 
@@ -91,21 +98,21 @@ class BatchCardPrinting extends Component
     {
         if ($this->selectAll) {
             $organizationId = auth()->user()->current_organization_id;
-            
+
             $membersQuery = Member::where('organization_id', $organizationId);
             $familyMembersQuery = FamilyMember::where('organization_id', $organizationId);
 
             // Apply filters
             if ($this->search) {
                 $membersQuery->where(function ($query) {
-                    $query->where('first_name', 'like', '%' . $this->search . '%')
-                          ->orWhere('last_name', 'like', '%' . $this->search . '%')
-                          ->orWhere('membership_number', 'like', '%' . $this->search . '%');
+                    $query->where('first_name', 'like', '%'.$this->search.'%')
+                        ->orWhere('last_name', 'like', '%'.$this->search.'%')
+                        ->orWhere('membership_number', 'like', '%'.$this->search.'%');
                 });
 
                 $familyMembersQuery->where(function ($query) {
-                    $query->where('first_name', 'like', '%' . $this->search . '%')
-                          ->orWhere('last_name', 'like', '%' . $this->search . '%');
+                    $query->where('first_name', 'like', '%'.$this->search.'%')
+                        ->orWhere('last_name', 'like', '%'.$this->search.'%');
                 });
             }
 
@@ -126,7 +133,7 @@ class BatchCardPrinting extends Component
     {
         try {
             $organizationId = auth()->user()->current_organization_id;
-            
+
             if (empty($this->selectedMembers) && empty($this->selectedFamilyMembers)) {
                 throw new \Exception('Please select at least one member or family member');
             }
@@ -140,8 +147,8 @@ class BatchCardPrinting extends Component
             $pdfPath = $cardService->bulkGenerateCards($organizationId, $filters);
 
             $this->dispatch('batch-cards-generated', path: $pdfPath);
-            $this->dispatch('show-notification', 
-                message: 'Batch cards generated successfully', 
+            $this->dispatch('show-notification',
+                message: 'Batch cards generated successfully',
                 type: 'success'
             );
 
@@ -151,8 +158,8 @@ class BatchCardPrinting extends Component
             $this->selectAll = false;
 
         } catch (\Exception $e) {
-            $this->dispatch('show-notification', 
-                message: 'Error generating batch cards: ' . $e->getMessage(), 
+            $this->dispatch('show-notification',
+                message: 'Error generating batch cards: '.$e->getMessage(),
                 type: 'error'
             );
         }
@@ -162,7 +169,7 @@ class BatchCardPrinting extends Component
     {
         try {
             $organizationId = auth()->user()->current_organization_id;
-            
+
             if (empty($this->selectedMembers) && empty($this->selectedFamilyMembers)) {
                 throw new \Exception('Please select at least one member or family member');
             }
@@ -174,13 +181,13 @@ class BatchCardPrinting extends Component
             ];
 
             $pdfPath = $cardService->bulkGenerateCards($organizationId, $filters);
-            $filename = "batch-cards-" . date('Y-m-d-H-i-s') . ".pdf";
+            $filename = 'batch-cards-'.date('Y-m-d-H-i-s').'.pdf';
 
             $this->dispatch('download-batch-cards', path: $pdfPath, filename: $filename);
 
         } catch (\Exception $e) {
-            $this->dispatch('show-notification', 
-                message: 'Error downloading batch cards: ' . $e->getMessage(), 
+            $this->dispatch('show-notification',
+                message: 'Error downloading batch cards: '.$e->getMessage(),
                 type: 'error'
             );
         }

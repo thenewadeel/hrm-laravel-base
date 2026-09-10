@@ -6,12 +6,13 @@ use App\Models\Organization;
 use App\Models\Traits\BelongsToOrganization;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SubscriptionPlan extends Model
 {
-    use HasFactory, BelongsToOrganization, SoftDeletes;
+    use BelongsToOrganization, HasFactory, SoftDeletes;
 
     protected $fillable = [
         'organization_id',
@@ -48,7 +49,7 @@ class SubscriptionPlan extends Model
         return $this->subscriptions()->where('status', 'active');
     }
 
-    public function organization(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function organization(): BelongsTo
     {
         return $this->belongsTo(Organization::class);
     }
@@ -66,6 +67,7 @@ class SubscriptionPlan extends Model
     public function calculateTotalCost(int $familyMembers = 0): float
     {
         $additionalMembers = max(0, $familyMembers - $this->family_members_included);
+
         return $this->amount + ($additionalMembers * $this->additional_family_member_fee);
     }
 
@@ -88,7 +90,7 @@ class SubscriptionPlan extends Model
     {
         return $query->where(function ($q) use ($search) {
             $q->where('name', 'like', "%{$search}%")
-              ->orWhere('description', 'like', "%{$search}%");
+                ->orWhere('description', 'like', "%{$search}%");
         });
     }
 }

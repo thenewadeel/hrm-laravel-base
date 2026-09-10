@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Services;
 
 /**
@@ -11,11 +10,12 @@ namespace App\Services;
 class PdfThemeManager
 {
     private array $config;
+
     private string $configPath;
 
-    public function __construct(string $configPath = null)
+    public function __construct(?string $configPath = null)
     {
-        $this->configPath = $configPath ?: __DIR__ . '/../../config/pdf-theme.json';
+        $this->configPath = $configPath ?: __DIR__.'/../../config/pdf-theme.json';
         $this->loadConfig();
     }
 
@@ -67,7 +67,7 @@ class PdfThemeManager
         $features = $this->getFeatures();
         $custom = $this->getCustom();
 
-        if (!$features['auto_toc'] && $pageNumber > 1) {
+        if (! $features['auto_toc'] && $pageNumber > 1) {
             return '';
         }
 
@@ -108,7 +108,7 @@ HTML;
         $features = $this->getFeatures();
         $custom = $this->getCustom();
 
-        if (!$features['page_numbers']) {
+        if (! $features['page_numbers']) {
             return '';
         }
 
@@ -146,12 +146,12 @@ HTML;
         $theme = $this->getTheme();
         $features = $this->getFeatures();
 
-        if (!$features['auto_toc'] || empty($headings)) {
+        if (! $features['auto_toc'] || empty($headings)) {
             return '';
         }
 
         $tocStyle = $this->getTocStyle();
-        $tocHtml = '<div class="table-of-contents ' . $tocStyle . '">';
+        $tocHtml = '<div class="table-of-contents '.$tocStyle.'">';
         $tocHtml .= '<h2 class="toc-title">📋 Table of Contents</h2>';
 
         foreach ($headings as $heading) {
@@ -200,7 +200,7 @@ HTML;
                 'logo' => '🏢',
                 'website' => 'https://hrm-laravel-base.example.com',
                 'company' => 'HRM Solutions',
-                'version' => '2.0.0'
+                'version' => '2.0.0',
             ],
             'theme' => [
                 'primary_color' => '#2563eb',
@@ -214,15 +214,15 @@ HTML;
                 'border_color' => '#e5e7eb',
                 'header_font' => 'Arial, sans-serif',
                 'body_font' => 'Georgia, serif',
-                'code_font' => "'Courier New', monospace"
+                'code_font' => "'Courier New', monospace",
             ],
             'custom' => [
                 'watermark_text' => '',
                 'confidential_text' => '',
                 'draft_mode' => false,
                 'print_date' => true,
-                'author_info' => true
-            ]
+                'author_info' => true,
+            ],
         ];
     }
 
@@ -668,18 +668,21 @@ CSS;
     private function getHeaderStyle(): string
     {
         $styling = $this->config['styling'] ?? [];
+
         return $styling['header_style'] ?? 'modern';
     }
 
     private function getFooterStyle(): string
     {
         $styling = $this->config['styling'] ?? [];
+
         return $styling['footer_style'] ?? 'modern';
     }
 
     private function getTocStyle(): string
     {
         $styling = $this->config['styling'] ?? [];
+
         return $styling['toc_style'] ?? 'numbered';
     }
 }

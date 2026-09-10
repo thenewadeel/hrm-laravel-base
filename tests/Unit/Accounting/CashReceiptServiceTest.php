@@ -89,7 +89,7 @@ test('cash receipt service validates amount is positive', function () {
     ];
 
     expect(fn () => $service->createReceipt($receiptData, $organization->id))
-        ->toThrow(\InvalidArgumentException::class, 'Amount must be positive');
+        ->toThrow(InvalidArgumentException::class, 'Amount must be positive');
 });
 
 test('cash receipt service generates sequential receipt numbers', function () {
@@ -139,5 +139,5 @@ test('cash receipt service validates account ownership', function () {
     ];
 
     expect(fn () => $service->createReceipt($receiptData, $organization2->id))
-        ->toThrow(\InvalidArgumentException::class, 'Accounts must belong to the same organization');
+        ->toThrow(InvalidArgumentException::class, 'Accounts must belong to the same organization');
 });

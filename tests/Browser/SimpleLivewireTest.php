@@ -10,6 +10,7 @@ use Tests\DuskTestCase;
 class SimpleLivewireTest extends DuskTestCase
 {
     protected ?Organization $organization = null;
+
     protected ?User $adminUser = null;
 
     protected function setUp(): void
@@ -98,6 +99,7 @@ class SimpleLivewireTest extends DuskTestCase
             if (strpos($currentUrl, '/login') !== false) {
                 // echo "\n=== REDIRECTED TO LOGIN - AUTHENTICATION ISSUE ===\n";
                 $this->markTestSkipped('Authentication issue - redirected to login');
+
                 return;
             }
 
@@ -106,6 +108,7 @@ class SimpleLivewireTest extends DuskTestCase
             if (strpos($pageContent, 'livewire:') === false) {
                 // echo "\n=== NO LIVEWIRE COMPONENTS FOUND IN SOURCE ===\n";
                 $this->markTestSkipped('No Livewire components found on page');
+
                 return;
             }
 

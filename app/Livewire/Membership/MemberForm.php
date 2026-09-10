@@ -5,6 +5,7 @@ namespace App\Livewire\Membership;
 use App\Models\Membership\FamilyMember;
 use App\Models\Membership\Member;
 use App\Services\Membership\MembershipService;
+use Illuminate\View\View;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -267,7 +268,7 @@ class MemberForm extends Component
         }
     }
 
-    public function render(): \Illuminate\View\View
+    public function render(): View
     {
         return view('livewire.membership.member-form', [
             'genders' => [

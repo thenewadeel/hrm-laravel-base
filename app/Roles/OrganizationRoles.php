@@ -7,9 +7,13 @@ use App\Permissions\OrganizationPermissions;
 class OrganizationRoles
 {
     const SUPER_ADMIN = 'admin';
+
     const ORGANIZATION_ADMIN = 'organization_admin';
+
     const ORGANIZATION_UNIT_MANAGER = 'organization_unit_manager';
+
     const USER_MANAGER = 'user_manager';
+
     const AUDITOR = 'auditor';
 
     public static function permissions(): array
@@ -22,7 +26,7 @@ class OrganizationRoles
             self::ORGANIZATION_ADMIN => [
                 // All inventory permissions
                 ...OrganizationPermissions::all(),
-                //Organization
+                // Organization
                 OrganizationPermissions::VIEW_ORGANIZATION,
                 OrganizationPermissions::CREATE_ORGANIZATION,
                 OrganizationPermissions::EDIT_ORGANIZATION,

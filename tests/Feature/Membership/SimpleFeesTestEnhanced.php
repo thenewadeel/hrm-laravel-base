@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Membership\SimpleFees;
 use App\Models\Membership\Member;
 use App\Models\Membership\MemberFee;
 use App\Models\Organization;
@@ -23,7 +24,7 @@ test('simple fees component requires view fees permission', function () {
     $user->current_organization_id = $organization->id;
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleFees::class)
+        ->test(SimpleFees::class)
         ->assertStatus(403);
 });
 
@@ -36,7 +37,7 @@ test('simple fees add fee form requires manage fees permission', function () {
     $user->current_organization_id = $organization->id;
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleFees::class)
+        ->test(SimpleFees::class)
         ->call('showAddFeeForm')
         ->assertStatus(403);
 });
@@ -74,7 +75,7 @@ test('simple fees process payment requires manage fees permission', function () 
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleFees::class)
+        ->test(SimpleFees::class)
         ->call('processPayment', $fee->id)
         ->assertStatus(403);
 });
@@ -100,7 +101,7 @@ test('simple fees waive fee requires manage fees permission', function () {
     ]);
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleFees::class)
+        ->test(SimpleFees::class)
         ->call('waiveFee', $fee->id, 'Test waiver')
         ->assertStatus(403);
 });
@@ -142,7 +143,7 @@ test('simple fees search functionality works correctly', function () {
 
     // Test search by first name
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleFees::class)
+        ->test(SimpleFees::class)
         ->set('search', 'John')
         ->assertSee($member1->full_name)
         ->assertDontSee($member2->full_name);
@@ -171,7 +172,7 @@ test('simple fees filtering by status works correctly', function () {
 
     // Test filter by paid status - check that paid fee is in results
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleFees::class)
+        ->test(SimpleFees::class)
         ->set('status', 'paid')
         ->assertViewHas('fees', function ($fees) use ($paidFee) {
             return $fees->contains('id', $paidFee->id);
@@ -201,7 +202,7 @@ test('simple fees filtering by fee type works correctly', function () {
 
     // Test filter by subscription type
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleFees::class)
+        ->test(SimpleFees::class)
         ->set('feeType', 'subscription')
         ->assertSee('Subscription')
         ->assertViewHas('fees', function ($fees) use ($subscriptionFee, $lateFee) {
@@ -227,7 +228,7 @@ test('simple fees pagination works correctly', function () {
 
     // Test default pagination (10 per page)
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleFees::class)
+        ->test(SimpleFees::class)
         ->set('perPage', 10)
         ->assertViewHas('fees', function ($fees) {
             return $fees->perPage() === 10;
@@ -235,7 +236,7 @@ test('simple fees pagination works correctly', function () {
 
     // Test custom pagination
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleFees::class)
+        ->test(SimpleFees::class)
         ->set('perPage', 25)
         ->assertViewHas('fees', function ($fees) {
             return $fees->perPage() === 25;
@@ -256,7 +257,7 @@ test('simple fees query string parameters work correctly', function () {
             'feeType' => 'subscription',
             'perPage' => 25,
         ])
-        ->test(\App\Livewire\Membership\SimpleFees::class);
+        ->test(SimpleFees::class);
 
     expect($component->search)->toBe('test');
     expect($component->status)->toBe('paid');
@@ -272,7 +273,7 @@ test('simple fees refreshes on events', function () {
     $user->current_organization_id = $organization->id;
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleFees::class);
+        ->test(SimpleFees::class);
 
     // Test that refreshFees method exists and can be called
     $component->call('refreshFees')
@@ -284,7 +285,7 @@ test('simple fees handles null organization gracefully', function () {
     // Don't set current_organization_id
 
     Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleFees::class)
+        ->test(SimpleFees::class)
         ->assertStatus(200)
         ->assertViewHas('feeStats', function ($stats) {
             return $stats['total_collected'] === 0 &&
@@ -302,7 +303,7 @@ test('simple fees can manage fees property works correctly', function () {
     $user->current_organization_id = $organization->id;
 
     // Test the property logic directly
-    $component = new \App\Livewire\Membership\SimpleFees;
+    $component = new SimpleFees;
 
     // Mock the auth user
     auth()->login($user);
@@ -321,7 +322,7 @@ test('simple fees can manage fees property returns false without permission', fu
     $user->current_organization_id = $organization->id;
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleFees::class);
+        ->test(SimpleFees::class);
 
     expect($component->canManageFees)->toBeFalse();
 });
@@ -334,7 +335,7 @@ test('simple fees fee types property returns correct options', function () {
     $user->current_organization_id = $organization->id;
 
     $component = Livewire::actingAs($user)
-        ->test(\App\Livewire\Membership\SimpleFees::class);
+        ->test(SimpleFees::class);
 
     $feeTypes = $component->feeTypes;
 

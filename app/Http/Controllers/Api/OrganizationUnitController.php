@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Organization;
-use Illuminate\Http\Request;
 use App\Models\OrganizationUnit;
 use App\Models\OrganizationUser;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class OrganizationUnitController extends Controller
@@ -31,7 +31,7 @@ class OrganizationUnitController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'type' => 'required|string|max:255',
-            'parent_id' => 'nullable|exists:organization_units,id,organization_id,' . $organization->id,
+            'parent_id' => 'nullable|exists:organization_units,id,organization_id,'.$organization->id,
             // 'custom_fields' => 'nullable|array'
         ]);
 
@@ -46,8 +46,9 @@ class OrganizationUnitController extends Controller
         //     dd($orgData);
         // }
         $unit = $organization->units()->create($orgData);
+
         return response()->json([
-            'data' => $unit
+            'data' => $unit,
         ], 201);
     }
 
@@ -59,7 +60,7 @@ class OrganizationUnitController extends Controller
         Gate::authorize('view', [OrganizationUnit::class, $organization]);
 
         return response()->json([
-            'data' => $unit->load(['parent', 'children'])
+            'data' => $unit->load(['parent', 'children']),
         ]);
     }
 
@@ -77,8 +78,8 @@ class OrganizationUnitController extends Controller
         $validated = $request->validate([
             'name' => 'sometimes|required|string|max:255',
             'type' => 'sometimes|required|string|max:255',
-            'parent_id' => 'nullable|exists:organization_units,id,organization_id,' . $organization->id,
-            'custom_fields' => 'nullable|array'
+            'parent_id' => 'nullable|exists:organization_units,id,organization_id,'.$organization->id,
+            'custom_fields' => 'nullable|array',
         ]);
 
         $unit->update($validated);
@@ -106,7 +107,6 @@ class OrganizationUnitController extends Controller
         return response()->json(null, 204);
     }
 
-
     public function hierarchy(Organization $organization, OrganizationUnit $unit)
     {
         // Authorization
@@ -115,10 +115,9 @@ class OrganizationUnitController extends Controller
         }
 
         return response()->json([
-            'data' => $unit->load(['children'])
+            'data' => $unit->load(['children']),
         ]);
     }
-
 
     public function assignUser(
         Request $request,
@@ -141,18 +140,18 @@ class OrganizationUnitController extends Controller
                 'required',
                 'exists:users,id',
                 function ($attribute, $value, $fail) use ($organization) {
-                    if (!$organization->users()->where('user_id', $value)->exists()) {
+                    if (! $organization->users()->where('user_id', $value)->exists()) {
                         $fail('The user is not a member of this organization');
                     }
-                }
+                },
             ],
-            'position' => 'nullable|string|max:255'
+            'position' => 'nullable|string|max:255',
         ]);
 
         // Update the user's unit assignment
         $organization->users()->updateExistingPivot($validated['user_id'], [
             'organization_unit_id' => $unit->id,
-            'position' => $validated['position'] ?? null
+            'position' => $validated['position'] ?? null,
         ]);
 
         return response()->json([
@@ -160,10 +159,11 @@ class OrganizationUnitController extends Controller
             'data' => [
                 'user_id' => $validated['user_id'],
                 'unit_id' => $unit->id,
-                'position' => $validated['position'] ?? null
-            ]
+                'position' => $validated['position'] ?? null,
+            ],
         ]);
     }
+
     // OrganizationUnitController.php
     public function members(Organization $organization, OrganizationUnit $unit)
     {
@@ -179,7 +179,7 @@ class OrganizationUnitController extends Controller
             ->push($unit->id);
 
         // Get users belonging to any of these units
-        $members = OrganizationUser::query() //$organization->users()
+        $members = OrganizationUser::query() // $organization->users()
             ->whereIn('organization_unit_id', $unitIds)
             // ->with(['organizationUnits' => function ($query) use ($organization) {
             //     $query->where('organization_units.organization_id', $organization->id); // Explicit table name
@@ -195,10 +195,11 @@ class OrganizationUnitController extends Controller
                     'email' => $user->email,
                     'unit_id' => $user->organization_unit_id,
                     'unit_name' => $user->unit ? $user->unit->name : null,
-                    'roles' => $user->roles
+                    'roles' => $user->roles,
                 ];
             });
         $x = response()->json(['data' => $members]);
+
         return $x;
     }
 }

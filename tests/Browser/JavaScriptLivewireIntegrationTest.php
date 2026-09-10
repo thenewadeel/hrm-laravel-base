@@ -2,8 +2,6 @@
 
 namespace Tests\Browser;
 
-use App\Models\Membership\Member;
-use App\Models\Membership\MemberFee;
 use App\Models\Organization;
 use App\Models\User;
 use Laravel\Dusk\Browser;
@@ -18,7 +16,9 @@ use Tests\DuskTestCase;
 class JavaScriptLivewireIntegrationTest extends DuskTestCase
 {
     protected ?Organization $organization = null;
+
     protected ?User $adminUser = null;
+
     protected User $regularUser;
 
     protected function setUp(): void
@@ -72,7 +72,7 @@ class JavaScriptLivewireIntegrationTest extends DuskTestCase
             $this->assertTrue($livewireLoaded, 'Livewire should be loaded');
 
             // Get Alpine version
-            $alpineVersion = $browser->script("return window.Alpine ? window.Alpine.version : null")[0] ?? null;
+            $alpineVersion = $browser->script('return window.Alpine ? window.Alpine.version : null')[0] ?? null;
             $this->assertNotEmpty($alpineVersion, 'Alpine.js version should be available');
 
             // Check for console errors first
@@ -175,22 +175,22 @@ class JavaScriptLivewireIntegrationTest extends DuskTestCase
             // Add debug info to assertion messages
             $this->assertTrue(
                 $livewireStatus['livewireLoaded'],
-                'Livewire should be loaded. Debug: ' . $livewireStatus['debugInfo']
+                'Livewire should be loaded. Debug: '.$livewireStatus['debugInfo']
             );
 
             // Check Livewire functionality using available API methods
             if ($livewireStatus['livewireLoaded']) {
                 $this->assertTrue(
                     $livewireStatus['findWorks'],
-                    'Livewire.find() should work. Debug: ' . $livewireStatus['debugInfo']
+                    'Livewire.find() should work. Debug: '.$livewireStatus['debugInfo']
                 );
                 $this->assertTrue(
                     $livewireStatus['firstWorks'],
-                    'Livewire.first() should work. Debug: ' . $livewireStatus['debugInfo']
+                    'Livewire.first() should work. Debug: '.$livewireStatus['debugInfo']
                 );
                 $this->assertTrue(
                     $livewireStatus['allWorks'],
-                    'Livewire.all() should work. Debug: ' . $livewireStatus['debugInfo']
+                    'Livewire.all() should work. Debug: '.$livewireStatus['debugInfo']
                 );
             }
 
@@ -271,6 +271,7 @@ class JavaScriptLivewireIntegrationTest extends DuskTestCase
             if (strpos($currentUrl, '/login') !== false) {
                 // echo "\n=== REDIRECTED TO LOGIN - AUTH ISSUE ===\n";
                 $this->markTestSkipped('Authentication/redirect issue - needs investigation');
+
                 return;
             }
 
@@ -325,6 +326,7 @@ class JavaScriptLivewireIntegrationTest extends DuskTestCase
             $currentUrl = $browser->driver->getCurrentURL();
             if (strpos($currentUrl, '/login') !== false) {
                 $this->markTestSkipped('Authentication issue - integration test skipped');
+
                 return;
             }
 
@@ -381,7 +383,7 @@ class JavaScriptLivewireIntegrationTest extends DuskTestCase
             if ($integrationTest['livewireComponentCount'] > 0 && $integrationTest['alpineComponentCount'] > 0) {
                 $this->assertTrue(
                     $integrationTest['alpineCanAccessLivewire'],
-                    'Alpine should be able to access Livewire components. Details: ' . $integrationTest['integrationDetails']
+                    'Alpine should be able to access Livewire components. Details: '.$integrationTest['integrationDetails']
                 );
             }
 
@@ -434,7 +436,7 @@ class JavaScriptLivewireIntegrationTest extends DuskTestCase
             $this->assertEquals('error-monitoring-setup', $errorMonitoring);
 
             // Trigger a harmless error
-            $browser->script("
+            $browser->script('
                 try {
                     // This should cause a ReferenceError
                     const result = nonExistentVariable.test;
@@ -444,12 +446,12 @@ class JavaScriptLivewireIntegrationTest extends DuskTestCase
                         message: error.message
                     };
                 }
-            ")[0];
+            ')[0];
 
             // Check if error was caught
-            $errorCaught = $browser->script("
+            $errorCaught = $browser->script('
                 return window.__duskErrorTest.caughtError || null;
-            ")[0];
+            ')[0];
 
             $this->assertNotNull($errorCaught, 'JavaScript error handling should catch errors');
             $this->assertEquals('ReferenceError', $errorCaught['name']);
@@ -472,7 +474,7 @@ class JavaScriptLivewireIntegrationTest extends DuskTestCase
             // Test clicking navigation elements
             $navLinks = $browser->elements('nav a, .navigation a, [role="navigation"] a');
 
-            if (!empty($navLinks)) {
+            if (! empty($navLinks)) {
                 // Click first navigation link
                 $firstLinkText = $browser->text($navLinks[0]);
                 $browser->click($navLinks[0])

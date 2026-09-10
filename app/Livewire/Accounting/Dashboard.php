@@ -23,8 +23,9 @@ class Dashboard extends Component
 
     public function generateSummary()
     {
-        $this->summary =  $this->reportService->getDashboardSummary();
+        $this->summary = $this->reportService->getDashboardSummary();
     }
+
     public function render()
     {
         return view('livewire.accounting.dashboard');

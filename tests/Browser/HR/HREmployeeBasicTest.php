@@ -2,7 +2,6 @@
 
 namespace Tests\Browser\HR;
 
-use Laravel\Dusk\Browser;
 use Tests\Browser\JavaScriptDuskTestCase;
 
 class HREmployeeBasicTest extends JavaScriptDuskTestCase

@@ -29,8 +29,9 @@ class TestSummary extends Command
     {
         $filePath = $this->argument('file');
 
-        if (!File::exists($filePath)) {
+        if (! File::exists($filePath)) {
             $this->error("Error: Test results file not found at: {$filePath}");
+
             return Command::FAILURE;
         }
 
@@ -47,9 +48,6 @@ class TestSummary extends Command
 
     /**
      * Processes the lines of the test output file to gather statistics and detailed failure information.
-     *
-     * @param array $lines
-     * @return array
      */
     protected function processLines(array $lines): array
     {
@@ -73,11 +71,12 @@ class TestSummary extends Command
                 } else {
                     // This is usually a second line of a failure or a summary line, ignore it
                     $currentClass = null;
+
                     continue;
                 }
 
                 // Initialize class summary
-                if ($currentClass && !isset($classSummary[$currentClass])) {
+                if ($currentClass && ! isset($classSummary[$currentClass])) {
                     $shortName = $this->getShortModuleName($currentClass);
                     $classSummary[$currentClass] = ['shortName' => $shortName, 'passed' => 0, 'failed' => 0, 'warned' => 0, 'total' => 0];
                     $detailedResults[$currentClass] = ['failures' => [], 'warnings' => []];
@@ -85,7 +84,7 @@ class TestSummary extends Command
             }
 
             // Must have a current class to count test cases
-            if (!$currentClass) {
+            if (! $currentClass) {
                 continue;
             }
 
@@ -124,9 +123,6 @@ class TestSummary extends Command
     /**
      * Extracts the short module name from the fully qualified test class name.
      * e.g., 'Tests\Feature\Portal\EmployeePortalTest' -> 'EmployeePortal'
-     *
-     * @param string $className
-     * @return string
      */
     protected function getShortModuleName(string $className): string
     {
@@ -143,9 +139,6 @@ class TestSummary extends Command
 
     /**
      * Outputs the test summary using Laravel console components, prioritizing lists for long descriptions.
-     *
-     * @param array $results
-     * @return void
      */
     protected function outputSummary(array $results): void
     {
@@ -154,7 +147,7 @@ class TestSummary extends Command
         $detailed = $results['detailed'];
 
         $this->info(str_repeat('=', 60));
-        $this->info("✨ Test Execution Summary - Professional Report v2.0 ✨");
+        $this->info('✨ Test Execution Summary - Professional Report v2.0 ✨');
         $this->info(str_repeat('=', 60));
 
         //
@@ -163,14 +156,15 @@ class TestSummary extends Command
         $this->line("\n--- Overall Test Status ---");
         if ($overall['total'] > 0) {
             $data = [
-                ['Total Tests', (string)$overall['total']],
-                ['Passed', "{$overall['passed']} (" . round(($overall['passed'] / $overall['total']) * 100, 1) . '%)'],
-                ['Failed', "{$overall['failed']} (" . round(($overall['failed'] / $overall['total']) * 100, 1) . '%)'],
-                ['Warnings/Skipped', "{$overall['warned']} (" . round(($overall['warned'] / $overall['total']) * 100, 1) . '%)'],
+                ['Total Tests', (string) $overall['total']],
+                ['Passed', "{$overall['passed']} (".round(($overall['passed'] / $overall['total']) * 100, 1).'%)'],
+                ['Failed', "{$overall['failed']} (".round(($overall['failed'] / $overall['total']) * 100, 1).'%)'],
+                ['Warnings/Skipped', "{$overall['warned']} (".round(($overall['warned'] / $overall['total']) * 100, 1).'%)'],
             ];
             $this->table(['Metric', 'Count/Percentage'], $data);
         } else {
-            $this->warn("No tests were found to process.");
+            $this->warn('No tests were found to process.');
+
             return;
         }
 
@@ -223,12 +217,12 @@ class TestSummary extends Command
         //
         // 4. Passed Modules Summary
         //
-        $passedModules = collect($summary)->filter(fn($data) => $data['passed'] == $data['total'] && $data['total'] > 0);
+        $passedModules = collect($summary)->filter(fn ($data) => $data['passed'] == $data['total'] && $data['total'] > 0);
         if ($passedModules->isNotEmpty()) {
             $this->line("\n--- ✅ Fully Passed Modules ---");
-            $passedData = $passedModules->map(fn($data) => [
+            $passedData = $passedModules->map(fn ($data) => [
                 "<fg=green>{$data['shortName']}</>",
-                "{$data['passed']}/{$data['total']}"
+                "{$data['passed']}/{$data['total']}",
             ])->toArray();
             $this->table(['Module', 'Tests Passed'], $passedData);
         }

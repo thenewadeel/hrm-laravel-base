@@ -3,23 +3,23 @@
 namespace App\Livewire\Accounting;
 
 use App\Models\Accounting\ChartOfAccount;
-use App\Models\Accounting\JournalEntry;
-use App\Exceptions\UnbalancedTransactionException;
-use App\Exceptions\InvalidAccountTypeException;
 use App\Models\Accounting\LedgerEntry;
-use Illuminate\Validation\Validator;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class LedgerEntries extends Component
 {
     use WithPagination;
+
     /**
      * @var Collection|array The collection or array of ledger entry data to display.
      */
-    public $entries, $title, $subTitle;
+    public $entries;
+
+    public $title;
+
+    public $subTitle;
 
     /**
      * Define the headers for the reusable data table component.
@@ -54,7 +54,7 @@ class LedgerEntries extends Component
         $this->entries = is_array($entries) ? collect($entries) : $entries;
 
         // Ensure the entries are not null and are iterable
-        if (!$this->entries instanceof Collection) {
+        if (! $this->entries instanceof Collection) {
             // $this->entries = collect([]);
             // $this->loadDefaultAccounts();
         }
@@ -63,9 +63,8 @@ class LedgerEntries extends Component
     public function render()
     {
 
-
         return view('livewire.accounting.ledger-entries', [
-            'entries' => $this->entries
+            'entries' => $this->entries,
         ]);
     }
 
@@ -75,13 +74,10 @@ class LedgerEntries extends Component
             $this->entries = LedgerEntry::latest()->get();
         } catch (\Exception $e) {
             // Log the error and show empty results
-            Log::error('Error loading ledger entries: ' . $e->getMessage());
+            Log::error('Error loading ledger entries: '.$e->getMessage());
             $this->entries = collect([]); // Empty collection as fallback
         }
     }
-
-
-
 
     /**
      * Computed property to process entries for the data table.
@@ -89,7 +85,7 @@ class LedgerEntries extends Component
     public function getProcessedEntriesProperty()
     {
         return $this->entries->map(function ($entry) {
-            $amount = (float)($entry['amount'] ?? 0);
+            $amount = (float) ($entry['amount'] ?? 0);
             $type = $entry['type'] ?? '';
 
             return [

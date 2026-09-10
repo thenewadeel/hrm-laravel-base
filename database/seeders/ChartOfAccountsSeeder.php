@@ -1,4 +1,5 @@
 <?php
+
 // database/seeders/ChartOfAccountsSeeder.php
 
 namespace Database\Seeders;

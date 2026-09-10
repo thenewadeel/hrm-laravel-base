@@ -7,9 +7,13 @@ use App\Permissions\InventoryPermissions;
 class InventoryRoles
 {
     const SUPER_ADMIN = 'admin';
+
     const INVENTORY_ADMIN = 'inventory_admin';
+
     const STORE_MANAGER = 'store_manager';
+
     const INVENTORY_CLERK = 'inventory_clerk';
+
     const AUDITOR = 'auditor';
 
     public static function permissions(): array

@@ -2,10 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Inventory\Item;
-use App\Models\Inventory\Store;
-use App\Models\Inventory\TransactionItem;
-use App\Services\PdfThemeManager;
 use Dompdf\Dompdf;
 
 class InventoryPdfService
@@ -22,13 +18,13 @@ class InventoryPdfService
      */
     public function generateLowStockPdf(array $outOfStockItems, array $lowStockItems, array $reorderSuggestions, array $filters = []): string
     {
-        $pdf = new Dompdf();
+        $pdf = new Dompdf;
         $pdf->setPaper('A4', 'portrait');
-        
+
         $html = $this->getLowStockHtml($outOfStockItems, $lowStockItems, $reorderSuggestions, $filters);
         $pdf->loadHtml($html);
         $pdf->render();
-        
+
         return $pdf->output();
     }
 
@@ -37,13 +33,13 @@ class InventoryPdfService
      */
     public function generateStockLevelsPdf(array $items, array $summary, array $filters = []): string
     {
-        $pdf = new Dompdf();
+        $pdf = new Dompdf;
         $pdf->setPaper('A4', 'portrait');
-        
+
         $html = $this->getStockLevelsHtml($items, $summary, $filters);
         $pdf->loadHtml($html);
         $pdf->render();
-        
+
         return $pdf->output();
     }
 
@@ -52,13 +48,13 @@ class InventoryPdfService
      */
     public function generateMovementPdf(object $movements, array $summary, array $topReceived, array $topIssued, array $filters = []): string
     {
-        $pdf = new Dompdf();
+        $pdf = new Dompdf;
         $pdf->setPaper('A4', 'portrait');
-        
+
         $html = $this->getMovementHtml($movements, $summary, $topReceived, $topIssued, $filters);
         $pdf->loadHtml($html);
         $pdf->render();
-        
+
         return $pdf->output();
     }
 
@@ -69,14 +65,14 @@ class InventoryPdfService
     {
         $theme = $this->themeManager->getTheme();
         $brand = $this->themeManager->getBrand();
-        
+
         return view('inventory.pdf.low-stock', [
             'outOfStockItems' => $outOfStockItems,
             'lowStockItems' => $lowStockItems,
             'reorderSuggestions' => $reorderSuggestions,
             'filters' => $filters,
             'theme' => $theme,
-            'brand' => $brand
+            'brand' => $brand,
         ])->render();
     }
 
@@ -87,13 +83,13 @@ class InventoryPdfService
     {
         $theme = $this->themeManager->getTheme();
         $brand = $this->themeManager->getBrand();
-        
+
         return view('inventory.pdf.stock-levels', [
             'items' => $items,
             'summary' => $summary,
             'filters' => $filters,
             'theme' => $theme,
-            'brand' => $brand
+            'brand' => $brand,
         ])->render();
     }
 
@@ -104,7 +100,7 @@ class InventoryPdfService
     {
         $theme = $this->themeManager->getTheme();
         $brand = $this->themeManager->getBrand();
-        
+
         return view('inventory.pdf.movement', [
             'movements' => $movements,
             'summary' => $summary,
@@ -112,7 +108,7 @@ class InventoryPdfService
             'topIssued' => $topIssued,
             'filters' => $filters,
             'theme' => $theme,
-            'brand' => $brand
+            'brand' => $brand,
         ])->render();
     }
 
@@ -122,11 +118,11 @@ class InventoryPdfService
     public function downloadLowStock(array $outOfStockItems, array $lowStockItems, array $reorderSuggestions, array $filters = [])
     {
         $pdfContent = $this->generateLowStockPdf($outOfStockItems, $lowStockItems, $reorderSuggestions, $filters);
-        $filename = "low-stock-report-" . now()->format('Y-m-d') . ".pdf";
-        
+        $filename = 'low-stock-report-'.now()->format('Y-m-d').'.pdf';
+
         return response($pdfContent)
             ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
+            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"')
             ->header('Cache-Control', 'private, max-age=0, must-revalidate')
             ->header('Pragma', 'public');
     }
@@ -137,11 +133,11 @@ class InventoryPdfService
     public function downloadStockLevels(array $items, array $summary, array $filters = [])
     {
         $pdfContent = $this->generateStockLevelsPdf($items, $summary, $filters);
-        $filename = "stock-levels-report-" . now()->format('Y-m-d') . ".pdf";
-        
+        $filename = 'stock-levels-report-'.now()->format('Y-m-d').'.pdf';
+
         return response($pdfContent)
             ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
+            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"')
             ->header('Cache-Control', 'private, max-age=0, must-revalidate')
             ->header('Pragma', 'public');
     }
@@ -152,11 +148,11 @@ class InventoryPdfService
     public function downloadMovement(object $movements, array $summary, array $topReceived, array $topIssued, array $filters = [])
     {
         $pdfContent = $this->generateMovementPdf($movements, $summary, $topReceived, $topIssued, $filters);
-        $filename = "movement-report-" . now()->format('Y-m-d') . ".pdf";
-        
+        $filename = 'movement-report-'.now()->format('Y-m-d').'.pdf';
+
         return response($pdfContent)
             ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
+            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"')
             ->header('Cache-Control', 'private, max-age=0, must-revalidate')
             ->header('Pragma', 'public');
     }

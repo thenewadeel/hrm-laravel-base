@@ -51,7 +51,7 @@ class EmployeeManagementAndPayrollTest extends BaseBrowserTest
                 $browser->visit('/hrm')
                     ->pause(2000);
             }
-            
+
             $browser->screenshot('employee-workflow-step-2-hr-module');
 
             // Step 3: Test basic employee listing
@@ -69,7 +69,7 @@ class EmployeeManagementAndPayrollTest extends BaseBrowserTest
                 if ($browser->see('Add Employee') || $browser->see('Create Employee')) {
                     $browser->clickLink('Add Employee')
                         ->pause(2000);
-                    
+
                     // Try to fill basic fields that might exist
                     $timestamp = time();
                     try {
@@ -79,7 +79,7 @@ class EmployeeManagementAndPayrollTest extends BaseBrowserTest
                     } catch (\Exception $e) {
                         // Fields may have different names
                     }
-                    
+
                     $browser->pause(1000)
                         ->screenshot('employee-workflow-step-4-form-filled');
                 }

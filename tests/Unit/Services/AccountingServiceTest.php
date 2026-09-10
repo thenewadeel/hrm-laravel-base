@@ -1,13 +1,15 @@
 <?php
+
 // tests/Unit/Accounting/AccountingServiceTest.php
 
 namespace Tests\Unit\Accounting;
 
+use App\Exceptions\UnbalancedTransactionException;
 use App\Models\Accounting\ChartOfAccount;
 use App\Services\AccountingService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
 
 class AccountingServiceTest extends TestCase
@@ -31,7 +33,7 @@ class AccountingServiceTest extends TestCase
             // Missing a corresponding credit entry. Debits (100) != Credits (0)
         ];
 
-        $this->expectException(\App\Exceptions\UnbalancedTransactionException::class);
+        $this->expectException(UnbalancedTransactionException::class);
         $this->accountingService->postTransaction($unbalancedEntries, 'Test transaction that will fail');
     }
 
@@ -57,14 +59,14 @@ class AccountingServiceTest extends TestCase
             'chart_of_account_id' => $cashAccount->id,
             'type' => 'debit',
             'amount' => 100.00,
-            'description' => 'Test Sale'
+            'description' => 'Test Sale',
         ]);
 
         $this->assertDatabaseHas('ledger_entries', [
             'chart_of_account_id' => $revenueAccount->id,
             'type' => 'credit',
             'amount' => 100.00,
-            'description' => 'Test Sale'
+            'description' => 'Test Sale',
         ]);
     }
 
@@ -89,7 +91,7 @@ class AccountingServiceTest extends TestCase
             $this->accountingService->postTransaction($complexEntries, 'Complex sale with tax and partial payment');
             $this->assertTrue(true); // If we get here, the test passes
         } catch (\Exception $e) {
-            $this->fail('Expected no exception but got: ' . $e->getMessage());
+            $this->fail('Expected no exception but got: '.$e->getMessage());
         }
     }
 }

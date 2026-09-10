@@ -5,10 +5,10 @@ namespace Tests\Unit;
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\LedgerEntry;
 use App\Services\AccountingReportService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use Carbon\Carbon;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
 
 class AccountingReportServiceTest extends TestCase
@@ -22,7 +22,7 @@ class AccountingReportServiceTest extends TestCase
         parent::setUp();
         $this->setupOrganization();
         // Since the service does not use constructor injection, we can simply instantiate it
-        $this->service = new AccountingReportService();
+        $this->service = new AccountingReportService;
     }
 
     #[Test]

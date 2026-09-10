@@ -5,6 +5,7 @@ namespace App\Livewire\Membership;
 use App\Models\Membership\Member;
 use App\Models\Membership\MemberFee;
 use App\Services\Membership\FeeService;
+use Illuminate\Auth\Access\AuthorizationException;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -72,7 +73,7 @@ class SimpleFees extends Component
                 return;
             }
             $this->authorize('membership.view_fees');
-        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+        } catch (AuthorizationException $e) {
             abort(403);
         } catch (\Exception $e) {
             // Handle other exceptions gracefully
@@ -171,7 +172,7 @@ class SimpleFees extends Component
             $this->authorize('membership.manage_fees');
             $this->showAddFeeForm = true;
             $this->due_date = now()->addDays(30)->format('Y-m-d');
-        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+        } catch (AuthorizationException $e) {
             abort(403);
         }
     }
@@ -186,7 +187,7 @@ class SimpleFees extends Component
     {
         try {
             $this->authorize('membership.manage_fees');
-        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+        } catch (AuthorizationException $e) {
             abort(403);
         }
 
@@ -227,7 +228,7 @@ class SimpleFees extends Component
     {
         try {
             $this->authorize('membership.manage_fees');
-        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+        } catch (AuthorizationException $e) {
             abort(403);
         }
 

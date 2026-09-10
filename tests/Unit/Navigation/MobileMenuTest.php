@@ -1,8 +1,9 @@
 <?php
 
 use App\View\Components\Navigation\MobileMenu;
-use Tests\TestCase;
+use Illuminate\Contracts\View\View;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class MobileMenuTest extends TestCase
 {
@@ -30,6 +31,6 @@ class MobileMenuTest extends TestCase
         $component = new MobileMenu;
 
         expect(method_exists($component, 'render'))->toBeTrue();
-        expect($component->render())->toBeInstanceOf(\Illuminate\Contracts\View\View::class);
+        expect($component->render())->toBeInstanceOf(View::class);
     }
 }

@@ -4,6 +4,8 @@ namespace Tests\Feature\Portal;
 
 use App\Models\AttendanceRecord;
 use App\Models\Employee;
+use App\Models\LeaveRequest;
+use App\Models\OrganizationUser;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
@@ -28,7 +30,7 @@ class ManagerPortalTest extends TestCase
         ]);
 
         // Create organization user relationship for team member
-        \App\Models\OrganizationUser::create([
+        OrganizationUser::create([
             'user_id' => $this->teamMember->id,
             'organization_id' => $this->manager->organization_id,
             'roles' => ['employee'],
@@ -36,7 +38,7 @@ class ManagerPortalTest extends TestCase
         ]);
 
         // Create employee record for team member
-        $this->teamMemberEmployee = \App\Models\Employee::factory()->create([
+        $this->teamMemberEmployee = Employee::factory()->create([
             'user_id' => $this->teamMember->id,
             'organization_id' => $this->manager->organization_id,
             'first_name' => 'Team',
@@ -78,7 +80,7 @@ class ManagerPortalTest extends TestCase
     #[Test]
     public function manager_can_approve_leave_requests()
     {
-        $leaveRequest = \App\Models\LeaveRequest::factory()->create([
+        $leaveRequest = LeaveRequest::factory()->create([
             'employee_id' => $this->teamMemberEmployee->id,
             'organization_id' => $this->manager->organization_id,
             'status' => 'pending',

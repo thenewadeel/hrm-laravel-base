@@ -3,6 +3,7 @@
 namespace App\Livewire\Membership;
 
 use App\Models\Membership\Member;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -40,7 +41,7 @@ class MemberListing extends Component
         try {
             $this->authorize('membership.view_members');
             $this->loadStatistics();
-        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+        } catch (AuthorizationException $e) {
             abort(403);
         } catch (\Exception $e) {
             // Handle other exceptions gracefully
@@ -145,7 +146,7 @@ class MemberListing extends Component
     {
         try {
             $this->authorize('membership.export_data');
-        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+        } catch (AuthorizationException $e) {
             abort(403);
         }
 
@@ -193,7 +194,7 @@ class MemberListing extends Component
     {
         try {
             $this->authorize('membership.manage_members');
-        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+        } catch (AuthorizationException $e) {
             abort(403);
         }
 

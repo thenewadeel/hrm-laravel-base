@@ -4,9 +4,10 @@ namespace Tests\Unit\Accounting;
 
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\LedgerEntry;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 use Tests\Traits\SetupOrganization;
 
 class ChartOfAccountTest extends TestCase
@@ -18,6 +19,7 @@ class ChartOfAccountTest extends TestCase
         parent::setUp();
         $this->setupOrganization();
     }
+
     #[Test]
     public function it_has_a_code_name_and_type()
     {
@@ -25,7 +27,7 @@ class ChartOfAccountTest extends TestCase
         $account = ChartOfAccount::factory()->create([
             'code' => '1010',
             'name' => 'Cash on Hand',
-            'type' => 'asset'
+            'type' => 'asset',
         ]);
 
         // Assert
@@ -49,7 +51,7 @@ class ChartOfAccountTest extends TestCase
         // Assert
         $this->assertCount(2, $assetAccounts);
         $this->assertCount(1, $expenseAccounts);
-        $this->assertTrue($assetAccounts->every(fn($account) => $account->type === 'asset'));
+        $this->assertTrue($assetAccounts->every(fn ($account) => $account->type === 'asset'));
     }
 
     #[Test]
@@ -59,7 +61,7 @@ class ChartOfAccountTest extends TestCase
         ChartOfAccount::factory()->create(['code' => '1010']);
 
         // Act & Assert
-        $this->expectException(\Illuminate\Database\QueryException::class);
+        $this->expectException(QueryException::class);
         ChartOfAccount::factory()->create(['code' => '1010']);
     }
 
@@ -72,19 +74,19 @@ class ChartOfAccountTest extends TestCase
         LedgerEntry::factory()->create([
             'chart_of_account_id' => $account->id,
             'type' => 'debit',
-            'amount' => 1000.00
+            'amount' => 1000.00,
         ]);
 
         LedgerEntry::factory()->create([
             'chart_of_account_id' => $account->id,
             'type' => 'credit',
-            'amount' => 300.00
+            'amount' => 300.00,
         ]);
 
         LedgerEntry::factory()->create([
             'chart_of_account_id' => $account->id,
             'type' => 'debit',
-            'amount' => 200.00
+            'amount' => 200.00,
         ]);
 
         // For asset accounts: balance = debits - credits

@@ -2,13 +2,14 @@
 
 namespace Database\Factories\Accounting;
 
+use App\Models\Accounting\ClosingEntry;
 use App\Models\Accounting\FinancialYear;
 use App\Models\Accounting\JournalEntry;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Accounting\ClosingEntry>
+ * @extends Factory<ClosingEntry>
  */
 class ClosingEntryFactory extends Factory
 {

@@ -1,4 +1,5 @@
 <?php
+
 // database/seeders/CsvOrganizationsSeeder.php
 
 namespace Database\Seeders;
@@ -13,8 +14,9 @@ class CsvOrganizationsSeeder extends Seeder
     {
         $csvFile = database_path('seeders/seedData/organizations.csv');
 
-        if (!File::exists($csvFile)) {
+        if (! File::exists($csvFile)) {
             $this->command->error("CSV file not found: {$csvFile}");
+
             return;
         }
 
@@ -29,7 +31,7 @@ class CsvOrganizationsSeeder extends Seeder
                 ['name' => $name],
                 [
                     'description' => $description,
-                    'is_active' => true
+                    'is_active' => true,
                 ]
             );
 

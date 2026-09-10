@@ -9,22 +9,27 @@ use App\Models\OrganizationUnit;
 use App\Models\User;
 use App\Roles\InventoryRoles;
 use App\Roles\OrganizationRoles;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 trait SetupTenancy
 {
-    use SetupOrganization, SetupInventory;
+    use SetupInventory, SetupOrganization;
+
     /**
      * Define the array of models that should be tested for tenancy scope.
      * Each model MUST use the BelongsToOrganization trait and have a factory.
      *
-     * @var array<class-string<\Illuminate\Database\Eloquent\Model>>
+     * @var array<class-string<Model>>
      */
     abstract protected function tenantModels(): array;
 
     protected Organization $orgA;
+
     protected Organization $orgB;
+
     protected User $userA;
+
     protected User $userB;
 
     /**
@@ -48,8 +53,8 @@ trait SetupTenancy
         $this->storesA = Store::factory(3)->create([
             'name' => 'test store',
             'organization_unit_id' => OrganizationUnit::factory()->create([
-                'organization_id' => $this->orgA->id
-            ])->id
+                'organization_id' => $this->orgA->id,
+            ])->id,
         ]);
         $this->userA->givePermissionTo(InventoryRoles::getPermissionsForRole(InventoryRoles::INVENTORY_ADMIN), $this->orgA);
 
@@ -66,8 +71,8 @@ trait SetupTenancy
         $this->storesB = Store::factory(2)->create([
             'name' => 'test store',
             'organization_unit_id' => OrganizationUnit::factory()->create([
-                'organization_id' => $this->orgB->id
-            ])->id
+                'organization_id' => $this->orgB->id,
+            ])->id,
         ]);
         Auth::logout();
         $this->populateTenantData();

@@ -3,6 +3,7 @@
 use App\Models\Accounting\Voucher;
 use App\Models\Organization;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
@@ -75,7 +76,7 @@ test('voucher casts date properly', function () {
     $date = now();
     $voucher = Voucher::factory()->create(['date' => $date]);
 
-    expect($voucher->date)->toBeInstanceOf(\Carbon\Carbon::class);
+    expect($voucher->date)->toBeInstanceOf(Carbon::class);
     expect($voucher->date->format('Y-m-d'))->toBe($date->format('Y-m-d'));
 });
 

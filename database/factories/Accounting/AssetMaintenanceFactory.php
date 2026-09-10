@@ -2,10 +2,11 @@
 
 namespace Database\Factories\Accounting;
 
+use App\Models\Accounting\AssetMaintenance;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Accounting\AssetMaintenance>
+ * @extends Factory<AssetMaintenance>
  */
 class AssetMaintenanceFactory extends Factory
 {

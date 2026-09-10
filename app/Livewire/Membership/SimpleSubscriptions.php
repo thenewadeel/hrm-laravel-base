@@ -7,6 +7,7 @@ use App\Models\Membership\MemberSubscription;
 use App\Models\Membership\SubscriptionPlan;
 use App\Permissions\MembershipPermissions;
 use App\Services\Membership\SubscriptionService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -575,7 +576,7 @@ class SimpleSubscriptions extends Component
 
     private function createDemoSubscription(Member $member, $plan): MemberSubscription
     {
-        $startDate = $this->start_date ? \Carbon\Carbon::parse($this->start_date) : now();
+        $startDate = $this->start_date ? Carbon::parse($this->start_date) : now();
         $endDate = $this->calculateEndDate($startDate, $plan->billing_frequency);
 
         // Create a temporary plan record for demo purposes
@@ -608,7 +609,7 @@ class SimpleSubscriptions extends Component
         return $subscription;
     }
 
-    private function calculateEndDate(\Carbon\Carbon $startDate, string $billingFrequency): \Carbon\Carbon
+    private function calculateEndDate(Carbon $startDate, string $billingFrequency): Carbon
     {
         return match ($billingFrequency) {
             'monthly' => $startDate->copy()->addMonth(),

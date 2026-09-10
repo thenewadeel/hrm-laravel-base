@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Accounting\CashPayment;
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\JournalEntry;
+use App\Models\Accounting\LedgerEntry;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -46,7 +47,7 @@ class CashPaymentService
             ]);
 
             // Post ledger entries directly for cash payments
-            \App\Models\Accounting\LedgerEntry::create([
+            LedgerEntry::create([
                 'entry_date' => $data['date'],
                 'chart_of_account_id' => $debitAccount->id,
                 'type' => 'debit',
@@ -56,7 +57,7 @@ class CashPaymentService
                 'transactionable_id' => $payment->id,
             ]);
 
-            \App\Models\Accounting\LedgerEntry::create([
+            LedgerEntry::create([
                 'entry_date' => $data['date'],
                 'chart_of_account_id' => $cashAccount->id,
                 'type' => 'credit',

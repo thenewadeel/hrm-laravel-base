@@ -3,6 +3,7 @@
 use App\Models\Accounting\ChartOfAccount;
 use App\Models\Accounting\FeeDistributionRule;
 use App\Models\Accounting\FeeDistributionRuleItem;
+use App\Models\Organization;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
@@ -41,7 +42,7 @@ test('fee distribution rule item belongs to rule', function () {
 
 // RED: Test that item belongs to chart of account
 test('fee distribution rule item belongs to chart of account', function () {
-    $organization = \App\Models\Organization::factory()->create();
+    $organization = Organization::factory()->create();
     $account = ChartOfAccount::factory()->create(['organization_id' => $organization->id]);
     $item = FeeDistributionRuleItem::factory()->create(['chart_of_account_id' => $account->id]);
 
@@ -165,7 +166,7 @@ test('priority is cast to integer', function () {
 
 // RED: Test organization scoping through rule
 test('item inherits organization from rule', function () {
-    $organization = \App\Models\Organization::factory()->create();
+    $organization = Organization::factory()->create();
     $rule = FeeDistributionRule::factory()->create(['organization_id' => $organization->id]);
     $item = FeeDistributionRuleItem::factory()->create(['fee_distribution_rule_id' => $rule->id]);
 

@@ -9,7 +9,9 @@ use Illuminate\View\Component;
 class UiKeyValueBadge extends Component
 {
     public string $label;
+
     public string $value;
+
     public string $color;
 
     public function __construct(string $label, string $value, string $color = 'gray')

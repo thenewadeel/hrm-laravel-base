@@ -7,13 +7,21 @@ use App\Permissions\AccountingPermissions;
 class AccountingRoles
 {
     const SUPER_ADMIN = 'admin';
+
     const ACCOUNTING_MANAGER = 'accounting_manager';
+
     const SENIOR_ACCOUNTANT = 'senior_accountant';
+
     const ACCOUNTANT = 'accountant';
+
     const ACCOUNTS_PAYABLE_CLERK = 'ap_clerk';
+
     const ACCOUNTS_RECEIVABLE_CLERK = 'ar_clerk';
+
     const BUDGET_ANALYST = 'budget_analyst';
+
     const FINANCIAL_APPROVER = 'financial_approver';
+
     const AUDITOR = 'auditor';
 
     public static function permissions(): array

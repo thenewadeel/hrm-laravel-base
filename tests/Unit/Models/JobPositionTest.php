@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Employee;
 use App\Models\JobPosition;
 use App\Models\OrganizationUnit;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -29,7 +30,7 @@ it('belongs to an organization unit', function () {
 
 it('has many employees', function () {
     $position = JobPosition::factory()->create();
-    $employees = \App\Models\Employee::factory()->count(3)->create([
+    $employees = Employee::factory()->count(3)->create([
         'position_id' => $position->id,
     ]);
 

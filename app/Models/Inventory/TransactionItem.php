@@ -2,6 +2,7 @@
 
 namespace App\Models\Inventory;
 
+use Database\Factories\Inventory\TransactionItemFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -93,7 +94,7 @@ class TransactionItem extends Model
 
     protected static function newFactory()
     {
-        return \Database\Factories\Inventory\TransactionItemFactory::new();
+        return TransactionItemFactory::new();
     }
 
     /**
