@@ -8,12 +8,17 @@
 
 ## 0. Prerequisites
 
-- Server running MySQL 8.0, PHP 8.4+, PHP-FPM (Unix socket or TCP pool), Nginx, Node 20+.
+- Server running MySQL/MariaDB 8, PHP 8.4+, PHP-FPM (Unix socket or TCP pool), Nginx, Node 20+.
 - `scripts/deploy-bluegreen.sh` present and executable; `scripts/hrm-queue-worker.service`
   installed and enabled.
 - Git access to the repository (shallow clone capability) and deploy key configured.
 - Production secrets in `/opt/hrm/shared/.env` (copied from `.env.production.example`,
   generated via `php artisan key:generate --force`). **Never** commit `.env.production`.
+
+> **RHEL-family user note (AlmaLinux/Rocky/CentOS).** This runbook assumes the php-fpm user
+> is `nginx` (`APP_USER=nginx`, `User=nginx` in the unit, cron owner `nginx`). On Debian/Ubuntu
+> substitute `www-data` everywhere. See `scripts/hrm-queue-worker.service` and
+> `docs/deployment/almalinux-first-time-setup.md`.
 
 ---
 
@@ -29,8 +34,10 @@ sudo systemctl status hrm-queue-worker   # verify running
 Scheduler (one per server): add a cron entry to run the live release's scheduler.
 
 ```cron
-* * * * * www-data cd /opt/hrm/current && php artisan schedule:run >> /dev/null 2>&1
+* * * * * nginx cd /opt/hrm/current && php artisan schedule:run >> /dev/null 2>&1
 ```
+
+> Scheduler cron owner must match the php-fpm user (`nginx` on AlmaLinux, `www-data` on Debian).
 
 ---
 
@@ -48,6 +55,16 @@ Expected outcomes:
 - `healthcheck` prints `Healthcheck PASSED` — otherwise no swap occurs (script exits non-zero).
 - `swap` is a single `ln -sfn` — sessions are NOT terminated, no 500s during the flip.
 - `smoke` verifies `/up`, `/login`, `/setup`, and the Vite manifest.
+
+Health probe (single-box): there is no dedicated green port (`GREEN_HEALTH_URL` defaults to
+`8081`). Point it at the real site so the green app's `/up`, `artisan up --check`, and `artisan
+about` still gate the swap:
+
+```bash
+GREEN_HEALTH_URL=https://app.yourdomain.com \
+APP_USER=nginx \
+scripts/deploy-bluegreen.sh healthcheck
+```
 
 Observation window: keep the previous release (target of `previous_release`) untouched for at
 least N minutes (e.g. 30). Roll back immediately if monitoring alerts.
@@ -119,14 +136,13 @@ Checks: `/up`, `/login`, `/setup` (200s), Vite manifest presence, active release
 
 | # | Check | Result |
 |---|-------|--------|
-| 1 | `composer test` green (PHPUnit on MySQL, memory=1G) | ☐ |
-| 2 | `vendor/bin/pint --test` passes | ☐ |
-| 3 | `npm run build` produces hashed manifest; `@vite` pages render post-swap | ☐ |
-| 4 | Blue/Green swap exercised 2× with no logged-out sessions and no 500s during flip | ☐ |
-| 5 | Rollback drill: forced failure → flipped back in <60s, data intact | ☐ |
-| 6 | Migrations forward-only; column-alter migrations re-declare full attributes | ☐ |
-| 7 | Two-tenant isolation vertical slice passes (see `MvpVerticalSliceIsolationTest`) | ☐ |
-| 8 | Health probe reachable from monitoring; queue worker supervised; `.env.production` secret-managed | ☐ |
-| 9 | `deploy-production-legacy.sh` retained as emergency escape hatch | ☐ |
+| 1 | CI gate green: `pint --test` + `npm run build` (deploy-blocking) | ☐ |
+| 2 | Full unit/feature suite green on CI (`php artisan test` — currently known-red, ~104 pre-existing failures, being triaged) | ☐ |
+| 3 | Blue/Green swap exercised 2× with no logged-out sessions and no 500s during flip | ☐ |
+| 4 | Rollback drill: forced failure → flipped back in <60s, data intact | ☐ |
+| 5 | Migrations forward-only; column-alter migrations re-declare full attributes | ☐ |
+| 6 | Two-tenant isolation vertical slice passes (see `MvpVerticalSliceIsolationTest`) | ☐ |
+| 7 | Health probe reachable from monitoring; queue worker supervised; `.env.production` secret-managed | ☐ |
+| 8 | `deploy-production-legacy.sh` retained as emergency escape hatch | ☐ |
 
 **Go:** all boxes checked. **No-Go:** any box unchecked — re-scope and re-run the affected check before release.

@@ -20,7 +20,7 @@
         @endif
         
         @if($removable)
-            <x-new-badge 
+            <x-badge
                 :color="$color"
                 :variant="$variant"
                 :size="$size"
@@ -29,26 +29,26 @@
                 x-on:dismiss="$wire.call('removeTag', '{{ $tag['value'] ?? $tag['label'] }}')"
             >
                 {{ $tag['label'] }}
-            </x-new-badge>
+            </x-badge>
         @else
-            <x-new-badge 
+            <x-badge
                 :color="$color"
                 :variant="$variant"
                 :size="$size"
                 wire:key="tag-{{ $tag['value'] ?? $index }}"
             >
                 {{ $tag['label'] }}
-            </x-new-badge>
+            </x-badge>
         @endif
     @endforeach
     
     @if($limit && $remainingCount > 0 && $showMore)
-        <x-new-badge 
+        <x-badge
             color="gray"
             variant="subtle"
             :size="$size"
         >
             +{{ $remainingCount }} more
-        </x-new-badge>
+        </x-badge>
     @endif
 </div>

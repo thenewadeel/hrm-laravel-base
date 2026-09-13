@@ -12,17 +12,22 @@
 # After a blue/green swap, run `sudo systemctl restart hrm-queue-worker`
 # to pick up the new code. The deploy-bluegreen.sh swap command does this
 # automatically via `artisan queue:restart`.
+#
+# USER: this unit targets RHEL-family (AlmaLinux/Rocky/CentOS) where the
+# php-fpm worker user is `nginx`. On Debian/Ubuntu change User/Group to
+# `www-data` — and keep it consistent with APP_USER in deploy-bluegreen.sh,
+# the php-fpm pool, and the scheduler cron.
 # =============================================================================
 
 [Unit]
 Description=HRM Laravel queue worker
-After=network.target mysql.service redis.service
-Wants=mysql.service
+After=network.target mariadb.service redis.service
+Wants=mariadb.service
 
 [Service]
 Type=simple
-User=www-data
-Group=www-data
+User=nginx
+Group=nginx
 WorkingDirectory=/opt/hrm/current
 
 EnvironmentFile=-/opt/hrm/current/.env
