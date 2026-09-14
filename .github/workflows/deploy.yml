@@ -45,7 +45,7 @@ jobs:
               git clone -b main https://github.com/${{ github.repository }}.git "$SCRATCH"
             fi
             sudo -u "$APP_USER" git -C "$SCRATCH" fetch --depth 1 origin main
-            sudo -u "$APP_USER" git -C "$SCRATCH" reset --hard origin/main
+            sudo -u "$APP_USER" git -C "$SCRATCH" checkout -B main origin/main
 
             cd "$SCRATCH"
 
@@ -72,4 +72,4 @@ jobs:
             sudo systemctl is-active hrm-queue-worker
 
             # ---- final health probe ----
-            APP_URL=$APP_URL ../deploy/scripts/health-check-probe.sh || exit 1
+            APP_URL=$APP_URL ./scripts/health-check-probe.sh || exit 1

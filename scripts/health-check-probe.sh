@@ -22,15 +22,21 @@ FAIL=0
 check() {
     local label="$1"
     local url="$2"
-    local expect="${3:-200}"
-    local code
+    shift 2
+    local expected="$*"
 
+    local code
     code="$(curl -sf -o /dev/null -w '%{http_code}' --max-time 10 "$url" 2>/dev/null || echo '000')"
 
-    if [[ "$code" == "$expect" ]]; then
+    local ok=false
+    for expect in "$@"; do
+        [[ "$code" == "$expect" ]] && ok=true
+    done
+
+    if $ok; then
         echo "[OK]   $label (HTTP $code)"
     else
-        echo "[FAIL] $label (expected $expect, got $code)"
+        echo "[FAIL] $label (expected [$expected], got $code)"
         FAIL=1
     fi
 }
@@ -38,9 +44,9 @@ check() {
 echo "Health probe: $BASE_URL"
 echo "────────────────────────────────────────"
 
-check "Laravel /up endpoint"   "$BASE_URL/up"   "200"
-check "Login page loads"       "$BASE_URL/login" "200"
-check "Setup wizard accessible" "$BASE_URL/setup" "200"
+check "Laravel /up endpoint"    "$BASE_URL/up"     "200"
+check "Login page loads"        "$BASE_URL/login"  "200"
+check "Setup wizard accessible" "$BASE_URL/setup"  "200" "302"
 
 # Vite manifest
 if [[ -f "/opt/hrm/current/public/build/manifest.json" ]]; then

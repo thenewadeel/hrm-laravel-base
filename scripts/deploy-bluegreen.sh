@@ -29,8 +29,8 @@ set -euo pipefail
 : "${SHARED_DIR:=$BASE_DIR/shared}"
 : "${RELEASES_DIR:=$BASE_DIR/releases}"
 : "${CURRENT_LINK:=$BASE_DIR/current}"
-: "${GREEN_HEALTH_URL:=http://127.0.0.1:8081}"
-: "${APP_USER:=www-data}"
+: "${GREEN_HEALTH_URL:=}"
+: "${APP_USER:=nginx}"
 : "${PHP_BIN:=php}"
 : "${KEEP_RELEASES:=5}"
 
@@ -99,6 +99,13 @@ EOF
     log "Symlinking shared resources"
     ln -sfn "$SHARED_DIR/.env"          "$release/.env"
     ln -sfn "$SHARED_DIR/storage"       "$release/storage"
+
+    # Persist the freshly-built Vite assets into the shared build dir, then
+    # symlink it so every release serves the same hashed manifest + assets.
+    # (Without the copy, a first deploy would delete the built assets and leave
+    #  only an empty shared dir → missing manifest.json / no CSS or JS.)
+    mkdir -p "$SHARED_DIR/public/build"
+    cp -a "$release/public/build/." "$SHARED_DIR/public/build/"
     rm -rf "$release/public/build"
     ln -sfn "$SHARED_DIR/public/build"  "$release/public/build"
 
@@ -146,21 +153,26 @@ healthcheck() {
 
     local pass=true
 
-    # 1. Check artisan up
-    if (cd "$green_release" && $PHP_BIN artisan up --check) > /dev/null 2>&1; then
-        ok "artisan up --check: passed"
+    # 1. Maintenance-mode check (Laravel has no `artisan up --check`; the flag
+    #    is the presence of storage/framework/down)
+    if [[ -f "$green_release/storage/framework/down" ]]; then
+        warn "Maintenance mode is ACTIVE (storage/framework/down) — clearing"
+        if ! (cd "$green_release" && $PHP_BIN artisan up) > /dev/null 2>&1; then
+            warn "Failed to disable maintenance mode"
+            pass=false
+        fi
     else
-        warn "artisan up --check: FAILED"
-        pass=false
+        ok "Maintenance mode: not active"
     fi
 
-    # 2. Check PHP-FPM / Nginx health endpoint on green port
-    local http_code
-    http_code="$(curl -sf -o /dev/null -w '%{http_code}' "$GREEN_HEALTH_URL/up" 2>/dev/null || echo '000')"
+    # 2. Check PHP-FPM / Nginx health endpoint on the green URL
+    local green_url http_code
+    green_url="$(resolve_green_url "$green_release")"
+    http_code="$(curl -sf -o /dev/null -w '%{http_code}' "$green_url/up" 2>/dev/null || echo '000')"
     if [[ "$http_code" == "200" ]]; then
-        ok "Green health probe ($GREEN_HEALTH_URL/up): HTTP $http_code"
+        ok "Green health probe ($green_url/up): HTTP $http_code"
     else
-        warn "Green health probe ($GREEN_HEALTH_URL/up): HTTP $http_code — FAIL"
+        warn "Green health probe ($green_url/up): HTTP $http_code — FAIL"
         pass=false
     fi
 
@@ -213,7 +225,8 @@ swap() {
 smoke() {
     log "Running post-swap smoke tests against $CURRENT_LINK"
 
-    local base_url="${APP_URL:-http://localhost}"
+    local base_url
+    base_url="$(resolve_app_url "$CURRENT_LINK/.env")"
     local pass=true
 
     # 1. /up health endpoint
@@ -287,6 +300,36 @@ find_latest_release() {
     ls -dt "$RELEASES_DIR"/*/  2>/dev/null | head -1 | sed 's:/$::'
 }
 
+# Resolve the site base URL for smoke tests: $APP_URL env → <release>/.env
+# APP_URL → http://localhost. This lets `sudo -u nginx ./deploy-bluegreen.sh
+# smoke` work without exporting APP_URL on the box.
+resolve_app_url() {
+    [[ -n "${APP_URL:-}" ]] && { printf '%s' "$APP_URL"; return; }
+    local env_file="${1:-$CURRENT_LINK/.env}"
+    if [[ -f "$env_file" ]]; then
+        local url
+        url="$(grep -E '^APP_URL=' "$env_file" 2>/dev/null | head -1 | cut -d= -f2- | tr -d '"\' || true)"
+        [[ -n "${url:-}" ]] && { printf '%s' "$url"; return; }
+    fi
+    printf '%s' "http://localhost"
+}
+
+# Resolve the URL to probe for green readiness: explicit $GREEN_HEALTH_URL →
+# the app's own URL (env or .env) → the 8081 fallback.
+resolve_green_url() {
+    local url
+    if [[ -n "${GREEN_HEALTH_URL:-}" ]]; then
+        printf '%s' "$GREEN_HEALTH_URL"
+        return
+    fi
+    url="$(resolve_app_url "${1:-$CURRENT_LINK/.env}")"
+    if [[ -n "$url" && "$url" != "http://localhost" ]]; then
+        printf '%s' "$url"
+    else
+        printf '%s' "http://127.0.0.1:8081"
+    fi
+}
+
 gc_old_releases() {
     local count
     count="$(ls -d "$RELEASES_DIR"/*/ 2>/dev/null | wc -l)"
@@ -320,8 +363,9 @@ Commands:
 
 Environment variables:
   BASE_DIR            Root deploy dir               (default: /opt/hrm)
-  GREEN_HEALTH_URL    Health probe URL for green    (default: http://127.0.0.1:8081)
-  APP_USER            File ownership                (default: www-data)
+  APP_URL             Live site URL for smoke tests (default: from release/.env, else http://localhost)
+  GREEN_HEALTH_URL    Health probe URL for green    (default: APP_URL/up, else http://127.0.0.1:8081)
+  APP_USER            File ownership                (default: nginx)
   KEEP_RELEASES       Releases to retain            (default: 5)
 
 Example deploy sequence:

@@ -33,10 +33,11 @@ echo "Deployment started at: $(date)"
 echo "Log file: $LOG_FILE"
 
 # Configuration
-APP_DIR="/var/www/hrm-laravel-base"
-BACKUP_DIR="/var/backups/hrm"
+APP_DIR="${APP_DIR:-/opt/hrm/current}"
+BACKUP_DIR="${BACKUP_DIR:-/opt/backups/hrm}"
 BRANCH=${1:-main}
 ENVIRONMENT=${2:-production}
+APP_USER="${APP_USER:-nginx}"
 
 # Function to print status
 print_status() {
@@ -124,9 +125,9 @@ echo -e "\n${BLUE}📦 Installing Dependencies${NC}"
 print_status "Installing PHP dependencies..."
 composer install --no-dev --optimize-autoloader --no-interaction
 
-# NPM dependencies
+# NPM dependencies (dev deps are required for the Vite build)
 print_status "Installing Node.js dependencies..."
-npm ci --production
+npm ci
 
 # Environment setup
 echo -e "\n${BLUE}⚙️  Environment Setup${NC}"
@@ -200,7 +201,7 @@ php artisan storage:link --force
 
 # Set proper permissions
 chmod -R 775 storage bootstrap/cache
-chown -R www-data:www-data storage bootstrap/cache
+chown -R "$APP_USER:$APP_USER" storage bootstrap/cache
 
 print_status "Storage permissions configured"
 
@@ -218,17 +219,17 @@ fi
 # Health checks
 echo -e "\n${BLUE}🏥 Health Checks${NC}"
 
-# Check application health
+# Check application health (maintenance mode is a flag file, not `up --check`)
 print_status "Checking application health..."
-if php artisan up --check > /dev/null 2>&1; then
+if [ ! -f "storage/framework/down" ]; then
     print_status "Application is not in maintenance mode"
 else
     print_warning "Application is in maintenance mode"
 fi
 
-# Test database connection
+# Test database connection (uses the connection configured in .env)
 print_status "Testing database connection..."
-php artisan db:show --database=hrm_production > /dev/null 2>&1
+php artisan db:show > /dev/null 2>&1
 print_status "Database connection successful"
 
 # Test cache

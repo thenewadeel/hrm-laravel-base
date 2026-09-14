@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('inventory_heads', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description')->nullable()->default('NULL');
-            $table->string('image')->nullable()->default('NULL');
+            $table->text('description')->nullable();
+            $table->string('image')->nullable();
             // $table->foreignId('store_id')->constrained('inventory_stores')->nullOnDelete();
             $table->softDeletes();
             $table->timestamps();
