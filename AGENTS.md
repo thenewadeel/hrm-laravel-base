@@ -15,6 +15,42 @@ All Software Requirements Specification (SRS) requirements have been successfull
 -   **Multi-Tenant Architecture**: Complete data isolation
 -   **Advanced Reporting**: Comprehensive analytics and insights
 
+## Branding & Naming (Wittness Tech)
+
+### Spelling (critical)
+
+-   Brand name is **Wittness** — always **two T's and two S's** (W-I-T-T-N-E-S-S). Never "Witness", "Witnes", or "Wittnes".
+-   Full brand: **Wittness Tech** (lockups "WittnessTech" / "wittnesstech" in URLs and filenames).
+-   All new UI copy, print materials, docs, and marketing content must spell the brand this way; treat any other spelling as a bug.
+
+### Brand colors
+
+-   Logo/mark accent green: `#0bf700` (SVG artwork)
+-   Print/brand deep green: `#1e3f20` (`--brand`), `#0f1f10` (`--brand-dark`), `#4c784e` (`--brand-light`), `#a3b899` (`--brand-muted`)
+
+### Logo variants & where to use them
+
+| Variant | Looks | Use on |
+|---|---|---|
+| `wittness-dark.*` | dark/black logo | light backgrounds (light-mode web, white print heads) |
+| `wittness-light.*` | white/light logo | dark backgrounds (dark-mode web, dark-green print bars `#1e3f20`) |
+| `wittness-sm-{dark,light}.*` | icon-only mark (no text) | small nav brand marks; safe as inline SVG |
+| `wittness-light-square.png`, `a.png` | square icon mark | icon-only placements |
+
+-   The full-name logo text uses custom fonts (Cyborg Punk, NEXTSTEP) that **do not render in browsers** — always use the **PNG** versions (`wittness-{dark,light}.png`) when the brand text must display in web or print. The icon-only `wittness-sm-*.svg` files have no font/text dependencies and are safe to use as SVGs.
+-   In views, pair the full-name PNGs with theme switching (Tailwind `darkMode: 'class'`): `wittness-dark.png` with `dark:hidden`, `wittness-light.png` with default `hidden` + `dark:block`.
+
+### Asset locations
+
+-   **Source artwork**: `docs/logos/wittness/`
+-   **Print-ready copies**: `docs/marketing/logos/wittness/` (`wittness-light.png`, `wittness-dark.png`) — print HTML in `docs/marketing/print/` references them via `../logos/wittness/<file>`
+-   **Web-served assets**: `public/images/logos/wittness/` — reference via `asset('images/logos/wittness/<file>')`
+-   Brand components already wired: `components/authentication-card-logo.blade.php`, `components/application-mark.blade.php`, `views/welcome.blade.php` (header & footer). New guest-facing screens must reuse these components or the same dark/light pattern.
+
+### Reference-only files (never commit)
+
+These are local developer references and must **not** be committed (they are gitignored): `docs/testResults*`, `docs/list of views.txt`, `laravel_components_llm.json`. Among the `docs/test*` snapshots, only `docs/testSummary.txt` is tracked and committed.
+
 ## Build/Lint/Test Commands
 
 -   **Run all tests**: `composer test` (outputs to docs/testResults.txt)
@@ -29,7 +65,7 @@ All Software Requirements Specification (SRS) requirements have been successfull
 -   **Development server**: `composer run dev` (runs Laravel, queue, logs, and Vite concurrently)
 -   **Database migrations**: `php artisan migrate`
 -   **Seed demo data**: `php artisan db:seed --class=DemoDataSeeder`
--   **Test snapshot & summary**: `composer run dev-cp` (captures test results to docs/testResults.txt & docs/testSummary.txt)
+-   **Test snapshot & summary**: `composer run dev-cp` (captures test results to docs/testResults.txt & docs/testSummary.txt; only `docs/testSummary.txt` is committed — `docs/testResults.txt` is reference-only)
 -   **Full development cycle with Dusk**: `composer run dev-cp-complete` (includes unit tests AND Dusk browser tests)
 
 ## Architecture Overview
