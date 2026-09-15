@@ -46,30 +46,13 @@
                         class="absolute inset-y-0 right-0 flex items-center px-3 text-muted transition-colors hover:text-primary focus:outline-none"
                         x-on:click="showPassword = !showPassword"
                         x-bind:aria-label="showPassword ? 'Hide password' : 'Show password'">
-                        <svg class="size-4" x-show="!showPassword" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            aria-hidden="true">
-                            <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
-                            <circle cx="12" cy="12" r="3" />
-                        </svg>
-                        <svg class="size-4" x-show="showPassword" x-cloak viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            aria-hidden="true">
-                            <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
-                            <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c6.5 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
-                            <path d="M6.61 6.61A13.5 13.5 0 0 0 2 12s3.5 7 10 7a9.74 9.74 0 0 0 5.39-1.61" />
-                            <line x1="2" y1="2" x2="22" y2="22" />
-                        </svg>
+                        <x-heroicon-o-eye class="size-4" x-show="!showPassword" />
+                        <x-heroicon-o-eye-slash class="size-4" x-show="showPassword" />
                     </button>
                 </div>
 
                 <p class="mt-1.5 text-xs font-medium text-muted" x-bind:class="passwordMet ? 'text-accent' : ''">
-                    <svg x-show="passwordMet" x-cloak class="mr-1 inline size-3.5 text-accent" viewBox="0 0 20 20"
-                        fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd"
-                            d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
-                            clip-rule="evenodd" />
-                    </svg>
+                    <x-heroicon-m-check-circle x-show="passwordMet" class="mr-1 inline size-3.5 text-accent" />
                     {{ __('Use at least 8 characters') }}
                 </p>
 
@@ -88,20 +71,8 @@
                         class="absolute inset-y-0 right-0 flex items-center px-3 text-muted transition-colors hover:text-primary focus:outline-none"
                         x-on:click="showConfirmation = !showConfirmation"
                         x-bind:aria-label="showConfirmation ? 'Hide password' : 'Show password'">
-                        <svg class="size-4" x-show="!showConfirmation" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            aria-hidden="true">
-                            <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
-                            <circle cx="12" cy="12" r="3" />
-                        </svg>
-                        <svg class="size-4" x-show="showConfirmation" x-cloak viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            aria-hidden="true">
-                            <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
-                            <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c6.5 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
-                            <path d="M6.61 6.61A13.5 13.5 0 0 0 2 12s3.5 7 10 7a9.74 9.74 0 0 0 5.39-1.61" />
-                            <line x1="2" y1="2" x2="22" y2="22" />
-                        </svg>
+                        <x-heroicon-o-eye class="size-4" x-show="!showConfirmation" />
+                        <x-heroicon-o-eye-slash class="size-4" x-show="showConfirmation" />
                     </button>
                 </div>
 
