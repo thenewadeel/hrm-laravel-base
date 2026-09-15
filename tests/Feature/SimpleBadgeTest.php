@@ -16,6 +16,6 @@ it('renders status badge component', function () {
     $view = $this->blade('<x-badge status="active">Active</x-badge>');
 
     $view->assertSee('Active');
-    $view->assertSee('bg-green-100');
-    $view->assertSee('text-green-800');
+    $view->assertSee('bg-success/15');
+    $view->assertSee('text-success');
 });

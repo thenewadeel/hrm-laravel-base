@@ -16,10 +16,10 @@ it('renders badge with custom color and size', function () {
     $view = $this->blade('<x-badge color="green" size="lg">Green Badge</x-badge>');
 
     $view->assertSee('Green Badge');
-    $view->assertSee('bg-green-100');
-    $view->assertSee('text-green-800');
+    $view->assertSee('bg-success/15');
+    $view->assertSee('text-success');
     $view->assertSee('px-3');
-    $view->assertSee('py-1');
+    $view->assertSee('py-1.5');
 });
 
 it('renders badge with icon', function () {
@@ -32,16 +32,16 @@ it('renders status badge correctly', function () {
     $view = $this->blade('<x-badge status="active">Active</x-badge>');
 
     $view->assertSee('Active');
-    $view->assertSee('bg-green-100');
-    $view->assertSee('text-green-800');
+    $view->assertSee('bg-success/15');
+    $view->assertSee('text-success');
 });
 
 it('renders category badge correctly', function () {
     $view = $this->blade('<x-badge color="blue">Sales</x-badge>');
 
     $view->assertSee('Sales');
-    $view->assertSee('bg-blue-100');
-    $view->assertSee('text-blue-800');
+    $view->assertSee('bg-info/15');
+    $view->assertSee('text-info');
 });
 
 it('renders count badge correctly', function () {
@@ -67,7 +67,7 @@ it('renders key-value badge correctly', function () {
 
     $view->assertSee('Status:');
     $view->assertSee('Active');
-    $view->assertSee('bg-green-100');
+    $view->assertSee('bg-success/15');
 });
 
 it('renders progress badge correctly', function () {
@@ -80,7 +80,7 @@ it('renders progress badge correctly', function () {
 
     $view->assertSee('Progress:');
     $view->assertSee('75%');
-    $view->assertSee('bg-blue-100');
+    $view->assertSee('bg-info/15');
 });
 
 it('renders tag badges correctly', function () {
@@ -100,24 +100,24 @@ it('renders role badge correctly', function () {
     $view = $this->blade('<x-badge color="purple" size="sm">Admin</x-badge>');
 
     $view->assertSee('Admin');
-    $view->assertSee('bg-purple-100');
-    $view->assertSee('text-purple-800');
+    $view->assertSee('bg-primary/15');
+    $view->assertSee('text-primary');
 });
 
 it('renders priority badge correctly', function () {
     $view = $this->blade('<x-badge color="orange" size="sm">High</x-badge>');
 
     $view->assertSee('High');
-    $view->assertSee('bg-orange-100');
-    $view->assertSee('text-orange-800');
+    $view->assertSee('bg-warning/15');
+    $view->assertSee('text-warning');
 });
 
 it('renders type badge correctly', function () {
     $view = $this->blade('<x-badge color="indigo" size="sm">Full-time</x-badge>');
 
     $view->assertSee('Full-time');
-    $view->assertSee('bg-indigo-100');
-    $view->assertSee('text-indigo-800');
+    $view->assertSee('bg-primary/15');
+    $view->assertSee('text-primary');
 });
 
 it('handles dismissible badge', function () {
@@ -142,16 +142,16 @@ it('handles badge variants correctly', function () {
     $outline = $this->blade('<x-badge variant="outline" color="blue">Outline</x-badge>');
     $subtle = $this->blade('<x-badge variant="subtle" color="blue">Subtle</x-badge>');
 
-    $solid->assertSee('bg-blue-100');
-    $outline->assertSee('border-blue-300');
-    $subtle->assertSee('bg-blue-50');
+    $solid->assertSee('bg-info/15');
+    $outline->assertSee('border-info/40');
+    $subtle->assertSee('bg-info/10');
 });
 
 it('handles dark mode classes', function () {
     $view = $this->blade('<x-badge color="green">Dark Mode</x-badge>');
 
-    $view->assertSee('dark:bg-green-900');
-    $view->assertSee('dark:text-green-200');
+    $view->assertSee('bg-success/15');
+    $view->assertSee('text-success');
 });
 
 it('limits tag badges correctly', function () {
@@ -177,14 +177,14 @@ it('handles unknown status gracefully', function () {
     $view = $this->blade('<x-badge status="unknown_status">Unknown_status</x-badge>');
 
     $view->assertSee('Unknown_status');
-    $view->assertSee('bg-gray-100');
+    $view->assertSee('bg-bg-tertiary');
 });
 
 it('handles unknown category gracefully', function () {
     $view = $this->blade('<x-badge color="gray">Unknown_category</x-badge>');
 
     $view->assertSee('Unknown_category');
-    $view->assertSee('bg-gray-100');
+    $view->assertSee('bg-bg-tertiary');
 });
 
 it('handles custom labels correctly', function () {
