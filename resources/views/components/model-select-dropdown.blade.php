@@ -30,9 +30,7 @@
         >
             <div class="flex items-center justify-between">
                 <span class="block truncate" x-text="getDisplayText() || '{{ $placeholder }}'"></span>
-                <svg class="w-5 h-5 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
+                <x-heroicon-o-chevron-down class="w-5 h-5 text-gray-400 transition-transform duration-200" x-bind:class="{ 'rotate-180': isOpen }" />
             </div>
         </button>
 
@@ -69,9 +67,7 @@
                     placeholder="{{ $searchPlaceholder }}"
                     class="w-full pl-10 pr-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 >
-                <svg class="absolute left-3 top-2.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
+                <x-heroicon-o-magnifying-glass class="absolute left-3 top-2.5 w-4 h-4 text-gray-400" />
             </div>
         </div>
 

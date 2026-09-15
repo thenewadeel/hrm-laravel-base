@@ -7,12 +7,7 @@
     <x-slot name="trigger">
         <x-navigation.link href="#" icon="📦" :active="request()->routeIs('inventory.*')">
             Inventory
-            <svg class="ml-1 -mr-0.5 h-4 w-4 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                fill="currentColor">
-                <path fill-rule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd" />
-            </svg>
+            <x-heroicon-m-chevron-down class="ml-1 -mr-0.5 h-4 w-4 flex-shrink-0" />
         </x-navigation.link>
     </x-slot>
 
@@ -81,12 +76,7 @@
     <x-slot name="trigger">
         <x-navigation.link href="#" icon="💰" :active="request()->routeIs('accounts.*') || request()->routeIs('accounting.*')">
             Accounting
-            <svg class="ml-1 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                fill="currentColor">
-                <path fill-rule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd" />
-            </svg>
+            <x-heroicon-m-chevron-down class="ml-1 -mr-0.5 h-4 w-4" />
         </x-navigation.link>
     </x-slot>
 
@@ -198,12 +188,7 @@
     <x-slot name="trigger">
         <x-navigation.link href="#" icon="📊" :active="request()->routeIs('*.reports.*') || request()->routeIs('reports.*')">
             Reports & Analytics
-            <svg class="ml-1 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                fill="currentColor">
-                <path fill-rule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd" />
-            </svg>
+            <x-heroicon-m-chevron-down class="ml-1 -mr-0.5 h-4 w-4" />
         </x-navigation.link>
     </x-slot>
 
@@ -357,12 +342,7 @@
     <x-slot name="trigger">
         <x-navigation.link href="#" icon="👥" :active="request()->routeIs('hr.*') || request()->routeIs('attendance.*') || request()->routeIs('payroll.*')">
             Human Resources
-            <svg class="ml-1 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                fill="currentColor">
-                <path fill-rule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd" />
-            </svg>
+            <x-heroicon-m-chevron-down class="ml-1 -mr-0.5 h-4 w-4" />
         </x-navigation.link>
     </x-slot>
 
@@ -431,12 +411,7 @@
     <x-slot name="trigger">
         <x-navigation.link href="#" icon="🏢" :active="request()->routeIs('organization.*') || request()->routeIs('organizations.*')">
             Organization
-            <svg class="ml-1 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                fill="currentColor">
-                <path fill-rule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd" />
-            </svg>
+            <x-heroicon-m-chevron-down class="ml-1 -mr-0.5 h-4 w-4" />
         </x-navigation.link>
     </x-slot>
 
@@ -462,12 +437,7 @@
     <x-slot name="trigger">
         <x-navigation.link href="#" icon="👥" :active="request()->routeIs('members.*') || request()->routeIs('membership.*') || request()->routeIs('cards.*') || request()->routeIs('fees.*') || request()->routeIs('subscriptions.*')">
             Membership
-            <svg class="ml-1 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                fill="currentColor">
-                <path fill-rule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd" />
-            </svg>
+            <x-heroicon-m-chevron-down class="ml-1 -mr-0.5 h-4 w-4" />
         </x-navigation.link>
     </x-slot>
 
@@ -544,12 +514,7 @@
         <x-slot name="trigger">
             <x-navigation.link href="#" icon="🔧" :active="request()->routeIs('admin.*')">
                 Admin Portal
-                <svg class="ml-1 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                    fill="currentColor">
-                    <path fill-rule="evenodd"
-                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        clip-rule="evenodd" />
-                </svg>
+                <x-heroicon-m-chevron-down class="ml-1 -mr-0.5 h-4 w-4" />
             </x-navigation.link>
         </x-slot>
 
@@ -577,12 +542,7 @@
         <x-slot name="trigger">
             <x-navigation.link href="#" icon="⚙️" :active="request()->routeIs('setup.*')">
                 System Setup
-                <svg class="ml-1 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                    fill="currentColor">
-                    <path fill-rule="evenodd"
-                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        clip-rule="evenodd" />
-                </svg>
+                <x-heroicon-m-chevron-down class="ml-1 -mr-0.5 h-4 w-4" />
             </x-navigation.link>
         </x-slot>
 

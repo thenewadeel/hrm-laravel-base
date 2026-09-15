@@ -26,9 +26,7 @@
             </li>
             
             @if($index < array_key_last($pages))
-                <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10 10.586 2.707 2.707a1 1 0 01-1.414 0l-4 4a1 1 0 001.414 0l4-4a1 1 0 010-1.414l-2.293-2.293a1 1 0 00-1.414 1.414L10 10.586l3.293 3.293a1 1 0 001.414-1.414l-4-4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                </svg>
+                <x-heroicon-m-chevron-right class="flex-shrink-0 h-5 w-5 text-gray-300" />
             @endif
         @endforeach
     </ol>

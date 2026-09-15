@@ -15,7 +15,7 @@ beforeEach(function () {
     $this->organization->users()->attach($this->user->id, ['roles' => 'admin']);
 });
 
-it('dropdown opens on hover and closes on mouse leave', function () {
+it('renders all navigation sections on the dashboard', function () {
     $this->actingAs($this->user)
         ->get(route('dashboard'))
         ->assertSuccessful()
@@ -40,12 +40,13 @@ it('dropdown content renders correctly', function () {
         ->assertSee('Payroll');
 });
 
-it('dropdown triggers have proper hover attributes', function () {
+it('navigation sections toggle on click', function () {
     $this->actingAs($this->user)
         ->get(route('dashboard'))
         ->assertSuccessful()
-        ->assertSee('@mouseenter')
-        ->assertSee('@mouseleave');
+        ->assertSee('@click')
+        ->assertSee('x-show')
+        ->assertSee('toggleSection');
 });
 
 it('navigation icons are properly aligned', function () {

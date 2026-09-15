@@ -10,10 +10,7 @@
         <span class="sr-only">Change language</span>
 
         <!-- Globe Icon -->
-        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M3.055 11H5a2 2 0 012 2v10a2 2 0 002 2h3.632a1 1 0 00.707-.293l6.632-6.632a1 1 0 00-.707-.293l-6.632 6.632A1 1 0 008.055 21H5a2 2 0 01-2-2V13a2 2 0 012-2h3.632a1 1 0 00.707.293l6.632-6.632a1 1 0 00.707-.293l-6.632 6.632A1 1 0 003.055 11zM16 3.055a1 1 0 00-.707.293l-6.632 6.632a1 1 0 00-.707.293l6.632-6.632a1 1 0 00.707-.293l6.632 6.632A1 1 0 0016.945 3.055zM12 8a4 4 0 100-8 4 4 0 000 8z" />
-        </svg>
+        <x-heroicon-o-globe-alt class="h-5 w-5" />
     </button>
 
     <!-- Language Dropdown -->

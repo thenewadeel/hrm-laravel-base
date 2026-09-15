@@ -77,18 +77,10 @@
                                     <span>{{ $header }}</span>
                                     <template x-if="sortBy === '{{ $key }}'">
                                         <template x-if="sortDirection === 'asc'">
-                                            <svg class="h-4 w-4 text-muted" fill="none" viewBox="0 0 24 24"
-                                                stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M5 15l7-7 7" />
-                                            </svg>
+                                            <x-heroicon-o-chevron-up class="h-4 w-4 text-muted" />
                                         </template>
                                         <template x-if="sortDirection === 'desc'">
-                                            <svg class="h-4 w-4 text-muted" fill="none" viewBox="0 0 24 24"
-                                                stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M19 9l-7 7-7" />
-                                            </svg>
+                                            <x-heroicon-o-chevron-down class="h-4 w-4 text-muted" />
                                         </template>
                                     </template>
                                 </div>

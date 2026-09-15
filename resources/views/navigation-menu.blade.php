@@ -21,10 +21,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m8-8V4a1 1 0 00-1-1h-2a1 1 0 00-1 1v1M9 7h6" />
-                        </svg>
+                        <x-heroicon-o-squares-2x2 class="w-5 h-5 mr-2" />
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
@@ -32,12 +29,7 @@
                     <div class="hidden sm:flex sm:items-center sm:ml-6" x-data="{ open: false }">
                         <x-nav-link href="#" @click="open = !open" class="cursor-pointer">
                             📦 Inventory
-                            <svg class="ml-1 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                fill="currentColor">
-                                <path fill-rule="evenodd"
-                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                    clip-rule="evenodd" />
-                            </svg>
+<x-heroicon-m-chevron-down class="ml-1 -mr-0.5 h-4 w-4" />
                         </x-nav-link>
 
                         <div x-show="open" @click.away="open = false"
@@ -80,11 +72,7 @@
                                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-muted surface hover:text-primary focus:outline-none focus:bg-tertiary active:bg-tertiary transition ease-in-out duration-150">
                                             {{ Auth::user()->currentTeam->name ?? Auth::user()->name }}
 
-                                            <svg class="ms-2 -me-0.5 size-4" xmlns="http://www.w3.org/2000/svg"
-                                                fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                                            </svg>
+<x-heroicon-o-chevron-up-down class="ms-2 -me-0.5 size-4" />
                                         </button>
                                     </span>
                                 </x-slot>
@@ -141,11 +129,7 @@
                                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-muted surface hover:text-primary focus:outline-none focus:bg-tertiary active:bg-tertiary transition ease-in-out duration-150">
                                             {{ Auth::user()->name }}
 
-                                            <svg class="ms-2 -me-0.5 size-4" xmlns="http://www.w3.org/2000/svg"
-                                                fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                            </svg>
+<x-heroicon-o-chevron-down class="ms-2 -me-0.5 size-4" />
                                         </button>
                                     </span>
                                 @endif
@@ -198,13 +182,8 @@
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open"
                     class="inline-flex items-center justify-center p-2 rounded-md text-muted hover:text-secondary hover:bg-tertiary focus:outline-none focus:bg-tertiary focus:text-secondary transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
-                            stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
+                    <x-heroicon-o-bars-3 class="h-6 w-6" x-show="!open" />
+                        <x-heroicon-o-x-mark class="h-6 w-6 hidden" x-show="open" x-cloak />
                 </button>
             </div>
         </div>

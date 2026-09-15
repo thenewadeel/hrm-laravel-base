@@ -23,9 +23,7 @@
             <p class="text-xs text-secondary mt-1">{{ $userRoles }}</p>
         </div>
         <button class="p-2 text-secondary hover:text-primary transition-colors">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-            </svg>
+            <x-heroicon-o-pencil-square class="w-5 h-5" />
         </button>
     </div>
 
@@ -39,21 +37,15 @@
             <div class="grid grid-cols-3 gap-2">
                 <button class="p-3 border-2 border-primary rounded-lg text-center transition-all"
                         :class="$store.theme === 'light' ? 'bg-primary text-primary-contrast' : 'border-secondary hover:border-primary/50'">
-                    <svg class="w-6 h-6 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                    </svg>
+                    <x-heroicon-o-sun class="w-6 h-6 mx-auto mb-1" />
                     <span class="text-xs">Light</span>
                 </button>
                 <button class="p-3 border-2 border-secondary rounded-lg text-center hover:border-primary/50 transition-all">
-                    <svg class="w-6 h-6 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-                    </svg>
+                    <x-heroicon-o-moon class="w-6 h-6 mx-auto mb-1" />
                     <span class="text-xs">Dark</span>
                 </button>
                 <button class="p-3 border-2 border-secondary rounded-lg text-center hover:border-primary/50 transition-all">
-                    <svg class="w-6 h-6 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                    </svg>
+                    <x-heroicon-o-computer-desktop class="w-6 h-6 mx-auto mb-1" />
                     <span class="text-xs">System</span>
                 </button>
             </div>

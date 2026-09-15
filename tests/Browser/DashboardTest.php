@@ -27,21 +27,16 @@ class DashboardTest extends JavaScriptDuskTestCase
             $this->waitForJavaScript($browser)
                 ->waitForAlpine($browser);
 
-            // Debug: take screenshot to see what's on the page
-            $browser->screenshot('dashboard-debug');
-
-            // Check if we're on the right page
-            $currentPath = $browser->script('return window.location.pathname;')[0];
-            dump("Current path: {$currentPath}");
+            // Force a desktop viewport, then reload so the shell initializes with the sidebar docked/open
+            $browser->resize(1920, 1080)
+                ->visit('/dashboard')
+                ->waitForJavaScript($browser)
+                ->waitForAlpine($browser);
 
             // Assert Alpine.js is properly initialized
-            $this->assertAlpineData($browser, 'test', 'working');
-            $this->assertAlpineData($browser, 'drawers', [
-                'left' => false,
-                'right' => false,
-                'top' => false,
-                'bottom' => false,
-            ]);
+            $this->assertAlpineData($browser, 'navOpen', true);
+            $browser->assertPresent('#sidebar');
+            $browser->assertVisible('.hidden.md\\:flex');
 
             // Assert dashboard elements are present - be more flexible
             $browser->assertSee('Dashboard')
@@ -65,52 +60,50 @@ class DashboardTest extends JavaScriptDuskTestCase
     }
 
     /**
-     * Test Alpine.js drawer system functionality.
+     * Test persistent sidebar and header popovers functionality.
      */
-    public function test_alpine_drawer_system(): void
+    public function test_sidebar_and_header_popovers(): void
     {
         $this->createBrowserWithOrganization(function (Browser $browser, Organization $org, User $user) {
-            $browser->visit('/dashboard')
+            $browser->resize(375, 667) // Mobile viewport so the sidebar is off-canvas
+                ->visit('/dashboard')
                 ->waitForAlpine($this);
 
-            // Test left drawer (navigation)
-            $this->toggleDrawer($browser, 'left');
-            $this->assertDrawerState($browser, 'left', true);
-            $this->assertDrawerVisible($browser, 'left');
+            // Sidebar starts closed on mobile
+            $this->assertSidebarTransform($browser, '-translate-x-full');
 
-            // Close drawer
-            $this->closeDrawer($browser, 'left');
-            $this->assertDrawerState($browser, 'left', false);
+            // Open the sidebar via the header hamburger
+            $browser->click('button[aria-label="Toggle navigation"]')
+                ->pause(300);
+            $this->assertSidebarTransform($browser, 'translate-x-0');
 
-            // Test right drawer (module settings)
-            $this->toggleDrawer($browser, 'right');
-            $this->assertDrawerState($browser, 'right', true);
-            $this->assertDrawerVisible($browser, 'right');
-
-            // Test top drawer (app info)
-            $this->toggleDrawer($browser, 'top');
-            $this->assertDrawerState($browser, 'top', true);
-            $this->assertDrawerVisible($browser, 'top');
-
-            // Test bottom drawer (user preferences)
-            $this->toggleDrawer($browser, 'bottom');
-            $this->assertDrawerState($browser, 'bottom', true);
-            $this->assertDrawerVisible($browser, 'bottom');
-
-            // Test close all drawers functionality
-            $this->closeAllDrawers($browser);
-            $this->assertAllDrawersClosed($browser);
-
-            // Test keyboard navigation (Escape key)
-            $this->toggleDrawer($browser, 'left');
-            $this->assertDrawerState($browser, 'left', true);
+            // Escape key closes the sidebar
             $browser->keys('body', '{escape}');
-            $this->assertDrawerState($browser, 'left', false);
+            $this->assertSidebarTransform($browser, '-translate-x-full');
+
+            // Switch to a desktop viewport for the header popovers
+            $browser->resize(1920, 1080)
+                ->visit('/dashboard')
+                ->waitForAlpine($this);
+
+            // Notifications popover
+            $browser->click('button[aria-label="Notifications"]')
+                ->pause(300)
+                ->assertSee('No new notifications');
+
+            // Opening search closes notifications and shows the search input
+            $browser->click('button[aria-label="Search navigation"]')
+                ->pause(300)
+                ->assertVisible('input[placeholder*="search" i]');
+
+            // User menu popover
+            $browser->click('button[aria-label="User menu"]')
+                ->assertSee('Profile');
         });
     }
 
     /**
-     * Test mobile menu toggle functionality.
+     * Test mobile hamburger menu toggle functionality.
      */
     public function test_mobile_menu_toggle(): void
     {
@@ -119,18 +112,29 @@ class DashboardTest extends JavaScriptDuskTestCase
                 ->resize(375, 667) // Mobile viewport
                 ->waitForAlpine($this);
 
-            // Mobile menu should be closed by default
-            $browser->assertMissing('.mobile-menu-open');
+            // Sidebar should be closed by default on mobile
+            $this->assertSidebarTransform($browser, '-translate-x-full');
+            $this->assertElementDisplay($browser, '[data-nav-overlay]', false);
 
-            // Click mobile menu button
-            $browser->click('button[aria-label="Toggle mobile menu"]')
-                ->waitFor('.mobile-menu-open', 5)
-                ->assertVisible('.mobile-menu-open');
+            // Open sidebar with the mobile menu button
+            $browser->click('button[aria-label="Toggle navigation"]')
+                ->pause(300);
+            $this->assertSidebarTransform($browser, 'translate-x-0');
+            $this->assertElementDisplay($browser, '[data-nav-overlay]', true);
 
-            // Click again to close
-            $browser->click('button[aria-label="Toggle mobile menu"]')
-                ->waitUntilMissing('.mobile-menu-open', 5)
-                ->assertMissing('.mobile-menu-open');
+            // Close with the sidebar close button
+            $browser->click('button[aria-label="Close navigation"]')
+                ->pause(300);
+            $this->assertSidebarTransform($browser, '-translate-x-full');
+            $this->assertElementDisplay($browser, '[data-nav-overlay]', false);
+
+            // Re-open then close again via the hamburger
+            $browser->click('button[aria-label="Toggle navigation"]')
+                ->pause(300);
+            $this->assertSidebarTransform($browser, 'translate-x-0');
+            $browser->click('button[aria-label="Toggle navigation"]')
+                ->pause(300);
+            $this->assertSidebarTransform($browser, '-translate-x-full');
         });
     }
 
@@ -222,6 +226,7 @@ class DashboardTest extends JavaScriptDuskTestCase
     {
         $this->createBrowserWithOrganization(function (Browser $browser, Organization $org, User $user) {
             $browser->visit('/dashboard')
+                ->resize(1920, 1080)
                 ->waitForJavaScript($this);
 
             // Check that search is properly defined (no "search is not defined" errors)
@@ -231,6 +236,10 @@ class DashboardTest extends JavaScriptDuskTestCase
             ");
 
             $this->assertTrue($searchDefined, 'Search functionality should be properly defined');
+
+            // Open the header search popover
+            $browser->click('button[aria-label="Search navigation"]')
+                ->waitForAlpine($this);
 
             // Test any search inputs that might be present
             $browser->whenAvailable('input[placeholder*="search" i]', function ($searchInput) {
@@ -254,6 +263,10 @@ class DashboardTest extends JavaScriptDuskTestCase
 
             // Check if theme toggle is present
             if ($browser->present('[data-theme-toggle]')) {
+                // Ensure desktop viewport so the header theme toggle is visible
+                $browser->resize(1920, 1080)
+                    ->visit('/dashboard')
+                    ->waitForAlpine($this);
                 // Get initial theme
                 $initialTheme = $this->executeScript($browser, "
                     return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
@@ -286,20 +299,23 @@ class DashboardTest extends JavaScriptDuskTestCase
             $browser->visit('/dashboard')
                 ->resize(1920, 1080)
                 ->waitForJavaScript($this)
-                ->assertPresent('.hidden.md\\:flex') // Desktop navigation visible
-                ->assertMissing('.md\\:hidden'); // Mobile navigation hidden
+                ->assertVisible('.hidden.md\\:flex') // Desktop header actions visible
+                ->assertVisible('#sidebar'); // Sidebar docked
+            $this->assertElementDisplay($browser, 'button[aria-label="Toggle navigation"]', false);
 
             // Test tablet view
             $browser->resize(768, 1024)
                 ->pause(500)
-                ->assertPresent('.hidden.md\\:flex')
-                ->assertMissing('.md\\:hidden');
+                ->assertVisible('.hidden.md\\:flex');
+            $this->assertElementDisplay($browser, 'button[aria-label="Toggle navigation"]', false);
 
             // Test mobile view
             $browser->resize(375, 667)
                 ->pause(500)
-                ->assertPresent('.md\\:hidden') // Mobile navigation visible
-                ->assertMissing('.hidden.md\\:flex'); // Desktop navigation hidden
+                ->assertVisible('button[aria-label="Toggle navigation"]') // Mobile hamburger visible
+                ->assertVisible('#sidebar'); // Sidebar element still present (off-canvas)
+            $this->assertElementDisplay($browser, '.hidden.md\\:flex', false);
+            $this->assertSidebarTransform($browser, '-translate-x-full'); // Off-canvas below lg
 
             // Assert dashboard content is still accessible
             $browser->assertSee('Dashboard - '.$org->name)
@@ -503,5 +519,33 @@ class DashboardTest extends JavaScriptDuskTestCase
                 ->pause(200)
                 ->assertFocused('button, a, input, select, textarea, [tabindex]:not([tabindex="-1"])');
         });
+    }
+
+    /**
+     * Assert the sidebar has the given transform class (open/closed state).
+     */
+    protected function assertSidebarTransform(Browser $browser, string $expectedClass): void
+    {
+        $hasClass = $browser->script(
+            "return document.getElementById('sidebar').classList.contains('{$expectedClass}');"
+        )[0];
+
+        $this->assertTrue((bool) $hasClass, "Sidebar should have transform class '{$expectedClass}'");
+    }
+
+    /**
+     * Assert whether an element is shown or hidden via its computed display value.
+     */
+    protected function assertElementDisplay(Browser $browser, string $selector, bool $visible): void
+    {
+        $display = $browser->script(
+            "var el = document.querySelector('{$selector}'); if (!el) return null; return getComputedStyle(el).display;"
+        )[0];
+
+        if ($visible) {
+            $this->assertNotEquals('none', $display, "Element '{$selector}' should be visible");
+        } else {
+            $this->assertEquals('none', $display, "Element '{$selector}' should be hidden");
+        }
     }
 }

@@ -25,9 +25,7 @@
                placeholder="Quick search..." 
                class="w-full px-3 py-2 text-sm border border-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                x-model="search">
-        <svg class="absolute right-3 top-2.5 w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-        </svg>
+        <x-heroicon-o-magnifying-glass class="absolute right-3 top-2.5 w-4 h-4 text-secondary" />
     </div>
 
     {{-- Main Navigation --}}
@@ -45,11 +43,8 @@
                     class="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors {{ in_array($currentModule, ['inventory']) ? 'bg-primary text-primary-contrast' : 'text-secondary hover:bg-secondary hover:text-primary' }}">
                 <span class="mr-3">📦</span>
                 Inventory
-                <svg class="ml-auto w-4 h-4 transition-transform" 
-                     :class="expandedSections.inventory ? 'rotate-180' : ''"
-                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
+                <x-heroicon-o-chevron-down class="ml-auto w-4 h-4 transition-transform" 
+                     x-bind:class="expandedSections.inventory  ? 'rotate-180' : ''" />
             </button>
             
             <div x-show="expandedSections.inventory" x-transition class="mt-1 space-y-1">
@@ -113,11 +108,8 @@
                     class="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors {{ in_array($currentModule, ['accounts', 'accounting']) ? 'bg-primary text-primary-contrast' : 'text-secondary hover:bg-secondary hover:text-primary' }}">
                 <span class="mr-3">💰</span>
                 Accounting
-                <svg class="ml-auto w-4 h-4 transition-transform" 
-                     :class="expandedSections.accounting ? 'rotate-180' : ''"
-                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
+                <x-heroicon-o-chevron-down class="ml-auto w-4 h-4 transition-transform" 
+                     x-bind:class="expandedSections.accounting  ? 'rotate-180' : ''" />
             </button>
             
             <div x-show="expandedSections.accounting" x-transition class="mt-1 space-y-1">
@@ -213,11 +205,8 @@
                     class="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors {{ str_contains($currentRoute, 'reports') ? 'bg-primary text-primary-contrast' : 'text-secondary hover:bg-secondary hover:text-primary' }}">
                 <span class="mr-3">📊</span>
                 Reports & Analytics
-                <svg class="ml-auto w-4 h-4 transition-transform" 
-                     :class="expandedSections.reports ? 'rotate-180' : ''"
-                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
+                <x-heroicon-o-chevron-down class="ml-auto w-4 h-4 transition-transform" 
+                     x-bind:class="expandedSections.reports  ? 'rotate-180' : ''" />
             </button>
             
             <div x-show="expandedSections.reports" x-transition class="mt-1 space-y-1">
@@ -289,11 +278,8 @@
                     class="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors {{ in_array($currentModule, ['hr', 'hrm', 'attendance', 'payroll']) ? 'bg-primary text-primary-contrast' : 'text-secondary hover:bg-secondary hover:text-primary' }}">
                 <span class="mr-3">👥</span>
                 Human Resources
-                <svg class="ml-auto w-4 h-4 transition-transform" 
-                     :class="expandedSections.hr ? 'rotate-180' : ''"
-                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
+                <x-heroicon-o-chevron-down class="ml-auto w-4 h-4 transition-transform" 
+                     x-bind:class="expandedSections.hr  ? 'rotate-180' : ''" />
             </button>
             
             <div x-show="expandedSections.hr" x-transition class="mt-1 space-y-1">
@@ -357,11 +343,8 @@
                     class="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors {{ $currentModule === 'organization' ? 'bg-primary text-primary-contrast' : 'text-secondary hover:bg-secondary hover:text-primary' }}">
                 <span class="mr-3">🏢</span>
                 Organization
-                <svg class="ml-auto w-4 h-4 transition-transform" 
-                     :class="expandedSections.organization ? 'rotate-180' : ''"
-                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
+                <x-heroicon-o-chevron-down class="ml-auto w-4 h-4 transition-transform" 
+                     x-bind:class="expandedSections.organization  ? 'rotate-180' : ''" />
             </button>
             
             <div x-show="expandedSections.organization" x-transition class="mt-1 space-y-1">
@@ -390,11 +373,8 @@
                     class="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors {{ in_array($currentModule, ['members', 'membership', 'cards', 'fees', 'subscriptions']) ? 'bg-primary text-primary-contrast' : 'text-secondary hover:bg-secondary hover:text-primary' }}">
                 <span class="mr-3">👥</span>
                 Membership
-                <svg class="ml-auto w-4 h-4 transition-transform" 
-                     :class="expandedSections.membership ? 'rotate-180' : ''"
-                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
+                <x-heroicon-o-chevron-down class="ml-auto w-4 h-4 transition-transform" 
+                     x-bind:class="expandedSections.membership  ? 'rotate-180' : ''" />
             </button>
             
             <div x-show="expandedSections.membership" x-transition class="mt-1 space-y-1">
@@ -463,11 +443,8 @@
                     class="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors {{ $currentModule === 'admin' ? 'bg-primary text-primary-contrast' : 'text-secondary hover:bg-secondary hover:text-primary' }}">
                 <span class="mr-3">🔧</span>
                 Admin Portal
-                <svg class="ml-auto w-4 h-4 transition-transform" 
-                     :class="expandedSections.admin ? 'rotate-180' : ''"
-                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
+                <x-heroicon-o-chevron-down class="ml-auto w-4 h-4 transition-transform" 
+                     x-bind:class="expandedSections.admin  ? 'rotate-180' : ''" />
             </button>
             
             <div x-show="expandedSections.admin" x-transition class="mt-1 space-y-1">
@@ -498,11 +475,8 @@
                     class="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors {{ $currentModule === 'setup' ? 'bg-primary text-primary-contrast' : 'text-secondary hover:bg-secondary hover:text-primary' }}">
                 <span class="mr-3">⚙️</span>
                 System Setup
-                <svg class="ml-auto w-4 h-4 transition-transform" 
-                     :class="expandedSections.setup ? 'rotate-180' : ''"
-                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
+                <x-heroicon-o-chevron-down class="ml-auto w-4 h-4 transition-transform" 
+                     x-bind:class="expandedSections.setup  ? 'rotate-180' : ''" />
             </button>
             
             <div x-show="expandedSections.setup" x-transition class="mt-1 space-y-1">

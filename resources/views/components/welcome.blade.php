@@ -44,27 +44,15 @@
 
             <div class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-secondary">
                 <span class="inline-flex items-center gap-2">
-                    <svg class="size-4 text-success" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd"
-                            d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5z"
-                            clip-rule="evenodd" />
-                    </svg>
+                    <x-heroicon-m-check-circle class="size-4 text-success" />
                     14-day free trial
                 </span>
                 <span class="inline-flex items-center gap-2">
-                    <svg class="size-4 text-success" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd"
-                            d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5z"
-                            clip-rule="evenodd" />
-                    </svg>
+                    <x-heroicon-m-check-circle class="size-4 text-success" />
                     No credit card required
                 </span>
                 <span class="inline-flex items-center gap-2">
-                    <svg class="size-4 text-success" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd"
-                            d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5z"
-                            clip-rule="evenodd" />
-                    </svg>
+                    <x-heroicon-m-check-circle class="size-4 text-success" />
                     Cancel anytime
                 </span>
             </div>
@@ -129,11 +117,7 @@
                             <p class="mt-3 text-3xl font-bold">12</p>
                             <div class="mt-4 flex items-center gap-2 text-xs font-medium text-warning">
                                 <span class="inline-flex items-center gap-1 rounded-full bg-warning/15 px-2.5 py-1">
-                                    <svg class="size-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                            d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625l6.28-10.875zM10 6a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 10 6zm0 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                    <x-heroicon-m-exclamation-triangle class="size-3.5" />
                                     4 need reorder today
                                 </span>
                             </div>
@@ -143,10 +127,7 @@
                             <p class="text-sm font-medium text-secondary">On-time attendance</p>
                             <div class="mt-3 flex items-center justify-between">
                                 <p class="text-3xl font-bold">96.8%</p>
-                                <svg class="size-8 text-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <path d="M3 3v18h18" />
-                                    <path d="m7 14 4-4 4 4 5-6" />
-                                </svg>
+                                <x-heroicon-o-chart-bar class="size-8 text-success" />
                             </div>
                         </div>
                     </div>
