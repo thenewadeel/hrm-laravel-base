@@ -106,11 +106,7 @@
                                 @if (count($transactions) > 2)
                                     <button type="button" wire:click="removeTransaction({{ $index }})"
                                         class="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-600 mt-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M19 7l-.867 12.142A2 2 0 0116.035 21H7.965a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                        </svg>
+                                        <x-heroicon-o-trash class="h-6 w-6" />
                                     </button>
                                 @endif
                             </div>
@@ -121,11 +117,7 @@
                 <div class="flex justify-between items-center pt-4 border-t border-gray-200 dark:border-gray-700">
                     <button type="button" wire:click="addTransaction"
                         class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-600 font-medium flex items-center space-x-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                clip-rule="evenodd" />
-                        </svg>
+                        <x-heroicon-m-plus class="h-5 w-5" />
                         <span>Add New Line</span>
                     </button>
                     <button type="submit"

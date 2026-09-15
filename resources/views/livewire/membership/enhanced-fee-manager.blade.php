@@ -11,9 +11,7 @@
                     <p class="text-blue-100 text-sm mt-2">{{ $feeStatistics['paid_fees'] ?? 0 }} transactions</p>
                 </div>
                 <div class="bg-blue-700 bg-opacity-50 rounded-full p-4 shadow-lg">
-                    <svg class="h-10 w-10 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
+                    <x-heroicon-o-face-smile class="h-10 w-10 text-blue-200" />
                 </div>
             </div>
         </div>
@@ -27,9 +25,7 @@
                     <p class="text-orange-100 text-sm mt-2">{{ $feeStatistics['pending_fees'] ?? 0 }} pending</p>
                 </div>
                 <div class="bg-orange-700 bg-opacity-50 rounded-full p-4 shadow-lg">
-                    <svg class="h-10 w-10 text-orange-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
+                    <x-heroicon-o-clock class="h-10 w-10 text-orange-200" />
                 </div>
             </div>
         </div>
@@ -43,9 +39,7 @@
                     <p class="text-red-100 text-sm mt-2">${{ number_format($overdueFees->sum('amount'), 2) }} value</p>
                 </div>
                 <div class="bg-red-700 bg-opacity-50 rounded-full p-4 shadow-lg">
-                    <svg class="h-10 w-10 text-red-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
+                    <x-heroicon-o-clock class="h-10 w-10 text-red-200" />
                 </div>
             </div>
         </div>
@@ -59,9 +53,7 @@
                     <p class="text-green-100 text-sm mt-2">This month</p>
                 </div>
                 <div class="bg-green-700 bg-opacity-50 rounded-full p-4 shadow-lg">
-                    <svg class="h-10 w-10 text-green-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                    </svg>
+                    <x-heroicon-o-document-duplicate class="h-10 w-10 text-green-200" />
                 </div>
             </div>
         </div>
@@ -75,9 +67,7 @@
                     <p class="text-purple-100 text-sm mt-2">Revenue insights</p>
                 </div>
                 <button wire:click="toggleAnalytics" class="bg-purple-700 bg-opacity-50 rounded-full p-4 hover:bg-opacity-70 transition shadow-lg hover:shadow-xl">
-                    <svg class="h-10 w-10 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                    </svg>
+                    <x-heroicon-o-document-duplicate class="h-10 w-10 text-purple-200" />
                 </button>
             </div>
         </div>
@@ -89,9 +79,7 @@
             <div class="flex items-center justify-between mb-8">
                 <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Revenue Analytics</h3>
                 <button wire:click="showAnalytics = false" class="text-gray-400 hover:text-gray-600 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
+                    <x-heroicon-o-x-mark class="h-6 w-6" />
                 </button>
             </div>
 
@@ -174,35 +162,25 @@
             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-6 lg:space-y-0">
                 <div class="flex flex-wrap gap-4">
                     <button wire:click="showCreateFeeForm" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 shadow-lg hover:shadow-xl font-semibold">
-                        <svg class="h-5 w-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                        </svg>
+                        <x-heroicon-o-plus class="h-5 w-5 inline mr-2" />
                         Create Fee
                     </button>
                     <button wire:click="generateOverdueFees" wire:confirm="Generate overdue fees for all pending subscriptions?" class="px-6 py-3 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-xl hover:from-orange-700 hover:to-orange-800 focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-200 shadow-lg hover:shadow-xl font-semibold">
-                        <svg class="h-5 w-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
+                        <x-heroicon-o-clock class="h-5 w-5 inline mr-2" />
                         Generate Overdue
                     </button>
                     <button wire:click="showReminderModal" class="px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-xl hover:from-purple-700 hover:to-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-200 shadow-lg hover:shadow-xl font-semibold">
-                        <svg class="h-5 w-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                        </svg>
+                        <x-heroicon-o-envelope class="h-5 w-5 inline mr-2" />
                         Send Reminders
                     </button>
                 </div>
                 <div class="flex gap-4">
                     <button wire:click="exportData('csv')" class="px-6 py-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white rounded-xl hover:from-gray-700 hover:to-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-200 shadow-lg hover:shadow-xl font-semibold">
-                        <svg class="h-5 w-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
+                        <x-heroicon-o-arrow-down-tray class="h-5 w-5 inline mr-2" />
                         Export CSV
                     </button>
                     <button wire:click="exportData('pdf')" class="px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-xl hover:from-red-700 hover:to-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-200 shadow-lg hover:shadow-xl font-semibold">
-                        <svg class="h-5 w-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                        </svg>
+                        <x-heroicon-o-document class="h-5 w-5 inline mr-2" />
                         Export PDF
                     </button>
                 </div>
@@ -217,9 +195,7 @@
                 <div class="flex items-center justify-between mb-8">
                     <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Create New Fee</h3>
                     <button wire:click="hideCreateFeeForm" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
+                        <x-heroicon-o-x-mark class="h-6 w-6" />
                     </button>
                 </div>
 
@@ -336,9 +312,7 @@
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Process Payment</h3>
                         <button wire:click="hidePaymentForm" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                            </svg>
+                            <x-heroicon-o-x-mark class="h-6 w-6" />
                         </button>
                     </div>
 
@@ -416,15 +390,11 @@
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Invoice #{{ $invoiceNumber }}</h3>
                     <div class="flex space-x-3">
                         <button wire:click="printInvoice" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                            <svg class="h-5 w-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
-                            </svg>
+                            <x-heroicon-o-square-2-stack class="h-5 w-5 inline mr-2" />
                             Print
                         </button>
                         <button wire:click="showInvoiceModal = false" class="text-gray-400 hover:text-gray-600">
-                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                            </svg>
+                            <x-heroicon-o-x-mark class="h-6 w-6" />
                         </button>
                     </div>
                 </div>
@@ -500,15 +470,11 @@
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Receipt #{{ $receiptNumber }}</h3>
                     <div class="flex space-x-3">
                         <button wire:click="printReceipt" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
-                            <svg class="h-5 w-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
-                            </svg>
+                            <x-heroicon-o-square-2-stack class="h-5 w-5 inline mr-2" />
                             Print
                         </button>
                         <button wire:click="showReceiptModal = false" class="text-gray-400 hover:text-gray-600">
-                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                            </svg>
+                            <x-heroicon-o-x-mark class="h-6 w-6" />
                         </button>
                     </div>
                 </div>
@@ -574,9 +540,7 @@
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Send Payment Reminders</h3>
                         <button wire:click="hideReminderModal" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                            </svg>
+                            <x-heroicon-o-x-mark class="h-6 w-6" />
                         </button>
                     </div>
 
@@ -737,26 +701,18 @@
                                 <div class="flex justify-end space-x-2">
                                     @if($fee->status === 'pending' || $fee->status === 'overdue')
                                         <button wire:click="showPaymentForm({{ $fee->id }})" class="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300" title="Process Payment">
-                                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                            </svg>
+                                            <x-heroicon-o-square-2-stack class="h-5 w-5" />
                                         </button>
                                         <button wire:click="generateInvoice($fee)" class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300" title="Generate Invoice">
-                                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                            </svg>
+                                            <x-heroicon-o-document-text class="h-5 w-5" />
                                         </button>
                                         <button wire:click="waiveFee({{ $fee->id }}, 'Waived by admin')" wire:confirm="Waive this fee?" class="text-orange-600 hover:text-orange-900 dark:text-orange-400 dark:hover:text-orange-300" title="Waive Fee">
-                                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
-                                            </svg>
+                                            <x-heroicon-o-x-mark class="h-5 w-5" />
                                         </button>
                                     @endif
                                     @if($fee->status === 'paid')
                                         <button wire:click="generateReceipt($fee)" class="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300" title="Generate Receipt">
-                                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            </svg>
+                                            <x-heroicon-o-check-circle class="h-5 w-5" />
                                         </button>
                                     @endif
                                 </div>
@@ -809,9 +765,7 @@
                         <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                             <div class="flex items-center">
                                 <div class="bg-green-100 dark:bg-green-900 rounded-full p-2 mr-3">
-                                    <svg class="h-5 w-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
+                                    <x-heroicon-o-check-circle class="h-5 w-5 text-green-600 dark:text-green-400" />
                                 </div>
                                 <div>
                                     <p class="text-sm font-medium text-gray-900 dark:text-white">{{ $payment->member->full_name }}</p>

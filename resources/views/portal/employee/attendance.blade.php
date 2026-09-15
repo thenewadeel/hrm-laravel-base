@@ -54,11 +54,7 @@
                     <div class="p-5">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
-                                <svg class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
+                                <x-heroicon-o-check-circle class="h-6 w-6 text-green-600" />
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
@@ -76,11 +72,7 @@
                     <div class="p-5">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
-                                <svg class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
+                                <x-heroicon-o-clock class="h-6 w-6 text-blue-600" />
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
@@ -97,11 +89,7 @@
                     <div class="p-5">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
-                                <svg class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
+                                <x-heroicon-o-clock class="h-6 w-6 text-yellow-600" />
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
@@ -118,11 +106,7 @@
                     <div class="p-5">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
-                                <svg class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v1m0 6v1m0-1v1" />
-                                </svg>
+                                <x-heroicon-o-face-frown class="h-6 w-6 text-purple-600" />
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>

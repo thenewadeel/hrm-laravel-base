@@ -13,9 +13,7 @@
                 class="{{ $activeTab === 'individual' ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300' }} 
                        flex-1 py-4 px-6 text-center border-b-2 font-medium text-sm transition-colors duration-200"
             >
-                <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                </svg>
+                <x-heroicon-o-user class="w-5 h-5 inline mr-2" />
                 Individual Registration
             </button>
             <button
@@ -23,9 +21,7 @@
                 class="{{ $activeTab === 'bulk' ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300' }} 
                        flex-1 py-4 px-6 text-center border-b-2 font-medium text-sm transition-colors duration-200"
             >
-                <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                </svg>
+                <x-heroicon-o-cloud-arrow-up class="w-5 h-5 inline mr-2" />
                 Bulk CSV Upload
             </button>
         </nav>
@@ -49,9 +45,7 @@
                                         @if($individualPhotoPreview)
                                             <img src="{{ $individualPhotoPreview }}" alt="Photo preview" class="w-full h-full object-cover">
                                         @else
-                                            <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                            </svg>
+                                            <x-heroicon-o-user class="w-10 h-10 text-gray-400" />
                                         @endif
                                     </div>
                                     <div>
@@ -208,9 +202,7 @@
                         <div class="mb-6">
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select CSV File</label>
                             <div class="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
-                                <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                                </svg>
+                                <x-heroicon-o-cloud-arrow-up class="w-12 h-12 text-gray-400 mx-auto mb-4" />
                                 <input type="file" wire:model="csvFile" class="hidden" id="csv-upload" accept=".csv,.txt">
                                 <label for="csv-upload" class="cursor-pointer px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                                     Choose CSV File
@@ -222,9 +214,7 @@
                         <!-- Template Download -->
                         <div class="mb-6">
                             <button wire:click="downloadTemplate" class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
-                                <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                </svg>
+                                <x-heroicon-o-arrow-down-tray class="w-4 h-4 inline mr-2" />
                                 Download Template
                             </button>
                             <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Download the CSV template with required fields</p>

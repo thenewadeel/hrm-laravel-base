@@ -9,9 +9,7 @@
     @if($showSuccess)
         <div class="mb-6 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
             <div class="flex items-center">
-                <svg class="w-6 h-6 text-green-600 dark:text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
+                <x-heroicon-o-check-circle class="w-6 h-6 text-green-600 dark:text-green-400 mr-3" />
                 <div>
                     <h3 class="text-green-800 dark:text-green-200 font-medium">Registration Successful!</h3>
                     <p class="text-green-700 dark:text-green-300 text-sm mt-1">Member has been registered successfully.</p>
@@ -37,9 +35,7 @@
                                     @if($photoPreview)
                                         <img src="{{ $photoPreview }}" alt="Photo preview" class="w-full h-full object-cover">
                                     @else
-                                        <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                        </svg>
+                                        <x-heroicon-o-user class="w-12 h-12 text-gray-400" />
                                     @endif
                                 </div>
                                 <div>
@@ -251,9 +247,7 @@
                                         <ul class="space-y-1">
                                             @foreach($plan['features'] as $feature)
                                                 <li class="flex items-start">
-                                                    <svg class="w-3 h-3 text-green-500 mr-1 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                                    </svg>
+                                                    <x-heroicon-o-check class="w-3 h-3 text-green-500 mr-1 mt-0.5 flex-shrink-0" />
                                                     {{ $feature }}
                                                 </li>
                                             @endforeach
@@ -445,9 +439,7 @@
                     <ul class="space-y-1">
                         @foreach($countryClubPlans[$formData['subscription_plan']]['features'] as $feature)
                             <li class="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                                <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
+                                <x-heroicon-o-check class="w-4 h-4 text-green-500 mr-2" />
                                 {{ $feature }}
                             </li>
                         @endforeach

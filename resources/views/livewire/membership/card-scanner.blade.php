@@ -17,9 +17,7 @@
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-4">
                         <div class="p-3 bg-blue-600 rounded-lg">
-                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path>
-                            </svg>
+                            <x-heroicon-o-qr-code class="w-8 h-8 text-white" />
                         </div>
                         <div>
                             <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Membership Access Scanner</h1>
@@ -51,9 +49,7 @@
                     <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-10">
                         <div class="text-center mb-10">
                             <div class="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800 rounded-full mb-6 shadow-lg">
-                                <svg class="w-10 h-10 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path>
-                                </svg>
+                                <x-heroicon-o-qr-code class="w-10 h-10 text-blue-600 dark:text-blue-400" />
                             </div>
                             <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-3">Scan Member Card</h2>
                             <p class="text-lg text-gray-600 dark:text-gray-400">Enter barcode number or scan with barcode reader</p>
@@ -73,9 +69,7 @@
                                            placeholder="Enter or scan barcode..."
                                            autofocus>
                                     <div class="absolute inset-y-0 right-0 flex items-center pr-3">
-                                        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path>
-                                        </svg>
+                                        <x-heroicon-o-qr-code class="w-6 h-6 text-gray-400" />
                                     </div>
                                 </div>
                                 @error('scannedBarcode')
@@ -87,9 +81,7 @@
                             <div class="flex space-x-6">
                                 <button wire:click="scanBarcode" 
                                         class="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-4 px-8 rounded-xl transition-all duration-200 flex items-center justify-center space-x-3 shadow-lg hover:shadow-xl transform hover:scale-105">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
+                                    <x-heroicon-o-check-circle class="w-5 h-5" />
                                     <span>Scan Card</span>
                                 </button>
                                 <button wire:click="clearScan" 
@@ -121,9 +113,7 @@
                                 <!-- Success Result -->
                                 <div class="text-center">
                                     <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-green-100 to-green-200 dark:from-green-900 dark:to-green-800 rounded-full mb-6 shadow-lg">
-                                        <svg class="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                        </svg>
+                                        <x-heroicon-o-check-circle class="w-8 h-8 text-green-600 dark:text-green-400" />
                                     </div>
                                     <h3 class="text-3xl font-bold text-green-600 dark:text-green-400 mb-3">Access Granted</h3>
                                     <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">{{ $accessStatus }}</p>
@@ -132,9 +122,7 @@
                                 <!-- Denied Result -->
                                 <div class="text-center">
                                     <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-red-100 to-red-200 dark:from-red-900 dark:to-red-800 rounded-full mb-6 shadow-lg">
-                                        <svg class="w-8 h-8 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                        </svg>
+                                        <x-heroicon-o-x-circle class="w-8 h-8 text-red-600 dark:text-red-400" />
                                     </div>
                                     <h3 class="text-3xl font-bold text-red-600 dark:text-red-400 mb-3">Access Denied</h3>
                                     <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">{{ $accessStatus }}</p>
@@ -161,9 +149,7 @@
                                                          class="w-12 h-12 rounded-full object-cover">
                                                 @else
                                                     <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center justify-center">
-                                                        <svg class="w-6 h-6 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                                        </svg>
+                                                        <x-heroicon-o-user class="w-6 h-6 text-gray-500 dark:text-gray-400" />
                                                     </div>
                                                 @endif
                                                 <div>
@@ -207,9 +193,7 @@
                                                              class="w-12 h-12 rounded-full object-cover">
                                                     @else
                                                         <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center justify-center">
-                                                            <svg class="w-6 h-6 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                                            </svg>
+                                                            <x-heroicon-o-user class="w-6 h-6 text-gray-500 dark:text-gray-400" />
                                                         </div>
                                                     @endif
                                                     <div>
@@ -243,13 +227,9 @@
                                             </div>
                                         </div>
                                         @if($scan['access_granted'])
-                                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            </svg>
+                                            <x-heroicon-o-check-circle class="w-5 h-5 text-green-500" />
                                         @else
-                                            <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            </svg>
+                                            <x-heroicon-o-x-circle class="w-5 h-5 text-red-500" />
                                         @endif
                                     </div>
                                 @endforeach
@@ -287,27 +267,19 @@
                         <h3 class="text-xl font-bold text-blue-900 dark:text-blue-100 mb-6">Instructions</h3>
                         <ul class="space-y-4 text-base text-blue-800 dark:text-blue-200">
                             <li class="flex items-start">
-                                <svg class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
+                                <x-heroicon-o-check-circle class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
                                 Enter barcode manually or scan with reader
                             </li>
                             <li class="flex items-start">
-                                <svg class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
+                                <x-heroicon-o-information-circle class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
                                 System validates membership status
                             </li>
                             <li class="flex items-start">
-                                <svg class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
+                                <x-heroicon-o-check-circle class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
                                         Green = Access Granted
                             </li>
                             <li class="flex items-start">
-                                <svg class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
+                                <x-heroicon-o-x-circle class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
                                 Red = Access Denied
                             </li>
                         </ul>

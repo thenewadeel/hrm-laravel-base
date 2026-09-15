@@ -11,9 +11,7 @@
             <!-- Scanner Header with Animation -->
             <div class="text-center mb-6">
                 <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-lg mb-4">
-                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path>
-                    </svg>
+                    <x-heroicon-o-qr-code class="w-10 h-10 text-white" />
                 </div>
                 <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Member Access Scanner</h2>
                 <p class="text-gray-600 dark:text-gray-400">Scan member cards or enter member ID to verify access</p>
@@ -22,9 +20,7 @@
             <!-- Enhanced Input Field -->
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path>
-                    </svg>
+                    <x-heroicon-o-qr-code class="w-6 h-6 text-gray-400" />
                 </div>
                 <input
                     wire:model.live="scanInput"
@@ -42,9 +38,7 @@
                         class="relative px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/20 disabled:opacity-50 transition-all duration-200 font-medium"
                     >
                         <span wire:loading.remove class="flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
+                            <x-heroicon-o-check-circle class="w-5 h-5 mr-2" />
                             Scan
                         </span>
                         <span wire:loading class="flex items-center">
@@ -65,13 +59,9 @@
                     class="group relative px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:from-green-600 hover:to-emerald-700 focus:outline-none focus:ring-4 focus:ring-green-500/20 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                 >
                     <span class="flex items-center">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
+                        <x-heroicon-o-check-circle class="w-5 h-5 mr-2" />
                         Test Valid Member
-                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                        </svg>
+                        <x-heroicon-o-arrow-right class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </span>
                 </button>
                 <button
@@ -79,13 +69,9 @@
                     class="group relative px-6 py-3 bg-gradient-to-r from-red-500 to-pink-600 text-white rounded-xl hover:from-red-600 hover:to-pink-700 focus:outline-none focus:ring-4 focus:ring-red-500/20 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                 >
                     <span class="flex items-center">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
+                        <x-heroicon-o-x-mark class="w-5 h-5 mr-2" />
                         Test Invalid Entry
-                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                        </svg>
+                        <x-heroicon-o-arrow-right class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </span>
                 </button>
             </div>
@@ -115,21 +101,15 @@
                                          class="w-32 h-32 rounded-2xl border-4 border-white shadow-2xl object-cover">
                                 @else
                                     <div class="w-32 h-32 rounded-2xl border-4 border-white shadow-2xl bg-white/20 flex items-center justify-center backdrop-blur-sm">
-                                        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                        </svg>
+                                        <x-heroicon-o-user class="w-16 h-16 text-white" />
                                     </div>
                                 @endif
                                 <!-- Status indicator -->
                                 <div class="absolute -bottom-2 -right-2 w-8 h-8 {{ $currentMember['is_active'] ? 'bg-green-500' : 'bg-red-500' }} rounded-full border-4 border-white flex items-center justify-center">
                                     @if($currentMember['is_active'])
-                                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                                        </svg>
+                                        <x-heroicon-o-check class="w-4 h-4 text-white" />
                                     @else
-                                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path>
-                                        </svg>
+                                        <x-heroicon-o-x-mark class="w-4 h-4 text-white" />
                                     @endif
                                 </div>
                             </div>
@@ -139,16 +119,12 @@
                                 <h2 class="text-3xl font-bold mb-2">{{ $currentMember['name'] }}</h2>
                                 <div class="flex items-center space-x-4 text-indigo-100 mb-3">
                                     <span class="flex items-center">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"></path>
-                                        </svg>
+                                        <x-heroicon-o-document-plus class="w-4 h-4 mr-1" />
                                         {{ $currentMember['member_id'] }}
                                     </span>
                                     @if($currentMember['age'])
                                         <span class="flex items-center">
-                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            </svg>
+                                            <x-heroicon-o-clock class="w-4 h-4 mr-1" />
                                             {{ $currentMember['age'] }} years
                                         </span>
                                     @endif
@@ -168,9 +144,7 @@
                         </div>
                         
                         <button wire:click="closeProfile" class="text-white hover:text-gray-200 transition-colors p-2 hover:bg-white/10 rounded-lg">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                            </svg>
+                            <x-heroicon-o-x-mark class="w-6 h-6" />
                         </button>
                     </div>
                 </div>
@@ -180,22 +154,15 @@
                     <!-- Quick Actions Bar -->
                     <div class="mb-8 flex flex-wrap gap-3">
                         <button wire:click="checkInMember" class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
+                            <x-heroicon-o-check-circle class="w-5 h-5 mr-2" />
                             Check In Member
                         </button>
                         <button wire:click="addNote" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                            </svg>
+                            <x-heroicon-o-pencil-square class="w-5 h-5 mr-2" />
                             Add Note
                         </button>
                         <button wire:click="viewFullProfile" class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                            </svg>
+                            <x-heroicon-o-eye class="w-5 h-5 mr-2" />
                             Full Profile
                         </button>
                     </div>
@@ -206,9 +173,7 @@
                             <!-- Contact Information -->
                             <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
                                 <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
-                                    <svg class="w-6 h-6 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                    </svg>
+                                    <x-heroicon-o-user class="w-6 h-6 mr-2 text-indigo-600" />
                                     Contact Information
                                 </h3>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -243,9 +208,7 @@
                             <!-- Family Members Section -->
                             <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
                                 <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
-                                    <svg class="w-6 h-6 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                    </svg>
+                                    <x-heroicon-o-user-group class="w-6 h-6 mr-2 text-purple-600" />
                                     Family Members ({{ count($currentMember['family_members'] ?? []) }})
                                 </h3>
                                 @if(!empty($currentMember['family_members']))
@@ -261,9 +224,7 @@
                                                                  class="w-16 h-16 rounded-xl object-cover">
                                                         @else
                                                             <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-400 to-purple-400 flex items-center justify-center">
-                                                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                                                </svg>
+                                                                <x-heroicon-o-user class="w-8 h-8 text-white" />
                                                             </div>
                                                         @endif
                                                         <!-- Family member status indicator -->
@@ -287,9 +248,7 @@
                                     </div>
                                 @else
                                     <div class="text-center py-8">
-                                        <svg class="w-16 h-16 mx-auto text-gray-300 dark:text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                        </svg>
+                                        <x-heroicon-o-user-group class="w-16 h-16 mx-auto text-gray-300 dark:text-gray-600 mb-4" />
                                         <p class="text-gray-500 dark:text-gray-400">No family members registered</p>
                                     </div>
                                 @endif
@@ -298,9 +257,7 @@
                             <!-- Recent Activity -->
                             <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
                                 <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
-                                    <svg class="w-6 h-6 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
+                                    <x-heroicon-o-clock class="w-6 h-6 mr-2 text-green-600" />
                                     Recent Activity
                                 </h3>
                                 @if(!empty($currentMember['recent_activity'] ?? []))
@@ -309,17 +266,11 @@
                                             <div class="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                                                 <div class="w-10 h-10 {{ $activity['type'] === 'check_in' ? 'bg-green-100' : ($activity['type'] === 'payment' ? 'bg-blue-100' : 'bg-purple-100') }} rounded-full flex items-center justify-center">
                                                     @if($activity['type'] === 'check_in')
-                                                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                                        </svg>
+                                                        <x-heroicon-o-check-circle class="w-6 h-6 text-green-600" />
                                                     @elseif($activity['type'] === 'payment')
-                                                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                                        </svg>
+                                                        <x-heroicon-o-square-2-stack class="w-6 h-6 text-blue-600" />
                                                     @else
-                                                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                                                        </svg>
+                                                        <x-heroicon-o-document-text class="w-6 h-6 text-purple-600" />
                                                     @endif
                                                 </div>
                                                 <div class="flex-1">
@@ -341,13 +292,9 @@
                             <div class="{{ $currentMember['is_active'] ? 'bg-gradient-to-br from-green-500 to-green-600' : 'bg-gradient-to-br from-red-500 to-red-600' }} rounded-xl shadow-lg p-6 text-white">
                                 <div class="flex items-center mb-4">
                                     @if($currentMember['is_active'])
-                                        <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                        </svg>
+                                        <x-heroicon-o-check-circle class="w-8 h-8 mr-3" />
                                     @else
-                                        <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                        </svg>
+                                        <x-heroicon-o-clock class="w-8 h-8 mr-3" />
                                     @endif
                                     <h3 class="text-lg font-bold">Access Status</h3>
                                 </div>
@@ -383,21 +330,15 @@
                                 <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Benefits</h3>
                                 <ul class="space-y-2">
                                     <li class="flex items-center text-sm text-gray-700 dark:text-gray-300">
-                                        <svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
+                                        <x-heroicon-o-check class="w-4 h-4 mr-2 text-green-500" />
                                         Full facility access
                                     </li>
                                     <li class="flex items-center text-sm text-gray-700 dark:text-gray-300">
-                                        <svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
+                                        <x-heroicon-o-check class="w-4 h-4 mr-2 text-green-500" />
                                         Guest privileges ({{ rand(2, 5) }} per month)
                                     </li>
                                     <li class="flex items-center text-sm text-gray-700 dark:text-gray-300">
-                                        <svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
+                                        <x-heroicon-o-check class="w-4 h-4 mr-2 text-green-500" />
                                         Priority bookings
                                     </li>
                                 </ul>
@@ -415,9 +356,7 @@
             <div class="flex items-center">
                 <div class="flex-shrink-0">
                     <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
-                        <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
+                        <x-heroicon-o-information-circle class="w-6 h-6 text-blue-600 dark:text-blue-400" />
                     </div>
                 </div>
                 <div class="ml-4">
@@ -447,13 +386,9 @@
                             <div class="flex items-center flex-1">
                                 <div class="w-12 h-12 {{ $scan['success'] ?? false ? 'bg-green-100 dark:bg-green-900' : 'bg-red-100 dark:bg-red-900' }} rounded-full flex items-center justify-center mr-4">
                                     @if($scan['success'] ?? false)
-                                        <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
+                                        <x-heroicon-o-check class="w-6 h-6 text-green-600 dark:text-green-400" />
                                     @else
-                                        <svg class="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                        </svg>
+                                        <x-heroicon-o-x-mark class="w-6 h-6 text-red-600 dark:text-red-400" />
                                     @endif
                                 </div>
                                 <div class="flex-1">
@@ -473,16 +408,12 @@
                             <div class="ml-4">
                                 @if($scan['success'] ?? false)
                                     <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                        </svg>
+                                        <x-heroicon-o-check-circle class="w-4 h-4 mr-1" />
                                         Access Granted
                                     </span>
                                 @else
                                     <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                        </svg>
+                                        <x-heroicon-o-clock class="w-4 h-4 mr-1" />
                                         Not Found
                                     </span>
                                 @endif
@@ -504,9 +435,7 @@
                     <p class="text-xs text-indigo-600 dark:text-indigo-400 mt-2">+12% from last month</p>
                 </div>
                 <div class="p-3 bg-indigo-500 rounded-xl shadow-lg group-hover:scale-110 transition-transform">
-                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                    </svg>
+                    <x-heroicon-o-user-group class="w-8 h-8 text-white" />
                 </div>
             </div>
         </div>
@@ -519,9 +448,7 @@
                     <p class="text-xs text-green-600 dark:text-green-400 mt-2">Peak time: 2-4 PM</p>
                 </div>
                 <div class="p-3 bg-green-500 rounded-xl shadow-lg group-hover:scale-110 transition-transform">
-                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
+                    <x-heroicon-o-check-circle class="w-8 h-8 text-white" />
                 </div>
             </div>
         </div>
@@ -534,9 +461,7 @@
                     <p class="text-xs text-purple-600 dark:text-purple-400 mt-2">Most busy hour</p>
                 </div>
                 <div class="p-3 bg-purple-500 rounded-xl shadow-lg group-hover:scale-110 transition-transform">
-                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
+                    <x-heroicon-o-clock class="w-8 h-8 text-white" />
                 </div>
             </div>
         </div>
@@ -583,9 +508,7 @@
             <div class="flex items-center">
                 <span class="font-medium">${message}</span>
                 <button onclick="this.parentElement.parentElement.remove()" class="ml-4 text-white hover:text-gray-200">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
+                    <x-heroicon-o-x-mark class="w-5 h-5" />
                 </button>
             </div>
         `;

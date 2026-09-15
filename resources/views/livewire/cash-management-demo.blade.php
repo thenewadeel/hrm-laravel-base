@@ -12,18 +12,14 @@
                         wire:click="setMode('receipt')"
                         class="px-4 py-2 rounded-lg font-medium transition-colors {{ $mode === 'receipt' ? 'bg-emerald-600 text-white' : 'bg-primary text-primary hover:bg-secondary' }}"
                     >
-                        <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
+                        <x-heroicon-o-plus class="w-5 h-5 inline-block mr-2" />
                         Cash Receipt
                     </button>
                     <button 
                         wire:click="setMode('payment')"
                         class="px-4 py-2 rounded-lg font-medium transition-colors {{ $mode === 'payment' ? 'bg-rose-600 text-white' : 'bg-primary text-primary hover:bg-secondary' }}"
                     >
-                        <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
-                        </svg>
+                        <x-heroicon-o-minus class="w-5 h-5 inline-block mr-2" />
                         Cash Payment
                     </button>
                 </div>
@@ -297,9 +293,7 @@
                                     type="submit"
                                     class="px-6 py-3 {{ $mode === 'receipt' ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-rose-600 hover:bg-rose-700' }} text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 {{ $mode === 'receipt' ? 'focus:ring-emerald-500' : 'focus:ring-rose-500' }}"
                                 >
-                                    <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
+                                    <x-heroicon-o-check class="w-5 h-5 inline-block mr-2" />
                                     {{ $mode === 'receipt' ? 'Create Receipt' : 'Create Payment' }}
                                 </button>
                             </div>
@@ -364,9 +358,7 @@
 
                         @if($recentReceipts->count() === 0 && $recentPayments->count() === 0)
                             <div class="text-center py-8">
-                                <svg class="w-12 h-12 mx-auto text-muted mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                </svg>
+                                <x-heroicon-o-document-text class="w-12 h-12 mx-auto text-muted mb-4" />
                                 <p class="text-secondary">No transactions yet</p>
                                 <p class="text-sm text-muted mt-1">Create your first cash receipt or payment</p>
                             </div>

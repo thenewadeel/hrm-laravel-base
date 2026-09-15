@@ -10,9 +10,7 @@
         <div class="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
             <div class="flex items-center">
                 <div class="p-3 bg-indigo-100 dark:bg-indigo-900 rounded-lg mr-4">
-                    <svg class="w-6 h-6 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
+                    <x-heroicon-o-face-smile class="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
                 </div>
                 <div>
                     <p class="text-sm text-gray-500 dark:text-gray-400">Active Rules</p>
@@ -24,9 +22,7 @@
         <div class="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
             <div class="flex items-center">
                 <div class="p-3 bg-green-100 dark:bg-green-900 rounded-lg mr-4">
-                    <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
+                    <x-heroicon-o-face-smile class="w-6 h-6 text-green-600 dark:text-green-400" />
                 </div>
                 <div>
                     <p class="text-sm text-gray-500 dark:text-gray-400">Annual Revenue</p>
@@ -38,9 +34,7 @@
         <div class="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
             <div class="flex items-center">
                 <div class="p-3 bg-purple-100 dark:bg-purple-900 rounded-lg mr-4">
-                    <svg class="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                    </svg>
+                    <x-heroicon-o-cog-6-tooth class="w-6 h-6 text-purple-600 dark:text-purple-400" />
                 </div>
                 <div>
                     <p class="text-sm text-gray-500 dark:text-gray-400">Special Rules</p>
@@ -57,9 +51,7 @@
             <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
                 <h3 class="text-lg font-medium text-gray-900 dark:text-white">Fee Rules</h3>
                 <button wire:click="showAddNewRule" class="px-3 py-1 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
-                    <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
+                    <x-heroicon-o-plus class="w-4 h-4 inline mr-1" />
                     Add Rule
                 </button>
             </div>
@@ -99,25 +91,17 @@
                             @if($rule['editable'])
                                 <div class="flex space-x-2 ml-4">
                                     <button wire:click="editRule('{{ $key }}')" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                                        </svg>
+                                        <x-heroicon-o-pencil-square class="w-4 h-4" />
                                     </button>
                                     <button wire:click="toggleRuleStatus('{{ $key }}')" class="text-{{ $rule['active'] ? 'yellow' : 'green' }}-600 dark:text-{{ $rule['active'] ? 'yellow' : 'green' }}-400 hover:text-{{ $rule['active'] ? 'yellow' : 'green' }}-800 dark:hover:text-{{ $rule['active'] ? 'yellow' : 'green' }}-300">
                                         @if($rule['active'])
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728L5.636 5.636m12.728 12.728L5.636 5.636"></path>
-                                            </svg>
+                                            <x-heroicon-o-x-mark class="w-4 h-4" />
                                         @else
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            </svg>
+                                            <x-heroicon-o-check-circle class="w-4 h-4" />
                                         @endif
                                     </button>
                                     <button wire:click="deleteRule('{{ $key }}')" class="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                        </svg>
+                                        <x-heroicon-o-trash class="w-4 h-4" />
                                     </button>
                                 </div>
                             @endif
@@ -159,25 +143,17 @@
                             
                             <div class="flex space-x-2 ml-4">
                                 <button wire:click="editRule('{{ $key }}')" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                                    </svg>
+                                    <x-heroicon-o-pencil-square class="w-4 h-4" />
                                 </button>
                                 <button wire:click="toggleRuleStatus('{{ $key }}')" class="text-{{ $rule['active'] ? 'yellow' : 'green' }}-600 dark:text-{{ $rule['active'] ? 'yellow' : 'green' }}-400 hover:text-{{ $rule['active'] ? 'yellow' : 'green' }}-800 dark:hover:text-{{ $rule['active'] ? 'yellow' : 'green' }}-300">
                                     @if($rule['active'])
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728L5.636 5.636m12.728 12.728L5.636 5.636"></path>
-                                        </svg>
+                                        <x-heroicon-o-x-mark class="w-4 h-4" />
                                     @else
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                        </svg>
+                                        <x-heroicon-o-check-circle class="w-4 h-4" />
                                     @endif
                                 </button>
                                 <button wire:click="deleteRule('{{ $key }}')" class="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                    </svg>
+                                    <x-heroicon-o-trash class="w-4 h-4" />
                                 </button>
                             </div>
                         </div>

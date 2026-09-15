@@ -13,10 +13,7 @@
                     <!-- Welcome Message -->
                     <div class="text-center mb-8">
                         <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-blue-100">
-                            <svg class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
+                            <x-heroicon-o-user class="h-8 w-8 text-blue-600" />
                         </div>
                         <h2 class="mt-4 text-2xl font-bold text-gray-900">Welcome to Your Employee Portal!</h2>
                         <p class="mt-2 text-gray-600">
@@ -118,11 +115,7 @@
                         <!-- Current Organization Info -->
                         <div class="mt-8 p-4 bg-blue-50 rounded-lg">
                             <div class="flex items-center">
-                                <svg class="h-5 w-5 text-blue-400 mr-2" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                </svg>
+                                <x-heroicon-o-document-text class="h-5 w-5 text-blue-400 mr-2" />
                                 <span class="text-sm font-medium text-blue-800">Organization Information</span>
                             </div>
                             <p class="mt-1 text-sm text-blue-600">
@@ -142,11 +135,7 @@
                     <!-- Help Text -->
                     <div class="mt-8 border-t border-gray-200 pt-6">
                         <div class="flex">
-                            <svg class="h-5 w-5 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                            <x-heroicon-o-information-circle class="h-5 w-5 text-gray-400 mr-2" />
                             <div>
                                 <h4 class="text-sm font-medium text-gray-900">Why do we need this information?</h4>
                                 <p class="mt-1 text-sm text-gray-600">

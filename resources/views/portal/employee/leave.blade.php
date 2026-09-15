@@ -34,10 +34,7 @@
                 <div class="mt-4 flex md:mt-0 md:ml-4">
                     <a href="{{ route('portal.employee.leave.create') }}"
                         class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">
-                        <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>
+                        <x-heroicon-o-plus class="mr-2 h-4 w-4" />
                         Apply for Leave
                     </a>
                 </div>
@@ -50,11 +47,7 @@
                     <div class="p-5">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
-                                <svg class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
+                                <x-heroicon-o-check-circle class="h-6 w-6 text-green-600" />
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
@@ -71,11 +64,7 @@
                     <div class="p-5">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
-                                <svg class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
+                                <x-heroicon-o-clock class="h-6 w-6 text-yellow-600" />
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
@@ -94,11 +83,7 @@
                     <div class="p-5">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
-                                <svg class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
+                                <x-heroicon-o-calendar class="h-6 w-6 text-blue-600" />
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
@@ -117,11 +102,7 @@
                     <div class="p-5">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
-                                <svg class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
+                                <x-heroicon-o-calendar class="h-6 w-6 text-purple-600" />
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>

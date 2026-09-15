@@ -17,20 +17,12 @@
                             </h2>
                             <div class="mt-1 flex flex-col sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6">
                                 <div class="mt-2 flex items-center text-sm text-gray-500">
-                                    <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
+                                    <x-heroicon-o-calendar class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" />
                                     Period: {{ $period->format('F Y') }}
                                 </div>
                                 @if ($employee)
                                     <div class="mt-2 flex items-center text-sm text-gray-500">
-                                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-blue-500" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                        </svg>
+                                        <x-heroicon-o-user class="flex-shrink-0 mr-1.5 h-5 w-5 text-blue-500" />
                                         Employee: {{ $employee->user->name }}
                                     </div>
                                 @endif
@@ -129,28 +121,19 @@
                         <div class="space-y-3">
                             <button type="button"
                                 class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
+                                <x-heroicon-o-check-circle class="mr-2 h-4 w-4" />
                                 Calculate Payroll
                             </button>
 
                             <button type="button"
                                 class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                                <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                </svg>
+                                <x-heroicon-o-document-text class="mr-2 h-4 w-4" />
                                 Export for Payroll
                             </button>
 
                             <a href="{{ route('attendance.export-payroll', ['period' => $period->format('Y-m'), 'employee_id' => request('employee_id')]) }}"
                                 class="w-full inline-flex justify-center items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                                </svg>
+                                <x-heroicon-o-arrow-up-tray class="mr-2 h-4 w-4" />
                                 Download CSV
                             </a>
                         </div>
@@ -298,10 +281,7 @@
             <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <div class="flex">
                     <div class="flex-shrink-0">
-                        <svg class="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+                        <x-heroicon-o-information-circle class="h-5 w-5 text-blue-400" />
                     </div>
                     <div class="ml-3">
                         <h3 class="text-sm font-medium text-blue-800">Payroll Calculation Notes</h3>

@@ -16,11 +16,7 @@
                     <form method="POST" action="{{ route('attendance.biometric-sync') }}">
                         @csrf
                         <x-button variant="outline" type="submit">
-                            <svg class="mr-2 size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                            </svg>
+                            <x-heroicon-o-arrow-path class="mr-2 size-4" />
                             {{ __('Sync Biometric Data') }}
                         </x-button>
                     </form>
@@ -31,11 +27,7 @@
                             <input type="hidden" name="employee_id" value="{{ request('employee_id') }}">
                         @endif
                         <x-button type="submit">
-                            <svg class="mr-2 size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                            </svg>
+                            <x-heroicon-o-arrow-down-tray class="mr-2 size-4" />
                             {{ __('Export for Payroll') }}
                         </x-button>
                     </form>
@@ -46,44 +38,28 @@
                 <x-dashboard.stat-card label="{{ __('Present Today') }}" :value="($presentToday ?? '0')"
                     tone="success">
                     <x-slot name="icon">
-                        <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+                        <x-heroicon-o-check-circle class="size-6" />
                     </x-slot>
                 </x-dashboard.stat-card>
 
                 <x-dashboard.stat-card label="{{ __('Absent Today') }}" :value="($absentToday ?? '0')"
                     tone="error">
                     <x-slot name="icon">
-                        <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
-                        </svg>
+                        <x-heroicon-o-exclamation-triangle class="size-6" />
                     </x-slot>
                 </x-dashboard.stat-card>
 
                 <x-dashboard.stat-card label="{{ __('Late Arrivals') }}" :value="($lateToday ?? '0')"
                     tone="warning">
                     <x-slot name="icon">
-                        <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+                        <x-heroicon-o-clock class="size-6" />
                     </x-slot>
                 </x-dashboard.stat-card>
 
                 <x-dashboard.stat-card label="{{ __('Total Hours') }}"
                     :value="($totalHours ?? '0').' hrs'" tone="info">
                     <x-slot name="icon">
-                        <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v1m0 6v1m0-1v1" />
-                        </svg>
+                        <x-heroicon-o-face-frown class="size-6" />
                     </x-slot>
                 </x-dashboard.stat-card>
             </div>
@@ -179,11 +155,7 @@
                             <label for="search" class="block text-sm font-medium text-primary">{{ __('Search Employee') }}</label>
                             <div class="relative mt-1 rounded-md shadow-sm">
                                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <svg class="size-5 text-muted" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                    </svg>
+                                    <x-heroicon-o-magnifying-glass class="size-5 text-muted" />
                                 </div>
                                 <input type="text" id="search" name="search" value="{{ request('search') }}"
                                     placeholder="{{ __('Search by employee name...') }}"

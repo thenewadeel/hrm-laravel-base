@@ -69,9 +69,7 @@
                     <div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 shadow-lg overflow-hidden sm:rounded-lg border border-blue-200 dark:border-blue-700">
                         <div class="px-4 py-5 sm:px-6 border-b border-blue-200 dark:border-blue-700 bg-gradient-to-r from-blue-600 to-indigo-600">
                             <h3 class="text-lg leading-6 font-medium text-white flex items-center">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                </svg>
+                                <x-heroicon-o-user class="w-5 h-5 mr-2" />
                                 Personal & Contact Information
                             </h3>
                         </div>
@@ -79,18 +77,14 @@
                             <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
                                 <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm">
                                     <dt class="text-sm font-medium text-blue-600 dark:text-blue-400 flex items-center">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                        </svg>
+                                        <x-heroicon-o-user class="w-4 h-4 mr-1" />
                                         First Name
                                     </dt>
                                     <dd class="mt-1 text-sm font-semibold text-gray-900 dark:text-gray-100">{{ $employee->first_name }}</dd>
                                 </div>
                                 <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm">
                                     <dt class="text-sm font-medium text-blue-600 dark:text-blue-400 flex items-center">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                        </svg>
+                                        <x-heroicon-o-user class="w-4 h-4 mr-1" />
                                         Last Name
                                     </dt>
                                     <dd class="mt-1 text-sm font-semibold text-gray-900 dark:text-gray-100">{{ $employee->last_name }}</dd>
@@ -103,9 +97,7 @@
                                 @endif
                                 <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm">
                                     <dt class="text-sm font-medium text-blue-600 dark:text-blue-400 flex items-center">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                                        </svg>
+                                        <x-heroicon-o-envelope class="w-4 h-4 mr-1" />
                                         Email
                                     </dt>
                                     <dd class="mt-1 text-sm font-semibold text-gray-900 dark:text-gray-100">{{ $employee->email }}</dd>
@@ -113,9 +105,7 @@
                                 @if ($employee->phone)
                                     <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm">
                                         <dt class="text-sm font-medium text-blue-600 dark:text-blue-400 flex items-center">
-                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                                            </svg>
+                                            <x-heroicon-o-phone class="w-4 h-4 mr-1" />
                                             Phone
                                         </dt>
                                         <dd class="mt-1 text-sm font-semibold text-gray-900 dark:text-gray-100">{{ $employee->phone }}</dd>
@@ -124,9 +114,7 @@
                                 @if ($employee->date_of_birth)
                                     <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm">
                                         <dt class="text-sm font-medium text-blue-600 dark:text-blue-400 flex items-center">
-                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                            </svg>
+                                            <x-heroicon-o-calendar class="w-4 h-4 mr-1" />
                                             Date of Birth
                                         </dt>
                                         <dd class="mt-1 text-sm font-semibold text-gray-900 dark:text-gray-100">
@@ -137,9 +125,7 @@
                                 @if ($employee->gender)
                                     <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm">
                                         <dt class="text-sm font-medium text-blue-600 dark:text-blue-400 flex items-center">
-                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                            </svg>
+                                            <x-heroicon-o-user class="w-4 h-4 mr-1" />
                                             Gender
                                         </dt>
                                         <dd class="mt-1 text-sm font-semibold text-gray-900 dark:text-gray-100">{{ ucfirst($employee->gender) }}</dd>
@@ -148,10 +134,7 @@
                                 @if ($employee->address || $employee->city || $employee->state)
                                     <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm sm:col-span-2">
                                         <dt class="text-sm font-medium text-blue-600 dark:text-blue-400 flex items-center">
-                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                            </svg>
+                                            <x-heroicon-o-map-pin class="w-4 h-4 mr-1" />
                                             Address
                                         </dt>
                                         <dd class="mt-1 text-sm font-semibold text-gray-900 dark:text-gray-100">
@@ -178,9 +161,7 @@
                     <div class="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 shadow-lg overflow-hidden sm:rounded-lg border border-emerald-200 dark:border-emerald-700">
                         <div class="px-4 py-5 sm:px-6 border-b border-emerald-200 dark:border-emerald-700 bg-gradient-to-r from-emerald-600 to-teal-600">
                             <h3 class="text-lg leading-6 font-medium text-white flex items-center">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
+                                <x-heroicon-o-face-smile class="w-5 h-5 mr-2" />
                                 Payroll Details
                             </h3>
                         </div>
@@ -189,9 +170,7 @@
                                 @if ($employee->salary_per_month || $employee->basic_salary)
                                     <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-emerald-100 dark:border-emerald-800">
                                         <dt class="text-sm font-medium text-emerald-600 dark:text-emerald-400 flex items-center">
-                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            </svg>
+                                            <x-heroicon-o-face-smile class="w-4 h-4 mr-1" />
                                             Monthly Salary
                                         </dt>
                                         <dd class="mt-2 text-xl font-bold text-emerald-700 dark:text-emerald-300">
@@ -203,9 +182,7 @@
                                 @if ($employee->required_daily_hours)
                                     <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-blue-100 dark:border-blue-800">
                                         <dt class="text-sm font-medium text-blue-600 dark:text-blue-400 flex items-center">
-                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            </svg>
+                                            <x-heroicon-o-clock class="w-4 h-4 mr-1" />
                                             Daily Hours Required
                                         </dt>
                                         <dd class="mt-2 text-xl font-bold text-blue-700 dark:text-blue-300">
@@ -217,9 +194,7 @@
                                 @if ($employee->payrollEntries->isNotEmpty())
                                     <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-purple-100 dark:border-purple-800">
                                         <dt class="text-sm font-medium text-purple-600 dark:text-purple-400 flex items-center">
-                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                            </svg>
+                                            <x-heroicon-o-document-text class="w-4 h-4 mr-1" />
                                             Last Payroll Entry
                                         </dt>
                                         <dd class="mt-2 text-sm font-semibold text-purple-700 dark:text-purple-300">
@@ -234,9 +209,7 @@
                                 @if ($employee->increments->isNotEmpty())
                                     <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-amber-100 dark:border-amber-800">
                                         <dt class="text-sm font-medium text-amber-600 dark:text-amber-400 flex items-center">
-                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                                            </svg>
+                                            <x-heroicon-o-arrow-down class="w-4 h-4 mr-1" />
                                             Latest Increment
                                         </dt>
                                         <dd class="mt-2 text-sm font-semibold text-amber-700 dark:text-amber-300">
@@ -255,9 +228,7 @@
                                 @if ($employee->loans->isNotEmpty())
                                     <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-red-100 dark:border-red-800">
                                         <dt class="text-sm font-medium text-red-600 dark:text-red-400 flex items-center">
-                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            </svg>
+                                            <x-heroicon-o-clock class="w-4 h-4 mr-1" />
                                             Active Loans
                                         </dt>
                                         <dd class="mt-2 text-xl font-bold text-red-700 dark:text-red-300">
@@ -272,9 +243,7 @@
                                 @if ($employee->salaryAdvances->isNotEmpty())
                                     <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-orange-100 dark:border-orange-800">
                                         <dt class="text-sm font-medium text-orange-600 dark:text-orange-400 flex items-center">
-                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                            </svg>
+                                            <x-heroicon-o-square-2-stack class="w-4 h-4 mr-1" />
                                             Salary Advances
                                         </dt>
                                         <dd class="mt-2 text-xl font-bold text-orange-700 dark:text-orange-300">
@@ -293,9 +262,7 @@
                     <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 shadow-lg overflow-hidden sm:rounded-lg border border-green-200 dark:border-green-700">
                         <div class="px-4 py-5 sm:px-6 border-b border-green-200 dark:border-green-700 bg-gradient-to-r from-green-600 to-emerald-600">
                             <h3 class="text-lg leading-6 font-medium text-white flex items-center">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                                </svg>
+                                <x-heroicon-o-lock-closed class="w-5 h-5 mr-2" />
                                 System Access
                             </h3>
                         </div>
@@ -304,9 +271,7 @@
                                 <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-green-100 dark:border-green-800">
                                     <div class="flex items-center justify-between mb-3">
                                         <div class="flex items-center">
-                                            <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            </svg>
+                                            <x-heroicon-o-check-circle class="w-6 h-6 text-green-500 mr-2" />
                                             <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
                                                 Active System Access
                                             </span>
@@ -335,9 +300,7 @@
                                 </div>
                             @else
                                 <div class="text-center bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-red-100 dark:border-red-800">
-                                    <svg class="mx-auto h-12 w-12 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                                    </svg>
+                                    <x-heroicon-o-lock-closed class="mx-auto h-12 w-12 text-red-400" />
                                     <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No System Access</h3>
                                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">This employee cannot login to the system.</p>
                                     <div class="mt-4">
@@ -357,9 +320,7 @@
                     <div class="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 shadow-lg overflow-hidden sm:rounded-lg border border-purple-200 dark:border-purple-700">
                         <div class="px-4 py-5 sm:px-6 border-b border-purple-200 dark:border-purple-700 bg-gradient-to-r from-purple-600 to-pink-600">
                             <h3 class="text-lg leading-6 font-medium text-white flex items-center">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                                </svg>
+                                <x-heroicon-o-document-text class="w-5 h-5 mr-2" />
                                 HR & Organization
                             </h3>
                         </div>
@@ -367,9 +328,7 @@
                             <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
                                 <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm">
                                     <dt class="text-sm font-medium text-purple-600 dark:text-purple-400 flex items-center">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path>
-                                        </svg>
+                                        <x-heroicon-o-code-bracket class="w-4 h-4 mr-1" />
                                         Employee ID
                                     </dt>
                                     <dd class="mt-1 text-sm font-bold text-gray-900 dark:text-gray-100 font-mono bg-purple-50 dark:bg-purple-900/30 px-2 py-1 rounded">
@@ -378,24 +337,18 @@
                                 </div>
                                 <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm">
                                     <dt class="text-sm font-medium text-purple-600 dark:text-purple-400 flex items-center">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                        </svg>
+                                        <x-heroicon-o-check-circle class="w-4 h-4 mr-1" />
                                         Status
                                     </dt>
                                     <dd class="mt-1">
                                         @if ($employee->is_active)
                                             <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                                </svg>
+                                                <x-heroicon-m-check-circle class="w-3 h-3 mr-1" />
                                                 Active
                                             </span>
                                         @else
                                             <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
-                                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
-                                                </svg>
+                                                <x-heroicon-m-x-circle class="w-3 h-3 mr-1" />
                                                 Inactive
                                             </span>
                                         @endif
@@ -404,9 +357,7 @@
                                 @if ($employee->organizationUnit)
                                     <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm">
                                         <dt class="text-sm font-medium text-purple-600 dark:text-purple-400 flex items-center">
-                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                                            </svg>
+                                            <x-heroicon-o-document-text class="w-4 h-4 mr-1" />
                                             Department
                                         </dt>
                                         <dd class="mt-1 text-sm font-semibold text-gray-900 dark:text-gray-100">{{ $employee->organizationUnit->name }}</dd>
@@ -415,9 +366,7 @@
                                 @if ($employee->organizationUser && $employee->organizationUser->position)
                                     <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm">
                                         <dt class="text-sm font-medium text-purple-600 dark:text-purple-400 flex items-center">
-                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                                            </svg>
+                                            <x-heroicon-o-paper-airplane class="w-4 h-4 mr-1" />
                                             Position
                                         </dt>
                                         <dd class="mt-1 text-sm font-semibold text-gray-900 dark:text-gray-100">{{ $employee->organizationUser->position }}</dd>
@@ -426,16 +375,12 @@
                                 @if ($employee->is_admin)
                                     <div class="bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 p-3 rounded-lg shadow-sm border border-purple-200 dark:border-purple-700 sm:col-span-2">
                                         <dt class="text-sm font-medium text-purple-700 dark:text-purple-300 flex items-center">
-                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                                            </svg>
+                                            <x-heroicon-o-shield-check class="w-4 h-4 mr-1" />
                                             Administrator Access
                                         </dt>
                                         <dd class="mt-1">
                                             <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg">
-                                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                                </svg>
+                                                <x-heroicon-o-star class="w-3 h-3 mr-1" />
                                                 System Administrator
                                             </span>
                                         </dd>
@@ -449,9 +394,7 @@
                     <div class="bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 shadow-lg overflow-hidden sm:rounded-lg border border-orange-200 dark:border-orange-700">
                         <div class="px-4 py-5 sm:px-6 border-b border-orange-200 dark:border-orange-700 bg-gradient-to-r from-orange-600 to-red-600">
                             <h3 class="text-lg leading-6 font-medium text-white flex items-center">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
+                                <x-heroicon-o-clock class="w-5 h-5 mr-2" />
                                 Attendance Setup
                             </h3>
                             <p class="mt-1 max-w-2xl text-sm text-orange-100">Critical settings linking clock-in device to user</p>
@@ -460,9 +403,7 @@
                             <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
                                 <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm">
                                     <dt class="text-sm font-medium text-orange-600 dark:text-orange-400 flex items-center">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                        </svg>
+                                        <x-heroicon-o-bolt class="w-4 h-4 mr-1" />
                                         Biometric ID
                                     </dt>
                                     <dd class="mt-1 text-sm font-bold text-gray-900 dark:text-gray-100 font-mono bg-orange-50 dark:bg-orange-900/30 px-2 py-1 rounded">
@@ -476,9 +417,7 @@
                                 @if ($employee->required_daily_hours)
                                     <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm">
                                         <dt class="text-sm font-medium text-orange-600 dark:text-orange-400 flex items-center">
-                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            </svg>
+                                            <x-heroicon-o-clock class="w-4 h-4 mr-1" />
                                             Daily Hours Required
                                         </dt>
                                         <dd class="mt-1 text-sm font-bold text-gray-900 dark:text-gray-100">{{ $employee->required_daily_hours }} hours</dd>
@@ -486,9 +425,7 @@
                                 @endif
                                 <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm sm:col-span-2">
                                     <dt class="text-sm font-medium text-orange-600 dark:text-orange-400 flex items-center">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                        </svg>
+                                        <x-heroicon-o-calendar class="w-4 h-4 mr-1" />
                                         Shift Schedule
                                     </dt>
                                     <dd class="mt-1">
@@ -517,9 +454,7 @@
                     <div class="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-900/20 dark:via-purple-900/20 dark:to-pink-900/20 shadow-lg overflow-hidden sm:rounded-lg border border-indigo-200 dark:border-indigo-700">
                         <div class="px-4 py-5 sm:px-6 border-b border-indigo-200 dark:border-indigo-700 bg-gradient-to-r from-indigo-600 to-purple-600">
                             <h3 class="text-lg leading-6 font-medium text-white flex items-center">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                                </svg>
+                                <x-heroicon-o-document-duplicate class="w-5 h-5 mr-2" />
                                 Quick Stats
                             </h3>
                         </div>
@@ -527,9 +462,7 @@
                             <dl class="grid grid-cols-2 gap-4 sm:grid-cols-2">
                                 <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-blue-200 dark:border-blue-800 text-center hover:shadow-md transition-shadow">
                                     <dt class="text-sm font-medium text-blue-600 dark:text-blue-400 flex items-center justify-center">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                        </svg>
+                                        <x-heroicon-o-check-circle class="w-4 h-4 mr-1" />
                                         Attendance Records
                                     </dt>
                                     <dd class="mt-2 text-2xl font-bold text-blue-700 dark:text-blue-300">
@@ -539,9 +472,7 @@
                                 
                                 <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-green-200 dark:border-green-800 text-center hover:shadow-md transition-shadow">
                                     <dt class="text-sm font-medium text-green-600 dark:text-green-400 flex items-center justify-center">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                        </svg>
+                                        <x-heroicon-o-calendar class="w-4 h-4 mr-1" />
                                         Leave Requests
                                     </dt>
                                     <dd class="mt-2 text-2xl font-bold text-green-700 dark:text-green-300">
@@ -551,9 +482,7 @@
                                 
                                 <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-purple-200 dark:border-purple-800 text-center hover:shadow-md transition-shadow">
                                     <dt class="text-sm font-medium text-purple-600 dark:text-purple-400 flex items-center justify-center">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                        </svg>
+                                        <x-heroicon-o-square-2-stack class="w-4 h-4 mr-1" />
                                         Payroll Entries
                                     </dt>
                                     <dd class="mt-2 text-2xl font-bold text-purple-700 dark:text-purple-300">
@@ -563,9 +492,7 @@
                                 
                                 <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-amber-200 dark:border-amber-800 text-center hover:shadow-md transition-shadow">
                                     <dt class="text-sm font-medium text-amber-600 dark:text-amber-400 flex items-center justify-center">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                        </svg>
+                                        <x-heroicon-o-clock class="w-4 h-4 mr-1" />
                                         Years of Service
                                     </dt>
                                     <dd class="mt-2 text-2xl font-bold text-amber-700 dark:text-amber-300">

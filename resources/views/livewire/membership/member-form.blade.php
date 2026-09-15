@@ -30,9 +30,7 @@
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
                 <div class="bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 px-8 py-6">
                 <h4 class="text-xl font-bold text-white flex items-center">
-                    <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                    </svg>
+                    <x-heroicon-o-user class="w-6 h-6 mr-3" />
                     Personal Information
                 </h4>
             </div>
@@ -47,9 +45,7 @@
                                  class="w-32 h-32 rounded-full object-cover border-4 border-blue-100 dark:border-blue-900 shadow-lg">
                         @else
                             <div class="w-32 h-32 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-full flex items-center justify-center border-4 border-gray-300 dark:border-gray-600 shadow-lg">
-                                <svg class="w-16 h-16 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                </svg>
+                                <x-heroicon-o-user class="w-16 h-16 text-gray-400 dark:text-gray-500" />
                             </div>
                         @endif
                     </div>
@@ -162,9 +158,7 @@
                         </label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                                </svg>
+                                <x-heroicon-o-envelope class="h-6 w-6 text-gray-400" />
                             </div>
                             <input
                                 type="email"
@@ -187,9 +181,7 @@
                         </label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                                </svg>
+                                <x-heroicon-o-phone class="h-6 w-6 text-gray-400" />
                             </div>
                             <input
                                 type="tel"
@@ -365,16 +357,12 @@
         <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
             <div class="bg-gradient-to-r from-purple-600 via-purple-700 to-indigo-700 px-8 py-6 flex items-center justify-between">
                 <h4 class="text-xl font-bold text-white flex items-center">
-                    <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                    </svg>
+                    <x-heroicon-o-user-group class="w-6 h-6 mr-3" />
                     Family Members
                 </h4>
                 <button type="button" wire:click="addFamilyMember" 
                         class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-6 py-3 rounded-xl text-base font-semibold transition-colors flex items-center shadow-lg hover:shadow-xl">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg>
+                    <x-heroicon-o-plus class="w-5 h-5 mr-2" />
                     Add Family Member
                 </button>
             </div>
@@ -389,9 +377,7 @@
                                         <h5 class="text-lg font-semibold text-gray-900 dark:text-white">Family Member #{{ $index + 1 }}</h5>
                                         <button type="button" wire:click="removeFamilyMember({{ $index }})" 
                                                 class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 transition-colors p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg">
-                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                            </svg>
+                                            <x-heroicon-o-trash class="w-6 h-6" />
                                         </button>
                                     </div>
                                     
@@ -458,17 +444,13 @@
                     </div>
                 @else
                     <div class="text-center py-12">
-                        <svg class="mx-auto h-16 w-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
+                        <x-heroicon-o-user-group class="mx-auto h-16 w-16 text-gray-400" />
                         <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-white">No family members</h3>
                         <p class="mt-2 text-base text-gray-500 dark:text-gray-400">Get started by adding a family member.</p>
                         <div class="mt-8">
                             <button type="button" wire:click="addFamilyMember" 
                                     class="inline-flex items-center px-6 py-3 border border-transparent shadow-lg text-base font-semibold rounded-xl text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all hover:shadow-xl">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                </svg>
+                                <x-heroicon-o-plus class="w-5 h-5 mr-2" />
                                 Add Family Member
                             </button>
                         </div>
@@ -485,9 +467,7 @@
             </a>
             <button type="submit" 
                     class="px-8 py-4 border border-transparent rounded-xl shadow-lg text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all hover:shadow-xl flex items-center">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
+                <x-heroicon-o-check class="w-5 h-5 mr-2" />
                 {{ $editMode ? 'Update Member' : 'Create Member' }}
             </button>
         </div>

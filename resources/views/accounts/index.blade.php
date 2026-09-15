@@ -65,9 +65,7 @@
                                class="block p-6 surface border border-secondary rounded-lg shadow-sm hover:bg-tertiary transition-colors">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
-                                        <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v2m0-4c0 1.11-.89 2-2 2H8m8 0c1.11 0 2-.89 2-2V8m0 0V6a2 2 0 00-2-2H8a2 2 0 00-2 2v2"></path>
-                                        </svg>
+                                        <x-heroicon-o-face-smile class="h-8 w-8 text-green-600" />
                                     </div>
                                     <div class="ml-4">
                                         <h3 class="text-lg font-medium text-primary">Receivables Outstanding</h3>
@@ -80,9 +78,7 @@
                                class="block p-6 surface border border-secondary rounded-lg shadow-sm hover:bg-tertiary transition-colors">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
-                                        <svg class="h-8 w-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 002-2v-4a2 2 0 00-2-2H5m0 0a2 2 0 00-2 2v4a2 2 0 002 2h16z"></path>
-                                        </svg>
+                                        <x-heroicon-o-shopping-cart class="h-8 w-8 text-red-600" />
                                     </div>
                                     <div class="ml-4">
                                         <h3 class="text-lg font-medium text-primary">Payables Outstanding</h3>
@@ -101,9 +97,7 @@
                                class="block p-6 surface border border-secondary rounded-lg shadow-sm hover:bg-tertiary transition-colors">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
-                                        <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                        </svg>
+                                        <x-heroicon-o-check-circle class="h-8 w-8 text-green-600" />
                                     </div>
                                     <div class="ml-4">
                                         <h3 class="text-lg font-medium text-primary">Sales Voucher</h3>
@@ -116,9 +110,7 @@
                                class="block p-6 surface border border-secondary rounded-lg shadow-sm hover:bg-tertiary transition-colors">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
-                                        <svg class="h-8 w-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-                                        </svg>
+                                        <x-heroicon-o-shopping-bag class="h-8 w-8 text-blue-600" />
                                     </div>
                                     <div class="ml-4">
                                         <h3 class="text-lg font-medium text-primary">Purchase Voucher</h3>
@@ -131,9 +123,7 @@
                                class="block p-6 surface border border-secondary rounded-lg shadow-sm hover:bg-tertiary transition-colors">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
-                                        <svg class="h-8 w-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                        </svg>
+                                        <x-heroicon-o-user-group class="h-8 w-8 text-purple-600" />
                                     </div>
                                     <div class="ml-4">
                                         <h3 class="text-lg font-medium text-primary">Salary Voucher</h3>
@@ -146,9 +136,7 @@
                                class="block p-6 surface border border-secondary rounded-lg shadow-sm hover:bg-tertiary transition-colors">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
-                                        <svg class="h-8 w-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"></path>
-                                        </svg>
+                                        <x-heroicon-o-document-text class="h-8 w-8 text-red-600" />
                                     </div>
                                     <div class="ml-4">
                                         <h3 class="text-lg font-medium text-primary">Expense Voucher</h3>

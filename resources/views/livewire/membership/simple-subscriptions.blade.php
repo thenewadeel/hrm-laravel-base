@@ -29,9 +29,7 @@
                     <p class="text-2xl font-bold text-green-600 dark:text-green-400">{{ $subscriptionStats['active'] }}</p>
                 </div>
                 <div class="p-2 bg-green-100 dark:bg-green-900 rounded-lg">
-                    <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
+                    <x-heroicon-o-check-circle class="w-6 h-6 text-green-600 dark:text-green-400" />
                 </div>
             </div>
         </div>
@@ -43,9 +41,7 @@
                     <p class="text-2xl font-bold text-yellow-600 dark:text-yellow-400">{{ $subscriptionStats['expiring'] }}</p>
                 </div>
                 <div class="p-2 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
-                    <svg class="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
+                    <x-heroicon-o-clock class="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
                 </div>
             </div>
         </div>
@@ -57,9 +53,7 @@
                     <p class="text-2xl font-bold text-red-600 dark:text-red-400">{{ $subscriptionStats['expired'] }}</p>
                 </div>
                 <div class="p-2 bg-red-100 dark:bg-red-900 rounded-lg">
-                    <svg class="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
+                    <x-heroicon-o-x-mark class="w-6 h-6 text-red-600 dark:text-red-400" />
                 </div>
             </div>
         </div>
@@ -71,9 +65,7 @@
                     <p class="text-2xl font-bold text-blue-600 dark:text-blue-400">{{ $subscriptionStats['new_this_month'] }}</p>
                 </div>
                 <div class="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
-                    <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
-                    </svg>
+                    <x-heroicon-o-user-plus class="w-6 h-6 text-blue-600 dark:text-blue-400" />
                 </div>
             </div>
         </div>
@@ -85,9 +77,7 @@
                     <p class="text-2xl font-bold text-purple-600 dark:text-purple-400">{{ $subscriptionStats['auto_renew_enabled'] ?? 0 }}</p>
                 </div>
                 <div class="p-2 bg-purple-100 dark:bg-purple-900 rounded-lg">
-                    <svg class="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                    </svg>
+                    <x-heroicon-o-arrow-path class="w-6 h-6 text-purple-600 dark:text-purple-400" />
                 </div>
             </div>
         </div>
@@ -156,9 +146,7 @@
                         <ul class="text-xs text-gray-600 dark:text-gray-400 space-y-1">
                             @foreach($plan->benefits as $benefit)
                                 <li class="flex items-start">
-                                    <svg class="w-3 h-3 text-green-500 mr-1 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
+                                    <x-heroicon-o-check class="w-3 h-3 text-green-500 mr-1 mt-0.5 flex-shrink-0" />
                                     {{ $benefit }}
                                 </li>
                             @endforeach
@@ -349,23 +337,17 @@
                                 <div class="flex items-center space-x-2">
                                     @if($subscription->paid_amount < $subscription->total_amount && auth()->user()->can('membership.process_payments'))
                                         <button wire:click="showPaymentForm({{ $subscription->id }})" class="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300" title="Process Payment">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                            </svg>
+                                            <x-heroicon-o-square-2-stack class="w-4 h-4" />
                                         </button>
                                     @endif
                                     @if($subscription->status === 'active' && auth()->user()->can('membership.renew_subscriptions'))
                                         <button wire:click="renewSubscription({{ $subscription->id }})" class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300" title="Renew">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                                            </svg>
+                                            <x-heroicon-o-arrow-path class="w-4 h-4" />
                                         </button>
                                     @endif
                                     @if($subscription->status === 'active' && auth()->user()->can('membership.cancel_subscriptions'))
                                         <button wire:click="cancelSubscription({{ $subscription->id }})" class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300" title="Cancel">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                            </svg>
+                                            <x-heroicon-o-x-mark class="w-4 h-4" />
                                         </button>
                                     @endif
                                 </div>
@@ -394,27 +376,21 @@
     <div class="mt-6 flex flex-wrap gap-3">
         @if(auth()->user()->can('membership.manage_subscriptions'))
             <button wire:click="showAddSubscriptionForm" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                </svg>
+                <x-heroicon-o-plus class="w-4 h-4 inline mr-2" />
                 New Subscription
             </button>
         @endif
         
         @if(auth()->user()->can('membership.renew_subscriptions'))
             <button wire:click="processRenewals" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
-                <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                </svg>
+                <x-heroicon-o-arrow-path class="w-4 h-4 inline mr-2" />
                 Process Renewals
             </button>
         @endif
         
         @if(auth()->user()->can('membership.manage_subscriptions'))
             <button wire:click="sendReminders" class="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500">
-                <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-                </svg>
+                <x-heroicon-o-bell class="w-4 h-4 inline mr-2" />
                 Send Reminders
             </button>
         @endif
