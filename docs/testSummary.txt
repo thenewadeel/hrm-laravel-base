@@ -6,13 +6,16 @@
 +------------------+------------------+
 | Metric           | Count/Percentage |
 +------------------+------------------+
-| Total Tests      | 1456             |
-| Passed           | 1442 (99%)       |
-| Failed           | 9 (0.6%)         |
+| Total Tests      | 1468             |
+| Passed           | 1452 (98.9%)     |
+| Failed           | 11 (0.7%)        |
 | Warnings/Skipped | 5 (0.3%)         |
 +------------------+------------------+
 
---- ❌ Detailed Failures (9 Total) ---
+--- ❌ Detailed Failures (11 Total) ---
+
+ Member (1/18 failures):
+   ⨯ Member Model → relationships work correctly
 
  Voucher (1/11 failures):
    ⨯ voucher generates sequential numbers
@@ -25,11 +28,14 @@
    ⨯ fee distribution log viewer respects organization isolation
    ⨯ fee distribution log viewer loads logs with relationships
 
- EnhancedFeeService (1/16 failures):
-   ⨯ generates overdue fees with proper business rules
-
  MemberDetails (1/15 failures):
    ⨯ it uploads member photo correctly
+
+ SimpleSubscriptions (1/14 failures):
+   ⨯ simple subscriptions shows correct statistics
+
+ Compliance (1/3 failures):
+   ⨯ multi-tenant data isolation under load testing
 
 
 --- ⚠️ Warnings/Skipped Tests (5 Total) ---
@@ -71,7 +77,6 @@
 | FamilyMember                     | 23/23        |
 | MemberFee                        | 25/25        |
 | MemberSubscription               | 14/14        |
-| Member                           | 18/18        |
 | MembershipService                | 33/33        |
 | SubscriptionPlan                 | 19/19        |
 | InventoryTransaction             | 1/1          |
@@ -155,7 +160,7 @@
 | FixedAsset                       | 11/11        |
 | ModelSelectDropdown              | 4/4          |
 | EmployeeManagement               | 16/16        |
-| EmployeePositionShiftIntegration | 5/5          |
+| EmployeePositionShiftIntegration | 9/9          |
 | JobPositionController            | 8/8          |
 | ShiftController                  | 5/5          |
 | HrmDashboardController           | 18/18        |
@@ -190,6 +195,7 @@
 | AdvancedMemberList               | 14/14        |
 | BulkMemberUpload                 | 18/18        |
 | EnhancedFeeManager               | 7/7          |
+| EnhancedFeeService               | 16/16        |
 | FeeManager                       | 8/8          |
 | MemberForm                       | 6/6          |
 | MemberList                       | 7/7          |
@@ -199,7 +205,6 @@
 | MultiTenantIsolation             | 18/18        |
 | ServiceIntegration               | 9/9          |
 | SimpleFees                       | 8/8          |
-| SimpleSubscriptions              | 14/14        |
 | SubscriptionManager              | 7/7          |
 | Customer                         | 8/8          |
 | FinancialManagement              | 12/12        |
@@ -217,6 +222,7 @@
 | NavigationHover                  | 4/4          |
 | NewBadge                         | 2/2          |
 | DepartmentManagement             | 7/7          |
+| MvpVerticalSliceIsolation        | 8/8          |
 | OrganizationDashboard            | 5/5          |
 | OrganizationUserIntegration      | 7/7          |
 | OutstandingStatementsBasic       | 1/1          |
@@ -230,7 +236,6 @@
 | ManagerPortal                    | 5/5          |
 | ProductionOptimization           | 10/10        |
 | AdvancedReporting                | 7/7          |
-| Compliance                       | 3/3          |
 | MembershipService                | 12/12        |
 | SetupChartOfAccounts             | 3/3          |
 | SetupStore                       | 3/3          |

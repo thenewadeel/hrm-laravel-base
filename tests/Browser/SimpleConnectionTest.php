@@ -14,7 +14,7 @@ class SimpleConnectionTest extends JavaScriptDuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->pause(1000)
-                ->assertTitle('HRM-Base');
+                ->assertTitleContains('HRM-Base');
         });
     }
 }

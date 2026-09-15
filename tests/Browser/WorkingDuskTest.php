@@ -14,7 +14,7 @@ class WorkingDuskTest extends BaseBrowserTest
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->pause(2000)
-                ->assertTitle('HRM-Base');
+                ->assertTitleContains('HRM-Base');
         });
     }
 

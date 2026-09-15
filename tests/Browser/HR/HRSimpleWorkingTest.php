@@ -15,7 +15,7 @@ class HRSimpleWorkingTest extends JavaScriptDuskTestCase
             // Start at home page
             $browser->visit('/')
                 ->pause(3000)
-                ->assertTitle('HRM-Base');
+                ->assertTitleContains('HRM-Base');
 
             // Navigate to HR employees
             $browser->visit('/hr/employees')

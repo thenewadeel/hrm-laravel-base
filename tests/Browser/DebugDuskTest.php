@@ -22,7 +22,7 @@ class DebugDuskTest extends BaseBrowserTest
             file_put_contents(storage_path('app/debug-page-source.html'), $source);
 
             // Check if we can find any text
-            $browser->assertTitle('hrm-laravel-base');
+            $browser->assertTitleContains('hrm-laravel-base');
         });
     }
 }

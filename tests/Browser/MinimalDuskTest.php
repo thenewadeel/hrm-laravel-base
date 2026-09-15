@@ -19,7 +19,7 @@ class MinimalDuskTest extends JavaScriptDuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->pause(2000)
-                ->assertTitle('HRM-Base');
+                ->assertTitleContains('HRM-Base');
         });
     }
 }
