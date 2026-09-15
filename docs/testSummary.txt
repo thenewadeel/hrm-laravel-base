@@ -7,15 +7,12 @@
 | Metric           | Count/Percentage |
 +------------------+------------------+
 | Total Tests      | 1468             |
-| Passed           | 1452 (98.9%)     |
-| Failed           | 11 (0.7%)        |
+| Passed           | 1454 (99%)       |
+| Failed           | 9 (0.6%)         |
 | Warnings/Skipped | 5 (0.3%)         |
 +------------------+------------------+
 
---- ❌ Detailed Failures (11 Total) ---
-
- Member (1/18 failures):
-   ⨯ Member Model → relationships work correctly
+--- ❌ Detailed Failures (9 Total) ---
 
  Voucher (1/11 failures):
    ⨯ voucher generates sequential numbers
@@ -33,9 +30,6 @@
 
  SimpleSubscriptions (1/14 failures):
    ⨯ simple subscriptions shows correct statistics
-
- Compliance (1/3 failures):
-   ⨯ multi-tenant data isolation under load testing
 
 
 --- ⚠️ Warnings/Skipped Tests (5 Total) ---
@@ -77,6 +71,7 @@
 | FamilyMember                     | 23/23        |
 | MemberFee                        | 25/25        |
 | MemberSubscription               | 14/14        |
+| Member                           | 18/18        |
 | MembershipService                | 33/33        |
 | SubscriptionPlan                 | 19/19        |
 | InventoryTransaction             | 1/1          |
@@ -236,6 +231,7 @@
 | ManagerPortal                    | 5/5          |
 | ProductionOptimization           | 10/10        |
 | AdvancedReporting                | 7/7          |
+| Compliance                       | 3/3          |
 | MembershipService                | 12/12        |
 | SetupChartOfAccounts             | 3/3          |
 | SetupStore                       | 3/3          |

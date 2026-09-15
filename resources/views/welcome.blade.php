@@ -21,10 +21,7 @@
                 <button type="button" onclick="document.dispatchEvent(new CustomEvent('toggle-theme'))"
                     class="flex size-9 items-center justify-center rounded-lg border border-secondary text-secondary transition-colors hover:bg-secondary"
                     aria-label="Toggle dark mode">
-                    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-                    </svg>
+                    <x-heroicon-o-sun class="size-4" />
                 </button>
                 <a href="{{ route('login') }}"
                     class="rounded-lg px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-secondary">Log in</a>
@@ -38,10 +35,7 @@
                 <button type="button" onclick="document.dispatchEvent(new CustomEvent('toggle-theme'))"
                     class="flex size-9 items-center justify-center rounded-lg border border-secondary text-secondary transition-colors hover:bg-secondary"
                     aria-label="Toggle dark mode">
-                    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-                    </svg>
+                    <x-heroicon-o-sun class="size-4" />
                 </button>
                 <button type="button" @click="mobileOpen = !mobileOpen"
                     class="flex size-9 items-center justify-center rounded-lg border border-secondary text-secondary transition-colors hover:bg-secondary"
@@ -120,13 +114,7 @@
                 {{-- Feature 1 --}}
                 <div class="group rounded-2xl border border-secondary bg-surface p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
                     <div class="flex size-12 items-center justify-center rounded-xl bg-primary/10 text-accent">
-                        <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                            <circle cx="9" cy="7" r="4" />
-                            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                        </svg>
+                        <x-heroicon-o-user-group class="size-6" />
                     </div>
                     <h3 class="mt-5 text-lg font-semibold">Employee Management</h3>
                     <p class="mt-2 text-sm leading-6 text-secondary">
@@ -138,13 +126,7 @@
                 {{-- Feature 2 --}}
                 <div class="group rounded-2xl border border-secondary bg-surface p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
                     <div class="flex size-12 items-center justify-center rounded-xl bg-primary/10 text-accent">
-                        <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <rect x="2" y="5" width="20" height="14" rx="2" />
-                            <path d="M2 10h20" />
-                            <path d="m6.5 15 .5.5" />
-                            <path d="m10.5 15 .5.5" />
-                        </svg>
+                        <x-heroicon-o-minus class="size-6" />
                     </div>
                     <h3 class="mt-5 text-lg font-semibold">Payroll &amp; Compensation</h3>
                     <p class="mt-2 text-sm leading-6 text-secondary">
@@ -156,11 +138,7 @@
                 {{-- Feature 3 --}}
                 <div class="group rounded-2xl border border-secondary bg-surface p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
                     <div class="flex size-12 items-center justify-center rounded-xl bg-primary/10 text-accent">
-                        <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <circle cx="12" cy="12" r="9" />
-                            <path d="M12 7v5l3 3" />
-                        </svg>
+                        <x-heroicon-o-clock class="size-6" />
                     </div>
                     <h3 class="mt-5 text-lg font-semibold">Time &amp; Attendance</h3>
                     <p class="mt-2 text-sm leading-6 text-secondary">
@@ -172,12 +150,7 @@
                 {{-- Feature 4 --}}
                 <div class="group rounded-2xl border border-secondary bg-surface p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
                     <div class="flex size-12 items-center justify-center rounded-xl bg-primary/10 text-accent">
-                        <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M3 3v18h18" />
-                            <path d="m7 14 4-4 4 4 5-6" />
-                            <path d="M18 8h3v3" />
-                        </svg>
+                        <x-heroicon-o-chart-bar class="size-6" />
                     </div>
                     <h3 class="mt-5 text-lg font-semibold">Financial Accounting</h3>
                     <p class="mt-2 text-sm leading-6 text-secondary">
@@ -189,12 +162,7 @@
                 {{-- Feature 5 --}}
                 <div class="group rounded-2xl border border-secondary bg-surface p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
                     <div class="flex size-12 items-center justify-center rounded-xl bg-primary/10 text-accent">
-                        <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
-                            <path d="M3.3 7 12 12l8.7-5" />
-                            <path d="M12 22V12" />
-                        </svg>
+                        <x-heroicon-o-square-3-stack-3d class="size-6" />
                     </div>
                     <h3 class="mt-5 text-lg font-semibold">Inventory Management</h3>
                     <p class="mt-2 text-sm leading-6 text-secondary">
@@ -206,15 +174,7 @@
                 {{-- Feature 6 --}}
                 <div class="group rounded-2xl border border-secondary bg-surface p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
                     <div class="flex size-12 items-center justify-center rounded-xl bg-primary/10 text-accent">
-                        <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M3 21h18" />
-                            <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16" />
-                            <path d="M9 9h6" />
-                            <path d="M9 13h6" />
-                            <path d="M9 17h4" />
-                            <circle cx="17" cy="5" r="2" />
-                        </svg>
+                        <x-heroicon-o-document-text class="size-6" />
                     </div>
                     <h3 class="mt-5 text-lg font-semibold">Organization &amp; Security</h3>
                     <p class="mt-2 text-sm leading-6 text-secondary">
@@ -242,31 +202,19 @@
                         <ul class="mt-8 space-y-4">
                             <li class="flex items-start gap-3">
                                 <span class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-accent">
-                                    <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                            d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                    <x-heroicon-m-check-circle class="size-4" />
                                 </span>
                                 <p class="text-sm text-secondary"><span class="font-semibold text-primary">Employee lifecycle.</span> Profiles, documents, positions, and full history in one place.</p>
                             </li>
                             <li class="flex items-start gap-3">
                                 <span class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-accent">
-                                    <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                            d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                    <x-heroicon-m-check-circle class="size-4" />
                                 </span>
                                 <p class="text-sm text-secondary"><span class="font-semibold text-primary">Payroll that pays.</span> Increments, allowances, deductions, loans, advances, and tax management.</p>
                             </li>
                             <li class="flex items-start gap-3">
                                 <span class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-accent">
-                                    <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                            d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                    <x-heroicon-m-check-circle class="size-4" />
                                 </span>
                                 <p class="text-sm text-secondary"><span class="font-semibold text-primary">Attend &amp; approve.</span> Shifts, biometric capture, leave workflows, and manager approvals.</p>
                             </li>
@@ -346,31 +294,19 @@
                         <ul class="mt-8 space-y-4">
                             <li class="flex items-start gap-3">
                                 <span class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-accent">
-                                    <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                            d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                    <x-heroicon-m-check-circle class="size-4" />
                                 </span>
                                 <p class="text-sm text-secondary"><span class="font-semibold text-primary">Double-entry always balanced.</span> Journal entries, ledgers, and specialized vouchers.</p>
                             </li>
                             <li class="flex items-start gap-3">
                                 <span class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-accent">
-                                    <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                            d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                    <x-heroicon-m-check-circle class="size-4" />
                                 </span>
                                 <p class="text-sm text-secondary"><span class="font-semibold text-primary">Bank &amp; cash.</span> Reconciliation, statements, receipts, and payments with full audit trails.</p>
                             </li>
                             <li class="flex items-start gap-3">
                                 <span class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-accent">
-                                    <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                            d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                    <x-heroicon-m-check-circle class="size-4" />
                                 </span>
                                 <p class="text-sm text-secondary"><span class="font-semibold text-primary">Financial reporting.</span> Balance sheet, income statement, trial balance, and outstanding aging with PDF export.</p>
                             </li>
@@ -389,31 +325,19 @@
                         <ul class="mt-8 space-y-4">
                             <li class="flex items-start gap-3">
                                 <span class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-accent">
-                                    <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                            d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                    <x-heroicon-m-check-circle class="size-4" />
                                 </span>
                                 <p class="text-sm text-secondary"><span class="font-semibold text-primary">Multi-store visibility.</span> Track stock levels and value across every location in real time.</p>
                             </li>
                             <li class="flex items-start gap-3">
                                 <span class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-accent">
-                                    <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                            d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                    <x-heroicon-m-check-circle class="size-4" />
                                 </span>
                                 <p class="text-sm text-secondary"><span class="font-semibold text-primary">Every movement logged.</span> Stock in, out, transfer, and adjustment with full history.</p>
                             </li>
                             <li class="flex items-start gap-3">
                                 <span class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-accent">
-                                    <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                            d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                    <x-heroicon-m-check-circle class="size-4" />
                                 </span>
                                 <p class="text-sm text-secondary"><span class="font-semibold text-primary">Smart reordering.</span> Automated low-stock alerts and FIFO or weighted-average valuation.</p>
                             </li>
@@ -504,11 +428,11 @@
             <div class="mt-16 grid gap-6 md:grid-cols-3">
                 <figure class="flex flex-col rounded-2xl border border-secondary bg-surface p-6 shadow-sm">
                     <div class="flex gap-1 text-warning" aria-label="5 out of 5 stars">
-                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" /></svg>
-                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" /></svg>
-                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" /></svg>
-                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" /></svg>
-                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" /></svg>
+                        <x-heroicon-m-sparkles class="size-4" />
+                        <x-heroicon-m-sparkles class="size-4" />
+                        <x-heroicon-m-sparkles class="size-4" />
+                        <x-heroicon-m-sparkles class="size-4" />
+                        <x-heroicon-m-sparkles class="size-4" />
                     </div>
                     <blockquote class="mt-4 flex-1 text-sm leading-6 text-secondary">
                         "We replaced four separate tools with HRM. Payroll went from a weekend of spreadsheets to a
@@ -525,12 +449,12 @@
 
                 <figure class="flex flex-col rounded-2xl border border-secondary bg-surface p-6 shadow-sm">
                     <div class="flex gap-1 text-warning" aria-label="5 out of 5 stars">
-                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" /></svg>
-                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" /></svg>
-                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" /></svg>
-                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" /></svg>
-                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" /></svg>
-                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" /></svg>
+                        <x-heroicon-m-sparkles class="size-4" />
+                        <x-heroicon-m-sparkles class="size-4" />
+                        <x-heroicon-m-sparkles class="size-4" />
+                        <x-heroicon-m-sparkles class="size-4" />
+                        <x-heroicon-m-sparkles class="size-4" />
+                        <x-heroicon-m-sparkles class="size-4" />
                     </div>
                     <blockquote class="mt-4 flex-1 text-sm leading-6 text-secondary">
                         "The multi-tenancy is exactly what we needed as an agency running multiple clients. Data stays
@@ -547,12 +471,12 @@
 
                 <figure class="flex flex-col rounded-2xl border border-secondary bg-surface p-6 shadow-sm">
                     <div class="flex gap-1 text-warning" aria-label="5 out of 5 stars">
-                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" /></svg>
-                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" /></svg>
-                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" /></svg>
-                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" /></svg>
-                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" /></svg>
-                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" /></svg>
+                        <x-heroicon-m-sparkles class="size-4" />
+                        <x-heroicon-m-sparkles class="size-4" />
+                        <x-heroicon-m-sparkles class="size-4" />
+                        <x-heroicon-m-sparkles class="size-4" />
+                        <x-heroicon-m-sparkles class="size-4" />
+                        <x-heroicon-m-sparkles class="size-4" />
                     </div>
                     <blockquote class="mt-4 flex-1 text-sm leading-6 text-secondary">
                         "Our auditors love the trail. Every voucher, every movement, every approval has an owner and a
