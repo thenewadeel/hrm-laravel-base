@@ -62,3 +62,6 @@ subagents/
 
 # test results
 docs/testResults*
+
+# Reference-only developer files (never commit)
+docs/list of views.txt
