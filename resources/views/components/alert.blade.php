@@ -1,6 +1,7 @@
 @props([
     'type' => 'info',
     'title' => null,
+    'description' => null,
     'dismissible' => false,
 ])
 
@@ -46,6 +47,9 @@
         <div class="min-w-0 flex-1 text-sm text-primary">
             @if ($title)
                 <p class="font-semibold {{ $tone['text'] }}">{{ $title }}</p>
+            @endif
+            @if ($description)
+                <p class="mt-1 {{ $tone['text'] }}">{{ $description }}</p>
             @endif
             {{ $slot }}
         </div>

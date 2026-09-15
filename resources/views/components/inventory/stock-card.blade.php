@@ -1,17 +1,18 @@
 @props(['title', 'value', 'trend', 'trendColor', 'description', 'icon' => '📦'])
 
-<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
-    <div class="flex items-center justify-between mb-4">
+<div
+    class="surface rounded-lg border border-secondary p-6 shadow-sm transition-shadow duration-200 hover:shadow-md">
+    <div class="mb-4 flex items-center justify-between">
         <div class="flex items-center">
-            <span class="text-2xl mr-3">{{ $icon }}</span>
-            <h3 class="text-lg font-semibold text-gray-900">{{ $title }}</h3>
+            <span class="mr-3 text-2xl">{{ $icon }}</span>
+            <h3 class="text-lg font-semibold text-primary">{{ $title }}</h3>
         </div>
-        <div class="{{ $trendColor }} text-xs font-medium px-2.5 py-0.5 rounded-full">
+        <div class="{{ $trendColor }} rounded-full px-2.5 py-0.5 text-xs font-medium">
             {{ $trend }}
         </div>
     </div>
     <div class="flex items-baseline">
-        <p class="text-3xl font-bold text-gray-900">{{ $value }}</p>
+        <p class="text-3xl font-bold text-primary">{{ $value }}</p>
     </div>
-    <p class="mt-2 text-sm text-gray-500">{{ $description }}</p>
+    <p class="mt-2 text-sm text-muted">{{ $description }}</p>
 </div>

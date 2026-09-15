@@ -1,19 +1,19 @@
 @props(['level' => 'warning', 'items'])
 
 @php
-    $colors = [
-        'warning' => 'bg-yellow-50 border-yellow-200 text-yellow-800',
-        'danger' => 'bg-red-50 border-red-200 text-red-800',
-        'info' => 'bg-blue-50 border-blue-200 text-blue-800'
+    $tones = [
+        'warning' => 'bg-warning/10 border-warning/30 text-warning',
+        'danger' => 'bg-error/10 border-error/30 text-error',
+        'info' => 'bg-info/10 border-info/30 text-info',
     ];
     $icons = [
         'warning' => '⚠️',
         'danger' => '❌',
-        'info' => 'ℹ️'
+        'info' => 'ℹ️',
     ];
 @endphp
 
-<div class="{{ $colors[$level] }} border rounded-lg p-4 mb-4">
+<div class="{{ $tones[$level] }} mb-4 rounded-lg border p-4">
     <div class="flex">
         <div class="flex-shrink-0">
             <span class="text-lg">{{ $icons[$level] }}</span>
