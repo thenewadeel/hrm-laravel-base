@@ -1,21 +1,28 @@
-{{-- resources/views/components/button/link.blade.php --}}
-@props(['variant' => 'primary', 'size' => 'md', 'href' => '#'])
+@props([
+    'variant' => 'primary',
+    'size' => 'md',
+    'href' => '#',
+])
+
 @php
     $baseClasses =
-        'inline-flex items-center justify-center rounded-md font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
+        'inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed focus-ring';
 
     $variants = [
-        'primary' => 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500',
-        'secondary' => 'bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500',
-        'danger' => 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500',
-        'outline' => 'border border-gray-300 text-gray-700 hover:bg-gray-50 focus:ring-gray-500',
-        'ghost' => 'text-gray-700 hover:bg-gray-100 focus:ring-gray-500',
+        'primary' => 'bg-primary text-inverse hover:bg-primary-dark focus:ring-primary',
+        'secondary' => 'surface border border-secondary text-primary hover:bg-secondary focus:ring-secondary',
+        'danger' => 'bg-error text-inverse hover:bg-error/90 focus:ring-error',
+        'outline' => 'border border-secondary text-primary hover:bg-secondary focus:ring-secondary',
+        'ghost' => 'text-primary hover:bg-secondary focus:ring-secondary',
+        'success' => 'bg-success text-inverse hover:bg-success/90 focus:ring-success',
+        'warning' => 'bg-warning text-inverse hover:bg-warning/90 focus:ring-warning',
     ];
 
     $sizes = [
         'sm' => 'px-3 py-1.5 text-sm',
         'md' => 'px-4 py-2 text-sm',
         'lg' => 'px-6 py-3 text-base',
+        'xl' => 'px-8 py-4 text-lg',
     ];
 
     $classes = $baseClasses . ' ' . $variants[$variant] . ' ' . $sizes[$size];

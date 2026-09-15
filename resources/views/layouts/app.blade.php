@@ -19,7 +19,7 @@
     @livewireStyles
 </head>
 
-<body class="font-sans antialiased bg-primary text-primary" 
+<body class="font-sans antialiased bg-bg-primary text-primary"
      x-data="{
          test: 'working',
          search: '',

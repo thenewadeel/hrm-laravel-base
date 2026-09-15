@@ -11,13 +11,11 @@
     $variants = [
         'primary' => 'bg-primary text-inverse hover:bg-primary-dark focus:ring-primary',
         'secondary' => 'surface border border-secondary text-primary hover:bg-secondary focus:ring-secondary',
-        'danger' => 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 dark:bg-red-700 dark:hover:bg-red-800',
+        'danger' => 'bg-error text-inverse hover:bg-error/90 focus:ring-error',
         'outline' => 'border border-secondary text-primary hover:bg-secondary focus:ring-secondary',
         'ghost' => 'text-primary hover:bg-secondary focus:ring-secondary',
-        'success' =>
-            'bg-green-600 text-white hover:bg-green-700 focus:ring-green-500 dark:bg-green-700 dark:hover:bg-green-800',
-        'warning' =>
-            'bg-yellow-600 text-white hover:bg-yellow-700 focus:ring-yellow-500 dark:bg-yellow-700 dark:hover:bg-yellow-800',
+        'success' => 'bg-success text-inverse hover:bg-success/90 focus:ring-success',
+        'warning' => 'bg-warning text-inverse hover:bg-warning/90 focus:ring-warning',
     ];
 
     $sizes = [

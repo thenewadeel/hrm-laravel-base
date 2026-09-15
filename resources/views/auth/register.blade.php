@@ -7,10 +7,11 @@
             <x-authentication-card-logo />
         </x-slot>
 
-        <div class="text-center">
-            <h1 class="text-2xl font-bold tracking-tight text-primary">Create your account</h1>
-            <p class="mt-2 text-sm text-secondary">Start your free trial of the HRM Enterprise ERP suite.</p>
-        </div>
+        <x-heading
+            align="center"
+            title="{{ __('Create your account') }}"
+            description="{{ __('Start your free trial of the HRM Enterprise ERP suite.') }}"
+        />
 
         <x-validation-errors class="mt-6" />
 
