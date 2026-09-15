@@ -1,87 +1,184 @@
-<div
-    class="bg-gray-100 dark:bg-gray-900 font-sans antialiased text-gray-900 dark:text-gray-100 min-h-screen flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8">
-    <!-- Hero Section -->
-    <div class="relative w-full max-w-4xl mx-auto text-center mb-16">
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight"><span class="block">The
-                Platform Your Business</span><span class="block text-indigo-600 dark:text-indigo-400 mt-2">Has Been
-                Waiting For</span></h1>
-        <p class="mt-6 text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Simplify your workflow,
-            boost productivity, and drive growth with our all-in-one SaaS solution.</p>
-        <div class="mt-8 flex justify-center space-x-4"><a href="#"
-                class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">Get
-                Started Free</a><a href="#"
-                class="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-full text-indigo-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-gray-800 dark:text-indigo-300 dark:hover:bg-gray-700 dark:border-gray-600 transition-colors">Learn
-                More</a></div>
-    </div><!-- Features Section -->
-    <div
-        class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-12 w-full max-w-6xl mx-auto border border-gray-200 dark:border-gray-700">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Feature Card 1 -->
-            <div class="flex flex-col items-center text-center p-4">
-                <div class="flex-shrink-0 mb-4 bg-indigo-50 dark:bg-indigo-900 p-3 rounded-full">
-                    <svg class="h-8 w-8 text-indigo-600 dark:text-indigo-400" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17 20h-10a4 4 0 01-4-4V8a4 4 0 014-4h10a4 4 0 014 4v8a4 4 0 01-4 4z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16M4 12h16" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Intuitive Dashboards</h3>
-                <p class="text-gray-600 dark:text-gray-400 text-sm">
-                    Gain a clear, real-time overview of your business performance with powerful, customizable
-                    dashboards.
-                </p>
+<div class="relative overflow-hidden">
+    {{-- Decorative background glows --}}
+    <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+        <div class="absolute -top-24 left-1/2 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full blur-3xl"
+            style="background: radial-gradient(circle, rgba(var(--color-primary-rgb), 0.14) 0%, transparent 70%);">
+        </div>
+        <div class="absolute top-32 -left-24 h-72 w-72 rounded-full blur-3xl"
+            style="background: radial-gradient(circle, rgba(var(--color-primary-rgb), 0.1) 0%, transparent 70%);">
+        </div>
+        <div class="absolute top-40 -right-24 h-72 w-72 rounded-full blur-3xl"
+            style="background: radial-gradient(circle, rgba(var(--color-primary-rgb), 0.1) 0%, transparent 70%);">
+        </div>
+    </div>
+
+    <div class="mx-auto max-w-7xl px-4 pt-20 pb-16 sm:px-6 sm:pt-28 sm:pb-20 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center">
+            <span
+                class="inline-flex items-center gap-2 rounded-full border border-secondary bg-surface px-4 py-1.5 text-sm font-medium text-secondary shadow-sm">
+                <span class="inline-block size-2 rounded-full bg-success"></span>
+                The all-in-one ERP trusted by growing teams
+            </span>
+
+            <h1
+                class="mt-6 text-4xl font-extrabold tracking-tight text-balance sm:text-5xl lg:text-6xl">
+                Run your entire business from
+                <span
+                    style="background-image: linear-gradient(to right, var(--color-primary), var(--color-primary-light)); -webkit-background-clip: text; background-clip: text; color: transparent;">one
+                    platform</span>
+            </h1>
+
+            <p class="mt-6 text-lg leading-8 text-secondary sm:text-xl">
+                Human resources, payroll, finance, inventory, and organization
+                management — unified, secure, and built for multi-tenant businesses.
+            </p>
+
+            <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                <x-button.primary href="{{ route('register') }}" size="xl" class="w-full sm:w-auto">
+                    Get started free
+                </x-button.primary>
+                <x-button.secondary href="#features" size="xl" class="w-full sm:w-auto">
+                    Explore features
+                </x-button.secondary>
             </div>
 
-            <!-- Feature Card 2 -->
-            <div class="flex flex-col items-center text-center p-4">
-                <div class="flex-shrink-0 mb-4 bg-purple-50 dark:bg-purple-900 p-3 rounded-full">
-                    <svg class="h-8 w-8 text-purple-600 dark:text-purple-400" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 8c1.657 0 3 1.343 3 3s-1.343 3-3 3s-3-1.343-3-3s1.343-3 3-3zm0 0v1.5a1.5 1.5 0 01-1.5 1.5h-3a1.5 1.5 0 01-1.5-1.5V8a1.5 1.5 0 011.5-1.5h3A1.5 1.5 0 0112 8z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <div class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-secondary">
+                <span class="inline-flex items-center gap-2">
+                    <svg class="size-4 text-success" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5z"
+                            clip-rule="evenodd" />
                     </svg>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Seamless Collaboration</h3>
-                <p class="text-gray-600 dark:text-gray-400 text-sm">
-                    Collaborate with your team in real-time on projects, share files, and communicate effortlessly.
-                </p>
+                    14-day free trial
+                </span>
+                <span class="inline-flex items-center gap-2">
+                    <svg class="size-4 text-success" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    No credit card required
+                </span>
+                <span class="inline-flex items-center gap-2">
+                    <svg class="size-4 text-success" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    Cancel anytime
+                </span>
+            </div>
+        </div>
+
+        {{-- Product preview --}}
+        <div class="relative mx-auto mt-16 max-w-5xl">
+            <div class="absolute -inset-x-8 -top-6 -bottom-6 -z-10 rounded-3xl"
+                style="background: linear-gradient(180deg, rgba(var(--color-primary-rgb), 0.12), rgba(var(--color-primary-rgb), 0.02));">
             </div>
 
-            <!-- Feature Card 3 -->
-            <div class="flex flex-col items-center text-center p-4">
-                <div class="flex-shrink-0 mb-4 bg-green-50 dark:bg-green-900 p-3 rounded-full">
-                    <svg class="h-8 w-8 text-green-600 dark:text-green-400" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 12h6m-3-3v6m-2 4h4a2 2 0 002-2V6a2 2 0 00-2-2H9a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
+            <div class="surface overflow-hidden rounded-2xl shadow-xl sm:rounded-3xl">
+                {{-- Fake window chrome --}}
+                <div class="flex items-center gap-2 border-b border-secondary bg-bg-secondary px-5 py-3">
+                    <span class="size-3 rounded-full bg-error/70"></span>
+                    <span class="size-3 rounded-full bg-warning/70"></span>
+                    <span class="size-3 rounded-full bg-success/70"></span>
+                    <span class="ml-4 hidden flex-1 rounded-md bg-surface px-3 py-1.5 text-xs text-muted sm:block">
+                        hrm.wittness.tech/dashboard
+                    </span>
                 </div>
-                <h3 class="text-xl font-semibold mb-2">Efficient Project Management</h3>
-                <p class="text-gray-600 dark:text-gray-400 text-sm">
-                    Plan, track, and execute your projects from start to finish with our robust project management
-                    tools.
-                </p>
-            </div>
 
-            <!-- Feature Card 4 -->
-            <div class="flex flex-col items-center text-center p-4">
-                <div class="flex-shrink-0 mb-4 bg-orange-50 dark:bg-orange-900 p-3 rounded-full">
-                    <svg class="h-8 w-8 text-orange-600 dark:text-orange-400" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 8c1.657 0 3 1.343 3 3s-1.343 3-3 3s-3-1.343-3-3s1.343-3 3-3z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 14v1a3 3 0 003 3h4a2 2 0 002-2v-3a2 2 0 00-2-2h-4a3 3 0 00-3-3v1m-4 10a4 4 0 01-4-4v-4a4 4 0 014-4h4a4 4 0 014 4v4a4 4 0 01-4 4h-4z" />
-                    </svg>
+                <div class="grid gap-5 p-5 sm:p-8 lg:grid-cols-3">
+                    {{-- Stat tiles --}}
+                    <div class="grid gap-5 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-2">
+                        <div class="rounded-xl border border-secondary bg-bg-secondary p-5">
+                            <div class="flex items-center justify-between">
+                                <p class="text-sm font-medium text-secondary">Total employees</p>
+                                <span class="inline-flex items-center rounded-full bg-success/10 px-2 py-0.5 text-xs font-semibold text-success">+4.2%</span>
+                            </div>
+                            <p class="mt-3 text-3xl font-bold">1,284</p>
+                            <div class="mt-4 flex h-10 items-end gap-1.5" aria-hidden="true">
+                                <div class="h-4 w-full rounded-sm bg-primary/20"></div>
+                                <div class="h-6 w-full rounded-sm bg-primary/30"></div>
+                                <div class="h-5 w-full rounded-sm bg-primary/25"></div>
+                                <div class="h-8 w-full rounded-sm bg-primary/40"></div>
+                                <div class="h-7 w-full rounded-sm bg-primary/35"></div>
+                                <div class="h-9 w-full rounded-sm bg-primary/50"></div>
+                                <div class="h-10 w-full rounded-sm bg-primary/60"></div>
+                            </div>
+                        </div>
+
+                        <div class="rounded-xl border border-secondary bg-bg-secondary p-5">
+                            <div class="flex items-center justify-between">
+                                <p class="text-sm font-medium text-secondary">Pending payroll</p>
+                                <span class="inline-flex items-center rounded-full bg-warning/15 px-2 py-0.5 text-xs font-semibold text-warning">Due Fri</span>
+                            </div>
+                            <p class="mt-3 text-3xl font-bold">$482,150</p>
+                            <div class="mt-4 flex h-10 items-end gap-1.5" aria-hidden="true">
+                                <div class="h-7 w-full rounded-sm bg-primary/30"></div>
+                                <div class="h-5 w-full rounded-sm bg-primary/20"></div>
+                                <div class="h-8 w-full rounded-sm bg-primary/40"></div>
+                                <div class="h-6 w-full rounded-sm bg-primary/25"></div>
+                                <div class="h-10 w-full rounded-sm bg-primary/60"></div>
+                                <div class="h-9 w-full rounded-sm bg-primary/50"></div>
+                                <div class="h-8 w-full rounded-sm bg-primary/40"></div>
+                            </div>
+                        </div>
+
+                        <div class="rounded-xl border border-secondary bg-bg-secondary p-5">
+                            <p class="text-sm font-medium text-secondary">Low stock alerts</p>
+                            <p class="mt-3 text-3xl font-bold">12</p>
+                            <div class="mt-4 flex items-center gap-2 text-xs font-medium text-warning">
+                                <span class="inline-flex items-center gap-1 rounded-full bg-warning/15 px-2.5 py-1">
+                                    <svg class="size-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625l6.28-10.875zM10 6a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 10 6zm0 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    4 need reorder today
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="rounded-xl border border-secondary bg-bg-secondary p-5">
+                            <p class="text-sm font-medium text-secondary">On-time attendance</p>
+                            <div class="mt-3 flex items-center justify-between">
+                                <p class="text-3xl font-bold">96.8%</p>
+                                <svg class="size-8 text-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M3 3v18h18" />
+                                    <path d="m7 14 4-4 4 4 5-6" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Recent activity list --}}
+                    <div class="rounded-xl border border-secondary bg-bg-secondary p-5">
+                        <p class="text-sm font-medium text-secondary">Recent activity</p>
+                        <ul class="mt-4 space-y-4 text-sm">
+                            <li class="flex items-start gap-3">
+                                <span class="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-xs font-bold text-accent">AM</span>
+                                <div>
+                                    <p class="font-medium text-primary">4 new employees onboarded</p>
+                                    <p class="text-xs text-muted">2 hours ago · HR Team</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-xs font-bold text-accent">SK</span>
+                                <div>
+                                    <p class="font-medium text-primary">Payroll run approved</p>
+                                    <p class="text-xs text-muted">Yesterday · Finance</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-xs font-bold text-accent">TW</span>
+                                <div>
+                                    <p class="font-medium text-primary">Invoice #2048 paid</p>
+                                    <p class="text-xs text-muted">Yesterday · Accounting</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <h3 class="text-xl font-semibold mb-2">Automated Reporting</h3>
-                <p class="text-gray-600 dark:text-gray-400 text-sm">
-                    Generate insightful reports automatically and stay on top of your business's key metrics without the
-                    hassle.
-                </p>
             </div>
         </div>
     </div>
