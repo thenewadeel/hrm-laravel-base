@@ -1,7 +1,7 @@
-# Witness Tech — Offline Marketing Strategy & Publication Plan (Australia)
+# Wittness Tech — Offline Marketing Strategy & Publication Plan (Australia)
 
-**Brand:** Witness Tech
-**Product:** Witness Tech ERP (all-in-one business management: Accounting, HR & Payroll, Inventory, Membership)
+**Brand:** Wittness Tech
+**Product:** Wittness Tech ERP (all-in-one business management: Accounting, HR & Payroll, Inventory, Membership)
 **Target sectors:** Pharmacies & pharma distributors · SMEs & trading companies · Schools & membership organisations · Manufacturing & wholesale
 **Campaign style:** Old-school / print-first — flyers, one-pagers, brochures, letterbox drops, ads in local & trade publications, direct mail, in-person events
 **Market:** Australia (local-first, city & suburban rollout)
@@ -17,14 +17,14 @@ Australian SMBs still respond strongly to trusted, physical materials:
 - **Federation & association channels** (Guild branches, Principal associations, Chambers of Commerce) give direct, warm distribution to the right desks.
 - A **visitable demo** (drop-in at the pharmacy counter, the front office) converts where a trial account can't.
 
-Witness Tech is credible offline because its modules are *already* Australia-relevant (GST-compatible reporting, PAYG-style payroll structure, multi-store inventory). The materials sell pain relief, not software.
+Wittness Tech is credible offline because its modules are *already* Australia-relevant (GST-compatible reporting, PAYG-style payroll structure, multi-store inventory). The materials sell pain relief, not software.
 
 ---
 
 ## 2. Positioning & messaging core
 
 **One-line pitch**
-> "Witness Tech brings your accounts, staff, stock and members into one system — no more re-keying data between them."
+> "Wittness Tech brings your accounts, staff, stock and members into one system — no more re-keying data between them."
 
 **The core promise:** *Stop re-entering the same numbers in three different programs.* Accounting, payroll, stock and membership should update each other automatically.
 
@@ -38,7 +38,7 @@ Witness Tech is credible offline because its modules are *already* Australia-rel
 
 **AUDIENCE → MESSAGE MAP**
 
-| Audience | Their pain | Witness Tech answer | CTA |
+| Audience | Their pain | Wittness Tech answer | CTA |
 |---|---|---|---|
 | **Pharmacy owner / dispensary manager** | Expiry management, stockouts, supplier reconciliation, staff rostering/payroll | Inventory + expiry tracking, purchase vouchers, payroll & accounting in one system | Request a demo at your counter |
 | **SME / trading company** | Separate invoicing, spreadsheets, payroll and stock records | One system: sales, purchases, inventory, payroll, P&L | Book a 20-minute demo |
@@ -52,7 +52,7 @@ Witness Tech is credible offline because its modules are *already* Australia-rel
 Phase 1 — Foundation (Weeks 1–2): finalise materials, set up demo, claim directory listings.
 Phase 2 — Direct (Weeks 2–6): letterbox drops, doorknock/demo visits, local print ads.
 Phase 3 — Trade & association (Weeks 4–10): trade magazine ads & advertorials, association newsletters, expos.
-Phase 4 — Referral loop (Ongoing): ask every converted client to host a "Witness Tech demo morning" for 3 peers.
+Phase 4 — Referral loop (Ongoing): ask every converted client to host a "Wittness Tech demo morning" for 3 peers.
 
 | Channel | Cost | Effort | Trust | Use for |
 |---|---|---|---|---|
@@ -155,7 +155,7 @@ Target decision-maker: owner/factory manager, ops manager, supply-chain person.
 
 ## 5. Materials pack (what we produce)
 
-All print files are A4-based, printed on 100gsm+ stock. Files live in `docs/marketing/print/`. Every asset carries a **logo placeholder** (dashed "WT" box marked *final logo goes here*) and a placeholder QR — replace both before any print run.
+All print files are A4-based, printed on 100gsm+ stock. Files live in `docs/marketing/print/`. Every asset now carries the **final Wittness Tech logo artwork** (files in `docs/marketing/logos/wittness/`; `wittness-light.png` on dark-green brand bars, `wittness-dark.png` on white/light backgrounds). Only the **placeholder QR** ("SCAN TO BOOK A DEMO") and contact tokens (`[PHONE]/[EMAIL]/[WEBSITE]`) remain to be filled before any print run.
 
 | Asset | File | Size | Spec | Distribution |
 |---|---|---|---|---|
@@ -165,12 +165,12 @@ All print files are A4-based, printed on 100gsm+ stock. Files live in `docs/mark
 | **Business card** | `business-card.html` | 90×50mm (front/back) | Contact + QR front; 3-line promise back | Walk-ins |
 | **QR shelf / demo card** | `qr-shelf-card.html` | A5 sheet, two 50×50 die-cut | QR → live demo; tent-fold for counter display | In-store shelf cards |
 | **Direct-mail letter** | `direct-mail-letter.html` | A4 portrait | Personalised intro letter with offer CTA | Direct mail + brochure |
-| **Logo / graphics** | — (placeholders) | — | Final logo artwork supplied by Witness Tech | Dropped into all assets before print |
+| **Logo / graphics** | `logos/wittness/wittness-{light,dark}.png` | Final artwork | White logo (`wittness-light.png`) on dark green; dark logo (`wittness-dark.png`) on white | Embedded in all assets |
 
 **Brand specs (matches the app theme):**
 - Primary colour: deep green `#1e3f20` · accent `#4c784e` · highlight `#a3b899`
 - Typography: clean sans (Inter/Poppins); heavy weights for headlines on print
-- Logo: **placeholder** `WT` lockup on all files — replace with final artwork
+- Logo: final Wittness Tech artwork embedded in all files — white logo (`wittness-light.png`) on dark-green brand bars, dark logo (`wittness-dark.png`) on white. Source artwork in `docs/logos/wittness/`, print-ready copies in `docs/marketing/logos/wittness/`
 - Print safety: full-bleed panels, 3mm bleed, 100% CMYK where possible
 
 ---
@@ -230,4 +230,4 @@ All print files are A4-based, printed on 100gsm+ stock. Files live in `docs/mark
 3. Book first trade publication (Pharmacy News or Retail Pharmacy Magazine) before its copy deadline
 4. Identify pilot city Chambers + Guild branch contacts
 
-**Keeping materials current:** follow `docs/marketing/90-day-refresh-protocol.md` every 90 days (content refresh, new QR codes, stub check, validation). Never print with `[PHONE]/[EMAIL]/[WEBSITE]`, the `WT` logo box, or "SCAN TO BOOK A DEMO" QR placeholders unfilled.
+**Keeping materials current:** follow `docs/marketing/90-day-refresh-protocol.md` every 90 days (content refresh, new QR codes, stub check, validation). Never print with `[PHONE]/[EMAIL]/[WEBSITE]` or "SCAN TO BOOK A DEMO" QR placeholders unfilled.

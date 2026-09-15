@@ -1,4 +1,4 @@
-# Witness Tech — 90-Day Materials Refresh Protocol (Salesman Agent Mode)
+# Wittness Tech — 90-Day Materials Refresh Protocol (Salesman Agent Mode)
 
 **Who runs this:** the sales agent assistant (or the salesperson) — every 90 days
 **Scope:** all print materials in `docs/marketing/print/` + strategy doc + QR codes + contact info
@@ -19,7 +19,7 @@
 | All assets | **Contact placeholders** | Unfilled `[PHONE]/[EMAIL]/[WEBSITE]` must be filled |
 
 **Two hard rules:**
-1. **Never print a placeholder.** Any `[PHONE]`, `[EMAIL]`, `[WEBSITE]`, `[NAME]`, `WT` logo box or "SCAN TO BOOK A DEMO" QR that is still a stub must block release.
+1. **Never print a placeholder.** Any `[PHONE]`, `[EMAIL]`, `[WEBSITE]`, `[NAME]` or `[ROLE]` stub, a re-introduced `WT`/“goes here” logo stub, or "SCAN TO BOOK A DEMO" QR that is still a stub must block release. (Logos are final — `wittness-light.png` on dark-green bars, `wittness-dark.png` on white.)
 2. **Never ship two versions of the same story.** When the offer/price/publisher changes, all materials change together in one pass, never one-off.
 
 ---
