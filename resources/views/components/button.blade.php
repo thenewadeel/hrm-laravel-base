@@ -1,7 +1,6 @@
 @props([
     'variant' => 'primary',
     'size' => 'md',
-    // Change: This prop will now control the 'type' HTML *attribute* (button, submit, reset)
     'type' => 'button',
 ])
 
@@ -31,7 +30,7 @@
     $classes = $baseClasses . ' ' . $variants[$variant] . ' ' . $sizes[$size];
 @endphp
 
-{{-- 🔑 Key Change: Always use the <button> element, and set the 'type' attribute using the $type prop --}}
-<button {{ $attributes->merge(['class' => $classes]) }} **type="{{ $type }}"**>
+{{-- Always use the <button> element, control its 'type' attribute with the $type prop --}}
+<button type="{{ $type }}" {{ $attributes->merge(['class' => $classes]) }}>
     {{ $slot }}
 </button>

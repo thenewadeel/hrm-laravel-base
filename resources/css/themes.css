@@ -206,6 +206,9 @@ div {
 .text-primary {
     color: var(--color-text-primary);
 }
+.text-accent {
+    color: var(--color-primary);
+}
 .text-secondary {
     color: var(--color-text-secondary);
 }
