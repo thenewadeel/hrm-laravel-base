@@ -1,3 +1,13 @@
+{{--
+    Welcome / Marketing landing page.
+
+    INTENTIONAL MARKETING COPY (per production-readiness audit item 16):
+    The numeric figures shown here ("99.9% uptime", "4x faster payroll",
+    "per-user/month" pricing, growth badges, satisfaction stats) are static
+    marketing claims for the SaaS product. They are NOT fetched from the
+    application database and are intentionally displayed as product messaging
+    on this public page. No organization/business data is referenced here.
+--}}
 <x-guest-layout title="Enterprise ERP Platform" description="HRM is an all-in-one ERP uniting HR, payroll, finance, inventory, and organization management in one secure multi-tenant workspace.">
 
     {{-- Navbar --}}

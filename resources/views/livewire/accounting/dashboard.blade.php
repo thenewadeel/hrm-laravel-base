@@ -17,21 +17,23 @@
         <!-- Recent Transactions/Activity -->
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
             <h2 class="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">Recent Activity</h2>
-            <!-- This section would be a Livewire partial or component for a recent transactions feed -->
-            <ul class="divide-y divide-gray-200 dark:divide-gray-700">
-                <li class="py-4 flex justify-between items-center">
-                    <span class="text-gray-800 dark:text-gray-200">Payment for consulting services</span>
-                    <span class="text-green-500 font-semibold">+ $5,000.00</span>
-                </li>
-                <li class="py-4 flex justify-between items-center">
-                    <span class="text-gray-800 dark:text-gray-200">Office supplies expense</span>
-                    <span class="text-red-500 font-semibold">- $250.00</span>
-                </li>
-                <li class="py-4 flex justify-between items-center">
-                    <span class="text-gray-800 dark:text-gray-200">Rent payment</span>
-                    <span class="text-red-500 font-semibold">- $1,200.00</span>
-                </li>
-            </ul>
+            @if (empty($recentActivity))
+                <p class="text-gray-500 dark:text-gray-400 text-sm">No ledger activity recorded yet.</p>
+            @else
+                <ul class="divide-y divide-gray-200 dark:divide-gray-700">
+                    @foreach ($recentActivity as $activity)
+                        <li class="py-4 flex justify-between items-center">
+                            <div class="pr-4">
+                                <p class="text-gray-800 dark:text-gray-200">{{ $activity['description'] }}</p>
+                                <p class="text-xs text-gray-400 mt-0.5">{{ $activity['account'] }} · {{ $activity['date'] }}</p>
+                            </div>
+                            <span class="font-semibold {{ $activity['type'] === 'credit' ? 'text-green-500' : 'text-red-500' }}">
+                                {{ $activity['signed_amount'] > 0 ? '+' : '' }}${{ number_format($activity['signed_amount'], 2) }}
+                            </span>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
         </div>
     </div>
 </div>

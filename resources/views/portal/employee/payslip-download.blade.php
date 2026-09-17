@@ -199,7 +199,10 @@
         <!-- Header -->
         <div class="header">
             <div class="company-info">
-                <h2>{{ config('app.name') }} Payroll</h2>
+                {{-- Company identity comes from the employee's real organization; the
+                     street address is an intentional print-template fallback because the
+                     Organization model does not store address columns. --}}
+                <h2>{{ $payslip->employee->organization?->name ?? config('app.name') }}</h2>
                 <p>{{ config('app.address', '123 Business Blvd, Suite 400') }}</p>
                 <p>{{ config('app.city', 'City, State 90210') }}</p>
             </div>
