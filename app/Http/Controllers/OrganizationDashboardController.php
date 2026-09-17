@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AttendanceRecord;
+use App\Models\Employee;
+use App\Models\LeaveRequest;
 use App\Models\Organization;
+use App\Models\PayrollEntry;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -25,20 +29,55 @@ class OrganizationDashboardController extends Controller
 
     /**
      * Get organization-wide metrics.
+     *
+     * @return array{
+     *     total_employees: int,
+     *     total_departments: int,
+     *     attendance_rate: float,
+     *     monthly_payroll: float,
+     *     employee_growth: float,
+     *     payroll_growth: float,
+     *     attendance_improvement: float,
+     * }
      */
     private function getOrganizationMetrics(Organization $organization): array
     {
         $totalEmployees = $organization->users()->count();
         $totalDepartments = $organization->units()->count();
 
+        $attendanceToday = AttendanceRecord::query()
+            ->forOrganization($organization->id)
+            ->forDate(today()->toDateString())
+            ->get(['status']);
+
+        $attendanceTotal = $attendanceToday->count();
+        $attendanceRate = $attendanceTotal > 0
+            ? round(($attendanceToday->whereIn('status', ['present', 'late'])->count() / $attendanceTotal) * 100, 1)
+            : 0;
+
+        $monthlyPayroll = (float) PayrollEntry::query()
+            ->ofOrganization($organization->id)
+            ->forPeriod(now()->format('Y-m'))
+            ->sum('gross_pay');
+
+        $totalEmployeesCount = Employee::query()->ofOrganization($organization->id)->count();
+        $newEmployeesThisMonth = Employee::query()
+            ->ofOrganization($organization->id)
+            ->where('created_at', '>=', now()->startOfMonth())
+            ->count();
+
+        $employeeGrowth = $totalEmployeesCount > 0
+            ? round(($newEmployeesThisMonth / $totalEmployeesCount) * 100, 1)
+            : 0;
+
         return [
             'total_employees' => $totalEmployees,
             'total_departments' => $totalDepartments,
-            'attendance_rate' => 94.2,
-            'monthly_payroll' => 1200000,
-            'employee_growth' => 12, // percentage
-            'payroll_growth' => 5.3, // percentage
-            'attendance_improvement' => 2.1, // percentage
+            'attendance_rate' => $attendanceRate,
+            'monthly_payroll' => $monthlyPayroll,
+            'employee_growth' => $employeeGrowth,
+            'payroll_growth' => 0.0,
+            'attendance_improvement' => 0.0,
         ];
     }
 
@@ -61,36 +100,80 @@ class OrganizationDashboardController extends Controller
 
     /**
      * Get recent organizational activities.
+     *
+     * Derived from real data: newly added employees, approved leave requests,
+     * and today's attendance records.
+     *
+     * @return list<array{type: string, description: string, time: string, icon: string}>
      */
-    private function getRecentActivities(Organization $organization)
+    private function getRecentActivities(Organization $organization): array
     {
-        // Mock data - replace with actual activity log
-        return [
-            [
+        $newEmployees = Employee::query()
+            ->ofOrganization($organization->id)
+            ->with(['organizationUnit:id,name'])
+            ->orderByDesc('created_at')
+            ->limit(2)
+            ->get();
+
+        $approvedLeaves = LeaveRequest::query()
+            ->ofOrganization($organization->id)
+            ->approved()
+            ->with(['employee:id,first_name,last_name'])
+            ->orderByDesc('updated_at')
+            ->limit(2)
+            ->get();
+
+        $attendanceToday = AttendanceRecord::query()
+            ->forOrganization($organization->id)
+            ->forDate(today()->toDateString())
+            ->count();
+
+        $activities = collect();
+
+        foreach ($newEmployees as $employee) {
+            $name = trim($employee->first_name.' '.$employee->last_name);
+            $department = $employee->organizationUnit?->name;
+
+            $activities->push([
                 'type' => 'employee_added',
-                'description' => 'John Smith joined Engineering department',
-                'time' => '2 hours ago',
-                'icon' => 'user-add',
-            ],
-            [
-                'type' => 'department_created',
-                'description' => 'New "Research & Development" department created',
-                'time' => '1 day ago',
-                'icon' => 'folder-add',
-            ],
-            [
-                'type' => 'attendance_regularized',
-                'description' => '15 attendance records regularized',
-                'time' => '2 days ago',
+                'description' => $department
+                    ? "{$name} joined {$department} department"
+                    : "New employee {$name} added",
+                'timestamp' => $employee->created_at,
+                'icon' => 'user-group',
+            ]);
+        }
+
+        foreach ($approvedLeaves as $leave) {
+            $name = $leave->employee ? trim($leave->employee->first_name.' '.$leave->employee->last_name) : 'Employee';
+
+            $activities->push([
+                'type' => 'leave_approved',
+                'description' => "Leave request approved for {$name}",
+                'timestamp' => $leave->approved_at ?? $leave->updated_at,
+                'icon' => 'calendar',
+            ]);
+        }
+
+        if ($attendanceToday > 0) {
+            $activities->push([
+                'type' => 'attendance_recorded',
+                'description' => "{$attendanceToday} attendance records recorded today",
+                'timestamp' => now(),
                 'icon' => 'clock',
-            ],
-            [
-                'type' => 'payroll_processed',
-                'description' => 'October payroll processed successfully',
-                'time' => '3 days ago',
-                'icon' => 'currency-dollar',
-            ],
-        ];
+            ]);
+        }
+
+        return $activities
+            ->sortByDesc('timestamp')
+            ->map(fn (array $activity) => [
+                'type' => $activity['type'],
+                'description' => $activity['description'],
+                'time' => $activity['timestamp']->diffForHumans(),
+                'icon' => $activity['icon'],
+            ])
+            ->values()
+            ->toArray();
     }
 
     /**
@@ -137,27 +220,36 @@ class OrganizationDashboardController extends Controller
     }
 
     // Additional methods for data aggregation...
+    /**
+     * Safe default placeholder - no reliable headcount trend data source yet.
+     * Values are illustrative only and will be replaced when a real source exists.
+     */
     private function getHeadcountTrend(Organization $organization, $startDate, $endDate): array
     {
-        // Mock implementation - replace with actual trend data
         return [
             'labels' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
             'data' => [120, 125, 130, 128, 135, 140],
         ];
     }
 
+    /**
+     * Safe default placeholder - no reliable attendance trend data source yet.
+     * Values are illustrative only and will be replaced when a real source exists.
+     */
     private function getAttendanceTrend(Organization $organization, $startDate, $endDate): array
     {
-        // Mock implementation - replace with actual attendance trend data
         return [
             'labels' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
             'data' => [94.2, 93.8, 95.1, 94.7, 95.3, 94.9],
         ];
     }
 
+    /**
+     * Safe default placeholder - no reliable department performance data source yet.
+     * Values are illustrative only and will be replaced when a real source exists.
+     */
     private function getDepartmentPerformance(Organization $organization, $startDate, $endDate): array
     {
-        // Mock implementation - replace with actual performance data
         return [
             'labels' => ['Engineering', 'Sales', 'Marketing', 'HR', 'Finance'],
             'productivity' => [87, 92, 78, 85, 90],
@@ -165,9 +257,12 @@ class OrganizationDashboardController extends Controller
         ];
     }
 
+    /**
+     * Safe default placeholder - no reliable cost analysis data source yet.
+     * Values are illustrative only and will be replaced when a real source exists.
+     */
     private function getCostAnalysis(Organization $organization, $startDate, $endDate): array
     {
-        // Mock implementation - replace with actual cost analysis
         return [
             'labels' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
             'payroll_costs' => [1200000, 1250000, 1300000, 1280000, 1350000, 1400000],

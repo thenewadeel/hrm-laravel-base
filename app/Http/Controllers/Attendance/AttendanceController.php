@@ -639,10 +639,6 @@ class AttendanceController extends Controller
      */
     public function payrollProcessing(Request $request)
     {
-        // Validate request parameters
-        dd([
-            'cp',
-        ]);
         $request->validate([
             'period' => 'required|date_format:Y-m',
             'employee_id' => 'sometimes|exists:employees,id',

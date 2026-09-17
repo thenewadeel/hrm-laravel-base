@@ -2,6 +2,10 @@
 
 namespace App\Livewire\Membership;
 
+use App\Models\Membership\MemberFee;
+use App\Services\Membership\FeeService;
+use App\Services\Membership\MembershipService;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 
 class FeeCollectionDashboard extends Component
@@ -23,127 +27,93 @@ class FeeCollectionDashboard extends Component
         $this->loadDashboardData();
     }
 
-    public function loadDashboardData(): void
+    public function loadDashboardData(FeeService $feeService, MembershipService $membershipService): void
     {
+        $organizationId = (int) (auth()->user()->current_organization_id ??
+            auth()->user()->operating_organization_id ??
+            auth()->user()->organizations()->value('organizations.id') ??
+            0);
+
+        if (! $organizationId) {
+            $this->dashboardStats = [];
+            $this->recentPayments = [];
+            $this->defaulters = [];
+            $this->monthlyTrends = [];
+
+            return;
+        }
+
+        $memberStats = $membershipService->getMemberStatistics($organizationId);
+        $collectionMetrics = $feeService->getCollectionMetrics($organizationId);
+        $overdueFees = $feeService->getOverdueFees($organizationId);
+
         $this->dashboardStats = [
-            'total_members' => 1247,
-            'active_members' => 1156,
-            'total_collected' => 4567890,
-            'pending_amount' => 1234567,
-            'overdue_amount' => 567890,
-            'defaulters_count' => 89,
-            'collection_rate' => 87.5,
+            'total_members' => $memberStats['total_members'] ?? 0,
+            'active_members' => $memberStats['active_members'] ?? 0,
+            'total_collected' => $collectionMetrics['paid_amount'] ?? 0,
+            'pending_amount' => $collectionMetrics['pending_amount'] ?? 0,
+            'overdue_amount' => $overdueFees->sum('amount'),
+            'defaulters_count' => $overdueFees->count(),
+            'collection_rate' => $collectionMetrics['collection_rate'] ?? 0,
         ];
 
-        $this->recentPayments = [
-            [
-                'id' => 1,
-                'member_name' => 'John Doe',
-                'member_id' => 'MEM001',
-                'amount' => 500000,
-                'payment_method' => 'credit_card',
-                'payment_date' => '2025-12-08 14:30:00',
-                'fee_type' => 'Annual Subscription',
-            ],
-            [
-                'id' => 2,
-                'member_name' => 'Jane Smith',
-                'member_id' => 'MEM002',
-                'amount' => 50000,
-                'payment_method' => 'bank_transfer',
-                'payment_date' => '2025-12-08 13:45:00',
-                'fee_type' => 'Monthly Subscription',
-            ],
-            [
-                'id' => 3,
-                'member_name' => 'Robert Johnson',
-                'member_id' => 'MEM003',
-                'amount' => 25000,
-                'payment_method' => 'cash',
-                'payment_date' => '2025-12-08 12:20:00',
-                'fee_type' => 'Sports Facilities',
-            ],
-            [
-                'id' => 4,
-                'member_name' => 'Emily Davis',
-                'member_id' => 'MEM004',
-                'amount' => 300000,
-                'payment_method' => 'cheque',
-                'payment_date' => '2025-12-08 11:15:00',
-                'fee_type' => 'Annual Subscription',
-            ],
-            [
-                'id' => 5,
-                'member_name' => 'Michael Wilson',
-                'member_id' => 'MEM005',
-                'amount' => 75000,
-                'payment_method' => 'credit_card',
-                'payment_date' => '2025-12-08 10:30:00',
-                'fee_type' => 'Family Membership',
-            ],
-        ];
+        $this->recentPayments = $feeService->getRecentPayments($organizationId, 5)
+            ->map(function ($fee) {
+                return [
+                    'id' => $fee->id,
+                    'member_name' => $fee->member->full_name ?? 'Unknown member',
+                    'member_id' => $fee->member->membership_number ?? "MEM-{$fee->member_id}",
+                    'amount' => $fee->paid_amount ?: $fee->amount,
+                    'payment_method' => $fee->payment_method ?? 'other',
+                    'payment_date' => optional($fee->paid_date)->toDateTimeString() ?? $fee->created_at->toDateTimeString(),
+                    'fee_type' => ucfirst(str_replace('_', ' ', $fee->fee_type)),
+                ];
+            })
+            ->values()
+            ->toArray();
 
-        $this->defaulters = [
-            [
-                'id' => 1,
-                'member_name' => 'William Brown',
-                'member_id' => 'MEM101',
-                'overdue_amount' => 150000,
-                'days_overdue' => 45,
-                'last_payment_date' => '2025-09-15',
-                'contact_attempts' => 3,
-                'status' => 'critical',
-            ],
-            [
-                'id' => 2,
-                'member_name' => 'Sarah Miller',
-                'member_id' => 'MEM102',
-                'overdue_amount' => 75000,
-                'days_overdue' => 30,
-                'last_payment_date' => '2025-10-20',
-                'contact_attempts' => 2,
-                'status' => 'high',
-            ],
-            [
-                'id' => 3,
-                'member_name' => 'David Taylor',
-                'member_id' => 'MEM103',
-                'overdue_amount' => 50000,
-                'days_overdue' => 15,
-                'last_payment_date' => '2025-11-01',
-                'contact_attempts' => 1,
-                'status' => 'medium',
-            ],
-            [
-                'id' => 4,
-                'member_name' => 'Lisa Anderson',
-                'member_id' => 'MEM104',
-                'overdue_amount' => 25000,
-                'days_overdue' => 10,
-                'last_payment_date' => '2025-11-06',
-                'contact_attempts' => 1,
-                'status' => 'low',
-            ],
-            [
-                'id' => 5,
-                'member_name' => 'James Thomas',
-                'member_id' => 'MEM105',
-                'overdue_amount' => 100000,
-                'days_overdue' => 60,
-                'last_payment_date' => '2025-08-25',
-                'contact_attempts' => 5,
-                'status' => 'critical',
-            ],
-        ];
+        $this->defaulters = $overdueFees->map(function ($fee) {
+            $daysOverdue = max(0, (int) now()->startOfDay()->diffInDays($fee->due_date->startOfDay()));
 
-        $this->monthlyTrends = [
-            ['month' => 'Jul', 'collected' => 3200000, 'pending' => 450000],
-            ['month' => 'Aug', 'collected' => 3800000, 'pending' => 380000],
-            ['month' => 'Sep', 'collected' => 4200000, 'pending' => 520000],
-            ['month' => 'Oct', 'collected' => 4100000, 'pending' => 480000],
-            ['month' => 'Nov', 'collected' => 4500000, 'pending' => 420000],
-            ['month' => 'Dec', 'collected' => 4567890, 'pending' => 567890],
-        ];
+            return [
+                'id' => $fee->id,
+                'member_name' => $fee->member->full_name ?? 'Unknown member',
+                'member_id' => $fee->member->membership_number ?? "MEM-{$fee->member_id}",
+                'overdue_amount' => $fee->amount,
+                'days_overdue' => $daysOverdue,
+                'last_payment_date' => $fee->paid_date ? $fee->paid_date->toDateString() : null,
+                'contact_attempts' => 0,
+                'status' => $this->statusForDays($daysOverdue),
+            ];
+        })
+            ->values()
+            ->toArray();
+
+        $monthlyTrend = $feeService->getFeeStatistics($organizationId)['monthly_trend'] ?? [];
+
+        $this->monthlyTrends = collect($monthlyTrend)->map(function ($row, $month) {
+            $collected = (float) ($row['total'] ?? $row['amount'] ?? 0);
+            $pending = (float) (MemberFee::where('organization_id', auth()->user()->current_organization_id)
+                ->where('status', 'pending')
+                ->where('paid_date', null)
+                ->sum('amount') ?? 0);
+
+            return [
+                'month' => Carbon::createFromFormat('Y-m', $month)->format('M'),
+                'collected' => $collected,
+                'pending' => $pending,
+            ];
+        })->values()->toArray();
+    }
+
+    private function statusForDays(int $daysOverdue): string
+    {
+        return match (true) {
+            $daysOverdue >= 45 => 'critical',
+            $daysOverdue >= 30 => 'high',
+            $daysOverdue >= 15 => 'medium',
+            default => 'low',
+        };
     }
 
     public function sendReminder(int $memberId): void

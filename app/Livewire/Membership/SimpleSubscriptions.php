@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class SimpleSubscriptions extends Component
 {
@@ -786,15 +787,18 @@ class SimpleSubscriptions extends Component
 
         $filename = 'subscriptions_'.now()->format('Y-m-d_H-i-s').'.csv';
 
-        header('Content-Type: text/csv');
-        header('Content-Disposition: attachment; filename="'.$filename.'"');
+        return new StreamedResponse(function () use ($csvData) {
+            $output = fopen('php://output', 'w');
 
-        $output = fopen('php://output', 'w');
-        foreach ($csvData as $row) {
-            fputcsv($output, $row);
-        }
-        fclose($output);
-        exit;
+            foreach ($csvData as $row) {
+                fputcsv($output, $row);
+            }
+
+            fclose($output);
+        }, 200, [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="'.$filename.'"',
+        ]);
     }
 
     private function resetForm()

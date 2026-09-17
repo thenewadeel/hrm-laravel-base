@@ -4,18 +4,17 @@ use App\Livewire\Demo\ModelSelectDemo;
 use App\Models\Organization;
 use Illuminate\Support\Facades\Route;
 
-// Demo Components
-Route::get('/demo/inventory-components', function () {
-    return view('demo.inventory-components');
-})->name('demo.inventory-components');
+if (! app()->isProduction()) {
+    // Demo Components
+    Route::get('/demo/inventory-components', function () {
+        return view('demo.inventory-components');
+    })->name('demo.inventory-components');
 
-Route::get('/demo/cash-management', function () {
-    $organization = Organization::first();
-    if (! $organization) {
-        $organization = Organization::factory()->create();
-    }
+    Route::get('/demo/cash-management', function () {
+        $organization = Organization::first() ?? Organization::factory()->create();
 
-    return view('demo.cash-management', ['organization' => $organization]);
-})->name('demo.cash-management');
+        return view('demo.cash-management', ['organization' => $organization]);
+    })->name('demo.cash-management');
 
-Route::get('/demo/model-select', ModelSelectDemo::class)->name('demo.model-select');
+    Route::get('/demo/model-select', ModelSelectDemo::class)->name('demo.model-select');
+}

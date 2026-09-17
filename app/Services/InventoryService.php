@@ -74,7 +74,7 @@ class InventoryService
      */
     public function adjustStoreInventory(Store $store, Item $item, int $adjustment, User $user): void
     {
-        // Gate::authorize('manageInventory', $store);
+        Gate::authorize('manageInventory', $store);
 
         DB::transaction(function () use ($store, $item, $adjustment) {
             $currentQuantity = $store->getItemQuantity($item);
@@ -99,7 +99,7 @@ class InventoryService
      */
     public function createTransaction(array $data, User $user): Transaction
     {
-        // Gate::authorize('create', Transaction::class);
+        Gate::authorize('create', Transaction::class);
         // Temporarily bypass authorization for testing
 
         return DB::transaction(function () use ($data, $user) {
@@ -138,7 +138,7 @@ class InventoryService
      */
     public function addItemsToTransaction(Transaction $transaction, array $items, User $user): Transaction
     {
-        // Gate::authorize('update', $transaction);
+        Gate::authorize('update', $transaction);
         // Temporarily bypass authorization for testing
 
         if (! $transaction->isDraft()) {
@@ -164,7 +164,7 @@ class InventoryService
      */
     public function finalizeTransaction(Transaction $transaction, User $user): Transaction
     {
-        // Gate::authorize('finalize', $transaction);
+        Gate::authorize('finalize', $transaction);
         // Temporarily bypass authorization for testing
 
         if (! $transaction->isDraft()) {
@@ -201,7 +201,7 @@ class InventoryService
      */
     public function cancelTransaction(Transaction $transaction, User $user): Transaction
     {
-        // Gate::authorize('cancel', $transaction);
+        Gate::authorize('cancel', $transaction);
 
         if ($transaction->isFinalized()) {
             throw new \Exception('Cannot cancel finalized transaction');
@@ -221,7 +221,7 @@ class InventoryService
      */
     public function getStoreStockLevels(Store $store, User $user): array
     {
-        // Gate::authorize('view', $store);
+        Gate::authorize('view', $store);
         // Temporarily bypass authorization for testing
 
         $items = $store->items()
@@ -289,7 +289,7 @@ class InventoryService
      */
     public function getItemAvailability(Item $item, User $user): array
     {
-        // Gate::authorize('view', $item);
+        Gate::authorize('view', $item);
         // Temporarily bypass authorization for testing
 
         $stores = $item->stores()

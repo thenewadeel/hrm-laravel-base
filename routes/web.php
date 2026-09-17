@@ -3,33 +3,40 @@
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
+if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature()) {
+    Route::view('/terms-of-service', 'terms')->name('terms.show');
+    Route::view('/privacy-policy', 'policy')->name('policy.show');
+}
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/simple-test', function () {
-    return '<html><head><title>Simple Test</title></head><body><h1>Simple Test Page</h1><p>This is a simple test page.</p></body></html>';
-});
+if (! app()->isProduction()) {
+    Route::get('/simple-test', function () {
+        return '<html><head><title>Simple Test</title></head><body><h1>Simple Test Page</h1><p>This is a simple test page.</p></body></html>';
+    });
 
-Route::get('/test-navigation', function () {
-    return view('test-navigation');
-})->name('test-navigation');
+    Route::get('/test-navigation', function () {
+        return view('test-navigation');
+    })->name('test-navigation');
 
-Route::get('/badge-showcase', function () {
-    return view('simple-badge-test');
-})->name('badge-showcase');
+    Route::get('/badge-showcase', function () {
+        return view('simple-badge-test');
+    })->name('badge-showcase');
 
-Route::get('/simple-badge-test', function () {
-    return view('simple-badge-test');
-})->name('simple-badge-test');
+    Route::get('/simple-badge-test', function () {
+        return view('simple-badge-test');
+    })->name('simple-badge-test');
 
-Route::get('/badge-standalone', function () {
-    return view('badge-standalone');
-})->name('badge-standalone');
+    Route::get('/badge-standalone', function () {
+        return view('badge-standalone');
+    })->name('badge-standalone');
 
-Route::get('/test-drawers', function () {
-    return view('test-drawers-simple');
-})->name('test-drawers');
+    Route::get('/test-drawers', function () {
+        return view('test-drawers-simple');
+    })->name('test-drawers');
+}
 
 // Static documentation routes
 Route::get('/docs', function () {
