@@ -61,7 +61,7 @@ it('renders app navigation drawer content', function () {
         ->assertSee('Reports')
         ->assertSee('Analytics')
         ->assertSee('Membership')
-        ->assertSee('Quick Actions');
+        ->assertSee('Quick actions');
 });
 
 it('renders module settings drawer content', function () {

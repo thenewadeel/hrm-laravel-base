@@ -116,3 +116,222 @@ header.z-30 {
 .drawer[x-show="false"] {
     display: none !important;
 }
+
+/* ========================================
+   SIDEBAR NAVIGATION
+   (Resets the global anchor/button chrome for
+   crisp, business-grade nav interactions.)
+   ======================================== */
+
+/* Neutralise global button pill styling on nav/header icon buttons.
+   These rules are unlayered and mirror the cascade, so they win over
+   both themes.css and the tailwind @layer utilities. */
+.nav-icon-btn {
+    background-color: transparent;
+    color: var(--color-text-secondary);
+    padding: 0;
+    border: 0;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transform: none;
+}
+
+.nav-icon-btn:hover,
+.nav-icon-btn:focus-visible {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    border-color: transparent;
+    transform: none;
+}
+
+.nav-icon-btn:active {
+    transform: none;
+}
+
+.dark .nav-icon-btn {
+    background-color: transparent;
+    color: var(--color-text-secondary);
+    border: 0;
+}
+
+.dark .nav-icon-btn:hover,
+.dark .nav-icon-btn:focus-visible {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    border-color: transparent;
+}
+
+/* Neutralise the global anchor underline/colour behaviour for nav rows. */
+.nav-item,
+.nav-link {
+    border-bottom: 1px solid transparent;
+}
+
+.nav-item:hover,
+.nav-item:focus-visible,
+.nav-link:hover,
+.nav-link:focus-visible {
+    border-bottom-color: transparent;
+    color: var(--color-text-primary);
+}
+
+/* Active nav rows sit on a solid primary chip, so text must stay crisp. */
+.nav-item-active,
+.nav-item-active:hover,
+.nav-item-active:focus-visible,
+.nav-link-active,
+.nav-link-active:hover,
+.nav-link-active:focus-visible {
+    color: var(--color-primary-contrast);
+}
+
+/* Active child link left accent bar + soft primary tint */
+.nav-child-active {
+    border-left: 2px solid var(--color-primary);
+    background-color: rgba(var(--color-primary-rgb), 0.08);
+}
+
+.dark .nav-child-active {
+    background-color: rgba(var(--color-primary-rgb), 0.12);
+}
+
+/* Keep active icon buttons / section triggers on a solid primary chip,
+   even while hovering. */
+.nav-icon-btn.nav-item-active,
+.nav-icon-btn.nav-item-active:hover,
+.nav-icon-btn.nav-item-active:focus-visible,
+.nav-section-trigger.nav-item-active,
+.nav-section-trigger.nav-item-active:hover {
+    background-color: var(--color-primary);
+    color: var(--color-primary-contrast);
+    border-color: transparent;
+}
+
+.dark .nav-icon-btn.nav-item-active,
+.dark .nav-icon-btn.nav-item-active:hover,
+.dark .nav-icon-btn.nav-item-active:focus-visible,
+.dark .nav-section-trigger.nav-item-active,
+.dark .nav-section-trigger.nav-item-active:hover {
+    background-color: var(--color-primary);
+    color: var(--color-primary-contrast);
+    border-color: transparent;
+}
+
+/* Full-width accordion section trigger (own chrome, not an icon button) */
+.nav-section-trigger {
+    background-color: transparent;
+    color: var(--color-text-secondary);
+    padding: 0.5rem 0.75rem;
+    border: 0;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transform: none;
+}
+
+.nav-section-trigger:hover {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    transform: none;
+}
+
+.dark .nav-section-trigger {
+    background-color: transparent;
+    color: var(--color-text-secondary);
+    border: 0;
+}
+
+.dark .nav-section-trigger:hover {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+}
+
+/* Compact search input used in the sidebar and header search field. */
+.nav-icon-input {
+    background-color: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border-secondary);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    color: var(--color-text-primary);
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.nav-icon-input:focus {
+    border-color: var(--color-border-focus);
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.12);
+    outline: none;
+}
+
+.dark .nav-icon-input {
+    background-color: var(--color-bg-tertiary);
+    border-color: var(--color-border-secondary);
+}
+
+.nav-icon-input::placeholder {
+    color: var(--color-text-muted);
+}
+
+/* Header user-menu trigger (avatar row needs real padding). */
+.nav-user-trigger {
+    background-color: transparent;
+    color: var(--color-text-primary);
+    padding: 0.25rem 0.5rem;
+    border: 0;
+    border-radius: 0.5rem;
+    transform: none;
+}
+
+.nav-user-trigger:hover,
+.nav-user-trigger:focus-visible {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    border-color: transparent;
+    transform: none;
+}
+
+.dark .nav-user-trigger {
+    background-color: transparent;
+    border: 0;
+}
+
+/* Outline quick-action links (crisp 1px borders instead of the global
+   transparent bottom border on anchors). */
+.nav-quick-link {
+    border: 1px solid var(--color-border-secondary);
+    border-radius: 0.5rem;
+    background-color: transparent;
+    color: var(--color-text-primary);
+}
+
+.nav-quick-link:hover,
+.nav-quick-link:focus-visible {
+    border-color: var(--color-primary);
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+}
+
+/* Type scale for nav text. themes.css forces 15px on p/span/div, which
+   would otherwise swallow the compact nav sizes. */
+.nav-text-sm {
+    font-size: 0.875rem;
+}
+
+.nav-text-xs {
+    font-size: 0.82rem;
+}
+
+.nav-text-tiny {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+}
+
+/* Slimmer scrollbar inside the scroll-fill sidebar body */
+.nav-scroll::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.nav-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border-primary) transparent;
+}

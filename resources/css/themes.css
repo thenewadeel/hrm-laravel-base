@@ -6,6 +6,7 @@
     --color-primary: #1e3f20; /* Very deep, almost black green */
     --color-primary-dark: #0f1f10;
     --color-primary-light: #4c784e;
+    --color-primary-contrast: #ffffff;
 
     /* Background Colors - Pure white for 'bureaucratic' feel */
     --color-bg-primary: #ffffff;
@@ -51,6 +52,7 @@
     --color-primary: #a3b899; /* Muted olive/sage green for highlights */
     --color-primary-dark: #7e9177;
     --color-primary-light: #c1d4ba;
+    --color-primary-contrast: #1f271f;
 
     /* Background Colors - Deep, muted military green tones */
     --color-bg-primary: #1f271f; /* Deepest forest/olive green / Gunmetal base */

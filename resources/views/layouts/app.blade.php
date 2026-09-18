@@ -36,8 +36,11 @@
 <div class="flex h-full">
         {{-- Persistent left sidebar --}}
         <aside id="sidebar"
-               class="fixed inset-y-0 left-0 z-40 w-72 surface border-r border-secondary flex flex-col transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:z-auto shrink-0"
-               :class="navOpen ? 'translate-x-0' : '-translate-x-full'"
+               x-data="{ railOpen: localStorage.getItem('nav-rail') === 'true', init() { this.$watch('railOpen', value => localStorage.setItem('nav-rail', value)) } }"
+               @toggle-rail.window="railOpen = !railOpen"
+               @rail-expand.window="railOpen = false"
+               class="fixed inset-y-0 left-0 z-40 w-72 surface border-r border-secondary flex flex-col transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:z-auto shrink-0 lg:transition-[width]"
+               :class="{ 'translate-x-0': navOpen, '-translate-x-full': !navOpen, 'lg:w-20': railOpen, 'lg:w-72': !railOpen }"
                role="navigation"
                aria-label="Navigation">
 
@@ -47,14 +50,14 @@
                     <x-application-mark class="h-8 w-auto" />
                 </a>
                 <button @click="navOpen = false"
-                        class="p-1.5 rounded-md text-secondary hover:text-primary hover:bg-secondary transition-colors lg:hidden"
+                        class="nav-icon-btn h-9 w-9 inline-flex items-center justify-center rounded-lg lg:hidden"
                         aria-label="Close navigation">
                     <x-heroicon-o-x-mark class="w-5 h-5" />
                 </button>
             </div>
 
             {{-- Scrollable nav content --}}
-            <div class="flex-1 overflow-y-auto overscroll-contain py-2">
+            <div class="flex-1 overflow-y-auto overscroll-contain py-2 nav-scroll">
                 <x-drawer.app-navigation />
             </div>
         </aside>
