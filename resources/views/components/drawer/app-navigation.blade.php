@@ -37,6 +37,7 @@
                 [
                     'label' => 'Catalogue',
                     'items' => [
+                        ['label' => 'Dashboard', 'icon' => 'chart-pie', 'href' => route('inventory.dashboard'), 'routes' => ['inventory.dashboard']],
                         ['label' => 'Items', 'icon' => 'cube', 'href' => route('inventory.items.index'), 'routes' => ['inventory.items.*']],
                         ['label' => 'Stores', 'icon' => 'building-storefront', 'href' => route('inventory.stores.index'), 'routes' => ['inventory.stores.*']],
                     ],
@@ -403,7 +404,7 @@
                         </span>
                         <span class="flex-1 text-left nav-text-sm" :class="railOpen ? 'lg:hidden' : ''">{{ $section['label'] }}</span>
                         <span class="inline-flex flex-shrink-0 transition-transform transform"
-                              x-bind:class="(expandedSections['{{ $section['key'] }}'] ? 'rotate-180' : '') . (railOpen ? ' lg:hidden' : '')">
+                              x-bind:class="(expandedSections['{{ $section['key'] }}'] ? 'rotate-180' : '') + (railOpen ? ' lg:hidden' : '')">
                             <x-heroicon-o-chevron-down class="h-4 w-4" />
                         </span>
                     </button>

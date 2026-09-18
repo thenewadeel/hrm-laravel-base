@@ -61,7 +61,7 @@ class DashboardTest extends TestCase
             ->get('/dashboard');
 
         $response->assertStatus(200)
-            ->assertSee('Dashboard')
+            ->assertSee('Command Center')
             ->assertSee($organization->name);
     }
 
@@ -82,7 +82,7 @@ class DashboardTest extends TestCase
         $user->save();
 
         $response = $this->actingAs($user)
-            ->get('/dashboard');
+            ->get('/inventory/dashboard');
 
         $response->assertStatus(200)
             ->assertSee('Stores Overview') // Actual section title
@@ -104,7 +104,7 @@ class DashboardTest extends TestCase
         $items = Item::factory()->count(3)->create(['organization_id' => $organization->id]);
 
         $response = $this->actingAs($user)
-            ->get('/dashboard');
+            ->get('/inventory/dashboard');
 
         $response->assertStatus(200)
             ->assertSee('Stores Overview')
@@ -160,7 +160,7 @@ class DashboardTest extends TestCase
         ]);
         // dd([$store->items]);
         $response = $this->actingAs($user)
-            ->get('/dashboard');
+            ->get('/inventory/dashboard');
         // dd($response);
         $response->assertStatus(200)
             ->assertSee('Low Stock Alerts')
@@ -181,7 +181,7 @@ class DashboardTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
-            ->get('/dashboard');
+            ->get('/inventory/dashboard');
 
         $response->assertStatus(200)
             ->assertSee('Recent Transactions')
@@ -199,7 +199,7 @@ class DashboardTest extends TestCase
         $items = Item::factory()->count(3)->create(['organization_id' => $organization->id]);
 
         $response = $this->actingAs($user)
-            ->get('/dashboard');
+            ->get('/inventory/dashboard');
 
         $response->assertStatus(200)
             ->assertSee('Add Store')
@@ -218,7 +218,7 @@ class DashboardTest extends TestCase
         $items = Item::factory()->count(2)->create(['organization_id' => $organization->id]);
 
         $response = $this->actingAs($user)
-            ->get('/dashboard');
+            ->get('/inventory/dashboard');
 
         $response->assertStatus(200)
             ->assertSee('Stores')
@@ -238,7 +238,7 @@ class DashboardTest extends TestCase
         // No stores created
 
         $response = $this->actingAs($user)
-            ->get('/dashboard');
+            ->get('/inventory/dashboard');
 
         $response->assertStatus(200)
             ->assertSee('No stores yet')
@@ -267,7 +267,7 @@ class DashboardTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
-            ->get('/dashboard');
+            ->get('/inventory/dashboard');
 
         $response->assertStatus(200)
             ->assertSee('All items are well stocked');
@@ -293,7 +293,7 @@ class DashboardTest extends TestCase
         }
 
         $response = $this->actingAs($user)
-            ->get('/dashboard');
+            ->get('/inventory/dashboard');
 
         $response->assertStatus(200)
             ->assertSee('Stores Overview')

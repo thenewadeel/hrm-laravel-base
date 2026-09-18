@@ -29,7 +29,7 @@ class DashboardTest extends JavaScriptDuskTestCase
 
             // Force a desktop viewport, then reload so the shell initializes with the sidebar docked/open
             $browser->resize(1920, 1080)
-                ->visit('/dashboard')
+                ->visit('/inventory/dashboard')
                 ->waitForJavaScript($browser)
                 ->waitForAlpine($browser);
 
@@ -55,6 +55,32 @@ class DashboardTest extends JavaScriptDuskTestCase
             }
 
             // Assert no JavaScript errors
+            $this->assertNoJavaScriptErrors($browser);
+        });
+    }
+
+    /**
+     * Test the executive (Eagle Eye) dashboard renders with live widgets.
+     */
+    public function test_executive_dashboard_renders(): void
+    {
+        $this->createBrowserWithOrganization(function (Browser $browser, Organization $org, User $user) {
+            $browser->resize(1920, 1080)
+                ->visit('/dashboard')
+                ->waitForJavaScript($this)
+                ->waitForAlpine($this);
+
+            $browser->assertSee('Command Center')
+                ->assertSee('Eagle Eye')
+                ->assertPresent('[data-executive-kpis]')
+                ->assertPresent('[data-widget-grid]')
+                ->assertPresent('[data-kpi]')
+                ->assertPresent('.dashboard-widget')
+                ->assertPresent('canvas[x-ref="particleCanvas"]');
+
+            // KPI values should be rendered server-side
+            $browser->assertPresent('[data-kpi-value]');
+
             $this->assertNoJavaScriptErrors($browser);
         });
     }
@@ -163,7 +189,7 @@ class DashboardTest extends JavaScriptDuskTestCase
                 'store_id' => $stores->random()->id,
             ]);
 
-            $browser->visit('/dashboard')
+            $browser->visit('/inventory/dashboard')
                 ->waitForJavaScript($this);
 
             // Assert statistics are displayed correctly
@@ -201,7 +227,7 @@ class DashboardTest extends JavaScriptDuskTestCase
                 'updated_at' => now(),
             ]);
 
-            $browser->visit('/dashboard')
+            $browser->visit('/inventory/dashboard')
                 ->waitForJavaScript($this);
 
             // Assert low stock alert is displayed
@@ -296,7 +322,7 @@ class DashboardTest extends JavaScriptDuskTestCase
     {
         $this->createBrowserWithOrganization(function (Browser $browser, Organization $org, User $user) {
             // Test desktop view
-            $browser->visit('/dashboard')
+            $browser->visit('/inventory/dashboard')
                 ->resize(1920, 1080)
                 ->waitForJavaScript($this)
                 ->assertVisible('.hidden.md\\:flex') // Desktop header actions visible
@@ -318,7 +344,7 @@ class DashboardTest extends JavaScriptDuskTestCase
             $this->assertSidebarTransform($browser, '-translate-x-full'); // Off-canvas below lg
 
             // Assert dashboard content is still accessible
-            $browser->assertSee('Dashboard - '.$org->name)
+            $browser->assertSee($org->name)
                 ->assertSee('Inventory Overview');
         });
     }
@@ -347,7 +373,7 @@ class DashboardTest extends JavaScriptDuskTestCase
 
         // Test org1 dashboard
         $this->createBrowserWithOrganization(function (Browser $browser) use ($store1, $item1, $store2, $item2) {
-            $browser->visit('/dashboard')
+            $browser->visit('/inventory/dashboard')
                 ->waitForJavaScript($this);
 
             // Should see org1 data
@@ -361,7 +387,7 @@ class DashboardTest extends JavaScriptDuskTestCase
 
         // Test org2 dashboard
         $this->createBrowserWithOrganization(function (Browser $browser) use ($store1, $item1, $store2, $item2) {
-            $browser->visit('/dashboard')
+            $browser->visit('/inventory/dashboard')
                 ->waitForJavaScript($this);
 
             // Should see org2 data
@@ -422,7 +448,7 @@ class DashboardTest extends JavaScriptDuskTestCase
     public function test_quick_action_links(): void
     {
         $this->createBrowserWithOrganization(function (Browser $browser, Organization $org, User $user) {
-            $browser->visit('/dashboard')
+            $browser->visit('/inventory/dashboard')
                 ->waitForJavaScript($this);
 
             // Test Add Store link
@@ -432,7 +458,7 @@ class DashboardTest extends JavaScriptDuskTestCase
                 ->assertSee('Create Store');
 
             // Go back to dashboard
-            $browser->visit('/dashboard')
+            $browser->visit('/inventory/dashboard')
                 ->waitForJavaScript($this);
 
             // Test New Transaction link
@@ -442,7 +468,7 @@ class DashboardTest extends JavaScriptDuskTestCase
                 ->assertSee('Create Transaction');
 
             // Go back to dashboard
-            $browser->visit('/dashboard')
+            $browser->visit('/inventory/dashboard')
                 ->waitForJavaScript($this);
 
             // Test Add Item link
@@ -461,7 +487,7 @@ class DashboardTest extends JavaScriptDuskTestCase
         $this->createBrowserWithOrganization(function (Browser $browser, Organization $org, User $user) {
             $startTime = microtime(true);
 
-            $browser->visit('/dashboard')
+            $browser->visit('/inventory/dashboard')
                 ->waitForJavaScript($this)
                 ->waitForAlpine($this);
 

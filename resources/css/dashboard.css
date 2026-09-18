@@ -1,0 +1,144 @@
+/* -------------------------------------------------------------------------- */
+/* Executive Dashboard                                                        */
+/* -------------------------------------------------------------------------- */
+
+[x-cloak] {
+    display: none !important;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+}
+
+.dashboard-widget {
+    grid-column: 1 / -1;
+    transition: transform 150ms ease-out, opacity 150ms ease-out, box-shadow 150ms ease-out;
+}
+
+.dashboard-widget.is-dragging {
+    opacity: 0.35;
+    transform: scale(0.985);
+}
+
+.dashboard-drag-handle {
+    cursor: grab;
+}
+
+.dashboard-widget:active .dashboard-drag-handle {
+    cursor: grabbing;
+}
+
+.dashboard-widget-inner {
+    background-color: var(--color-surface);
+}
+
+.dashboard-widget-inner .dashboard-chart-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Hero */
+.dashboard-hero {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Chart primitives */
+.dashboard-chart-grid .domain {
+    display: none;
+}
+
+.dashboard-chart-crosshair {
+    pointer-events: none;
+}
+
+.dashboard-chart-dot {
+    pointer-events: none;
+}
+
+.dashboard-chart-slice {
+    transition: opacity 150ms ease-out;
+}
+
+/* Tooltip */
+.dashboard-chart-tooltip {
+    position: absolute;
+    z-index: 40;
+    min-width: 150px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background-color: var(--color-surface-elevated);
+    border: 1px solid var(--color-border-secondary);
+    box-shadow: var(--surface-shadow-elevated);
+    pointer-events: none;
+    font-size: 0.8125rem;
+}
+
+.dashboard-chart-tooltip-label {
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 4px;
+}
+
+.dashboard-chart-tooltip-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-text-secondary);
+    margin-top: 2px;
+}
+
+.dashboard-chart-tooltip-row strong {
+    margin-left: auto;
+    color: var(--color-text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Donut legend */
+.dashboard-chart-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.dashboard-chart-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    padding: 4px 6px;
+    border-radius: 6px;
+    transition: background-color 150ms ease-out, color 150ms ease-out;
+}
+
+.dashboard-chart-legend-item.is-highlighted {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+}
+
+.dashboard-chart-legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 9999px;
+    flex-shrink: 0;
+}
+
+.dashboard-chart-legend-label {
+    font-weight: 500;
+}
+
+.dashboard-chart-legend-value {
+    margin-left: auto;
+    color: var(--color-text-muted);
+    font-variant-numeric: tabular-nums;
+}
