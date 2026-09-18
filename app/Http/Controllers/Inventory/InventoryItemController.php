@@ -62,7 +62,7 @@ class InventoryItemController extends Controller
     public function create(): View
     {
         $organizations = Organization::where('is_active', true)->get();
-        $heads = Head::where('is_active', true)->get();
+        $heads = Head::query()->get();
 
         return view('inventory.items.form', compact('organizations', 'heads'));
     }
@@ -73,7 +73,6 @@ class InventoryItemController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'organization_id' => 'required|exists:organizations,id',
             'name' => 'required|string|max:255',
             'sku' => 'required|string|unique:inventory_items,sku',
             'description' => 'nullable|string',
@@ -84,6 +83,8 @@ class InventoryItemController extends Controller
             'reorder_level' => 'nullable|integer|min:0',
             'is_active' => 'boolean',
         ]);
+
+        $validated['organization_id'] = auth()->user()->operatingOrganizationId;
 
         Item::create($validated);
 
@@ -107,7 +108,7 @@ class InventoryItemController extends Controller
     public function edit(Item $item): View
     {
         $organizations = Organization::where('is_active', true)->get();
-        $heads = Head::where('is_active', true)->get();
+        $heads = Head::query()->get();
 
         return view('inventory.items.form', compact('item', 'organizations', 'heads'));
     }
@@ -118,7 +119,6 @@ class InventoryItemController extends Controller
     public function update(Request $request, Item $item): RedirectResponse
     {
         $validated = $request->validate([
-            'organization_id' => 'required|exists:organizations,id',
             'name' => 'required|string|max:255',
             'sku' => 'required|string|unique:inventory_items,sku,'.$item->id,
             'description' => 'nullable|string',
@@ -129,6 +129,8 @@ class InventoryItemController extends Controller
             'reorder_level' => 'nullable|integer|min:0',
             'is_active' => 'boolean',
         ]);
+
+        $validated['organization_id'] = auth()->user()->operatingOrganizationId;
 
         $item->update($validated);
 

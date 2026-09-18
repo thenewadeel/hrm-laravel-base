@@ -2,6 +2,7 @@
 
 namespace App\Models\Inventory;
 
+use App\Models\Traits\BelongsToOrganization;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Head extends Model
 {
-    use HasFactory;
+    use BelongsToOrganization, HasFactory;
 
     /**
      * The table associated with the model.
@@ -23,6 +24,7 @@ class Head extends Model
         'name',
         'description',
         'image',
+        'organization_id',
         // 'sore_id'
     ];
 

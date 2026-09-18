@@ -67,6 +67,11 @@ class OrganizationTree extends Component
                 return;
             }
 
+            // 2a. Prevent cross-organization reparenting.
+            if ((int) $potentialParent->organization_id !== (int) $unitToMove->organization_id) {
+                return;
+            }
+
             // Traverse up the hierarchy from the potential new parent.
             // If we ever find the unit being moved, it means the drop target is a descendant.
             $currentNode = $potentialParent;

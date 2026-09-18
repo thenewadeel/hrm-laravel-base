@@ -91,6 +91,9 @@ class InventoryItemControllerTest extends TestCase
     {
         $response = $this->post(route('inventory.items.store'), []);
 
-        $response->assertSessionHasErrors(['organization_id', 'name', 'sku', 'unit']);
+        // organization_id is now derived server-side from the operating org (tenant
+        // isolation fix) and is no longer a client-submitted field.
+        $response->assertSessionHasErrors(['name', 'sku', 'unit']);
+        $response->assertSessionDoesntHaveErrors('organization_id');
     }
 }

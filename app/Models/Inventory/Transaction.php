@@ -2,6 +2,7 @@
 
 namespace App\Models\Inventory;
 
+use App\Models\Traits\BelongsToOrganization;
 use App\Models\User;
 use Database\Factories\Inventory\TransactionFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Transaction extends Model
 {
-    use HasFactory, SoftDeletes;
+    use BelongsToOrganization, HasFactory, SoftDeletes;
 
     /**
      * The table associated with the model.
@@ -38,6 +39,7 @@ class Transaction extends Model
     const STATUS_CANCELLED = 'cancelled';
 
     protected $fillable = [
+        'organization_id',
         'store_id',
         'to_store_id',
         'created_by',

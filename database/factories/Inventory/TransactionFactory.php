@@ -26,6 +26,21 @@ class TransactionFactory extends Factory
         ];
     }
 
+    public function configure()
+    {
+        return $this->afterMaking(function (Transaction $transaction) {
+            if (! empty($transaction->organization_id) || empty($transaction->store_id)) {
+                return;
+            }
+
+            $store = Store::query()->withoutGlobalScopes()->find($transaction->store_id);
+
+            if ($store && $store->organization_unit) {
+                $transaction->organization_id = $store->organization_unit->organization_id;
+            }
+        });
+    }
+
     public function finalized()
     {
         return $this->state(function (array $attributes) {

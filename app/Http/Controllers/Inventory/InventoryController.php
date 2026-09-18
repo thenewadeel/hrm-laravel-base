@@ -43,13 +43,20 @@ class InventoryController extends Controller
     }
 
     /**
-     * Get count of low stock items across all stores
+     * Get count of low stock items across all stores (scoped to the operating organization).
      */
     private function getLowStockItemsCount(): int
     {
-        return \DB::table('inventory_store_items')
-            ->whereRaw('quantity < min_stock')
-            ->where('quantity', '>', 0)
-            ->count();
+        return (int) Store::query()
+            ->whereHas('items', function ($query) {
+                $query->whereRaw('inventory_store_items.quantity < inventory_store_items.min_stock')
+                    ->where('inventory_store_items.quantity', '>', 0);
+            })
+            ->withCount(['items as low_stock_count' => function ($query) {
+                $query->whereRaw('inventory_store_items.quantity < inventory_store_items.min_stock')
+                    ->where('inventory_store_items.quantity', '>', 0);
+            }])
+            ->get()
+            ->sum('low_stock_count');
     }
 }
