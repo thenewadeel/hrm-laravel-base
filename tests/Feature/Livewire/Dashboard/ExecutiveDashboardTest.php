@@ -50,6 +50,7 @@ test('showcases organization-scoped data in widgets', function () {
     MemberSubscription::factory()->active()->create([
         'organization_id' => $organization->id,
         'member_id' => $member->id,
+        'end_date' => now()->addDays(45)->toDateString(),
     ]);
 
     $this->actingAs($user);
@@ -165,4 +166,61 @@ test('resurrects a saved preference for repeat visits', function () {
 
     Livewire::test(ExecutiveDashboard::class, ['organization' => $organization])
         ->assertSet('layout', $expected);
+});
+
+test('sanitizes stale widget keys from a stored preference', function () {
+    [$organization, $user] = executiveDashboardOrg();
+
+    UserDashboardPreference::create([
+        'user_id' => $user->id,
+        'organization_id' => $organization->id,
+        'layout' => ['removed-widget', 'activity-feed', 'also-gone'],
+    ]);
+
+    $this->actingAs($user);
+
+    Livewire::test(ExecutiveDashboard::class, ['organization' => $organization])
+        ->assertSet('layout', ['activity-feed'])
+        ->assertHasNoErrors();
+
+    $this->assertDatabaseHas('user_dashboard_preferences', [
+        'user_id' => $user->id,
+        'organization_id' => $organization->id,
+        'layout' => json_encode(['activity-feed']),
+    ]);
+});
+
+test('forbids users who are not members of the organization', function () {
+    [$organization, $user] = executiveDashboardOrg();
+    $outsider = User::factory()->create(['current_organization_id' => $organization->id]);
+
+    $this->actingAs($outsider);
+
+    Livewire::test(ExecutiveDashboard::class, ['organization' => $organization])
+        ->assertForbidden();
+});
+
+test('expired subscriptions exclude cancelled members', function () {
+    [$organization, $user] = executiveDashboardOrg();
+
+    $member = Member::factory()->create(['organization_id' => $organization->id]);
+    MemberSubscription::factory()->expired()->create([
+        'organization_id' => $organization->id,
+        'member_id' => $member->id,
+    ]);
+
+    $cancelled = MemberSubscription::factory()->expired()->create([
+        'organization_id' => $organization->id,
+        'member_id' => $member->id,
+        'status' => 'cancelled',
+    ]);
+
+    $this->actingAs($user);
+
+    Livewire::test(ExecutiveDashboard::class, ['organization' => $organization])
+        ->assertSet('widgets.subscription-health.data', [
+            ['label' => 'Active', 'value' => 0, 'color' => 'success'],
+            ['label' => 'Expiring', 'value' => 0, 'color' => 'warning'],
+            ['label' => 'Expired', 'value' => 1, 'color' => 'error'],
+        ]);
 });

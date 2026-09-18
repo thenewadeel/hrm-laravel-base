@@ -17,6 +17,7 @@ use App\Models\Membership\SubscriptionPlan;
 use App\Models\Organization;
 use App\Models\OrganizationUnit;
 use App\Models\User;
+use App\Services\Dashboard\ExecutiveOverviewService;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -61,6 +62,8 @@ class DashboardDemoSeeder extends Seeder
             $this->createInventoryTransactions($organization);
 
             $this->createMemberships($organization);
+
+            ExecutiveOverviewService::forget($organization);
         });
 
         $this->command->info('✅ Dashboard demo data seeded!');

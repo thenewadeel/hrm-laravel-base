@@ -1,4 +1,3 @@
-import '../../css/dashboard.css';
 import { registerCharts } from './charts';
 import { registerDashboardUi } from './ui';
 import { registerParticleField } from './particles';

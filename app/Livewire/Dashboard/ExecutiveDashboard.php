@@ -5,6 +5,8 @@ namespace App\Livewire\Dashboard;
 use App\Models\Organization;
 use App\Models\UserDashboardPreference;
 use App\Services\Dashboard\ExecutiveOverviewService;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 /**
@@ -55,10 +57,17 @@ class ExecutiveDashboard extends Component
      */
     public array $available = [];
 
-    public function mount(Organization $organization): void
+    protected ExecutiveOverviewService $service;
+
+    public function mount(Organization $organization, ExecutiveOverviewService $service): void
     {
+        $this->service = $service;
         $this->organizationId = $organization->id;
         $this->organizationName = $organization->name;
+
+        // Non-members are never granted the dashboard payload (abort 403).
+        $this->organization();
+
         $this->loadData($organization);
     }
 
@@ -67,19 +76,14 @@ class ExecutiveDashboard extends Component
      */
     protected function loadData(Organization $organization): void
     {
-        $payload = app(ExecutiveOverviewService::class)->build($organization);
+        $payload = $this->service->build($organization);
 
         $this->kpis = $payload['kpis'];
         $this->widgets = $payload['widgets'];
         $this->activity = $payload['activity'];
         $this->available = array_keys($payload['widgets']);
-
-        $preference = $this->preference($organization);
-
-        $this->layout = $preference?->layout ?? array_values(array_intersect(
-            ExecutiveOverviewService::DEFAULT_ORDER,
-            array_keys($payload['widgets'])
-        ));
+        $this->layout = $this->resolveLayout($organization, $this->available);
+        $this->saved = false;
     }
 
     /**
@@ -87,7 +91,16 @@ class ExecutiveDashboard extends Component
      */
     public function refresh(): void
     {
-        $this->loadData($this->organization());
+        $organization = $this->organization();
+
+        if (! $organization) {
+            $this->redirect('/setup');
+
+            return;
+        }
+
+        ExecutiveOverviewService::forget($organization);
+        $this->loadData($organization);
     }
 
     /**
@@ -97,6 +110,14 @@ class ExecutiveDashboard extends Component
      */
     public function reorderWidgets(array $order): void
     {
+        $this->clearSaved();
+
+        $organization = $this->organization();
+
+        if (! $organization) {
+            return;
+        }
+
         $allowed = array_flip($this->available);
 
         $cleaned = array_values(array_filter(
@@ -111,7 +132,7 @@ class ExecutiveDashboard extends Component
         }
 
         $this->layout = array_values(array_unique($cleaned));
-        $this->savePreference($this->organization());
+        $this->savePreference($organization);
     }
 
     /**
@@ -119,7 +140,11 @@ class ExecutiveDashboard extends Component
      */
     public function toggleWidget(string $key): void
     {
+        $this->clearSaved();
+
         if (! in_array($key, $this->available, true)) {
+            $this->layout = array_values(array_diff($this->layout, [$key]));
+
             return;
         }
 
@@ -130,15 +155,66 @@ class ExecutiveDashboard extends Component
         }
 
         $this->layout = array_values(array_unique($this->layout));
-        $this->savePreference($this->organization());
+
+        $organization = $this->organization();
+
+        if ($organization) {
+            $this->savePreference($organization);
+        }
     }
 
     /**
-     * The organization this dashboard is scoped to.
+     * The organization this dashboard is scoped to, when the current user is a
+     * member of it (or null once the organization no longer exists).
      */
-    protected function organization(): Organization
+    protected function organization(): ?Organization
     {
-        return Organization::query()->findOrFail($this->organizationId);
+        $user = Auth::user();
+
+        if (! $user || ! $this->organizationId) {
+            return null;
+        }
+
+        $organization = Organization::query()->find($this->organizationId);
+
+        if (! $organization) {
+            return null;
+        }
+
+        if (! $user->organizations()->whereKey($organization->id)->exists()) {
+            abort(403);
+
+            return null;
+        }
+
+        return $organization;
+    }
+
+    /**
+     * Resolve the user's personalized layout, bounded to the currently
+     * available widgets so stale keys from removed widgets never surface.
+     *
+     * @param  array<int, string>  $available
+     * @return array<int, string>
+     */
+    protected function resolveLayout(Organization $organization, array $available): array
+    {
+        $preference = $this->preference($organization);
+
+        if (! $preference || ! is_array($preference->layout)) {
+            return array_values(array_intersect(
+                ExecutiveOverviewService::DEFAULT_ORDER,
+                $available
+            ));
+        }
+
+        $this->layout = array_values(array_intersect($preference->layout, $available));
+
+        if (count($this->layout) !== count($preference->layout)) {
+            $this->savePreference($organization);
+        }
+
+        return $this->layout;
     }
 
     /**
@@ -146,7 +222,7 @@ class ExecutiveDashboard extends Component
      */
     protected function preference(Organization $organization): ?UserDashboardPreference
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
         if (! $user) {
             return null;
@@ -163,7 +239,7 @@ class ExecutiveDashboard extends Component
      */
     protected function savePreference(Organization $organization): void
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
         if (! $user) {
             return;
@@ -177,7 +253,15 @@ class ExecutiveDashboard extends Component
         $this->saved = true;
     }
 
-    public function render()
+    /**
+     * Clear the transient "layout saved" indicator before a layout mutation.
+     */
+    protected function clearSaved(): void
+    {
+        $this->saved = false;
+    }
+
+    public function render(): View
     {
         return view('livewire.dashboard.executive-dashboard');
     }

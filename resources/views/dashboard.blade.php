@@ -12,4 +12,6 @@
             <livewire:dashboard.executive-dashboard :organization="$organization" />
         </div>
     </div>
+
+    @vite(['resources/js/dashboard.js'])
 </x-app-layout>

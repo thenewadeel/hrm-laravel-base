@@ -2,10 +2,6 @@
 /* Executive Dashboard                                                        */
 /* -------------------------------------------------------------------------- */
 
-[x-cloak] {
-    display: none !important;
-}
-
 .dashboard-grid {
     display: grid;
     grid-template-columns: 1fr;

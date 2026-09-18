@@ -5,12 +5,12 @@ namespace App\Services\Dashboard;
 use App\Models\Accounting\BankAccount;
 use App\Models\Accounting\Voucher;
 use App\Models\AttendanceRecord;
-use App\Models\Employee;
 use App\Models\Inventory\Transaction;
 use App\Models\Membership\Member;
 use App\Models\Membership\MemberSubscription;
 use App\Models\Organization;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\DB;
  */
 class ExecutiveOverviewService
 {
+    /**
+     * How long a full dashboard payload is cached before it is recomputed.
+     */
+    private const CACHE_TTL = 300;
+
     /**
      * The canonical order widgets are rendered in when a user has no custom
      * layout stored yet.
@@ -37,11 +42,44 @@ class ExecutiveOverviewService
     ];
 
     /**
-     * Build the complete dashboard payload for an organization.
+     * Build a complete dashboard payload keyed by the organization, cached for
+     * a few minutes so repeated visits do not re-run every aggregate query.
+     *
+     * The active user can always force a fresh payload via `refresh()`.
      *
      * @return array<string, mixed>
      */
     public function build(Organization $organization): array
+    {
+        return Cache::remember(
+            self::cacheKey($organization),
+            self::CACHE_TTL,
+            fn () => $this->compute($organization)
+        );
+    }
+
+    /**
+     * Drop any cached payload for an organization (e.g. before a data refresh).
+     */
+    public static function forget(Organization $organization): void
+    {
+        Cache::forget(self::cacheKey($organization));
+    }
+
+    /**
+     * The cache key holding an organization's dashboard payload.
+     */
+    private static function cacheKey(Organization $organization): string
+    {
+        return 'dashboard:executive:'.(int) $organization->id;
+    }
+
+    /**
+     * Compute the complete payload from source data.
+     *
+     * @return array<string, mixed>
+     */
+    protected function compute(Organization $organization): array
     {
         $revenueSeries = $this->revenueSeries($organization);
         $stockByStore = $this->stockByStore($organization);
@@ -250,19 +288,21 @@ class ExecutiveOverviewService
         }
 
         $revenueValues = array_values($revenue);
+        $expenseValues = array_values($expense);
+        $netValues = array_map(fn ($r, $e) => max(0, $r - $e), $revenueValues, $expenseValues);
 
-        // Most recent month and the month before it, for the KPI delta.
-        $keyCount = count($revenueValues);
-        $currentMonthRevenue = $keyCount > 0 ? $revenueValues[$keyCount - 1] : 0;
-        $previousMonthRevenue = $keyCount > 1 ? $revenueValues[$keyCount - 2] : null;
+        // Most recent month and the month before it (net), for the KPI delta.
+        $keyCount = count($netValues);
+        $currentMonthNet = $keyCount > 0 ? $netValues[$keyCount - 1] : 0;
+        $previousMonthNet = $keyCount > 1 ? $netValues[$keyCount - 2] : null;
 
         return [
             'labels' => $months->values()->all(),
             'revenue' => $revenueValues,
-            'expense' => array_values($expense),
+            'expense' => $expenseValues,
             'net' => round(array_sum($revenue) - array_sum($expense), 2),
-            'current_month' => $currentMonthRevenue,
-            'previous_month' => $previousMonthRevenue,
+            'current_month' => $currentMonthNet,
+            'previous_month' => $previousMonthNet,
         ];
     }
 
@@ -334,25 +374,44 @@ class ExecutiveOverviewService
     /**
      * Active / expiring / expired membership subscription buckets.
      *
+     * Resolves all three counts in a single query using conditional SUM to
+     * avoid three separate passes over the same table.
+     *
+     * The expired bucket excludes 'cancelled' subscriptions so that a member
+     * who intentionally cancelled is not surfaced as an error-level alert.
+     *
      * @return array<string, int>
      */
     private function subscriptionStatus(Organization $organization): array
     {
-        $query = MemberSubscription::query()->where('organization_id', $organization->id);
+        $now = now();
 
-        $active = (clone $query)->active()->count();
-        $expiring = (clone $query)->expiringSoon()->count();
-        $expired = (clone $query)->expired()->count();
+        $row = MemberSubscription::query()
+            ->where('organization_id', $organization->id)
+            ->selectRaw('
+                SUM(CASE WHEN status = ? AND start_date <= ? AND end_date >= ? THEN 1 ELSE 0 END) as active,
+                SUM(CASE WHEN status = ? AND end_date <= ? AND end_date > ? THEN 1 ELSE 0 END) as expiring,
+                SUM(CASE WHEN end_date < ? AND status != ? THEN 1 ELSE 0 END) as expired
+            ', [
+                'active', $now->toDateString(), $now->toDateString(),
+                'active', $now->copy()->addDays(30)->toDateString(), $now->toDateString(),
+                $now->toDateString(), 'cancelled',
+            ])
+            ->first();
 
         return [
-            'active' => $active,
-            'expiring' => $expiring,
-            'expired' => $expired,
+            'active' => (int) ($row->active ?? 0),
+            'expiring' => (int) ($row->expiring ?? 0),
+            'expired' => (int) ($row->expired ?? 0),
         ];
     }
 
     /**
      * Active employee headcount grouped by organizational unit.
+     *
+     * The unit name is coalesced in PHP so that two units which share the same
+     * name are not merged into one bucket, and a real unit named "Unassigned"
+     * cannot collide with the fallback bucket.
      *
      * @return array<string, mixed>
      */
@@ -363,25 +422,28 @@ class ExecutiveOverviewService
             ->where('e.organization_id', $organization->id)
             ->where('e.is_active', true)
             ->whereNull('e.deleted_at')
-            ->selectRaw('COALESCE(ou.name, ?) as unit, COUNT(*) as total', ['Unassigned'])
-            ->groupBy('ou.name')
-            ->orderByDesc('total')
+            ->selectRaw('ou.id as unit_id, ou.name as unit_name, COUNT(*) as total')
+            ->groupBy('ou.id', 'ou.name')
             ->get()
-            ->map(fn ($row) => ['unit' => $row->unit, 'total' => (int) $row->total]);
-
-        $total = Employee::query()
-            ->where('organization_id', $organization->id)
-            ->where('is_active', true)
-            ->count();
+            ->map(fn ($row) => [
+                'unit' => $row->unit_name ?? 'Unassigned',
+                'total' => (int) $row->total,
+            ])
+            ->sortByDesc('total')
+            ->values();
 
         return [
             'units' => $units,
-            'total' => $total,
+            'total' => (int) $units->sum('total'),
         ];
     }
 
     /**
      * Today's attendance plus a daily-present sparkline for the last 14 days.
+     *
+     * Only records where the employee actually attended (present or late) are
+     * counted, so leave / absent / missed-punch records do not inflate the
+     * rate; the denominator stays the active headcount.
      *
      * @return array<string, mixed>
      */
@@ -398,17 +460,16 @@ class ExecutiveOverviewService
         $records = AttendanceRecord::query()
             ->where('organization_id', $organization->id)
             ->where('record_date', '>=', $start->format('Y-m-d'))
+            ->whereIn('status', ['present', 'late'])
             ->selectRaw('record_date, COUNT(*) as total')
             ->groupBy('record_date')
             ->get()
             ->keyBy(fn ($record) => Carbon::parse($record->record_date)->format('Y-m-d'))
             ->map(fn ($record) => (int) $record->total);
 
-        $values = $labels->keys()->map(fn ($day) => (int) ($records[$day] ?? 0));
-
         return [
-            'labels' => $labels->values()->values()->all(),
-            'values' => $values->all(),
+            'labels' => $labels->values()->all(),
+            'values' => $labels->keys()->map(fn ($day) => (int) ($records[$day] ?? 0))->all(),
             'today' => (int) ($records[today()->format('Y-m-d')] ?? 0),
         ];
     }

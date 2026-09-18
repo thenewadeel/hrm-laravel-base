@@ -13,6 +13,7 @@ export function registerWidgetGrid(Alpine) {
 
         init() {
             this.rootEl = this.$el;
+            this.completed = true;
 
             this.rootEl.addEventListener('dragstart', (event) => {
                 const card = event.target.closest('.dashboard-widget');
@@ -21,6 +22,7 @@ export function registerWidgetGrid(Alpine) {
                 }
 
                 this.dragging = card;
+                this.completed = false;
                 card.classList.add('is-dragging');
                 event.dataTransfer.effectAllowed = 'move';
                 event.dataTransfer.setData('text/plain', card.dataset.widgetKey);
@@ -49,12 +51,17 @@ export function registerWidgetGrid(Alpine) {
                 }
             });
 
+            // Both `drop` and `dragend` fire at the end of a successful drag, so
+            // persist the resulting order exactly once. A cancelled drag (Esc or
+            // dropping outside the grid) still fires `dragend`, rehydrating the
+            // original DOM order so we can resync without a redundant call.
             const finish = (event) => {
-                if (!this.dragging) {
+                if (!this.dragging || this.completed) {
                     return;
                 }
 
                 event.preventDefault();
+                this.completed = true;
                 this.dragging.classList.remove('is-dragging');
                 this.dragging = null;
 
