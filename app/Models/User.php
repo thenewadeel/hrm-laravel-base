@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Roles\AccountingRoles;
 use App\Roles\InventoryRoles;
 use App\Roles\MembershipRoles;
 use App\Roles\OrganizationRoles;
@@ -312,6 +313,12 @@ class User extends Authenticatable
             $membershipRolePermissions = MembershipRoles::getPermissionsForRole($role);
             if (! empty($membershipRolePermissions)) {
                 $allPermissions = array_merge($allPermissions, $membershipRolePermissions);
+            }
+
+            // Check accounting roles
+            $accountingRolePermissions = AccountingRoles::getPermissionsForRole($role);
+            if (! empty($accountingRolePermissions)) {
+                $allPermissions = array_merge($allPermissions, $accountingRolePermissions);
             }
         }
 

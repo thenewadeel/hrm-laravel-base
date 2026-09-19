@@ -138,12 +138,13 @@ class InventoryService
      */
     public function addItemsToTransaction(Transaction $transaction, array $items, User $user): Transaction
     {
-        Gate::authorize('update', $transaction);
-        // Temporarily bypass authorization for testing
-
+        // Domain invariant first: even an authorized user cannot modify a
+        // finalized or cancelled transaction (immutable once closed).
         if (! $transaction->isDraft()) {
             throw new \Exception('Cannot modify finalized or cancelled transaction');
         }
+
+        Gate::authorize('update', $transaction);
 
         return DB::transaction(function () use ($transaction, $items) {
             foreach ($items as $itemData) {

@@ -230,10 +230,10 @@ class AdminPortalController extends Controller
      */
     private function canAccessAdminPortal(User $user): bool
     {
-        // Super admin check (you might want to add an is_admin field to users table)
-        if ($user->email === config('app.admin_email', 'admin@example.com')) {
-            return true;
-        }
+        // RBAC-only: admin portal access is granted exclusively through explicit
+        // role assignment. There is no email-based bypass (previously a hardcoded
+        // 'admin@example.com' fallback here was active on every deployment, since
+        // app.admin_email is never defined in config/app.php).
 
         // Check if user has admin role in any organization
         foreach ($user->organizations as $org) {
