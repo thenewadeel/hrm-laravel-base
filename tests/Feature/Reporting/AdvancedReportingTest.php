@@ -250,8 +250,19 @@ test('generates comparative period analysis reports', function () {
     $currentPeriod = now()->subMonths(3);
     $previousPeriod = now()->subMonths(15);
 
-    $accounts = ChartOfAccount::factory()->count(3)->create([
-        'organization_id' => $organization->id,
+    $accounts = collect([
+        ChartOfAccount::factory()->create([
+            'organization_id' => $organization->id,
+            'type' => 'revenue',
+        ]),
+        ChartOfAccount::factory()->create([
+            'organization_id' => $organization->id,
+            'type' => 'expense',
+        ]),
+        ChartOfAccount::factory()->create([
+            'organization_id' => $organization->id,
+            'type' => 'asset',
+        ]),
     ]);
 
     // Create entries for current period

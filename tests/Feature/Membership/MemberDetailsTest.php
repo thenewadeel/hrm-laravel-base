@@ -301,6 +301,10 @@ it('sends SMS to member correctly', function () {
 });
 
 it('uploads member photo correctly', function () {
+    if (! function_exists('imagecreatetruecolor')) {
+        $this->markTestSkipped('GD extension is not installed.');
+    }
+
     $organization = Organization::factory()->create();
     $user = User::factory()->create();
     $user->organizations()->attach($organization->id, ['roles' => json_encode([MembershipRoles::MEMBERSHIP_ADMIN])]);

@@ -95,6 +95,7 @@ test('inventory to accounting integration posts stock movements', function () {
     // Get permissions for role and assign
     $permissions = InventoryRoles::getPermissionsForRole('inventory_admin');
     $user->givePermissionTo($permissions, $organization);
+    $this->actingAs($user);
 
     // Setup chart of accounts for inventory
     $inventoryAccount = ChartOfAccount::factory()->create([
@@ -318,6 +319,11 @@ test('audit trail captures cross-module activities', function () {
     $adminPermissions = OrganizationRoles::getPermissionsForRole('admin');
     $user->givePermissionTo($adminPermissions, $organization);
     $user->assignRole('admin', $organization);
+
+    // Inventory handlers also need transaction permissions (RBAC)
+    $inventoryPermissions = InventoryRoles::getPermissionsForRole(InventoryRoles::INVENTORY_ADMIN);
+    $user->givePermissionTo($inventoryPermissions, $organization);
+    $this->actingAs($user);
 
     // Setup required accounts for all tests
     ChartOfAccount::factory()->create([

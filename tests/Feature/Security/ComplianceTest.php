@@ -5,6 +5,7 @@ use App\Models\Employee;
 use App\Models\Inventory\Item;
 use App\Models\Membership\Member;
 use App\Models\Organization;
+use App\Models\OrganizationUnit;
 use App\Models\User;
 use App\Roles\InventoryRoles;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -40,7 +41,14 @@ test('multi-tenant data isolation under load testing', function () {
         $users->push($user);
 
         // Create significant data for each organization
-        Employee::factory()->count(50)->create(['organization_id' => $organization->id]);
+        $organizationUnit = OrganizationUnit::factory()->create([
+            'organization_id' => $organization->id,
+            'name' => 'Unit '.$organization->id,
+        ]);
+        Employee::factory()->count(50)->create([
+            'organization_id' => $organization->id,
+            'organization_unit_id' => $organizationUnit->id,
+        ]);
         Item::factory()->count(25)->create(['organization_id' => $organization->id]);
         Member::factory()->count(100)->create(['organization_id' => $organization->id]);
         ChartOfAccount::factory()->count(10)->create(['organization_id' => $organization->id]);

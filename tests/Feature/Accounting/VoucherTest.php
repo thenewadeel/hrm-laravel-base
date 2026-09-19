@@ -113,5 +113,5 @@ test('voucher generates sequential numbers', function () {
 
     expect($number)->toBeString();
     expect($number)->toMatch('/^SALES-\d{4}-\d{4}$/');
-    expect($number)->toContain('SALES-2025-');
+    expect($number)->toContain('SALES-'.now()->year.'-');
 });

@@ -228,6 +228,7 @@ test('generates overdue fees with proper business rules', function () {
     $overdueFee = MemberFee::factory()->create([
         'organization_id' => $this->organization->id,
         'member_id' => $newMember->id,
+        'fee_type' => 'subscription',
         'amount' => 100.00,
         'due_date' => now()->subDays(10)->format('Y-m-d'),
         'status' => 'pending',
@@ -254,6 +255,7 @@ test('prevents duplicate late fees', function () {
     $overdueFee = MemberFee::factory()->create([
         'organization_id' => $this->organization->id,
         'member_id' => $this->member->id,
+        'fee_type' => 'subscription',
         'amount' => 100.00,
         'due_date' => now()->subDays(10),
         'status' => 'pending',
@@ -276,6 +278,7 @@ test('calculates late fee amount correctly', function () {
     $overdueFee = MemberFee::factory()->create([
         'organization_id' => $this->organization->id,
         'member_id' => $this->member->id,
+        'fee_type' => 'subscription',
         'amount' => 100.00,
         'due_date' => now()->subDays(10),
         'status' => 'pending',

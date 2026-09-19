@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Employee;
 use App\Models\Organization;
 use App\Models\OrganizationUnit;
 use App\Models\User;
@@ -260,6 +261,11 @@ class HrmDashboardControllerTest extends TestCase
     #[Test]
     public function it_provides_realistic_hrm_data_values()
     {
+        Employee::factory()->count(3)->create([
+            'organization_unit_id' => $this->organizationUnit->id,
+            'organization_id' => $this->organization->id,
+        ]);
+
         $response = $this->get(route('hrm.dashboard'));
 
         $summary = $response->viewData('employeeSummary');

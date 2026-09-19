@@ -448,7 +448,7 @@ class AccountingReportService
         $previousTotal = $previousPeriod['net_income'];
         $currentTotal = $currentPeriod['net_income'];
         $variance = $currentTotal - $previousTotal;
-        $variancePercentage = $previousTotal != 0 ? ($variance / $previousTotal) * 100 : 0;
+        $variancePercentage = $previousTotal != 0 ? ($variance / abs($previousTotal)) * 100 : 0;
 
         return [
             'previous_period' => [

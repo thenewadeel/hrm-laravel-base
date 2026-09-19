@@ -118,7 +118,7 @@ test('simple subscriptions shows correct statistics', function () {
         'subscription_plan_id' => $plan->id,
         'status' => 'active',
         'start_date' => now()->subMonth(),
-        'end_date' => now()->addMonth(),
+        'end_date' => now()->addMonths(2),
     ]);
 
     MemberSubscription::factory()->create([

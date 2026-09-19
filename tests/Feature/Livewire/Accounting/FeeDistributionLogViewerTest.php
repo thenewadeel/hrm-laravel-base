@@ -81,6 +81,7 @@ test('fee distribution log viewer searches by description', function () {
             'member_fee_id' => $memberFee1->id,
             'total_amount' => 1000,
             'fee_distribution_rule_id' => null,
+            'distributed_at' => now(),
         ]);
 
     FeeDistributionLog::factory()
@@ -90,6 +91,7 @@ test('fee distribution log viewer searches by description', function () {
             'member_fee_id' => $memberFee2->id,
             'total_amount' => 500,
             'fee_distribution_rule_id' => null,
+            'distributed_at' => now(),
         ]);
 
     Livewire::actingAs($user)
@@ -120,6 +122,7 @@ test('fee distribution log viewer searches by member name', function () {
     FeeDistributionLog::factory()->successful()->create([
         'organization_id' => $organization->id,
         'member_fee_id' => $memberFee->id,
+        'distributed_at' => now(),
     ]);
 
     Livewire::actingAs($user)
@@ -143,6 +146,8 @@ test('fee distribution log viewer filters by status', function () {
             'organization_id' => $organization->id,
             'member_fee_id' => $memberFee->id,
             'fee_distribution_rule_id' => null,
+            'total_amount' => 1000,
+            'distributed_at' => now(),
         ]);
 
     FeeDistributionLog::factory()
@@ -151,13 +156,15 @@ test('fee distribution log viewer filters by status', function () {
             'organization_id' => $organization->id,
             'member_fee_id' => $memberFee->id,
             'fee_distribution_rule_id' => null,
+            'total_amount' => 500,
+            'distributed_at' => now(),
         ]);
 
     Livewire::actingAs($user)
         ->test(FeeDistributionLogViewer::class)
         ->set('statusFilter', 'success')
-        ->assertSee('success')
-        ->assertDontSee('failed');
+        ->assertSee('1,000.00')
+        ->assertDontSee('500.00');
 });
 
 // RED: Test fee type filter
@@ -170,11 +177,13 @@ test('fee distribution log viewer filters by fee type', function () {
     $subscriptionFee = MemberFee::factory()->create([
         'organization_id' => $organization->id,
         'fee_type' => 'subscription',
+        'description' => 'Quarterly Dues',
     ]);
 
     $lateFee = MemberFee::factory()->create([
         'organization_id' => $organization->id,
         'fee_type' => 'late_fee',
+        'description' => 'Overnight Surcharge',
     ]);
 
     FeeDistributionLog::factory()
@@ -183,6 +192,8 @@ test('fee distribution log viewer filters by fee type', function () {
             'organization_id' => $organization->id,
             'member_fee_id' => $subscriptionFee->id,
             'fee_distribution_rule_id' => null,
+            'total_amount' => 1000,
+            'distributed_at' => now(),
         ]);
 
     FeeDistributionLog::factory()
@@ -191,13 +202,15 @@ test('fee distribution log viewer filters by fee type', function () {
             'organization_id' => $organization->id,
             'member_fee_id' => $lateFee->id,
             'fee_distribution_rule_id' => null,
+            'total_amount' => 500,
+            'distributed_at' => now(),
         ]);
 
     Livewire::actingAs($user)
         ->test(FeeDistributionLogViewer::class)
         ->set('feeTypeFilter', 'subscription')
-        ->assertSee('subscription')
-        ->assertDontSee('late_fee');
+        ->assertSee('Quarterly Dues')
+        ->assertDontSee('Overnight Surcharge');
 });
 
 // RED: Test date range filter
@@ -412,6 +425,7 @@ test('fee distribution log viewer paginates results', function () {
     FeeDistributionLog::factory()->count(20)->successful()->create([
         'organization_id' => $organization->id,
         'member_fee_id' => $memberFee->id,
+        'distributed_at' => now(),
     ]);
 
     Livewire::actingAs($user)
@@ -436,6 +450,7 @@ test('fee distribution log viewer respects organization isolation', function () 
             'organization_id' => $organization1->id,
             'total_amount' => 1000,
             'fee_distribution_rule_id' => null,
+            'distributed_at' => now(),
         ]);
 
     // Create log for different organization
@@ -445,6 +460,7 @@ test('fee distribution log viewer respects organization isolation', function () 
             'organization_id' => $organization2->id,
             'total_amount' => 500,
             'fee_distribution_rule_id' => null,
+            'distributed_at' => now(),
         ]);
 
     Livewire::actingAs($user)
@@ -477,6 +493,7 @@ test('fee distribution log viewer loads logs with relationships', function () {
             'member_fee_id' => $memberFee->id,
             'fee_distribution_rule_id' => $rule->id,
             'journal_entry_id' => $journalEntry->id,
+            'distributed_at' => now(),
         ]);
 
     $component = Livewire::actingAs($user)
