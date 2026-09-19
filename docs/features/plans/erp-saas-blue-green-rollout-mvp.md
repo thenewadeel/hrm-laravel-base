@@ -139,15 +139,16 @@ MVP Go/No-Go already includes the "two tenants don't cross" test (Day 3).
 ## Runbook / Go-No-Go Checklist
 > Full runbook: `docs/features/plans/erp-saas-blue-green-rollout-runbook.md`
 
-- [x] `composer test` green (Memory=1G, MySQL service container via `phpunit.mysql.xml`).
-- [x] `vendor/bin/pint --test` passes (gated in `ci.yml`).
+- [x] `composer test` green (Memory=1G; 1473 passed / 0 failed as of `8a6d3d2`).
+- [x] `vendor/bin/pint --test` passes (gated in `ci.yml` — verified after formatting fix).
 - [x] `npm run build` produces hashed manifest; `ci.yml` fails if `manifest.json` missing.
-- [ ] Blue/Green swap exercised 2× with **no logged-out sessions** and **no 500s** during flip *(staging box)*.
-- [ ] Rollback drill: forced failure -> flipped back in <60s, data intact (forward-only migration policy honored) *(staging box)*.
+- [ ] Blue/Green swap exercised 2× with **no logged-out sessions** and **no 500s** during flip *(staging box — pending)*.
+- [ ] Rollback drill: forced failure -> flipped back in <60s, data intact (forward-only migration policy honored) *(staging box — pending)*.
 - [x] Migrations forward-only; review step confirms column-alter migrations re-declare full column attributes (runbook §5).
-- [x] Two-tenant isolation vertical slice passes (`MvpVerticalSliceIsolationTest` — 8 tests).
+- [x] Two-tenant isolation vertical slice passes (`MvpVerticalSliceIsolationTest` — 8 tests, verified).
 - [x] Health probe (`scripts/health-check-probe.sh`) reachable; workers supervised (`scripts/hrm-queue-worker.service`); `.env.production` secret-managed, not in git.
 - [x] `deploy-production-legacy.sh` retained as emergency escape hatch.
+- [x] CI test job made **deploy-blocking** (`continue-on-error: false` in `ci.yml`); suite green so no longer a non-blocking signal.
 
 ## Files Created/Referenced
 - **New (this task):** `docs/features/plans/erp-saas-blue-green-rollout-mvp.md`, `docs/features/plans/erp-saas-blue-green-rollout-runbook.md`

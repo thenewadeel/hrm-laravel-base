@@ -6,33 +6,15 @@
 +------------------+------------------+
 | Metric           | Count/Percentage |
 +------------------+------------------+
-| Total Tests      | 1468             |
-| Passed           | 1454 (99%)       |
-| Failed           | 9 (0.6%)         |
-| Warnings/Skipped | 5 (0.3%)         |
+| Total Tests      | 1479             |
+| Passed           | 1473 (99.6%)     |
+| Failed           | 0 (0%)           |
+| Warnings/Skipped | 6 (0.4%)         |
 +------------------+------------------+
 
---- ❌ Detailed Failures (9 Total) ---
+--- ✅ All Tests Passed! ---
 
- Voucher (1/11 failures):
-   ⨯ voucher generates sequential numbers
-
- FeeDistributionLogViewer (6/18 failures):
-   ⨯ fee distribution log viewer searches by description
-   ⨯ fee distribution log viewer searches by member name
-   ⨯ fee distribution log viewer filters by status
-   ⨯ fee distribution log viewer filters by fee type
-   ⨯ fee distribution log viewer respects organization isolation
-   ⨯ fee distribution log viewer loads logs with relationships
-
- MemberDetails (1/15 failures):
-   ⨯ it uploads member photo correctly
-
- SimpleSubscriptions (1/14 failures):
-   ⨯ simple subscriptions shows correct statistics
-
-
---- ⚠️ Warnings/Skipped Tests (5 Total) ---
+--- ⚠️ Warnings/Skipped Tests (6 Total) ---
 
  EmailVerification (3/3 warnings):
    - email verification screen can be rendered → Email verification not…
@@ -44,6 +26,9 @@
 
  FamilyMemberManager (1/14 warnings):
    - it uploads photo for family member correctly → GD extension is requ…
+
+ MemberDetails (1/15 warnings):
+   - it uploads member photo correctly → GD extension is not installed.
 
 
 --- ✅ Fully Passed Modules ---
@@ -129,6 +114,7 @@
 | FeeDistributionService           | 15/15        |
 | FinancialYear                    | 15/15        |
 | SpecializedVoucher               | 10/10        |
+| Voucher                          | 11/11        |
 | AdminPortal                      | 3/3          |
 | AdvanceReportService             | 11/11        |
 | AdvanceReportsLivewire           | 12/12        |
@@ -158,7 +144,7 @@
 | EmployeePositionShiftIntegration | 9/9          |
 | JobPositionController            | 8/8          |
 | ShiftController                  | 5/5          |
-| HrmDashboardController           | 18/18        |
+| HrmDashboardController           | 16/16        |
 | CrossModuleWorkflow              | 6/6          |
 | InventoryController              | 5/5          |
 | InventoryItemController          | 5/5          |
@@ -175,10 +161,12 @@
 | Create                           | 7/7          |
 | Create                           | 7/7          |
 | ChartOfAccounts                  | 5/5          |
+| FeeDistributionLogViewer         | 18/18        |
 | FeeDistributionRuleManager       | 18/18        |
 | JournalEntries                   | 3/3          |
 | Create                           | 7/7          |
 | CashManagementDemo               | 11/11        |
+| ExecutiveDashboard               | 11/11        |
 | CardDesigner                     | 6/6          |
 | SimpleScanner                    | 18/18        |
 | MemberManager                    | 2/2          |
@@ -200,6 +188,7 @@
 | MultiTenantIsolation             | 18/18        |
 | ServiceIntegration               | 9/9          |
 | SimpleFees                       | 8/8          |
+| SimpleSubscriptions              | 14/14        |
 | SubscriptionManager              | 7/7          |
 | Customer                         | 8/8          |
 | FinancialManagement              | 12/12        |
@@ -214,7 +203,7 @@
 | NavigationRouteValidation        | 3/3          |
 | NavigationRoutesValidation       | 10/10        |
 | PortalHrDashboardRoute           | 2/2          |
-| NavigationHover                  | 4/4          |
+| NavigationHover                  | 6/6          |
 | NewBadge                         | 2/2          |
 | DepartmentManagement             | 7/7          |
 | MvpVerticalSliceIsolation        | 8/8          |

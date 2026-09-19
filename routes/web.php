@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+use Laravel\Jetstream\Jetstream;
 
-if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature()) {
+if (Jetstream::hasTermsAndPrivacyPolicyFeature()) {
     Route::view('/terms-of-service', 'terms')->name('terms.show');
     Route::view('/privacy-policy', 'policy')->name('policy.show');
 }

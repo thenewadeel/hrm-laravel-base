@@ -41,13 +41,11 @@ jobs:
       - name: Laravel Pint (code style)
         run: vendor/bin/pint --test
 
-  # NON-BLOCKING signal — full unit + feature suite (sqlite :memory:).
-  # Temporarily marked continue-on-error while the ~104 pre-existing failures
-  # are triaged. Revert (remove continue-on-error) once the suite is green.
+  # DEPLOY-BLOCKING gate — full unit + feature suite (sqlite :memory:).
   test:
     name: PHP ${{ matrix.php }} — Tests
     runs-on: ubuntu-latest
-    continue-on-error: true
+    continue-on-error: false
 
     strategy:
       fail-fast: false

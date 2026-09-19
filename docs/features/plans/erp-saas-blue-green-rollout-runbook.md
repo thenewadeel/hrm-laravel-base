@@ -137,7 +137,7 @@ Checks: `/up`, `/login`, `/setup` (200s), Vite manifest presence, active release
 | # | Check | Result |
 |---|-------|--------|
 | 1 | CI gate green: `pint --test` + `npm run build` (deploy-blocking) | ☐ |
-| 2 | Full unit/feature suite green on CI (`php artisan test` — currently known-red, ~104 pre-existing failures, being triaged) | ☐ |
+| 2 | Full unit/feature suite green on CI (`php artisan test` — suite is green as of `8a6d3d2`, continue-on-error removed) | ☐ |
 | 3 | Blue/Green swap exercised 2× with no logged-out sessions and no 500s during flip | ☐ |
 | 4 | Rollback drill: forced failure → flipped back in <60s, data intact | ☐ |
 | 5 | Migrations forward-only; column-alter migrations re-declare full attributes | ☐ |
