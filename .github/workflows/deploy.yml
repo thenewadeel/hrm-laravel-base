@@ -20,7 +20,6 @@ jobs:
     name: Deploy to VPS
     runs-on: ubuntu-latest
     needs: [ ci-gate ]
-    secrets: inherit
 
     steps:
       - name: Run blue/green deploy sequence on the VPS
