@@ -74,6 +74,19 @@ jobs:
       - name: Generate application key
         run: php artisan key:generate --force
 
+      # Views use @vite, so assets must exist before the suite can render pages.
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build production assets
+        run: npm run build
+
       - name: Run test suite (sqlite :memory:, unit + feature)
         run: php artisan test --no-coverage
 
