@@ -39,7 +39,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
 
-            $table->index(['fee_distribution_rule_id', 'priority']);
+            $table->index(['fee_distribution_rule_id', 'priority'], 'fee_dist_items_rule_priority_idx');
         });
 
         Schema::create('fee_distribution_logs', function (Blueprint $table) {
