@@ -28,7 +28,7 @@ return new class extends Migration
             $table->text('notes')->nullable();
             $table->timestamps();
 
-            $table->index(['organization_id', 'exemptible_type', 'exemptible_id']);
+            $table->index(['organization_id', 'exemptible_type', 'exemptible_id'], 'tax_exempt_org_type_id_idx');
             $table->index(['organization_id', 'certificate_number']);
             $table->index(['organization_id', 'is_active']);
         });

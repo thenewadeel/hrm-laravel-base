@@ -27,7 +27,7 @@ return new class extends Migration
             $table->text('notes')->nullable();
             $table->timestamps();
 
-            $table->index(['organization_id', 'calculable_type', 'calculable_id']);
+            $table->index(['organization_id', 'calculable_type', 'calculable_id'], 'tax_calcs_org_type_id_idx');
             $table->index(['organization_id', 'tax_rate_id']);
             $table->index(['organization_id', 'calculation_date']);
         });

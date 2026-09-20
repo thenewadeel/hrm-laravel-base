@@ -30,8 +30,8 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index(['organization_id', 'bank_account_id', 'statement_date']);
-            $table->unique(['organization_id', 'bank_account_id', 'statement_number']);
+            $table->index(['organization_id', 'bank_account_id', 'statement_date'], 'bank_statements_org_account_date_idx');
+            $table->unique(['organization_id', 'bank_account_id', 'statement_number'], 'bank_statements_org_account_number_unique');
         });
     }
 

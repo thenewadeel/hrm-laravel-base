@@ -31,9 +31,9 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index(['organization_id', 'bank_account_id', 'transaction_date']);
+            $table->index(['organization_id', 'bank_account_id', 'transaction_date'], 'bank_tx_org_acct_date_idx');
             $table->index(['organization_id', 'bank_account_id', 'status']);
-            $table->index(['organization_id', 'bank_account_id', 'reconciliation_status']);
+            $table->index(['organization_id', 'bank_account_id', 'reconciliation_status'], 'bank_tx_org_acct_recon_idx');
             $table->index(['bank_statement_id', 'transaction_date']);
         });
     }

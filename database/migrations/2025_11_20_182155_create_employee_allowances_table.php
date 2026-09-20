@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('notes')->nullable();
             $table->timestamps();
 
-            $table->unique(['employee_id', 'allowance_type_id', 'effective_date']);
+            $table->unique(['employee_id', 'allowance_type_id', 'effective_date'], 'emp_allowances_emp_type_date_unique');
             $table->index(['employee_id', 'is_active']);
             $table->index(['organization_id', 'effective_date']);
         });
