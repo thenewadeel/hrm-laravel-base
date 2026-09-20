@@ -35,7 +35,13 @@ return new class extends Migration
             $table->unsignedBigInteger('organization_id')->nullable();
         });
 
-        DB::table('sequences')->update(['organization_id' => DB::table('organizations')->min('id')]);
+        $firstOrganizationId = DB::table('organizations')->value('id');
+
+        if ($firstOrganizationId !== null) {
+            DB::table('sequences')->update(['organization_id' => $firstOrganizationId]);
+        } else {
+            DB::table('sequences')->truncate();
+        }
 
         Schema::table('sequences', function (Blueprint $table) {
             $table->dropPrimary('sequences_name_primary');

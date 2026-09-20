@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('inventory_transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('store_id')->constrained('inventory_stores')->nullOnDelete();
+            $table->foreignId('store_id')->constrained('inventory_stores')->restrictOnDelete();
             // $table->foreignId('inventory_id');
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
             // $table->foreignId('staff_id');

@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('inventory_store_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('store_id')->constrained('inventory_stores')->nullOnDelete();
-            $table->foreignId('item_id')->constrained('inventory_items')->nullOnDelete();
+            $table->foreignId('store_id')->constrained('inventory_stores')->restrictOnDelete();
+            $table->foreignId('item_id')->constrained('inventory_items')->restrictOnDelete();
             $table->foreignId('head_id')->nullable()->constrained('inventory_heads')->nullOnDelete();
             $table->integer('quantity')->default(0);
             $table->integer('min_stock')->nullable();

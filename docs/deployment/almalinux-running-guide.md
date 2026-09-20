@@ -35,14 +35,14 @@ tail -f /var/log/nginx/access.log /var/log/nginx/error.log
 tail -f /var/log/php-fpm/error.log
 
 # Queue worker journal
-journalctl -u hrm-queue-worker -f
+journalctl -u hrm-queue -f
 ```
 
 ## 3. Services
 
 ```bash
-sudo systemctl status nginx php-fpm mariadb hrm-queue-worker crond
-sudo systemctl restart hrm-queue-worker   # after secrets or .env changes
+sudo systemctl status nginx php-fpm mariadb hrm-queue crond
+sudo systemctl restart hrm-queue   # after secrets or .env changes
 sudo systemctl restart php-fpm            # after pool/php.ini changes
 sudo systemctl reload nginx               # after vhost changes
 ```
@@ -82,7 +82,7 @@ sudo -u nginx ./scripts/deploy-bluegreen.sh healthcheck      # fails hard → no
 sudo -u nginx ./scripts/deploy-bluegreen.sh swap             # atomic symlink flip
 sudo -u nginx ./scripts/deploy-bluegreen.sh smoke            # post-swap verification
 
-sudo systemctl restart hrm-queue-worker
+sudo systemctl restart hrm-queue
 ```
 
 Or skip the SSH dance entirely: push to `main` and let `.github/workflows/deploy.yml` run the
@@ -93,7 +93,7 @@ same sequence (gated on CI passing).
 ```bash
 cd /opt/hrm/deploy
 sudo -u nginx ./scripts/deploy-bluegreen.sh rollback
-sudo systemctl restart hrm-queue-worker
+sudo systemctl restart hrm-queue
 ```
 
 Instant symlink flip to the previous release. No automated DB down — schema is forward-only;
@@ -158,6 +158,7 @@ sudo firewall-cmd --list-all          # expect ssh/http/https only
 | `502/504` after swap | php-fpm socket owner in `/etc/php-fpm.d/www.conf` (`nginx`), release perms (`chown -R nginx`), `/opt/hrm/current` symlink target |
 | 403 on `current/public` | SELinux — `getenforce`; first deploy keeps it `permissive`, then add proper `semanage fcontext` for `/opt/hrm(/.*)?` |
 | Login page 500 immediately after migrate | schema/seed mismatch — `migrate:status`, check `laravel.log`; consider manual DOWN + `migrate` |
+| `migrate` fails: `Base table or view already exists` | a table exists but its row is missing from `migrations`. Compare `migrate:status` vs live schema; mark the table's migration as already-run (`INSERT INTO migrations (migration, batch) SELECT '<filename>', MAX(batch) FROM migrations;`), then re-run `artisan migrate --force`. Repeat until only genuinely-new migrations remain |
 | Stale assets after deploy | `prepare` rebuilds via `npm run build`; confirm `public/build/manifest.json` exists and `@vite` resolves |
-| Queue jobs stuck | `systemctl status hrm-queue-worker`; `artisan queue:failed`; confirm `QUEUE_CONNECTION=database` in `shared/.env` |
+| Queue jobs stuck | `systemctl status hrm-queue`; `artisan queue:failed`; confirm `QUEUE_CONNECTION=database` in `shared/.env` |
 | Random logouts | `SESSION_DRIVER=database` (must not be file) and `SESSION_DOMAIN` matches `APP_URL` |

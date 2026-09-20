@@ -1,15 +1,15 @@
 # =============================================================================
-# hrm-queue-worker.service — systemd unit for HRM Laravel queue worker
+# hrm-queue.service — systemd unit for HRM Laravel queue worker
 # =============================================================================
 #
 # Install:
-#   sudo cp scripts/hrm-queue-worker.service /etc/systemd/system/
+#   sudo cp scripts/hrm-queue.service /etc/systemd/system/
 #   sudo systemctl daemon-reload
-#   sudo systemctl enable --now hrm-queue-worker.service
+#   sudo systemctl enable --now hrm-queue.service
 #
 # The ExecStartPre script writes the current release path to the unit's
 # environment file so the worker always runs the live release's artisan.
-# After a blue/green swap, run `sudo systemctl restart hrm-queue-worker`
+# After a blue/green swap, run `sudo systemctl restart hrm-queue`
 # to pick up the new code. The deploy-bluegreen.sh swap command does this
 # automatically via `artisan queue:restart`.
 #

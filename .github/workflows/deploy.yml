@@ -67,8 +67,8 @@ jobs:
               ./scripts/deploy-bluegreen.sh smoke
 
             # ---- restart queued workers against the new release ----
-            sudo systemctl restart hrm-queue-worker
-            sudo systemctl is-active hrm-queue-worker
+            sudo systemctl restart hrm-queue
+            sudo systemctl is-active hrm-queue
 
             # ---- final health probe ----
             APP_URL=$APP_URL ./scripts/health-check-probe.sh || exit 1

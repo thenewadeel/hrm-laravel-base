@@ -288,26 +288,10 @@ Deploy dirs are owned by **nginx** (the php‑fpm worker user) — not `www-data
 
 - [ ] **Queue worker** — dequeues ERP jobs; `swap` calls `artisan queue:restart` which only matters if a worker runs.
 
-  `/etc/systemd/system/hrm-queue.service`:
-
-  ```ini
-  [Unit]
-  Description=HRM Laravel queue worker
-  After=network.target mariadb.service php-fpm.service
-
-  [Service]
-  User=nginx
-  Group=nginx
-  WorkingDirectory=/opt/hrm/current
-  ExecStart=/usr/bin/php artisan queue:work --sleep=3 --tries=3 --max-time=3600
-  Restart=on-failure
-  RestartSec=5
-
-  [Install]
-  WantedBy=multi-user.target
-  ```
+  The unit is committed at `scripts/hrm-queue.service`. Install it under the same name the runbook and `deploy.yml` use:
 
   ```bash
+  sudo cp scripts/hrm-queue.service /etc/systemd/system/hrm-queue.service
   systemctl daemon-reload
   systemctl enable --now hrm-queue
   ```

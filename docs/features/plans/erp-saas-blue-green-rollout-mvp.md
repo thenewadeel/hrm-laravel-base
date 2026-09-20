@@ -89,7 +89,7 @@ Deliver a production **Blue/Green pipeline** and validate the **core vertical sl
   - [x] `swap` -> `ln -sfn` flip; `queue:restart`; sends success/failure notification via hook.
   - [x] `smoke` -> post-swap checks against live `current` (login, setup/org onboarding, `/up`, Vite manifest).
   - [x] `rollback` -> `ln -sfn` back to previous release + restart workers; **no auto DOWN** on rollback (forward-only policy kept).
-- [x] **Queue worker management**: systemd unit `scripts/hrm-queue-worker.service` runs `artisan queue:work` from `current`; on swap, `queue:restart`. Scheduler cron documented in runbook.
+- [x] **Queue worker management**: systemd unit `scripts/hrm-queue.service` runs `artisan queue:work` from `current`; on swap, `queue:restart`. Scheduler cron documented in runbook.
 - [x] **Migrations**: **forward-only** rule documented in runbook + `deploy-bluegreen.sh`; never auto-rollback on deploy failure.
 - [x] **Database migration ordering note**: column-alter migration checklist recorded in runbook §5.
 
@@ -146,11 +146,11 @@ MVP Go/No-Go already includes the "two tenants don't cross" test (Day 3).
 - [ ] Rollback drill: forced failure -> flipped back in <60s, data intact (forward-only migration policy honored) *(staging box — pending)*.
 - [x] Migrations forward-only; review step confirms column-alter migrations re-declare full column attributes (runbook §5).
 - [x] Two-tenant isolation vertical slice passes (`MvpVerticalSliceIsolationTest` — 8 tests, verified).
-- [x] Health probe (`scripts/health-check-probe.sh`) reachable; workers supervised (`scripts/hrm-queue-worker.service`); `.env.production` secret-managed, not in git.
+- [x] Health probe (`scripts/health-check-probe.sh`) reachable; workers supervised (`scripts/hrm-queue.service`); `.env.production` secret-managed, not in git.
 - [x] `deploy-production-legacy.sh` retained as emergency escape hatch.
 - [x] CI test job made **deploy-blocking** (`continue-on-error: false` in `ci.yml`); suite green so no longer a non-blocking signal.
 
 ## Files Created/Referenced
 - **New (this task):** `docs/features/plans/erp-saas-blue-green-rollout-mvp.md`, `docs/features/plans/erp-saas-blue-green-rollout-runbook.md`
-- **New (Day 1–3 implementation):** `.github/workflows/ci.yml`, `phpunit.mysql.xml`, `scripts/deploy-bluegreen.sh`, `scripts/health-check-probe.sh`, `scripts/hrm-queue-worker.service`, `.env.production.example`, `tests/Feature/Organization/MvpVerticalSliceIsolationTest.php`, `scripts/deploy-production.sh` → renamed `scripts/deploy-production-legacy.sh`.
+- **New (Day 1–3 implementation):** `.github/workflows/ci.yml`, `phpunit.mysql.xml`, `scripts/deploy-bluegreen.sh`, `scripts/health-check-probe.sh`, `scripts/hrm-queue.service`, `.env.production.example`, `tests/Feature/Organization/MvpVerticalSliceIsolationTest.php`, `scripts/deploy-production.sh` → renamed `scripts/deploy-production-legacy.sh`.
 - **Existing (already in repo, reused):** `scripts/deploy-production-legacy.sh` (emergency escape hatch), `.github/workflows/dusk.yml`, `routes/setup.php` + `SetupController` (provisioning), `HR/EmployeeController.php` + `OrganizationUser` pivot (enrollment), `OrganizationScope` + `BelongsToOrganization` (tenancy), Vite manifest (`public/build`), Laravel `/up` health endpoint.

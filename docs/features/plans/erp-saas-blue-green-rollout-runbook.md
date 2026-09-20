@@ -9,7 +9,7 @@
 ## 0. Prerequisites
 
 - Server running MySQL/MariaDB 8, PHP 8.4+, PHP-FPM (Unix socket or TCP pool), Nginx, Node 20+.
-- `scripts/deploy-bluegreen.sh` present and executable; `scripts/hrm-queue-worker.service`
+- `scripts/deploy-bluegreen.sh` present and executable; `scripts/hrm-queue.service`
   installed and enabled.
 - Git access to the repository (shallow clone capability) and deploy key configured.
 - Production secrets in `/opt/hrm/shared/.env` (copied from `.env.production.example`,
@@ -17,7 +17,7 @@
 
 > **RHEL-family user note (AlmaLinux/Rocky/CentOS).** This runbook assumes the php-fpm user
 > is `nginx` (`APP_USER=nginx`, `User=nginx` in the unit, cron owner `nginx`). On Debian/Ubuntu
-> substitute `www-data` everywhere. See `scripts/hrm-queue-worker.service` and
+> substitute `www-data` everywhere. See `scripts/hrm-queue.service` and
 > `docs/deployment/almalinux-first-time-setup.md`.
 
 ---
@@ -25,10 +25,10 @@
 ## 1. Install the queue worker (systemd)
 
 ```bash
-sudo cp scripts/hrm-queue-worker.service /etc/systemd/system/
+sudo cp scripts/hrm-queue.service /etc/systemd/system/
 sudo systemctl daemon-reload
-sudo systemctl enable --now hrm-queue-worker.service
-sudo systemctl status hrm-queue-worker   # verify running
+sudo systemctl enable --now hrm-queue.service
+sudo systemctl status hrm-queue   # verify running
 ```
 
 Scheduler (one per server): add a cron entry to run the live release's scheduler.
