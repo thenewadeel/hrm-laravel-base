@@ -48,6 +48,63 @@ ok()    { echo -e "${GREEN}[OK]${NC} $*"; }
 warn()  { echo -e "${YELLOW}[WARN]${NC} $*"; }
 err()   { echo -e "${RED}[ERR]${NC} $*"; exit 1; }
 
+# ─── env validation ─────────────────────────────────────────────────────────────
+# Preflight a release's .env for the settings that historically broke blue/green
+# deploys: session persistence across swaps, cookie/domain mismatch (419), and
+# debug leftovers. Pass the path to the release .env (which is a symlink to
+# shared/.env in practice). Purely advisory for env values that are legitimate
+# in some setups — we only hard-fail on the ones that always break.
+validate_env() {
+    local env_file="${1:?Usage: validate_env <release/.env>}"
+    [[ -f "$env_file" ]] || { warn "No .env found at $env_file; skipping env validation"; return 1; }
+
+    local pass=true
+    local val
+
+    # APP_KEY must be a real generated key (never the placeholder)
+    val="$(grep -E '^APP_KEY=' "$env_file" | head -1 | cut -d= -f2- || true)"
+    if [[ -z "$val" ]]; then
+        warn "APP_KEY is missing — run: php artisan key:generate"
+        pass=false
+    elif [[ "$val" == *"YOUR_GENERATED_APP_KEY_HERE"* ]]; then
+        warn "APP_KEY is still the placeholder — run: php artisan key:generate"
+        pass=false
+    fi
+
+    # APP_DEBUG must be false in production (leaks stack traces + dev assets)
+    val="$(grep -E '^APP_DEBUG=' "$env_file" | head -1 | cut -d= -f2- || true)"
+    if [[ "$val" == "true" ]]; then
+        warn "APP_DEBUG=true in production — set APP_DEBUG=false"
+        pass=false
+    fi
+
+    # SESSION_DRIVER must be database so sessions survive release swaps
+    val="$(grep -E '^SESSION_DRIVER=' "$env_file" | head -1 | cut -d= -f2- || true)"
+    if [[ "$val" != "database" ]]; then
+        warn "SESSION_DRIVER=$val (expected database) — file/cookie sessions cause random logouts after swap"
+        pass=false
+    fi
+
+    # SESSION_DOMAIN=null for a single host; if set it must match APP_URL host
+    local domain app_url
+    domain="$(grep -E '^SESSION_DOMAIN=' "$env_file" | head -1 | cut -d= -f2- || true)"
+    app_url="$(grep -E '^APP_URL=' "$env_file" | head -1 | cut -d= -f2- || true)"
+    if [[ -n "$domain" && "$domain" != "null" ]]; then
+        local app_host
+        app_host="$(printf '%s' "$app_url" | sed -E 's#^https?://([^:/]+).*#\1#')"
+        if [[ "$domain" != "$app_host" ]]; then
+            warn "SESSION_DOMAIN=$domain does not match APP_URL host ($app_host) — sessions break (HTTP 419). Set SESSION_DOMAIN=null or keep them in sync."
+            pass=false
+        fi
+    fi
+
+    if [[ "$pass" == "true" ]]; then
+        ok "Env preflight PASSED ($env_file)"
+    else
+        warn "Env preflight found issues in $env_file — review the warnings above before going live"
+    fi
+}
+
 # ─── prepare ────────────────────────────────────────────────────────────────────
 prepare() {
     local ref="${1:?Usage: $0 prepare <git-ref>}"
@@ -99,6 +156,9 @@ EOF
     log "Symlinking shared resources"
     ln -sfn "$SHARED_DIR/.env"          "$release/.env"
     ln -sfn "$SHARED_DIR/storage"       "$release/storage"
+
+    # Preflight the shared env before building/caching anything
+    validate_env "$release/.env"
 
     # Persist the freshly-built Vite assets into the shared build dir, then
     # symlink it so every release serves the same hashed manifest + assets.
@@ -153,6 +213,9 @@ healthcheck() {
 
     local pass=true
 
+    # 0. Env preflight (session/domain/debug — the classic 419 & asset breakers)
+    validate_env "$green_release/.env"
+
     # 1. Maintenance-mode check (Laravel has no `artisan up --check`; the flag
     #    is the presence of storage/framework/down)
     if [[ -f "$green_release/storage/framework/down" ]]; then
@@ -181,6 +244,23 @@ healthcheck() {
         ok "artisan about: passed"
     else
         warn "artisan about: FAILED"
+        pass=false
+    fi
+
+    # 4. Livewire script — must route through PHP (nginx try_files fallback),
+    #    otherwise the dashboard has no JS/Alpine (blank interactions)
+    local lw_url lw_code
+    lw_url="$green_url/livewire/livewire.js"
+    if ! curl -sf -o /dev/null "$lw_url" 2>/dev/null; then
+        lw_code="$(curl -sf -o /dev/null -w '%{http_code}' "$green_url/livewire/livewire.min.js" 2>/dev/null || echo '000')"
+        lw_url="$green_url/livewire/livewire.min.js"
+    else
+        lw_code=200
+    fi
+    if [[ "$lw_code" == "200" ]]; then
+        ok "Livewire script ($lw_url): HTTP $lw_code"
+    else
+        warn "Livewire script ($lw_url): HTTP $lw_code — check vhost try_files fallback → /index.php"
         pass=false
     fi
 
@@ -257,7 +337,21 @@ smoke() {
         pass=false
     fi
 
-    # 4. Vite manifest is accessible
+    # 4. Livewire script serves through PHP (nginx try_files fallback)
+    local lw_url lw_code
+    lw_url="$base_url/livewire/livewire.js"
+    if ! curl -sf -o /dev/null "$lw_url" 2>/dev/null; then
+        lw_url="$base_url/livewire/livewire.min.js"
+    fi
+    lw_code="$(curl -sf -o /dev/null -w '%{http_code}' "$lw_url" 2>/dev/null || echo '000')"
+    if [[ "$lw_code" == "200" ]]; then
+        ok "Livewire script ($lw_url): HTTP $lw_code"
+    else
+        warn "Livewire script ($lw_url): HTTP $lw_code — check vhost try_files fallback"
+        pass=false
+    fi
+
+    # 5. Vite manifest is accessible
     if [[ -f "$CURRENT_LINK/public/build/manifest.json" ]]; then
         ok "Vite manifest exists in current release"
     else

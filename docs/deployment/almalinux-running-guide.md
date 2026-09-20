@@ -161,4 +161,6 @@ sudo firewall-cmd --list-all          # expect ssh/http/https only
 | `migrate` fails: `Base table or view already exists` | a table exists but its row is missing from `migrations`. Compare `migrate:status` vs live schema; mark the table's migration as already-run (`INSERT INTO migrations (migration, batch) SELECT '<filename>', MAX(batch) FROM migrations;`), then re-run `artisan migrate --force`. Repeat until only genuinely-new migrations remain |
 | Stale assets after deploy | `prepare` rebuilds via `npm run build`; confirm `public/build/manifest.json` exists and `@vite` resolves |
 | Queue jobs stuck | `systemctl status hrm-queue`; `artisan queue:failed`; confirm `QUEUE_CONNECTION=database` in `shared/.env` |
-| Random logouts | `SESSION_DRIVER=database` (must not be file) and `SESSION_DOMAIN` matches `APP_URL` |
+| Random logouts | `SESSION_DRIVER=database` (must not be file); `SESSION_DOMAIN` must be `null` or exactly match `APP_URL` host |
+| Login 419 / "cookie rejected for invalid domain" | `SESSION_DOMAIN` mismatch with `APP_URL` — set `SESSION_DOMAIN=null` (host-only cookie) for a single-host site; verify `APP_KEY` is generated |
+| Dashboard has no JS / Alpine inert (`/livewire/livewire.js` 404) | vhost static block `location ~* \.(js\|...)$` swallows the Livewire script route — its `try_files` must fall back to `/index.php?$query_string`, not `=404` |

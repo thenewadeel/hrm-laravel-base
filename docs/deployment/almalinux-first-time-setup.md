@@ -130,6 +130,9 @@ Run as root (`sudo -i` is fine on first setup).
       }
 
       location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff2?)$ {
+          # Fall through to PHP when the file doesn't exist on disk: Livewire
+          # serves /livewire/livewire(.min).js via a PHP route, not a real file.
+          try_files $uri /index.php?$query_string;
           expires 1y;
           access_log off;
       }
@@ -233,6 +236,10 @@ Deploy dirs are owned by **nginx** (the php‑fpm worker user) — not `www-data
 
   SESSION_DRIVER=database
   SESSION_LIFETIME=120
+  # null = host-only cookie. A non-null domain MUST match APP_URL exactly,
+  # otherwise login 419s ("cookie rejected for invalid domain").
+  SESSION_DOMAIN=null
+  SESSION_SECURE_COOKIE=true
   CACHE_STORE=database
   QUEUE_CONNECTION=database
 
