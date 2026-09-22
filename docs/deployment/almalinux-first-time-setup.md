@@ -243,8 +243,9 @@ Deploy dirs are owned by **nginx** (the php‑fpm worker user) — not `www-data
   CACHE_STORE=database
   QUEUE_CONNECTION=database
 
-  MAIL_MAILER=log          # swap to smtp when mail is wired up
-  MAIL_FROM_ADDRESS=noreply@app.yourdomain.com
+  MAIL_MAILER=resend        # sends via Resend API when mail is wired up
+  RESEND_API_KEY=re_xxxxxxxxx   # from https://resend.com/api-keys
+  MAIL_FROM_ADDRESS=noreply@app.yourdomain.com   # domain must be verified in Resend
   MAIL_FROM_NAME="${APP_NAME}"
   ```
 

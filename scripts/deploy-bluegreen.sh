@@ -98,6 +98,18 @@ validate_env() {
         fi
     fi
 
+    # When MAIL_MAILER=resend, RESEND_API_KEY must be present (otherwise every
+    # mail send throws at runtime while the rest of the app looks healthy).
+    local mailer resend_key
+    mailer="$(grep -E '^MAIL_MAILER=' "$env_file" | head -1 | cut -d= -f2- || true)"
+    resend_key="$(grep -E '^RESEND_API_KEY=' "$env_file" | head -1 | cut -d= -f2- || true)"
+    if [[ "$mailer" == "resend" ]]; then
+        if [[ -z "$resend_key" || "$resend_key" == "CHANGE_ME" || "$resend_key" == *"xxxx"* ]]; then
+            warn "MAIL_MAILER=resend but RESEND_API_KEY is missing/placeholder — set a real key from https://resend.com/api-keys"
+            pass=false
+        fi
+    fi
+
     if [[ "$pass" == "true" ]]; then
         ok "Env preflight PASSED ($env_file)"
     else
